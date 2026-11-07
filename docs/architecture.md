@@ -61,6 +61,14 @@ no-aid static-hold diagnostics with the frozen numerical gate values and an
 explicit new mug contact-region mapping. It does not turn the mug layout into
 a phone checkpoint resume or imply source-gravity/trajectory preservation.
 
+`mechanics/support.py` builds native condim3 pyramidal force/COM-wrench and
+hand-load columns, explicit affine-PD torque boxes and frozen static support
+LPs. The saved reviewer independently compares them with native EFC unit
+columns, accounting for BODY-root versus moving-COM moments. Its hypothetical
+coefficients are never applied as simulator forces. `force_initialization.py`
+searches bounded native initial pose/command proposals; optimizer termination
+alone is not equilibrium or physical task qualification.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not

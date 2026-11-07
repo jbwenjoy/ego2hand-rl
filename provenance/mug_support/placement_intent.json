@@ -1,0 +1,79 @@
+{
+  "schema": "mug_conditional_gravity_placement_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\propose_gravity_aware_mug.py",
+      "bytes": 6637,
+      "sha256": "0129bc392af4b9c378c3610311971f975a029784c43ad5e304de70626609feae"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\retargeting.py",
+      "bytes": 3375,
+      "sha256": "65eb41d332a06e021c0818cb35faa296377ef4c8387a67f98d62b6910f6f505a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_ik.py",
+      "bytes": 7752,
+      "sha256": "45d6922d2a7b9a14e895daa750f0c09073db414401aa8d6e82afab2388edb174"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\collision.py",
+      "bytes": 5761,
+      "sha256": "34f57072296f596098249a00b41812144ae72d66e87b0469852be9ca85b0e67e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\convex.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    }
+  ],
+  "diagnostic": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_v2\\report.json",
+    "bytes": 548614,
+    "sha256": "27e0be9e35a7d6256731bdcd58ca41a24811648019e67466196a6f62379cf643"
+  },
+  "reference": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\report.json",
+    "bytes": 12614,
+    "sha256": "a45d6e5db4aa95d87c700c641e51e77fe00be779434f175f37b3f58bd77bda31"
+  },
+  "feasible_operand": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_v2\\case00_sample05\\operands.npz",
+    "bytes": 5342,
+    "sha256": "72c4c9d8eb812687fa40d578e79ae0dc6aec0038554fdcf3a88a713df7da07c3"
+  },
+  "yaw_rad": [
+    0.0,
+    1.0471975511965976,
+    2.0943951023931953,
+    3.141592653589793,
+    4.1887902047863905,
+    5.235987755982989
+  ],
+  "anchor_world_m": [
+    -0.13554567950173316,
+    0.01672381243057521,
+    0.5459263552054449
+  ],
+  "anchor_BODY_m": [
+    -0.051206533341354395,
+    0.055214585515119326,
+    0.006366586045097663
+  ],
+  "placement": "R_robotWorld_object=Rz(yaw)*R_sourceWorld_object(first); translate to hold declared handle-anchor centroid",
+  "source_Z_up_is_conditional": true,
+  "per_sequence_gravity_measured": false,
+  "robot_root_unchanged": true,
+  "fingertip_targets": "original source first-frame human annotations in object BODY, mapped through proposed object pose",
+  "max_tip_nfev_each": 300,
+  "max_contact_nfev_each": 160,
+  "max_contact_seconds_each": 45,
+  "no_scale_or_collision_asset_change": true,
+  "neural_updates": 0,
+  "integration_steps": 0
+}

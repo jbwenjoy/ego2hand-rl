@@ -1,0 +1,104 @@
+"""Engage actual three-finger contacts inside the unchanged geometric band."""
+from pathlib import Path
+import argparse,json,sys
+import numpy as np
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
+from supermimic_research.artifacts import file_pin,verify_file_pin
+from supermimic_research.mechanics.compound_collision import CompoundCollisionAudit
+from supermimic_research.mechanics.compound_contacts import CompoundContacts
+from supermimic_research.mechanics.support import contact_basis,torque_box,static_feasibility,maximum_support
+
+
+def write(path,value):
+    path.write_text(json.dumps(value,indent=2,allow_nan=False,default=lambda x:x.tolist())+'\n',encoding='utf8')
+
+
+def main(args):
+    import mujoco
+    parent,reference,out=args.parent.resolve(),args.reference.resolve(),args.output.resolve()
+    if out.exists() or not out.is_relative_to(ROOT/'runs'):raise ValueError('Fresh unified output')
+    prior=json.loads((parent/'report.json').read_text());selected=next(r for r in prior['results'] if r['geometry_pass'])
+    bind=json.loads((reference/'binding.json').read_text());verify_file_pin(selected['candidate']);verify_file_pin(selected['geometry'])
+    q0=np.load(selected['candidate']['path'])['qpos27'];before=json.loads(Path(selected['geometry']['path']).read_text())
+    model=mujoco.MjModel.from_binary_path(str(verify_file_pin(bind['model'])));data=mujoco.MjData(model)
+    hand=[model.geom(n).id for n in bind['hand_collision_names']]
+    groups={i:[model.geom(f'right_finger{i}_{s}').id for s in ['link3_col','link4_col','tip_sensor_col']] for i in range(1,4)}
+    allowed={g for values in groups.values() for g in values}
+    audit=CompoundCollisionAudit(model,bind['mug_part_geom_ids'],hand,model.geom('mug_task_table').id,groups)
+    reader=CompoundContacts(model,bind['mug_part_geom_ids'],bind['mug_body_id'],groups,model.geom('mug_task_table').id)
+    pairs=[]
+    for group,pads in groups.items():
+        rows=[r for r in before['rows'] if r['kind']=='object' and r['geom_ids'][1] in pads and r.get('gap_m') is not None]
+        pairs.append(min(rows,key=lambda r:r['gap_m'])['geom_ids'])
+    depths=[-.00002,-.00005,-.000075]
+    sources=[file_pin(p) for p in [Path(__file__),ROOT/'src/supermimic_research/mechanics/support.py',
+        ROOT/'src/supermimic_research/mechanics/compound_collision.py',ROOT/'src/supermimic_research/mechanics/compound_contacts.py',
+        ROOT/'src/supermimic_research/mechanics/collision.py',ROOT/'src/supermimic_research/mechanics/convex.py']]
+    out.mkdir(parents=True);write(out/'intent.json',dict(schema='mug_actual_contact_preload_intent:1',sources=sources,parent=file_pin(parent/'report.json'),
+        qualified_parent=selected['candidate'],target_component_gap_m=depths,tolerance_m=.000005,max_iterations_per_group=8,
+        central_step_rad=1e-5,max_step_Linf_rad=.02,unchanged_qualification_band_m=[-.0001,.0002],
+        robot_root_and_object_pose_unchanged=True,force_targets_are_hypothetical_LP_only=True,
+        maximum_LP_attempts=24,integration_steps=0,neural_updates=0))
+    all_results=[];records=[];target=np.r_[-model.body_mass[bind['mug_body_id']]*model.opt.gravity,np.zeros(3)]
+    for index,depth in enumerate(depths):
+        folder=out/f'preload{index:02d}';folder.mkdir();q=q0.copy();log=[];queries=0
+        def gap(proposal,pair):
+            nonlocal queries
+            if np.any(proposal[:20]<model.jnt_range[:20,0]+.001) or np.any(proposal[:20]>model.jnt_range[:20,1]-.001):
+                raise ValueError('Preload proposal beyond unchanged joint bounds')
+            data.qpos[:]=proposal;mujoco.mj_kinematics(model,data);queries+=1
+            return audit.query(audit.shape(data,pair[0]),audit.shape(data,pair[1]),force_exact=True)['gap_m']
+        for digit,pair in enumerate(pairs):
+            for it in range(8):
+                current=gap(q,pair);error=current-depth
+                if abs(error)<=5e-6:break
+                gradient=np.zeros(4)
+                for j,k in enumerate(range(digit*4,digit*4+4)):
+                    plus=q.copy();minus=q.copy();plus[k]+=1e-5;minus[k]-=1e-5
+                    gradient[j]=(gap(plus,pair)-gap(minus,pair))/2e-5
+                if np.linalg.norm(gradient)<1e-10:break
+                delta=-error*gradient/(gradient@gradient)
+                if abs(delta).max()>.02:delta*=.02/abs(delta).max()
+                accepted=False
+                for alpha in [1.,.5,.25]:
+                    proposal=q.copy();proposal[digit*4:digit*4+4]+=alpha*delta;after=gap(proposal,pair)
+                    log.append(dict(digit=digit+1,iteration=it,before_gap_m=current,after_gap_m=after,delta4=alpha*delta))
+                    if abs(after-depth)<abs(error):q=proposal;accepted=True;break
+                if not accepted:break
+        data.qpos[:]=q;mujoco.mj_kinematics(model,data);geometry=audit.evaluate(data)
+        write(folder/'geometry.json',geometry);write(folder/'proposals.json',log)
+        mujoco.mj_resetData(model,data);data.qpos[:]=q;data.ctrl[:]=q[:20];mujoco.mj_forward(model,data)
+        snapshot=reader.read(data);basis=contact_basis(model,data,bind['mug_part_geom_ids'],bind['mug_body_id'],allowed)
+        W,L=basis['wrench'],basis['loads'];other=basis['other_constraint_torque20'];offset=data.qfrc_bias[:20]-data.qfrc_passive[:20]-other
+        domains=[]
+        for name,lo,hi,base,f in [
+            ('observed_other_constraint_local_command_005',np.maximum(model.actuator_ctrlrange[:,0],q[:20]-.05),np.minimum(model.actuator_ctrlrange[:,1],q[:20]+.05),offset,np.zeros(20)),
+            ('observed_other_constraint_full_command',model.actuator_ctrlrange[:,0],model.actuator_ctrlrange[:,1],offset,np.zeros(20)),
+            ('free_dry_friction_full_command',model.actuator_ctrlrange[:,0],model.actuator_ctrlrange[:,1],data.qfrc_bias[:20]-data.qfrc_passive[:20],model.dof_frictionloss[:20])]:
+            lower,upper=torque_box(model,data,lo,hi)
+            domains.append(dict(name=name,feasibility=static_feasibility(W,target,loads=L,offset=base,lower=lower,upper=upper,friction=f),
+                maximum=maximum_support(W,L,base,lower,upper,f),control_interval=[lo,hi],torque_interval=[lower,upper],offset=base,free_friction=f))
+        cone=static_feasibility(W,target);force_only=static_feasibility(W,target,force_only=True)
+        affine=model.actuator_biasprm[:,0]+model.actuator_biasprm[:,1]*data.actuator_length
+        np.savez_compressed(folder/'operands.npz',qpos27=q,ctrl20=q[:20],wrench6xN=W,joint_load20xN=L,target6=target,
+            gain20=model.actuator_gainprm[:,0],affine20=affine,source_pre_qvel=data.qvel)
+        group_contacts={str(i):sum(c['other_geom'] in pads for c in basis['contacts']) for i,pads in groups.items()}
+        record=dict(target_gap_m=depth,raw=file_pin(folder/'operands.npz'),geometry=file_pin(folder/'geometry.json'),
+            geometry_pass=geometry['passed'],native_normal_N=snapshot['normal_by_finger_N'][:3],group_contact_counts=group_contacts,
+            contacts=basis['contacts'],cone6D=cone,force_only=force_only,domains=domains,queries=queries,
+            source_dt_s=float(model.opt.timestep),source_time_s=0.,source_clock_is_new_static_init=True)
+        write(folder/'report.json',record);all_results.append(record)
+        if geometry['passed'] and all(group_contacts.values()):records.append(record)
+        print(json.dumps(dict(depth=depth,geometry=geometry['passed'],contacts=group_contacts,Fn=snapshot['normal_by_finger_N'][:3].tolist(),
+            cone6D=cone['success'],full_command=[d['feasibility']['success'] for d in domains[1:]])),flush=True)
+    report=dict(schema='mug_actual_contact_preload_diagnostic:1',sources=sources,results=all_results,records=records,
+        actual_native_three_group_geometry_qualified=len(records),cone6D_feasible_count=sum(r['cone6D']['success'] for r in records),
+        LP_attempts=24,linprog_invocations=sum(8 for r in all_results if r['contacts']),integration_steps=0,neural_updates=0,
+        scope='Small initial finger-pose engagement inside the same component band and conditional gravity placement. Actual native three-group presence and full geometry are prerequisites; LP coefficients remain hypothetical and unapplied. No physical holding claim.')
+    for pin in sources:verify_file_pin(pin)
+    write(out/'report.json',report);print(json.dumps(dict(report=file_pin(out/'report.json'),qualified=len(records),cone6D=report['cone6D_feasible_count'])))
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--reference',type=Path,required=True);p.add_argument('--parent',type=Path,required=True)
+    p.add_argument('--output',type=Path,required=True);main(p.parse_args())

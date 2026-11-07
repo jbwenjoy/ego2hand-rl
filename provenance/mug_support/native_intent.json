@@ -1,0 +1,238 @@
+{
+  "schema": "mug_support_witness_native_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\evaluate_mug_support_witnesses.py",
+      "bytes": 7425,
+      "sha256": "8864d190412f0f29bf1243185ffccbc42d88cdd6690650f799684bb4de79bb17"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_contacts.py",
+      "bytes": 3098,
+      "sha256": "573b9f5367782b91422598b6b09f3188c0d4d369c3090f702ee0536c2e5cf241"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\collision.py",
+      "bytes": 5761,
+      "sha256": "34f57072296f596098249a00b41812144ae72d66e87b0469852be9ca85b0e67e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\convex.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    }
+  ],
+  "parent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_v2\\report.json",
+    "bytes": 548614,
+    "sha256": "27e0be9e35a7d6256731bdcd58ca41a24811648019e67466196a6f62379cf643"
+  },
+  "selection": "first declared snapshot with cone6D and both full-command static feasibility",
+  "selected_operand": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_v2\\case00_sample05\\operands.npz",
+    "bytes": 5342,
+    "sha256": "72c4c9d8eb812687fa40d578e79ae0dc6aec0038554fdcf3a88a713df7da07c3"
+  },
+  "selected_source_dt_s": 0.0003125,
+  "selected_source_time_s": 0.15,
+  "zero_velocity_reinitialization": true,
+  "initial": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_native_v1\\initial_state.npz",
+    "bytes": 791,
+    "sha256": "0b062ba03b42cc793fefe7ae42adbc1a837501333897322dfba27b3e4ac9570f"
+  },
+  "geometry": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_native_v1\\geometry.json",
+    "bytes": 896912,
+    "sha256": "b778524868862ccae05e3d3d8c0cb48ac6dae03acbc7cc6f85f758b1b5dafbe4"
+  },
+  "targets": [
+    {
+      "name": "original_command_new_pose",
+      "u": [
+        0.6695629901009488,
+        -0.4193447758823891,
+        0.6613338467145745,
+        0.37031985652745014,
+        0.6426181413262088,
+        0.17471794564110396,
+        0.9935237999485768,
+        0.5757850511227843,
+        0.9321735501095653,
+        0.14278557633635727,
+        0.8888487628013778,
+        0.2628300078356792,
+        0.8683106848471799,
+        -0.05264381584069404,
+        1.4608987964322915,
+        0.4294185782735363,
+        1.1988343605926886,
+        -0.6425915373977613,
+        1.3922906676251645,
+        0.9948391394048102
+      ],
+      "role": "BASELINE_NEW_STATIC_INIT"
+    },
+    {
+      "name": "observed_other_constraint_full_command",
+      "u": [
+        0.7276559269641021,
+        -0.38542737058847476,
+        0.7464261628121447,
+        0.42504651748783506,
+        0.6055499687361603,
+        0.048676632317181244,
+        0.9507410492657089,
+        0.5648404550057087,
+        1.0112248788715243,
+        0.1513921743710326,
+        0.9971672250081566,
+        0.3056789788951149,
+        0.8685549322701551,
+        -0.052584527717236304,
+        1.4608803350971635,
+        0.42941293992662194,
+        1.19886233697038,
+        -0.6421155874910621,
+        1.3921825210258651,
+        0.9948186589976286
+      ],
+      "role": "LEGAL_PD_TARGET_FROM_HYPOTHETICAL_LP_TORQUE",
+      "hypothetical_torque20": [
+        0.15163145247206597,
+        0.07608682087360485,
+        0.11419010702664517,
+        0.04254135350829151,
+        -0.012555300999672211,
+        -0.15267653203244533,
+        -0.07856506906476196,
+        -0.03544398496578503,
+        0.24640266521688692,
+        0.0036874995219409023,
+        0.11827912331274128,
+        0.04349525467736677,
+        0.011441630712241725,
+        0.001170333532664891,
+        -0.0033527837456850088,
+        -0.0005229371579057436,
+        0.0045688567718225855,
+        0.004524615824507415,
+        -0.0024969662634876733,
+        -0.0005075266426176651
+      ],
+      "maximum_target_change_rad": 0.1260413133239227
+    },
+    {
+      "name": "free_dry_friction_full_command",
+      "u": [
+        0.7386594662006633,
+        -0.39110604106803853,
+        0.7591794851765171,
+        0.43667981067298184,
+        0.5896509837073344,
+        0.046789339334199063,
+        0.919686480987903,
+        0.5677055334257698,
+        1.0218814194424617,
+        0.15748170800023603,
+        1.010483884817639,
+        0.3149032704516468,
+        0.8710179862954982,
+        -0.05162787255320082,
+        1.4603206212590476,
+        0.4293405749504961,
+        1.1994440389307899,
+        -0.6348235982085064,
+        1.391194101103326,
+        0.9946828301181017
+      ],
+      "role": "LEGAL_PD_TARGET_FROM_HYPOTHETICAL_LP_TORQUE",
+      "hypothetical_torque20": [
+        0.1777291316470183,
+        0.06454293912754407,
+        0.1303963391459812,
+        0.051407126680358274,
+        -0.050263769299672204,
+        -0.15448713916807666,
+        -0.10835780576476194,
+        -0.03269532247496765,
+        0.27167734920320996,
+        0.009529598836208705,
+        0.13105469101274128,
+        0.05234473817780855,
+        0.01728338692922292,
+        0.002088117195275782,
+        -0.003889754888132285,
+        -0.0005923617482182582,
+        0.0060569211212466775,
+        0.009187019264414665,
+        -0.0031289491516063696,
+        -0.0005943738677856661
+      ],
+      "maximum_target_change_rad": 0.1279286063069049
+    }
+  ],
+  "deviation": {
+    "object_root_delta_world_m": [
+      -0.026853055837898543,
+      -0.0004257220270174819,
+      -0.006431932046503386
+    ],
+    "object_rotation_delta_world_rotvec_rad": [
+      -0.01449282160507187,
+      -0.4387840933116674,
+      0.08860992066147574
+    ],
+    "object_rotation_delta_angle_rad": 0.44787636738395953,
+    "hand_q20_max_change_rad": 1.4643751215211007,
+    "reference_rebuilt": false,
+    "new_initial_pose_is_distinct_task_variant": true,
+    "source_gravity_preserved": false
+  },
+  "numerical_gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483,
+    "tail_triple_pad_force_coverage": 0.95
+  },
+  "dt_pair_gates": {
+    "final_COM_difference_m": 0.002,
+    "final_orientation_difference_rad": 0.03490658503988659,
+    "require_both_duration_complete": true
+  },
+  "dts": [
+    0.0003125,
+    0.00015625
+  ],
+  "maximum_integrations": 57600,
+  "duration_s": 2.0,
+  "no_LP_force_or_torque_witness_applied": true,
+  "neural_updates": 0
+}

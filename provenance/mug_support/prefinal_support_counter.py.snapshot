@@ -1,0 +1,88 @@
+"""Native quasi-static re-projection of saved hold poses and full6D support."""
+from pathlib import Path
+import argparse,json,sys,time
+import numpy as np
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
+from supermimic_research.artifacts import file_pin,verify_file_pin
+from supermimic_research.mechanics.support import contact_basis,torque_box,static_feasibility,maximum_support
+
+
+def write(path,data):
+    path.write_text(json.dumps(data,indent=2,allow_nan=False,default=lambda x:x.tolist())+'\n',encoding='utf8')
+
+
+def main(args):
+    import mujoco
+    previous,reference,out=args.holding.resolve(),args.reference.resolve(),args.output.resolve()
+    if out.exists() or not out.is_relative_to(ROOT/'runs'):raise ValueError('Fresh unified output')
+    holding=json.loads((previous/'report.json').read_text());intent=json.loads((previous/'intent.json').read_text())
+    bind=json.loads((reference/'binding.json').read_text());model=mujoco.MjModel.from_binary_path(str(verify_file_pin(bind['model'])))
+    sources=[file_pin(Path(__file__)),file_pin(ROOT/'src/supermimic_research/mechanics/support.py')]
+    selected=[x for x in holding['cases'] if x['overclosure_m'] in (0.,.002)]
+    if len(selected)!=4:raise ValueError('Two command levels and bothdt')
+    times=[0.,.01,.02,.05,.1,.15];out.mkdir(parents=True)
+    write(out/'intent.json',dict(schema='mug_support_diagnostic_intent:1',sources=sources,parent=file_pin(previous/'report.json'),
+        source_times_s=times,overclosures_m=[0.,.002],source_dt_s=[.0003125,.00015625],snapshots=24,
+        reproject_zero_joint_and_object_velocity=True,hold_actual_pose_and_original_command=True,
+        domains=['observed_other_constraint_local_command_005','observed_other_constraint_full_command','free_dry_friction_full_command'],
+        per_snapshot_LPs=8,maximum_LP_calls=192,maximum_native_forward=24,maximum_integrations=0,
+        cone='actual native condim3 pyramidal tangent friction',moment_row_radius_m=.1,
+        role='MECHANICAL_DIAGNOSTIC_NO_NN_FITTING_NO_WITNESS_FORCES_APPLIED'))
+    pad_groups={int(k):list(v) for k,v in intent['pad_groups'].items()};allowed={g for v in pad_groups.values() for g in v}
+    target=np.r_[-model.body_mass[bind['mug_body_id']]*model.opt.gravity,np.zeros(3)];weight=float(np.linalg.norm(target[:3]))
+    records=[];lp_calls=0;tick=time.perf_counter()
+    for ci,case in enumerate(selected):
+        verify_file_pin(case['trace']);z=np.load(case['trace']['path']);dt=float(z['native_dt_s']);model.opt.timestep=dt
+        for ti,t in enumerate(times):
+            row=round(t/dt);q=z['pre_qpos'][row].copy();u=z['ctrl20'].copy()
+            data=mujoco.MjData(model);data.qpos[:]=q;data.qvel[:]=0;data.ctrl[:]=u;data.qacc_warmstart[:]=0
+            mujoco.mj_forward(model,data)
+            if np.any(data.warning.number) or np.any(data.qfrc_applied) or np.any(data.xfrc_applied):raise ValueError('Native static re-projection warning or aid')
+            basis=contact_basis(model,data,bind['mug_part_geom_ids'],bind['mug_body_id'],allowed)
+            W,L=basis['wrench'],basis['loads'];other=basis['other_constraint_torque20']
+            observed_offset=data.qfrc_bias[:20]-data.qfrc_passive[:20]-other
+            free_offset=data.qfrc_bias[:20]-data.qfrc_passive[:20]
+            domains=[]
+            for name,lo,hi,offset,f in [
+                ('observed_other_constraint_local_command_005',np.maximum(model.actuator_ctrlrange[:,0],u-.05),np.minimum(model.actuator_ctrlrange[:,1],u+.05),observed_offset,np.zeros(20)),
+                ('observed_other_constraint_full_command',model.actuator_ctrlrange[:,0],model.actuator_ctrlrange[:,1],observed_offset,np.zeros(20)),
+                ('free_dry_friction_full_command',model.actuator_ctrlrange[:,0],model.actuator_ctrlrange[:,1],free_offset,model.dof_frictionloss[:20])]:
+                lower,upper=torque_box(model,data,lo,hi)
+                feasible=static_feasibility(W,target,loads=L,offset=offset,lower=lower,upper=upper,friction=f)
+                maximum=maximum_support(W,L,offset,lower,upper,f,direction=target[:3]/weight);lp_calls+=2
+                domains.append(dict(name=name,feasibility=feasible,maximum=maximum,
+                    control_interval=[lo,hi],torque_interval=[lower,upper],offset=offset,free_friction=f))
+            cone=static_feasibility(W,target);force_only=static_feasibility(W,target,force_only=True);lp_calls+=2
+            gain=model.actuator_gainprm[:,0];affine=model.actuator_biasprm[:,0]+model.actuator_biasprm[:,1]*data.actuator_length
+            pd_low,pd_high=torque_box(model,data,u,u)
+            pd_error=float(np.max(np.abs(pd_low-data.qfrc_actuator[:20])))
+            if pd_error>1e-12:raise ValueError('Affine PD envelope differs from native torque')
+            groups={str(k):sum(x['other_geom'] in geoms for x in basis['contacts']) for k,geoms in pad_groups.items()}
+            folder=out/f'case{ci:02d}_sample{ti:02d}';folder.mkdir()
+            np.savez_compressed(folder/'operands.npz',qpos27=q,source_pre_qvel=z['pre_qvel'][row],reprojected_qvel=data.qvel,
+                ctrl20=u,wrench6xN=W,joint_load20xN=L,target6=target,other_constraint20=other,
+                qfrc_bias20=data.qfrc_bias[:20],qfrc_passive20=data.qfrc_passive[:20],
+                actuator_torque20=data.qfrc_actuator[:20],gain20=gain,affine20=affine,frictionloss20=model.dof_frictionloss[:20])
+            record=dict(overclosure_m=case['overclosure_m'],source_dt_s=dt,source_time_s=row*dt,source_tick=row,
+                source_trace=case['trace'],raw=file_pin(folder/'operands.npz'),contacts=basis['contacts'],group_contact_counts=groups,
+                cone6D=cone,force_only=force_only,domains=domains,affine_native_PD_max_error_Nm=pd_error,
+                other_constraint_max_abs_Nm=float(np.abs(other).max()),
+                other_within_free_dry_friction_box=bool(np.all(np.abs(other)<=model.dof_frictionloss[:20]+1e-8)),
+                readonly_jacobians=basis['jacobian_queries_preserve_integration_state'])
+            write(folder/'report.json',record);records.append(record)
+            print(json.dumps(dict(case=ci,t=row*dt,contacts=len(basis['contacts']),groups=groups,
+                cone6D=cone['success'],force_only=force_only['success'],
+                maximum_support_N=[x['maximum']['support_weight_N'] for x in domains],elapsed_s=time.perf_counter()-tick)),flush=True)
+    report=dict(schema='mug_quasistatic_support_diagnostic:1',sources=sources,parent=file_pin(previous/'report.json'),records=records,
+        snapshots=len(records),native_forward=24,LP_calls=lp_calls,integration_steps=0,neural_updates=0,
+        actual_weight_N=weight,cone6D_feasible_count=sum(r['cone6D']['success'] for r in records),
+        force_only_feasible_count=sum(r['force_only']['success'] for r in records),wall_s=time.perf_counter()-tick,
+        scope='Saved PRE poses and original commands reprojected with zero velocity. Not the recorded dynamic force state. Frozen contact points/normals/Jacobians, freely chosen nonnegative native pyramid generators, affine PD bounds and either frozen other load or optimistic dry-friction box. No compliance, contact evolution, dynamic/global feasibility or source-gravity transfer certificate. No witness force was applied.')
+    if lp_calls!=192 or len(records)!=24:raise ValueError('Diagnostic scope changed')
+    for pin in sources:verify_file_pin(pin)
+    write(out/'report.json',report);print(json.dumps(dict(report=file_pin(out/'report.json'),cone6D=report['cone6D_feasible_count'],force_only=report['force_only_feasible_count'])))
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--holding',type=Path,required=True);p.add_argument('--reference',type=Path,required=True)
+    p.add_argument('--output',type=Path,required=True);main(p.parse_args())

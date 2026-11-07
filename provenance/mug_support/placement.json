@@ -1,0 +1,807 @@
+{
+  "schema": "mug_conditional_gravity_placement_proposals:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\propose_gravity_aware_mug.py",
+      "bytes": 6637,
+      "sha256": "0129bc392af4b9c378c3610311971f975a029784c43ad5e304de70626609feae"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\retargeting.py",
+      "bytes": 3375,
+      "sha256": "65eb41d332a06e021c0818cb35faa296377ef4c8387a67f98d62b6910f6f505a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_ik.py",
+      "bytes": 7752,
+      "sha256": "45d6922d2a7b9a14e895daa750f0c09073db414401aa8d6e82afab2388edb174"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\collision.py",
+      "bytes": 5761,
+      "sha256": "34f57072296f596098249a00b41812144ae72d66e87b0469852be9ca85b0e67e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\convex.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    }
+  ],
+  "results": [
+    {
+      "best": {
+        "q20": [
+          0.9107154045540566,
+          0.02418590466045298,
+          0.03208489797246002,
+          0.3108726518105701,
+          0.6649739936552554,
+          0.018010957993091124,
+          0.8462039169537907,
+          0.3652511505834514,
+          0.31030322767299856,
+          -0.6754969196395458,
+          0.702881723850542,
+          1.199712710684338,
+          0.14988725401108427,
+          -0.6131180467840941,
+          0.3958583694794829,
+          1.1562617341165733,
+          0.49024865477960033,
+          -0.5584580937068129,
+          -0.06621685411639401,
+          -0.07914559460334245
+        ],
+        "squared_cost": 1329.0913455338282,
+        "maximum_native_object_penetration_m": 0.009761005625405505,
+        "maximum_native_self_or_table_penetration_m": 0.0015094241851736044,
+        "canonical_min_native_component_gap_m": [
+          -0.009761005625405505,
+          -0.0015082059171778078,
+          0.0
+        ],
+        "elapsed_s": 0.10978819988667965
+      },
+      "solver_success": true,
+      "solver_message": "`xtol` termination condition is satisfied.",
+      "nfev": 21,
+      "q20": [
+        0.9107154045540566,
+        0.02418590466045298,
+        0.03208489797246002,
+        0.3108726518105701,
+        0.6649739936552554,
+        0.018010957993091124,
+        0.8462039169537907,
+        0.3652511505834514,
+        0.31030322767299856,
+        -0.6754969196395458,
+        0.702881723850542,
+        1.199712710684338,
+        0.14988725401108427,
+        -0.6131180467840941,
+        0.3958583694794829,
+        1.1562617341165733,
+        0.49024865477960033,
+        -0.5584580937068129,
+        -0.06621685411639401,
+        -0.07914559460334245
+      ],
+      "tip_errors_m": [
+        0.03713884559004066,
+        0.022447820719596702,
+        0.02509605656793443,
+        2.917957875745607e-12,
+        0.01442989593316029
+      ],
+      "native_penalties_are_not_independent_clearance": true,
+      "counts": {
+        "kinematics": 23,
+        "comPos": 23,
+        "jacSite": 105,
+        "residual": 21,
+        "integration_steps": 0,
+        "native_distance": 6743,
+        "jacPoint": 3714,
+        "zero_distance_normal_heuristic": 68
+      },
+      "yaw_rad": 0.0,
+      "geometry_pass": false,
+      "all_pairs_clear": false,
+      "geometry_unknown": 0,
+      "canonical_contact_candidates": {
+        "1": [],
+        "2": [],
+        "3": []
+      },
+      "failed_pair_counts": {
+        "object": 48,
+        "self": 1,
+        "hand_table": 0
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed00\\candidate.npz",
+        "bytes": 1591,
+        "sha256": "d4967b32c0aa3fe6741042204e67d7c38d3b1b865234262800966aedbb186445"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed00\\geometry.json",
+        "bytes": 898459,
+        "sha256": "97cf80a4a26766224715b981d6098d9a2e86ca2db78a8e72f98e90c9361773d0"
+      },
+      "proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed00\\proposals.jsonl",
+        "bytes": 15388,
+        "sha256": "623fd915c2a508ec06f8a2e227be00744c652a884bd875eb54eac3d8844e80c5"
+      },
+      "source_world_up_preserved_conditionally": true,
+      "original_rest_palm_alignment_preserved": false,
+      "object_rotation_delta_from_previous_rad": 2.794909241522381,
+      "object_root_delta_from_previous_m": [
+        0.06618823592031033,
+        0.06212284343223835,
+        -0.11740638734085984
+      ]
+    },
+    {
+      "best": {
+        "q20": [
+          1.2771149091021312,
+          -0.3034101896871429,
+          0.10977160584938374,
+          -0.11151665968080847,
+          0.5720450218691592,
+          0.11840022142406688,
+          0.9203192180671792,
+          0.5972775630230952,
+          0.3168712631101889,
+          -0.05870998074984665,
+          1.181652089410786,
+          1.322166787484897,
+          -0.002415579596526574,
+          -0.2686945587190261,
+          0.9192366891226955,
+          1.3814978870630752,
+          -0.3768427008369434,
+          -0.21576166932113766,
+          1.083823759593108,
+          0.8940958809372841
+        ],
+        "squared_cost": 1.1941741620340511,
+        "maximum_native_object_penetration_m": 0.0,
+        "maximum_native_self_or_table_penetration_m": 0.0,
+        "canonical_min_native_component_gap_m": [
+          0.0,
+          1.0785111355065423e-05,
+          0.0
+        ],
+        "elapsed_s": 0.18023120006546378
+      },
+      "solver_success": true,
+      "solver_message": "`xtol` termination condition is satisfied.",
+      "nfev": 28,
+      "q20": [
+        1.2771149091021312,
+        -0.3034101896871429,
+        0.10977160584938374,
+        -0.11151665968080847,
+        0.5720450218691592,
+        0.11840022142406688,
+        0.9203192180671792,
+        0.5972775630230952,
+        0.3168712631101889,
+        -0.05870998074984665,
+        1.181652089410786,
+        1.322166787484897,
+        -0.002415579596526574,
+        -0.2686945587190261,
+        0.9192366891226955,
+        1.3814978870630752,
+        -0.3768427008369434,
+        -0.21576166932113766,
+        1.083823759593108,
+        0.8940958809372841
+      ],
+      "tip_errors_m": [
+        0.006187988570259885,
+        0.013972662068894887,
+        0.015246971532219928,
+        1.7083765155671837e-12,
+        1.788744226631251e-12
+      ],
+      "native_penalties_are_not_independent_clearance": true,
+      "counts": {
+        "kinematics": 30,
+        "comPos": 30,
+        "jacSite": 140,
+        "residual": 28,
+        "integration_steps": 0,
+        "native_distance": 4163,
+        "jacPoint": 2967,
+        "zero_distance_normal_heuristic": 34
+      },
+      "yaw_rad": 1.0471975511965976,
+      "geometry_pass": false,
+      "all_pairs_clear": true,
+      "geometry_unknown": 0,
+      "canonical_contact_candidates": {
+        "1": [
+          [
+            186,
+            15
+          ]
+        ],
+        "2": [
+          [
+            88,
+            24
+          ],
+          [
+            95,
+            26
+          ]
+        ],
+        "3": []
+      },
+      "failed_pair_counts": {
+        "object": 0,
+        "self": 0,
+        "hand_table": 0
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed01\\candidate.npz",
+        "bytes": 1618,
+        "sha256": "adc9cf486ac16cb6a1fa56ecdac5f4337b68da08ffb2fb66a96c7e5e0e7b769a"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed01\\geometry.json",
+        "bytes": 895898,
+        "sha256": "2f59571c0d1ed181e6871c5fb097f7127cade842b442f9b3c8b92a1dec6632ba"
+      },
+      "proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed01\\proposals.jsonl",
+        "bytes": 19655,
+        "sha256": "3cccab90d7bd3da9238464962ddfd364146d944b27fec2e43abac46880b1f974"
+      },
+      "source_world_up_preserved_conditionally": true,
+      "original_rest_palm_alignment_preserved": false,
+      "object_rotation_delta_from_previous_rad": 3.050850873221915,
+      "object_root_delta_from_previous_m": [
+        0.021946864879977462,
+        0.0890737694771955,
+        -0.11740638734085984
+      ]
+    },
+    {
+      "best": {
+        "q20": [
+          0.6626378728935606,
+          -0.2953071481754183,
+          0.24426786711412224,
+          0.8764781525357778,
+          0.8483482547931092,
+          -0.13226994034539993,
+          1.1933462746890986,
+          1.3168830006981735,
+          -0.09181705165766925,
+          -0.3803722860523242,
+          1.6147744384210858,
+          0.700242129271361,
+          0.005402906009100478,
+          -0.5241690638988757,
+          1.661415039853999,
+          1.2076658877646473,
+          0.022182190995795038,
+          0.6979989999999998,
+          2.0939989999999993,
+          1.3284757799554212
+        ],
+        "squared_cost": 9.633796358751738,
+        "maximum_native_object_penetration_m": 0.0005614937091483916,
+        "maximum_native_self_or_table_penetration_m": 0.0,
+        "canonical_min_native_component_gap_m": [
+          0.0,
+          -0.0005614937091483916,
+          0.0010342797607000938
+        ],
+        "elapsed_s": 0.25520660006441176
+      },
+      "solver_success": true,
+      "solver_message": "`xtol` termination condition is satisfied.",
+      "nfev": 26,
+      "q20": [
+        0.6626378728935606,
+        -0.2953071481754183,
+        0.24426786711412224,
+        0.8764781525357778,
+        0.8483482547931092,
+        -0.13226994034539993,
+        1.1933462746890986,
+        1.3168830006981735,
+        -0.09181705165766925,
+        -0.3803722860523242,
+        1.6147744384210858,
+        0.700242129271361,
+        0.005402906009100478,
+        -0.5241690638988757,
+        1.661415039853999,
+        1.2076658877646473,
+        0.022182190995795038,
+        0.6979989999999998,
+        2.0939989999999993,
+        1.3284757799554212
+      ],
+      "tip_errors_m": [
+        0.040263742238523643,
+        0.036955368110967564,
+        0.012534320034323455,
+        5.910310822273953e-07,
+        0.007480826377054623
+      ],
+      "native_penalties_are_not_independent_clearance": true,
+      "counts": {
+        "kinematics": 28,
+        "comPos": 28,
+        "jacSite": 130,
+        "residual": 26,
+        "integration_steps": 0,
+        "native_distance": 4182,
+        "jacPoint": 2937,
+        "zero_distance_normal_heuristic": 36
+      },
+      "yaw_rad": 2.0943951023931953,
+      "geometry_pass": false,
+      "all_pairs_clear": false,
+      "geometry_unknown": 0,
+      "canonical_contact_candidates": {
+        "1": [],
+        "2": [
+          [
+            88,
+            24
+          ]
+        ],
+        "3": []
+      },
+      "failed_pair_counts": {
+        "object": 2,
+        "self": 0,
+        "hand_table": 0
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed02\\candidate.npz",
+        "bytes": 1620,
+        "sha256": "f55f76a9e40d32dfedac5890edc8f7daefd039f3637c6f594808b061677241c7"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed02\\geometry.json",
+        "bytes": 895681,
+        "sha256": "439ee239f2b2fc610f196f851c1c2394448a2ae844c87b18041d220fe21fe52a"
+      },
+      "proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed02\\proposals.jsonl",
+        "bytes": 18296,
+        "sha256": "8ce20d0d7226e783510f4f00be4554c339e13e37853ff8ceae230cb5be2dcfc9"
+      },
+      "source_world_up_preserved_conditionally": true,
+      "original_rest_palm_alignment_preserved": false,
+      "object_rotation_delta_from_previous_rad": 2.6340987931122517,
+      "object_root_delta_from_previous_m": [
+        -0.023514007250637542,
+        0.0642350812804926,
+        -0.11740638734085984
+      ]
+    },
+    {
+      "best": {
+        "q20": [
+          0.9952111392945177,
+          -0.7759624139184466,
+          0.7015644284824515,
+          0.4511933135086383,
+          0.5632175532551422,
+          0.011149647357985328,
+          1.1245004845785522,
+          0.5085333615642579,
+          -0.06476101178404046,
+          -0.31202586226507123,
+          1.57095688167981,
+          0.7828109023965043,
+          0.2857043553494358,
+          -0.6860952617125972,
+          1.5599816042623629,
+          1.5697636153369483,
+          1.3698157171425829,
+          -0.56829005954246,
+          0.7140956510302005,
+          1.5699989998764392
+        ],
+        "squared_cost": 3.055950284125427,
+        "maximum_native_object_penetration_m": 7.439319486369406e-05,
+        "maximum_native_self_or_table_penetration_m": 0.0,
+        "canonical_min_native_component_gap_m": [
+          3.977117064592265e-05,
+          2.5959774482351488e-05,
+          -7.439319486369406e-05
+        ],
+        "elapsed_s": 0.3872893999796361
+      },
+      "solver_success": true,
+      "solver_message": "`xtol` termination condition is satisfied.",
+      "nfev": 38,
+      "q20": [
+        0.9952111392945177,
+        -0.7759624139184466,
+        0.7015644284824515,
+        0.4511933135086383,
+        0.5632175532551422,
+        0.011149647357985328,
+        1.1245004845785522,
+        0.5085333615642579,
+        -0.06476101178404046,
+        -0.31202586226507123,
+        1.57095688167981,
+        0.7828109023965043,
+        0.2857043553494358,
+        -0.6860952617125972,
+        1.5599816042623629,
+        1.5697636153369483,
+        1.3698157171425829,
+        -0.56829005954246,
+        0.7140956510302005,
+        1.5699989998764392
+      ],
+      "tip_errors_m": [
+        0.01138542235649884,
+        0.011150902690436223,
+        0.012623622810594036,
+        0.02212615240491741,
+        0.05119442002921065
+      ],
+      "native_penalties_are_not_independent_clearance": true,
+      "counts": {
+        "kinematics": 40,
+        "comPos": 40,
+        "jacSite": 190,
+        "residual": 38,
+        "integration_steps": 0,
+        "native_distance": 6270,
+        "jacPoint": 4178,
+        "zero_distance_normal_heuristic": 46
+      },
+      "yaw_rad": 3.141592653589793,
+      "geometry_pass": true,
+      "all_pairs_clear": true,
+      "geometry_unknown": 0,
+      "canonical_contact_candidates": {
+        "1": [
+          [
+            100,
+            13
+          ],
+          [
+            185,
+            13
+          ]
+        ],
+        "2": [
+          [
+            88,
+            26
+          ],
+          [
+            98,
+            26
+          ]
+        ],
+        "3": [
+          [
+            122,
+            39
+          ],
+          [
+            168,
+            39
+          ],
+          [
+            173,
+            39
+          ]
+        ]
+      },
+      "failed_pair_counts": {
+        "object": 0,
+        "self": 0,
+        "hand_table": 0
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed03\\candidate.npz",
+        "bytes": 1612,
+        "sha256": "25007ff5c48e43675a3f1177623ca954e0d4eee6e03a1ab890d64cff31ac912e"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed03\\geometry.json",
+        "bytes": 896582,
+        "sha256": "f6e46f71d0e43af3aea8fc0e1a520a8379690ab84da9b75a082f7b4239603e00"
+      },
+      "proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed03\\proposals.jsonl",
+        "bytes": 26983,
+        "sha256": "3c041d8592939f45e16c62b3a68ea04c247c7ab921cdf12e884b19d4f79e9668"
+      },
+      "source_world_up_preserved_conditionally": true,
+      "original_rest_palm_alignment_preserved": false,
+      "object_rotation_delta_from_previous_rad": 2.341532601229413,
+      "object_root_delta_from_previous_m": [
+        -0.02473350834091967,
+        0.012445467038832567,
+        -0.11740638734085984
+      ]
+    },
+    {
+      "best": {
+        "q20": [
+          0.7395547671031979,
+          -0.7050094788599964,
+          0.6511934981325712,
+          0.41910456828371623,
+          0.5245265313511844,
+          0.34736257082501987,
+          0.7342509209607616,
+          1.3024680461886662,
+          -0.04451503003546349,
+          0.1796923435959199,
+          1.5531952319998292,
+          1.174829910605402,
+          0.88532798395744,
+          -0.697998999972234,
+          0.13057135284995736,
+          0.8482470789992087,
+          1.500694902709922,
+          -0.6865817414991928,
+          -0.15041594322798793,
+          0.36533908316656877
+        ],
+        "squared_cost": 5.929700684388979,
+        "maximum_native_object_penetration_m": 0.0,
+        "maximum_native_self_or_table_penetration_m": 0.0,
+        "canonical_min_native_component_gap_m": [
+          0.0,
+          0.00044822274420420316,
+          3.1154866093112925e-05
+        ],
+        "elapsed_s": 0.37489580013789237
+      },
+      "solver_success": true,
+      "solver_message": "`xtol` termination condition is satisfied.",
+      "nfev": 37,
+      "q20": [
+        0.7395547671031979,
+        -0.7050094788599964,
+        0.6511934981325712,
+        0.41910456828371623,
+        0.5245265313511844,
+        0.34736257082501987,
+        0.7342509209607616,
+        1.3024680461886662,
+        -0.04451503003546349,
+        0.1796923435959199,
+        1.5531952319998292,
+        1.174829910605402,
+        0.88532798395744,
+        -0.697998999972234,
+        0.13057135284995736,
+        0.8482470789992087,
+        1.500694902709922,
+        -0.6865817414991928,
+        -0.15041594322798793,
+        0.36533908316656877
+      ],
+      "tip_errors_m": [
+        0.012761365470843907,
+        0.015331423138149477,
+        0.018771447586340334,
+        0.03930371354696757,
+        0.0695980623931376
+      ],
+      "native_penalties_are_not_independent_clearance": true,
+      "counts": {
+        "kinematics": 39,
+        "comPos": 39,
+        "jacSite": 185,
+        "residual": 37,
+        "integration_steps": 0,
+        "native_distance": 8096,
+        "jacPoint": 6822,
+        "zero_distance_normal_heuristic": 75
+      },
+      "yaw_rad": 4.1887902047863905,
+      "geometry_pass": false,
+      "all_pairs_clear": true,
+      "geometry_unknown": 0,
+      "canonical_contact_candidates": {
+        "1": [],
+        "2": [],
+        "3": [
+          [
+            173,
+            39
+          ]
+        ]
+      },
+      "failed_pair_counts": {
+        "object": 0,
+        "self": 0,
+        "hand_table": 0
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed04\\candidate.npz",
+        "bytes": 1626,
+        "sha256": "d6f7d325bdaf9789b7de088a83b1f5b93921552e303b36358ed2e13c49b6305b"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed04\\geometry.json",
+        "bytes": 898332,
+        "sha256": "0057601ad12a6eeb60041a20b29ae7efa28b11e1c83737317298f8b93136e5d0"
+      },
+      "proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed04\\proposals.jsonl",
+        "bytes": 25569,
+        "sha256": "8de4fc8698ad71c3db50e586c9b4359dce085f9719ded93e1cab1426b20dec4a"
+      },
+      "source_world_up_preserved_conditionally": true,
+      "original_rest_palm_alignment_preserved": false,
+      "object_rotation_delta_from_previous_rad": 2.266965038534429,
+      "object_root_delta_from_previous_m": [
+        0.01950786269941321,
+        -0.014505459006124571,
+        -0.11740638734085979
+      ]
+    },
+    {
+      "best": {
+        "q20": [
+          0.745610948765124,
+          -0.4653128489076868,
+          0.5956058894750842,
+          0.2405689902046585,
+          0.7245951106834213,
+          0.42072865456893743,
+          0.7898355844123589,
+          1.0753305428814235,
+          0.35850462983753445,
+          -0.5193532371144598,
+          1.0886815770513039,
+          1.3307596411806997,
+          0.46431883771592247,
+          -0.594301322557896,
+          -0.18863100908709424,
+          1.487497327816432,
+          0.1497980419908369,
+          -0.6121496297820876,
+          0.9481730273712089,
+          -0.6267143295983005
+        ],
+        "squared_cost": 376.0312180132113,
+        "maximum_native_object_penetration_m": 0.009454185497862932,
+        "maximum_native_self_or_table_penetration_m": 0.0,
+        "canonical_min_native_component_gap_m": [
+          5.299801144471648e-05,
+          3.077322821795355e-05,
+          4.50852371483254e-05
+        ],
+        "elapsed_s": 0.3395395001862198
+      },
+      "solver_success": true,
+      "solver_message": "`xtol` termination condition is satisfied.",
+      "nfev": 31,
+      "q20": [
+        0.745610948765124,
+        -0.4653128489076868,
+        0.5956058894750842,
+        0.2405689902046585,
+        0.7245951106834213,
+        0.42072865456893743,
+        0.7898355844123589,
+        1.0753305428814235,
+        0.35850462983753445,
+        -0.5193532371144598,
+        1.0886815770513039,
+        1.3307596411806997,
+        0.46431883771592247,
+        -0.594301322557896,
+        -0.18863100908709424,
+        1.487497327816432,
+        0.1497980419908369,
+        -0.6121496297820876,
+        0.9481730273712089,
+        -0.6267143295983005
+      ],
+      "tip_errors_m": [
+        0.0065756812527636675,
+        0.008657822406230009,
+        0.010624797683832092,
+        0.025579835762989098,
+        0.05962037022588272
+      ],
+      "native_penalties_are_not_independent_clearance": true,
+      "counts": {
+        "kinematics": 33,
+        "comPos": 33,
+        "jacSite": 155,
+        "residual": 31,
+        "integration_steps": 0,
+        "native_distance": 8094,
+        "jacPoint": 6988,
+        "zero_distance_normal_heuristic": 106
+      },
+      "yaw_rad": 5.235987755982989,
+      "geometry_pass": false,
+      "all_pairs_clear": false,
+      "geometry_unknown": 0,
+      "canonical_contact_candidates": {
+        "1": [
+          [
+            188,
+            15
+          ]
+        ],
+        "2": [
+          [
+            98,
+            28
+          ],
+          [
+            187,
+            28
+          ]
+        ],
+        "3": [
+          [
+            187,
+            39
+          ]
+        ]
+      },
+      "failed_pair_counts": {
+        "object": 28,
+        "self": 0,
+        "hand_table": 0
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed05\\candidate.npz",
+        "bytes": 1619,
+        "sha256": "b577b45fc6d95bc93a7cd06d65bd6850e3a48ec9ea80592392fae3c886f912f0"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed05\\geometry.json",
+        "bytes": 899665,
+        "sha256": "6ed5f08bf1a0698d0103dfe43a52c3e8ad307d82245441de0ca4593448d82029"
+      },
+      "proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_placement_v1\\seed05\\proposals.jsonl",
+        "bytes": 21762,
+        "sha256": "82c8cfc88904972be1e5e20196b58795c68a4ce1a1086417590709f0a7dc8d1b"
+      },
+      "source_world_up_preserved_conditionally": true,
+      "original_rest_palm_alignment_preserved": false,
+      "object_rotation_delta_from_previous_rad": 2.4390523586386474,
+      "object_root_delta_from_previous_m": [
+        0.06496873483002824,
+        0.010333229190578323,
+        -0.11740638734085984
+      ]
+    }
+  ],
+  "geometry_pass_count": 1,
+  "all_pairs_clear_count": 3,
+  "neural_updates": 0,
+  "integration_steps": 0,
+  "wall_s": 18.355908600147814,
+  "scope": "Six first-frame placements preserving conditional source Z-up orientation modulo yaw. Handle anchor fixed in robot world; robot root and assets unchanged. Original rest-palm alignment intentionally lost, target clock/full trajectory/force labels not rebuilt. Native-distance proposal followed by all-piece static audit; not physical holding or verified per-sequence gravity."
+}

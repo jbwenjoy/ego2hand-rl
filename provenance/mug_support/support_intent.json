@@ -1,0 +1,51 @@
+{
+  "schema": "mug_support_diagnostic_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\diagnose_mug_support.py",
+      "bytes": 7924,
+      "sha256": "74e9adb7fe8d0fe64a97bb46afbfb3e83127490e7506cdbbe020cf574bc45794"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    }
+  ],
+  "parent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_static_hold_v1\\report.json",
+    "bytes": 32867,
+    "sha256": "f2af2efbb7156e6d709d4258e4a50e3490247a221337c2b0b37f351921895274"
+  },
+  "source_times_s": [
+    0.0,
+    0.01,
+    0.02,
+    0.05,
+    0.1,
+    0.15
+  ],
+  "overclosures_m": [
+    0.0,
+    0.002
+  ],
+  "source_dt_s": [
+    0.0003125,
+    0.00015625
+  ],
+  "snapshots": 24,
+  "reproject_zero_joint_and_object_velocity": true,
+  "hold_actual_pose_and_original_command": true,
+  "domains": [
+    "observed_other_constraint_local_command_005",
+    "observed_other_constraint_full_command",
+    "free_dry_friction_full_command"
+  ],
+  "per_snapshot_LPs": 8,
+  "maximum_LP_calls": 192,
+  "maximum_native_forward": 24,
+  "maximum_integrations": 0,
+  "cone": "actual native condim3 pyramidal tangent friction",
+  "moment_row_radius_m": 0.1,
+  "role": "MECHANICAL_DIAGNOSTIC_NO_NN_FITTING_NO_WITNESS_FORCES_APPLIED"
+}
