@@ -1,0 +1,252 @@
+{
+  "schema": "phone_tripod_online_matched_learning_protocol:1",
+  "role": "new3cycle_native_common_replay_sharedWM_matched_A1_A2_learning",
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "native_collection_authorized": false,
+  "device": "cuda:0",
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_learning_v1\\gpu_run1",
+  "recipe": {
+    "seed": 1734,
+    "cpu_threads": 4,
+    "NN_dtype": "float32",
+    "physical_dtype": "float64",
+    "amp": false,
+    "TF32": false,
+    "collection_cycles": 3,
+    "updates_per_cycle": 100,
+    "first_healthy_global_update": 10,
+    "stop_after_first_healthy": true,
+    "collection_profiles_per_arm": 4,
+    "collection_episodes_per_cycle": 16,
+    "maximum_H_per_cycle": 320,
+    "maximum_native_steps_per_cycle": 30720,
+    "maximum_native_steps": 92160,
+    "WM_batch": 8,
+    "WM_online_rows": 4,
+    "WM_old_original_rows": 2,
+    "WM_old_tripod_rows": 2,
+    "Actor_batch": 8,
+    "imagination_horizon": 2,
+    "Actor_microbatch": 2,
+    "WM_lr": 0.0001,
+    "Actor_lr": 0.0001,
+    "Critic_lr": 0.0003,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "epsilon": 1e-08,
+    "foreach": false,
+    "capturable": false,
+    "clip_norm": 1.0,
+    "gamma": 0.99,
+    "target_critic_tau": 0.01,
+    "normalizers": "frozen_offline1000_WM_actor_critic_target_norms_no_refit",
+    "WM_loss_scales": "frozen_offline1000_no_refit",
+    "WM_supervision": "equal6physical_headblocks+equal2decoded_velocityblocks+log1p_meanFn1N+coverageBCE;absolute_only_no_CF",
+    "WM_sampling": "4_cumulative_online+2_old_original684+2_old_tripod153_uniform_with_replacement",
+    "Actor_sampling": "common_cumulative_online_complete_prealive_B8_with_replacement;imaginedH2_not_groundtruth_window",
+    "TD": "per_mode_saved_real_reward+gamma*not_actor_absorbing_done*not_reference_timeout*targetCritic(nextobs);collection_truncation_bootstraps",
+    "shared_WM": true,
+    "shared_real_batch_indices": true,
+    "online_arms_pooled": true,
+    "checkpoint_every_cycle_end": true,
+    "Adam_start": "fresh5_at_new_stage_only;resume_all5_no_reset",
+    "monitor_or_CHECK_training": false,
+    "old_CF_continued": false,
+    "stage_counter": "global_paired_updates_online_only;lineage_paired=1000+global;sharedWMlineage=1100+global",
+    "collection_time": "full_cycle100_checkpoint_only_for_next_cycle;firststep10_resume_reuses_saved_cycle1_pool",
+    "automatic_retry": false
+  },
+  "recipe_pin": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_learning_v1\\recipe_v1.json",
+    "bytes": 2631,
+    "sha256": "a378db822e9e8e640769478fd2fdac39aa03989c95c5198afc75903bc7b321b1"
+  },
+  "sources": {
+    "WM_trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\train_geometry_momentum_wm.py",
+      "bytes": 37229,
+      "sha256": "224a0c9f47e196c626e862aa52d46402a454a6d16f0b497d3720ae74e25ca539"
+    },
+    "structured_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+      "bytes": 4100,
+      "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+    },
+    "momentum": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\momentum_contract.py",
+      "bytes": 4023,
+      "sha256": "983e182d7b8980d44a23db0f143d4a1c48ed483d37522fdba33dca3d5344b0ca"
+    },
+    "rotation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    },
+    "scalar_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "state_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "FK": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\geometry_provider.py",
+      "bytes": 11690,
+      "sha256": "f00da9a2c5deb19261a3ff4e168d79f8aea9784736e0fdd0897ffe9599a3b07b"
+    },
+    "directional": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+      "bytes": 9556,
+      "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+    },
+    "geometry_constants": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_constants.json",
+      "bytes": 91553,
+      "sha256": "330243d3b85abb1e996c2658b9216fe89df9ede53b0c4e035af63deb651f8fd9"
+    },
+    "geometry_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_geometry_arrays.npz",
+      "bytes": 514604,
+      "sha256": "4bafa2e40788f1106dcb497e575304d9bfabc7476fdb910147179325db97570f"
+    },
+    "direction_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\direction_arrays_v1.npz",
+      "bytes": 24503,
+      "sha256": "08dbbe3bfc8c0cbd19dad14510fd48c48351d8102cbeb99ca3d8f735cd1ca053"
+    },
+    "task": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_task_v2.py",
+      "bytes": 15259,
+      "sha256": "1d069f19760cee674abd94e76166cff4aee89b4eab2a3f42b54ce43308d7acaf"
+    },
+    "imagination": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_actor_imagination_v2.py",
+      "bytes": 5601,
+      "sha256": "23bf5342dda374fe682c52dea878c7cf95b044780df74a1f738a710ba1eba96b"
+    },
+    "reader_replay": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\reader_replay_adapter_v2.py",
+      "bytes": 9110,
+      "sha256": "266c4b0609193601e1ec8fbdecf43b04ac8dfc37a817fea6a1bdc6a80462c6cd"
+    },
+    "reference": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_ego_reference_v1\\reference.py",
+      "bytes": 4463,
+      "sha256": "88c85fe21db72ab29f5c8da5a799345205be45ed7ec830e804b2370ccf70bbb0"
+    },
+    "Actor_Critic": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "bytes": 5331,
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "Actor_common": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\common.py",
+      "bytes": 3261,
+      "sha256": "6d6ff994d592c8fec1d46401d7051d0511310281a3d28450db8bd9be8c327f8b"
+    },
+    "replay": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\buffer.py",
+      "bytes": 3651,
+      "sha256": "3048a42d13aa5142a4c42a29b5f7c77df02c5c628f6276bf9d5256a644494d5f"
+    },
+    "chord_contacts": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\contacts.py",
+      "bytes": 5132,
+      "sha256": "79b53c63dd5573c9908d052f29c678f1724ff5be3ffa5b7c077421cbf4788212"
+    },
+    "weighted_support": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\contact_geometry.py",
+      "bytes": 25350,
+      "sha256": "a9e0e19cc826cefe4e6a97a5c7b33f02f04c23585065cb0a273436eb07846d7a"
+    },
+    "paired_trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\train_shared_WM_A1_A2.py",
+      "bytes": 36961,
+      "sha256": "a1bcf9f820e00d7da4ac515dd81d45d39a2c59abd07c85319d1346db384b2439"
+    },
+    "native_reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    },
+    "raw_collector": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_task_acquisition_v1\\collect_tripod_task_v1.py",
+      "bytes": 24841,
+      "sha256": "7c9f9bcfedc56d197ecf8d637ca51ef242ca22751e872b7b8bf290bcddf5b597"
+    },
+    "label_adapter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\dataset_adapter_v1.py",
+      "bytes": 15120,
+      "sha256": "fefba9dd7ff3f7f660a4d126ffc8bcf046388a40b7be10e58dd5515bdc554389"
+    },
+    "dataset_exporter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\export_dataset_v1.py",
+      "bytes": 16314,
+      "sha256": "586eea709f274c966b0d537d02fc072e9b032310a78323ed920844c04f486eed"
+    },
+    "collector": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\collect_online_v3.py",
+      "bytes": 29289,
+      "sha256": "1ac42da98b030a55431cdc9471ef467bc70a1422a30a04a0fd25642b4c7879c6"
+    },
+    "preparation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\prepare_protocol_v3.py",
+      "bytes": 4431,
+      "sha256": "83ae00fe4f465f5f95b5b1ebb73ee5821040b5270f238833a6689479ac588bb7"
+    },
+    "actor_lineage": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\actor_lineage_v3.py",
+      "bytes": 9000,
+      "sha256": "21aa0f2ffad8182deb1b6758d1d9e2b484d641fbac975085753750f6cccad59f"
+    },
+    "trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_learning_v1\\train_online_matched_v1.py",
+      "bytes": 36135,
+      "sha256": "ab7a9fde8ddbf58d2dbf447605cb597f8fc8a8bb839f0beaa0356ae88961519b"
+    }
+  },
+  "inputs": {
+    "training_seed_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\protocol_CPUFalse_v1.json",
+      "bytes": 10979,
+      "sha256": "932701956482288ea3acdeefb7b39040d5700aaf76cfa8f5368ba4bb9f2e182b"
+    },
+    "root_training_protocol": null,
+    "root_result": null,
+    "root_health": null,
+    "root_terminal": null,
+    "collector_template": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\protocol_CPUFalse_v3.json",
+      "bytes": 13015,
+      "sha256": "b81c0aa7533b65b80f13242002c0c9bc47e46580716f62171fdaf026436483d4"
+    },
+    "task_bundle": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+      "bytes": 19375,
+      "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+    },
+    "geometry_catalog": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\geometry_catalog_v1.json",
+      "bytes": 2197,
+      "sha256": "f36298062d6039a6230c9958f0169e57f8544dfd7706ec3b2e988b4796afa33c"
+    }
+  },
+  "resume_checkpoint": null,
+  "resume_health": null,
+  "preparation": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_learning_v1\\prepare_online_protocol_v1.py",
+    "bytes": 5230,
+    "sha256": "8e422c433ff321fc8d909722c17f6ed5b43c00764dac5978594949c4da59f24e"
+  },
+  "data_scope": "Native newONLINE_TRAIN commonpool only plusoffline originalTRAIN684 andtripodTRAIN153 WMreplay. No oldmonitor/CHECK/freshfinal/TEST opens or fitting. Botharms useallonlinepool/per-mode reward, same rowbatch; allpartial/failure/alias retained.",
+  "physical_scope": "Fixednativeparameters/scene/wrist, noaid, unchangedReader safety andPOSTH taskterminal. Exploration.95Actor+.05namedprofile.0.4s acquisition isnot2s learned-policy evaluation.",
+  "resume_scope": "No recollection of completedcycle; dataset/protocol/raw receipts pinchain, stable(poolSHA,row/episode)identity mapping, previousprocess fixedlogprefixbytes retained; restore WM/allarms/target/norm/5Adam/CPUandselectedCUDA/sampleRNG"
+}

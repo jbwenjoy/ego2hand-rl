@@ -1,0 +1,77 @@
+{
+  "schema": "full151_failed_candidate_geometry_diagnostic:1",
+  "output": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_failed_candidate_geometry_v1",
+  "queries": 601,
+  "physics": false,
+  "training": false,
+  "GPU": false,
+  "source_identity": {
+    "legacy_source_frames_half_open": [
+      200,
+      351
+    ],
+    "local_states": 151,
+    "duration_s": 3.0,
+    "goal_dt_s": 0.02,
+    "solver_diagnostic_dt_s": 0.005,
+    "planned_targets": 150,
+    "target_indices": [
+      0,
+      149
+    ],
+    "terminal_state_only_index": 150,
+    "inactive_clamp_last_target_index": 149,
+    "shared_source_0_151": false,
+    "independent_ego_N": 0
+  },
+  "inputs": {
+    "failed_receipt": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_cpu_input_v1\\receipt.json",
+      "sha256": "ae32b64e0e66a26fe5657e20e8efcf1d5624d859871cb5751f7c3fb9efd5c7d1"
+    },
+    "reference": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_cpu_input_v1\\reference_bspline151.npz",
+      "sha256": "7c0210a2e3185a17cce72381f66dd3275811395ff6667c9ab77f8663105334c9"
+    },
+    "model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    }
+  },
+  "sources": {
+    "producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\diagnose_candidate_geometry_cpu_v1.py",
+      "sha256": "b8449767ec8eb065c2d4c9eff92e6a5547e32b49e58091c32f15000b01a76784"
+    },
+    "io": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\io.py",
+      "sha256": "1727f40a66e8ebf4bbf7b1271252a0f01948be714820b6430b0b020ba9a36224"
+    },
+    "package_init": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\__init__.py",
+      "sha256": "cac7f2dadbe1f9cffba229c32de01f11c792e9be50bc501d1f2232ae3f3b9486"
+    },
+    "native_geometry": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\native_filtered_contact_geometry.py",
+      "sha256": "c964d5b300baac57a5353afd3b5aa4cfb381eca1da03ceef712691dd10376c72"
+    },
+    "kinematics": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    }
+  },
+  "limitations": [
+    "Diagnostic sampling of source64 q/object pose only, not a rollout, optimizer, live controller or native151 mode qualification.",
+    "The parent CPU candidate remains FAILED/no READY. This stage cannot promote it or change its numerical gate.",
+    "601 fixed5ms samples do not prove collision clearance or bound penetration between samples.",
+    "Absent filtered native pairs have unknown gap NaN. Only generated native contact depths are reported.",
+    "Original3mm penetration criterion is displayed as a diagnostic threshold without regrading any previous experiment.",
+    "Source64 q and object pose are prescribed independently; query qvel=0/time=0 for geometry only. Actual nonzero initialization is unchanged and not simulated.",
+    "No contact intent/force labels or measured dynamics; no WM/training/CHORD benefit/ego/hardware claim.",
+    "One constructor nominal FK and601 sample FK,601 original-options collision queries; all dynamic/force/geomDistance/optimization APIs instrumented to reject."
+  ]
+}

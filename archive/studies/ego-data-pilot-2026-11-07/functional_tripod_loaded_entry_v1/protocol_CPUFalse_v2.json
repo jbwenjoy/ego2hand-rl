@@ -1,0 +1,115 @@
+{
+  "schema": "functional_tripod_loaded_entry_geometry_protocol:1",
+  "CPU_static_run_authorized": false,
+  "neural_training_or_integration_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\completed_run2",
+  "compression_target_window_m": [
+    -9e-05,
+    -6e-05
+  ],
+  "compression_target_center_m": -7.5e-05,
+  "selected_parent_candidates": [
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_projection_v1\\completed_run1\\source1mm__index_material_toward_COM_30mm_candidate.json",
+      "bytes": 233733,
+      "sha256": "44c30608f05e292d35756b888bb523558c4ef73fb258fe6d32e171dfbac1c57f"
+    }
+  ],
+  "sources": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\solve_compression_geometry_v2.py",
+      "bytes": 17158,
+      "sha256": "909800aa42bf0cca6d551c1c09c93aa2f997f39c52dbe75c6346442b46b3ee9b"
+    },
+    "protocol_builder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\build_protocol_v2.py",
+      "bytes": 2091,
+      "sha256": "e9f6007102fdd9785b568649e3e4089cab21a69915118334f2efcb23e546a643"
+    },
+    "frozen_geometry_solver": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\solve_tripod_geometry_v2.py",
+      "bytes": 25708,
+      "sha256": "1778732382cc6fe9b53b1207c31e459dc603997edd123f4b237591db4a1e1fef"
+    },
+    "plane_helper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\refinement_v1\\separating_plane_refinement_v1.py",
+      "bytes": 10395,
+      "sha256": "75f664e7abefeee5716398c5753f2c9023554b436aae65c1757b3531ed6bcf2e"
+    },
+    "original_projection_runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_projection_v1\\project_saved_candidates_v1.py",
+      "bytes": 11434,
+      "sha256": "14521c3a245fc45834a306f329e6a7431412fba20d2dd44483851fc43b8fce8b"
+    }
+  },
+  "inputs": {
+    "original_geometry_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\protocol_CPUTrue_run1.json",
+      "bytes": 6057,
+      "sha256": "9d524d37ad39220a85bcd7589820a7e8de2f5cac749a71f3fd42987a1d3d32c8"
+    },
+    "original_geometry_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_projection_v1\\completed_run1\\report.json",
+      "bytes": 6885,
+      "sha256": "74a9d659a86954a25df2ab7a43bc9428857dfabb5971ec67c611b94f5492622f"
+    },
+    "retained_compression_v1_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\completed_run1\\report.json",
+      "bytes": 4955,
+      "sha256": "96eec5b034f8271e7f8965bf7e3566b229690c479f5e4ba7c175802e0f2c33ac"
+    },
+    "retained_numeric_boundary_candidate": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\completed_run1\\source1mm__index_material_toward_COM_30mm_candidate.json",
+      "bytes": 234871,
+      "sha256": "64e953d6f7f48327d5046d408287468084e164c2db3ccffaff999ff1a3e622dc"
+    }
+  },
+  "budget": {
+    "global_wall_s": 180,
+    "entry_wall_s": 75,
+    "final_wall_s": 8,
+    "iterations_per_entry": 20,
+    "full_queries_per_entry": 80,
+    "final_full_queries_reserved": 2,
+    "heavy_queries_per_entry": 2000
+  },
+  "proposal": {
+    "joint_step_trust_rad": 0.02,
+    "interior_target_margin_m": 2e-06,
+    "center_objective_weight": 100.0,
+    "line_search_fractions": [
+      1.0,
+      0.5,
+      0.25,
+      0.125,
+      0.0625
+    ]
+  },
+  "hard_geometry": {
+    "designated_geom_ids": [
+      15,
+      28,
+      41
+    ],
+    "pad_window_m": [
+      -0.0001,
+      0.0002
+    ],
+    "nonpad_minimum_gap_m": 0.0,
+    "self_minimum_gap_m": 0.0,
+    "phone_pair_count": 22,
+    "self_pair_count": 189,
+    "table_complete_required": true,
+    "unknown_forbidden": true,
+    "frozen_phone_and_q12_19": true,
+    "hardware_joint_bounds_unchanged": true
+  },
+  "scope": "Compression[-90,-60]um and center-75um are separate search targets, not a changed original geometry gate or proof of native loaded/holding. No if geometrypassed break: require targetpass AND originalgeometrypass. All2 finals/failures kept; full fresh final mandatory. No idealpointLP or zeroacc necessary gate.",
+  "candidate_ABI": "Existing functional_tripod_geometric_reference_candidate:1/report:1 retained. Additional compression_target,compression_target_pass,geometry_and_compression_target_pass fields. Existing geometry.passed remains original214+trust result.",
+  "retained_CPUFalse_v1_protocol": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\protocol_CPUFalse_v1.json",
+    "bytes": 4424,
+    "sha256": "f19953831d4e16613df9a4fca682a57a4910e88986d9995e6ed3b3daa989c169"
+  },
+  "numeric_feasibility_revision": "Original eligible starting state only, explicit one-state subset and2um proposal interior. Original hard>=0 /[-100,+200]um and compression[-90,-60]um unchanged. The v1 negative margin remains failed; no warmstart from it, no valid-exact repeat."
+}

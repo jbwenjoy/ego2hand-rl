@@ -1,0 +1,195 @@
+{
+  "schema": "fixed_wrist_contact_first_geometry_protocol:2",
+  "inputs": {
+    "loader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\scene_loader_v1.py",
+      "bytes": 2908,
+      "sha256": "5a36cf1d6ac875c3f0cfc3c80b5b28c8c5726ec68d3ac40f731ccee70840b303"
+    },
+    "model_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\completed_v2\\report.json",
+      "bytes": 6041,
+      "sha256": "88202faa3eeb05fa1a98fb726cd599b2cbe256376c2d31b6de5dd38355d15838"
+    },
+    "targets": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\frame42_targets.json",
+      "bytes": 11518,
+      "sha256": "2918c7385036c93fc0e81dbba7f72d02ba72f9b26744b9fe8caab3a1b4b2c15f"
+    },
+    "old_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\report.json",
+      "bytes": 32618,
+      "sha256": "f63174e4252cc98e75ff5720f1184ee47a07a0b3ee8c1bed6d285b4f62a3db36"
+    },
+    "old_trace": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\all_geometry_evaluations.jsonl",
+      "bytes": 309178,
+      "sha256": "f1fd7fe97d4e6b67a14e5f98ab832cc0b7c552cf39661c1c8f985fc490d43488"
+    },
+    "seed0": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\seed0_candidate_state.npz",
+      "bytes": 8344,
+      "sha256": "13ee1c6e27b7a3b820261dbcca5fe539d50c4f24a6630399ef31925d3ab909fb"
+    },
+    "seed1": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\seed1_candidate_state.npz",
+      "bytes": 8342,
+      "sha256": "9916e41b5c890522e7eb72bd70e367d1db5c358c91188ffb4744dc0a98408565"
+    },
+    "seed2": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\seed2_candidate_state.npz",
+      "bytes": 7883,
+      "sha256": "58fa94ed0e350da1ec3d49e3d5705fdcdf76af6db05dfe07f2e60cc214d3fcd2"
+    }
+  },
+  "source_pins": {
+    "producer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\solve_contact_first_v2.py",
+      "bytes": 26045,
+      "sha256": "7a2deeb196fa24bcac6c33f17ebe9862f9129b055a92fbaad8e5491ae8c86fdb"
+    },
+    "convex_query": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\convex_query.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    },
+    "query_interface": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\query_interface_v2.py",
+      "bytes": 3575,
+      "sha256": "5c5785a7d8301404ef62659dc2e3f2ca016d98c8041b96feeb1e4e5c2ac779fe"
+    },
+    "core_fixtures": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\fixture_results_v1.json",
+      "bytes": 16212,
+      "sha256": "c68275eaab81c99d14140859fe020ad613c483bceb04edc4a6071d50534f85e1"
+    },
+    "interface_fixtures": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\interface_fixture_v2.json",
+      "bytes": 5365,
+      "sha256": "575a5a0f405dccc597e1c929b530b83f5e81b5ffce9736599ca4a0841f0bcba1"
+    },
+    "source_collision_driver": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\distance_probe_v1\\sources\\src__engine__engine_collision_driver.c",
+      "bytes": 87442,
+      "sha256": "6bac32ee954231dc5fb1068e371e68ef95274b09adc5cd8582b369e47bf6ab28"
+    }
+  },
+  "frame": 42,
+  "human_to_robot": "same anatomical thumb/index/middle/ring/pinky, left-reference to right Hand2 without reflection/permutation. No22-angle transfer.",
+  "wrist_and_scale": "source fixed palm fullframe; phone/hand scale1; true compiled joint/actuator parameters unchanged",
+  "start_points": "Exactly the3 original saved v1 snapshot states, allreported. No additional seeds.",
+  "anchor_definition": "Each original source q0 robot tip site projected to its corresponding actual compiled tip_sensor convex boundary, fixed in geomlocal frame. Geometric anchor only, not soft/compliantpad semantics.",
+  "human_target_definition": "Original frame42 human nearcontact scanpoint for thumb/index projected once onto phone single convex surface, unchanged objectframe. All5tip references retained.",
+  "objective_blocks": {
+    "candidate_anchor_xyz": {
+      "weight": 1.0,
+      "normalization_m": 0.005
+    },
+    "candidate_anatomical_tip_style": {
+      "weight": 0.15,
+      "normalization_m": 0.01
+    },
+    "noncontact3_tip_style": {
+      "weight": 0.05,
+      "normalization_m": 0.02
+    },
+    "joint_regularizer_to_source_q0": {
+      "weight": 0.01,
+      "normalization": "source hard range"
+    }
+  },
+  "no_nearest_witness_position_objective": true,
+  "hard_constraints": {
+    "requested_pad_gap_m": [
+      0.0,
+      0.0002
+    ],
+    "optimizer_stricter_pad_gap_m": [
+      1e-05,
+      0.00019
+    ],
+    "optimizer_nonpad_table_buffer_m": 2e-05,
+    "final_nonpad_table_min_m": 0.0,
+    "all_use_query_roundoff_guarded_intervals": true,
+    "no_preload_or_allowed_penetration": true
+  },
+  "bounds": {
+    "q20": "original compiled hard bounds",
+    "phone_translation_palm_m": [
+      [
+        -0.18,
+        -0.08,
+        -0.25
+      ],
+      [
+        0.18,
+        0.18,
+        0.05
+      ]
+    ],
+    "phone_rotvec_component_rad": [
+      [
+        -3.141592653589793,
+        -3.141592653589793,
+        -3.141592653589793
+      ],
+      [
+        3.141592653589793,
+        3.141592653589793,
+        3.141592653589793
+      ]
+    ]
+  },
+  "solver": {
+    "method": "SLSQP",
+    "maxiter": 200,
+    "ftol": 1e-09,
+    "physical_finite_difference_q_rad": 0.0001,
+    "physical_finite_difference_translation_m": 1e-05,
+    "physical_finite_difference_rotation_rad": 0.0001,
+    "gradient": "Same explicit forward/backward physical steps for objective andconstraints; no defaulteps1e-8",
+    "native_site_jacobian": false,
+    "constraint_scaling_m": 0.001,
+    "variable_scaling_q_p_rot": [
+      1.0,
+      0.1,
+      1.0
+    ]
+  },
+  "budgets": {
+    "total_seconds": 180,
+    "per_seed_seconds": 60,
+    "optimization_seconds_per_seed": 45,
+    "remaining15s_reserved_for_final_checks": true,
+    "heavy_Minkowski_query_attempts_total": 6000,
+    "optimization_heavy_per_seed": 1900,
+    "max_pair_points": 4000000,
+    "single_atomic_query_overrun": "Record actualelapsed/UNKNOWN if a query crosses deadline; no automatic retry or higherlimit."
+  },
+  "acceleration": {
+    "AABB_exact_switch_m": 0.0005,
+    "meaning": "Only nonpad pairs whose AABB lower separation bound exceeds.5mm may use it as nonpenetrationcertificate duringsearch. It is explicitly not an exactgap. Pads always exact; final ALL phonepair gaps exact. Overlapping AABBneverpasses.",
+    "cache": "Exactgeometry bytekeys only, no rounding/quantization. Full sourcevertices passed tocore; core exacthull reduction is not geometric decimation."
+  },
+  "query_semantics": "Independent idealconvex signed puretranslation margin; no native mj_geomDistance. query_interface normal/supportfeatures validated. 4M cap explicit, no vertexdecimation.",
+  "final_self_collision": {
+    "eligible": "compiledbody/weld/parent/exclude_signature/geom masks; explicitpairs separately retained; no sleep suppression",
+    "nearby_AABB_lower_m": 0.002,
+    "nearby_query": "all eligible near crossbody pairs exactcapsule/convex or analyticcapsulecapsule; far disjointAABB certificate",
+    "unknown_not_PASS": true,
+    "analytic_capsule_segment_contracts": 3
+  },
+  "selection": {
+    "per_seed": "best base-evaluated state satisfying tightenedoptimizationconstraints else minimummaxconstraintviolation, thenobjective; FDprobes not selected",
+    "global": [
+      "complete_qualified_geometry_first",
+      "all_pad_and_nonpad_exact_final_constraints_first",
+      "max_search_constraint_violation_ascending",
+      "objective_ascending",
+      "seed_index"
+    ],
+    "self_unknown_or_intersection": "notqualified even if phoneconstraints pass"
+  },
+  "output": "All3 seed states/results, fullobjective/iteration/querylogs, exactfinal phonegap+supportfeatures(world andrawphoneframes), selfpair table, unchangedmodel proof. No holding/force/ego-successqualification.",
+  "no_integration_training_GPU": true
+}

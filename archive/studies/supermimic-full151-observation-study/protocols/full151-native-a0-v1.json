@@ -1,0 +1,111 @@
+{
+  "schema": "full151_knownrough_native_A0_protocol:1",
+  "allowed_roles": [
+    "native_a0"
+  ],
+  "allowed_seeds": [
+    0
+  ],
+  "input_bundle": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\bundle.json",
+    "sha256": "59406c6214a085afba7efcc2b33880d5c82b409ee4f6485ec71c073fec19dc76"
+  },
+  "reference_states": 151,
+  "control_intervals": 150,
+  "source_frame_range_half_open": [
+    200,
+    351
+  ],
+  "physical_reference_qualified": false,
+  "training_authorized": false,
+  "known_rough_reference": true,
+  "geometric_candidate_qualified": false,
+  "environment": {
+    "num_envs": 1,
+    "nconmax": 192,
+    "njmax": 4096,
+    "control_hz": 50,
+    "physics_dt_s": 0.005,
+    "substeps_per_interval": 4,
+    "quality_early_stop": false
+  },
+  "episode_counts": {
+    "real_intervals": 150,
+    "solver_steps": 600,
+    "raw_states": 601,
+    "native_postinterval_forwards": 150,
+    "last_real_phase": 149,
+    "terminal_observation": 150,
+    "u150_permitted": false
+  },
+  "clock_contract": {
+    "schema": "full151_native_clock:1",
+    "dtype": "float32",
+    "physics_dt_s": 0.005,
+    "physics_steps": 600,
+    "control_substeps": 4,
+    "expected_rule": "sequential_float32_add_from_zero",
+    "bitexact_expected_time": true,
+    "canonical_time_rule": "integer_physics_tick_times_0p005",
+    "nominal_drift_gate_s": 5e-05,
+    "legacy_prefix_2us_diagnostic_only": true
+  },
+  "evaluation_gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "clock": {
+      "schema": "full151_native_clock:1",
+      "dtype": "float32",
+      "physics_dt_s": 0.005,
+      "physics_steps": 600,
+      "control_substeps": 4,
+      "expected_rule": "sequential_float32_add_from_zero",
+      "bitexact_expected_time": true,
+      "canonical_time_rule": "integer_physics_tick_times_0p005",
+      "nominal_drift_gate_s": 5e-05,
+      "legacy_prefix_2us_diagnostic_only": true
+    },
+    "legacy_prefix_2us_diagnostic_only_s": 2e-06,
+    "target_rate_max_rad_s": 15.0,
+    "actuator_load_ratio_max": 1.01,
+    "load_charge_max": 0.8,
+    "charge_decay_time_s": 2.0,
+    "drop_center_below_default_wrist_m": 0.15
+  },
+  "readiness": {
+    "input_CPU16": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\receipt.json",
+      "sha256": "82c8659df54000b156e82bfa6b4a64435e1cacd89a8d5ee6cdc1776a497340aa"
+    },
+    "input_independent67": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_saved_independent_v2\\report.json",
+      "sha256": "947f9def1b39eaa5b16663c5ff6c487e452a8997ffdf08d3a024a105620bc0bf"
+    },
+    "core_CPU61_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_core_READY_v1\\READY.json",
+      "sha256": "c0ee7b750a8e806b5559012dd720b632c4d2c34b3c2b6255090fc34fde1a8c85"
+    },
+    "native_A0_CPU44_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\READY_full151_native_A0_v1.json",
+      "sha256": "a8034dd45f27b19c6a1c5769c1d5b5107fabc240ce7b1576d43d47de7e53776c"
+    },
+    "consumers_CPU65_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\READY_checkpoint_consumers_v1.json",
+      "sha256": "bc226c8846c493a2a76b419d84f892c152bdaa7a7bd9eccf961215cbbe1d9208"
+    },
+    "A0_front_static27": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_A0_front_static_review_v1\\report.json",
+      "sha256": "e60038e5766330d4ae25dd2e84b0f9b86cdd603f012de3af1516b5e67a5f64b1"
+    }
+  },
+  "runtime_scope": "One fromscratch-zeroresidual A0; noActor/WM/Runner instance or optimizer. Actual8copy-setconst0restore-doubleread then explicitanalyticphase0reset. Fullqualityfailuresrecordedwithoutresetorassist; hardunstable/nonfinite/clock/APIerror partialuncensoredmask.",
+  "capacity_scope": "Frozenstickyobserver beginsafterEnvconstructor, beforeactual8/explicitreset, readsbeforeeachobservedresetandoncefinal. Constructor-before-observer work separatelyUNOBSERVED, not promotedtofullprocesscapacityproof.",
+  "sampling": "Rawpoststep qpos/qvel/clock600+startup. Solverderived contact/force preintegration before original150Managerforwards. Rewardcapture/state58/self15/PENmemory/terms samecadence and phase explicitlysaved.",
+  "attempt_policy": "One Root-authorized run, soft180s/hard240s watchdog, noautomaticretry/fallback, nohistoricalqualityselection. Partialexceptions/metadata/identity failuresretained.",
+  "source_history": "Parentfull151SCPFAIL preserved; accepting an explicitlyknownrough engineeringinput doesnotchangegeometry/physicalqualification. No old104checkpoint/16framepadding orshared[0,151)identity reuse.",
+  "checkpoint_scope": "105 newidentityreserved; noactualcheckpointcreatedbyA0. Futuretraining/actual105health/A2independenttargets remainpending."
+}

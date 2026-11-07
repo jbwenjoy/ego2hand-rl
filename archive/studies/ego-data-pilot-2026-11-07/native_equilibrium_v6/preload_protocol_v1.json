@@ -1,0 +1,68 @@
+{
+  "schema": "two_seed_linear_contact_preload_initialization:6",
+  "inputs": {
+    "seed0": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\support_refinement_v5_run1\\seed0_result.json",
+      "bytes": 220509,
+      "sha256": "c3c5cb5dd6c342800cb5edb58416e9ca3e60e337dec01fe4461a444a71e66ffb"
+    },
+    "seed1": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\support_refinement_v5_run1\\seed1_result.json",
+      "bytes": 231990,
+      "sha256": "b7b699f5ce938f1558f132c1afcce25ff6054dea8aa57d2739c02d5629d9559d"
+    },
+    "v5_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\support_refinement_v5_run1\\report.json",
+      "bytes": 512025,
+      "sha256": "38881cf58f18f3d59771de5f78d80df201ed0b39ada22fd606462736a6df7ab8"
+    }
+  },
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\prepare_preload_v1.py",
+      "bytes": 9680,
+      "sha256": "0f4db3985c3ecda1814cfac8fa249aa099959d716a09af8219764e4922a1f621"
+    },
+    "native_evaluator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\evaluator_native_v6.py",
+      "bytes": 19267,
+      "sha256": "0a7a15cf16d98066920de3a95dc7b0b1a9faf61d387c24cf43a1b38f1aa2a16f"
+    },
+    "frozen_geometry": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\evaluator_v3.py",
+      "bytes": 23763,
+      "sha256": "090cf6535f5249de4377a0e022ed7c87b555ad69ed7b570f995badb4d2245d57"
+    }
+  },
+  "CPU_static_authorized": true,
+  "integration_training_GPU_authorized": false,
+  "target_pad_gap_m": [
+    -2.5e-05,
+    -2.5e-05
+  ],
+  "max_abs_delta_q_rad": 0.02,
+  "linear_operator": "G_i=n_hand_exit_i^T J_hand_i[:,:20], from saved v5 current unique positive-gap pair",
+  "residual_scaling_m": 0.001,
+  "regularizer_delta_q_scale_rad": 0.01,
+  "regularizer_weight": 0.001,
+  "linear_solver": {
+    "method": "trf",
+    "lsq_solver": "exact",
+    "tol": 1e-10,
+    "max_iter": 100
+  },
+  "pad_window_hypothesis_m": [
+    -0.0001,
+    0.0002
+  ],
+  "nonpad_min_m": 0.0,
+  "self_min_m": 0.0,
+  "seed0_ctrl_rule": "Preserve saved proposed_tau20, invert actual unchanged fixed-gain affine PD at qnew; no clamping. Unreachable -> BLOCK native forward.",
+  "seed1_ctrl_rule": "ctrl=qnew, cold-start position command, not holding proposal",
+  "phonepose_wrist_scale_materials_unchanged": true,
+  "max_native_forwards": 2,
+  "max_full_22_189_geometry_calls": 2,
+  "nonlinear_optimization_or_LP_calls": 0,
+  "automatic_retry": false,
+  "scope": "Engineering soft-contact initialization; linearization approximate; no old geometry PASS or equilibrium/holding qualification inherited."
+}

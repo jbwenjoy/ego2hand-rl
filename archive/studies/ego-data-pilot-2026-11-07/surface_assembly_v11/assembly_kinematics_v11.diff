@@ -1,0 +1,64 @@
+--- assembly_kinematics_v9.py
++++ assembly_kinematics_v11.py
+@@ -2,7 +2,7 @@
+ 
+ Use AssemblyKinematics(existing_native_or_geometry_evaluator.geometry). Each
+ query owns its data and performs one mj_kinematics plus one mj_comPos. Fixed
+-filled-triangle material anchors/normals come from the immutable307e91 source.
++filled-triangle anchors/normals come from an explicit pinned schema11 source branch.
+ Ten raw equations contain6 positional [m] and4 tangent-normal [unitless] terms.
+ """
+ from pathlib import Path
+@@ -10,8 +10,7 @@
+ import json
+ 
+ PILOT=Path(__file__).resolve().parent.parent
+-ANCHOR_PATH=PILOT/'contact_patch_v7/paired_surface_anchors_v1.json'
+-ANCHOR_SHA='307e91a728c14fc4f799465649bc11f71c1b0be0971a3ec289d2a1acfaf565bb'
++from anchor_validation_v11 import validate_anchor_bundle, verify_compiled_anchors
+ COMPRESSION_M=.000025
+ 
+ 
+@@ -21,7 +20,7 @@
+ 
+ 
+ class AssemblyKinematics:
+-    def __init__(self,geometry_evaluator,*,anchors_path=ANCHOR_PATH,qrest12=None):
++    def __init__(self,geometry_evaluator,*,anchors_path,expected_anchor_pin,qrest12=None):
+         import mujoco
+         import numpy as np
+         from scipy.spatial.transform import Rotation
+@@ -31,12 +30,9 @@
+         self.initial_qpos=geometry_evaluator.initial['qpos'].copy()
+         self.pid,self.oid=geometry_evaluator.pid,geometry_evaluator.oid
+         self.pads=list(geometry_evaluator.pads)
+-        record=pin(anchors_path)
+-        if record['sha256']!=ANCHOR_SHA:raise ValueError('Fixed actual307e91 triangle anchors required')
+-        a=json.loads(Path(anchors_path).read_text(encoding='utf8'))
+-        if (a['schema']!='saved_filled_triangle_paired_surface_anchors:7'
+-                or not a['checks'] or any(v is not True for v in a['checks'].values())):
+-            raise ValueError('Completed original anchor contract')
++        a,self.anchor_json_checks=validate_anchor_bundle(anchors_path,expected_anchor_pin)
++        record=self.anchor_json_checks['anchor_pin']
++        self.compiled_anchor_checks=verify_compiled_anchors(self.m,mujoco,a,self.oid)
+         rows=a['anchors']
+         if (len(rows)!=2 or [v['finger'] for v in rows]!=['thumb','index']
+                 or [v['hand_geom_id'] for v in rows]!=self.pads
+@@ -126,7 +122,7 @@
+         if not np.isfinite(np.r_[A.ravel(),B.ravel(),nH.ravel(),nO.ravel(),closure.ravel(),normal_eq.ravel()]).all():
+             raise ValueError('Finite FK assembly operands')
+         self.counts['query_returned']+=1
+-        return {'schema':'fixed_original_surface_assembly_kinematics:9',
++        return {'schema':'source_region_surface_assembly_kinematics:11',
+             'x14':x.copy(),'q20':q,'qrest12':rest.copy(),'qpos27':d.qpos.copy(),
+             'phone_t_palm3':t.copy(),'phone_rotvec3':rv.copy(),
+             'phone_p_world_m':p,'phone_R_world':R,'phone_COM_world_m':d.xipos[self.oid].copy(),
+@@ -137,7 +133,7 @@
+             'eq10_units':['m']*6+['dimensionless']*4,
+             'normal_dot2':dots,'antidot2':-dots,'antiparallel_branch2':dots<0,
+             'antidot_branch_rule':'antidot2 must be strictly positive (normal_dot2<0); projection eq alone also admits same-direction normals.',
+-            'compression_target_m':COMPRESSION_M,'anchor_pin':self.anchor_pin,
++            'compression_target_m':COMPRESSION_M,'anchor_pin':self.anchor_pin,'anchor_branch':self.anchors['branch'],
+             'tangent_basis_rule':'Original phone triangle edge v1-v0, projected off saved nO for numerical orthogonality, t2=nO_unit cross t1. Only basis arithmetic; original anchor/normals/model are not repaired.',
+             'counts':dict(self.counts),'full_geometry_or_support_or_holding_qualified':False,
+             'scope':'Pure fixed-material assembly FK; no collision, force/dynamics, native contact or global geometry certificate.'}

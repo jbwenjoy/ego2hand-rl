@@ -1,0 +1,11 @@
+--- D:\workspace\ego-data-pilot-2026-11-07\phone_causal_fresh_acquisition_v1\collect_fresh_phone_families_v1.py
++++ D:\workspace\ego-data-pilot-2026-11-07\phone_causal_fresh_acquisition_v1\collect_fresh_phone_families_v2.py
+@@ -195,7 +195,7 @@
+         counts={k:sum(r.counts[k] for r in readers.values()) for k in next(iter(readers.values())).counts}
+         assert counts['integration_steps']<=23040 and len(episodes)==24 and len(rows)<=240
+         summary=dict(schema=RESULT_SCHEMA,status='COMPLETE_NEW12_CONTROLLED_FINAL_NATIVE_ACQUISITION',
+-            protocol=pin(args.protocol),design=protocol['inputs']['design'],family_plan=protocol['inputs']['family_plan'],
++            protocol=pin(protocol_path),design=protocol['inputs']['design'],family_plan=protocol['inputs']['family_plan'],
+             state_schema='phone_COM_world_state58:1',delta_schema='phone_physical_world_delta52:2',
+             array_schema='phone_episode_H20ms_arrays:1',outputs=outputs,
+             sample_identities=pin(out/'sample_identities.json'),episodes=pin(out/'episodes.json'),

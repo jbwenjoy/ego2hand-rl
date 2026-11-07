@@ -1,0 +1,126 @@
+{
+  "schema": "phone_fresh12_fixed5000_state_evaluation_CPU_protocol:1",
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_fresh_evaluation_v1\\completed_v1",
+  "rules": {
+    "checkpoint_iteration": 5000,
+    "checkpoint_selection": "fixed_before_fresh_predictions_no_selection",
+    "all_rows": 240,
+    "known_rows": 228,
+    "partial_rows": 12,
+    "CPU_checkpoint_loads": 1,
+    "NN_constructors": 1,
+    "NN_forward_calls": 1,
+    "NN_rows": 228,
+    "AD_optimizer_native_calls": 0,
+    "normalizer_refit": false,
+    "TRAIN_CHECK_VAL_TEST_target_array_opens": 0
+  },
+  "inputs": {
+    "training_result": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_resume1\\result.json",
+      "bytes": 1129,
+      "sha256": "ece5f7c85eb78c6727dddd246256475742971554662bd96a572e8f9525c58723"
+    },
+    "training_health": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_resume1\\health_5000.json",
+      "bytes": 3002,
+      "sha256": "f5555dec44098f8d0e541e42da56c18e999b3e9f2b6f0de4b71f7f4c0e66db8c"
+    },
+    "training_terminal": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\process_resume1\\terminal.json",
+      "bytes": 1975,
+      "sha256": "0a78b1db656bc2a5c66e7649340a5df063cb95a63350edded7b5617bb5c68e35"
+    },
+    "geometry_catalog": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\geometry_catalog_v1.json",
+      "bytes": 2197,
+      "sha256": "f36298062d6039a6230c9958f0169e57f8544dfd7706ec3b2e988b4796afa33c"
+    },
+    "fresh_acquisition": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_fresh_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 10454,
+      "sha256": "a2c597d7b745b64081b0ed3934b3bf10133de8602ae1dd2903143b30760cbf33"
+    },
+    "fresh_saved_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_fresh_acquisition_v1\\saved_review_v1\\report.json",
+      "bytes": 4561,
+      "sha256": "68fb38d9cc0cd063c9b86561dec289b98609bf4f94bade601d674dc6f80859a3"
+    }
+  },
+  "sources": {
+    "trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\train_geometry_momentum_wm.py",
+      "bytes": 37229,
+      "sha256": "224a0c9f47e196c626e862aa52d46402a454a6d16f0b497d3720ae74e25ca539"
+    },
+    "structured_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+      "bytes": 4100,
+      "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+    },
+    "momentum": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\momentum_contract.py",
+      "bytes": 4023,
+      "sha256": "983e182d7b8980d44a23db0f143d4a1c48ed483d37522fdba33dca3d5344b0ca"
+    },
+    "rotation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    },
+    "scalar_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "state_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "FK": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\geometry_provider.py",
+      "bytes": 11690,
+      "sha256": "f00da9a2c5deb19261a3ff4e168d79f8aea9784736e0fdd0897ffe9599a3b07b"
+    },
+    "directional": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+      "bytes": 9556,
+      "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+    },
+    "geometry_constants": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_constants.json",
+      "bytes": 91553,
+      "sha256": "330243d3b85abb1e996c2658b9216fe89df9ede53b0c4e035af63deb651f8fd9"
+    },
+    "geometry_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_geometry_arrays.npz",
+      "bytes": 514604,
+      "sha256": "4bafa2e40788f1106dcb497e575304d9bfabc7476fdb910147179325db97570f"
+    },
+    "direction_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\direction_arrays_v1.npz",
+      "bytes": 24503,
+      "sha256": "08dbbe3bfc8c0cbd19dad14510fd48c48351d8102cbeb99ca3d8f735cd1ca053"
+    },
+    "frozen_CHECK_evaluator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_evaluation_v1\\evaluate_fixed5000.py",
+      "bytes": 27863,
+      "sha256": "32f565f0d120272114692505d5ada9455fc2f857b9225ee6b1a3e2b82ca8a302"
+    },
+    "evaluator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_fresh_evaluation_v1\\evaluate_fresh_fixed5000_v1.py",
+      "bytes": 12717,
+      "sha256": "eb25256e0383cfc133a486756c1da89e8e976c7c17d681ee28a48016ce49e9b9"
+    }
+  },
+  "parent_interface_protocol": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_evaluation_v1\\protocol_cpu_false_v1.json",
+    "bytes": 8043,
+    "sha256": "63743218dbea1a0e091e4a3aad04d75c17b6fc31f3c57446456d95fa563a3fbb"
+  },
+  "source_derivation_scope": "Single-batch wiring uses frozen trainer224a make_model/precompute_features/head layout and codec057a; pure state_stats and CV/ballistic state-prior definitions from frozen CHECK32f. No alternate NN, optimizer, fit, family selection or original CHECK/VAL/TEST target-array open.",
+  "scientific_scope": "Fresh controlled q/actions at the same2known object poses, not independent ego scenes. All240 rows retained,12unknown H/predictions stayNaN. Only state58 and originaltwo-pad coverage have truth; predicted meanFn22/J22 retained without fabricated labels. Root alone authorizes actual oneFW."
+}

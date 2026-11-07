@@ -1,0 +1,49 @@
+--- finalize_current104_physical_manifest_cpu_v2.py
++++ finalize_current104_physical_manifest_cpu_v3.py
+@@ -20,7 +20,7 @@
+         print(json.dumps(dict(status='NOT_READY_MISSING_TERMINAL_DATA',missing=missing,WM_forwards=0,GPU_used=False)));return
+     if not args.run:
+         print(json.dumps(dict(status='SAVED_ONLY_FINALIZER_PREFLIGHT',files=len(required),WM_forwards=0,GPU_used=False)));return
+-    if (out/'physical_manifest.json').exists():raise ValueError('Final manifest already exists; no overwrite')
++    if any((out/name).exists() for name in ('lifecycle_evidence_v2.json','physical_manifest_v2.json','finalization_report_v2.json')):raise ValueError('Finalization v2 artifact already exists; no overwrite')
+     config=read(out/'config.json');runtime=read(out/'runtime.json');report=read(out/'physical_report.json')
+     state=read(logs/'state.json');identity=read(logs/'engineering_identity.json');post=read(logs/'post_terminal_CIM.json')
+     preservation=read(out/'source_and_input_preservation.json');ledgers=read(out/'capacity_ledgers.json')
+@@ -31,6 +31,11 @@
+     pids=sorted(set(v for v in (state.get('actual_pid'),state.get('launcher_pid')) if type(v) is int and v>0))
+     need('postterminal_exact_owned_PIDs_absent',bool(pids) and post.get('status')=='NO_OWNED_PID_REMAINING' and post.get('queried_pids')==pids and post.get('actual_CIM_rows')==[])
+     need('runtime_PID_and_source_bound',runtime.get('pid')==state.get('actual_pid')==identity.get('actual_pid') and runtime.get('plan_sha256')==sha(out/'config.json') and runtime.get('source_sha256')==config['source_pins']['entry']['sha256'])
++    command=state.get('command')
++    if type(command) is not list or len(command)!=8 or command[3]!='--config':raise ValueError('Exact executed command ABI required')
++    actual_config=Path(command[4]).resolve(strict=True)
++    need('actual_config_bytes_match_saved_copy',sha(actual_config)==sha(out/'config.json')==runtime.get('plan_sha256'))
++    need('actual_config_owned_route',actual_config==(ROOT/'configs/current104-physical-FD-authorized_v2.json').resolve())
+     need('worker_terminal_completed',runtime.get('status')=='completed_physical_probe')
+     need('source_input_and_config_preserved',preservation.get('all_pins_unchanged') is True and preservation.get('config_sha256')==sha(out/'config.json'))
+     need('all_physical_engineering_gates',report.get('status')=='COMPLETED_PHYSICAL_PROBE' and all(report.get(k) is True for k in ('engineering_qualified','baseline_all_passed','capacity_finalized','capacity_qualified')))
+@@ -53,19 +58,19 @@
+     need('all_registered_source_input_pins_current',source_current)
+     lifecycle=dict(schema='current104_physical_probe_lifecycle:1',watchdog_state=pin(logs/'state.json'),
+         engineering_identity=pin(logs/'engineering_identity.json'),post_terminal_CIM=pin(logs/'post_terminal_CIM.json'),
+-        runtime=pin(out/'runtime.json'),config=pin(out/'config.json'))
+-    write(out/'lifecycle_evidence.json',lifecycle)
++        runtime=pin(out/'runtime.json'),config=pin(actual_config))
++    write(out/'lifecycle_evidence_v2.json',lifecycle)
+     qualified=all(checks.values())
+     manifest=dict(schema='current104_physical_probe_result:1',proposal=config['parent_proposal'],
+         physical_report=pin(out/'physical_report.json'),physical_arrays=pin(out/'physical_arrays.npz'),
+         branch_index=pin(out/'branch_index.json'),source_pins={**config['source_pins'],'saved_only_finalizer':pin(__file__)},
+-        capacity_ledgers=pin(out/'capacity_ledgers.json'),lifecycle_evidence=pin(out/'lifecycle_evidence.json'),
++        capacity_ledgers=pin(out/'capacity_ledgers.json'),lifecycle_evidence=pin(out/'lifecycle_evidence_v2.json'),
+         postterminal_identity_qualified=qualified)
+-    write(out/'physical_manifest.json',manifest)
++    write(out/'physical_manifest_v2.json',manifest)
+     final=dict(schema='current104_physical_probe_saved_finalization:1',status='QUALIFIED_FOR_CPU_CONSUMER_RECHECK' if qualified else 'UNQUALIFIED_NO_WM_PERMITTED',
+-               checks=checks,manifest=pin(out/'physical_manifest.json'),finalizer=pin(__file__),new_physics_steps=0,WM_forwards=0,GPU_used=False,
++               checks=checks,manifest=pin(out/'physical_manifest_v2.json'),finalizer=pin(__file__),new_physics_steps=0,WM_forwards=0,GPU_used=False,
+                scope='Saved-only qualification; CPU consumer independently rechecks 48baseline numbers and raw capacity/identity semantics before any WM load.')
+-    write(out/'finalization_report.json',final);print(json.dumps(dict(status=final['status'],checks=len(checks),failed=[k for k,v in checks.items() if not v])))
++    write(out/'finalization_report_v2.json',final);print(json.dumps(dict(status=final['status'],checks=len(checks),failed=[k for k,v in checks.items() if not v])))
+     if not qualified:raise SystemExit(1)
+ 
+ 

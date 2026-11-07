@@ -1,0 +1,27 @@
+--- preserved_core_v1
+
++++ core_v2
+
+@@ -17,8 +17,8 @@
+
+ CONTRACT_SHA='3ad8c12324e37795fc13217d699f323ac99a88719bdb8cfa6f9bfada01b899f6'
+ INPUTS={'target_report','target_arrays','target_identities','target_saved8','target_source_inventory','original_initial_component','initial_validation',
+         'initial_saved_parity10','initial_saved_baseline','initial_parity_report','training_protocol','training_result','final_pair_manifest','final_saved_health5'}
+-OWN={'consumer':ROOT/'src/full151_gradient/boundary_component_final_evaluation105_v1.py','CLI':ROOT/'scripts/evaluate_full151_boundary_components_final_cpu_v1.py',
+-     'checker':ROOT/'scripts/check_full151_boundary_components_final_cpu_v1.py'}
++OWN={'consumer':ROOT/'src/full151_gradient/boundary_component_final_evaluation105_v2.py','CLI':ROOT/'scripts/evaluate_full151_boundary_components_final_cpu_v2.py',
++     'checker':ROOT/'scripts/check_full151_boundary_components_final_cpu_v2.py'}
+ DEPENDENCIES={**parity.DEPENDENCIES,'parity_helper':ROOT/'src/full151_gradient/boundary_component_initial_parity105_v1.py'}
+ 
+ 
+@@ -73,7 +73,8 @@
+
+     require(payload['schema']==component.ARTIFACT_SCHEMA and payload['pair_schema']=='full151105_boundary_impulse_matched_pair:1' and payload['arm']==module.arm and type(payload['iteration']) is int and payload['iteration']==1000 and payload['checkpoint_tag']=='AFTER_OPTIMIZER_I','True own AFTER1000 artifact')
+     require(same(payload['protocol'],training_pin) and same(payload['recipe'],training['recipe']),'Frozen training provenance')
+     for key in ('input_pins','source_pins'):
+-        require(set(payload[key])==set(training[key]) and all(same(v,training[key][k]) for k,v in payload[key].items()),'Exact source/fit cohort pin map')
++        protocol_key='inputs' if key=='input_pins' else key
++        require(set(payload[key])==set(training[protocol_key]) and all(same(v,training[protocol_key][k]) for k,v in payload[key].items()),'Exact source/fit cohort pin map')
+     reference=module.wm.state_dict();weights=payload['WM_state']
+     require(set(reference)==set(weights) and all(isinstance(weights[k],torch.Tensor) and weights[k].device.type=='cpu' and weights[k].dtype==v.dtype and weights[k].shape==v.shape and bool(torch.isfinite(weights[k]).all()) for k,v in reference.items()),'Strict final native architecture/dtype/finite')
+     norm=c._norm_state(module.wm)

@@ -1,0 +1,128 @@
+{
+  "schema": "phone_fixed_final5000_evaluation_protocol:1",
+  "status": "FROZEN_BEFORE_FIRST_TEST_MODEL_EVALUATION",
+  "CPU_inference_authorized": true,
+  "new_training_AD_native_GPU": false,
+  "primary_checkpoint_iteration": 5000,
+  "select_checkpoint_by_TEST": false,
+  "recursive_horizons": [
+    1,
+    2,
+    5,
+    9,
+    10
+  ],
+  "methods": [
+    "WM_final5000",
+    "TRAIN_mean",
+    "constant_joint_COM_world_angular_velocity",
+    "continuous_ballistic_COM_constant_joint_angular_velocity"
+  ],
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_evaluation_v1\\completed_v1",
+  "inputs": {
+    "training_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\protocol_CPU_run1.json",
+      "bytes": 4058,
+      "sha256": "524ace8e4f41ac845225187553cf634017650e7fff18fa5e51747468d36c7498"
+    },
+    "training_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\cpu_run1\\report.json",
+      "bytes": 11469,
+      "sha256": "9b3d562e5118ac3dd5bb93f67c62347509ea4e28a197779343d7c97b4303aaf6"
+    },
+    "training_terminal": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\process_training_run1\\terminal.json",
+      "bytes": 1813,
+      "sha256": "ca76e7f1b6efe4603e783ba7abd4400afa8932a40dec9d12072526a6a2a9d98a"
+    },
+    "final_health": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\cpu_run1\\checkpoint_5000_health.json",
+      "bytes": 3115,
+      "sha256": "8336a3790af300c36002b34fcd3ee54c9231001c57f7d3b4d37b1c02a70cb631"
+    },
+    "final_checkpoint": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\cpu_run1\\checkpoint_5000.pt",
+      "bytes": 598379,
+      "sha256": "f2e51432377bcd68b235b0f5dbeb6953a3a411f586e008e0ee4a08111a3b1f1f"
+    },
+    "training_log": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\cpu_run1\\updates.jsonl",
+      "bytes": 981792,
+      "sha256": "8d6e7717d42b69c032a517ce19ff8975019c51bb754230544f0177e2b8f6b3d5"
+    },
+    "acquisition_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 10554,
+      "sha256": "4eaba866d38b51d5edfced2cbc46eb6cd8315c78a0c50b769d7e2b79fecf4559"
+    },
+    "dataset_audit": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\independent_dataset_review_v1\\report.json",
+      "bytes": 9318,
+      "sha256": "718368880239b9858c7f47bc5ef4fed0ca6a07d74d2a72e9fa6d97349966d506"
+    },
+    "family_plan": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\family_plan_v1.json",
+      "bytes": 820546,
+      "sha256": "7336ae9243290158c061791a28f6f5b668cc59091e6c1cbdfa51a0f8f4704739"
+    },
+    "TEST_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\test.npz",
+      "bytes": 153788,
+      "sha256": "cc4abd83d78929e39bcaa6085ef0d66cc368808ff7a4da8287ca731be03a7e13"
+    },
+    "sample_identities": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\sample_identities.json",
+      "bytes": 2687154,
+      "sha256": "23b39fe3dd3d1f15b44942e4ac8a8e12082515a3fdc6ba41e34d936fc13f8a56"
+    },
+    "gravity_source_exact": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\exact_source_original_hand_completed_v1\\seed1_rank0.json",
+      "bytes": 543975,
+      "sha256": "7af27c899e0e7b5252a7eb770a70ef7ec30913f5506881d0462e61af07d28303"
+    },
+    "gravity_source_side": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\source1mm_opposed_side_original_hand_completed_v1\\seed1_rank0.json",
+      "bytes": 543004,
+      "sha256": "e07ddb0192b52eb47102ca89b12dc191e80d4d1d1296b4e7ccd9f205633ec8bd"
+    }
+  },
+  "sources": {
+    "evaluator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_evaluation_v1\\evaluate_phone_wm.py",
+      "bytes": 26892,
+      "sha256": "93687fa66636ac060eb614b6730693b4933639797c518dc35319c830cf948439"
+    },
+    "trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\train_phone_wm_v2.py",
+      "bytes": 28494,
+      "sha256": "1234ea0491edcd23e3d15d32959a39bbac2f851b2514b17b5e2c41d87c5fd9b9"
+    },
+    "decoder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    }
+  },
+  "budget": {
+    "own_final_checkpoint_CPU_loads": 1,
+    "model_constructors": 1,
+    "TEST_NPZ_reads": 1,
+    "one_step_FW": 1,
+    "one_step_rows": 114,
+    "recursive_FW_max": 10,
+    "recursive_rows_max": 120,
+    "AD_optimizer_native_physics_GPU": 0
+  },
+  "baseline_contracts": {
+    "TRAIN_mean": "Saved TRAIN-only physicaldelta52/coverage/logforce means, pooleddt;F64 observer",
+    "constant_velocity": "q+=qdH,pCOM+=vCOMH,R=Exp(worldomegaH)R;velocities constant;no force/gravity",
+    "ballistic": "Asconstantvelocity but pCOM+=.5gH\u00b2,vCOM+=gH, g=[0,0,-9.81] pinned per source; no contact/full torque-free body claim"
+  },
+  "occupancy_contract": "From raw true per-pad coverage>0: no,one,both observed pads; both is NOT proof of simultaneity",
+  "state_metrics": "Physicaldelta52 perfeature;state58 raw6blocks;COM mm/fullbodySO3 atan2 geodesic/vel/omega; no projection",
+  "contact_metrics": "coverageF64Brier; min2/lastPREendpoint2/nonpadmax1 forceRMSE/MAE/log1p; force phasePRE vs statePOST20",
+  "recursive_contract": "Actual episode source then predictions only, real planned controls anddt/n eachstep;no clipping/repair/teacherforcing;allpartialrows retained, unavailable H targets masked,not fabricated",
+  "fixed_per_row_Torch_decoder_policy": "Pure decoder per row so nonfinite/structural failure is retained; no neural rerun or dtype fallback",
+  "training_curve": "All5000 savedtraininglogrows andall3savedVALcheckpoints; no earliercheckpoint FW or TEST selection",
+  "scope": "First model TEST evaluation for local simulated heldoutfamilies. No ego/Markov/holding/Actor/CHORD qualification."
+}

@@ -1,0 +1,44 @@
+--- scripts/build_current104_physical_probe_config_cpu.py
++++ scripts/build_current104_physical_probe_config_cpu_v2.py
+@@ -16,16 +16,16 @@
+ sys.path.insert(0,str(ROOT/'src'))
+ from rough_prefix.io import read,pin,checked,canonical,loadnp
+ 
+-PROTOCOL=ROOT/'protocols/current104-physical-fd-execution-v2.json'
++PROTOCOL=ROOT/'protocols/current104-physical-fd-execution-v3.json'
+ PROPOSAL=ROOT/'proposals/current104_samewarp_physical_fd_v2/protocol.json'
+ PROPOSAL_SHA='ce9a9575b6aa7dc9b5b535bfe1cf7ff5be4db6065dc122ba4860561d40096e09'
+-DESTINATION=ROOT/'configs/current104-physical-FD-v1.json'
+-OUTPUT=ROOT/'outputs/current104_physical_FD_v1'
++DESTINATION=ROOT/'configs/current104-physical-FD-v2.json'
++OUTPUT=ROOT/'outputs/current104_physical_FD_v2'
+ STAGE='GPU_physics_then_separateCPU'
+-ENTRY=ROOT/'scripts/probe_current104_physical_fd.py'
+-SUPERVISOR=ROOT/'scripts/run_current104_physical_fd.py'
+-WORKER=ROOT/'src/rough_prefix/physical_fd.py'
+-TRANSACTION=ROOT/'src/rough_prefix/probe_transaction_v2.py'
++ENTRY=ROOT/'scripts/probe_current104_physical_fd_v2.py'
++SUPERVISOR=ROOT/'scripts/run_current104_physical_fd_v2.py'
++WORKER=ROOT/'src/rough_prefix/physical_fd_v2.py'
++TRANSACTION=ROOT/'src/rough_prefix/probe_transaction_v3.py'
+ WATCHDOG=Path('D:/workspace/supermimic-control-feasibility-draft/scripts/run_braking_microprobe.py')
+ IDENTITY=Path('D:/workspace/supermimic-observation-restoration-prefix-study/scripts/run_track_prefix_v3.py')
+ NATIVE=Path('D:/workspace/dex-supermimic-research/src/dex_supermimic')
+@@ -52,7 +52,7 @@
+     """Only metadata/NPZ invariants; no model output or task-quality selection."""
+     p=read(protocol)
+     need(p.get('schema')=='rough_current104_physical_FD_execution_protocol:1'
+-         and type(p.get('protocol_revision')) is int and p['protocol_revision']==2,'Wrong explicit revision2 physical-FD protocol')
++         and type(p.get('protocol_revision')) is int and p['protocol_revision']==3,'Wrong explicit revision3 physical-FD protocol')
+     need(p.get('parent_proposal')==pin(PROPOSAL) and p['parent_proposal']['sha256']==PROPOSAL_SHA,'Only integrated V2 proposal is admissible')
+     q=read(checked(p['parent_proposal']))
+     need(q.get('schema')=='current104_same_Warp_physical_FD_proposal:2'
+@@ -70,7 +70,7 @@
+                              ('branch_arrays','branch_object_terms_kplus1',[560,2]),
+                              ('snapshot_arrays','donor_object_terms_k',[16,2]),
+                              ('snapshot_arrays','donor_object_terms_kplus1',[16,2])]:
+-        need(result.get(group,{}).get(name)==shape,'Revision2 native FP32 reward term ABI missing: '+name)
++        need(result.get(group,{}).get(name)==shape,'Revision3 native FP32 reward term ABI missing: '+name)
+     for value in pins_in(q):checked(value)
+     for value in pins_in(p):checked(value)
+     prep=read(checked(wanted['config']));report=read(checked(wanted['report']))

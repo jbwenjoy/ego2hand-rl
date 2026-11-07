@@ -1,0 +1,16 @@
+<mujoco model="hot3d_phone24_convex_candidate_stage2">
+  <compiler angle="radian" inertiafromgeom="false" />
+  <option timestep="0.000625" integrator="implicitfast" solver="Newton" iterations="100" ls_iterations="20" cone="pyramidal" jacobian="auto" gravity="0 0 -9.81" tolerance="0.000001" ls_tolerance=".01"><flag energy="enable" /></option>
+  <asset>
+    <mesh name="phone24_visual" file="D:\workspace\ego-data-pilot-2026-11-07\asset_stage2_convex\completed_v2\meshes\phone24_visual_m.obj" scale="1 1 1" />
+    <mesh name="phone24_convex_collision" file="D:\workspace\ego-data-pilot-2026-11-07\asset_stage2_convex\completed_v2\meshes\phone24_collision_convex_m.obj" scale="1 1 1" />
+  </asset>
+  <worldbody>
+    <body name="hot3d_phone24" pos="0 0 0" quat="1 0 0 0" gravcomp="0">
+      <freejoint name="phone24_freejoint" />
+      <inertial pos="-6.89334902126415e-05 -0.0004924760098720671 0.0" mass="0.2" diaginertia="0.00039681032421837664 0.0004836813955752171 9.041834577935144e-05" />
+      <geom name="phone24_visual_only" type="mesh" mesh="phone24_visual" contype="0" conaffinity="0" density="0" group="2" rgba=".22 .24 .28 1" />
+      <geom name="phone24_collision_convex" type="mesh" pos="0 0 0" contype="1" conaffinity="1" density="0" group="3" rgba=".1 .45 .95 .16" friction="0.6 0.005 0.0001" condim="3" priority="0" margin="0" gap="0" solref="0.005 1" solimp="0.9 0.95 0.001 0.5 2" mesh="phone24_convex_collision" solmix="1" />
+    </body>
+  <geom name="bench_support" type="plane" pos="0 0 0" size="5 5 .1" rgba=".6 .65 .7 1" friction="0.6 0.005 0.0001" condim="3" solref="0.005 1" solimp="0.9 0.95 0.001 0.5 2" priority="0" solmix="1" margin="0" gap="0" contype="1" conaffinity="1" density="0" /></worldbody>
+</mujoco>

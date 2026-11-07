@@ -1,0 +1,36 @@
+{
+  "schema": "joint_geometry_gravity_support_source_recommendation:3",
+  "status": "PURE_SOURCE_AND_SYNTHETIC_NO_ACTUAL_POSE_OR_PHYSICS",
+  "outer_variables": "q20 plus proper phone SE3, fixed source wrist, no reflection or scaling",
+  "stage_A": {
+    "purpose": "Recover geometry using fixed material-point/anchor terms and gravity-line moment; not actual-contact qualification",
+    "gravity_line_term": "unit(Ro*(a2-a1)) dot ((COM-(Ro*a1+po)) cross (m*g)) [Nm]",
+    "limits": "Fixed material points are a smooth proposal model only. The98degree fixed-hand rotation was a collision failure and is not reused as a valid seed."
+  },
+  "stage_B": {
+    "purpose": "26D pose optimization with the physical inner-LP residual value, not a fit to chosen witness coordinates",
+    "search_pad_gap_m": [0.00005, 0.00015],
+    "final_existing_pad_gap_m": [0, 0.0002],
+    "FD_phone_translation_m": 0.00001,
+    "FD_joint_and_rotation_rad": 0.0001,
+    "current_geometry_each_evaluation": "All22 original phone-active proxies and189 eligible self pairs; fixed source bounds/wrist/scale. Intersection or unknown is rejected, not assigned zero cost.",
+    "contact_position": "Current genuine paired object/hand closest witnesses; solve barycentric support-feature correspondence and retain full3 residual/rank. Unique pair required for this point route; arbitrary support centroids forbidden.",
+    "finite_patch_route": "Only if actual paired surface region is established with nonzero area and all point pairs truly supported; current support-edge/vertex sets alone do not prove a patch. No invented torsion.",
+    "force_model": "lambda16 nonnegative inscribed8; mu_design=0.7/sqrt(2), actual sliding mu0.7; sum(lambda_per_pad)<=3N",
+    "hard_constraints": ["sum(force)+m*g=0", "actual_PD_actuator_joint_tau_lower<=bias+sum(J_hand^T*force_object)<=upper", "normal cap3N perpad"],
+    "inner_objective": "Minimum max absolute COM contact-moment component, Nm",
+    "proposal_gate": {"max_abs_moment_Nm": 0.0001, "force_equality_max_abs_N": 1e-8},
+    "primary_force_infeasible": "Keep primary false/None. Run at most one separate force-infinity recoveryLP with same hard torque/cap constraints and unconstrained moment; return finite guidance only. If torque-feasible cone absent, explicitly NO_TORQUE_FEASIBLE_CONE.",
+    "smoothness": "Piecewise smooth support value; actual convex feature/rank transitions remain explicit. Fixed worldY tangent reference is projected onto the current normal plane; chart pole is UNKNOWN, no implicit axis switching."
+  },
+  "physical_assumptions": {"mass_kg": 0.2, "actual_mu": 0.7, "gravity_world_m_s2": [0, 0, -9.81], "calibrated": false},
+  "final_reporting": [
+    "Recompute current mesh closest pairs, geometry and all hard bounds at the selected pose",
+    "Report exact zero-moment LP separately; unchanged old exact-LP core has no3N normal cap, so its force-budget compatibility must be reported separately",
+    "Report residual proposal gate independently from exact statics and actual finite-mesh holding",
+    "No small residual implies a2second5degree guarantee; no old failed trial is relabeled",
+    "No CI, trajectory generalization, real friction/inertia calibration, arbitrary torsion or remote-contact force claim"
+  ],
+  "implementation": {"module": "support_residual_lp_v3.py", "function": "support_residual_lp", "prior_static_LP_modified": false},
+  "synthetic_proof": "preparation_v3/report.json: four analytic checks, four primary LP calls and one force-recovery call, no actual model/FK/pose/physics"
+}

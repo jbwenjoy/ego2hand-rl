@@ -1,0 +1,135 @@
+{
+  "schema": "functional_tripod_loaded_contact_dynamic_protocol:2",
+  "CPU_run_authorized": false,
+  "integration_training_GPU_other_than_declared_CPU_steps_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_dynamics_v1\\completed_run1",
+  "dt_s": [
+    0.0003125,
+    0.00015625
+  ],
+  "duration_s": 2.0,
+  "gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483,
+    "tail_triple_pad_force_coverage": 0.95
+  },
+  "old_two_pad_gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "tail_dual_pad_force_coverage": 0.95,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483
+  },
+  "dt_pair_gates": {
+    "final_COM_difference_m": 0.002,
+    "final_orientation_difference_rad": 0.03490658503988659,
+    "require_both_duration_complete": true
+  },
+  "routes": [
+    "ctrl_equal_q",
+    "actual_contact_normal_1N",
+    "actual_contact_normal_3N",
+    "GN_best_final_fresh"
+  ],
+  "budget": {
+    "candidates": 2,
+    "control_routes_per_source": 4,
+    "dt_cases": 2,
+    "maximum_cases": 16,
+    "maximum_integration_steps": 153600,
+    "preload_preparation_forward": 0,
+    "maximum_initial_forward": 16
+  },
+  "inputs": {
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    }
+  },
+  "preload_sources": [
+    {
+      "source_id": "exact",
+      "preload_report": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\completed_run1\\report.json",
+        "bytes": 29901,
+        "sha256": "ed23a37b18f844ed9c346dabb1bee664014f14743d99a1f4f4c1a7434a76ac9c"
+      },
+      "preload_protocol": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\protocol_CPUTrue_run1.json",
+        "bytes": 4736,
+        "sha256": "75d8a15d955dbbbf908c88e74739e0d0760caa68a945d7a9bbcbc2045fcdd276"
+      },
+      "preload_saved_review": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\saved_review_v1\\report.json",
+        "bytes": 24779,
+        "sha256": "92c43c1ada32ac69a08816472c8e4dc6c84f50ac1e45b39b26933d5bbac663db"
+      }
+    },
+    {
+      "source_id": "source1mm",
+      "preload_report": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\completed_source1mm_run1\\report.json",
+        "bytes": 29009,
+        "sha256": "53febfdfc8908b685e11bc08443b5070706505a7b4fa989a6d4968d003140e74"
+      },
+      "preload_protocol": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\protocol_source1mm_CPUTrue_run1.json",
+        "bytes": 5552,
+        "sha256": "3f2cd78f83facb99abde021e629b73fa96dbde30c45a1b0b5a4584b7bde29761"
+      },
+      "preload_saved_review": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\source1mm_saved_review_v1\\report.json",
+        "bytes": 24751,
+        "sha256": "1cd78be65ea309ac316eb910844bef8510c2aee1e6d96e70da5a2da755d89c0e"
+      }
+    }
+  ],
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_dynamics_v1\\run_loaded_dynamics_v2.py",
+      "bytes": 11130,
+      "sha256": "49a122b35180b8b2b979abd3e7728829ba8c113661ca54545883b210b6113c76"
+    },
+    "builder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_dynamics_v1\\build_protocol_v2.py",
+      "bytes": 2085,
+      "sha256": "d0b3b6139b2c27ffa4952006acd2dbc6a224ab8c91cc72b404518f4f7894002a"
+    },
+    "frozen_dynamicv3": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_dynamics_v1\\run_functional_tripod_dynamics_v3.py",
+      "bytes": 29569,
+      "sha256": "d433a51df307bf45b40e70bc2c74776654eb2ece65bd2de67ae8163c201fd960"
+    }
+  },
+  "automatic_retry": false
+}

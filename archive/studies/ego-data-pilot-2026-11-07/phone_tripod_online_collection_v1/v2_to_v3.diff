@@ -1,0 +1,150 @@
+--- frozen_collect_online_v2.py
++++ collect_online_v3.py
+@@ -9,8 +9,8 @@
+ import numpy as np
+ 
+ H=Path(__file__).resolve().parent
+-SCHEMA='phone_tripod_matched_online_collection_CPU_protocol:1'
+-RESULT='phone_tripod_matched_online_collection_result:1'
++SCHEMA='phone_tripod_matched_online_collection_CPU_protocol:3'
++RESULT='phone_tripod_matched_online_collection_result:3'
+ POOL='phone_tripod_online_common_replay_dataset:1'
+ MODES=('A1_tracking','A2_engineered_material_proxy')
+ RULES=dict(profiles_per_arm=4,native_dt_s=[.0003125,.00015625],substeps=[64,128],
+@@ -18,7 +18,7 @@
+     maximum_native_steps_per_arm=15360,maximum_rows=320,maximum_native_steps=30720,
+     H_s=.02,exploration_mixture=.05,action_rule='a=.95*Actor_FP32_as_F64+.05*fixed_profile_F64; no clip',
+     device='cpu',NN_dtype='float32',physical_memory_action_dtype='float64',cpu_threads=4,
+-    checkpoint_paired_round=1000,checkpoint_shared_WM_updates=1100,
++    offline_root_paired_round=1000,offline_root_shared_WM_updates=1100,collection_cycles=3,updates_per_completed_source_cycle=100,
+     training_updates=0,optimizer_constructors=0,WM_forward=0,Critic_forward=0,
+     terminal='boundaryPOSTH task loss or Reader physical loss; partial invalid; collection20H truncation bootstraps',
+     data_role='ONLINE_TRAIN_ONLY_NEW_STAGE; no independent ego or heldout claim',
+@@ -55,31 +55,28 @@
+         predeclared_before_new_native=True)
+ 
+ def metadata_preflight(path):
+-    p=read(path);need(p['schema']==SCHEMA and p['rules']==RULES,'New online stage fixed recipe')
++    p=read(path);need(p['schema']==SCHEMA and p['rules']==RULES,'Versioned online collection recipe')
+     need(type(p['CPU_run_authorized']) is bool and p['training_authorized'] is False and p['GPU_authorized'] is False,'CPU collection only')
+     for v in [*p['sources'].values(),*[v for v in p['inputs'].values() if v is not None]]:checked(v)
+-    need(p['sources']['collector']==pin(__file__),'Own source binding')
+-    need(read(checked(p['inputs']['profile_plan']))==profile_plan(),'Fixed named profile bytes')
+-    parent=read(checked(p['inputs']['paired_training_protocol']))
++    need(p['sources']['collector']==pin(__file__),'Own v3 source binding')
++    need(read(checked(p['inputs']['profile_plan']))==profile_plan(),'Unchanged fixed profile bytes')
++    seed=read(checked(p['inputs']['offline_seed_protocol']))
+     for key in ['task','reader_replay','directional','imagination','Actor_Critic','Actor_common']:
+-        need(parent['sources'][key]==p['sources'][key],'Actual checkpoint family source '+key)
++        need(seed['sources'][key]==p['sources'][key],'Frozen root interface source '+key)
++    need(seed['sources']['trainer']==p['sources']['paired_trainer'],'Frozen canonical F64 memory wrapper')
+     bundle=read(checked(p['inputs']['task_bundle']))
+     need(bundle['schema']=='phone_fixed_wrist_ego61_tripod_task:1' and bundle['task_designated_geom_ids']==[15,28,41],'Same tripod task')
+-    need(parent['inputs']['task_bundle']==p['inputs']['task_bundle'] and bundle['model']==p['inputs']['model_mjb'],'Same initial/task/model')
+-    need(parent['sources']['trainer']==p['sources']['paired_trainer'],'Actual canonical F64 memory wrapper')
++    need(seed['inputs']['task_bundle']==p['inputs']['task_bundle'] and bundle['model']==p['inputs']['model_mjb'],'Same initial/task/model')
+     qual=read(checked(p['inputs']['bridge_qualification']))
+-    need(qual['status']=='PASS_TWO_ACTUAL_ONE_H_INTERFACES' and all(v is True for v in qual['checks'].values()),'Actual existing bridge qualification')
++    need(qual['status']=='PASS_TWO_ACTUAL_ONE_H_INTERFACES' and all(v is True for v in qual['checks'].values()),'Actual bridge qualification')
+     qp=read(checked(qual['protocol']));need(qp['inputs']['bundle']==p['inputs']['task_bundle'] and qp['inputs']['model']==p['inputs']['model_mjb'],'Qualified bridge lineage')
+-    for k in ['task','reader_replay','native_reader','directional']:need(qp['sources'][k]==p['sources'][k],'Frozen actual bridge '+k)
++    for k in ['task','reader_replay','native_reader','directional']:need(qp['sources'][k]==p['sources'][k],'Frozen bridge implementation '+k)
+     dataset=read(checked(p['inputs']['offline_dataset']));review=read(checked(p['inputs']['offline_dataset_review']))
+     need(dataset['task_bundle']==p['inputs']['task_bundle'] and review['dataset_report']==p['inputs']['offline_dataset'] and review['engineering_qualified'] is True,'Frozen offline provenance; no array read')
+-    pending=p['inputs']['paired_checkpoint'] is None or p['inputs']['paired_health'] is None
+-    if pending:need(p['CPU_run_authorized'] is False,'Actual collection requires final own checkpoint/health')
+-    else:
+-        health=read(checked(p['inputs']['paired_health']))
+-        need(health['paired_round']==1000 and health['shared_WM_updates']==1100 and health['checkpoint']==p['inputs']['paired_checkpoint'] and all(v is True for v in health['checks'].values()),'Healthy own fixed AFTER1000 checkpoint')
+-    out=Path(p['output']);need(out.is_absolute() and out.parent.resolve()==H and not out.exists(),'Fresh output; no retry/overwrite')
+-    return p,bundle,out,pending
++    L=mod('online_actor_lineage_v3',checked(p['sources']['actor_lineage']))
++    context=L.validate_actor_metadata(p)
++    out=Path(p['output']);need(out.is_absolute() and out.parent.resolve()==H and not out.exists(),'Every collection round gets fresh local output')
++    return p,bundle,out,context['pending']
+ 
+ def tensor_tree_digest(state):
+     """Raw typed header+bytes; mixed F32/F64/int normalizers are not cast."""
+@@ -88,22 +85,19 @@
+         a=v.detach().cpu().contiguous().numpy();h.update(name.encode());h.update(a.dtype.str.encode());h.update(str(a.shape).encode());h.update(a.tobytes())
+     return h.hexdigest()
+ 
+-def load_final_actors(p,torch):
++def load_actors_for_round(p,torch):
++    L=mod('online_actor_lineage_payload',checked(p['sources']['actor_lineage']))
++    context=L.validate_actor_metadata(p);need(not context['pending'],'Actor lineage fully bound before one own load')
+     factory=mod('online_actual_factory',checked(p['sources']['imagination']))
+     sys.path.insert(0,str(Path(p['sources']['Actor_Critic']['path']).parents[3]))
+-    ck=torch.load(checked(p['inputs']['paired_checkpoint']),map_location='cpu',weights_only=False)
+-    need(ck['schema']=='phone_tripod_sharedWM_A1A2_training_checkpoint:1' and ck['paired_round']==1000 and ck['shared_WM_updates']==1100,'Own matched final artifact')
+-    need(ck['protocol']==p['inputs']['paired_training_protocol'] and ck['task_bundle']==p['inputs']['task_bundle'],'Checkpoint execution protocol/task pins')
+-    parent=read(checked(p['inputs']['paired_training_protocol']))
+-    need(ck['recipe']==parent['recipe'] and ck['inputs']==parent['inputs'] and ck['sources']==parent['sources'],'Full payload/source/input/recipe binding')
+-    for key in ['task','reader_replay','directional','imagination','Actor_Critic','Actor_common']:
+-        need(ck['sources'][key]==p['sources'][key],'Checkpoint actual source '+key)
++    ck=torch.load(checked(p['actor_input']['checkpoint']),map_location='cpu',weights_only=False)
++    L.validate_actor_payload(ck,p,context)
+     actors={};evidence={}
+     for mode in MODES:
+         pair=factory.make_fresh_actor_critic(seed=1733,source_pins=p['sources'],device='cpu')
+         actor=pair['actor'];actor.load_state_dict(ck['arms'][mode]['stateactor'],strict=True)
+         need(tensor_tree_digest(actor.state_dict())==tensor_tree_digest(ck['arms'][mode]['stateactor']) and all(torch.isfinite(v).all().item() for v in actor.state_dict().values()),'Exact finite serialized Actor')
+-        need(tensor_tree_digest(actor.norm.state_dict())==tensor_tree_digest(ck['arms'][mode]['norm']['actor']),'Loaded raw actor normalizer')
++        need(tensor_tree_digest(actor.norm.state_dict())==tensor_tree_digest(ck['arms'][mode]['norm']['actor']),'Loaded raw Actor normalizer; never refit')
+         actor.eval();actor.requires_grad_(False);actors[mode]=actor
+         evidence[mode]=dict(state_digest=tensor_tree_digest(actor.state_dict()),norm_digest=tensor_tree_digest(actor.norm.state_dict()),
+             norm_host={k:v for k,v in vars(actor.norm).items() if isinstance(v,(bool,int,float,str))})
+@@ -131,10 +125,11 @@
+     C=mod('online_frozen_collector',checked(p['sources']['raw_collector']))
+     D=mod('online_frozen_labels',checked(p['sources']['label_adapter']))
+     E=mod('online_field_map',checked(p['sources']['dataset_exporter']))
++    L=mod('online_round_lineage',checked(p['sources']['actor_lineage']))
+     out.mkdir();C.write(out/'protocol.json',p);start=time.perf_counter();readers={};episodes=[];notes=[];rows=[];aliases=defaultdict(list)
+-    phase='load_final_actors';actor_fw=0;raw_calls=0
++    phase='load_actors_for_round';actor_fw=0;raw_calls=0
+     try:
+-        actors,before=load_final_actors(p,torch)
++        actors,before=load_actors_for_round(p,torch)
+         C.save(out/'actor_normalizers_before.npz',{mode+'__'+k:v.detach().cpu().numpy() for mode,a in actors.items() for k,v in a.norm.state_dict().items()})
+         rng_before=dict(python=random.getstate(),numpy=np.random.get_state(),torchCPU=torch.get_rng_state().numpy())
+         C.save(out/'RNG_before.npz',dict(torchCPU=rng_before['torchCPU'],numpy_keys=rng_before['numpy'][1]))
+@@ -191,7 +186,7 @@
+                                 action_normalized20_F64=a.numpy(),complete_H_bool=np.array(complete),reward_scalar_F64=np.array(reward),task_done=task_done,reader_done=physical_done)
+                             arrays.update(decisions)
+                             row,note,key=canonical_online_row(D,arrays,ident,ep,bundle,physical,maths,prealive)
+-                            row.update(arm_i64=ai,online_global_episode_id_i64=global_ep,profile_id_i64=fid,actor_action20_FP32=actor_action.numpy())
++                            row.update(arm_i64=ai,online_global_episode_id_i64=global_ep,profile_id_i64=fid,collection_cycle_i64=p['collection_cycle'],actor_source_stage_id_i64=p['actor_input']['stage_id'],actor_action20_FP32=actor_action.numpy())
+                             for rewardmode,rewardtask in tasks.items():
+                                 row['reward_'+rewardmode+'_F64']=float(rewardtask.rewards(v['state58'],m0,a)['total'].item()) if complete and finite else float('nan')
+                             C.save(folder/f'canonical_{k:02d}.npz',{n:np.asarray(w) for n,w in row.items()});note['canonical_row']=C.pin(folder/f'canonical_{k:02d}.npz')
+@@ -213,7 +208,7 @@
+         C.save(out/'RNG_after.npz',dict(torchCPU=rng_after['torchCPU'],numpy_keys=rng_after['numpy'][1]))
+         for i,row in enumerate(rows):
+             nxt=rows[i+1] if i+1<len(rows) else None
+-            row['H2_start_eligible_bool']=bool(nxt is not None and row['Actor_start_eligible_bool'] and nxt['Actor_start_eligible_bool'] and not row['actor_absorbing_done_bool'] and row['online_global_episode_id_i64']==nxt['online_global_episode_id_i64'])
++            row['H2_start_eligible_bool']=bool(nxt is not None and row['Actor_start_eligible_bool'] and nxt['Actor_start_eligible_bool'] and not row['actor_absorbing_done_bool'] and row['online_global_episode_id_i64']==nxt['online_global_episode_id_i64'] and nxt['step_k_i64']==row['step_k_i64']+1)
+         allarrays={k:np.asarray([r[k] for r in rows]) for k in rows[0]};C.save(out/'common_pool.npz',allarrays)
+         partitions={}
+         for ai,mode in enumerate(MODES):
+@@ -225,10 +220,10 @@
+         need(all(a['passed'] is True and a['model_pin']==p['inputs']['model_mjb'] for a in audits.values()),'Actual shared model audits pass before replay qualification')
+         perarm={mode:dict(episodes=sum(e['arm']==mode for e in episodes),rows=sum(r['arm_i64']==ai for r in rows),native_steps=sum(int(r['executed_substeps_i64']) for r in rows if r['arm_i64']==ai),planned_maximum_H=160,unused_H_budget=160-sum(r['arm_i64']==ai for r in rows)) for ai,mode in enumerate(MODES)}
+         need(all(v['episodes']==8 and v['native_steps']<=15360 for v in perarm.values()),'Each arm same maximum budget, no resampling after failure')
+-        C.write(out/'read_only_actor_evidence.json',dict(before=before,after=after,own_checkpoint=p['inputs']['paired_checkpoint'],no_parameter_or_norm_update=True))
++        C.write(out/'read_only_actor_evidence.json',dict(before=before,after=after,own_checkpoint=p['actor_input']['checkpoint'],no_parameter_or_norm_update=True))
+         eligible_counts={mode:dict(WM_rows=sum(bool(r['WM_eligible_bool']) for r in rows if r['arm_i64']==ai),Actor_rows=sum(bool(r['Actor_start_eligible_bool']) for r in rows if r['arm_i64']==ai),H2_rows=sum(bool(r['H2_start_eligible_bool']) for r in rows if r['arm_i64']==ai)) for ai,mode in enumerate(MODES)}
+         ready=bool(sum(v['WM_rows'] for v in eligible_counts.values()) and all(v['Actor_rows'] for v in eligible_counts.values()))
+-        dataset=dict(schema=POOL,status='COMPLETE_ONLINE_COMMON_POOL_NOT_LEARNING',data_training_ready=ready,eligibility_counts=eligible_counts,protocol=C.pin(protocol_path),paired_checkpoint=p['inputs']['paired_checkpoint'],task_bundle=p['inputs']['task_bundle'],
++        dataset=dict(schema=POOL,status='COMPLETE_ONLINE_COMMON_POOL_NOT_LEARNING',data_training_ready=ready,eligibility_counts=eligible_counts,protocol=C.pin(protocol_path),paired_checkpoint=p['actor_input']['checkpoint'],actor_input=p['actor_input'],collection_cycle=p['collection_cycle'],offline1000_root=L.root_metadata(p)['checkpoint'],task_bundle=p['inputs']['task_bundle'],
+             common_pool=C.pin(out/'common_pool.npz'),arm_partitions=partitions,field_map=dict(E.FIELD_MAP,episode_id='online_global_episode_id_i64'),mode_reward_keys={m:'reward_'+m+'_F64' for m in MODES},
+             sample_identities=C.pin(out/'sample_identities.json'),alias_review=C.pin(out/'alias_groups.json'),rows=len(rows),partial_rows=sum(not r['complete_H_bool'] for r in rows),
+             eligibility='WM complete finite no-warning; Actor additionally pre-boundary alive. Terminal endpoint retained, H2 mask excludes crossing episode/taskfailure. Newstage train-only, all arms pooled; no heldout split.',
+@@ -241,7 +236,7 @@
+         initial_groups=[dict(global_episode_ids=v,receipt_sha256=k[0],dt_s=k[1]) for k,v in initial_alias.items() if len(v)>1]
+         state_groups=[dict(sample_ids=v,receipt_sha256=k[0],dt_s=k[1]) for k,v in state_alias.items() if len(v)>1]
+         report=dict(schema=RESULT,status='COMPLETED_MATCHED_ONLINE_CPU_COLLECTION_NOT_POLICY_QUALIFICATION',protocol=C.pin(protocol_path),dataset_report=C.pin(out/'dataset_report.json'),
+-            task_bundle=p['inputs']['task_bundle'],checkpoint=p['inputs']['paired_checkpoint'],health=p['inputs']['paired_health'],profile_plan=p['inputs']['profile_plan'],episodes=16,rows=len(rows),
++            task_bundle=p['inputs']['task_bundle'],checkpoint=p['actor_input']['checkpoint'],health=p['actor_input']['health'],actor_input=p['actor_input'],collection_cycle=p['collection_cycle'],actor_checkpoint_kind=p['actor_input']['kind'],actor_training_protocol=p['actor_input']['training_protocol'],offline1000_root=L.root_metadata(p)['checkpoint'],collector_sources=L.subset(p),profile_plan=p['inputs']['profile_plan'],episodes=16,rows=len(rows),
+             per_arm=perarm,counts=counts,Actor_FW=actor_fw,NN_constructors=4,unused_Critic_constructors=2,Critic_FW=0,WM_FW=0,own_checkpoint_loads=1,training_updates=0,
+             raw_sink_calls=raw_calls,episode_records=C.pin(out/'episodes.json'),model_audits=audits,initial_receipt_alias_groups=initial_groups,source_state_alias_groups=state_groups,read_only_actor_evidence=C.pin(out/'read_only_actor_evidence.json'),
+             source_scope='Exact reused Reader and raw sink/label arithmetic; no mutation of offline protocols/data. Model uses current observation only. Future contacts are labels, never Actor inputs.',

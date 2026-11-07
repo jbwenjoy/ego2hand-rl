@@ -1,0 +1,157 @@
+--- D:\workspace\supermimic-c2-training-study\source_baselines\original_train_controlled_pen.py
++++ D:\workspace\supermimic-c2-training-study\scripts\train_controlled_pen.py
+@@ -30,6 +30,7 @@
+ 
+ STARTED = time.perf_counter()
+ STUDY_ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(STUDY_ROOT / "src"))
+ 
+ 
+ def digest(path):
+@@ -358,6 +359,35 @@
+ 
+ 
+ def run_attempt(input_config, dex_root, recipe, clips, output, compiled, objective_spec=None):
++    from mjlab.envs import ManagerBasedRlEnv
++    from dex_supermimic.rl.dex_supermimic.pen import PenMDP
++    from dex_supermimic.rl.dex_supermimic.runner import DexSuperMimicRunner
++    from c2_training_adapter import training_controller
++    metadata={"schema":"C2_020_training_controller:1","trained_method":input_config["method"],
++        "base_method":input_config["method"],"training_seed":input_config.get("seed",0),
++        "run_role":input_config.get("run_role"),"config_sha256":digest(output.parent/"input_config.json"),
++        "paired_protocol_sha256":digest(resolve(input_config["paired_protocol_file"])) if input_config.get("paired_protocol_file") else None,
++        "study_protocol_sha256":input_config.get("c2_protocol_sha256"),
++        "native_source_inventory_sha256":digest(output.parent/"source/inventory.json"),
++        "objective":input_config.get("contact_objective"),"record_actual_u":True,
++        "adapter_sha256":digest(STUDY_ROOT/"src/c2_training_adapter.py"),
++        "pure_projection_sha256":digest(STUDY_ROOT/"src/target_inset.py"),
++        "entry_sha256":digest(__file__),"no_reward_or_WM_loss_change":True}
++    with training_controller(ManagerBasedRlEnv,PenMDP,DexSuperMimicRunner,metadata):
++        return _native_run_attempt(input_config,dex_root,recipe,clips,output,compiled,objective_spec)
++
++
++def build_penalty_only_objective(spec,device):
++    from penalty_study.penalty_only_objective import PenaltyOnlyPrior
++    if digest(STUDY_ROOT/"src/penalty_study/penalty_only_objective.py")!="cfa53515fb7dc12ae49a2aec2d9ca37603061c1752fc8875f879cf5ea235c914":
++        raise ValueError("Frozen P_ONLY objective source changed")
++    base=build_contact_objective(spec,device)
++    module=PenaltyOnlyPrior(base).eval().requires_grad_(False)
++    module.metadata["penalty_wrapper_sha256"]=digest(STUDY_ROOT/"src/penalty_study/penalty_only_objective.py")
++    return module
++
++
++def _native_run_attempt(input_config, dex_root, recipe, clips, output, compiled, objective_spec=None):
+     import numpy as np
+     import torch
+     import warp as wp
+@@ -519,8 +549,8 @@
+     env = None; runner = None
+     result = {
+         "status": "running", "condition": input_config.get("method", "A1"),
+-        "method": "A2 CHORD-inspired geometric intent shaping; unqualified geometric prior" if objective_spec else "A1 upstream SuperMimic; no CHORD objective",
+-        "control_contract": "absolute joint hard / actuator ctrlrange intersection; EMA residual unchanged",
++        "method": "P_ONLY exact shared penetration prior, support0" if input_config["method"]=="P_ONLY" else ("A2 CHORD-inspired geometric intent shaping; unqualified geometric prior" if objective_spec else "A1 upstream SuperMimic; no CHORD objective"),
++        "control_contract": "C2_020 common FP32 inset on real/imagined actualu; EMA residual unchanged",
+         "compiled_requested": compiled, "seed": seed, "training_budget_iterations": cfg.max_iterations,
+         "contact_head": "15-dimensional finger self-collision; not hand-object wrench/contact",
+         "contact_weight": .1, "failure_head_used_in_policy": False, "auxiliary_failure_head_fit_retained": True,
+@@ -542,7 +572,7 @@
+         result["runner_init_seconds"] = time.perf_counter() - runner_started
+         if objective_spec is not None:
+             setup_started = time.perf_counter()
+-            runner.contact_objective = build_contact_objective(objective_spec, cfg.device)
++            runner.contact_objective = (build_penalty_only_objective if input_config["method"]=="P_ONLY" else build_contact_objective)(objective_spec, cfg.device)
+             if runner.contact_objective.frame_count != len(runner.mdp.motion._frames["joint_pos"]):
+                 raise ValueError("A2 fixed contact timeline does not match the single training reference")
+             if runner.contact_objective.metadata["joint_names"] != list(runner.reader.robot.joint_names):
+@@ -554,6 +584,17 @@
+         assert runner.contact_dim == 15 and bool((runner.observations.disturbance(runner.observations.auxiliary()) == 0).all())
+         assert bool((env.command_manager.get_term("motion").time_steps == 0).all())
+         before = {name: [p.detach().cpu().clone() for p in module.parameters()] for name, module in runner.modules().items()}
++        fingerprints={}
++        for name,values in before.items():
++            hashed=hashlib.sha256()
++            for value in values:
++                hashed.update(str((str(value.dtype),tuple(value.shape))).encode())
++                hashed.update(value.contiguous().view(torch.uint8).numpy().tobytes())
++            fingerprints[name]={"sha256":hashed.hexdigest(),"tensors":len(values),
++                "parameters":sum(v.numel() for v in values),"l2":sum(float(v.double().square().sum()) for v in values)**.5}
++        write_json(output/"initial_parameters.json",fingerprints)
++        runner.c2_initial_parameter_fingerprints=fingerprints
++        result["initial_parameter_fingerprints"]=fingerprints
+         before_contact = runner.wm.net[-1].weight[-15:].detach().cpu().clone()
+         body_fields = ("body_mass", "body_inertia", "body_iquat", "geom_size", "geom_pos", "geom_friction", "actuator_gainprm", "actuator_biasprm")
+         physical = {name: getattr(env.sim.model, name).detach().cpu().numpy() for name in body_fields}
+@@ -587,6 +628,7 @@
+         checkpoint = output / "train/model_final.pt"
+         saved = torch.load(checkpoint, map_location="cpu", weights_only=False)
+         assert saved["iteration"] == cfg.max_iterations
++        assert saved["format_version"]==103 and saved["c2_controller"]["margin_rad"]==.020
+         result.update(status="passed", final_iteration=saved["iteration"], reference_signature=saved["reference_signature"],
+                       parameter_delta_l2=changes, self_collision_head_weight_delta_l2=contact_delta,
+                       checkpoint=str(checkpoint), checkpoint_sha256=digest(checkpoint),
+@@ -612,17 +654,29 @@
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--config", type=Path, required=True)
++    parser.add_argument("--run", action="store_true", help="Explicitly execute the bounded GPU attempt; default is CPU configuration preflight")
+     args = parser.parse_args()
+     config_path = args.config.resolve(strict=True)
+     config = json.loads(config_path.read_text(encoding="utf-8-sig"))
+-    allowed = {"schema", "label", "method", "seed", "output_dir", "dex_root", "reference", "training", "compile_fallback", "max_attempt_seconds", "initial_grasp_status", "contact_objective", "paired_protocol_file", "run_role"}
++    allowed = {"schema", "label", "method", "seed", "output_dir", "dex_root", "reference", "training", "compile_fallback", "max_attempt_seconds", "initial_grasp_status", "contact_objective", "paired_protocol_file", "run_role", "c2_controller", "c2_protocol_file", "c2_protocol_sha256"}
+     if set(config) - allowed or config.get("schema") != "supermimic_chord_train:1":
+         raise ValueError("Invalid configuration schema/keys")
+     method = config.get("method", "A1")
+-    if method not in {"A1", "A1L", "A2"}:
+-        raise ValueError("method must be A1/A1L native baseline or explicitly shaped A2")
+-    if (method == "A2") != bool(config.get("contact_objective")):
+-        raise ValueError("Only A2 may construct the frozen geometric-contact prior; A1/A1L must omit it")
++    if method not in {"A1L", "A2", "P_ONLY"}:
++        raise ValueError("C2 training arms are A1L/A2/P_ONLY")
++    if (method in {"A2","P_ONLY"}) != bool(config.get("contact_objective")):
++        raise ValueError("A2/P_ONLY require frozen objective inputs; A1L omits them")
++    if config.get("c2_controller")!={"kind":"C2_TARGET_INSET","margin_rad":.020,"checkpoint_format_version":103,"resume":"from_scratch_only"}:
++        raise ValueError("Explicit immutable C2_020 controller contract is required")
++    if {"checkpoint","model_checkpoint"} & set(config.get("training",{})):
++        raise ValueError("C2 training is from scratch only")
++    if bool(config.get("c2_protocol_file"))!=bool(config.get("c2_protocol_sha256")):
++        raise ValueError("Protocol path/hash must be declared together")
++    if config.get("c2_protocol_file") and digest(resolve(config["c2_protocol_file"]))!=config["c2_protocol_sha256"]:
++        raise ValueError("C2 study protocol hash mismatch")
++    if not args.run:
++        print(json.dumps({"status":"CPU_preflight_only","GPU_started":False,"method":method,"seed":config.get("seed"),"controller":config["c2_controller"]},indent=2))
++        return
+     dex_root = resolve(config.get("dex_root", "D:/workspace/dex-supermimic-research"))
+     output = resolve(config["output_dir"])
+     if output.exists() and any(output.iterdir()):
+@@ -633,9 +687,28 @@
+     write_json(output / "runtime.json", runtime)
+     shutil.copy2(config_path, output / "input_config.json")
+     source = freeze_source(dex_root, output)
++    c2_source=output/"source/c2_controller"
++    c2_source.mkdir()
++    c2_files={"adapter":STUDY_ROOT/"src/c2_training_adapter.py","pure_projection":STUDY_ROOT/"src/target_inset.py",
++        "penalty_wrapper":STUDY_ROOT/"src/penalty_study/penalty_only_objective.py",
++        "entry":Path(__file__),"original_trainer":STUDY_ROOT/"source_baselines/original_train_controlled_pen.py"}
++    frozen_files={}
++    for name,path in c2_files.items():
++        filename="original_train_controlled_pen.py" if name=="original_trainer" else path.name
++        shutil.copy2(path,c2_source/filename)
++        frozen_files[name]={"filename":filename,"sha256":digest(path)}
++    c2_contract={"schema":"C2_020_training_controller:1","base_method":method,"training_seed":config.get("seed",0),
++        "run_role":config.get("run_role"),"controller":config["c2_controller"],"input_config_sha256":digest(config_path),
++        "files":frozen_files,"study_protocol_sha256":config.get("c2_protocol_sha256"),
++        "actualu_evidence":"percollect allbatch exact cache/actual/replay.u+residual/replay.c; traces calls1/2/3/every100, last<=4steps/env0:4"}
++    if config.get("c2_protocol_file"):
++        shutil.copy2(resolve(config["c2_protocol_file"]),c2_source/"study_protocol.json")
++    write_json(c2_source/"controller_contract.json",c2_contract)
++    source["c2_controller"]={**c2_contract,"contract_sha256":digest(c2_source/"controller_contract.json")}
++    write_json(output/"source/inventory.json",source)
+     recipe, clips, provenance = prepare_reference(config["reference"], output)
+     freeze_paired_protocol(config, output, provenance, source)
+-    objective_spec = freeze_contact_inputs(config["contact_objective"], output) if method == "A2" else None
++    objective_spec = freeze_contact_inputs(config["contact_objective"], output) if method in {"A2","P_ONLY"} else None
+     if objective_spec is not None:
+         frozen_evaluation = provenance.get("frozen_evaluation_reference")
+         if not frozen_evaluation or frozen_evaluation["npz_sha256"] != objective_spec["expected_hashes"]["reference_npz_sha256"] or frozen_evaluation["json_sha256"] != objective_spec["expected_hashes"]["reference_json_sha256"]:

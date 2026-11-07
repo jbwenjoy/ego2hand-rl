@@ -1,0 +1,247 @@
+{
+  "schema": "supermimic_research.learning_origins:1",
+  "copied_package_inventory": {
+    "path": "D:\\workspace\\supermimic-research\\provenance\\dex_chord_import.json",
+    "bytes": 87315,
+    "sha256": "1fa4500765c60d548a5d0b25673ed43721016ed4bc47aac2d4a91c5fe830eae1"
+  },
+  "git_audit": {
+    "path": "D:\\workspace\\supermimic-research\\provenance\\git_audit.json",
+    "bytes": 27686,
+    "sha256": "21d223191afb33c8caaf18394a5e457ea463549ffad1a483315a938c55438ac1"
+  },
+  "modules": [
+    {
+      "destination": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\world_model.py",
+        "bytes": 13536,
+        "sha256": "2bfd9307e0686b27cba055093aae51f1bdc59d506384283e3f809caf59e54192"
+      },
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\train_geometry_momentum_wm.py",
+        "bytes": 37229,
+        "sha256": "224a0c9f47e196c626e862aa52d46402a454a6d16f0b497d3720ae74e25ca539"
+      },
+      "origin_symbols": [
+        "physical_blocks",
+        "physical_floors",
+        "current_features",
+        "precompute_features",
+        "make_model",
+        "heads_from_physical",
+        "block_mse",
+        "losses",
+        "tensor_digest",
+        "rng",
+        "tree_equal",
+        "atomic_checkpoint"
+      ],
+      "new_symbols": [
+        "WorldModelConfig",
+        "LossConfig",
+        "physical_blocks",
+        "physical_floors",
+        "current_features",
+        "precompute_features",
+        "normalize_features",
+        "make_model",
+        "heads_from_physical",
+        "block_mse",
+        "decode_output",
+        "absolute_loss",
+        "tensor_digest",
+        "raw_tree_equal",
+        "capture_rng",
+        "move_tensors",
+        "restore_rng",
+        "atomic_checkpoint"
+      ],
+      "changes": [
+        "No H/P or frozen5000 experiment preflight",
+        "Explicit dataclass/config and caller tensors/registry",
+        "Physical loss arithmetic/unitblocks retained; optionalCF explicit, no silent split selection"
+      ]
+    },
+    {
+      "destination": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\imagination.py",
+        "bytes": 4946,
+        "sha256": "3287c0d19e4f19faffd8b40e7c43bd377dcc097119511a92094601e9857c49b3"
+      },
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_actor_imagination_v2.py",
+        "bytes": 5601,
+        "sha256": "23bf5342dda374fe682c52dea878c7cf95b044780df74a1f738a710ba1eba96b"
+      },
+      "origin_symbols": [
+        "make_fresh_actor_critic",
+        "imagined_actor_objective"
+      ],
+      "new_symbols": [
+        "PolicyConfig",
+        "make_fresh_actor_critic",
+        "CanonicalMemoryTask",
+        "imagined_actor_objective"
+      ],
+      "changes": [
+        "Ordinary copied dex package import, no oldpath/spec/parents3 or sourcehardpins",
+        "Explicit policy config; preserved CPU initialization/fork RNG and frozen WM/Critic inputAD"
+      ]
+    },
+    {
+      "destination": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\update_step.py",
+        "bytes": 7296,
+        "sha256": "3a29cc379587c75e8b707e828db4fc7796d91b1d31eb439886c9865fa15b7a76"
+      },
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\train_shared_WM_A1_A2.py",
+        "bytes": 36961,
+        "sha256": "a1bcf9f820e00d7da4ac515dd81d45d39a2c59abd07c85319d1346db384b2439"
+      },
+      "origin_symbols": [
+        "make_opt",
+        "finish_step",
+        "run_training",
+        "arm_states",
+        "restore_arm_states"
+      ],
+      "new_symbols": [
+        "UpdateConfig",
+        "make_optimizer",
+        "finish_optimizer_step",
+        "supervised_WM_step",
+        "matched_actor_critic_step",
+        "arm_states",
+        "restore_arm_states"
+      ],
+      "changes": [
+        "Actual shared WM/realTD/H2Actor steps extracted into reusable functions",
+        "No per-experiment loops/metadata baked into primitives",
+        "Same commonbatch/permode rewards/absorption/microbatch/clip/EMA order"
+      ]
+    },
+    {
+      "destination": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\data.py",
+        "bytes": 8901,
+        "sha256": "c0e48663889f604c35c98dbb1e6a90d053f76b25c0d80276d7eecf5d5eb10956"
+      },
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\train_shared_WM_A1_A2.py",
+        "bytes": 36961,
+        "sha256": "a1bcf9f820e00d7da4ac515dd81d45d39a2c59abd07c85319d1346db384b2439"
+      },
+      "origin_symbols": [
+        "map_partition",
+        "old_rows",
+        "physical_data",
+        "encode_and_cache"
+      ],
+      "new_symbols": [
+        "_resolve",
+        "ReplayDataset",
+        "read_partition",
+        "from_registry",
+        "prepare_WM_batch",
+        "read_original_train",
+        "prepare_physical_rows"
+      ],
+      "changes": [
+        "ArtifactRegistry/explicitresolvedpins only",
+        "Allrawrows/partialmasks retained, oldTRAINonly outputopened",
+        "Heldout/monitor fitting rejected"
+      ]
+    },
+    {
+      "destination": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\runner.py",
+        "bytes": 25477,
+        "sha256": "9e524cec3833217e0d81f7103181005724f808adabe828fb8f60ef94428746f5"
+      },
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\train_shared_WM_A1_A2.py",
+        "bytes": 36961,
+        "sha256": "a1bcf9f820e00d7da4ac515dd81d45d39a2c59abd07c85319d1346db384b2439"
+      },
+      "origin_symbols": [
+        "run_training",
+        "health_checkpoint",
+        "mixed_scales",
+        "select_mix",
+        "real_rewards"
+      ],
+      "new_symbols": [
+        "source_pins",
+        "_content_bindings",
+        "_artifact_pins",
+        "_counts_valid",
+        "configuration",
+        "inspect",
+        "_science_config",
+        "_log_prefix_valid",
+        "_subset",
+        "_tripod_rows",
+        "_sample",
+        "_geometry",
+        "_task",
+        "_setup",
+        "smoke",
+        "_mixed_scales",
+        "_health",
+        "train"
+      ],
+      "changes": [
+        "TOML driver invokes newpackage components, no legacy Python callbacks",
+        "common100/WM4tripod+4old684/Actor153 default recipe present but migration not silently frozenreproduction",
+        "Ownnewcheckpoint resume route; legacy schemas are warmstart only",
+        "Training authorization false; no optimizer/learning run in this consolidation",
+        "Resume binds selected task/geometry/input bytes and relative source-content fingerprint; config/cursor/health count guard",
+        "Source fingerprints computed once at setup; no hot-path hashing or legacy Python callbacks"
+      ]
+    }
+  ],
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\phone_offline.toml",
+    "bytes": 802,
+    "sha256": "59af6c71e9076da23d8eaee5a20f56a8a85678288f6ffc54fa6aed27e8f1f65e"
+  },
+  "CPU_zero_update_smoke": {
+    "path": "D:\\workspace\\supermimic-research\\provenance\\learning_cpu_smoke.json",
+    "bytes": 6716,
+    "sha256": "bbf7e5b50723f74e9435ac3e6a07bbbb3b3a8d1f2251ac1705eb64a3f1849e6d"
+  },
+  "validation_scope": {
+    "actual_own_CPU_loads": 1,
+    "actual_NN_constructors": 5,
+    "target_deepcopies": 2,
+    "actual_NN_FW": 5,
+    "actual_physical_decode": 1,
+    "actual_optimizer_constructors": 0,
+    "actual_backward_updates_native_GPU": 0,
+    "trained_or_resume_loop_executed": false
+  },
+  "post_smoke_source_only_changes": [
+    "Explicit Python/NumPy seeding",
+    "OptionalCF arithmetic insertion order preserved",
+    "Ownschema resume/logprefix/health source route; no runtime training or resume test",
+    "Own resume counter/config/input/source-content fingerprint guards; full final result checkpoint/health pins"
+  ],
+  "remaining_boundaries": [
+    "Unified ownschema resume is SOURCE implemented, not exercised on a new learned checkpoint",
+    "Complete online-native3cycle orchestration remains legacy/source until ported to same runner",
+    "External Dex simulator resources registered/inventoried, not copied into src assets",
+    "No completeActor/CHORD policy benefit or physicalgradient qualification"
+  ],
+  "old_sources_unchanged": true,
+  "driver_metadata": {
+    "path": "D:\\workspace\\supermimic-research\\provenance\\learning_driver_metadata.json",
+    "bytes": 9967,
+    "sha256": "3a9af3cc275cd5f5dee9c9d0ace4d9b83bf251bf42e5f7ca0d70e51cc706da9e"
+  },
+  "learning_migration_parity": {
+    "path": "D:\\workspace\\supermimic-research\\provenance\\learning_parity.json",
+    "bytes": 7121,
+    "sha256": "30d5b81779a82f1c087425456ecd0d1d4eb32d3a557d76eb29b25261c5741eeb"
+  }
+}

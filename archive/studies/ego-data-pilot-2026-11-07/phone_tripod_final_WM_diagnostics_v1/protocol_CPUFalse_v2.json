@@ -1,0 +1,141 @@
+{
+  "schema": "phone_tripod_fixed_final_WM_diagnostics_CPU_protocol:2",
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "rules": {
+    "final_paired_round": 1000,
+    "final_shared_WM_updates": 1100,
+    "warm_iteration": 5000,
+    "checkpoint_selection": false,
+    "normalizer_or_scale_fitting": false,
+    "cpu_threads": 4,
+    "MON_rows": 52,
+    "CHECK_rows": 1476,
+    "CHECK_known": 1472,
+    "CHECK_sides": 1440,
+    "CHECK_defined_sides": 1436,
+    "fresh_rows": 240,
+    "fresh_known": 228,
+    "checkpoint_CPU_loads": 2,
+    "WM_constructors": 2,
+    "NN_forward_calls": 4,
+    "NN_rows": 1804,
+    "structured_decode_calls": 4,
+    "Actor_Critic_constructors": 0,
+    "AD_optimizer_native_GPU_calls": 0,
+    "old_input": "reuse_saved_normalized_input366_FP32_after_raw_normalizer_and_context_equality",
+    "MON_input": "precompute_current_geometry_once_then_same_input_for_both_models",
+    "roles": [
+      "offline_final1000",
+      "warm5000"
+    ],
+    "data_NPZ_reads": 5,
+    "frozen_geometry_asset_NPZ_reads": 2
+  },
+  "inputs": {
+    "final_training_protocol": null,
+    "final_result": null,
+    "final_health": null,
+    "final_terminal": null,
+    "warm_result": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_resume1\\result.json",
+      "bytes": 1129,
+      "sha256": "ece5f7c85eb78c6727dddd246256475742971554662bd96a572e8f9525c58723"
+    },
+    "warm_health": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_resume1\\health_5000.json",
+      "bytes": 3002,
+      "sha256": "f5555dec44098f8d0e541e42da56c18e999b3e9f2b6f0de4b71f7f4c0e66db8c"
+    },
+    "tripod_dataset": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\completed_v1\\report.json",
+      "bytes": 8887,
+      "sha256": "c451509bccab0e92b75a738c8a6fddcada4ae94a5d6537aab080c915dd14a879"
+    },
+    "CHECK_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_evaluation_v1\\completed_v1\\report.json",
+      "bytes": 6043,
+      "sha256": "f7baa940e71d997ae5e4bdec70d5f2c9f176d2a7ddf48ee9a792d9c6ed032461"
+    },
+    "fresh_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_fresh_evaluation_v1\\completed_v1\\report.json",
+      "bytes": 3453,
+      "sha256": "cec3802c565d75eb7b06429c2963001563dbd0f2164249d22ed996740916b64f"
+    }
+  },
+  "sources": {
+    "WM_trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\train_geometry_momentum_wm.py",
+      "bytes": 37229,
+      "sha256": "224a0c9f47e196c626e862aa52d46402a454a6d16f0b497d3720ae74e25ca539"
+    },
+    "structured_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+      "bytes": 4100,
+      "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+    },
+    "directional": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+      "bytes": 9556,
+      "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+    },
+    "momentum": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\momentum_contract.py",
+      "bytes": 4023,
+      "sha256": "983e182d7b8980d44a23db0f143d4a1c48ed483d37522fdba33dca3d5344b0ca"
+    },
+    "rotation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    },
+    "scalar_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "offline_trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\train_shared_WM_A1_A2.py",
+      "bytes": 36961,
+      "sha256": "a1bcf9f820e00d7da4ac515dd81d45d39a2c59abd07c85319d1346db384b2439"
+    },
+    "frozen_metrics": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_evaluation_v1\\evaluate_fixed5000.py",
+      "bytes": 27863,
+      "sha256": "32f565f0d120272114692505d5ada9455fc2f857b9225ee6b1a3e2b82ca8a302"
+    },
+    "evaluator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_final_WM_diagnostics_v1\\compare_final_WM_v2.py",
+      "bytes": 22260,
+      "sha256": "81ddf2cbacf994884e455532373229f4035c94578e3d834e561bf0b28741886e"
+    },
+    "state_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "FK": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\geometry_provider.py",
+      "bytes": 11690,
+      "sha256": "f00da9a2c5deb19261a3ff4e168d79f8aea9784736e0fdd0897ffe9599a3b07b"
+    },
+    "geometry_constants": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_constants.json",
+      "bytes": 91553,
+      "sha256": "330243d3b85abb1e996c2658b9216fe89df9ede53b0c4e035af63deb651f8fd9"
+    },
+    "geometry_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_geometry_arrays.npz",
+      "bytes": 514604,
+      "sha256": "4bafa2e40788f1106dcb497e575304d9bfabc7476fdb910147179325db97570f"
+    },
+    "direction_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\direction_arrays_v1.npz",
+      "bytes": 24503,
+      "sha256": "08dbbe3bfc8c0cbd19dad14510fd48c48351d8102cbeb99ca3d8f735cd1ca053"
+    }
+  },
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_final_WM_diagnostics_v1\\completed_v1",
+  "scope": "Fixed offline final1000/WM1100 vs warm5000; no checkpoint selection/fit/Actor/Critic/native. Final pins pending.",
+  "budget_note": "Five distinct data NPZs plus two frozen geometry-asset NPZs; same four forwards/1804rows/four decodes."
+}

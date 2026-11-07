@@ -1,0 +1,175 @@
+{
+  "schema": "assembly_then_hard_geometry_support_protocol:11",
+  "CPU_run_authorized": false,
+  "config": {
+    "seed_names": [
+      "original",
+      "tilt5"
+    ],
+    "q_trust_rad": null,
+    "q_planner_margin_rad": 1e-09,
+    "palm_translation_trust_m": 0.025,
+    "rotvec_coordinate_trust_rad": 0.5,
+    "compression_target_m": 2.5e-05,
+    "pad_gap_window_m": [
+      -0.0001,
+      0.0002
+    ],
+    "closure_gate_m": 0.0002,
+    "normal_gate_deg": 1.0,
+    "eq_position_scale_m": 0.001,
+    "max_abs_hard_eq10_dimensionless": 1e-05,
+    "A0_max_FK_queries": 6000,
+    "A0_wall_s": 20.0,
+    "A0_max_nfev": 200,
+    "A1_full_queries": 450,
+    "A1_heavy_queries": 6000,
+    "A1_wall_s": 60.0,
+    "A1_maxiter": 40,
+    "B_full_queries": 600,
+    "B_heavy_queries": 6000,
+    "B_wall_s": 90.0,
+    "B_maxiter": 60,
+    "final_heavy_queries_per_seed": 3000,
+    "final_wall_s_per_seed": 45.0,
+    "FD14": [
+      1e-05,
+      1e-05,
+      1e-05,
+      1e-05,
+      1e-05,
+      1e-05,
+      1e-05,
+      1e-05,
+      1e-06,
+      1e-06,
+      1e-06,
+      1e-05,
+      1e-05,
+      1e-05
+    ],
+    "full_cache_size": 128,
+    "cheap_cache_size": 1024,
+    "shortlist_per_seed": 2,
+    "native_forward_max": 12,
+    "final_native_LP_max": 8,
+    "normal_cap_per_finger_N": 3.0,
+    "common_force_point": "Actual hand-triangle A, conditionally inside preloaded phone; not native con.pos",
+    "actual_initial_3N_budget_is_descriptive": true
+  },
+  "output_path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\exact_source_original_hand_completed_v1",
+  "automatic_retry": false,
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\solve_assembly_support_v11.py",
+      "bytes": 23011,
+      "sha256": "72e72b69457c376d2ac89d9f66f48927b80928e77d5e34a96ecbcf85cfb87c55"
+    },
+    "cheap_FK": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\assembly_kinematics_v11.py",
+      "bytes": 8892,
+      "sha256": "d1fdc02ba0037c8d4b3303f7f86004372f0cdac30d20ab6327e18536679e734d"
+    },
+    "native_wrapper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\evaluator_contact_design_v7.py",
+      "bytes": 8321,
+      "sha256": "26a960d87e4be004afcb74e2616b39ae52dd128983eea2ee6dce25f4692860de"
+    },
+    "native_base": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\evaluator_native_v6.py",
+      "bytes": 19267,
+      "sha256": "0a7a15cf16d98066920de3a95dc7b0b1a9faf61d387c24cf43a1b38f1aa2a16f"
+    },
+    "static_geometry": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\evaluator_v3.py",
+      "bytes": 23763,
+      "sha256": "090cf6535f5249de4377a0e022ed7c87b555ad69ed7b570f995badb4d2245d57"
+    },
+    "scaled_support_LP": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\wrench_residual_v6\\scaled_wrench_residual_lp_v6.py",
+      "bytes": 8853,
+      "sha256": "bee7223fd8d7c22acd0481b9228d2a38d16130eee12743ae3e4c39a78dd4a651"
+    },
+    "native_wrench_LP": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\native_wrench_lp_v7.py",
+      "bytes": 6836,
+      "sha256": "e422b673d4644c15f1d13af2a083bdac2ff97c2fd653ce28fb631f887a6b7012"
+    },
+    "strict_native_support_LP": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\strict_support_lp_guarded_v7.py",
+      "bytes": 7383,
+      "sha256": "6395a7d9d6f182426585dbc1e77a7a08a5c19324ae2463e894372d611f5491b1"
+    },
+    "native_LP_adapter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\scan_body_axis_reference_v7.py",
+      "bytes": 9478,
+      "sha256": "81caf8e93b4e1ec70bf58b7e42cc8343fc0624a56e385ae03cf8c097e88bb22b"
+    },
+    "anchor_validation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\anchor_validation_v11.py",
+      "bytes": 7302,
+      "sha256": "7470a4693f1773398898a712361d5fa834327e4cb6df68e999d9eff6e65fcba7"
+    }
+  },
+  "inputs": {
+    "old_native_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\report.json",
+      "bytes": 2336903,
+      "sha256": "ff9d0cdeabd766ba29e1d6da6d049f42aa4dbd92ae7c1bd87301be0a3518438f"
+    },
+    "surface_anchors": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\source_surface_mapping_v11\\exact_source_original_hand_anchors_v1.json",
+      "bytes": 23254,
+      "sha256": "e1ac44cd3d12423a31f8b892767caa366fd57b6c3747e1bca0603fb1ee7c0946"
+    },
+    "reference_design": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\reference_seed_design_v7\\report.json",
+      "bytes": 20255,
+      "sha256": "02ad38111fac7aaef2705bc3e5cac97e1e42a5b698f6cac86b840e40481adb62"
+    },
+    "cheap_FK_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v9\\original_pose_contract_v1\\report.json",
+      "bytes": 3239,
+      "sha256": "75e22fc3c91caa66580c6dec82171dd4a7276d1a8f2a72a77cfc032bc8d3885c"
+    },
+    "native_J_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\contract_v1\\report.json",
+      "bytes": 9165,
+      "sha256": "86f9c6ff1662600d0407fb222e47130cda288fea94f25e5d1eee7bdcefce0d7b"
+    },
+    "native_LP_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\analytic_contract_v1\\report.json",
+      "bytes": 55298,
+      "sha256": "ff39dcd614c7e17ec5a3bdece0fc6497be15a0b2e4076acc95370bfd507a199d"
+    },
+    "original_ego_material_targets": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\fixed_anchors_and_targets.json",
+      "bytes": 38112,
+      "sha256": "cac45ba762879007da2043c5c588109fed2c34cc5502e963ead8b3e83eeaebcc"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    }
+  },
+  "A0": "Cheap FK10eq+opposite branch and weak pose regularizer; no force or collision qualification. On budget stop use lowest finite visited residual including FD, with saved last requested point.",
+  "A1": "SLSQP10eq plus opposite branch and full collision-window constraints; objective stay close to A0. Pool/ALREADY_PASSED additionally require max(abs(eq10_scaled))<=1e-5, not only coarse closure/angle gate.",
+  "B": "SLSQP under the same10eq+collision constraints. Objective conditional LP scaled_Linf squared plus1e-7 normalized pose norm; pool ranks primary scaled_Linf. Common A is real hand-triangle point, conditionally inside phone preload, not actual native con.pos.",
+  "collision_inequalities": "Designated2pad signed gaps in[-0.1,+0.2]mm; other20phone pairs and189eligible self pairs nonpenetrating. Nonnegative constraint values do not mean designated pads have positive signed gap.",
+  "opposed_normal_equations": "Each actual phone triangle provides two fixed body tangent rows rotated to world; tangent dot hand outward normal gives2eq perpair, with opposite-normal branch.",
+  "model_and_reference": "Original fixed wrist, geometry, scale, gains, mass, inertia, friction and solver. Remaining12q and phone material points fixed; original ego targets separately retained. No adjacent-face substitution in this run.",
+  "budget_scope": "Stage wall limits are cooperative checks before cache-miss/full queries; cached and cheap work plus finite library iterations/load/save overhead are not an absolute process deadline. Attempts are flushed with requestedx before full geometry; no restart on observation timeout.",
+  "final": "Up to2candidates/seed, original complete22/189 geometry and newly generated native multipt/J/friction/PD. Minimax guidance followed by strict force-hard/moment-box witness if geometry and assembly pass; then2fresh command probes/repeat. No integration here.",
+  "initial_load_budget": "Ideal per-finger3N remains an LP design cap. Actual initial Fn and its3N flag are descriptive for this new diagnostic enrollment; original2s dynamic gates have no instantaneous3N cap. Do not claim actual load meets3N unless measured flag does.",
+  "qualification": "Candidate assembly/ideal support/repeated preload do not establish calibrated physical pad, faithful ego trajectory, learned benefit, native equilibrium or2s holding.",
+  "new_training_GPU_or_dynamics_steps_authorized": false,
+  "anchor_branch": "exact_source_original_hand",
+  "matched_source_mapping_scope": "Same v10 full hardware q8, rest12, original two seeds, phone boxes, model, methods and budgets; branch changes source phone B/normal/tangent only, old hand triangles retained. Source1mm is algorithmic sensitivity, not empirical uncertainty.",
+  "prior_contract_scope": "Old14/87/4 are parent provenance. New pinned anchor JSON validation runs before default return; same original model compiled vertex/support/body-frame checks run in custom constructor. Existing same-x A/B/q checks and actual full-state anchor J remain."
+}

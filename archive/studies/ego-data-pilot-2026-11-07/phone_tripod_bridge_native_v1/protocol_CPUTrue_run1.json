@@ -1,0 +1,81 @@
+{
+  "schema": "phone_loaded_tripod_native_reader_bridge_CPU_protocol:1",
+  "CPU_run_authorized": true,
+  "NN_training_GPU_authorized": false,
+  "source": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_bridge_native_v1\\check_native_bridge_v1.py",
+    "bytes": 8992,
+    "sha256": "8f7ba074bc9d54a5cf1bf245fded32776fbaf5fc99e107cf977c65b5bf0972ba"
+  },
+  "inputs": {
+    "bundle": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+      "bytes": 19375,
+      "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+    },
+    "integration_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\protocol_CPUFalse_v2.json",
+      "bytes": 7949,
+      "sha256": "6a27380d8dcb5a007f7d1c9671d0cdb5e26a70988fed1bfdc21137081fd8d3e8"
+    },
+    "catalog": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\geometry_catalog_v1.json",
+      "bytes": 2197,
+      "sha256": "f36298062d6039a6230c9958f0169e57f8544dfd7706ec3b2e988b4796afa33c"
+    },
+    "model": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    }
+  },
+  "sources": {
+    "task": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_task_v2.py",
+      "bytes": 15259,
+      "sha256": "1d069f19760cee674abd94e76166cff4aee89b4eab2a3f42b54ce43308d7acaf"
+    },
+    "reader_replay": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\reader_replay_adapter_v2.py",
+      "bytes": 9110,
+      "sha256": "266c4b0609193601e1ec8fbdecf43b04ac8dfc37a817fea6a1bdc6a80462c6cd"
+    },
+    "native_reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    },
+    "directional": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+      "bytes": 9556,
+      "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+    }
+  },
+  "dt_s": [
+    0.0003125,
+    0.00015625
+  ],
+  "action": "exact_zero_FP32_normalized20_GN_F64_ctrl_unchanged",
+  "budget": {
+    "MJB": 2,
+    "initial_forward": 2,
+    "maximum_native_steps": 192,
+    "NN_constructors_FW_optimizer": 0,
+    "GPU": 0
+  },
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_bridge_native_v1\\completed_run1",
+  "scope": "Two physical reset/control/replay interface executions, one20ms perdt. No training, no operator interventions, no2s holding or task gain. A2 score is an engineered geometry proxy read, not observed force reward.",
+  "root_review": {
+    "parent_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_bridge_native_v1\\protocol_CPUFalse_v1.json",
+      "bytes": 3056,
+      "sha256": "7bc3b594ec35c3d6290fcae02f6680da767994574c7b5146281d2ae6de3c3272"
+    },
+    "launcher": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_bridge_native_v1\\execute_once_v1.py",
+      "bytes": 2248,
+      "sha256": "e9ba90f8ff91d5b078660a8d4827d367d3780fec8c04cb1d491dcd933652eb14"
+    },
+    "scope": "Two physical reset+single20ms interface checks,192steps maximum, raw300 state and PREcontacts persisted. Zero Actor/WM/GPU/learning, not2s holding."
+  }
+}

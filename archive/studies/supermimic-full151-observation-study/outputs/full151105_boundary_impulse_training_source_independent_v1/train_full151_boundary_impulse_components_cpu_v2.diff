@@ -1,0 +1,14 @@
+--- D:\workspace\supermimic-full151-observation-study\scripts\train_full151_boundary_impulse_components_cpu_v1.py
+
++++ D:\workspace\supermimic-full151-observation-study\scripts\train_full151_boundary_impulse_components_cpu_v2.py
+
+@@ -6,7 +6,7 @@
+
+ 
+ def main(argv=None):
+     ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--protocol',type=Path);ap.add_argument('--output',type=Path);ap.add_argument('--execute',action='store_true');a=ap.parse_args(argv)
+-    from full151_gradient import boundary_impulse_training105_v1 as core
++    from full151_gradient import boundary_impulse_training105_v2 as core
+     if a.execute:
+         if a.protocol is None or a.output is None:ap.error('--execute requires protocol and fresh output')
+         r=core.run_training(a.protocol,a.output);print(json.dumps({k:r[k] for k in ('schema','status','iteration','training_counts','process_counts')}));return 0

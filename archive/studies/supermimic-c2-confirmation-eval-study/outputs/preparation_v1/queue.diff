@@ -1,0 +1,30 @@
+--- D:\workspace\supermimic-c2-020-portfolio-study\scripts\run_c2_portfolio_queue.py
++++ D:\workspace\supermimic-c2-confirmation-eval-study\scripts\run_c2_portfolio_queue.py
+@@ -11,7 +11,7 @@
+ STARTED=time.monotonic()
+ ROOT=Path(__file__).resolve().parents[1]
+ STUDY=Path("D:/workspace/supermimic-chord-study")
+-DEFAULT_PLAN=ROOT/"configs/c2-portfolio-v1.json"
++DEFAULT_PLAN=ROOT/"configs/c2-confirmation-evaluation-v1.json"
+ 
+ 
+ def import_path(path,name):
+@@ -36,6 +36,7 @@
+ 
+ def validate_capacity(plan,job,worker,meta,capacity):
+     model=worker.model_for_job(plan,job)
++    worker.require(capacity["training_checkpoint_format"]==103 and capacity["checkpoint_contract_sha256"]==model["contract_file"]["sha256"],"Capacity103 contract mismatch")
+     worker.require(capacity["status"]=="OK" and capacity["overflow_bitmask"]==0,"Sticky capacity not qualified")
+     worker.require(meta["resets_during_rollout"]==capacity["resets_during_rollout"]==0,"Reset invalidates sticky scope")
+     worker.require(capacity["read_count"]==1 and capacity["read_at_control_intervals"]==150,"Wrong observation timing/count")
+@@ -49,6 +50,10 @@
+     model=worker.model_for_job(plan,job)
+     worker.require(meta["checkpoint_sha256"]==model["checkpoint_sha256"] and meta["seed"]==0,"Checkpoint/evaluation seed mismatch")
+     worker.require(meta["checkpoint_training_config"]["seed"]==model["training_seed"] and meta["checkpoint_iteration"]==2000,"Actual checkpoint training seed/iteration mismatch")
++    worker.require(meta["checkpoint_format_version"]==103 and meta["checkpoint_contract_sha256"]==model["contract_file"]["sha256"],"Original103 contract missing")
++    worker.require(meta["checkpoint_controller"]["trained_method"]==model["method"] and meta["checkpoint_controller"]["training_seed"]==model["training_seed"],"Actual103 controller identity mismatch")
++    worker.require(meta["runtime_reference_signature"]==model["expected"]["reference_signature"],"Actual runtime reference signature mismatch")
++    worker.require(condition["schema"]=="C2_trained_confirmation:1" and condition["training_checkpoint_format"]==103,"Wrong confirmation condition schema")
+     for record in (condition,runtime):
+         worker.require(record["trained_method"]==model["method"] and record["model_id"]==model["model_id"] and record["training_seed"]==model["training_seed"] and record["checkpoint_sha256"]==model["checkpoint_sha256"],"Output policy identity mismatch")
+ 

@@ -1,0 +1,97 @@
+--- src/full151_gradient/state_replay105_v1.py
++++ src/full151_gradient/state_replay105_v2.py
+@@ -19,8 +19,8 @@
+ ROLE='full151105_native_GPU_state_replay'
+ KEYS={'schema','role','protocol','output','source_pins','CPU_ready','CPU_contract_report','GPU_run_authorized',
+       'training_authorized','Env_or_physics_authorized','automatic_retry','compile_fallback','soft_worker_seconds','hard_process_seconds','evaluation_seed','device','allow_tf32'}
+-OWN={'module':ROOT/'src/full151_gradient/state_replay105_v1.py','entry':ROOT/'scripts/execute_full151_state_replay_v1.py',
+-     'supervisor':ROOT/'scripts/run_full151_state_replay_v1.py','checker':ROOT/'scripts/check_full151_state_replay_cpu_v1.py'}
++OWN={'module':ROOT/'src/full151_gradient/state_replay105_v2.py','entry':ROOT/'scripts/execute_full151_state_replay_v2.py',
++     'supervisor':ROOT/'scripts/run_full151_state_replay_v2.py','checker':ROOT/'scripts/check_full151_state_replay_cpu_v2.py'}
+ EXPECTED={'native_state_calls':2260,'native_state_returned':2260,'native_state_batch_size':1,'converted_rows':2260,
+     'pre_rows':1808,'known_post20_rows':452,'endpoint_comparisons':452,'anchor_comparisons':160,'solver_pose_comparisons':1808,
+     'native_CPU_state_calls':0,'new_MJB_loads':0,'factory_calls':0,'objective_WM_Actor_forward':0,'weights_loads':0,'AD_calls':0,
+@@ -165,7 +165,7 @@
+       'cudnn_allow_tf32':torch.backends.cudnn.allow_tf32,'cudnn_deterministic':torch.backends.cudnn.deterministic,'cudnn_benchmark':torch.backends.cudnn.benchmark,
+       'deterministic_algorithms':torch.are_deterministic_algorithms_enabled(),'deterministic_warn_only':torch.is_deterministic_algorithms_warn_only_enabled(),
+       'bf16_reduced_precision':get(mat,'allow_bf16_reduced_precision_reduction'),'fp16_reduced_precision':get(mat,'allow_fp16_reduced_precision_reduction'),
+-      'fp16_accumulation':get(mat,'allow_fp16_accumulation'),'bf16_splitK':get(mat,'allow_bf16_reduction_split_k'),
++      'fp16_accumulation':get(mat,'allow_fp16_accumulation'),'bf16_splitK':get(mat,'allow_bf16_reduced_precision_reduction_split_k'),
+       'autocast_enabled_CUDA':torch.is_autocast_enabled('cuda'),'autocast_dtype_CUDA':str(torch.get_autocast_dtype('cuda')),
+       'environment':{k:os.environ.get(k) for k in ('CUDA_VISIBLE_DEVICES','NVIDIA_TF32_OVERRIDE','TORCH_ALLOW_TF32_CUBLAS_OVERRIDE','CUBLAS_WORKSPACE_CONFIG')}}
+ 
+--- scripts/execute_full151_state_replay_v1.py
++++ scripts/execute_full151_state_replay_v2.py
+@@ -28,9 +28,9 @@
+         'compile_fallback', 'soft_worker_seconds', 'hard_process_seconds', 'evaluation_seed', 'device', 'allow_tf32'}
+ PROTOCOL = ROOT / 'protocols/full151105-matched-native-GPU-reader-replay-prereg-v1.json'
+ PROTOCOL_SHA = 'fddcf970d7a8e44732fe93e6c83d1918fe017d4d5df159ae5c851a77e15fca6c'
+-MODULE = ROOT / 'src/full151_gradient/state_replay105_v1.py'
+-SUPERVISOR = ROOT / 'scripts/run_full151_state_replay_v1.py'
+-CHECKER = ROOT / 'scripts/check_full151_state_replay_cpu_v1.py'
++MODULE = ROOT / 'src/full151_gradient/state_replay105_v2.py'
++SUPERVISOR = ROOT / 'scripts/run_full151_state_replay_v2.py'
++CHECKER = ROOT / 'scripts/check_full151_state_replay_cpu_v2.py'
+ DRIVER = Path('D:/workspace/supermimic-observation-restoration-prefix-study/scripts/run_track_prefix_v3.py')
+ DRIVER_SHA = 'f4161cb4be7ac2e5e0fc598820a944f4d9a0e7240ee79b4eb68054732f246475'
+ LIFECYCLE = Path('D:/workspace/supermimic-control-feasibility-draft/scripts/run_braking_microprobe.py')
+@@ -123,7 +123,7 @@
+             raise ValueError('Execution dependency not archived: ' + str(path_))
+         ast.parse(path_.read_text(encoding='utf-8-sig'))
+     validate_CPU_proof(c)
+-    module = importlib.import_module('full151_gradient.state_replay105_v1')
++    module = importlib.import_module('full151_gradient.state_replay105_v2')
+     if not same_pin(pin(module.__file__), pin(MODULE)):
+         raise ValueError('Unexpected imported replay core')
+     module.validate_config(c)
+@@ -176,7 +176,7 @@
+             runtime.update(updates, worker_elapsed_seconds=time.perf_counter()-STARTED)
+             write(out / 'runtime.json', runtime)
+ 
+-        core = importlib.import_module('full151_gradient.state_replay105_v1')
++        core = importlib.import_module('full151_gradient.state_replay105_v2')
+         result = core.run_replay(path, out, emit, started_perf=STARTED)
+         write(out / 'result.json', jsonable(result))
+         result_validation = core.validate_result(result)
+--- scripts/run_full151_state_replay_v1.py
++++ scripts/run_full151_state_replay_v2.py
+@@ -17,7 +17,7 @@
+ 
+ DRIVER = Path('D:/workspace/supermimic-observation-restoration-prefix-study/scripts/run_track_prefix_v3.py')
+ DRIVER_SHA = 'f4161cb4be7ac2e5e0fc598820a944f4d9a0e7240ee79b4eb68054732f246475'
+-ENTRY = ROOT / 'scripts/execute_full151_state_replay_v1.py'
++ENTRY = ROOT / 'scripts/execute_full151_state_replay_v2.py'
+ HIDDEN = (subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP) if os.name == 'nt' else 0
+ WORKER_PATTERN = r'[\\/](execute_full151_(?:a0|learning|policy_eval|gradient|precision|state_replay)_v[0-9]+|train_rough_prefix_pen(?:_v[0-9]+)?|track_prefix_warp|train_controlled_pen|evaluate_pen_checkpoint|evaluate_confirmation_checkpoint|evaluate_c2_portfolio|probe_world_model_gradients|rest_hold_warp)\.py(?:[\s\"\x27]|$)'
+ 
+--- scripts/check_full151_state_replay_cpu_v1.py
++++ scripts/check_full151_state_replay_cpu_v2.py
+@@ -3,7 +3,7 @@
+ from pathlib import Path
+ import numpy as np
+ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
+-from full151_gradient import state_replay105_v1 as s
++from full151_gradient import state_replay105_v2 as s
+ 
+ 
+ def main():
+@@ -87,6 +87,10 @@
+         reject('reject_FP64_native_views',lambda:s.tensor_views_B1(q.double(),v,pp,R,idx,'cpu'))
+         reject('reject_float_index_dtype',lambda:s.tensor_views_B1(q,v,pp,R,{**idx,'object_qpos':torch.arange(7,dtype=torch.float32)},'cpu'))
+         check('CPU_fixture_did_not_initialize_CUDA',not torch.cuda.is_initialized())
++        metadata=s.flags_runtime(torch)
++        expected_splitK=getattr(torch.backends.cuda.matmul,'allow_bf16_reduced_precision_reduction_split_k')
++        check('correct_installed_BF16_splitK_getter_observed',metadata['bf16_splitK']!='UNAVAILABLE' and metadata['bf16_splitK']==expected_splitK)
++        check('optional_backend_metadata_read_did_not_initialize_CUDA',not torch.cuda.is_initialized())
+         check('native_reader_not_imported_by_fixture','dex_supermimic.rl.dex_supermimic.sim' not in sys.modules)
+         text=Path(s.__file__).read_text(encoding='utf-8');tree=ast.parse(text)
+         native=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='native_cuda_state_B1')
+@@ -97,6 +101,8 @@
+         check('whole_worker_started_perf_and_bounded_partial',"started_perf=None" in text and "completed%128==0" in text and 'replace_with_bounded_retry' in text)
+         check('front_complete_nonqual_exit_after_completion_outside_catch','raise SystemExit(result_validation[\'exit_code\'])' in Path(s.OWN['entry']).read_text())
+         check('no_new_data_model_or_native_module_imports',all(name not in sys.modules for name in ('mujoco','warp','full151_intent.binding_v3','full151_native.world_model_checkpoint')))
++        previous=s.read(ROOT/'outputs/full151105_state_replay_preparation_CPU_v1/READY.json')
++        check('v1_all_four_executed_sources_preserved',all(s.pin(v['path'])==v for v in previous['source_pins'].values()))
+         for k,v in pins.items():check('source_unchanged_'+k,s.pin(v['path'])==v)
+         proof={'schema':'full151105_state_replay_CPU_contract:1','status':'PASS_PURE_CPU_CONTRACT_NO_GPU','checks':checks,'passed':sum(checks.values()),'total':len(checks),
+            'source_pins':pins,'protocol':s.pin(s.PROTOCOL),'actual_GPU_calls':0,'native_state_calls':0,'NPZ_input_reads':0,'MJB_loads':0,'model_loads':0,

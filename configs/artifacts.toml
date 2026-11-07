@@ -1,0 +1,69 @@
+schema = 1
+
+# Relative to this file. Machine-specific overrides belong in paths.local.toml.
+[roots]
+ego = "../../ego-data-pilot-2026-11-07"
+dex = "../../dex-supermimic-research"
+
+[relocations]
+"D:/workspace/ego-data-pilot-2026-11-07" = "ego"
+"D:/workspace/dex-supermimic-research" = "dex"
+
+[artifacts.phone_task]
+root = "ego"
+path = "phone_geometry_actor_integration_v1/task_bundle_v2.json"
+role = "task_configuration"
+sha256 = "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+
+[artifacts.phone_model]
+root = "ego"
+path = "hand2_holding_v1/compiled_nominal_v2/model.mjb"
+role = "nominal_simulator_asset"
+sha256 = "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+
+[artifacts.geometry_catalog]
+root = "ego"
+path = "phone_directional_gap_features_v1/geometry_catalog_v1.json"
+role = "geometry_configuration"
+sha256 = "f36298062d6039a6230c9958f0169e57f8544dfd7706ec3b2e988b4796afa33c"
+
+[artifacts.tripod_dataset]
+root = "ego"
+path = "phone_tripod_replay_dataset_v1/completed_v1/report.json"
+role = "partitioned_TRAIN_MONITOR_manifest"
+sha256 = "c451509bccab0e92b75a738c8a6fddcada4ae94a5d6537aab080c915dd14a879"
+
+[artifacts.action_response]
+root = "ego"
+path = "phone_tripod_action_response_v1/native_completed_v1/report.json"
+role = "ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE"
+sha256 = "41c6e80a54de3043207d9e4a70c65a468991e187898cfe454ce1d2a81e3b1fe1"
+
+[artifacts.warm_WM_result]
+root = "ego"
+path = "phone_geometry_momentum_wm_v1/cpu_resume1/result.json"
+role = "fixed_warm5000_checkpoint_manifest"
+
+[artifacts.paired100_checkpoint]
+root = "ego"
+path = "phone_tripod_supermimic_v1/gpu_run1/paired_checkpoint_0100.pt"
+role = "migration_parity_fixture_not_model_selection"
+sha256 = "9c773938665bffe4d52893cb8a9abfc53e4d4bf4d103a2beaf36383464f6b7eb"
+
+[artifacts.final_training_result]
+root = "ego"
+path = "phone_tripod_supermimic_v1/gpu_resume1/result.json"
+role = "fixed_final1000_result"
+optional = true
+
+[artifacts.old_original_TRAIN]
+root = "ego"
+path = "phone_episode_acquisition_v1/acquired_v1/report.json"
+role = "original_partitioned_acquisition_manifest_TRAIN684_only_for_fitting"
+sha256 = "4eaba866d38b51d5edfced2cbc46eb6cd8315c78a0c50b769d7e2b79fecf4559"
+
+[artifacts.old_pair_labels]
+root = "ego"
+path = "phone_original_train_pair_labels_v1/completed_v1/report.json"
+role = "original_TRAIN_pair22_labels"
+sha256 = "137796e4bf436a44b17a4fa8fb704969d1bb018e73bf861d797ba1e383044501"

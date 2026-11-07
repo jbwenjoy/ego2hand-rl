@@ -1,0 +1,32 @@
+--- executed_builder_v1
++++ builder_v2
+@@ -5,6 +5,7 @@
+ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
+ from rough_prefix.io import read,pin,checked,canonical
+ from rough_prefix.metadata import write
++SHARED_CONSUMERS={'scripts/evaluate_rough_prefix_pen_v2.py','scripts/run_rough_evaluation_v2.py','src/rough_prefix/evaluation_v2.py','src/rough_prefix/policy_probe.py','src/rough_prefix/checkpoint_v2.py','scripts/audit_native_policy_saved_cpu.py'}
+ 
+ 
+ def build_config(training_config,health_report,actor_load_report,protocol,version,evidence=()):
+@@ -22,6 +23,13 @@
+     receipt=load['receipt']
+     if not equal_fields(receipt,{'schema':'rough_prefix_104_actor_evaluation_load:1','format_version':104,'method':train['method'],'seed':0,'iteration':2000,'evaluation_only':True,'training_resume_supported':False}) or receipt.get('checkpoint')!=checkpoint or receipt.get('bundle')!=train['input_bundle']:raise ValueError('Actor receipt is not the same primary final2000/bundle')
+     if p.get('schema')!='rough_prefix_policy_evaluation_protocol:1' or canonical(p.get('checkpoint_iterations'))!=canonical([2000]) or canonical(p.get('allowed_seeds'))!=canonical([0]) or train['method'] not in p['arms'] or p['input_bundle']!=train['input_bundle']:raise ValueError('Separate final2000 protocol selection/data mismatch')
++    if type(p.get('protocol_revision')) is not int or p['protocol_revision']!=3 or p.get('training_role')!='primary_matched' or p.get('training_protocol')!=train['protocol']:raise ValueError('Explicit revision3/primary training role/protocol alias mismatch')
++    checked(p['training_protocol'])
++    consumers=p.get('shared_executed_consumer')
++    if type(consumers) is not dict or set(consumers)!=SHARED_CONSUMERS:raise ValueError('Exact six shared executed consumer declarations required')
++    for key,value in consumers.items():
++        checked(value)
++        if Path(value['path']).resolve()!=(ROOT/key).resolve() or value!=pin(ROOT/key):raise ValueError('Shared consumer path/SHA differs from actual unchanged execution source: '+key)
+     if canonical(p['evaluation_gates'])!=canonical(GATES) or not equal_fields(p,{'worlds':1,'reference_states':16,'control_intervals':15,'solver_substeps':60,'postinterval_forward_calls':15,'automatic_retry':False,'compile_fallback':False}):raise ValueError('Original evaluation threshold/cadence/no-retry contract differs')
+     if type(p['hard_process_seconds']) is not int or type(p['soft_worker_seconds']) is not int or not 0<p['soft_worker_seconds']<p['hard_process_seconds']<=120:raise ValueError('Finite tested evaluation process cap differs')
+     pins=dict(train['source_pins'])
+@@ -32,6 +40,7 @@
+     paths=[Path(__file__),ROOT/'scripts/evaluate_rough_prefix_pen_v2.py',ROOT/'scripts/run_rough_evaluation_v2.py']
+     paths += [ROOT/'src/rough_prefix'/name for name in ('evaluation_v2.py','policy_probe.py','checkpoint_v2.py')]
+     for path in paths:pins['primary_evaluation__'+path.relative_to(ROOT).as_posix()]=pin(path)
++    for key,value in consumers.items():pins['protocol_shared_consumer__'+key]=value
+     for key,path in {'training_config':training_config,'checkpoint_health':health_report,'actor_cpu_load':actor_load_report}.items():pins['primary_evaluation_evidence__'+key]=pin(path)
+     for key,value in {'health_auditor':health['auditor'],'actual_load_producer':load['source'],'actual_loader':receipt['loader']}.items():pins['primary_evaluation_producer__'+key]=value
+     for index,path in enumerate(evidence):pins['primary_evaluation_independent__'+str(index)]=pin(path)

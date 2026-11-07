@@ -1,0 +1,65 @@
+{
+  "schema": "phone_tripod_online_collection_source_contract:1",
+  "status": "PASS_PURE_SOURCE_METADATA_NOT_NN_NATIVE_QUALIFICATION",
+  "checks": {
+    "current_source_AST_and_exact_JSON_pins": true,
+    "four_bounded_opposed_named_profiles": true,
+    "convex_action_rule_no_clipping_at_extremeActoroutputs": true,
+    "paired_arm4profile2dt20H_exact_320H30720steps_budget": true,
+    "pending_final_no_checkpoint_deserialization": true,
+    "default_actualCLI_exit0_metadataonly": true,
+    "no_optimizer_or_backward_in_collector": true,
+    "no_Torch_MuJoCo_import_in_pure_contract": true
+  },
+  "passed": 8,
+  "total": 8,
+  "protocol": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\protocol_CPUFalse_v2.json",
+    "bytes": 11963,
+    "sha256": "de72b3ae01996efbb859ede4fea9faa7589077634d7c523f2f0c1531cee049e4"
+  },
+  "sources": {
+    "collect_online_v2.py": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\collect_online_v2.py",
+      "bytes": 29484,
+      "sha256": "243918ca06d151fcf3cc438a50400bb880a49a4ffedba00adce20fc24a0db6c9"
+    },
+    "prepare_protocol_v2.py": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\prepare_protocol_v2.py",
+      "bytes": 4314,
+      "sha256": "332b0ced0f418d66d29007b3f22f28cf3f1669275f0d39c88e4f2ec10a2c36fe"
+    },
+    "bind_final_result_v1.py": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\bind_final_result_v1.py",
+      "bytes": 4160,
+      "sha256": "ac48873f3304a885442fa34e8d81925dd656be9b549913d1e74f6df6803058a3"
+    }
+  },
+  "CLI": {
+    "argv": [
+      "D:\\workspace\\dex-supermimic-research\\.venv\\Scripts\\python.exe",
+      "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\collect_online_v2.py",
+      "--protocol",
+      "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\protocol_CPUFalse_v2.json"
+    ],
+    "returncode": 0,
+    "stdout": {
+      "status": "SOURCE_METADATA_ONLY_NO_TORCH_NATIVE_NPZ_VALUES",
+      "pending_final_checkpoint": true,
+      "maximum_rows": 320,
+      "maximum_native_steps": 30720,
+      "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\acquired_run1"
+    },
+    "stderr": ""
+  },
+  "counts": {
+    "NN_constructors": 0,
+    "NN_FW": 0,
+    "native_model_load": 0,
+    "native_FK_forward_steps": 0,
+    "NPZ_payload_reads": 0,
+    "training_updates": 0
+  },
+  "actual_inference_and_native_collection_qualified": false,
+  "scope": "Only implemented source/metadata/analytic action bounds; no final checkpoint binding or actual policy/native rollout was executed."
+}

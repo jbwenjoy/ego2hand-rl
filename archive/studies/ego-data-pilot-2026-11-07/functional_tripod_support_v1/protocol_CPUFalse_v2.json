@@ -1,0 +1,114 @@
+{
+  "schema": "functional_tripod_geometry_protocol:1",
+  "CPU_static_run_authorized": false,
+  "integration_or_training_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\completed_v1",
+  "designated_geom_ids": [
+    15,
+    28,
+    41
+  ],
+  "budget": {
+    "global_wall_s": 360,
+    "phaseA_wall_s": 15,
+    "phaseB_wall_s": 60,
+    "final_wall_s": 8,
+    "cheap_FK_per_phase": 1200,
+    "full_queries_per_entry": 250,
+    "final_full_query_reserve": 2,
+    "max_total_heavy_queries": 20000,
+    "heavy_queries_per_entry": 4500
+  },
+  "inputs": {
+    "exact_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\exact_source_original_hand_completed_v1\\seed1_rank0.json",
+      "bytes": 543975,
+      "sha256": "7af27c899e0e7b5252a7eb770a70ef7ec30913f5506881d0462e61af07d28303"
+    },
+    "source1mm": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\source1mm_opposed_side_original_hand_completed_v1\\seed1_rank0.json",
+      "bytes": 543004,
+      "sha256": "e07ddb0192b52eb47102ca89b12dc191e80d4d1d1296b4e7ccd9f205633ec8bd"
+    },
+    "exact_anchors": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\source_surface_mapping_v11\\exact_source_original_hand_anchors_v1.json",
+      "bytes": 23254,
+      "sha256": "e1ac44cd3d12423a31f8b892767caa366fd57b6c3747e1bca0603fb1ee7c0946"
+    },
+    "source1mm_anchors": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\source_surface_mapping_v11\\source1mm_opposed_side_original_hand_anchors_v1.json",
+      "bytes": 23461,
+      "sha256": "8a2a716c654c4eeb001160813b607cb47d43bd5dd9f6f9733f294f0510b79eb5"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "memo": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_support_review_v1\\memo_v1.json",
+      "bytes": 5378,
+      "sha256": "1db49eba707420bac22622d39dc5c2e91b9d802a40c57f9c8e9b667430198ed3"
+    }
+  },
+  "source_pins": {
+    "solver": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\solve_tripod_geometry_v2.py",
+      "bytes": 25708,
+      "sha256": "1778732382cc6fe9b53b1207c31e459dc603997edd123f4b237591db4a1e1fef"
+    },
+    "builder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\build_protocol_v2.py",
+      "bytes": 2733,
+      "sha256": "e9d847a4ba8660e791b3f00e57e1de21c764bfacb1e6c336571dffe511efb814"
+    },
+    "static_geometry": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\evaluator_v3.py",
+      "bytes": 23763,
+      "sha256": "090cf6535f5249de4377a0e022ed7c87b555ad69ed7b570f995badb4d2245d57"
+    },
+    "convex_query": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\convex_query.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    },
+    "feature_interface": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\query_interface_v2.py",
+      "bytes": 3575,
+      "sha256": "5c5785a7d8301404ef62659dc2e3f2ca016d98c8041b96feeb1e4e5c2ac779fe"
+    }
+  },
+  "entries": [
+    {
+      "name": "exact_source__source_middle_anchor_nearest_phone",
+      "source_input": "exact_source",
+      "anchor_input": "exact_anchors",
+      "third_target_rule": "source_middle_anchor_nearest_phone"
+    },
+    {
+      "name": "exact_source__index_material_toward_COM_30mm",
+      "source_input": "exact_source",
+      "anchor_input": "exact_anchors",
+      "third_target_rule": "index_material_toward_COM_30mm"
+    },
+    {
+      "name": "source1mm__source_middle_anchor_nearest_phone",
+      "source_input": "source1mm",
+      "anchor_input": "source1mm_anchors",
+      "third_target_rule": "source_middle_anchor_nearest_phone"
+    },
+    {
+      "name": "source1mm__index_material_toward_COM_30mm",
+      "source_input": "source1mm",
+      "anchor_input": "source1mm_anchors",
+      "third_target_rule": "index_material_toward_COM_30mm"
+    }
+  ],
+  "protocol_scope": "New functional mapping, not old2pad success or measured functionalpad truth. All q0..11 free within true limits; q12..19 fixed. Phone35mm/30deg trusts are algorithmic concessions, not ego uncertainty. Own214geometry constraints explicitly3designatedpads; idealLP/zeroacc never entrygate. No static/dynamic support promise.",
+  "candidate_interface": "Report.candidates contains candidate pin/state_npz pin. Candidate schema functional_tripod_geometric_reference_candidate:1; stateNPZ qpos27_F64/qvel26_F64. ctrl20None/control_qualifiedFalse; future native preload controls independently verified."
+}

@@ -1,0 +1,430 @@
+{
+  "schema": "full151105_three_component_H8_donor_preregistration:1",
+  "status": "FROZEN_SOURCE_METADATA_METHOD_NOT_EXECUTION_AUTHORIZATION",
+  "execution_protocol_schema": "full151105_three_component_H8_donor_CPU_protocol:1",
+  "role": "three_component_fixed_control_H8_donor_state_error",
+  "execution_authorized": false,
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "proposal": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\full151_component_H8_three_model_rollout_proposal_v1.md",
+    "sha256": "daf460f6614dda946300d6b57df13f0c60ca277c71ea0bd5c776a826d3b4d193"
+  },
+  "model_roles": [
+    "initial_unmodified_A2",
+    "pointwise_final1000",
+    "pointwise_plus_response_final1000"
+  ],
+  "cpu_threads": 4,
+  "horizon": 8,
+  "batch_windows": 286,
+  "starts_per_path": 143,
+  "accuracy_gate": null,
+  "output_prefix": "full151105_three_component_H8_donor_CPU_",
+  "inputs": {
+    "calibration_recipe": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_WM_common_pre_calibration_recipe_v1.json",
+      "sha256": "ea22ab07643c48e9bea24cb4be708a326c88922a57e2a06b97d73dd5d317b5d9"
+    },
+    "training_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_WM_common_pre_calibration_CPU_run_v1.json",
+      "sha256": "c4d20d4002c02e4a1cafce105c76ce1f5c43b26d6b62e3e05a410ab79946f65d"
+    },
+    "initial_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_component_state.pt",
+      "sha256": "ea051225b7279fc69fbd97725eb15462faaf4b3a6706881f8fe4a05b658a14bf"
+    },
+    "initial_validation": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_validation.json",
+      "sha256": "36c43a9ab4b03edd7f45fe8760fc2743821ecfe2599ea5795b7ade44a04b4186"
+    },
+    "pointwise_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\pointwise_update_1000.pt",
+      "sha256": "54d81c0e1d50e24510a985c90944af328e40f4a69d1c2e1987130af4ea3a719e"
+    },
+    "response_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\pointwise_plus_common_pre_response_update_1000.pt",
+      "sha256": "8e27eaec850d7d0adfd8e50cf426ba8f3414ae58379cefc2af43b4387a59e3e3"
+    },
+    "final_checkpoint_saved_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_final1000_saved_independent_v1\\report.json",
+      "sha256": "daff6c0b4f1d165b054b2431f4cb62476237f65869b9f3e4fff2846b861b36fa"
+    },
+    "H1_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-state-prediction452-CPU-v1.json",
+      "sha256": "ba8c3669506acfb9fe01441770927dcc656508c94d14a50826b1901b4bc8aa65"
+    },
+    "H1_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\report.json",
+      "sha256": "202b4e15512491b15fd8fc3fa3efb0f1c9da85a17ce359b372ee619ea535175a"
+    },
+    "H1_matched_inputs": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\matched_input_arrays.npz",
+      "sha256": "18a361bbc6a56139e79df5b6891e3aa80e030abebbbee4fa39e3dbe5129e9cb4"
+    },
+    "H1_prediction_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\prediction_arrays.npz",
+      "sha256": "84fe797f5da806160dc891422961afd606bdcda1bb3e96ffc99cb426761261b1"
+    },
+    "H1_identities": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\group_identities452.json",
+      "sha256": "0151e53864bbf26840b4435863c7038a957ba94dd142e8385deadfe18f0d167b"
+    },
+    "H1_saved_independent25": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_saved_independent_v1\\report.json",
+      "sha256": "b2675cbaaa46c5575d5f9084a64c2bf7b28c7eabe13715b600347e5485cc4d20"
+    },
+    "prior_H8_contiguity": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_H8_donor_source_feasibility_v1\\contiguity.json",
+      "sha256": "6512f82401e954eb4e2ae77d45937e6123f50339283fe6a0e382dc221589d0ff"
+    }
+  },
+  "source_pins": {
+    "native_WM": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "native_state": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    },
+    "native_rotations": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\rotations.py",
+      "sha256": "0fbb36bc8608dcc9a33edfac7f6551e742380e1e66c70e857b33d6d05cd81e70"
+    },
+    "final_component_constructor": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\component_confirmation105_v1.py",
+      "sha256": "f75302fa70a894300ceb3a71492b9cffd973244990f13be26cee5b7e5e112659"
+    },
+    "component_artifact_guards": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\response_calibration105_v1.py",
+      "sha256": "71efe05da17a37df4111158860443433304f1d57762e2377d4dbafc3b57ca27f"
+    }
+  },
+  "execution_sources_to_bind_after_source_and_CPU_review": [
+    "src/full151_gradient/component_H8_donor105_v1.py",
+    "scripts/diagnose_full151_component_H8_donor_cpu_v1.py",
+    "actual focused CPU proof/READY and independent math/source proof"
+  ],
+  "artifact_roles": {
+    "initial_unmodified_A2": {
+      "artifact": {
+        "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_component_state.pt",
+        "sha256": "ea051225b7279fc69fbd97725eb15462faaf4b3a6706881f8fe4a05b658a14bf"
+      },
+      "namespace": "full151105_WM_common_pre_component_calibration:1",
+      "weight_key": "WM",
+      "is_final1000": false,
+      "arm_or_iteration_to_fabricate": null,
+      "validated_initial_WM_digest": "d28551ced4b939f59dfc26ee2a2f2ff0146977d7e9277e6afa9c32128171c4ec",
+      "strict_initial_constructor_required": true
+    },
+    "pointwise_final1000": {
+      "artifact": {
+        "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\pointwise_update_1000.pt",
+        "sha256": "54d81c0e1d50e24510a985c90944af328e40f4a69d1c2e1987130af4ea3a719e"
+      },
+      "weight_key": "WM_state",
+      "arm": "pointwise",
+      "iteration": 1000,
+      "constructor": "frozen component_confirmation105_v1.make_eval_component"
+    },
+    "pointwise_plus_response_final1000": {
+      "artifact": {
+        "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\pointwise_plus_common_pre_response_update_1000.pt",
+        "sha256": "8e27eaec850d7d0adfd8e50cf426ba8f3414ae58379cefc2af43b4387a59e3e3"
+      },
+      "weight_key": "WM_state",
+      "arm": "pointwise_plus_common_pre_response",
+      "iteration": 1000,
+      "constructor": "frozen component_confirmation105_v1.make_eval_component"
+    }
+  },
+  "input_authority": {
+    "H1_population": 452,
+    "actual_usable_donor_groups": 300,
+    "excluded_groups": 152,
+    "exclusion_reason": "Restored one-step branches lack recorded consecutive160ms controls/targets; availability exclusion, never error/contact selection.",
+    "selector": "(path,mode=donor,k) with all A0/A2 k0..149, never array[:300]",
+    "source_contiguity_summary": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_H8_donor_source_feasibility_v1\\report.json",
+      "sha256": "3af0784023e31fe304b1e0ecc7bd83189633d544e2719d43ff3f5da05c10e838"
+    },
+    "actual_contiguity_alias_is_6512_not_summary_3af": true,
+    "prior_proof_is_not_new_H8_accuracy_qualification": true,
+    "headers": {
+      "H1_matched_inputs": {
+        "pre_x452_FP32": {
+          "shape": [
+            452,
+            58
+          ],
+          "dtype": "<f4",
+          "fortran_order": false,
+          "payload_read": false
+        },
+        "target_x452_FP32": {
+          "shape": [
+            452,
+            58
+          ],
+          "dtype": "<f4",
+          "fortran_order": false,
+          "payload_read": false
+        },
+        "actual_u452_FP32": {
+          "shape": [
+            452,
+            20
+          ],
+          "dtype": "<f4",
+          "fortran_order": false,
+          "payload_read": false
+        },
+        "all_substep_u452x4x20_FP32": {
+          "shape": [
+            452,
+            4,
+            20
+          ],
+          "dtype": "<f4",
+          "fortran_order": false,
+          "payload_read": false
+        }
+      },
+      "H1_prediction_arrays": {
+        "physical_xi46_FP32": {
+          "shape": [
+            46
+          ],
+          "dtype": "<f4",
+          "fortran_order": false,
+          "payload_read": false
+        }
+      }
+    }
+  },
+  "runtime_preconditions": [
+    "Rejoin H1 report/config/output_pins/25saved review, final1000 review29, recipe and training protocol and actual initial strict-loader receipt using absolute file identity+SHA.",
+    "Before constructing any numeric window recheck all298 target[k]\u2192PRE[k+1] links across all58 FP32 bits, and all300 actual_u replicated across4substeps in uint32 bits. Any break blocks entire run; no segment selection/repair.",
+    "Before any model FW compare trusted initial_component.physical_xi46 against H1 prediction_arrays.physical_xi46_FP32 dtype/shape and bytes; final constructors require exact same initial xi/norm/s52. This prereg only read headers; actual xi-bit validation remains pending.",
+    "All nativeWM state-key sets/shapes/dtypes/finite, running norm buffers/counts and host configuration strict; eval/frozen parameters/ampFalse. No original119f call or old105 format relabel."
+  ],
+  "window_definition": {
+    "paths": [
+      "A0",
+      "A2"
+    ],
+    "start_k": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142
+    ],
+    "horizons": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "window_id": "path_index*143+start_k",
+    "initial": "native PRE58[path,k]",
+    "control_at_h": "saved actual_absolute_u[path,k+h-1]",
+    "target_at_h": "native POST20[path,k+h-1], observation k+h",
+    "last_window": "start142, u142..149, obs143..150; no u150 or terminal bootstrap"
+  },
+  "recurrence": {
+    "state": "xhat0=initial native PRE; xhat_h=WM(xhat_(h-1),u_(k+h-1),cat(xhat_(h-1),fixed_xi46,zero174)).state58",
+    "must_rebuild_dynamics_each_h": true,
+    "teacher_forcing": false,
+    "Actor_memory_EMA_C2_control_recompute": false,
+    "output_clamp_projection_rotation_repair": false,
+    "normalizer_update": false,
+    "new_auxiliary_or_contact_targets": false,
+    "self15_scope": "Finite raw auxiliary logits only; not HO/force labels or a classification criterion."
+  },
+  "expected_costs": {
+    "trusted_component_file_reads": 3,
+    "native_WM_constructors": 3,
+    "WM_forward_attempts_if_complete": 24,
+    "WM_forward_returns_if_complete": 24,
+    "batch_rows_per_forward": 286,
+    "dependent_predicted_state_rows": 6864,
+    "per_model_forward_calls": 8,
+    "AD_optimizer_Actor_original119f_MJB_state_conversion_FK_query_Env_physics_GPU": 0
+  },
+  "raw_error_statistics": {
+    "definition": "prediction58.astype(F64)-native_target58.astype(F64), every model/window/h/feature retained.",
+    "axes": "3roles \u00d72paths \u00d7143starts \u00d7h1..8 \u00d758 features",
+    "units": {
+      "q[0:20]": "rad, no wrap",
+      "qd[20:40]": "rad/s",
+      "p[40:43]": "m",
+      "R[43:52]": "dimensionless raw9, never angle",
+      "v[52:55]": "m/s",
+      "omega[55:58]": "rad/s"
+    },
+    "summaries": "All/global and perpath perh six blocks: componentRMSE,MAE,maxabs; p/v/omega vectorRMS, R9 FrobeniusRMS. Full signed raw errors retained.",
+    "no_mixed_unit58_scalar": true,
+    "no_accuracy_gate_or_CI_or_model_winner": true,
+    "no_monotonic_error_requirement": true,
+    "no_error_contact_drop_flat_survival_filter": true,
+    "H1_comparison_scope": "H1 population here is the286 window starts and their source identities, not original aggregate452. Batch size also changes; no naive cross-table causal attribution."
+  },
+  "partial_and_integrity_policy": {
+    "preallocate": "All3role plans and all286\u00d78 outputs/masks; NaN for not-run, never uninitialized values.",
+    "on_nonfinite": "Save attempted/returned counts, values and per-row completion masks; stop all remaining rollouts. No truth replacement, clamps, retry or successful-window-only summary.",
+    "preserve": "Initial/input/control/xi, source file, parameter/norm buffer/config hashes and inspectable raw RNG before/after; no caller RNG restoration to conceal change. Native constructors use their established fork_rng scope."
+  },
+  "limits": [
+    "Exploratory seen donor paths/cache lineage, parent A2 seed0, 286 overlapping dependent windows; no independent trajectory/state or ego sample count.",
+    "Fixed executed controls, not closed-loop Actor imagination: no predicted obs155 policy reselection, memory/EMA/prior/reward, survival/critic or changing disturbances. zero174 is the inherited CPU consumer approximation.",
+    "FP32 CPU shadow is not historical native GPUAMP/training-gradient replay.",
+    "No whole-hidden-state/Graph scratch identity, true Jacobian, HO-force gradient, physical-reference qualification, original ea22 confirmation rescue or CHORD task benefit.",
+    "Original rough-reference/taskFAIL, prepolicy100 divergence, proxy misses, original5/9 and egoN0 remain."
+  ],
+  "scientific_decision_boundary": "H8 is a diagnostic, not a replacement for a physically executable reference or controlled CHORD task comparison. A negative/degrading rollout result means the component is not yet justified for Actor promotion; return to the same native151 reference/controller/contact-support and dynamics-consistency correction, then re-establish a controlled baseline before any longer Actor training. Do not rescue H8 by selecting windows/checkpoints/metrics or adding another diagnostic chain. Positive curves would still require the original task and independent-data/ego evidence; no automatic next execution is authorized."
+}

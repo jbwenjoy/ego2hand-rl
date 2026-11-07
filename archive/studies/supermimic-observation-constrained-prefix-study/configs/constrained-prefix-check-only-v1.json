@@ -1,0 +1,303 @@
+{
+  "schema": "constrained_prefix_geometry_cpu_plan:1",
+  "optimization_authorized": false,
+  "retarget_variant_id": "H123_cubic_bspline_constrained_prefix16_v1",
+  "protocol": {
+    "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\protocols\\constrained-prefix-v1.json",
+    "sha256": "0798ea7aa6da6f56684067992906bbba3136f9e15b413f743674f54159ad2e6d"
+  },
+  "parent_protocol": {
+    "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\proposals\\short_dynamic_tracking_v1\\protocol.json",
+    "sha256": "94ea7cbe03f3e2aaa7bb4f7c8860bae8e599cd4e8e823cbe47220f73ffe101a3"
+  },
+  "inputs": {
+    "observation_fixture": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/observation_only_fixture_v1/observations.npz",
+      "sha256": "3bdca0ee6fd8d7956cac1ee2b13719db5cb302ceb0130972719032a04b3ec35b"
+    },
+    "frozen_full151_geometry": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/outputs/native_contact_refined_geometry_v1/geometric_retarget.npz",
+      "sha256": "539d6247576b9b2e3fb1b143cf17b6ad507e3baea73c5fafcda4e221d9230c8f"
+    },
+    "canonical_H123_q0": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/frame0_h123_seeded_baseline_v3/initialization_candidate.npz",
+      "sha256": "57135b4c607f48d844e3977b56065dc6f1b4c8991626fc033651c6d136b89406"
+    },
+    "frozen_material_anchors": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/frame0_h123_seeded_baseline_v3/frozen_anchor_bindings.json",
+      "sha256": "91022e42f8a3a6ef215695d8975e46fcc92cb88e431018b412eca77db391775f"
+    },
+    "static_preload_design": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/h123_preload_cpu_v1/baseline/designed_target_u0.json",
+      "sha256": "eadb33db1ebbf1abc774a16ed551243ba89f6e325e7486d53720e2ac65caa808"
+    },
+    "PDU_rest_actual": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/outputs/h123_rest_baseline_preload_v1/evaluation.json",
+      "sha256": "69aecde6bb4be45e158c123662877f013387dc25c4b393eacac8a1bbf40e10ee"
+    },
+    "PDU_owner_evidence": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/outputs/h123_preload_owner_execution_v1/completion.json",
+      "sha256": "9ad1452ea20d433e33389c70a9683c31e3c5274f07ac10a69ba9c5066e630e6f"
+    },
+    "rawFD_design_arrays": {
+      "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\outputs\\dynamic_wrench_v2\\designed_wrench_151.npz",
+      "sha256": "60b1ae5bc6fa918ac1d569b44fddefad387a5ee3e45fc8fffe731cdb17516ead"
+    },
+    "rawFD_protocol": {
+      "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\protocols\\dynamic-wrench-v1.json",
+      "sha256": "a6130ef7d91c89963f94d322cafa8c694784badd905361815c16d01383791a66"
+    },
+    "model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "rest_worker_reuse": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/scripts/rest_hold_warp.py",
+      "sha256": "03770389af4f47a9659da015557df04707d574b6c76827d36ded2fa45c47b6a0"
+    },
+    "supervisor_reuse": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/scripts/run_rest_hold.py",
+      "sha256": "2f29bcf1cbe0b96282fb825c18c4ac257de17ddf2e760bce8d200577ddad681f"
+    },
+    "pure_C2": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/vendor/target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    },
+    "kinematics": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/scripts/retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    },
+    "native_filtered_geometry": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/scripts/native_filtered_contact_geometry.py",
+      "sha256": "c964d5b300baac57a5353afd3b5aa4cfb381eca1da03ceef712691dd10376c72"
+    },
+    "material_geometry": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/scripts/material_anchors.py",
+      "sha256": "d860c666cf596abe8f374342f191515b4c51b3537d86a64d99e850e8f7fcd37c"
+    },
+    "registry_background_only": {
+      "path": "D:/workspace/supermimic-shared-reference-study/configs/derived_reference_registry_v1.json",
+      "sha256": "f44d29724a6f8abec13254f375ccbcc16ce12c049599fd3586dc02401a18d5a7"
+    },
+    "registry_API_background_only": {
+      "path": "D:/workspace/supermimic-shared-reference-study/src/shared_reference/reference_registry.py",
+      "sha256": "7ea67f432e75045da2237009d8ceb0e739cad3439c444f2512b93020ac1fe327"
+    },
+    "original_acceptance_math": {
+      "path": "D:/workspace/supermimic-chord-study/src/chord_study/acceptance.py",
+      "sha256": "b7afba11a1bc0b97425b2d1987615bcbe21acb74467759a0b822f932868a9bb4"
+    }
+  },
+  "source_pins": {
+    "0": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\scripts\\build_constrained_prefix_geometry_cpu.py",
+      "sha256": "18bf39beb8b7449a2eed371efc8be57947323af4cd00dac87ef680209326d023"
+    },
+    "1": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\bspline_control.py",
+      "sha256": "145117f06476f0bb7edc7bbcdc9cb1dbb3b67ab81dd8f46372a7cf0737773dfd"
+    },
+    "2": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\vendor\\runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    },
+    "3": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\constrained_prefix\\__init__.py",
+      "sha256": "0d843e3f3952ea0b84efb396d89d62fdecc1d6c1e47a3192c31d8c9ce83ad88c"
+    },
+    "4": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\constrained_prefix\\guard.py",
+      "sha256": "ec23c017246a9fe20282d04724c8ae9d811e95a8794e9434008ca29e7009b1da"
+    },
+    "5": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\constrained_prefix\\inputs.py",
+      "sha256": "d5d8ce3722c62c28bb4a6bee392fedcc6397ea1d7ff81ab2666d8761d6107f9b"
+    },
+    "6": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\constrained_prefix\\io.py",
+      "sha256": "a2664acac0d174e442b840e60ec767b5684994a1d72cf0c518290c9408e81afb"
+    },
+    "7": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\constrained_prefix\\problem.py",
+      "sha256": "e0edf889ca1d393e557a67f4dc7c54b4bc0626acb515f6e43d67ca264b5e8808"
+    },
+    "8": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_curves.py",
+      "sha256": "aa03e4c8584c600875a7a6737f1c2f6d72fe63d4dd36be2e31f858ceb0bde384"
+    },
+    "9": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_control.py",
+      "sha256": "76026dbdcdfdecf4680820b24da088e1d123e86ceb8b42a2bbd60a5412103b6d"
+    },
+    "10": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_study\\__init__.py",
+      "sha256": "75a2ae519127ac10a8e7f345aafb67300a41b05c747ea535c866cea271947d14"
+    },
+    "11": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_study\\inputs.py",
+      "sha256": "9975da31b4c82a21c52184c45aa95d3da587b2fa29afd5f7e233f37cc30f6544"
+    },
+    "12": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_study\\io.py",
+      "sha256": "a2664acac0d174e442b840e60ec767b5684994a1d72cf0c518290c9408e81afb"
+    },
+    "13": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_study\\problem.py",
+      "sha256": "f66a5cd403a768480eba02a7eb921f4bbb186e839eb6faf7759897870afb4b1f"
+    },
+    "14": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\vendor\\runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    },
+    "15": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    },
+    "16": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\native_filtered_contact_geometry.py",
+      "sha256": "c964d5b300baac57a5353afd3b5aa4cfb381eca1da03ceef712691dd10376c72"
+    },
+    "17": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\scripts\\material_anchors.py",
+      "sha256": "d860c666cf596abe8f374342f191515b4c51b3537d86a64d99e850e8f7fcd37c"
+    },
+    "scripts/build_constrained_prefix_geometry_cpu.py": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\scripts\\build_constrained_prefix_geometry_cpu.py",
+      "sha256": "18bf39beb8b7449a2eed371efc8be57947323af4cd00dac87ef680209326d023"
+    },
+    "src/bspline_control.py": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\bspline_control.py",
+      "sha256": "145117f06476f0bb7edc7bbcdc9cb1dbb3b67ab81dd8f46372a7cf0737773dfd"
+    },
+    "vendor/runtime_io.py": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\vendor\\runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    },
+    "src/constrained_prefix/__init__.py": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\constrained_prefix\\__init__.py",
+      "sha256": "0d843e3f3952ea0b84efb396d89d62fdecc1d6c1e47a3192c31d8c9ce83ad88c"
+    },
+    "src/constrained_prefix/guard.py": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\constrained_prefix\\guard.py",
+      "sha256": "ec23c017246a9fe20282d04724c8ae9d811e95a8794e9434008ca29e7009b1da"
+    },
+    "src/constrained_prefix/inputs.py": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\constrained_prefix\\inputs.py",
+      "sha256": "d5d8ce3722c62c28bb4a6bee392fedcc6397ea1d7ff81ab2666d8761d6107f9b"
+    },
+    "src/constrained_prefix/io.py": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\constrained_prefix\\io.py",
+      "sha256": "a2664acac0d174e442b840e60ec767b5684994a1d72cf0c518290c9408e81afb"
+    },
+    "src/constrained_prefix/problem.py": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\src\\constrained_prefix\\problem.py",
+      "sha256": "e0edf889ca1d393e557a67f4dc7c54b4bc0626acb515f6e43d67ca264b5e8808"
+    },
+    "scripts/check_constrained_prefix_cpu.py": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\scripts\\check_constrained_prefix_cpu.py",
+      "sha256": "b10dea9ebedec9ccbe3fb375c833d1b0909d99bb139048a3b50ac314e794edb8"
+    },
+    "scripts/check_plan_contract_cpu.py": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\scripts\\check_plan_contract_cpu.py",
+      "sha256": "770d4ed1d89caa1cd826a88c9cc4ff19695bd530eb45d500bc6c4ff8d7281233"
+    },
+    "docs/nonlinear-producer.md": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\docs\\nonlinear-producer.md",
+      "sha256": "edde23ed8b978dd5e5d1d8afc6126d378a89a520d65f1ac870852659e96af848"
+    },
+    "worker": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\scripts\\build_constrained_prefix_geometry_cpu.py",
+      "sha256": "18bf39beb8b7449a2eed371efc8be57947323af4cd00dac87ef680209326d023"
+    },
+    "supervisor": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\scripts\\run_constrained_prefix_cpu.py",
+      "sha256": "0f2f587f9aff6b3f22f5f75cde7115a447c0caec415cd7225f5f014a5d8bb3cd"
+    },
+    "reviewed_lifecycle": {
+      "path": "D:\\workspace\\supermimic-control-feasibility-draft\\scripts\\run_braking_microprobe.py",
+      "sha256": "40b397f60e91bf59a1c72ad43f9bd52b42e33a820a695c2ec6e43736fa8a54aa"
+    },
+    "bounded_IO": {
+      "path": "D:\\workspace\\supermimic-c2-confirmation-eval-study\\src\\runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    },
+    "implementation_READY": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\READY_NONLINEAR_IMPLEMENTATION.json",
+      "sha256": "efe15b89cc8d077c13b504c0e461ce238eb302cc979f5c33c4fd9987bb4086a0"
+    },
+    "independent_static": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\outputs\\constrained_independent_static_review_v2\\report.json",
+      "sha256": "ff0def599ed3d1244499a58a2b8405a0b1a056a33e9a5f038d04fe5ca80ca56f"
+    },
+    "independent_math": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\outputs\\independent_basis_linear_cpu_v2\\report.json",
+      "sha256": "3b04c665e642b1dd66831fcf8777f45c3deac688090b49f0bcd395e294ad4a97"
+    },
+    "independent_supervisor": {
+      "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\outputs\\supervisor_independent_static_review_v1\\report.json",
+      "sha256": "987cb028f3c8e890bdbe99e5e56f1580d83d3707ac4df24a61b5497291eaf1d6"
+    },
+    "scipy_SLSQP": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\scipy\\optimize\\_slsqp_py.py",
+      "sha256": "f3f2fac15abbf6ca53ea09fdbf20d4725d20f4a7862f441f56f9e654dc6a64c9"
+    },
+    "scipy_linprog": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\scipy\\optimize\\_linprog.py",
+      "sha256": "ecca09ba6dd109aff5ffa52beb4433dd63dfe1b7dea047e5fbe3abee728ae85b"
+    },
+    "scipy_BSpline": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\scipy\\interpolate\\_bsplines.py",
+      "sha256": "bc2c603fa2dec6f6fff71efc2cb214ee6e0e92b528062f51035a2fbe62647c88"
+    }
+  },
+  "frames": 16,
+  "joints": 20,
+  "geometry_samples": 61,
+  "n_control": 18,
+  "free_variables": 340,
+  "maxiter": 80,
+  "max_evaluations": 250,
+  "soft_wall_seconds": 220,
+  "owned_process_seconds": 240,
+  "automatic_retry": false,
+  "planning_depth_bound_m": 0.002999,
+  "control_margin_rad": 2e-06,
+  "force_margin_Nm": 2e-06,
+  "rate_margin_rad_s": 0.0001,
+  "status": "ROOT_REVIEWED_CLI_CHECK_ONLY_NO_LP_NO_OPTIMIZATION",
+  "GPU_authorized": false,
+  "training_authorized": false,
+  "python": "D:\\workspace\\dex-supermimic-research\\.venv\\Scripts\\python.exe",
+  "output": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\outputs\\constrained_prefix_geometry_preflight_v1",
+  "planning_margins": {
+    "control_inner_margin_rad": 2e-06,
+    "force_margin_Nm": 2e-06,
+    "rate_margin_rad_s": 0.0001,
+    "generated_depth_max_m": 0.002999,
+    "rationale": "Numerical tightening fixed before any LP/nonlinear solve. C2.020/15rad_s/originalforcecaps/3mm qualification are unchanged; margins are not simulator-accuracy or hardware guarantees."
+  },
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "-1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "software_versions": {
+    "numpy": "2.4.2",
+    "scipy": "1.17.1",
+    "mujoco": "3.11.0"
+  },
+  "root_review": {
+    "scope": "One CPUworker; one L1 closest-repeatq0 HiGHS LP, then only if successful one SLSQP. No alternative seed/weight/mode/stencil, no retry, no physics/GPU/training. Oldprefix preserved.",
+    "canonical_selection": "Only normally returned terminal SLSQP.result.x. No best historical iterate selection. LPfail/objectivebudget/timeout preservespartial without canonical candidate.",
+    "primal_vs_optimal": "Returnstatus alone insufficient: terminal feasible but not converged may be explicitly reported FEASIBLE_NOT_OPTIMAL for later Root review; no automatic physics authorization. Record every rawfloat64 violation and independent finalFP32 qualification.",
+    "sufficient_class": "Coefficientbox/Bernstein/hold-moving-reference restrictions are sufficient, not necessary for the motion; any LP infeasibility is restricted-model outcome, not proof of motion infeasibility.",
+    "geometry_scope": "61maxgenerated-overlap constraints,2.999mmplanning/3mmqualification,no positivegap/continuous-clearance/actualdynamic proof; nativeJac branches/ties/numericlimits retained.",
+    "identity": "Same rawlineage/window, new retarget_variant_id/ref/controller/source/plan hashes. No copied oldrest or sharedwindow qualification."
+  }
+}

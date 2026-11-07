@@ -1,0 +1,72 @@
+{
+  "schema": "hand2_phone_nominal_CPU_holding_protocol:1",
+  "CPU_run_authorized": true,
+  "training_or_GPU_authorized": false,
+  "inputs": {
+    "geometry_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\report.json",
+      "bytes": 894875,
+      "sha256": "58917fe84e775f3dc82d56c4f569b602c362b8c148ae521858c8aa1c9134b29b"
+    },
+    "candidate_state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\seed2_selected_state.npz",
+      "bytes": 8039,
+      "sha256": "05875553843c3a124591781f4eac8e14b8ecfae4ce3e07e504c3526ac5b1ea1a"
+    },
+    "support_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\support_preparation_v1\\actual_v1\\report.json",
+      "bytes": 28530,
+      "sha256": "e61954f90e6256cc5c642dc0cb9a6c422d659e3180905e103ceccd0c5764acfe"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    }
+  },
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\run_cpu_holding_v1.py",
+      "bytes": 16273,
+      "sha256": "f4eda5d622b761acf28de083c1b061fa000b43b4b80546744455e95ebd673941"
+    },
+    "scene": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\scene.py",
+      "bytes": 6257,
+      "sha256": "6913e917c50ab520b9af94206e030a4a83c4186d9aad8ad6ab4ca45dc145f147"
+    }
+  },
+  "gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "tail_dual_pad_force_coverage": 0.95,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483
+  },
+  "dt_s": [
+    0.0003125,
+    0.00015625
+  ],
+  "duration_s": 2.0,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\cpu_nominal_v1",
+  "control": "Exactly all reachable preregistered variants; constant unmodified PD ctrl. No adaptive force scan, clamping, object aid, policy, training or retry. LP infeasibility does not preclude a bounded finite-mesh diagnostic.",
+  "physical_parameters": "0.2kg and explicit phone-hand sliding mu0.7, phone-table0.6, uniform box inertia/COM; all uncalibrated engineering priors.",
+  "phase": "Native forces/energy/geometries PRE; qpos/qvel/derived COM POST. Extra forward only once at each initial state.",
+  "failure_preservation": "Fresh output, abort records retained, no automatic retry; all original controls and both stepsizes reported."
+}

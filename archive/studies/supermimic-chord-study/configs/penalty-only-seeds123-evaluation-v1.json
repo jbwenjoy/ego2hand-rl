@@ -1,0 +1,79 @@
+{
+  "schema": "supermimic_replication_evaluation_plan:1",
+  "frozen_utc": "2026-11-02T14:07:44.087566+00:00",
+  "python": "D:\\workspace\\dex-supermimic-research\\.venv\\Scripts\\python.exe",
+  "evaluation_seed": 0,
+  "evaluation_seed_scope": "Common fixed evaluationseed0/initialcondition with prior A1L/A2; trainseeds1/2/3 differ.",
+  "output": "D:\\workspace\\supermimic-chord-study\\outputs\\penalty_only_seeds123_evaluation_v1",
+  "jobs": [
+    {
+      "method": "P_ONLY",
+      "training_seed": 1,
+      "budget": "primary_equal_updates_2000",
+      "training_run": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed1",
+      "checkpoint": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed1\\compiled\\train\\model_final.pt",
+      "checkpoint_sha256": "fd7af976aef1493f140f88323575164759a3ddf12ef0fae89458e1aab13027fd",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_p_only_seed1_primary",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_p_only_seed1_primary"
+    },
+    {
+      "method": "P_ONLY",
+      "training_seed": 2,
+      "budget": "primary_equal_updates_2000",
+      "training_run": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed2",
+      "checkpoint": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed2\\compiled\\train\\model_final.pt",
+      "checkpoint_sha256": "1cb3479b741444b67ff2e0d3c0f11c5daee7836b7eb93366f97abf689a4f0f38",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_p_only_seed2_primary",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_p_only_seed2_primary"
+    },
+    {
+      "method": "P_ONLY",
+      "training_seed": 3,
+      "budget": "primary_equal_updates_2000",
+      "training_run": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed3",
+      "checkpoint": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed3\\compiled\\train\\model_final.pt",
+      "checkpoint_sha256": "1cf1efbf9e5de750f0783664c2d60709c8e05c855d187a4564ad361beb442a3e",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_p_only_seed3_primary",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_p_only_seed3_primary"
+    },
+    {
+      "method": "P_ONLY",
+      "training_seed": 1,
+      "budget": "pre1200_availability_with_2000_cap",
+      "training_run": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed1",
+      "checkpoint": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed1\\compiled\\train\\model_1800.pt",
+      "checkpoint_sha256": "d5f34d9cf6e9986a488a7ac3db5d529bc01f054a1958500d92a8700e7ff87101",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_p_only_seed1_secondary1200",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_p_only_seed1_secondary1200"
+    },
+    {
+      "method": "P_ONLY",
+      "training_seed": 2,
+      "budget": "pre1200_availability_with_2000_cap",
+      "training_run": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed2",
+      "checkpoint": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed2\\compiled\\train\\model_1800.pt",
+      "checkpoint_sha256": "34404078b67b145377f0e6353ebf84a0c2b43ca28d21851c7f23f827d6a424ea",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_p_only_seed2_secondary1200",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_p_only_seed2_secondary1200"
+    },
+    {
+      "method": "P_ONLY",
+      "training_seed": 3,
+      "budget": "pre1200_availability_with_2000_cap",
+      "training_run": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed3",
+      "checkpoint": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed3\\compiled\\train\\model_1800.pt",
+      "checkpoint_sha256": "46ed60af959e09cef975216337fe8dd749d87998e632def0f7d0b1abf8cfa332",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_p_only_seed3_secondary1200",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_p_only_seed3_secondary1200"
+    }
+  ],
+  "reference": "D:\\workspace\\supermimic-chord-study\\outputs\\pilot_rotating_reference_v2\\reference.npz",
+  "reference_sha256": "bb61dbbfe97cdca5ed7453eeea372b6d11007999f463476eaab5cfcd07040f53",
+  "evaluator": "D:\\workspace\\supermimic-chord-study\\scripts\\evaluate_pen_checkpoint.py",
+  "evaluator_sha256": "efa80b51e24881438136b924be15b90fa286b3d129b397a06851d66bd73193e3",
+  "cost_runner": "D:\\workspace\\supermimic-chord-study\\scripts\\run_recorded.py",
+  "cost_runner_sha256": "4b36f404d4d862a48886d8ece8bf5ce7eb7254f5327b974fdb135617e099f59e",
+  "source_inventory": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed1\\source\\inventory.json",
+  "source_inventory_sha256": "59b061ccad21e16266bb2ede61b4b8a9f5ce4be40093dd93161730ed3a0d8c4c",
+  "runner_sha256": "69838bc22f75651fb08a2319c12242d74497c3f4c9aafae4f9dae3ba998508a4"
+}

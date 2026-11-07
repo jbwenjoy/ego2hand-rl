@@ -1,0 +1,232 @@
+{
+  "schema": "hand2_source_mapping_constant_u_diagnostic_protocol:11",
+  "CPU_run_authorized": true,
+  "training_or_GPU_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\cpu_nominal_v1",
+  "dt_s": [
+    0.0003125,
+    0.00015625
+  ],
+  "duration_s": 2.0,
+  "gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "tail_dual_pad_force_coverage": 0.95,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483
+  },
+  "dt_pair_gates": {
+    "final_COM_difference_m": 0.002,
+    "final_orientation_difference_rad": 0.03490658503988659,
+    "require_both_duration_complete": true
+  },
+  "inputs": {
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "exact_source_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\protocol_exact_source_original_hand_run_v1.json",
+      "bytes": 10333,
+      "sha256": "256a338cfc038e05ad2ce896d7e7eb54fb7d3c932410b62deecb4fd35d5f4cf8"
+    },
+    "exact_source_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\exact_source_original_hand_completed_v1\\report.json",
+      "bytes": 7592,
+      "sha256": "adc677aefb64764d16d105455ae470aa6b031a038c5b42576027bd3c9d1fa171"
+    },
+    "sensitivity_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\protocol_source1mm_opposed_side_original_hand_run_v1.json",
+      "bytes": 10373,
+      "sha256": "1c12fca0c8858d044b5f65ea285eb8ad27716e48bd571f54b97702364167a08b"
+    },
+    "sensitivity_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\source1mm_opposed_side_original_hand_completed_v1\\report.json",
+      "bytes": 8065,
+      "sha256": "ce7b9f9cd58a11a630aa19164c05bdbfa1d4efea4936c1fe2c4bcf44efc701d2"
+    }
+  },
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\run_source_mapping_dynamics_v11.py",
+      "bytes": 35343,
+      "sha256": "fe0cb9074bc5d3df768aba7b8cef697efe41d22904fba2ae91672ca1901de1f2"
+    },
+    "selector": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\selector_source_v11.txt",
+      "bytes": 14178,
+      "sha256": "7f45161575e237b1e633b175e86f98cbfc2993c99b0eef46b75f2b92b5f667a7"
+    },
+    "source_builder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\build_runner_source_v11.py",
+      "bytes": 3658,
+      "sha256": "7e8e643300f7adf5f56d173b82f279c39cbf964016210d8c791549d3827f0706"
+    },
+    "source_derivation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\source_derivation_v11.json",
+      "bytes": 3241,
+      "sha256": "daf1c3e588e3b4e3b7033628d02c7f53f5f708c49851f756f29f0a2671bc93e8"
+    },
+    "state_preparation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\prepare_selected_states_v11.py",
+      "bytes": 2050,
+      "sha256": "5ef53af146738c3ca4462f46130b39fe53f0c2e4d50ec0614d24620848e78566"
+    },
+    "plan_builder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\build_selection_plan_v11.py",
+      "bytes": 3594,
+      "sha256": "2f2304f107015fc91ba75fa73b87af6c4a0cb238face1b20ebeea977c4a67333"
+    },
+    "physics_preservation_checker": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\check_source_preservation_v11.py",
+      "bytes": 3825,
+      "sha256": "b1d9541b9676c545fd8226b2e029b660ac8c757725242cab9afdac72e30b6810"
+    },
+    "physics_preservation_receipt": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\source_preservation_v11.json",
+      "bytes": 3877,
+      "sha256": "704c42f2a03d815feb721bd13cc6db6755ee5091991b6919924436e8f44f5f12"
+    },
+    "old_holding_runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\run_cpu_holding_v1.py",
+      "bytes": 16650,
+      "sha256": "32511cbee40363ab87ed38868f654ae80035dbc739f1a74ddc22e612dfa4d504"
+    },
+    "constant_u_parent": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_constant_u_baseline_v1\\run_cpu_constant_u_baseline_v1.py",
+      "bytes": 30609,
+      "sha256": "1750796f7c21d39f706c912f0cafbe9e8c6c871b5fdb65840227cc5fa5ae04d2"
+    },
+    "scene": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\scene.py",
+      "bytes": 6257,
+      "sha256": "6913e917c50ab520b9af94206e030a4a83c4186d9aad8ad6ab4ca45dc145f147"
+    },
+    "independent_source_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11_review_v1\\report.json",
+      "bytes": 4996,
+      "sha256": "1c0431385ef1c7b716971a3aac8dd9dec2e07079252ddefc9366c26f4eda61c4"
+    },
+    "readiness_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\finalize_readiness_v11.py",
+      "bytes": 3718,
+      "sha256": "84b5b7f10eddeb70d48f82cb32d514682af43912d0b3b87c30c9bcce7d3687ee"
+    }
+  },
+  "selections": [
+    {
+      "branch": "exact_source_original_hand",
+      "record": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\exact_source_original_hand_completed_v1\\seed1_rank0.json",
+        "bytes": 543975,
+        "sha256": "7af27c899e0e7b5252a7eb770a70ef7ec30913f5506881d0462e61af07d28303"
+      },
+      "state": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\prepared_states_v1\\exact_source_original_hand_state.npz",
+        "bytes": 1550,
+        "sha256": "c2dcdd959499fe3913da9619e7e52ccbca0ec6d950f48d32d85abb034b09a3cd"
+      },
+      "seed": 1,
+      "rank": 0,
+      "control_origin": "saved_native_probe_control"
+    },
+    {
+      "branch": "source1mm_opposed_side_original_hand",
+      "record": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\source1mm_opposed_side_original_hand_completed_v1\\seed1_rank0.json",
+        "bytes": 543004,
+        "sha256": "e07ddb0192b52eb47102ca89b12dc191e80d4d1d1296b4e7ccd9f205633ec8bd"
+      },
+      "state": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\prepared_states_v1\\source1mm_opposed_side_original_hand_state.npz",
+        "bytes": 1548,
+        "sha256": "7b32fecade82549024b58fb04ba5afde8069c5f261863badafd0248bf8ed3bfe"
+      },
+      "seed": 1,
+      "rank": 0,
+      "control_origin": "saved_native_probe_control"
+    }
+  ],
+  "process_terminal_receipts": {
+    "exact_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\process_exact_source_v1\\terminal.json",
+      "bytes": 1845,
+      "sha256": "2ceedf1b0f15ed832acc0b53a6ccc2604f1a9fe7857c95f442ba0a3fbe7f6b82"
+    },
+    "source1mm": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\process_source1mm_v1\\terminal.json",
+      "bytes": 1859,
+      "sha256": "62e5834235e5741475e869d46fe47ebfafb881a514dccb0dc6a737abc5541b55"
+    }
+  },
+  "selection_rule": "One rank0 seed per mapping branch with minimum saved current_native_LP.scaled_loss among known assembly/fullgeometry/loaded/legal-control evidence; tie seed. Declared before dynamics.",
+  "control_rule": "If original holding_diagnostic_eligible and complete strict-control two-fresh evidence use fresh command0; otherwise original native_probe/raw. Preserve both fresh evidence and all false ideal flags.",
+  "budget": {
+    "mapping_branches": 2,
+    "dt_cases_per_branch": 2,
+    "maximum_cases": 4,
+    "maximum_integration_steps": 38400,
+    "maximum_MJB_reads": 1,
+    "maximum_MjData": 4,
+    "maximum_initial_forward": 4,
+    "new_training_GPU": 0
+  },
+  "scope": "Exploratory full-retarget-pipeline constant-u diagnostic, not isolated geometry causal effect, policy benefit, measured mass/friction calibration, or faithful ego success. Original2s individual and dt-pair gates decide nominal holding. Strict ideal point LP and zero acceleration are not necessary admission gates; initial3N descriptive only.",
+  "prepared_state_receipt": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\prepared_states_v1\\prepared_selections.json",
+    "bytes": 14095,
+    "sha256": "96032002d8ea76585aed173a571c111bc041e8161b82b10656247cae37d4284e"
+  },
+  "prepared_CPUFalse_protocol": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\protocol_CPUFalse_v1.json",
+    "bytes": 9045,
+    "sha256": "e2ef8399c31ce2a844503dd9726d7fb05b995799d3282f71bbe849b0cbfeadf1"
+  },
+  "metric_semantics": {
+    "state_phase": "POST integration integer tick+1; contact/energy/geometry are solver PRE integer tick",
+    "tail_linear_velocity_RMS_m_s": "Original preserved metric is root world translational freejoint qvel, not offset COM velocity.",
+    "tail_angular_velocity_RMS_rad_s": "Original preserved metric is the norm of freejoint angular qvel, in body coordinates; norm is frame invariant.",
+    "optional_true_COM_velocity": "May be derived separately from saved qpos/qvel and body_ipos; does not change original gates."
+  },
+  "selected_control_provenance": [
+    {
+      "branch": "exact_source_original_hand",
+      "record": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\exact_source_original_hand_completed_v1\\seed1_rank0.json",
+        "bytes": 543975,
+        "sha256": "7af27c899e0e7b5252a7eb770a70ef7ec30913f5506881d0462e61af07d28303"
+      },
+      "control_origin": "saved_native_probe_control",
+      "source_native_probe_ctrl_origin": "legal_conditional_common_A_inverse_PD",
+      "ideal_flags_preserved": true
+    },
+    {
+      "branch": "source1mm_opposed_side_original_hand",
+      "record": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\source1mm_opposed_side_original_hand_completed_v1\\seed1_rank0.json",
+        "bytes": 543004,
+        "sha256": "e07ddb0192b52eb47102ca89b12dc191e80d4d1d1296b4e7ccd9f205633ec8bd"
+      },
+      "control_origin": "saved_native_probe_control",
+      "source_native_probe_ctrl_origin": "legal_conditional_common_A_inverse_PD",
+      "ideal_flags_preserved": true
+    }
+  ]
+}

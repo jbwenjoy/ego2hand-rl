@@ -1,0 +1,74 @@
+FULL151 NATIVE CONTROLLER/RUNTIME — SOURCE AND CPU CONTRACT
+
+READY: outputs/full151_native_core_READY_v1/READY.json (all source/report pins).
+Runtime: src/full151_native/runtime.py, controller: controller.py.
+This is a distinct mode rough_observation_reference_full151_v1 / variant
+legacy_H123_full151_SCP8_knownrough_v1. It does not change old rough-prefix
+sources, old checkpoints, or any retained numerical/geometry failure outcome.
+
+Install contexts before construction, in this order:
+  with full151_runtime(Env,Command,PenMDP,Runner,arrays,descriptor) as api:
+      with full151_controller(Env,PenMDP,Runner,baseline_u150,descriptor):
+          ...construct the original native objects...
+
+The outer scope installs analytic joint qd151 and object world v/omega151 only
+after the original fixed-wrist command transform and before first reset. The
+native Reader's FD velocity tables stay diagnostic, separately recorded. It
+allows only phase0 single-reference resets and uniform/no-first-frame-hold
+sampling. Selected reset ids get explicit q0, nonzero analytic qd0, original
+object pose/world twist, default wrist mocap, u0 and residual/action history0.
+The object Entity API receives world angular velocity; its raw native body
+angular readback is checked at the inherited1e-6 API tolerance. q0 is not
+projected. Selected observation histories use installed compute(True,ids) to
+backfill corrected state without advancing untouched rows or drawing new lag.
+
+The inner scope reconstructs baseline_u150[phase] + original EMA residual after
+the native process call. Hard joint/ctrl intersection and frozen C2.020 apply
+once to the cached absolute target. It never encodes absolute targets as c1/c2.
+Real phases0..149 are legal; phase149 ends at observation150/time_out/done,
+not a failure label. There is no real u150. Imagined phase150 and later return
+finite baseline149 as an inactive placeholder, with zero action-to-u gradient.
+Runtime survival and critic norm/loss exclude post-reference dead rows while
+the final phase149 reward and critic supervision remain valid. Native replay
+keeps the terminal row; reset generation changes require the preceding done
+and the sampled native mask removes the next-episode suffix. Source indices
+remain legacy current-frame200..349, terminal reference350; no shared[0,151)
+relabeling or prefix tiling occurs.
+
+Checkpoint105 is from-scratch-only. Actual native save is intercepted only at
+its torch.save serialization boundary, before the atomic native temporary-file
+replace. It inserts full151_controller and combined reference signature, rejects
+legacy/pre-annotated payloads, and restores torch.save in finally. Both training
+load and model-only warm-start entry points are rejected. Metadata canonical
+signature excludes exactly its self signature and dynamic latest actual-u
+evidence. Root's native orchestration can attach full151_runtime_evidence; the
+runtime module does not independently alter checkpoint payloads. Network/state
+sizes remain155 observation,58 state,46 simulator context and15 self labels.
+
+CPU evidence: outputs/full151_native_methods_CPU_v2/report.json,61/61.
+It uses the actual new bundle and saved151 Reader arrays, without repeating
+Reader/FK. Real native ActionTerm, PenMDP, advance_memory, WM.inputs, PD and
+Runner.save methods run on CPU API fixtures. The actual PenMDP observation
+stays155 at phases149 and150. Full150 process/apply intervals plus next-reset0,
+replay terminal149, inactive150/157, controller gradients, native format3 consumer
+rejection, installed ObservationManager/DelayBuffer/CircularBuffer selected
+history correction, and real native H8 policy method finite-end masking pass.
+The H8 method's clients are tiny differentiable networks with backward only:
+no optimizer.step or learned WM forward. Their long nonterminal formulas,
+gradients and normalization match native; mixed active counts[8,8,1,1] yield19
+critic-norm rows and preserve original1 actor+8 critic call sites.
+
+Env/Entity state writers, collection and forward/sense are explicitly FAKE
+fixtures. MuJoCo step/forward/kinematics/collision/Jacobian APIs were guarded
+and all counters stayed0. No ManagerBasedRlEnv or physics was constructed/run;
+CUDA stayed uninitialized and invisible. This is NOT native reset/clock/physics,
+GPUAMP, task quality, real format105 trained-checkpoint or training qualification.
+The retained v1 checker failed before reaching any checks because its Motion
+fixture omitted joint_names. Checker v2 only adds that read-only field. The
+production b81controller/d410runtime source bytes never changed after execution.
+
+Actual native A0 still needs Root's separate finite GPU authorization, full
+raw601/600/150 cadence, actual8 double readbacks, full nonzero startup state,
+native FP32 clock, capacity and owned-process identity checks. A checkpoint or
+learning/evaluation pipeline must retain all known-rough and failed-source
+status, and cannot infer contact labels, force support or shared10 qualification.

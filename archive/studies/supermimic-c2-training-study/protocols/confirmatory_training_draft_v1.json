@@ -1,0 +1,71 @@
+{
+  "schema": "C2_020_prospective_training_seed_replication:1",
+  "status": "FROZEN_DESIGN_DRAFT_CPU_ONLY_NOT_EXECUTION_AUTHORIZATION",
+  "formal_training_authorized": false,
+  "implementation_binding_status": "PENDING_REAL_IMAG_CUDA_ENGINEERING_SMOKE_AND_ROOT_REVIEW",
+  "scope": "Prospective replication over fresh training seeds of the three objectives under a common20mrad controller in both collection and imagination. Same already seen clip/reference/object/physics; not action, video, object or embodiment generalization.",
+  "historical_knowledge": "The old final2000 policies were already assessed post-hoc under5and20mrad. The20cohort A2 result was positive and informed this prospective design. New seeds reduce training-seed reuse, but do not make the dataset/controller choice historically blind or independent motion confirmation.",
+  "training_seeds": [4, 5, 6],
+  "engineering_seed": 0,
+  "fresh_seed_access": "No formal4/5/6 training/initialization/performance runs before final source/config/gates/queue are frozen and Root explicitly authorizes formal execution. Seed0 engineering outcomes cannot select formal checkpoints or tune doses/weights.",
+  "arms": {
+    "A1L": {"native_objective": "unchanged", "prior_unscaled": "0", "geometric_prior_constructed": false},
+    "P_ONLY": {"native_objective": "unchanged", "prior_unscaled": "-.1*exact_shared_A2_penetration_prior", "implementation": "Read base_terms.geometry_intent_penetration_prior and multiply directly by-.1. Never recover P by subtracting support attraction from an A2 combined bonus."},
+    "A2": {"native_objective": "unchanged", "prior_unscaled": "phase_weight*support_match-.1*exact_shared_penetration_prior", "role": "soft geometric intent/anticipation shaping only"}
+  },
+  "prior_injection": "Only policy-imagination reward during actor/critic update; exactly external dt=.02 once. Native collection reward and native WM fitting/labels/loss remain unchanged. P stays active in every phase; only A2 support attraction is phase/known masked. Fixed targets are never redefined from the current policy.",
+  "prior_execution_scope": "Geometry/objective remain eager FP32 with existing autocast protection; native compiled submodules retain their declared path. Prior full-Inductor precision qualification and local proxy/action-gradient qualifications remain failed/unproven. No MLP contact head or force-predictor claim.",
+  "shared_C2_controller": {
+    "margin_rad": 0.02,
+    "dtype": "FP32",
+    "formula": "clip(original_bounded_absolute_target,shared_lower+.020,shared_upper-.020)",
+    "collection": "Install after original process_actions forms the absolute target, and before four original20ms-hold apply calls; preserve residual EMA/mask/RNG semantics. Actual executed ctrl/cache/collector-buffer u must match.",
+    "imagination": "Apply the identical pure projection to PenMDP.control_target output, retain original residual/c1/c2 and assign filtered absolute frozen_target. The WM input uses this filtered executed target, not the unclipped proposal.",
+    "limits": "Same declared joint-hard/actuator-control intersection and per-world/joint mapping. Reject an unsupported nonshared imagined limit domain; never average it silently.",
+    "initialization": "Preserve original physical reset/phase/hold/RSI semantics. Explicitly document t0 activation and verify physical q/qd/object/wrist identity, rather than injecting a new physical state.",
+    "does_not_change": ["physical joint ranges", "recorded actual q/qd", "object assistance", "task thresholds", "reference object/wrist/link intent", "reward coefficients", "WM architecture or native loss", "original EMA residual and RNG stream"]
+  },
+  "per_run_fixed_budget": {"max_iterations": 2000, "num_envs": 128, "wm_only_iterations": 200, "real_transitions": 648192, "wm_optimizer_steps": 4000, "fail_head_optimizer_steps": 4000, "actor_optimizer_steps": 1800, "critic_optimizer_steps": 7200},
+  "from_scratch": "No actor/WM/critic/failure/norm/optimizer weights or statistics from the historical policies or engineering smoke. No model_checkpoint or checkpoint warm start. Compiler cache reuse is allowed and logged separately from model-weight reuse.",
+  "unchanged_inputs": {
+    "reference_npz_sha256": "bb61dbbfe97cdca5ed7453eeea372b6d11007999f463476eaab5cfcd07040f53",
+    "reference_json_sha256": "11a79a3074ca1065bdecf43ec9671605cfc06ad46f6b521632bb02a92650bdb9",
+    "nominal_model_sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd",
+    "task_protocol_sha256": "41e7bdd97d07a0f4cac06cefc84d59548407d29332f6836fc5094e5e2f4fc2a3",
+    "contact_target_npz_sha256": "4f1078706e36dc3db890c41cddb4693a0d3512e9be8e43514181ab1637da9cbc",
+    "policy": "Freeze the original source clip/catalog/recipe, assets, physics/context, all native training config fields and RNG/noise/mask/DR settings. The only intended common change from old training is C2 actual-input projection in real and imagined paths; objective arms retain their old formulas."
+  },
+  "preformal_gates": [
+    "CPU source/AST/diff, real-imag domain/memory/EMA/input contracts, unchanged native objective/loss, no RNG mutation from new construction, P_ONLY direct value/gradient formula and external-dt isolation",
+    "Real CUDA C2 real-imag forward/target/WM-input parity in FP32 and declared AMP contexts, including interior/bound/clipped directions, correct piecewise gradients, finite recurrentH8 path and recorded VRAM/runtime",
+    "Engineering seed0 smoke covers actual collection, WM, actor, critic and intended eager-prior paths. A10iter run with formalwm_only200 does not exercise actor/prior and is insufficient. Any reduced warmup engineering recipe is separately labeled and never copied into formal4/5/6 configs",
+    "All frozen inputs/source inventories,9formalconfigs, balanced train/eval schedules, objective hashes, audit scripts, caps and resume/engineering-stop policy are reviewed; no outcome-selected retry or template drift",
+    "Root explicitly authorizes the one formal serial GPU queue after reviewing the above evidence; this draft does not authorize CUDA/parity/smoke or formal training"
+  ],
+  "train_order": [
+    {"training_seed": 4, "arm_order": ["A1L", "P_ONLY", "A2"]},
+    {"training_seed": 5, "arm_order": ["P_ONLY", "A2", "A1L"]},
+    {"training_seed": 6, "arm_order": ["A2", "A1L", "P_ONLY"]}
+  ],
+  "train_order_balance": "Each arm occupies each within-seed position once; with3seed blocks pair-order balance is only2:1 or1:2, not exact pair symmetry. Sequential cache/thermal/training-cost context is recorded, not treated as equal compute.",
+  "checkpoint_selection": "Final2000 only for primary task evaluation. Save every declared intermediate checkpoint for health/resume, not quality/time selection. No best-of-checkpoint, early task stopping or hyperparameter/dose adaptation from formal outcomes.",
+  "evaluation": {"fresh_processes_per_checkpoint": 3, "evaluation_seed": 0, "initial_state": "same frozen first-frame3s task, fixed wrist, nohold/RSI/reset/assistance/DR/corruption", "controller_margin_rad": 0.02, "clock": "151states/150controlintervals at50Hz,5ms physics", "capacity": "Final postphysics sticky overflow read once at150, one world, no reset; bind sidecar/runtime/health/condition/raw hashes; unknown or overflow never becomes0", "schedule_file": "confirmatory_schedule_draft_v1.json"},
+  "primary_endpoint": "Per training seed/checkpoint, all3capacity-qualified complete evaluation processes satisfy the unchanged full task gates. Method summary is the count/profile across3training seeds, not nine independent training seeds or frame N.",
+  "secondary_endpoints": "Retain all3process outcomes and mean/median/min/max/worst continuous task metrics per checkpoint; compare three-process means/worst across3matched training-seed pairs. Actual q/targets separate, plus position/shaft/progress/drop/depth/load/rate and actual-contact512 diagnostics. No CI, population significance or support-score surrogate for task success.",
+  "complete_reporting": "Report all9training attempts and27evaluation jobs in declared order, including failed/partial/invalid records. Task-quality failure does not censor3s evaluation. Engineering failure preserves artifacts; no unreported restart/reseed/retry. Missing/unqualified records remain null/PENDING/INVALID, not task false or zero.",
+  "first_model100_health_pause": {
+    "planned_first_model": "A1L_training_seed4",
+    "expected_iteration": 100,
+    "expected_real_transitions": 40192,
+    "expected_optimizer_steps": {"wm": 200, "fail_head": 200, "actor": 0, "critic": 0},
+    "scope": "Serialization/finiteness/source/controller/budget health only. This checkpoint is still WM pretraining; no actor/prior qualification or formal task-quality peeking.",
+    "ETA": "Use measured compile/collection/WM timing plus separately measured seed0 actor/critic/eager-prior costs; report a range and phase uncertainty. Do not extrapolate20times the WM-only100iter wall as a full-run ETA.",
+    "operational_user_request": "After the actually authorized queue starts and its first100checkpoint passes health, report actual PID/OS creation, checkpoint/hash, health scope and ETA, then Root pauses Goal as requested while the already authorized background queue continues. This condition does not authorize training now or ad-hoc work while paused."
+  },
+  "costs": "Matched nominal updates/transitions, unequal observed compute. Preserve seed/arm phase profiles, OS PID/CreationDate, launcher/child/whole queue walls, compile/cache and failed engineering attempt costs separately; no GPU-kernel-busy or WM-speedup inference from wall time.",
+  "retained_limits": ["same seen clip/object/wrist/initial condition", "known historical20mrad positive result and posthoc design choice", "small3training-seed replication", "fresh-process numerical variability", "geometry ghost/contact-gradient and standalone compiled-precision qualification limitations", "no support-only factorial arm or unconditional mechanism attribution", "no original-ego lineage, real robot, continuous-state safety or new-motion generalization evidence"],
+  "training_process_caps": "PENDING_ROOT_APPROVAL_FROM_ENGINEERING_COSTS_BEFORE_FORMAL_EXECUTION",
+  "C1_enabled": false,
+  "m0": null,
+  "a_brake": null
+}

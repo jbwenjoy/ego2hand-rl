@@ -1,0 +1,73 @@
+--- D:\workspace\supermimic-observation-contact-intent-study\scripts\refine_initial_contacts_distal_cpu.py
++++ D:\workspace\supermimic-observation-contact-intent-study\scripts\refine_initial_contacts_seeded_cpu.py
+@@ -67,14 +67,16 @@
+     ap.add_argument('--output', type=Path, required=True)
+     args = ap.parse_args()
+     recipe = read(args.recipe)
+-    assert recipe['schema'] == 'frame0_material_contact_hypothesis:2'
++    assert recipe['schema'] == 'frame0_material_contact_hypothesis:3'
+     for name, pin in recipe['pins'].items():
+         if sha(pin['path']) != pin['sha256']: raise ValueError('Source/input drift: ' + name)
+     assert recipe['weights'] == {'bone': 1., 'native_overlap': 1., 'anchor_position': 1.,
+                                 'anchor_normal': .25, 'q_baseline': .03, 'q_nominal': .001}
+     assert recipe['anchor_position_scale_m'] == .001 and recipe['anchor_inset_m'] == .0003
+     assert recipe['max_nfev'] == 120 and recipe['CPU_soft_wall_seconds'] == 60
+-    assert recipe['fingers'] in ([2, 3], [1, 2, 3])
++    assert recipe['fingers'] == [2, 3]
++    assert recipe['initialization_rule'] == 'independent_single_finger_B_composite'
++    assert recipe['seed_id'] in ('B_baseline_composite', 'B_midpoint_composite')
+     assert recipe['rankings_variant'] == 'source_rigid_mapped'
+     assert recipe['material_geometry_rule'] == 'ordinal_landmark_to_link4_or_tip_only'
+     out = args.output.resolve()
+@@ -94,6 +96,11 @@
+     hypotheses = read(pins['rankings']['path'])['variants'][recipe['rankings_variant']]['nearest_per_finger_distal2']
+     hypotheses = [next(h for h in hypotheses if h['finger_chain'] == f) for f in recipe['fingers']]
+     assert all(h['confidence'] is None and h['is_known_contact_label'] is False and h['component'] == 'object/cube' and h['feature'] == 'cylinder_lateral_external' for h in hypotheses)
++    seed_catalog = read(pins['composite_seeds']['path'])
++    seed_entry = next(s for s in seed_catalog['seeds'] if s['seed_id'] == recipe['seed_id'])
++    qinit = np.asarray(seed_entry['joint_pos_rad'], dtype=np.float64)
++    assert qinit.shape == (20,) and np.isfinite(qinit).all()
++    assert np.array_equal(qinit[np.r_[0:4,12:20]], qbase[np.r_[0:4,12:20]])
+     identity = np.eye(20)
+     with geometry_only():
+         g = NativeFilteredContactGeometry(pins['model']['path'], pins['context']['path'])
+@@ -138,7 +145,12 @@
+                     'target_material_points_w': goals.tolist(), 'target_hand_normals_w': normals.tolist(),
+                     'selection_and_arrays_frozen_before_optimizer': True,
+                     'known_contacts_or_forces': False, 'physical_reference_qualified': False}
++        assert bindings == read(pins['parent_bindings']['path']), 'Warm start must not reselect or change the material hypothesis'
++        assert np.all(qinit >= robot.lower) and np.all(qinit <= robot.upper)
+         write(out / 'frozen_anchor_bindings.json', bindings)
++        write(out / 'optimizer_initial_seed.json', seed_entry)
++        seed_native = g.evaluate(qinit)
++        write(out / 'seed_native_contacts.json', contact_records(g))
+         def residual(q):
+             budget()
+             bone, _ = robot.bone_features(q)
+@@ -154,7 +166,7 @@
+             return np.vstack((robot.bone_features(q)[1], g.penetration_residual(q)[1],
+                               np.vstack([x[1] / .001 for x in features]),
+                               np.vstack([.25 * x[3] for x in features]), .03 * identity, .001 * identity))
+-        result = least_squares(residual, qbase.copy(), jac=jacobian, bounds=(robot.lower, robot.upper),
++        result = least_squares(residual, qinit.copy(), jac=jacobian, bounds=(robot.lower, robot.upper),
+                                max_nfev=120, ftol=1e-8, xtol=1e-8, gtol=1e-8)
+         q = result.x.copy()
+         native = g.evaluate(q)
+@@ -172,6 +184,8 @@
+         report = {'status': 'COMPLETED_GEOMETRIC_HYPOTHESIS_ONLY', 'hypothesis_id': recipe['hypothesis_id'],
+                   'optimizer_success': bool(result.success), 'optimizer_status': int(result.status),
+                   'nfev': int(result.nfev), 'cost': float(result.cost),
++                  'optimizer_initialization_rule': recipe['initialization_rule'], 'seed_id': recipe['seed_id'],
++                  'same_parent_material_bindings': True, 'same_parent_objective_and_qbaseline_prior': True,
+                   'material_point_goal_error_m': np.linalg.norm(np.array([x[0] for x in features]) - goals, axis=1).tolist(),
+                   'material_normal_goal_error_deg': np.rad2deg(np.arccos(np.clip(np.sum(np.array([x[2] for x in features]) * normals, axis=1), -1, 1))).tolist(),
+                   'native_contacts_attained_by_hypothesized_finger': attained, 'native_summary': summary,
+@@ -189,7 +203,7 @@
+                   'scope': 'Single frame0, explicit contact-intent hypothesis. Native counts are geometric contacts, not load-bearing/force/robot-equilibrium or trajectory qualification.'}
+         np.savez_compressed(out / 'initialization_candidate.npz', joint_pos_rad=q[None], mapped_object_pose_w=pose[None],
+                             fk_hand_points_w=points[None], morphology_normalized_target_points_w=target_points[None],
+-                            bone_angle_error_deg=angles[None], baseline_joint_pos_rad=qbase[None],
++                            bone_angle_error_deg=angles[None], baseline_joint_pos_rad=qbase[None], optimizer_initial_joint_pos_rad=qinit[None],
+                             selected_native_contact_distance_m=native.signed_distance_m[None],
+                             generated_contact_mask=native.generated_mask[None], geometry_pair_indices=g.pairs,
+                             geometry_pair_kind=g.pair_kind, material_goal_points_w=goals,

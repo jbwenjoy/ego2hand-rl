@@ -1,0 +1,16 @@
+--- run_native_preload_v1.py
++++ run_native_preload_v2.py
+@@ -74,6 +74,13 @@
+         for fraction in RULES['line_search_fractions']:
+             if evaluator.per_candidate[candidate_id]>=BUDGET['native_forward_per_candidate']-2:break
+             trial=u.copy();trial[:12]+=fraction*solve.x
++            # The bounded numerical solve is not a strict floating-point box
++            # certificate. Reject this fraction locally, without clamping or FW.
++            if np.any(trial<lo) or np.any(trial>hi):
++                note['line_search'].append(dict(fraction=fraction,status='STRICT_CONTROL_BOX_REJECTION',
++                    ctrl20=trial.tolist(),below_axes=np.nonzero(trial<lo)[0].tolist(),above_axes=np.nonzero(trial>hi)[0].tolist(),
++                    available=False,accepted=False,native_forward_called=False,probe=None))
++                continue
+             value=evaluator.evaluate(qpos27,trial,candidate_id=candidate_id,tag=f'line_iter{iteration}_fraction{fraction}',target_wrench_world6=target_wrench_world6)
+             good=value['measurements']['original_no_unwanted_penetration_control_bounds'] and rank(value)<rank(current)
+             note['line_search'].append(dict(fraction=fraction,probe=value.get('saved_probe'),rank=rank(value),accepted=bool(good)))

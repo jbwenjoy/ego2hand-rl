@@ -1,0 +1,59 @@
+{
+  "schema": "phone_H1_same_integration_finite_action_secants:1",
+  "primary_formula": "(saved physical_world_delta52_FD - saved physical_world_delta52_baseline) / actual signed control difference[j]",
+  "rotation": "Each physical delta uses Log(Rtarget @ Rcommon_input.T) in world chart. Difference of these two saved world rotation deltas; raw full58/R9 inputs and targets are retained. Not native WM chart52, no R projection or new Log evaluation.",
+  "blocks": {
+    "q20": {
+      "slice": [
+        0,
+        20
+      ],
+      "response_unit": "rad",
+      "secant_unit": "rad/rad"
+    },
+    "qd20": {
+      "slice": [
+        20,
+        40
+      ],
+      "response_unit": "rad/s",
+      "secant_unit": "(rad/s)/rad"
+    },
+    "pCOM3": {
+      "slice": [
+        40,
+        43
+      ],
+      "response_unit": "m",
+      "secant_unit": "m/rad"
+    },
+    "world_rotation_Log3": {
+      "slice": [
+        43,
+        46
+      ],
+      "response_unit": "rad",
+      "secant_unit": "rad/rad"
+    },
+    "vCOM3": {
+      "slice": [
+        46,
+        49
+      ],
+      "response_unit": "m/s",
+      "secant_unit": "(m/s)/rad"
+    },
+    "omega_world3": {
+      "slice": [
+        49,
+        52
+      ],
+      "response_unit": "rad/s",
+      "secant_unit": "(rad/s)/rad"
+    }
+  },
+  "state58_same_input_scope": "Complete captured integration-state SHA/size/signature and source-before/after receipts match; all observed58 input bytes match too. No raw hidden state was reconstructed and no state58 Markov certificate follows.",
+  "coverage": "112 intended signed finite directions:7 source boundaries x2 distinct iteration bases x8 actuators. Remaining12 controls fixed, not probed. All H2_step1 excluded because branch-dependent state differs.",
+  "undefined": "All112 records retained. Undefined/missing/ambiguous raw rows are retained with NaN arrays and false defined mask; JSON status/identities remain explicit.",
+  "scope": "One consecutive failed-hold planning lineage, captured native simulator branches only; not independent episodes, heldout ego data, full20-action Jacobian, infinitesimal derivative, contact/force derivative or learning/holding qualification."
+}

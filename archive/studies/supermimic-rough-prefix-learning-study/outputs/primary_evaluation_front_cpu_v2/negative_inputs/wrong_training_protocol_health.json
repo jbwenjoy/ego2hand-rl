@@ -1,0 +1,1936 @@
+{
+  "schema": "rough104_checkpoint_CPU_health:1",
+  "status": "PASS_SAVED_ENGINEERING_HEALTH",
+  "checks": {
+    "format104_fromscratch_newvariant": true,
+    "config_copy_exact": true,
+    "checkpoint_index_sidecar_SHA": true,
+    "checkpoint_effective_config_exact": true,
+    "all_saved_tensors_finite": true,
+    "module_and_optimizer_names": true,
+    "native_state_architecture_dimensions": true,
+    "module_state_architecture_exact": true,
+    "run_input_training_subset_exact": true,
+    "actual_optimizer_hook_counts": true,
+    "actual_transition_count": true,
+    "optimizer_stored_steps_actor": true,
+    "optimizer_stored_steps_wm": true,
+    "optimizer_stored_steps_fail_head": true,
+    "optimizer_stored_steps_critic": true,
+    "source_config_protocol_alias": true,
+    "protocol_input_budget_role": true,
+    "input_bundle_variant_source_window": true,
+    "source_archive_inventory_exact": true,
+    "source_archive_bytes_exact": true,
+    "nominal_model_and_actual_context_pins": true,
+    "actual8_raw_readbacks_exact": true,
+    "reader_context_raw_exact": true,
+    "new16_reference_and_analytic_init": true,
+    "controller_signatures": true,
+    "controller_input_source_arm_identity": true,
+    "controller104_fixed_baseline_EMA_C2": true,
+    "controller_descriptor_snapshot": true,
+    "controller_source_projection_bound": true,
+    "actualu_checkpoint_prefix_complete_and_contiguous": true,
+    "actualu_marker_equals_last_prefix_row": true,
+    "actualu_per_call_steps_worlds_and_total": true,
+    "actualu_allbatch_exact_finite_phase0to14": true,
+    "actualu_all5_mismatches_zero": true,
+    "actualu_clamped_count_accounting": true,
+    "actualu_trace1_shapes_finite": true,
+    "actualu_trace1_projection_actual_replay": true,
+    "actualu_trace1_baseline_phase_residual": true,
+    "actualu_trace2_shapes_finite": true,
+    "actualu_trace2_projection_actual_replay": true,
+    "actualu_trace2_baseline_phase_residual": true,
+    "actualu_trace3_shapes_finite": true,
+    "actualu_trace3_projection_actual_replay": true,
+    "actualu_trace3_baseline_phase_residual": true,
+    "actualu_trace100_shapes_finite": true,
+    "actualu_trace100_projection_actual_replay": true,
+    "actualu_trace100_baseline_phase_residual": true,
+    "actualu_trace200_shapes_finite": true,
+    "actualu_trace200_projection_actual_replay": true,
+    "actualu_trace200_baseline_phase_residual": true,
+    "actualu_trace300_shapes_finite": true,
+    "actualu_trace300_projection_actual_replay": true,
+    "actualu_trace300_baseline_phase_residual": true,
+    "actualu_trace400_shapes_finite": true,
+    "actualu_trace400_projection_actual_replay": true,
+    "actualu_trace400_baseline_phase_residual": true,
+    "actualu_trace500_shapes_finite": true,
+    "actualu_trace500_projection_actual_replay": true,
+    "actualu_trace500_baseline_phase_residual": true,
+    "actualu_trace600_shapes_finite": true,
+    "actualu_trace600_projection_actual_replay": true,
+    "actualu_trace600_baseline_phase_residual": true,
+    "actualu_trace700_shapes_finite": true,
+    "actualu_trace700_projection_actual_replay": true,
+    "actualu_trace700_baseline_phase_residual": true,
+    "actualu_trace800_shapes_finite": true,
+    "actualu_trace800_projection_actual_replay": true,
+    "actualu_trace800_baseline_phase_residual": true,
+    "actualu_trace900_shapes_finite": true,
+    "actualu_trace900_projection_actual_replay": true,
+    "actualu_trace900_baseline_phase_residual": true,
+    "actualu_trace1000_shapes_finite": true,
+    "actualu_trace1000_projection_actual_replay": true,
+    "actualu_trace1000_baseline_phase_residual": true,
+    "actualu_trace1100_shapes_finite": true,
+    "actualu_trace1100_projection_actual_replay": true,
+    "actualu_trace1100_baseline_phase_residual": true,
+    "actualu_trace1200_shapes_finite": true,
+    "actualu_trace1200_projection_actual_replay": true,
+    "actualu_trace1200_baseline_phase_residual": true,
+    "actualu_trace1300_shapes_finite": true,
+    "actualu_trace1300_projection_actual_replay": true,
+    "actualu_trace1300_baseline_phase_residual": true,
+    "actualu_trace1400_shapes_finite": true,
+    "actualu_trace1400_projection_actual_replay": true,
+    "actualu_trace1400_baseline_phase_residual": true,
+    "actualu_trace1500_shapes_finite": true,
+    "actualu_trace1500_projection_actual_replay": true,
+    "actualu_trace1500_baseline_phase_residual": true,
+    "actualu_trace1600_shapes_finite": true,
+    "actualu_trace1600_projection_actual_replay": true,
+    "actualu_trace1600_baseline_phase_residual": true,
+    "actualu_trace1700_shapes_finite": true,
+    "actualu_trace1700_projection_actual_replay": true,
+    "actualu_trace1700_baseline_phase_residual": true,
+    "actualu_trace1800_shapes_finite": true,
+    "actualu_trace1800_projection_actual_replay": true,
+    "actualu_trace1800_baseline_phase_residual": true,
+    "actualu_trace1900_shapes_finite": true,
+    "actualu_trace1900_projection_actual_replay": true,
+    "actualu_trace1900_baseline_phase_residual": true,
+    "actualu_trace2000_shapes_finite": true,
+    "actualu_trace2000_projection_actual_replay": true,
+    "actualu_trace2000_baseline_phase_residual": true,
+    "initial_raw_schema_CPU_finite": true,
+    "initial_capture_source_pins": true,
+    "initial_actor_names_shapes_and_hash": true,
+    "initial_actor_delta_independent": true,
+    "initial_wm_names_shapes_and_hash": true,
+    "initial_wm_delta_independent": true,
+    "initial_fail_head_names_shapes_and_hash": true,
+    "initial_fail_head_delta_independent": true,
+    "initial_critic_names_shapes_and_hash": true,
+    "initial_critic_delta_independent": true,
+    "actual_actor_WM_critic_change_matches_training_phase": true,
+    "capacity_prefix_schema_and_backend": true,
+    "capacity_prefix_records_nonempty_contiguous": true,
+    "capacity_prefix_raw_record_OR_status_and_no_clear": true,
+    "capacity_prefix_raw_OK_no_overflow_or_unknown": true,
+    "capacity_prefix_record_counts": true,
+    "capacity_prefix_fixed_capacity": true,
+    "capacity_prefix_scope_prefix_not_final": true,
+    "capacity_final_schema_and_backend": true,
+    "capacity_final_records_nonempty_contiguous": true,
+    "capacity_final_raw_record_OR_status_and_no_clear": true,
+    "capacity_final_raw_OK_no_overflow_or_unknown": true,
+    "capacity_final_record_counts": true,
+    "capacity_final_fixed_capacity": true,
+    "capacity_final_scope_run_final_once": true,
+    "capacity_checkpoint_records_are_finalrun_prefix": true,
+    "capacity_checkpoint_budget_binding": true,
+    "capacity_evidence_sources_bound": true,
+    "runtime_H8_shapes_and_integer_phases": true,
+    "runtime_terminal_active_mask_independent": true,
+    "runtime_critic_norm_eligible_independent": true,
+    "runtime_critic_minibatch_mask_counts": true,
+    "runtime_actual_policy_call_contract": true,
+    "runtime_validated_native_window_summary": true,
+    "runtime_replay_transition_count": true,
+    "runtime_final_result_snapshot": true,
+    "checkpoint_metric_prefix_finite": true,
+    "A1L_no_prior_file_or_metrics": true,
+    "completed_engineering_not_task_result": true,
+    "training_completion_schema_and_config": true,
+    "training_wrapper_return_final_capacity": true,
+    "worker_config_identity_no_retry": true,
+    "worker_terminal_completed": true,
+    "CPU_no_CUDA_or_environment": true
+  },
+  "passed": 148,
+  "total": 148,
+  "method": "A1L",
+  "seed": 0,
+  "iteration": 2000,
+  "final_iteration_scope": true,
+  "config": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_evaluation_front_cpu_v2\\negative_inputs\\wrong_training_protocol_training.json",
+    "sha256": "b23f8397602b6b7a9322839284ac7b4e532a1ab6187d7c6716ccae392fd75658"
+  },
+  "run_dir": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a1l_seed0_v1",
+  "checkpoint": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a1l_seed0_v1\\train\\model_final.pt",
+    "sha256": "5a3f48d6cbf24e0a177f57e21ed6ce83992ac01bbc3af273653633bae2cea59c"
+  },
+  "auditor": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\audit_rough_checkpoint_cpu_v3.py",
+    "sha256": "7a6a4e21d24f5acad0eccc6908bef03fd7e1c4acaec7196edf296cc75772850f"
+  },
+  "details": {
+    "actual_architecture": {
+      "actor": {
+        "norm._mean": [
+          1,
+          155
+        ],
+        "norm._var": [
+          1,
+          155
+        ],
+        "norm._std": [
+          1,
+          155
+        ],
+        "norm.count": [],
+        "net.0.weight": [
+          512,
+          155
+        ],
+        "net.0.bias": [
+          512
+        ],
+        "net.2.weight": [
+          256,
+          512
+        ],
+        "net.2.bias": [
+          256
+        ],
+        "net.4.weight": [
+          128,
+          256
+        ],
+        "net.4.bias": [
+          128
+        ],
+        "net.6.weight": [
+          20,
+          128
+        ],
+        "net.6.bias": [
+          20
+        ]
+      },
+      "wm": {
+        "error_floor": [
+          52
+        ],
+        "norm.mean": [
+          298
+        ],
+        "norm.var": [
+          298
+        ],
+        "norm.count": [],
+        "net.0.weight": [
+          512,
+          298
+        ],
+        "net.0.bias": [
+          512
+        ],
+        "net.1.weight": [
+          512
+        ],
+        "net.1.bias": [
+          512
+        ],
+        "net.3.weight": [
+          512,
+          512
+        ],
+        "net.3.bias": [
+          512
+        ],
+        "net.4.weight": [
+          512
+        ],
+        "net.4.bias": [
+          512
+        ],
+        "net.6.weight": [
+          512,
+          512
+        ],
+        "net.6.bias": [
+          512
+        ],
+        "net.7.weight": [
+          512
+        ],
+        "net.7.bias": [
+          512
+        ],
+        "net.9.weight": [
+          67,
+          512
+        ],
+        "net.9.bias": [
+          67
+        ],
+        "delta_norm.mean": [
+          52
+        ],
+        "delta_norm.var": [
+          52
+        ],
+        "delta_norm.count": []
+      },
+      "fail_head": {
+        "norm.mean": [
+          426
+        ],
+        "norm.var": [
+          426
+        ],
+        "norm.count": [],
+        "net.0.weight": [
+          256,
+          426
+        ],
+        "net.0.bias": [
+          256
+        ],
+        "net.2.weight": [
+          128,
+          256
+        ],
+        "net.2.bias": [
+          128
+        ],
+        "net.4.weight": [
+          1,
+          128
+        ],
+        "net.4.bias": [
+          1
+        ]
+      },
+      "critic": {
+        "norm.mean": [
+          301
+        ],
+        "norm.var": [
+          301
+        ],
+        "norm.count": [],
+        "net.0.weight": [
+          512,
+          301
+        ],
+        "net.0.bias": [
+          512
+        ],
+        "net.2.weight": [
+          512,
+          512
+        ],
+        "net.2.bias": [
+          512
+        ],
+        "net.4.weight": [
+          256,
+          512
+        ],
+        "net.4.bias": [
+          256
+        ],
+        "net.6.weight": [
+          128,
+          256
+        ],
+        "net.6.bias": [
+          128
+        ],
+        "net.8.weight": [
+          1,
+          128
+        ],
+        "net.8.bias": [
+          1
+        ]
+      }
+    },
+    "actual_optimizer_hook_counts": {
+      "wm": 4000,
+      "fail_head": 4000,
+      "actor": 1800,
+      "critic": 7200
+    },
+    "optimizer_stored_steps": {
+      "actor": [
+        1800.0
+      ],
+      "wm": [
+        4000.0
+      ],
+      "fail_head": [
+        4000.0
+      ],
+      "critic": [
+        7200.0
+      ]
+    },
+    "real_transitions": 648192,
+    "source_pin_count": 283,
+    "input_bundle": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\input_bundle_v1\\bundle.json",
+      "sha256": "225b34e9ec26ae7d66c805c7312d5f1db76d39a8c6b1627682cda217b5261242"
+    },
+    "reference_signature": "b6c74dfeabfa9d279456554d3d46681d250812aebd683be2d4b025033c3cd444",
+    "init_source": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\outputs\\restored_prefix_control_export_v1\\init_requested.npz",
+      "sha256": "fd74f89a7b12f4c83daa3525ca3d0ae3832b05e7d17faeb70372d41449991517"
+    },
+    "actualu_checkpoint_prefix": {
+      "last_collect_call": 2001,
+      "prefix_rows": 2001,
+      "prefix_sha256": "c3510827e71dd4d883ae297b4f5da4412c8eb54fff8f5b50bf36fb635b152428",
+      "prefix_byte_count": 886044,
+      "real_transitions": 648192,
+      "sample_trace_sha256": {
+        "rough_actualu_trace_00001.npz": "82cdcc5f9b05e07e3945ef08a360ac51828537afbfb959e70056c21e772153d0",
+        "rough_actualu_trace_00002.npz": "47fcc7f894458bdf36f0b7b2d36ce57a4493f60fd77db30ab332814bc022046a",
+        "rough_actualu_trace_00003.npz": "dd5f9ea693cd6b3656bbd9e296115fc7fe218c881c419ec3ef46f04dba2a52e4",
+        "rough_actualu_trace_00100.npz": "4ae7b588615dcb195156ed1f1b1224dfefbb909017c114bb7c01607589f7bd81",
+        "rough_actualu_trace_00200.npz": "38eecd13bf84629ccbb42ad76c5b358d8cc04107b8c1f70cbca2cca751f060af",
+        "rough_actualu_trace_00300.npz": "f1e92513bfb24729a8c978c7200a23a606d1a32c2346a0ad6f580a68e77c50c1",
+        "rough_actualu_trace_00400.npz": "071d0a94c207137b6dcf70b77cd8e4ac320584f8e293e36a1e41287e672deb5a",
+        "rough_actualu_trace_00500.npz": "f00b7697aec6528d235ee547b91f1b502d61a5639916045a9d729d2c71256ab8",
+        "rough_actualu_trace_00600.npz": "b01d77a52d185cd4c6776284e3187367099fe527d42e6fbbbb5091ca28a6d230",
+        "rough_actualu_trace_00700.npz": "12a8c14d17b7dab02b5efc22b14df4599f989ff51f3d268278b7cdb94986be7c",
+        "rough_actualu_trace_00800.npz": "2409c81e65c3c5227da1c0427f4063a490f1a580c0cc1936bde61d83d6066d4e",
+        "rough_actualu_trace_00900.npz": "96e10a953fb6208e88ca013fe636bb984cbbe149f349cf0aa5a6029dd2ebc997",
+        "rough_actualu_trace_01000.npz": "b4f36b0ebb5fc5c3531b35d7319b1247a82dd77bf5d842c6b76931ff200e5edc",
+        "rough_actualu_trace_01100.npz": "a4912bd6d331ddbf8c06e4e16a2052353334fd5f9c0658fd2988f341dfcdb930",
+        "rough_actualu_trace_01200.npz": "ee66c04a6ba013e9f490d58bf43f7fd71675afd6a9ad89db513e51218b239c7a",
+        "rough_actualu_trace_01300.npz": "47dae2387d697869a3d7c1e82eac70e241dbddc0747ab27dfaece2123f7f97df",
+        "rough_actualu_trace_01400.npz": "691d4dd2473109861a6a18f57db9333798b6ec9b08cef31a800523bddb3f5b46",
+        "rough_actualu_trace_01500.npz": "56a60cdbeb845bdaf6dd6016d7a0b0c6e3adeb3b315dc933a961471a101ca42f",
+        "rough_actualu_trace_01600.npz": "757e130ba2038cd487daa598a73b71c49650aa965fbea5176df336b2b266b060",
+        "rough_actualu_trace_01700.npz": "4eeb65a1cda067acbe42e15a4652078d84af6f1cdb92fe7adaf80da516f06889",
+        "rough_actualu_trace_01800.npz": "fc03b701582c2f05f921a824e993517c14f12726896a972ce22a3a7aadf0f9df",
+        "rough_actualu_trace_01900.npz": "90485222e34c29abb376ae8aee1787e0e9f111add339e579a39691d941a7249b",
+        "rough_actualu_trace_02000.npz": "aa384e9a99e89dd52e0735929185defde6532dffa1e51e3c12db2092de3ee316"
+      },
+      "later_complete_rows_ignored": 0
+    },
+    "initial_parameters": {
+      "independently_recomputed_fingerprints": {
+        "actor": {
+          "sha256": "d80a1bf127e47b0d93cfaec6debfbc298a3ecde79d9cde576e2f5492d1a732ce",
+          "tensors": 8,
+          "parameters": 246676
+        },
+        "wm": {
+          "sha256": "c253e038376b4f3ebb70633b3102dc3cac8ff93a280bc77b6c31d80f31f319a2",
+          "tensors": 14,
+          "parameters": 715843
+        },
+        "fail_head": {
+          "sha256": "943355c496e691a2d1bc4e209907ce13b57d0624e2955a26b258a7244959cc7c",
+          "tensors": 6,
+          "parameters": 142337
+        },
+        "critic": {
+          "sha256": "4074c9ab48aa1b5c8b108c1e056fb378ad77a6815879df508444408970772bfa",
+          "tensors": 10,
+          "parameters": 581633
+        }
+      },
+      "independent_final_parameter_delta_l2": {
+        "actor": 7.084954826212895,
+        "wm": 13.327680744058567,
+        "fail_head": 6.825597803022136,
+        "critic": 5.953646346947229
+      },
+      "capture_point": "after_native_DexRunner_init_before_first_collect_or_optimizer",
+      "raw_initial_tensor_artifact": {
+        "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a1l_seed0_v1\\initial_parameter_tensors.pt",
+        "sha256": "c116c52c3f2f6c67e584db8d4a49057785b09eee2e53b1fd6d4d084010bd8a88"
+      },
+      "scope": "Raw CPU constructor-return parameters hashed against later native-before-learning fingerprint; source rejects allresume/modelwarmstart. Crossarm same-seed comparison remains separate."
+    },
+    "capacity_checkpoint_prefix": {
+      "raw_OR_bitmask": 0,
+      "raw_unknown_read_count": 0,
+      "record_count": 3067,
+      "before_reset_read_count": 3046
+    },
+    "capacity_final_run": {
+      "raw_OR_bitmask": 0,
+      "raw_unknown_read_count": 0,
+      "record_count": 3068,
+      "before_reset_read_count": 3046
+    },
+    "runtime_saved_evidence": {
+      "replay_counts": {
+        "transitions": 648192,
+        "natural_end_rows": 43016,
+        "physical_terminated_rows": 364
+      },
+      "latest_window": {
+        "valid_window_entries": 1548,
+        "candidate_window_entries": 2048,
+        "terminal_valid_entries": 140,
+        "reset_suffix_entries_masked": 500
+      },
+      "policy": {
+        "start_phases": [
+          [
+            8.0
+          ],
+          [
+            5.0
+          ],
+          [
+            4.0
+          ],
+          [
+            6.0
+          ],
+          [
+            1.0
+          ],
+          [
+            6.0
+          ],
+          [
+            5.0
+          ],
+          [
+            6.0
+          ],
+          [
+            4.0
+          ],
+          [
+            14.0
+          ],
+          [
+            13.0
+          ],
+          [
+            2.0
+          ],
+          [
+            4.0
+          ],
+          [
+            2.0
+          ],
+          [
+            3.0
+          ],
+          [
+            10.0
+          ],
+          [
+            1.0
+          ],
+          [
+            2.0
+          ],
+          [
+            5.0
+          ],
+          [
+            11.0
+          ],
+          [
+            7.0
+          ],
+          [
+            2.0
+          ],
+          [
+            6.0
+          ],
+          [
+            9.0
+          ],
+          [
+            12.0
+          ],
+          [
+            8.0
+          ],
+          [
+            1.0
+          ],
+          [
+            8.0
+          ],
+          [
+            14.0
+          ],
+          [
+            9.0
+          ],
+          [
+            11.0
+          ],
+          [
+            4.0
+          ],
+          [
+            4.0
+          ],
+          [
+            8.0
+          ],
+          [
+            4.0
+          ],
+          [
+            1.0
+          ],
+          [
+            1.0
+          ],
+          [
+            6.0
+          ],
+          [
+            3.0
+          ],
+          [
+            9.0
+          ],
+          [
+            14.0
+          ],
+          [
+            10.0
+          ],
+          [
+            3.0
+          ],
+          [
+            2.0
+          ],
+          [
+            0.0
+          ],
+          [
+            11.0
+          ],
+          [
+            5.0
+          ],
+          [
+            5.0
+          ],
+          [
+            5.0
+          ],
+          [
+            11.0
+          ],
+          [
+            8.0
+          ],
+          [
+            8.0
+          ],
+          [
+            1.0
+          ],
+          [
+            6.0
+          ],
+          [
+            7.0
+          ],
+          [
+            6.0
+          ],
+          [
+            0.0
+          ],
+          [
+            0.0
+          ],
+          [
+            6.0
+          ],
+          [
+            5.0
+          ],
+          [
+            9.0
+          ],
+          [
+            10.0
+          ],
+          [
+            14.0
+          ],
+          [
+            10.0
+          ],
+          [
+            6.0
+          ],
+          [
+            6.0
+          ],
+          [
+            7.0
+          ],
+          [
+            1.0
+          ],
+          [
+            9.0
+          ],
+          [
+            10.0
+          ],
+          [
+            13.0
+          ],
+          [
+            2.0
+          ],
+          [
+            5.0
+          ],
+          [
+            11.0
+          ],
+          [
+            8.0
+          ],
+          [
+            11.0
+          ],
+          [
+            9.0
+          ],
+          [
+            6.0
+          ],
+          [
+            9.0
+          ],
+          [
+            1.0
+          ],
+          [
+            7.0
+          ],
+          [
+            11.0
+          ],
+          [
+            2.0
+          ],
+          [
+            6.0
+          ],
+          [
+            4.0
+          ],
+          [
+            2.0
+          ],
+          [
+            4.0
+          ],
+          [
+            10.0
+          ],
+          [
+            3.0
+          ],
+          [
+            14.0
+          ],
+          [
+            10.0
+          ],
+          [
+            4.0
+          ],
+          [
+            2.0
+          ],
+          [
+            3.0
+          ],
+          [
+            0.0
+          ],
+          [
+            2.0
+          ],
+          [
+            14.0
+          ],
+          [
+            5.0
+          ],
+          [
+            7.0
+          ],
+          [
+            7.0
+          ],
+          [
+            3.0
+          ],
+          [
+            10.0
+          ],
+          [
+            8.0
+          ],
+          [
+            5.0
+          ],
+          [
+            10.0
+          ],
+          [
+            11.0
+          ],
+          [
+            14.0
+          ],
+          [
+            11.0
+          ],
+          [
+            8.0
+          ],
+          [
+            3.0
+          ],
+          [
+            9.0
+          ],
+          [
+            1.0
+          ],
+          [
+            6.0
+          ],
+          [
+            1.0
+          ],
+          [
+            2.0
+          ],
+          [
+            14.0
+          ],
+          [
+            7.0
+          ],
+          [
+            9.0
+          ],
+          [
+            7.0
+          ],
+          [
+            14.0
+          ],
+          [
+            5.0
+          ],
+          [
+            3.0
+          ],
+          [
+            6.0
+          ],
+          [
+            6.0
+          ],
+          [
+            14.0
+          ],
+          [
+            8.0
+          ],
+          [
+            4.0
+          ],
+          [
+            9.0
+          ]
+        ],
+        "active_mask_H_B": [
+          [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true
+          ],
+          [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            true,
+            false,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false
+          ],
+          [
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            false
+          ]
+        ],
+        "critic_norm_eligible": 913,
+        "critic_loss_minibatch_active_counts": [
+          422,
+          422,
+          421,
+          423
+        ],
+        "critic_total_candidate_rows": 1024,
+        "optimizer_actor_calls": 1,
+        "optimizer_critic_calls": 4,
+        "hard_mask_rule": "phase<15 only; physical soft termination retains native survival semantics"
+      },
+      "policy_not_run_is_not_a_pass": false
+    },
+    "metrics_prefix_sha256": "9fcc03e7982575850a9e088301514ece21cd087d4977af101892868da1fff6b6",
+    "training_completion_marker": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a1l_seed0_v1\\training_completion.json",
+      "sha256": "031a1c54f93e6b2c77ee6ffe0a0363c40c9cc3379f2a8b7535e79dd0ffbdaaa4"
+    }
+  },
+  "physical_task_success": "NOT_ASSESSED",
+  "physical_reference_qualified": false,
+  "GPU_used": false,
+  "created_environment": false,
+  "claim_scope": "Saved format104 source/input/finiteness/architecture/initialization/budget/control/replay-mask/capacity evidence only. Latest native replaywindow is source-validated summary, not a rawwindow independently rerun here. No contact/dynamics-gradient or learning-benefit qualification."
+}

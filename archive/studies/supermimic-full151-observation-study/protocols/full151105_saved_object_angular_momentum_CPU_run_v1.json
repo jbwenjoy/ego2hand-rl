@@ -1,0 +1,153 @@
+{
+  "schema": "full151105_saved_object_angular_momentum_CPU_protocol:1",
+  "role": "all1808_saved_world_angular_momentum_diagnostic",
+  "CPU_run_authorized": true,
+  "GPU_run_authorized": false,
+  "preregistration": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_saved_object_angular_momentum_CPU_prereg_v1.json",
+    "sha256": "a20050a01778d6a55edf90545fe9f0af6032b4dbfde8f705071cd42f953fdca4"
+  },
+  "inputs": {
+    "linear_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_object_linear_momentum_CPU_v1\\report.json",
+      "sha256": "e2a866c71e15357c18bb9e055274df761b0795b036ef0fd3a9c633811a465172"
+    },
+    "linear_metadata": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_object_linear_momentum_CPU_v1\\metadata.json",
+      "sha256": "96bd21297243ce25760f9650960c1c51d97f9c517350dde8957ebc76ec5eb69d"
+    },
+    "linear_metadata_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_object_linear_momentum_CPU_v1\\passive_metadata_and_actual_readbacks.npz",
+      "sha256": "14bedb21072323a6f558b77e40bca743bc336a7dc59756844bbb837b2a59072d"
+    },
+    "linear_source_inventory": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_object_linear_momentum_CPU_v1\\source_inventory.json",
+      "sha256": "4719c04f696d601715852b09b0f972b7f7eb8466d87ab2f9f07bf010590f09a3"
+    },
+    "source_feasibility": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\full151_object_angular_momentum_source_feasibility_v1.md",
+      "sha256": "f623d08b4ee23e6cca25e48870e01e3f8605c5e6311e198ac4d11866c4e3e658"
+    },
+    "physical_samples": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\physical_samples.jsonl",
+      "sha256": "c363f20838c6cec1acdc3541c7d250c7cb5980c3d6719ebb7c245d4e13c9071f"
+    },
+    "geometry_catalog": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_solver_phase_penalty_GPU_qualified_CPU_v1\\geometry_ID_mapping.json",
+      "sha256": "98cfd7f725699fcacdf890219937ef4e443ecd97efc2e431f1b7719d7c3b932c"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "A0_actual_readbacks": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\actual_context_readbacks.npz",
+      "sha256": "681f704b9f44335f7fb3124dc1184f43f8f8982a8fdae7e5c2ba5d1c6a509286"
+    },
+    "A2_actual_readbacks": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\actual_context_readbacks.npz",
+      "sha256": "681f704b9f44335f7fb3124dc1184f43f8f8982a8fdae7e5c2ba5d1c6a509286"
+    }
+  },
+  "source_pins": {
+    "consumer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\object_angular_momentum105_v1.py",
+      "sha256": "4fb22ef1d940273563b730fc24fb0eb078c07d896f049237b3a17caf3058be67"
+    },
+    "CLI": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\diagnose_full151_object_angular_momentum_saved_cpu_v1.py",
+      "sha256": "56c3c0d6ecddc71bbf1147afd946be63d5196aa86916b826a0c5a9838d69ec7f"
+    },
+    "checker": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\check_full151_object_angular_momentum_cpu_v1.py",
+      "sha256": "1b22513855c9000e52708fcfad37452560e987b0b4e1b3b7451f918c9c65ee59"
+    },
+    "borrowed_linear": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\object_linear_momentum105_v1.py",
+      "sha256": "16542abbc5f7187116b90f24c4a32e33aaf70fa0cc9357312610c997d21b956c"
+    },
+    "borrowed_IO": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\response_calibration105_v1.py",
+      "sha256": "71efe05da17a37df4111158860443433304f1d57762e2377d4dbafc3b57ca27f"
+    },
+    "math": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\math.py",
+      "sha256": "4c58d5e3864f7b841633d403d78e7702bb547359ee846d43810e3b31c63966c2"
+    },
+    "forward": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\forward.py",
+      "sha256": "5777015c762394cf5e26d261f05a1b84d3dfda051de48992d7ef709b06e9c86f"
+    },
+    "smooth": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\smooth.py",
+      "sha256": "ac9f763769820b460848c9ba298be7d8ae54815372153f459cdd933d64deaafa"
+    },
+    "io": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\io.py",
+      "sha256": "6fe550047ed4b82c307741f84a8a4800587469c52e5ce292a3073824f3451fa6"
+    },
+    "passive": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\passive.py",
+      "sha256": "0529a92fa4904ff20a7e2a5dc5a0a9ae35e3f86c3a337d4216c7b9b6307bc29c"
+    },
+    "solver": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\solver.py",
+      "sha256": "f07a7c33e038a312ea5c8cab4ec718b24d5e7d163dc8435a592118c9fc0e07fb"
+    },
+    "original_worker": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\serial_probe105_v2.py",
+      "sha256": "a24c89da47f4aad7acfc9d9dfd1f053518cdc878230716bb2c857127ec13e592"
+    },
+    "contact_helper": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\vendor\\measured_contacts.py",
+      "sha256": "478c3117489bd4a02238f6299a91638e791a751352b772321ce2676b0ec4f96f"
+    },
+    "READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_object_angular_momentum_preparation_CPU_v1\\READY.json",
+      "sha256": "ca006af96481b0e2875c7ab5a9439934490d7d5fd488afb478eb4c808639ecd7"
+    },
+    "CPU_synthetic_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_object_angular_momentum_preparation_CPU_v1\\report.json",
+      "sha256": "5e0bc740863717c12d1769bf9024476faef5580a23bca238588f04e20f03be68"
+    },
+    "independent_source_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_object_angular_momentum_source_independent_v1\\report.json",
+      "sha256": "83b6c2becc2f67de78e1a8a4f5f11ee58be1eed06bf1699ab49e55df185eef65"
+    },
+    "independent_math_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_object_angular_independent_math_preparation_v1\\READY.json",
+      "sha256": "2ad3e8584e3fcee76fb84423100cb441787ce2d6cb1d3f7e78314dba07d9de93"
+    },
+    "independent_math": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\object_angular_momentum_independent_math_v1.py",
+      "sha256": "9e059f9c677798b4e4026abb0e018f96655e8bbcb8c795fef52e1bca5afdc30b"
+    }
+  },
+  "budget": {
+    "new_MJB_MjData_backend_import_FK_forward_step_Env_model_AD_optimizer_GPU_physics_training": 0
+  },
+  "rows": {
+    "ALL": 1808,
+    "A0": 904,
+    "A2": 904,
+    "donor": 1200,
+    "baseline": 96,
+    "direction": 512
+  },
+  "contact_rows": 9473,
+  "accuracy_gate": null,
+  "output_prefix": "full151105_saved_object_angular_momentum_CPU_",
+  "observer_convention": {
+    "raw": "Original finite FP32 full27qpos/full26qvel preserved; each row own PRE/POST, no crossrestore adjacency",
+    "quaternion": "Both body_iquat_actual and each endpoint raw wxyz castF64 then normF64 and normalizeF64; save raw/norm/R; nonzero norm required, not a bitexact GPU observer",
+    "inertia": "I_body = Q_i @ diag(actual_FP32_body_inertia_as_F64) @ Q_i.T",
+    "angular_momentum": "L_world_endpoint = R_body_endpoint @ I_body @ omega_body_endpoint_F64; use both endpoint rotations",
+    "angular_impulse": "delta_L = L_world_post - L_world_pre inF64",
+    "contact_torque": "For all external object pairs: sign*frame.T localF and localdirectTau; cross(saved contact.pos - saved solverPRE_COM, F_world) + directTau_world ONCE; internal cancel; no Fn selection",
+    "known_noncontact": "COM0 uniformgravity torque0; all other static terms must retain same source-backed closure ledger; applied vectors only sourceassertions+max0",
+    "residual": "delta_L - dt_wp32_F64 * tau_all_solverPRE; equivalent torque residual = residual/dt",
+    "gyro": "No separate gyroscopic external torque in world delta_L equation",
+    "source_PRE_check": "Saved solverPREpose/COM vs same row pre_qpos normalizedF64 observer; allposition/rotation differences descriptive, no accuracy gate"
+  },
+  "review_scope": "Root source/math plus independent source7 and producer synthetic3; independent vector math fixture1. Actual metadata inherited from one prior passive read, not independently reread MJB."
+}

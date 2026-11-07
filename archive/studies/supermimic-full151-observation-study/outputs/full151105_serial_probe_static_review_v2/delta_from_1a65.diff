@@ -1,0 +1,208 @@
+--- retained_1a65
++++ reviewed_79207
+@@ -14,12 +14,12 @@
+ PHASES=[0,49,99,149]
+ JOINTS=[0,4,8,12]
+ EPS=(.002,.001)
+-SCALAR_CONTRACT={'primary':'native_GPU_RewardManager_step_reward_object_pos_and_object_rot_FP32_then_GPU_FP32_sum',
+-    'goal_phase':'preaction k','units':'unscaled object reward rate/rad','weights':[2.,8.],'sigma_m':[.05,.04],
+-    'axis_point_radius_m':.1,'dt_s':.02,'native_rounding':'RewardManager value=raw*weight*dt; _step_reward=value/dt; sum on GPU',
+-    'CPU_FP32_and_F64_state_rescore':'secondary arithmetic diagnostic, never substituted for primary',
++SCALAR_CONTRACT={'primary':'matched_post20_gpu_score','formula':'controlled FP32 native-formula2+8 directly on captured postintegration x20; GPU FP32 subset sum',
++    'primary_state_phase':'postintegration20ms','goal_phase':'preaction k','units':'controlled formula score/rad','weights':[2.,8.],'sigma_m':[.05,.04],
++    'axis_point_radius_m':.1,'dt_s':.02,'original_native_reward':'derived15ms RewardManager GPU rate terms andsubset sum, secondary only',
++    'CPU_FP32_and_F64_state_rescore':'same-x20 secondary arithmetic diagnostic, never substituted for primary',
+     'kplus1':'CPU_FP32_state_rescore diagnostic only; no native command mutation',
+-    'arithmetic_bound':'8*eps32*max(1,abs(F64_expected_term)) per native rate term'}
++    'arithmetic_bound':'8*eps32*max(1,abs(F64_expected_term)) per same-x20 primaryterm; never phase tolerance'}
+ DONOR_FILES=('controller_descriptor.json','control_events.json','raw_states.npz',
+              'evaluation.json','config.json','fixed_physics_context.npz','native_reward_transitions.json')
+ 
+@@ -36,7 +36,7 @@
+     if type(config.get('evaluation_seed')) is not int or config['evaluation_seed']!=0:raise ValueError('Fixed source seed0 required')
+     if type(config.get('soft_worker_seconds')) not in (int,float) or not 0<config['soft_worker_seconds']<=180 or config.get('hard_process_seconds')!=240:raise ValueError('Fixed bounded physical-probe budget required')
+     proposal=read(checked(config['proposal']));checked(config['protocol']);checked(config['input_bundle'])
+-    for field,value in {'schema':'full151105_same_Warp_control_gradient_diagnostic_proposal:1','snapshot_phases':PHASES,'direction_joint_indices':JOINTS,'eps_rad':list(EPS),'baseline_repeats':3,'planned_branches':152,'planned_total_episode_substeps':1808,'physical_reference_qualified':False}.items():
++    for field,value in {'schema':'full151105_same_Warp_control_gradient_diagnostic_proposal:2','primary_scalar_kind':'matched_post20_gpu_score','scalar_contract':SCALAR_CONTRACT,'snapshot_phases':PHASES,'direction_joint_indices':JOINTS,'eps_rad':list(EPS),'baseline_repeats':3,'planned_branches':152,'planned_total_episode_substeps':1808,'physical_reference_qualified':False}.items():
+         if proposal.get(field)!=value:raise ValueError('Frozen proposal field differs: '+field)
+     if set(config.get('donor_inputs',{}))!=set(PATHS):raise ValueError('Exactly A0/A2 donor action sources required')
+     for name in PATHS:
+@@ -52,7 +52,7 @@
+     for value in pins.values():checked(value)
+     own=pin(__file__)
+     if own not in pins.values():raise ValueError('This new worker source is not in the config closure')
+-    for alias in ('controller105','runtime105','native105','policy_probe105','native_pen','native_state','native_snapshot','Warp_support','Warp_io','old104_capacity','measured_contacts'):
++    for alias in ('controller105','runtime105','native105','policy_probe105','native_pen','native_state','native_snapshot','Warp_support','Warp_io','old104_capacity','measured_contacts','native_sim_reader','native_reward_functions','native_reward_observations','entity_data','manager_environment','reward_manager'):
+         expected=proposal['source_pins'][alias];checked(expected)
+         if expected not in pins.values():raise ValueError('Frozen proposal execution dependency absent from new closure: '+alias)
+     transaction=pin(Path(__file__).with_name('transaction105.py'))
+@@ -174,7 +174,9 @@
+         'branch_x_next':(152,58),'branch_self15':(152,15),'branch_u':(152,20),
+         'branch_object_terms_k':(152,2),'branch_object_terms_k_CPU_secondary':(152,2),'branch_object_score_k':(152,),
+         'branch_object_terms_kplus1':(152,2),'donor_object_terms_k':(8,2),'donor_object_terms_k_CPU_secondary':(8,2),
+-        'donor_object_score_k':(8,),'donor_object_terms_kplus1':(8,2)}.items()}
++        'donor_object_score_k':(8,),'donor_object_terms_kplus1':(8,2),
++        'branch_native_reward_terms_15ms_secondary':(152,2),'branch_native_reward_score_15ms_secondary':(152,),
++        'donor_native_reward_terms_15ms_secondary':(8,2),'donor_native_reward_score_15ms_secondary':(8,)}.items()}
+     arrays.update(snapshot_completed=np.zeros(8,bool),completed=np.zeros(152,bool),restore_inventory_bitexact=np.zeros(152,bool),restore_qualified=np.zeros(152,bool))
+     directions={key:np.full((8,4,2,20),np.nan,np.float32) for key in ('plus','minus')}
+     directions.update(d_eff=np.full((8,4,2,20),np.nan,np.float64),center_offset=np.full((8,4,2,20),np.nan,np.float64),
+@@ -196,14 +198,26 @@
+     """Secondary FP32CPU state rescore; never primary native GPU evidence."""
+     import torch
+     a=torch.as_tensor(np.asarray(x,np.float32)).reshape(1,58)
+-    pos=a[:,40:43];rot=a[:,43:52].reshape(-1,3,3)
+     gp=torch.as_tensor(np.asarray(p,np.float32)).reshape(1,3)
+     gR=torch.as_tensor(np.asarray(R,np.float32)).reshape(1,3,3)
++    terms,score=controlled_object_score_FP32(a,gp,gR)
++    return terms[0].numpy().copy(),float(score[0])
++
++
++def controlled_object_score_FP32(a,gp,gR):
++    """Same20ms mathematical function for physical GPU and future CPU WM AD.
++
++    This is controlled native-formula scoring, not actual15ms RewardManager
++    evidence. No detach/inplace: a future frozen WM CPU consumer can retain AD.
++    """
++    import torch
++    if a.dtype!=torch.float32 or gp.dtype!=torch.float32 or gR.dtype!=torch.float32 or a.ndim!=2 or a.shape[1]!=58 or gp.shape!=(len(a),3) or gR.shape!=(len(a),3,3) or a.device!=gp.device or a.device!=gR.device:raise ValueError('Same-device FP32 state58/goalp/R batch required')
++    pos=a[:,40:43];rot=a[:,43:52].reshape(-1,3,3)
+     off=.1*rot[:,:,0];goff=.1*gR[:,:,0]
+     endpoint=((pos+off-gp-goff).norm(dim=-1)+(pos-off-gp+goff).norm(dim=-1))*.5
+     terms=torch.stack((2*torch.exp(-((pos-gp).norm(dim=-1)/.05).square()),
+-                       8*torch.exp(-(endpoint/.04).square())),-1)[0]
+-    return terms.numpy().copy(),float(terms.sum())
++                       8*torch.exp(-(endpoint/.04).square())),-1)
++    return terms,terms.sum(-1,dtype=torch.float32)
+ 
+ 
+ def object_terms_f64(x,p,R):
+@@ -247,6 +261,7 @@
+     from dex_supermimic.rl.dex_supermimic.pen import PenMDP,PenSimReader
+     from dex_supermimic.tasks.pen_spin.task import make_env_cfg
+     from dex_supermimic.tasks.pen_spin.mdp.commands import SingleHandTrackingCommand
++    from dex_supermimic.tasks.pen_spin.mdp.observations import object_pose_wrist_local
+     from dex_supermimic.rl.dex_supermimic.rotations import quat_to_mat,mm,mv
+     from full151_native.runtime import full151_runtime
+     from full151_native.controller import full151_controller,PURE_PATH,PURE_SHA256,_canonical
+@@ -278,7 +293,7 @@
+     stage={'name':'imports_and_setup'};counts=defaultdict(lambda:defaultdict(int));phase_seconds=defaultdict(float);phase_clock=[time.perf_counter()]
+     def mark(name):
+         now=time.perf_counter();phase_seconds[stage['name']]+=now-phase_clock[0];phase_clock[0]=now;stage['name']=name
+-    report=dict(schema='full151105_serial_physical_probe_worker_report:1',status='INITIALIZING',
++    report=dict(schema='full151105_serial_physical_probe_worker_report:2',status='INITIALIZING',
+                 engineering_qualified=False,baseline_all_passed=False,capacity_finalized=False,
+                 capacity_qualified=False,source_lineage_N=1,independent_ego_N=0,
+                 probe_mode=mode,planned_full_branch_slots=152,planned_branch_count=planned_branches,planned_episode_substeps=planned_steps,scheduled_substeps=0,optimizer_updates=0,
+@@ -360,10 +375,19 @@
+                                     if rate.dtype!=torch.float32 or tuple(rate.shape)!=(1,2):raise ValueError('Native GPU object-rate terms ABI changed')
+                                     reader.reward_snapshot['object_terms_native_rate_FP32']=rate
+                                     reader.reward_snapshot['object_score_native_rate_FP32']=rate.sum(-1,dtype=torch.float32).clone()
++                                    k=ctx['phase']
++                                    controlled_terms,controlled_score=controlled_object_score_FP32(reader.reward_snapshot['physics'],gp_GPU[k:k+1],gR_GPU[k:k+1])
++                                    reader.reward_snapshot['matched_post20_terms_FP32']=controlled_terms.clone()
++                                    reader.reward_snapshot['matched_post20_score_FP32']=controlled_score.clone()
++                                    reader.reward_snapshot['native15_reward_used_pose_wristlocal']=object_pose_wrist_local(env).clone()
++                                    reader.reward_snapshot['native15_goal_pose_wristlocal']=env.command_manager.get_term('motion').object_pose.clone()
++                                    reader.reward_snapshot['native15_axis_points']=env.command_manager.get_term('motion').axis_points.clone()
++                                    reader.reward_snapshot['native15_object_pose_derived_world']=reader.obj.data.root_link_pose_w.clone()
++                                    reader.reward_snapshot['native15_robot_pose_derived_world']=reader.robot.data.root_link_pose_w.clone()
+                                     reader.reward_snapshot['object_rate_capture_metadata']={
+                                         'compute_dt_s':dt,'scale_by_dt':rm._scale_by_dt,'term_names':['object_pos','object_rot'],
+                                         'term_columns':list(rate_columns),'weights':[rm.get_term_cfg(key).weight for key in ('object_pos','object_rot')],
+-                                        'rate_source':'RewardManager._step_reward after original compute, before Managerforward',
++                                        'rate_source':'RewardManager._step_reward uses derived15ms pose; secondary originalreward only',
+                                         'subset_sum':'capture-time GPU torch.sum over [object_pos,object_rot], dtypeFP32; not original full reward aggregate',
+                                         'dt_scaled_rate_if_derived':'derived only; original per-term predivision step-value cache not retained'}
+                                     return result
+@@ -444,7 +468,10 @@
+                                     native_contact={f:getattr(env.sim.wp_data.contact,f).numpy()[:now['nacon']].copy() for f in ('geom','type','worldid','efc_address')}
+                                     measurement=measured.capture_contacts(model,host,obj,object_geoms,hand)
+                                     F=np.asarray(measurement['force_w_N']);T=np.asarray(measurement['torque_at_contact_w_Nm'])
+-                                    point_w=host.xpos[obj]+np.asarray(measurement['pos_o_m'])@host.xmat[obj].reshape(3,3).T
++                                    point_w=np.asarray([c['pos'] for c in contacts if
++                                        (c['geom'][0] in object_geoms or c['geom'][1] in object_geoms) and
++                                        (c['geom'][0] in hand or c['geom'][1] in hand)],np.float64).reshape(-1,3)
++                                    if len(point_w)!=len(F):raise ValueError('Measured helper/raw HO contact order differs')
+                                     totalF=F.sum(axis=0);totalT=(np.cross(point_w-host.xipos[obj],F)+T).sum(axis=0)
+                                     sample=dict(path=name,phase=ctx['phase'],mode=ctx['mode'],branch_id=ctx['branch_id'],substep=ctx['step_in_interval'],
+                                         pre_time=prev['time'],post_time=now['time'],pre_qpos=prev['qpos'],pre_qvel=prev['qvel'],post_qpos=now['qpos'],post_qvel=now['qvel'],
+@@ -461,7 +488,8 @@
+                                 term.process_actions=process;env.sim.step=substep
+                                 palm=reader.palm_rot[0].T;pp=reader.palm_pos[0]
+                                 poses=torch.tensor(bundle['arrays']['reference']['mapped_object_pose_w'],dtype=torch.float32,device=env.device)
+-                                gp=mv(palm[None],poses[:,:3]-pp).cpu().numpy();gR=mm(palm[None],quat_to_mat(poses[:,3:])).cpu().numpy()
++                                gp_GPU=mv(palm[None],poses[:,:3]-pp);gR_GPU=mm(palm[None],quat_to_mat(poses[:,3:]))
++                                gp=gp_GPU.cpu().numpy();gR=gR_GPU.cpu().numpy()
+                                 def interval(k,override=None,branch_id=None):
+                                     checktime();ctx.update(phase=k,override=override,branch_id=branch_id,step_in_interval=0,previous_raw=raw())
+                                     phase=env.command_manager.get_term('motion').time_steps
+@@ -483,19 +511,29 @@
+                                     if raw_found.shape[0]!=1:raise ValueError('Single-world sensorfound required')
+                                     found=raw_found>0;independent=np.concatenate((found[:,reader.middle],found[:,reader.distal]|found[:,reader.tips]),axis=-1).astype(np.float32)
+                                     if not np.array_equal(independent[0].view(np.uint32),contact.view(np.uint32)):raise ValueError('Raw sensorfound does not reconstruct native self15')
+-                                    primary=snap['object_terms_native_rate_FP32'][0].cpu().numpy().copy()
+-                                    primary_score=snap['object_score_native_rate_FP32'][0].cpu().numpy().copy()
++                                    primary=snap['matched_post20_terms_FP32'][0].cpu().numpy().copy()
++                                    primary_score=snap['matched_post20_score_FP32'][0].cpu().numpy().copy()
++                                    native15=snap['object_terms_native_rate_FP32'][0].cpu().numpy().copy()
++                                    native15_score=float(snap['object_score_native_rate_FP32'][0].cpu().numpy())
+                                     diagnostic=object_terms_f64(x,gp[k],gR[k]);bound=8*np.finfo(np.float32).eps*np.maximum(1.,abs(diagnostic))
+-                                    if not np.isfinite(primary).all() or not np.isfinite(primary_score) or np.any(abs(primary.astype(float)-diagnostic)>bound):raise ValueError('Native GPU object terms exceed frozen F64 arithmetic diagnostic bound')
++                                    if not np.isfinite(primary).all() or not np.isfinite(primary_score) or np.any(abs(primary.astype(float)-diagnostic)>bound):raise ValueError('Matched post20 GPU terms exceed same-phase F64 arithmetic diagnostic bound')
+                                     out=dict(x=x,contact=contact,torque=snap['torque'][0].cpu().numpy().copy(),
+                                         raw_found=raw_found,
+                                         raw_sensordata=snap['raw_sensordata'].copy(),
+-                                        rawstate=rawstate,terms_k=primary,r_native=float(primary_score),terms_k_CPU=object_terms(x,gp[k],gR[k])[0],
++                                        rawstate=rawstate,terms_k=primary,r_primary=float(primary_score),terms_k_CPU=object_terms(x,gp[k],gR[k])[0],
++                                        native15_terms=native15,native15_score=native15_score,
+                                         terms_F64_diagnostic=diagnostic,term_arithmetic_bound=bound,terms_next=object_terms(x,gp[k+1],gR[k+1])[0])
+                                     rewardfile.write(json.dumps(jsonable(dict(path=name,k=k,mode=ctx['mode'],branch_id=branch_id,
+                                         physics=x,contact=contact,torque=out['torque'],raw_found=out['raw_found'],
+                                         raw_sensordata=out['raw_sensordata'],label_time='lastsolver_preintegration~kdt+.015',
+-                                        native_GPU_object_rate_terms_FP32=primary,native_GPU_object_rate_score_FP32=out['r_native'],
++                                        matched_post20_GPU_terms_FP32=primary,matched_post20_GPU_score_FP32=out['r_primary'],
++                                        native15_GPU_object_rate_terms_secondary=native15,native15_GPU_object_rate_score_secondary=native15_score,
++                                        native15_current_pose_wristlocal=snap['native15_reward_used_pose_wristlocal'].cpu().numpy(),
++                                        native15_goal_pose_wristlocal=snap['native15_goal_pose_wristlocal'].cpu().numpy(),
++                                        native15_axis_points=snap['native15_axis_points'].cpu().numpy(),
++                                        native15_object_pose_derived_world=snap['native15_object_pose_derived_world'].cpu().numpy(),
++                                        native15_robot_pose_derived_world=snap['native15_robot_pose_derived_world'].cpu().numpy(),
++                                        state20_reader_palm_pos=reader.palm_pos.cpu().numpy(),state20_reader_palm_rot=reader.palm_rot.cpu().numpy(),
+                                         native_GPU_capture_metadata=snap['object_rate_capture_metadata'],
+                                         CPU_FP32_object_rate_terms_secondary=out['terms_k_CPU'],F64_object_rate_terms_diagnostic=diagnostic,
+                                         F64_arithmetic_bound=bound,scalar_contract=SCALAR_CONTRACT,
+@@ -534,7 +572,8 @@
+                                             'bundle':bundle,'dirs':dirs,'archive':archive,'proposal':proposal,'config':config,'dataset':dataset,'snapshots':snapshots,'donors':donors,'ledgers':ledgers,
+                                             'baseline_gates':baseline_gates,'Torch_module':torch,'Warp_module':wp,'MuJoCo_module':mujoco,'MJWarp_module':mjwarp,
+                                             'C2_readonly_module':pure,'measured_contacts_module':measured,'host_readback_only':host,
+-                                            'statebuf_readback_only':statebuf,'captured_expected_actual8':actual_expected}
++                                            'statebuf_readback_only':statebuf,'captured_expected_actual8':actual_expected,
++                                            'matched_goal_p_readonly':gp_GPU,'matched_goal_R_readonly':gR_GPU}
+                                         try:
+                                             Transaction105.__init__(tx,env,reader,capacity_observer=observer,source_action=actions[k].copy(),label=name+'/'+str(k),
+                                                 expected_phase=k,external_roots=external)
+@@ -560,7 +599,8 @@
+                                     if k in PHASES:
+                                         sid=path_i*4+PHASES.index(k);arrays['donor_next_x'][sid]=outcome['x'];arrays['donor_self15'][sid]=outcome['contact']
+                                         arrays['donor_object_terms_k'][sid]=outcome['terms_k'];arrays['donor_object_terms_kplus1'][sid]=outcome['terms_next'];arrays['snapshot_completed'][sid]=True
+-                                        arrays['donor_object_score_k'][sid]=np.float32(outcome['r_native']);arrays['donor_object_terms_k_CPU_secondary'][sid]=outcome['terms_k_CPU']
++                                        arrays['donor_object_score_k'][sid]=np.float32(outcome['r_primary']);arrays['donor_object_terms_k_CPU_secondary'][sid]=outcome['terms_k_CPU']
++                                        arrays['donor_native_reward_terms_15ms_secondary'][sid]=outcome['native15_terms'];arrays['donor_native_reward_score_15ms_secondary'][sid]=np.float32(outcome['native15_score'])
+                                     if k%4==3:emit(status='running',phase=stage['name'],scheduled_substeps=report['scheduled_substeps'])
+                                 observer._raise_if_unqualified(observer._read('donor_terminal'))
+                                 donor_delta_q=max(float(abs(v['qpos'].astype(float)-archive['full_qpos'][i]).max()) for i,v in enumerate(local_states))
+@@ -604,9 +644,11 @@
+                                             restores.append(dict(branch_id=bid,begin=restore,transaction_events=tx.events[-2:]))
+                                         arrays['branch_x_next'][bid]=outcome['x'];arrays['branch_self15'][bid]=outcome['contact'];arrays['branch_u'][bid]=u
+                                         arrays['branch_object_terms_k'][bid]=outcome['terms_k'];arrays['branch_object_terms_kplus1'][bid]=outcome['terms_next']
+-                                        arrays['branch_object_score_k'][bid]=np.float32(outcome['r_native']);arrays['branch_object_terms_k_CPU_secondary'][bid]=outcome['terms_k_CPU']
++                                        arrays['branch_object_score_k'][bid]=np.float32(outcome['r_primary']);arrays['branch_object_terms_k_CPU_secondary'][bid]=outcome['terms_k_CPU']
++                                        arrays['branch_native_reward_terms_15ms_secondary'][bid]=outcome['native15_terms'];arrays['branch_native_reward_score_15ms_secondary'][bid]=np.float32(outcome['native15_score'])
+                                         arrays['completed'][bid]=True
+-                                        row.update(actualu=u,r_k=outcome['r_native'],r_kplus1=float(np.sum(outcome['terms_next'],dtype=np.float32)),status='COMPLETED',reason=None,
++                                        row.update(actualu=u,r_k=outcome['r_primary'],r_kplus1=float(np.sum(outcome['terms_next'],dtype=np.float32)),status='COMPLETED',reason=None,
++                                            original_native_reward_rate_15ms_secondary=outcome['native15_score'],scalar_kind='matched_post20_gpu_score',
+                                             source_frame=200+k,terminal_observation=k+1,valid_next_policy_decision=k+1<150,no_u150=True)
+                                         if row['type']=='baseline':
+                                             gate=baseline_errors(outcome['x'],arrays['donor_next_x'][sid],row['r_k'],float(arrays['donor_object_score_k'][sid]))

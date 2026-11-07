@@ -1,0 +1,80 @@
+{
+  "schema": "full151_declared_H123_dynamic_cone_LP:1",
+  "source_pins": {
+    "entry": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\screen_full151_declared_H123_dynamic_cone_cpu_v1.py",
+      "sha256": "117efc332f8bda843020c48988957cbb2e7a07b2dcf3ac9eea19b80db66ca98c"
+    },
+    "targets": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_declared_H123_surface_targets_v1\\intent_targets.npz",
+      "sha256": "888954fc9a1ed8fba9d550a6b9117cbe080e283797b50a48cf3273a3c40e2dc7"
+    },
+    "binding": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_declared_H123_surface_targets_v1\\binding_manifest.json",
+      "sha256": "249a994ad8c9bfc511c9d9efbe0a8076c916f7af00b1875182f0428e234b8d6e"
+    },
+    "bundle": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\bundle.json",
+      "sha256": "59406c6214a085afba7efcc2b33880d5c82b409ee4f6485ec71c073fec19dc76"
+    },
+    "reference": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\reference_candidate151.npz",
+      "sha256": "aa4f13b146979c7b274f7191100023168ff69032fe5d88125d339e3a56e3be93"
+    },
+    "context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "Frisvad_support_math": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\vendor\\frozen_contact_math\\contacts.py",
+      "sha256": "79b53c63dd5573c9908d052f29c678f1724ff5be3ffa5b7c077421cbf4788212"
+    },
+    "producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\build_full151_observation_intent_targets_cpu_v1.py",
+      "sha256": "826e4139d0619e609bd6e8fb183871bbe91a46eb758773234a73a7fe703a8f25"
+    }
+  },
+  "targets": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_declared_H123_surface_targets_v1\\intent_targets.npz",
+    "sha256": "888954fc9a1ed8fba9d550a6b9117cbe080e283797b50a48cf3273a3c40e2dc7"
+  },
+  "reference": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\reference_candidate151.npz",
+    "sha256": "aa4f13b146979c7b274f7191100023168ff69032fe5d88125d339e3a56e3be93"
+  },
+  "context": {
+    "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+    "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+  },
+  "model": {
+    "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+    "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+  },
+  "radius_m": 0.1290454076850486,
+  "frames": 151,
+  "samples_from_dense601": "indices0,4,...600; analytic a,alpha,omega,R, not prefix-FD/padding",
+  "object_selection": "only freejoint body in nominalMJB; COM exact0 required",
+  "inertia": "actual body_iquat rotation times actual diagonal body_inertia times transpose; all128 context rows identical",
+  "wrench": "F_body=R.T*m*(a_world-g_world); tau_body=I_body*alpha_body+omega_body cross I_body*omega_body; request6=[F,tau/radius]",
+  "cone": "3 declaredH123 COM-body points/inward normals; each8 normalized frictionedges mu.1 plusnormal ray; Frisvad phase as pinned79b53; moments cross(point,F)/radius once;27 nonnegative coefficients",
+  "solver": "scipy.optimize.linprog method highs once perframe no retry",
+  "solver_options": {
+    "primal_feasibility_tolerance": 1e-09,
+    "dual_feasibility_tolerance": 1e-09
+  },
+  "objective": "min sum27 lambda with unit-force rays; no force upperbound",
+  "nonnegative_gate": "all returned lambda>=0 strict; no clipping",
+  "equality_residual_gate_N": 1e-07,
+  "residual_units": "original6 row units N_equivalent=[force_N,moment_Nm/radius_m]; rawforce and rawmoment residual separately retained",
+  "classification": "status0 + nonnegative finite lambda + residual<=gate -> FEASIBLE;status2 -> INFEASIBLE;other ->SOLVER_UNKNOWN; no numerical retry",
+  "analytic_missing": "UNKNOWN without zero imputation or LP",
+  "no_contact_force_prediction": true,
+  "no_normalcap_or_PD_or_handconstraints": true,
+  "physical_reference_qualified": false,
+  "training_authorized": false,
+  "scope": "Declared projected geometric frictionpolycone only. Nonzero512support is not membership; finite151 dependent same-source frames do not give independentN."
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "supermimic_chord_replication_queue:1",
+  "status": "frozen_ready_not_started",
+  "queue_id": "penalty_only_seeds123_v1",
+  "created_utc": "2026-11-02T15:54:55.420447+08:00",
+  "paired_protocol_file": "D:\\workspace\\supermimic-chord-penalty-only-study\\configs\\paired-contact-pilot-v2.json",
+  "paired_protocol_sha256": "a835df9c4ba1450faffdfebb217ceaca6db99e1d3ea3dcf634b6110a389dcae6",
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "pilot_outcome_known_when_execution_manifest_created": true,
+  "no_tuning_from_pilot_outcome": true,
+  "ordering_rule": {
+    "seed_order": [
+      1,
+      2,
+      3
+    ],
+    "method": "P_ONLY",
+    "single_GPU_serial": true,
+    "scope": "Historical A1L/A2 controls remain immutable; no randomized3-arm batch claim"
+  },
+  "jobs": [
+    {
+      "position": 1,
+      "seed": 1,
+      "method": "P_ONLY",
+      "config": "D:\\workspace\\supermimic-chord-penalty-only-study\\configs\\training\\penalty_only_2000iter_seed1.json",
+      "config_sha256": "d4d0b864ae615f3e76d2b454f6f14fdc203d37626ff17bae23ebc18c67e4856c",
+      "output": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed1",
+      "estimated_seconds_from_P_ONLY_smoke": 1260
+    },
+    {
+      "position": 2,
+      "seed": 2,
+      "method": "P_ONLY",
+      "config": "D:\\workspace\\supermimic-chord-penalty-only-study\\configs\\training\\penalty_only_2000iter_seed2.json",
+      "config_sha256": "753f9c14fecf8e86c5c4967b409742a2f0e1f99352164a53b8a9d55ac9a540bb",
+      "output": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed2",
+      "estimated_seconds_from_P_ONLY_smoke": 1260
+    },
+    {
+      "position": 3,
+      "seed": 3,
+      "method": "P_ONLY",
+      "config": "D:\\workspace\\supermimic-chord-penalty-only-study\\configs\\training\\penalty_only_2000iter_seed3.json",
+      "config_sha256": "e6dc2f595a53a19973fd6a13ff798048c354ff7861c027093faa957df743fef9",
+      "output": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_paired_v2_2000iter_seed3",
+      "estimated_seconds_from_P_ONLY_smoke": 1260
+    }
+  ],
+  "source_inventory": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed1\\source\\inventory.json",
+  "source_inventory_sha256": "a92cb6549bd7c72811ffeecd4d8e3d37b534b7398b0b7264dffd8f5e02c51452",
+  "trainer": "D:\\workspace\\supermimic-chord-penalty-only-study\\scripts\\train_controlled_pen.py",
+  "trainer_sha256": "f9215ce9605728a4822b00f50f907f78650ebbecb1d920c9fd663996c64c6943",
+  "audit_script": "D:\\workspace\\supermimic-chord-penalty-only-study\\scripts\\audit_training_checkpoint.py",
+  "audit_script_sha256": "954e2238032527767b4536d5845e3ff2a700dae118bd0d101d127bb2f52ebca4",
+  "python_executable": "D:/workspace/dex-supermimic-research/.venv/Scripts/python.exe",
+  "queue_output": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_only_seeds123_queue_v1",
+  "per_run_attempt_guard_seconds": 3600,
+  "per_run_process_watchdog_seconds": 3900,
+  "primary_budget": {
+    "iterations": 2000,
+    "num_envs": 128,
+    "wm_updates": 4000,
+    "actor_updates": 1800,
+    "critic_updates": 7200,
+    "real_transitions": 648192
+  },
+  "secondary_budget_seconds": 1200,
+  "cache_policy": "Use same explicit project native Inductor/Triton caches; never clear between jobs; snapshot actual before/after cache inventories in every child run; report different warm histories",
+  "production_prior": "A2 eager geometric prior; native compile/TF32 unchanged in both arms",
+  "execution_policy": {
+    "single_GPU_serial": true,
+    "no_auto_retry": true,
+    "no_quality_based_stopping": true,
+    "fail_stop_on_process_or_CPU_health_error": true,
+    "fresh_process_each_job": true,
+    "from_scratch_no_checkpoint_resume": true,
+    "first_checkpoint_cpu_audit_each_run": 100,
+    "final_cpu_audit_each_run": 2000,
+    "pause_Goal_leaves_queue_and_child_running": true,
+    "do_not_run_external_GPU_evaluations_while_queue_active": true
+  },
+  "estimated_total_seconds_from_pilot_costs": 3780,
+  "ETA_scope": "Legacy planning-reference field:3x1260s from actual P_ONLY10iter late-throughput forecast; not observed seed0 or equal-compute claim. Range54-81min; CPU launch/audit overhead extra.",
+  "queue_runner_sha256": "fe06715419a7ec863e64cfa4757b0db3cad78bed272d06d7ac5153385ea2ef41",
+  "queue_runner": "D:\\workspace\\supermimic-chord-penalty-only-study\\scripts\\run_matched_training_queue.py",
+  "launcher": "D:\\workspace\\supermimic-chord-penalty-only-study\\scripts\\start_matched_training_queue.ps1",
+  "launcher_sha256": "92a05ac70750e48da01b065f85e79be9fe85a530a66b299d6f24f9cd5cf895f2",
+  "templates": {
+    "P_ONLY": {
+      "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\configs\\training\\penalty_only_2000iter_seed1.json",
+      "sha256": "d4d0b864ae615f3e76d2b454f6f14fdc203d37626ff17bae23ebc18c67e4856c"
+    }
+  },
+  "clock_policy": {
+    "actual_child_PID_OS_creation": "CIM observed once with parentPID and commandline identity; raw UTC/local timestamps persisted",
+    "strict_secondary1200s": "Use checkpoint completedUTC minus observed exact actual child OS creationUTC; sidecar STARTED elapsed is additional diagnostic, not an exact OS anchor",
+    "missing_OS_timestamp": "Explicitly missing; conservative bounds from Popen prelaunch to actual runtime first observation; do not substitute runtime timestamp or Popen postlaunch as exact actual child creation",
+    "startup_errors": "Outer handler covers initial validation, lock and launch; failed_no_child_started recorded; preserve competing/prior queue state in separate failure note"
+  },
+  "method": "P_ONLY",
+  "followup_protocol_file": "D:\\workspace\\supermimic-chord-penalty-only-study\\configs\\penalty-only-followup-v1.json",
+  "followup_protocol_sha256": "6c017ee91ba355e34011be0ed22b128ea32a4d977d71c2863f57080d571b31f1",
+  "shared_physical_GPU_lock": "D:/workspace/supermimic-chord-study/.locks/single_gpu_training.lock",
+  "engineering_smoke_evidence": {
+    "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\outputs\\penalty_smoke_summary_v1\\report.json",
+    "sha256": "b39248793873e715c2a17cd886f21bc5faf465df0f818370074988fc042bd378",
+    "entry_sha256": "f9215ce9605728a4822b00f50f907f78650ebbecb1d920c9fd663996c64c6943",
+    "wrapper_sha256": "cfa53515fb7dc12ae49a2aec2d9ca37603061c1752fc8875f879cf5ea235c914"
+  }
+}

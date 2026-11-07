@@ -1,0 +1,247 @@
+{
+  "schema": "hand2_phone_static_distance_probe:1",
+  "scope": "Pure static signed-distance observer diagnosis, not optimization/contact certificate/holding",
+  "inputs": {
+    "retarget_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\report.json",
+      "bytes": 32618,
+      "sha256": "f63174e4252cc98e75ff5720f1184ee47a07a0b3ee8c1bed6d285b4f62a3db36"
+    },
+    "retarget_log": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\all_geometry_evaluations.jsonl",
+      "bytes": 309178,
+      "sha256": "f1fd7fe97d4e6b67a14e5f98ab832cc0b7c552cf39661c1c8f985fc490d43488"
+    },
+    "retarget_diagnostic": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\diagnostic_readback_v1.json",
+      "bytes": 11118,
+      "sha256": "31ec1de5cf62a5120bff996063ddd008b3ec40ed969c8417439759f50b7544a8"
+    },
+    "loader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\scene_loader_v1.py",
+      "bytes": 2908,
+      "sha256": "5a36cf1d6ac875c3f0cfc3c80b5b28c8c5726ec68d3ac40f731ccee70840b303"
+    },
+    "model": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\completed_v2\\hand2_phone_scene.mjb",
+      "bytes": 18196132,
+      "sha256": "72c78a89b7c10c2f02034a680397187f3283d3f9b9010a7b0db399e388966cc7"
+    },
+    "source_manifest": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\distance_probe_v1\\source_manifest.json",
+      "bytes": 2963,
+      "sha256": "8011289d9c232484ef033bd6a1dc45e2077d7b8fa837522eda1a796c3bdaa1f0"
+    },
+    "seed0_state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\seed0_candidate_state.npz",
+      "bytes": 8344,
+      "sha256": "13ee1c6e27b7a3b820261dbcca5fe539d50c4f24a6630399ef31925d3ab909fb"
+    },
+    "seed1_state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\seed1_candidate_state.npz",
+      "bytes": 8342,
+      "sha256": "9916e41b5c890522e7eb72bd70e367d1db5c358c91188ffb4744dc0a98408565"
+    },
+    "seed2_state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\seed2_candidate_state.npz",
+      "bytes": 7883,
+      "sha256": "58fa94ed0e350da1ec3d49e3d5705fdcdf76af6db05dfe07f2e60cc214d3fcd2"
+    }
+  },
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "cases": [
+    {
+      "name": "base",
+      "frame": "world",
+      "delta_m": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "saved_tiny_palmY",
+      "frame": "palm",
+      "delta_m": [
+        0.0,
+        1.4901161193847656e-08,
+        0.0
+      ]
+    },
+    {
+      "name": "world_X_-1_1e-05m",
+      "frame": "world",
+      "delta_m": [
+        -1e-05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "world_X_+1_1e-05m",
+      "frame": "world",
+      "delta_m": [
+        1e-05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "world_Y_-1_1e-05m",
+      "frame": "world",
+      "delta_m": [
+        0.0,
+        -1e-05,
+        0.0
+      ]
+    },
+    {
+      "name": "world_Y_+1_1e-05m",
+      "frame": "world",
+      "delta_m": [
+        0.0,
+        1e-05,
+        0.0
+      ]
+    },
+    {
+      "name": "world_Z_-1_1e-05m",
+      "frame": "world",
+      "delta_m": [
+        0.0,
+        0.0,
+        -1e-05
+      ]
+    },
+    {
+      "name": "world_Z_+1_1e-05m",
+      "frame": "world",
+      "delta_m": [
+        0.0,
+        0.0,
+        1e-05
+      ]
+    },
+    {
+      "name": "world_X_-1_1e-06m",
+      "frame": "world",
+      "delta_m": [
+        -1e-06,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "world_X_+1_1e-06m",
+      "frame": "world",
+      "delta_m": [
+        1e-06,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "world_Y_-1_1e-06m",
+      "frame": "world",
+      "delta_m": [
+        0.0,
+        -1e-06,
+        0.0
+      ]
+    },
+    {
+      "name": "world_Y_+1_1e-06m",
+      "frame": "world",
+      "delta_m": [
+        0.0,
+        1e-06,
+        0.0
+      ]
+    },
+    {
+      "name": "world_Z_-1_1e-06m",
+      "frame": "world",
+      "delta_m": [
+        0.0,
+        0.0,
+        -1e-06
+      ]
+    },
+    {
+      "name": "world_Z_+1_1e-06m",
+      "frame": "world",
+      "delta_m": [
+        0.0,
+        0.0,
+        1e-06
+      ]
+    }
+  ],
+  "pairs": {
+    "phone": "phone24_collision_convex",
+    "targets": [
+      {
+        "name": "right_finger1_tip_sensor_col",
+        "original_geom_id": 15
+      },
+      {
+        "name": "right_finger2_tip_sensor_col",
+        "original_geom_id": 28
+      },
+      {
+        "name": "right_finger2_link3_col",
+        "original_geom_id": 24
+      }
+    ]
+  },
+  "distmax_m": 1.0,
+  "orders": [
+    "phone_to_target",
+    "target_to_phone"
+  ],
+  "identical_input_repeats": 3,
+  "kinematic_path": "mj_kinematics only, matching old solver. Full qpos27 reset each case; exact q20 and phone rotation remain fixed; world displacement saved.",
+  "modes": [
+    {
+      "name": "original_native",
+      "ccd_iterations": 35,
+      "ccd_tolerance": 1e-06,
+      "nativeccd_enabled": true
+    },
+    {
+      "name": "fixed_precise_native",
+      "ccd_iterations": 200,
+      "ccd_tolerance": 1e-10,
+      "nativeccd_enabled": true
+    },
+    {
+      "name": "legacy_libccd_control",
+      "ccd_iterations": 35,
+      "ccd_tolerance": 1e-06,
+      "nativeccd_enabled": false
+    }
+  ],
+  "model_changes": "Only owned per-mode copies receive exactly these option changes. Original model/file/wrist/gains/geometry untouched.",
+  "necessary_bound_screen": {
+    "formula": "abs(d_translated-d_base) <= norm(actual_world_translation) + allowance",
+    "allowance_m": 2e-06,
+    "reason": "Fixed engineering screen chosen before probes: twice original1um CCD tolerance. This is NOT a certified algorithmic error bound; strict zero-allowance excess is also saved. Never tuned after outputs.",
+    "semantic_limit": "For consistent minimum signed distance of translated convex bodies. Legacy distances are documented inaccurate, so its bound failures are control descriptors, not a replacement reference."
+  },
+  "zero_and_censoring": "Record all scalars/witnesses. d==distmax with zero segment is censored/no selected contact; d==0 including zero segment is UNKNOWN without convergence status. No scalar0 contact certificate.",
+  "failure_policy": "Preserve row exceptions/native warnings without automatic settings changes/retries; complete the predeclared remaining rows where possible.",
+  "expected_counts": {
+    "modes": 3,
+    "seeds": 3,
+    "poses_per_seed_mode": 14,
+    "MjData_instances": 3,
+    "mj_kinematics": 126,
+    "mj_geomDistance": 2268,
+    "mj_step_optimization_training_GPU": 0
+  },
+  "setting_selection": "All3 modes reported; no after-results mode tuning or winner/physical qualification."
+}

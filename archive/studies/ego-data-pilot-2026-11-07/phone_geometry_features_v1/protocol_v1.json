@@ -1,0 +1,113 @@
+{
+  "schema": "phone_geometry_features_bounded_CPU_protocol:1",
+  "role": "current_state_compiled_geometry_FK_not_distance_or_dynamics",
+  "CPU_run_authorized": true,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1",
+  "inputs": {
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "acquisition_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 10554,
+      "sha256": "4eaba866d38b51d5edfced2cbc46eb6cd8315c78a0c50b769d7e2b79fecf4559"
+    },
+    "dataset_audit": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\independent_dataset_review_v1\\report.json",
+      "bytes": 9318,
+      "sha256": "718368880239b9858c7f47bc5ef4fed0ca6a07d74d2a72e9fa6d97349966d506"
+    },
+    "identities": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\sample_identities.json",
+      "bytes": 2687154,
+      "sha256": "23b39fe3dd3d1f15b44942e4ac8a8e12082515a3fdc6ba41e34d936fc13f8a56"
+    },
+    "episodes": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\episodes.json",
+      "bytes": 161321,
+      "sha256": "189b2b5af34c3999a57b7da6b705547a1b8464cd3b6ee5920327630233bf4c99"
+    }
+  },
+  "sources": {
+    "provider": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\geometry_provider.py",
+      "bytes": 11690,
+      "sha256": "f00da9a2c5deb19261a3ff4e168d79f8aea9784736e0fdd0897ffe9599a3b07b"
+    },
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\build_and_check_provider_v1.py",
+      "bytes": 17921,
+      "sha256": "66da623bf79c6cfd239cbd3a1bc9933c46321dfd61795a30015dd656353e762c"
+    },
+    "adapter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    },
+    "codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "state_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "native_kinematics": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_source_audit_v1\\official_3_11_sources\\src__engine__engine_core_smooth.c",
+      "bytes": 82794,
+      "sha256": "dea0dbe7520a71655623f7da150bce373f861df48539c0303f4989c15c040f0d"
+    },
+    "native_collision_geometry": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\primary_mujoco_3_11_collision_convex.c",
+      "bytes": 51061,
+      "sha256": "273eab37a20fb8c8428626610d7f6d845c98df9a067df50d8f13d43d6e92f31f"
+    }
+  },
+  "fixtures": [
+    {
+      "family_id": 0,
+      "dt_s": 0.00015625,
+      "interval_index": 0
+    },
+    {
+      "family_id": 8,
+      "dt_s": 0.0003125,
+      "interval_index": 2
+    },
+    {
+      "family_id": 24,
+      "dt_s": 0.00015625,
+      "interval_index": 5
+    }
+  ],
+  "tolerances": {
+    "F64_pose_abs": 1e-10,
+    "q_Jacobian_abs": 1e-10,
+    "directional_FD_abs": 1e-08
+  },
+  "budget": {
+    "MJB_loads": 1,
+    "MjData": 3,
+    "mj_kinematics": 3,
+    "mj_forward": 0,
+    "mj_comPos": 0,
+    "mj_step": 0,
+    "Torch_FK_calls": 6,
+    "pure_tensor_q_AD_calls": 1,
+    "NN_constructors": 0,
+    "NN_forward": 0,
+    "NN_AD": 0,
+    "optimizer_updates": 0,
+    "GPU_calls": 0
+  },
+  "qualification_scope": "Structure/coordinate arithmetic only; no gap/SDF/contact-normal/force/causal/Markov/learning/Actor qualification"
+}

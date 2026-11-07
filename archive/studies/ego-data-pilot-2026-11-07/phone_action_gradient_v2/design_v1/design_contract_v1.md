@@ -1,0 +1,9 @@
+# Phone finite-action and learned-AD probe v2
+
+Select VAL family6 (exact source) and30 (1mm source), both timesteps and intervals0/2/5:12 fixed states. The original before-action integration vectors, initial episode safety references and target receipts are pinned in the operand package. Restore the full300-state context, including current velocity and original native time, rather than starting a new episode at the current pose. All12 original-action baselines must first reproduce their recorded H endpoints/receipts.
+
+For q0..7, each positive and negative side independently uses min(0.01 rad, half of its actual hard-control margin). A side whose actual F64 endpoint difference is below1e-6 rad is explicitly unavailable; the feasible opposite side remains. No clipping or symmetry-driven reduction. At most204 branches and19,584 native steps are permitted. All aborted prefixes remain, with no invented20ms target.
+
+The primary59 observations are physical world delta52, two full-PRE pad coverage fractions, and five log1p(force/1N) values. Compare native and model finite-action secants at identical physical endpoints and actual F64 denominators. Separately compare the model's action AD at its FP32 baseline to its own finite secant using actual FP32 endpoint separation. Save rounding differences and undefined denominators. Full body orientation, COM and contact signatures remain available.
+
+Report every side in physical blocks, with additional frozen TRAIN-only standardization; constant TRAIN dimensions have undefined normalized values. Use no mixed-unit global norm as the sole result and no accuracy/stability threshold. Crossing contacts produces a finite-action response, not proof of a physical Jacobian. This is exploratory local VAL analysis, with no new learning, real-ego truth, holding qualification or checkpoint selection. The JSON contract and selection are authoritative.

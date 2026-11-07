@@ -1,0 +1,59 @@
+--- evaluate_learned_actors_v1.py
++++ evaluate_learned_actors_v2.py
+@@ -7,7 +7,8 @@
+ import argparse,hashlib,importlib.util,json,math,os,sys,time,traceback
+ import numpy as np
+ H=Path(__file__).resolve().parent;P=H.parent
+-SCHEMA='phone_tripod_fixed1000_Actor_native_evaluation_protocol:1'
++SCHEMA='phone_tripod_fixed1000_Actor_native_evaluation_protocol:2'
++PAIR_GATES={'final_COM_difference_m':.002,'final_orientation_difference_rad':.03490658503988659,'require_both_duration_complete':True}
+ ARTIFACT='phone_tripod_sharedWM_A1A2_training_checkpoint:1'
+ MODES=['A1_tracking','A2_engineered_material_proxy'];DTS=[.0003125,.00015625]
+ FINAL_INPUTS=['training_final_protocol','final_result','final_health','final_terminal']
+@@ -27,6 +28,7 @@
+ def metadata_preflight(path,*,check_output_fresh=True):
+     p=read(path);need(p['schema']==SCHEMA and p['source']==pin(__file__),'New fixed1000 evaluation source')
+     need(p['fixed_paired_round']==1000 and p['modes']==MODES and p['dt_s']==DTS and p['device']=='cpu','Fixed final two arms/four CPU cases')
++    need(p['native_dt_pair_gates']==PAIR_GATES and p['native_dt_pair_rule']['source']==p['sources']['kernel_frozen_loop'] and p['native_dt_pair_rule']['function']=='dt_pair_summary','Original full double-dt endpoint gates')
+     need(p['GPU_run_authorized'] is False and p['training_authorized'] is False,'No GPU/training')
+     for k in ['CPU_run_authorized','NN_forward_authorized','native_execution_authorized']:need(type(p[k]) is bool,'Typed execution permission')
+     for v in p['sources'].values():checked(v)
+@@ -132,6 +134,8 @@
+         model=mujoco.MjModel.from_binary_path(str(checked(p['inputs']['model'])));counts['MJB_reads']=1
+         phone,pg,table,pads=kernel.frozen.assert_model(model,mujoco,np,read(checked(p['inputs']['binding'])))
+         digest=kernel.frozen.model_digest_except_dt(model,np);geometry=gap.DirectionalGapProvider(checked(p['inputs']['geometry_catalog']))
++        need(kernel.frozen.PAIR_GATES==p['native_dt_pair_gates'],'Actual frozen native pair gates')
++        variants=[];endpoints_by_variant={}
+         before={mode:{k:v.detach().clone() for k,v in actor.state_dict().items()} for mode,actor in actors.items()};CPU_rng=torch.get_rng_state().clone()
+         for mode in MODES:
+             # Both modes share observation/control semantics; rewards are not
+@@ -139,9 +143,11 @@
+             task=trainer.CanonicalMemoryTask(taskmod.PhoneTask(checked(p['inputs']['task_bundle']),mode='A1_tracking',geometry=geometry))
+             for dt in DTS:
+                 phase=mode+'_dt_'+str(dt);base=next(c for c in p['original_cases'] if c['dt_s']==dt);variant=dict(base['command']);variant['name']=mode+'__fixed1000'
++                if variant['name'] not in endpoints_by_variant:variants.append(variant);endpoints_by_variant[variant['name']]=[]
+                 folder=out/(mode+'__dt'+str(dt));folder.mkdir()
+                 callback=controller_module.TaskController(task,geometry,codec,dt,phone,actor=actors[mode],device='cpu')
+                 summary,endpoint=kernel.evaluate_case_controlled(model,variant,dt,folder,phone,pg,table,pads,mujoco,np,counts,callback)
++                endpoints_by_variant[variant['name']].append(endpoint)
+                 need(callback.NN_FW==len(callback.records),'One Actor forward per issued50Hz command')
+                 need(all(callback.memory[k].dtype==torch.float64 for k in ['a1','a2','c1','last_u']),'Canonical F64 executed history')
+                 write(folder/'controller_records.json',callback.records);counts['Actor_FW']+=callback.NN_FW
+@@ -149,10 +155,15 @@
+                 np.savez_compressed(folder/'tracking101.npz',**arrays);write(folder/'tracking_statistics.json',tracking)
+                 cases.append(dict(mode=mode,dt_s=dt,native_summary=summary,endpoint=endpoint,controller_calls=len(callback.records),controller_records=pin(folder/'controller_records.json'),tracking=tracking,tracking_arrays=pin(folder/'tracking101.npz'),tracking_statistics=pin(folder/'tracking_statistics.json')))
+                 write(out/'completed_case_manifest.json',dict(cases=cases,planned_cases=4,all_cases_complete=len(cases)==4))
++        pairs=kernel.frozen.dt_pair_summary(variants,[c['native_summary'] for c in cases],endpoints_by_variant,np)
++        need(len(pairs)==2 and {v['name'] for v in pairs}=={m+'__fixed1000' for m in MODES},'Both full frozen dt-pair records retained')
++        write(out/'native_dt_pair_consistency.json',pairs)
++        pair_by_name={v['name']:v for v in pairs}
+         checks=dict(all4_fixed_cases_recorded=len(cases)==4,exact_Actor_FW_callback_count=counts['Actor_FW']==counts['controller_calls'],finite_declared_budget=counts['integration_steps']<=38400 and counts['Actor_FW']<=400,Actor_weights_norm_unchanged=all(raw_equal(before[k],actors[k].state_dict(),torch) for k in MODES),CPU_RNG_unchanged=raw_equal(CPU_rng,torch.get_rng_state(),torch),no_WM_training_or_observer_forward=counts['WM_FW']==counts['Critic_FW']==counts['optimizer_steps']==counts['backward_calls']==counts['observer_forward']==0,model_unchanged_except_dt=digest==kernel.frozen.model_digest_except_dt(model,np),CPU_only=not torch.cuda.is_initialized())
+         need(all(checks.values()),'Evaluation integrity failed; preserve output, no retry')
+-        report=dict(schema='phone_tripod_fixed1000_Actor_native_evaluation_result:1',status='COMPLETED_ALL4_CASES_PHYSICAL_GATES_REPORTED_NOT_ASSUMED',protocol=pin(protocol),source=pin(__file__),checkpoint=load_receipt['checkpoint'],load_receipt=load_receipt,checks=checks,passed=sum(checks.values()),total=len(checks),counts=counts,cases=cases,
+-            physical_results=dict(tripod_cases_passing=sum(v['native_summary']['nominal_holding_dynamics_pass'] for v in cases),old_two_pad_cases_passing=sum(v['native_summary']['old_two_pad_pass'] for v in cases),double_dt_by_mode={mode:dict(both_duration_complete=all(c['native_summary']['gates']['duration_complete'] for c in cases if c['mode']==mode),both_tripod_original_gates_pass=all(c['native_summary']['nominal_holding_dynamics_pass'] for c in cases if c['mode']==mode)) for mode in MODES}),
++        report=dict(schema='phone_tripod_fixed1000_Actor_native_evaluation_result:2',status='COMPLETED_ALL4_CASES_PHYSICAL_GATES_REPORTED_NOT_ASSUMED',protocol=pin(protocol),source=pin(__file__),checkpoint=load_receipt['checkpoint'],load_receipt=load_receipt,checks=checks,passed=sum(checks.values()),total=len(checks),counts=counts,cases=cases,
++            physical_results=dict(tripod_cases_passing=sum(v['native_summary']['nominal_holding_dynamics_pass'] for v in cases),old_two_pad_cases_passing=sum(v['native_summary']['old_two_pad_pass'] for v in cases),double_dt_by_mode={mode:dict(comparison_status=pair_by_name[mode+'__fixed1000']['comparison_status'],gates=pair_by_name[mode+'__fixed1000']['gates'],dt_pair_consistency_pass=pair_by_name[mode+'__fixed1000']['dt_pair_consistency_pass'],both_tripod_cases_and_dt_pair_pass=pair_by_name[mode+'__fixed1000']['both_tripod_cases_pass'] and pair_by_name[mode+'__fixed1000']['dt_pair_consistency_pass'],both_old_two_pad_cases_and_dt_pair_pass=pair_by_name[mode+'__fixed1000']['both_old_two_pad_cases_pass'] and pair_by_name[mode+'__fixed1000']['dt_pair_consistency_pass']) for mode in MODES}),
++            dt_pair_consistency=pairs,dt_pair_consistency_output=pin(out/'native_dt_pair_consistency.json'),
+             elapsed_s=time.perf_counter()-start,scope=p['scope'],tracking_success_qualified=None,full_online_SuperMimic_implemented=False)
+         write(out/'report.json',report);print(json.dumps(dict(report=pin(out/'report.json'),case_count=4,counts=counts,physical_results=report['physical_results'])),flush=True);return 0
+     except BaseException as e:

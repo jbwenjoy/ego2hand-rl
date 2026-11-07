@@ -1,0 +1,214 @@
+{
+  "schema": "observation_warmseed_frame0_rest_hold_plan:1",
+  "status": "ROOT_REVIEWED_ONE_H123_INITIALIZATION_ATTEMPT_AUTHORIZED",
+  "GPU_run_authorized": true,
+  "frame": 0,
+  "steps": 60,
+  "dt_s": 0.005,
+  "duration_s": 0.3,
+  "nworld": 1,
+  "nconmax": 192,
+  "njmax": 4096,
+  "hard_process_seconds": 45,
+  "soft_worker_seconds": 40,
+  "automatic_retry": false,
+  "output": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\outputs\\h123_rest_baseline_v1",
+  "source_pins": {
+    "worker": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\scripts\\rest_hold_warp.py",
+      "sha256": "03770389af4f47a9659da015557df04707d574b6c76827d36ded2fa45c47b6a0"
+    },
+    "supervisor": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\scripts\\run_rest_hold.py",
+      "sha256": "2f29bcf1cbe0b96282fb825c18c4ac257de17ddf2e760bce8d200577ddad681f"
+    },
+    "protocol": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\protocols\\h123_warmseed_rest_frame0_v1.json",
+      "sha256": "21c8b87f2bec50a7a11ea6a8229d2f4e36a6b63add14cd0c7fff82238848f368"
+    },
+    "measurement_vendor": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\vendor\\measured_contacts.py",
+      "sha256": "478c3117489bd4a02238f6299a91638e791a751352b772321ce2676b0ec4f96f"
+    },
+    "pure_projection": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\vendor\\target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    },
+    "vendor_provenance": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\vendor\\provenance.json",
+      "sha256": "33f803e409578a3f080d86696272f0086108defd656248b57b4a878227b13377"
+    },
+    "candidate": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\frame0_h123_seeded_baseline_v3\\initialization_candidate.npz",
+      "sha256": "57135b4c607f48d844e3977b56065dc6f1b4c8991626fc033651c6d136b89406"
+    },
+    "firstframe": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\inputs\\h123_baseline_firstframe_geometry_parameters.json",
+      "sha256": "34c0f36d3b92469087aa2b3300351ca2c63237526c4c9752e2ab98502f04605e"
+    },
+    "model": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\rotating_reference_warp_a0\\model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "context": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed1\\compiled\\fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "robot_kinematics": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    },
+    "original_measurement": {
+      "path": "D:\\workspace\\supermimic-chord-study\\scripts\\controlled_pen_rollout.py",
+      "sha256": "8958dc3a1014ad2dbd0879381996ca3a86ce9acefa686286f41759222745f708"
+    },
+    "original_geometry_math": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\geometry.py",
+      "sha256": "a7962e821feb851414d19125aa096a06858d45fcfee726eb7ba8691316aac56f"
+    },
+    "original_pure_projection": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\src\\target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    },
+    "actual8field_copy_reference": {
+      "path": "D:\\workspace\\supermimic-chord-study\\scripts\\probe_world_model_gradients.py",
+      "sha256": "74420b5a66cc8d3a3fd055b5f1c21b879117592d6259fa90051f94a023d76070"
+    },
+    "reviewed_lifecycle": {
+      "path": "D:\\workspace\\supermimic-control-feasibility-draft\\scripts\\run_braking_microprobe.py",
+      "sha256": "40b397f60e91bf59a1c72ad43f9bd52b42e33a820a695c2ec6e43736fa8a54aa"
+    },
+    "mujoco_warp_io": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\io.py",
+      "sha256": "6fe550047ed4b82c307741f84a8a4800587469c52e5ce292a3073824f3451fa6"
+    },
+    "CPU_checker": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\scripts\\check_rest_hold_cpu.py",
+      "sha256": "75381a850481b1a7a6781ea53312122ea4402a4381e3999f070cd2e9c2c66108"
+    },
+    "bounded_IO_vendor": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\vendor\\runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    },
+    "bounded_IO_original": {
+      "path": "D:/workspace/supermimic-c2-confirmation-eval-study/src/runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    },
+    "original_rest_worker": {
+      "path": "D:\\workspace\\supermimic-observation-grounding-study\\scripts\\rest_hold_warp.py",
+      "sha256": "8a269b22bc171b8b214ae45ebf7b961fcff93bc3f53e8717dd66e2a2655565b4"
+    },
+    "original_rest_supervisor": {
+      "path": "D:\\workspace\\supermimic-observation-grounding-study\\scripts\\run_rest_hold.py",
+      "sha256": "242603ec00ecc937698188315e94f2552fbd89355e8e839b4737eb7c5cdf950f"
+    },
+    "H123_recipe": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\configs\\frame0-h123-seeded-baseline-v3.json",
+      "sha256": "d7a5e2e5d876cbbf93b8f59d60f78bef2852d7555d522a9b7f41a7ac6e637ef0"
+    },
+    "H123_bindings": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\frame0_h123_seeded_baseline_v3\\frozen_anchor_bindings.json",
+      "sha256": "91022e42f8a3a6ef215695d8975e46fcc92cb88e431018b412eca77db391775f"
+    },
+    "H123_geometry_report": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\frame0_h123_seeded_baseline_v3\\report.json",
+      "sha256": "4aeaac8b3314e7d10008dde653ab430c42065d7fb8a0b783d809643a1f54b648"
+    },
+    "H123_static_screen": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\h123_object_wrench_screen_v1\\report.json",
+      "sha256": "1746d2f6bf38a82c6fddbc1b4fc4b1bab507669726fe0ee68823e8b83450cc2b"
+    }
+  },
+  "protocol": {
+    "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\protocols\\h123_warmseed_rest_frame0_v1.json",
+    "sha256": "21c8b87f2bec50a7a11ea6a8229d2f4e36a6b63add14cd0c7fff82238848f368"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-chord-study\\outputs\\rotating_reference_warp_a0\\model.mjb",
+    "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+  },
+  "context": {
+    "path": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed1\\compiled\\fixed_physics_context.npz",
+    "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+  },
+  "candidate": {
+    "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\frame0_h123_seeded_baseline_v3\\initialization_candidate.npz",
+    "sha256": "57135b4c607f48d844e3977b56065dc6f1b4c8991626fc033651c6d136b89406"
+  },
+  "firstframe": {
+    "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\inputs\\h123_baseline_firstframe_geometry_parameters.json",
+    "sha256": "34c0f36d3b92469087aa2b3300351ca2c63237526c4c9752e2ab98502f04605e"
+  },
+  "robot_kinematics": {
+    "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\retarget_palmroot_cpu.py",
+    "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+  },
+  "gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0,
+    "finite_all_raw_states_and_measurements": true,
+    "clock_absolute_tolerance_s": 0.000002,
+    "actual_ctrl_FP32_bitwise_equals_fixed_initial_projection": true,
+    "complete_raw61states60solver_samples": true,
+    "final_sticky_overflow_bitmask": 0
+  },
+  "joint_lower_rad": [
+    -1.187,
+    -1.484,
+    -1.047,
+    -1.047,
+    -1.047,
+    -0.698,
+    -1.047,
+    -1.047,
+    -1.047,
+    -0.698,
+    -1.047,
+    -1.047,
+    -1.047,
+    -0.698,
+    -1.047,
+    -1.047,
+    -1.047,
+    -0.698,
+    -1.047,
+    -1.047
+  ],
+  "joint_upper_rad": [
+    1.291,
+    0.698,
+    1.57,
+    1.57,
+    1.57,
+    0.698,
+    2.094,
+    1.57,
+    1.57,
+    0.698,
+    2.094,
+    1.57,
+    1.57,
+    0.698,
+    2.094,
+    1.57,
+    1.57,
+    0.698,
+    2.094,
+    1.57
+  ],
+  "scope": "H123 two fixed different initial-q geometric basins: this is one N1 QREF_C2 rest condition, not a same-q controller test, independent training seed replicate, PD preload or original task success. Other condition must remain separately reported, no quality selection. Static existence is mechanism only, not a physical-launch prerequisite.",
+  "control_condition": "QREF_C2",
+  "canonical_seed_id": "B_baseline_composite",
+  "condition_attempts_max": 1,
+  "cohort_condition_id": "H123_BASELINE_QREF_C2",
+  "fixed_execution_order": 1,
+  "root_review": {
+    "review_plan_sha256": "3d8127a91d4b0662275ec27c3ccb8b19b166f291d93cd30262144012608a9164",
+    "source_worker": "03770389af4f47a9659da015557df04707d574b6c76827d36ded2fa45c47b6a0",
+    "scope": "One attempt for this initialization only; fixed baseline then midpoint order. Same physics/gates as previous rest,60x5ms/40sworker/45sowned/sharedlock/exactCIM. No retry or best selection. Advance to midpoint only after baseline engineering complete60/cap0/ownedprocess exited; quality failure alone does not stop schedule. Both are N1 design conditions, not independent training replicates or same-q controller comparison. No PD preload/other GPU authorization."
+  }
+}

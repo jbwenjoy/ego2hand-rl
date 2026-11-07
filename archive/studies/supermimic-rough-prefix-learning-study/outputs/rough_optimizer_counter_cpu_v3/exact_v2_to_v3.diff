@@ -1,0 +1,39 @@
+--- audit_rough_checkpoint_cpu_v2.py
++++ audit_rough_checkpoint_cpu_v3.py
+@@ -53,6 +53,27 @@
+     # Tuple/list share the JSON array ABI. Canonical bytes preserve JSON scalar
+     # types, unlike Python dict equality where True==1 and 1==1.0.
+     return canonical(saved_config)==canonical(effective)
++
++def optimizer_counts_match(observed, expected):
++    """Only absent counters whose declared expected count is zero may mean zero.
++
++    Native hooks populate defaultdict keys lazily during the WM-only prefix.
++    Unknown keys, booleans, nonintegers, negatives and absent positive counts
++    remain invalid. This does not normalize Adam state or update budgets.
++    """
++    names={'wm','fail_head','actor','critic'}
++    if type(expected) is not dict or set(expected)!=names:
++        return False
++    if not all(type(v) is int and v>=0 for v in expected.values()):
++        return False
++    if type(observed) is not dict or not set(observed)<=names:
++        return False
++    if not all(type(v) is int and v>=0 for v in observed.values()):
++        return False
++    if any(expected[k]>0 and k not in observed for k in names):
++        return False
++    return all(observed.get(k,0)==expected[k] for k in names)
++
+ 
+ def expected_collect_steps(cfg,iteration):
+     out=[max(cfg['warmup_steps'],cfg['wm_window'])];acc=0.
+@@ -176,7 +197,7 @@
+     if cfg['role']=='engineering_smoke':check('engineering10_budget_configuration',all(effective.get(k)==v for k,v in {'num_envs':128,'max_iterations':10,'warmup_steps':16,'utd':.4,'wm_batches':2,'wm_only_iters':2,'horizon':8,'max_horizon':8,'pi_batch':128,'critic_epochs':2,'critic_minibatches':2,'wm_window':8}.items()) and 1<=iteration<=10)
+     check('run_input_training_subset_exact',all(effective.get(k)==v for k,v in cfg['training'].items()))
+     active=max(0,iteration-effective['wm_only_iters']);counts={'wm':iteration*effective['wm_batches'],'fail_head':iteration*effective['wm_batches'],'actor':active,'critic':active*effective['critic_epochs']*effective['critic_minibatches']};transitions=effective['num_envs']*sum(expected_collect_steps(effective,iteration))
+-    check('actual_optimizer_hook_counts',meta.get('actual_optimizer_steps')==counts and (not isfinal or counts==result.get('actual_optimizer_steps')))
++    check('actual_optimizer_hook_counts',optimizer_counts_match(meta.get('actual_optimizer_steps'),counts) and (not isfinal or optimizer_counts_match(result.get('actual_optimizer_steps'),counts)))
+     check('actual_transition_count',transitions==saved.get('sim_steps')==meta.get('sim_steps') and (not isfinal or transitions==result.get('sim_steps')))
+     optsteps={}
+     for n,opt in saved['optimizers'].items():

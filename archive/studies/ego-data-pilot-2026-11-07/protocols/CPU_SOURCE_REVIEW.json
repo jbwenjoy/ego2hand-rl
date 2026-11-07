@@ -1,0 +1,102 @@
+{
+  "schema": "phone_physics_stage1_CPU_source_independent:1",
+  "status": "PASS_BOUNDED_CPU_BENCH_SOURCE_REVIEW_NOT_EXECUTION",
+  "created_UTC": "2026-11-06T18:30:48.302683+00:00",
+  "source_review_qualified": true,
+  "checks": {
+    "current_source_SHA_exact_and_AST_parses": true,
+    "Rx90_maps_thinnest_body_Y_to_world_Z": true,
+    "root_translation_compensates_rotated_nonzero_COM_center": true,
+    "mass_and_uniform_box_inertia_explicit_for_each_prior": true,
+    "bench_condim3_pyramidal_override_and_both_contact_geoms_match": true,
+    "visual_collision_and_inertia_not_double_counted": true,
+    "nominal_first_nine_priors_three_tests_two_dt_source_coverage": true,
+    "protocol_nested_dt_and_canonical_test_names_match": true,
+    "integer_step_push_schedule_half_open_1_to_1p2s_COM_force": true,
+    "poststate_derived_contact_phase_and_extra_forward_accounted": true,
+    "world_COM_and_angular_velocity_from_native_jacobians_saved": true,
+    "physical_U_T_and_native_energy_separate_with_work_operands": true,
+    "contact_rows_warning_changes_and_compiled_options_retained": true,
+    "result_does_not_assert_threshold_or_physical_calibration_pass": true
+  },
+  "passed": 14,
+  "total": 14,
+  "source": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\simulation_stage1\\run_phone_cpu_bench_v1.py",
+    "bytes": 17891,
+    "sha256": "3e3303f09d710c5d9de9e61324fcfc84776cb648b5d8cf3a8d32972953aa858c"
+  },
+  "protocol": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\protocols\\phone_physics_stage1_v1.json",
+    "bytes": 14384,
+    "sha256": "8981e89aec0993887aad65db1722f80d27470d6553a7bd25760a6ba7556d0505"
+  },
+  "contract": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\protocols\\phone_physics_stage1_v1.md",
+    "bytes": 5343,
+    "sha256": "de48254f9932ef3154ef1f6e07c0f1e230426ffb1cb52949946639da6c92f83d"
+  },
+  "asset": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage1\\phone_asset.xml",
+    "bytes": 1333,
+    "sha256": "d39f91e22b4cd7c013acbc3cf040f74924cf96a6e5922e758da188ab2e183528"
+  },
+  "geometry_report": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage1\\geometry_report.json",
+    "bytes": 10311,
+    "sha256": "614d7f60ddda8e4249fa75516137874b36b771b927323b85940fbd5362a0bba2"
+  },
+  "reviewed_functions": [
+    "make_model",
+    "compiled_options",
+    "kinematics_from_state",
+    "initial_state",
+    "force_at_time",
+    "run_case",
+    "main"
+  ],
+  "line_refs": {
+    "Rx90": [
+      18,
+      19
+    ],
+    "COM_correction": [
+      134
+    ],
+    "shared_contact": [
+      76,
+      87
+    ],
+    "force": [
+      142,
+      191,
+      193
+    ],
+    "native_kinematics": [
+      165
+    ],
+    "post_phase": [
+      196
+    ],
+    "extra_forward_counts": [
+      286,
+      287
+    ],
+    "grid_order": [
+      264
+    ]
+  },
+  "bounded_notes": [
+    "SOURCE review only: no mujoco/numpy import, MjModel/MjData, physical step, saved numerical trajectory read or backend execution by reviewer. Production runner imports/executes these only when Root separately invokes it.",
+    "Native contact force6 is local native-contact-frame evidence at the POST state, recomputed with the just-ended interval force still installed. In particular the record at1.2s holds the preceding active interval force; it is not the next force-free interval force solution. Do not integrate these diagnostic POST forces as physical solver-PRE impulses or call them world-frame forces. Contact.frame is not saved; no world force/torque reconstruction is qualified.",
+    "Initial forward1/case and post-step explicit forward1/step are separately counted. Native mj_step internal work is not thereby measured as independent backend API calls. Warp parity requires equivalent declared sampling and initial conditions.",
+    "max_speed_m_s diagnostic currently uses freejoint root-origin speed; COM-rest gates use correctly saved jacobian-based world COM velocity. An independent evaluator should use COM arrays for COM metrics.",
+    "The runner emits recording evidence with thresholds_assessed=false, not a complete phone_physics_stage1_result gate assessment. Future saved-only evaluation must assess all protocol gates, compare time steps, bind execution/geometry/source evidence, and preserve every failed or missing backend case.",
+    "Geometry error is already outside the predeclared geometry bound. Numerical stability, if subsequently observed, cannot override geometry_qualified=false or become real parameter calibration."
+  ],
+  "physics_executed_by_reviewer": false,
+  "actual_backend_parity_qualified": false,
+  "real_parameter_calibrated": false,
+  "ego_retargeting_qualified": false,
+  "hand_task_qualified": false
+}

@@ -1,0 +1,11 @@
+--- D:\workspace\supermimic-c2-portfolio-study\scripts\evaluate_c2_portfolio.py
++++ D:\workspace\supermimic-c2-020-portfolio-study\scripts\evaluate_c2_portfolio.py
+@@ -59,7 +59,7 @@
+     p = read(plan_path)
+     require(p["method"] == "C2_TARGET_INSET" and p["training_updates"] == 0, "Wrong condition")
+     require(p["evaluation_seed"]==0 and p["training_seed_N_per_method"]==3,"Frozen evaluation/seed hierarchy changed")
+-    require(p["margin_rad"]==.005 and all(j["margin_rad"]==.005 and j["margin_mrad"]==5 for j in p["jobs"]),"Common margin changed")
++    require(p["margin_rad"]==.020 and all(j["margin_rad"]==.020 and j["margin_mrad"]==20 for j in p["jobs"]),"Common margin changed")
+     require(len(p["models"])==9 and len(p["jobs"])==len({j["output_dir"] for j in p["jobs"]})==27,"Nine models/27 distinct jobs required")
+     require(len({j["job_id"] for j in p["jobs"]})==27,"Distinct job identities required")
+     require(p["per_child_cap_seconds"]==45 and p["whole_queue_budget_seconds"]==600,"Budget changed")

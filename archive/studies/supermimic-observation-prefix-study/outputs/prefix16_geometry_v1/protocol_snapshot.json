@@ -1,0 +1,343 @@
+{
+  "schema": "short_mapped_dynamic_tracking_proposal:1",
+  "status": "DRAFT_NEXT_CPU_TASK_ONLY_READY_PENDING",
+  "GPU_authorized": false,
+  "optimization_authorized_this_turn": false,
+  "training_authorized": false,
+  "scope": "A new16frame continuous q-goal prefix and two separately reviewed future0.3s tracking diagnostics. Not a rest-stability repetition, full151motion qualification, real-ego result or statistical replication.",
+  "history_and_selection": {
+    "is_real_ego": false,
+    "confidence": null,
+    "canonical_H123_choice_after_prior_geometry_and_QREF_results_visible": true,
+    "static_LP_priority": "Frozen zero-stiction math first, not selected using newphysical outcome",
+    "PDU_rest_is_prior_support_only": "Its zero-velocity constantu PASS applies only to thatrest. It does not qualify the new nonzero-velocity initialization or trajectory."
+  },
+  "inputs": {
+    "observation_fixture": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/observation_only_fixture_v1/observations.npz",
+      "sha256": "3bdca0ee6fd8d7956cac1ee2b13719db5cb302ceb0130972719032a04b3ec35b"
+    },
+    "frozen_full151_geometry": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/outputs/native_contact_refined_geometry_v1/geometric_retarget.npz",
+      "sha256": "539d6247576b9b2e3fb1b143cf17b6ad507e3baea73c5fafcda4e221d9230c8f"
+    },
+    "canonical_H123_q0": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/frame0_h123_seeded_baseline_v3/initialization_candidate.npz",
+      "sha256": "57135b4c607f48d844e3977b56065dc6f1b4c8991626fc033651c6d136b89406"
+    },
+    "frozen_material_anchors": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/frame0_h123_seeded_baseline_v3/frozen_anchor_bindings.json",
+      "sha256": "91022e42f8a3a6ef215695d8975e46fcc92cb88e431018b412eca77db391775f"
+    },
+    "static_preload_design": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/h123_preload_cpu_v1/baseline/designed_target_u0.json",
+      "sha256": "eadb33db1ebbf1abc774a16ed551243ba89f6e325e7486d53720e2ac65caa808"
+    },
+    "PDU_rest_actual": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/outputs/h123_rest_baseline_preload_v1/evaluation.json",
+      "sha256": "69aecde6bb4be45e158c123662877f013387dc25c4b393eacac8a1bbf40e10ee"
+    },
+    "PDU_owner_evidence": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/outputs/h123_preload_owner_execution_v1/completion.json",
+      "sha256": "9ad1452ea20d433e33389c70a9683c31e3c5274f07ac10a69ba9c5066e630e6f"
+    },
+    "rawFD_design_arrays": {
+      "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\outputs\\dynamic_wrench_v2\\designed_wrench_151.npz",
+      "sha256": "60b1ae5bc6fa918ac1d569b44fddefad387a5ee3e45fc8fffe731cdb17516ead"
+    },
+    "rawFD_protocol": {
+      "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\protocols\\dynamic-wrench-v1.json",
+      "sha256": "a6130ef7d91c89963f94d322cafa8c694784badd905361815c16d01383791a66"
+    },
+    "model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "rest_worker_reuse": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/scripts/rest_hold_warp.py",
+      "sha256": "03770389af4f47a9659da015557df04707d574b6c76827d36ded2fa45c47b6a0"
+    },
+    "supervisor_reuse": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/scripts/run_rest_hold.py",
+      "sha256": "2f29bcf1cbe0b96282fb825c18c4ac257de17ddf2e760bce8d200577ddad681f"
+    },
+    "pure_C2": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/vendor/target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    },
+    "kinematics": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/scripts/retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    },
+    "native_filtered_geometry": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/scripts/native_filtered_contact_geometry.py",
+      "sha256": "c964d5b300baac57a5353afd3b5aa4cfb381eca1da03ceef712691dd10376c72"
+    },
+    "material_geometry": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/scripts/material_anchors.py",
+      "sha256": "d860c666cf596abe8f374342f191515b4c51b3537d86a64d99e850e8f7fcd37c"
+    },
+    "registry_background_only": {
+      "path": "D:/workspace/supermimic-shared-reference-study/configs/derived_reference_registry_v1.json",
+      "sha256": "f44d29724a6f8abec13254f375ccbcc16ce12c049599fd3586dc02401a18d5a7"
+    },
+    "registry_API_background_only": {
+      "path": "D:/workspace/supermimic-shared-reference-study/src/shared_reference/reference_registry.py",
+      "sha256": "7ea67f432e75045da2237009d8ceb0e739cad3439c444f2512b93020ac1fe327"
+    },
+    "original_acceptance_math": {
+      "path": "D:/workspace/supermimic-chord-study/src/chord_study/acceptance.py",
+      "sha256": "b7afba11a1bc0b97425b2d1987615bcbe21acb74467759a0b822f932868a9bb4"
+    }
+  },
+  "source_identity": {
+    "proposed_new_id": "legacy_observation_fixture/clip007_f0200_f0216_H123_prefix16_v1",
+    "parent_observation_source_frame_range_half_open": [
+      200,
+      351
+    ],
+    "primary_pose_prefix_local": [
+      0,
+      16
+    ],
+    "primary_pose_source_frame_range_half_open": [
+      200,
+      216
+    ],
+    "rawFD_derivative_support_local": [
+      0,
+      18
+    ],
+    "rawFD_derivative_support_source_range_half_open": [
+      200,
+      218
+    ],
+    "time_s": [
+      0.0,
+      0.3
+    ],
+    "dt_goal_s": 0.02,
+    "goal_states": 16,
+    "source_lineage_group": "Existing controlled cached fixture; original video/camera/scale/confidence unknown, not a new independentmotion",
+    "not_existing_shared10clip_identity": "Current registry only accepts source[0,151), so it must reject migration of this old[200,351) artifact. A distinct prefix manifest/extension is required, not relabeling."
+  },
+  "next_CPU_task": {
+    "name": "Build one continuous H123 prefix16 candidate, export separate init/reference/control bundles, freeze controller equivalence",
+    "implementation_status": "NOT_IMPLEMENTED_THIS_TURN",
+    "global_q_goal_solver": {
+      "knots": 16,
+      "joints": 20,
+      "q0_hard_fixed_to": "canonical_H123_q0 source64; physical initializer later casts onceFP32",
+      "free_variables": "q_goal[1:16,20] only (300), q_goal[0]=q0",
+      "initial_guess": "Repeat canonical q0 at all16frames; never use old539d q1..15 as outputs, solverwarmstarts or regularization targets",
+      "source_read_for_construction": [
+        "allowlist time/handlandmarks/objectpose",
+        "knownkinematics/geometry/context",
+        "frozen source-to-fixed-palm R/t and mappedobjectpose; do not optimize wrist/objectpose",
+        "canonicalH123 q0 and fixed hand-material/object-local anchor hypotheses"
+      ],
+      "objective": "One coupled wholeprefix least_squares with sparseanalytic blocks; no per-frame acceptance/restart/parameter sweep",
+      "residual_weights": {
+        "bone_direction": 1.0,
+        "native_hand_object_and_self_overlap": 1.0,
+        "anchor_position": 1.0,
+        "anchor_normal": 0.25,
+        "q_to_canonical_q0": 0.03,
+        "q_to_nominal": 0.001,
+        "adjacent_q_difference": 0.03,
+        "second_q_difference": 0.03
+      },
+      "anchor_position_scale_m": 0.001,
+      "anchor_inset_m": 0.0003,
+      "native_overlap_allowance_m": 0.0005,
+      "native_overlap_scale_m": 0.001,
+      "optimizer": "scipy least_squares TRF, analytic sparseCSR Jacobian, originalhardq bounds, ftol/xtol/gtol1e-8",
+      "max_nfev": 80,
+      "soft_wall_s": 110,
+      "owned_process_cap_s": 120,
+      "automatic_retry": false,
+      "outcome": "Keep complete/partial iterate, allframe errors/ties/missingcontacts/nonconvergence. Do not clip or substitute another branch to pass gates."
+    },
+    "frozen_contact_intent_schedule": {
+      "status": "HYPOTHESIS_NOT_KNOWN_CONTACT_LABEL",
+      "fingers": [
+        1,
+        2,
+        3
+      ],
+      "frames": "all16, fixed before solve",
+      "rule": "Freeze parent handgeom/materialpoint/normal once. Freeze corresponding objectlocal surfacepoint/outwardnormal from parent source-side hypothesis, transport by mapped objectR/t. Never reselect nearestfinger/vertex using optimizedstate or physicalfeedback.",
+      "extra_contacts": "No identity-based penalty against other stable contacts. Native handself and HO overlap penalties remain. Absence is UNKNOWNgap, not gap0/no-overlap proof."
+    },
+    "reference_curves": {
+      "object_translation": "Piecewise quintic Hermite through frozen16COM positions and full151 rawFD v/a at these knots, not a newly tuned smoother",
+      "object_rotation": "SO3 quintic Hermite R(s)=Ri Exp(phi(s)): preserve frozenpose knots and worldomega/worldalpha at boundaries. RightJacobian maps phi_dot to bodyomega; endpoint phi_dot=Jr^-1*omega_body, phi_ddot=Jr^-1*(alpha_body-DJr[phi_dot]*phi_dot). Validate independently before use; never filterquatcomponents.",
+      "object_sensitivity": "Existing window9/poly3 is report-only, never substitute after failure",
+      "q_goal": "Newprefix FD1/FD2 from its own16q knots with declared one-sided endpoint stencils, then quintic Hermite. No oldq derivatives. Validate q/qdot/qdd continuous at knots and whole-polynomial hardrange (not onlysampled knots); failureblocksGPU.",
+      "endpoint": "Stop at.3 without asserting zero terminalvelocity or appending oldframe16. Extending to3s later requires a new wholetrajectory construction, not a splice.",
+      "artifact_status": "PENDING_IMPLEMENTATION_AND_NUMERIC_VALIDATION"
+    },
+    "q_u_v_separation": {
+      "q_goal": "Kinematic desired20joint state, not actualstate or command",
+      "native_FD_goal_qd": "Designed derivative of NEW q_goal, not video/robot velocity",
+      "q_init_requested": "New q_goal0 castonceFP32, distinctfield/provenance from goal and actualmeasured",
+      "qd_init_requested": "New q_goal derivative0 castonceFP32, not copiedzero-v rest",
+      "object_init_world_v_omega": "Frozen rawFD COMv0/worldomega0 design; bodyorigin v=COMv-omega cross(R*body_ipos), native freeangular=R_init.T*worldomega, castFP32 and verify startup. Herebody_ipos0.",
+      "u_executed": "Frozen pureC2 absolute target schedule, not q_goal/actualq",
+      "init_measured": "None/PENDING until independent truephysical startupreadback",
+      "relative_contact_velocity": "Report pointJac*qdot vs object v+omega crossarm for everygenerated initialcontact. Finite diagnostic required, no fabricated no-slip/contactforce qualification."
+    }
+  },
+  "controller_contract": {
+    "status": "PENDING_NEW_PURE_FUNCTION_AND_CPU_REAL_IMAG_PROOF",
+    "kind": "Absolute positionPD target schedule, zero learnedresidual, no EMA in thisfirstexperiment",
+    "actual_affine_law": "tau=kp*u+bias0+bias1*q_actual+bias2*qd_actual, actualcontext, gear1. Do not ignore qdot damping.",
+    "static_prior": "tau_ff_static0=kp*u_PDU+bias0+bias1*q0 using actualcontext/FP32 specifiedgrouping atzeroqd; not a dynamicinverse solution or measuredforce",
+    "tracking_proposal": "u_pre[k]=(tau_ff_static0-bias0-bias1*q_goal[k]-bias2*qd_goal[k])/kp. This cancels referencePDdamping and transports a fixedstaticload prior; it does NOT solve changing object inertial/contact demands.",
+    "execution": "u_exec[k]=frozenFP32 C2.020(u_pre[k]); bothconditions share exactly u_exec0. Allclipping recorded; initialtarget need not equal oldzero-v PDUu. No actualq feedback target recomputation; actuatorPD feedback remains native.",
+    "required_CPU_proof": [
+      "actual gain/bias/gear/dyntype contract; reject unsupported model",
+      "NumPy real-export and pureTorch imagined algebra sameFP32grouping plus pinnedC2; no WM/dynamicsparity claim",
+      "q_goal/qd_goal/init/u fields andunits/frame distinct; nonfinite/wrongwindow/phase mismatch reject",
+      "all15 executedtargets C2-bound, actual50Hz targetrate<=15rad/s; no silentclipping of q_goal or velocity",
+      "predicted actuatorforce fromactualaffine model atreference q/qd within bothactuator+jointforce caps; bothFP32 groupings andquantization effects recorded, not claimedWarpFMAidentical",
+      "same u0 forhold andtracking; tracking schedule must differ fromhold atsomeactualFP32 command, otherwise no intervention",
+      "reference interpolation/endpoint derivatives checked; forces/gravityframe convention matches installedAPI; identity/hash/registrycontract complete"
+    ],
+    "write_schedule": "15targets forintervals[k*.02,(k+1)*.02), k0..14. Initializeu0 beforestartup. Exactly14postinitctrlupdates beforephysicssteps5,9,...57; zero q/qvel/object/mocap/exogenous writes afterinit.",
+    "forcephase": "Afterstepj, contact/force samples solverprestate j-1 with controlinterval floor((j-1)/4); q/qvel/time arepoststatej. Targetupdate event and commandreadback separate from priorstate ctrl, no extraforward."
+  },
+  "registry_contract": {
+    "background_schema": "shared_derived_reference_registry:1",
+    "background_API": [
+      "open_reference_registry(path, expected_sha256=...)",
+      "resolve_init_requested(registry, source_id, velocity_design=...)",
+      "validate_initialization_identity(...)",
+      "require_training_ready(...) currently raisesPENDING"
+    ],
+    "actual_prefix_entry": null,
+    "integration_status": "PENDING_DISTINCT_LEGACY_WINDOW_IDENTITY_AND_NEW_BUNDLE_EXPORTER",
+    "must_preserve": [
+      "sourceid/window/hash/lineage andmodel/context identity",
+      "q_goal0/nativeFD_goal_qd0 distinct from init_requested and init_measured",
+      "world angular design converted explicitly tofreejoint bodyangular",
+      "u_executed0/PDdesign/controlmemory/actual8/defaultmocap/FP32 casts bound",
+      "registered/geometry-derived data are not physicalqualification; staticPDU cannot fillmeasured init or sharedtrainingready"
+    ],
+    "current_catalog_is_NOT_used_to_request_this_prefix_init": true
+  },
+  "pre_GPU_gates": {
+    "current_status": "ALL_NEW_PREFIX_AND_RUNTIME_GATES_PENDING",
+    "required": [
+      "one frozen new16frame wholeprefix artifact withhardq0/allframe q shape/finite/hardrange checks; alloptimizerfailures/ties preserved",
+      "newq_goal derivatives/continuouscurve/initialboundaries verified; never oldq splice",
+      "frozenobject16pose+rawFD v/a/omega/alpha consistency/units/sourcewindow/hash and properSO3",
+      "nativegeometry diagnostics atall16 and61plannedsubstates: no hiddenmount proxy; absentgapUNKNOWN; initialhypothesislabelsunknown",
+      "fullcontroller u_schedule/C2/rate/actualgainbias-forceprechecks and realimag purealgebra contracts pass",
+      "separateinit/reference/control manifests and distinctsharedregistry compatibility contract pass; no migration from10clip[0,151)",
+      "newworker initnonzerovel/scheduler CPUnegativeproofs, actual8copy/forcephase/overflow/lifecycle source reviewed and finalsourcepins frozen",
+      "Root separately approves bothorderedboundedattempts; untilthen GPUfalse"
+    ],
+    "failure_policy": "No tuning/alternateq0/smoothing/weights orretry withinthisprotocol; savefailedCPUcandidate andstopqualification."
+  },
+  "future_physics_campaign": {
+    "status": "NOT_AUTHORIZED_NOT_IMPLEMENTED",
+    "conditions": [
+      {
+        "id": "H0_MATCHED_DYNAMIC_INIT_HOLD",
+        "order": 1,
+        "control": "All15targets equal newu_exec0"
+      },
+      {
+        "id": "T0_MATCHED_DYNAMIC_INIT_TRACK",
+        "order": 2,
+        "control": "Newfrozen15intervalu_exec schedule"
+      }
+    ],
+    "same_inputs": [
+      "newnonzero qd0/objectv0/objectomega0 andq0/objectpose",
+      "sameu_exec0/model/actual8/defaultmocap/clock/capacities/forceparameters",
+      "same movingobjectreference forboth grades"
+    ],
+    "prior_rest_NOT_matched_control": "OldPDUrest haszero velocities, so cannot replaceH0. No newrest-only repetition substitutes fordynamictracking.",
+    "attempts_per_condition": 1,
+    "automatic_retry": false,
+    "states": 61,
+    "control_targets": 15,
+    "control_intervals": 15,
+    "physics_steps": 60,
+    "physics_dt_s": 0.005,
+    "duration_s": 0.3,
+    "nworld": 1,
+    "nconmax": 192,
+    "njmax": 4096,
+    "worker_soft_s": 40,
+    "owned_process_cap_s": 45,
+    "total_owned_cap_s": 90,
+    "GPU_shared_lock": "Same reviewed singleGPU lock, sequential exclusiveowner",
+    "initialization": "put_model(originalnominal)->copyactual8->put_data(initialq/qd/objectpose/twist/u0)->set_const0restoreTrue->one startupforward; verify exactFP32expected/readback/FK/control",
+    "perstep": "Only Warpstep/readback/capture actualcontacts; no furtherforward/nativeforward/resets/RSI/DR/noise/objectassist",
+    "capacity": "Stickyoverflow readexactlyonce afterstep60/noreset/oneworld0 andnacon/nefc belowcapacity. Engineeringincomplete/nonfinite/capacityfail=>UNKNOWN, preservepartial; qualityfailure full60.",
+    "ownership": "ActualPID+OSCreation+commandhash, bounded40b/159clifecycle andcleanup evidence; no retries/extraGPU"
+  },
+  "future_grade": {
+    "name": "NEW_SHORT_MAPPED_DYNAMIC_TRACKING_NOT_OLD_REST_OR_3S_SPIN",
+    "primary_reference": "Movingfrozenobjectposes atcanonical20ms16ticks; alsoall61substates againstfrozencontinuouscurve diagnostic, no timefit",
+    "position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_environment_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "raw_clock_absolute_tolerance_s": 2e-06,
+    "rawcoverage61state60solver": true,
+    "actualtarget_schedule_FP32_bitexact": true,
+    "target_rate_abs_max_rad_s": 15.0,
+    "actuator_load_ratio_max": 1.01,
+    "load_charge_max": 0.8,
+    "charge_decay_time_s": 2.0,
+    "drop_center_below_default_wrist_m": 0.15,
+    "scope_change_explicit": "Position/shaft comparemovingreference, not initialpose. Constantactualu gate becomes exactdeclaredscheduleconformance; numericthresholds are notrelaxed. Retainall61state/contact depth/force safetychecks.",
+    "full_SO3": "Diagnostic at16/61samples, no new rollthreshold tuned",
+    "short_vs_full_task": "Original3sspin minimum45degprogress/60degexcursion/90degpath andtrajectoryspecificprogressframe cannot be claimed from.3prefix. Thisnewshorttask hasownname; allreferenceprogress/endpointvalues reported andfull3sgrade remainsNOT_ASSESSED.",
+    "interpretation": "OneN1percondition inknown-history sequentialstudy. Both results retained; no bestselection/seedN inflation, no controlledgrasp population/forceprediction/realrobotclaim."
+  },
+  "route_comparison": [
+    {
+      "route": "Joint wholeprefix contactintent geometry+continuity, then directPD",
+      "priority": "RECOMMENDED_NEXT_CPU_ONLY",
+      "why": "Repairs joint boundary and materiallymovingcontactintent overtheentiretestedwindow before dynamicqualification; doesnotreusea discontinuousoldqtail."
+    },
+    {
+      "route": "Per-frame previousq warmstart withtemporalpenalty",
+      "priority": "NOT_A_QUALIFICATION_ALONE",
+      "why": "Existingrefine_native_contacts issequential; temporalsoftpenalty doesnotprove C1velocity/control continuity orsimultaneousconstraints. Itcould bea separatelydeclaredinitializationmethod later, not automaticfallbacknow."
+    },
+    {
+      "route": "Directly reuseold151q afterwarmq0/rest",
+      "priority": "PROHIBITED",
+      "why": "Counterexample jump1.10786rad/20ms=55.3929rad/s implicitqgoalrate; q/u/v andcontactboundary discontinuities."
+    },
+    {
+      "route": "PD plus learnedresidual/SuperMimic+CHORD",
+      "priority": "DEFERRED_UNTIL_NEW_REFERENCE_AND_PHYSICAL_INTERFACE_QUALIFIED",
+      "why": "OldWM/actors were trained oncontrolledreferences; MLP contactproxy/compiledprecision failures remain. ExistingWMwrapperformat3 isnot a format103/newregistry loader; 15selfcollisionhead isnot handobjectprediction. New q/ref/control/velocity/context realimag equivalence andtrainingdataqualification required before learning."
+    }
+  ],
+  "deliverables_next_turn": [
+    "prefix16_reference_and_init_bundle withfullsourceprovenance andrawcontact/tie/vel diagnostics",
+    "CPUsolverresult orpreservedfailure, no alternateattempt",
+    "frozenq/qd/objectstate andu_pre/u_exec schedules withpureCPUrealimag andforce/rateproofs",
+    "newnonzero-init/schedulerworker source+CPUnegativecontracts/READYstillGPUfalse ifanygatepending"
+  ],
+  "pending_reasons": [
+    "Newwholeprefix geometry/reference/control artifacts donotexist yet",
+    "SO3/quintic/derivative/physicalinitinterface andscheduler arenotimplemented/qualified",
+    "Thislegacywindow hasno validcurrentregistryentry",
+    "NoCPUreadiness result orGPU/trainingauthorization issued bythisdraft"
+  ]
+}

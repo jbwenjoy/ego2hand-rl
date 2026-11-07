@@ -1,0 +1,25 @@
+--- prior_static_snapshot/entry
++++ phase2/entry
+@@ -28,14 +28,20 @@
+         ast.parse(source.read_text(encoding='utf-8'))
+     protocol=read(checked(c['protocol']));proposal=read(checked(c['proposal']))
+     if protocol['schema']!='full151105_physical_probe_execution_protocol:1' or protocol['mode_counts']!=MODES or protocol['input_bundle']!=c['input_bundle'] or protocol['proposal']!=c['proposal']:raise ValueError('Common protocol/count/input mismatch')
+-    if proposal['schema']!='full151105_same_Warp_control_gradient_diagnostic_proposal:1' or proposal['execution_status']!='NOT_EXECUTED' or proposal['physical_reference_qualified'] is not False:raise ValueError('Frozen proposal required; no qualification upgrade')
+-    for key in ('transaction_CPU_READY','transaction_CPU_report','schema2_WM_CPU_report'):
++    if proposal['schema']!='full151105_same_Warp_control_gradient_diagnostic_proposal:2' or proposal['execution_status']!='NOT_EXECUTED' or proposal['physical_reference_qualified'] is not False:raise ValueError('Phase-corrected frozen proposal2 required; no qualification upgrade')
++    for key in ('transaction_CPU_READY','transaction_CPU_report','schema2_WM_CPU_report','serial_CPU_READY','serial_CPU_report'):
+         if (str(checked(c['readiness'][key]).resolve()).casefold(),c['readiness'][key]['sha256']) not in indexed:raise ValueError('Readiness not archived')
+     ready=read(checked(c['readiness']['transaction_CPU_READY']));tr=positive(c['readiness']['transaction_CPU_report']);positive(c['readiness']['schema2_WM_CPU_report'])
+     if tr['status']!='PASS_CPU_SURROGATE_INVENTORY_ONLY' or not same(ready['cpu_report'],c['readiness']['transaction_CPU_report']):raise ValueError('Only actual CPU component preparation accepted')
+     for value in ready['source_pins'].values():
+         if (str(checked(value).resolve()).casefold(),value['sha256']) not in indexed:raise ValueError('CPU transaction proof source unarchived or changed')
+     if not same(ready['source_pins']['transaction105'],pin(ROOT/'src/full151_gradient/transaction105.py')):raise ValueError('Current transaction differs from CPU-tested component')
++    serial_ready=read(checked(c['readiness']['serial_CPU_READY']));positive(c['readiness']['serial_CPU_report'])
++    if not same(serial_ready['cpu_report'],c['readiness']['serial_CPU_report']):raise ValueError('Serial CPU proof/report alias mismatch')
++    for value in serial_ready['source_pins'].values():
++        if (str(checked(value).resolve()).casefold(),value['sha256']) not in indexed:raise ValueError('Serial CPU proof source unarchived or changed')
++    current_serial=pin(ROOT/'src/full151_gradient/serial_probe105_v1.py')
++    if not any(same(current_serial,v) for v in serial_ready['source_pins'].values()):raise ValueError('Current serial source was not CPU planning-tested')
+     for donor in c['donor_inputs'].values():
+         directory=Path(donor['directory']).resolve(strict=True)
+         for name,v in donor['input_pins'].items():

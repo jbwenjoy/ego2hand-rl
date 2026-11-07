@@ -1,0 +1,50 @@
+--- original/audit_training_checkpoint.py
++++ P_ONLY/audit_training_checkpoint.py
+@@ -13,9 +13,10 @@
+ import os
+ from pathlib import Path
+ import shutil
++import sys
+ import zipfile
+ 
+-os.environ["CUDA_VISIBLE_DEVICES"] = ""
++os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+ import numpy as np
+ import torch
+ 
+@@ -39,6 +40,27 @@
+     if isinstance(value, float):
+         return math.isfinite(value)
+     return True
++
++
++def followup_contract_checks(run, config, inventory, objective_meta):
++    checks = {}
++    def check(name, passed):
++        checks[name] = bool(passed)
++    workspace = run.parents[1]
++    sys.path.insert(0, str(workspace / "src"))
++    from penalty_study.followup import validate as validate_followup
++    followup_path, followup = validate_followup(config, workspace)
++    check("P_ONLY_distinct_method", config["method"] == "P_ONLY")
++    check("P_ONLY_followup_protocol_frozen", digest(run / "source/followup_protocol.json") == digest(followup_path) == config["followup_protocol_sha256"])
++    check("P_ONLY_inherits_original_v2", followup["inherited_paired_protocol_sha256"] == digest(run / "source/paired_protocol.json"))
++    check("P_ONLY_original_trainer8237_preserved", digest(run / "source/train_controlled_pen.py") == inventory["script_sha256"] and digest(run / "source" / "original_train_controlled_pen.py") == followup["source_bindings"]["original_trainer"]["sha256"])
++    wrapper_pin = followup["source_bindings"]["penalty_wrapper"]
++    check("P_ONLY_wrapper_frozen_current", digest(run / "source/penalty_only_objective.py") == digest(wrapper_pin["path"]) == wrapper_pin["sha256"] == objective_meta["penalty_wrapper_sha256"])
++    check("P_ONLY_effective_support0_baseA2_support1", objective_meta["support_coefficient"] == 0. and objective_meta["scoring"]["support_coefficient"] == 0. and objective_meta["base_A2_scoring"]["support_coefficient"] == 1.)
++    check("P_ONLY_exact_penalty_formula_dt", objective_meta["formula"] == "-.1*penetration_prior" and objective_meta["penetration_coefficient"] == .1 and objective_meta["caller_dt_s"] == .02 and objective_meta["dt_applied_inside_module"] is False)
++    with zipfile.ZipFile(run / "source/contact_objective/study_contact_source.zip") as archive:
++        check("P_ONLY_all12_base_sources_exact", len(followup["vendored_chord_study_sha256"]) == 12 and all(hashlib.sha256(archive.read(name)).hexdigest() == expected for name, expected in followup["vendored_chord_study_sha256"].items()))
++    return checks
+ 
+ 
+ def audit(run, iteration):
+@@ -121,6 +143,7 @@
+         objective_meta = read(attempt / "contact_objective_metadata.json")
+         check("A2_fixed_sampling", objective_meta["sampled_hand_surface_points"] == 1344 and objective_meta["basis"]["training_directions"] == 64)
+         check("A2_qualification_and_dt_preserved", objective_meta["qualified_contact_predictor"] is False and objective_meta["dt_applied_inside_module"] is False and spec["per_control_step_scale"] == .02)
++    checks.update(followup_contract_checks(run, config, inventory, objective_meta))
+     context_difference = {}
+     with np.load(attempt / "fixed_physics_context.npz", allow_pickle=False) as physical:
+         for name in physical.files:

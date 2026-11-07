@@ -1,0 +1,59 @@
+{
+  "schema": "native_equilibrium_interface_four_forward_contract:6",
+  "source_pins": {
+    "evaluator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\evaluator_native_v6.py",
+      "bytes": 19267,
+      "sha256": "0a7a15cf16d98066920de3a95dc7b0b1a9faf61d387c24cf43a1b38f1aa2a16f"
+    },
+    "checker": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\check_native_contract_v1.py",
+      "bytes": 6258,
+      "sha256": "4f911e69665506e01aec1d416c3cfb96242a8fd5f2a6644052d26d945f0ea264"
+    },
+    "geometry": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\evaluator_v3.py",
+      "bytes": 23763,
+      "sha256": "090cf6535f5249de4377a0e022ed7c87b555ad69ed7b570f995badb4d2245d57"
+    }
+  },
+  "input_pins": {
+    "seed0": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\support_refinement_v5_run1\\seed0_result.json",
+      "bytes": 220509,
+      "sha256": "c3c5cb5dd6c342800cb5edb58416e9ca3e60e337dec01fe4461a444a71e66ffb"
+    },
+    "seed1": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\support_refinement_v5_run1\\seed1_result.json",
+      "bytes": 231990,
+      "sha256": "b7b699f5ce938f1558f132c1afcce25ff6054dea8aa57d2739c02d5629d9559d"
+    },
+    "v5report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\support_refinement_v5_run1\\report.json",
+      "bytes": 512025,
+      "sha256": "38881cf58f18f3d59771de5f78d80df201ed0b39ada22fd606462736a6df7ab8"
+    },
+    "binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    }
+  },
+  "native_forward_authorized": true,
+  "integration_optimization_training_GPU_authorized": false,
+  "probes": [
+    "seed0_proposed_ctrl",
+    "seed0_exact_repeat",
+    "seed1_ctrl_equals_q20",
+    "seed1_exact_repeat"
+  ],
+  "fresh_MjData_each_call": true,
+  "qvel_qacc_warmstart_applied_forces": 0,
+  "maximum_native_forward_calls": 4,
+  "digest_check_period": 1,
+  "PD_formula_absolute_roundoff_bound": 1e-12,
+  "geometry_calls": 0,
+  "geometry_scope": "Both exact source poses already have pinned v5 final22/189; this contract is not a new geometry enrollment.",
+  "no_accuracy_or_equilibrium_threshold": true,
+  "automatic_retry": false
+}

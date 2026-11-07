@@ -1,0 +1,238 @@
+{
+  "schema": "phone_tripod_matched_online_collection_CPU_protocol:1",
+  "role": "matched_closed_loop_fixed_final_A1_A2_collection_into_common_nextstage_replay",
+  "CPU_run_authorized": false,
+  "GPU_authorized": false,
+  "training_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\acquired_run1",
+  "rules": {
+    "profiles_per_arm": 4,
+    "native_dt_s": [
+      0.0003125,
+      0.00015625
+    ],
+    "substeps": [
+      64,
+      128
+    ],
+    "maximum_intervals_per_episode": 20,
+    "episodes_per_arm": 8,
+    "maximum_H_per_arm": 160,
+    "maximum_native_steps_per_arm": 15360,
+    "maximum_rows": 320,
+    "maximum_native_steps": 30720,
+    "H_s": 0.02,
+    "exploration_mixture": 0.05,
+    "action_rule": "a=.95*Actor_FP32_as_F64+.05*fixed_profile_F64; no clip",
+    "device": "cpu",
+    "NN_dtype": "float32",
+    "physical_memory_action_dtype": "float64",
+    "cpu_threads": 4,
+    "checkpoint_paired_round": 1000,
+    "checkpoint_shared_WM_updates": 1100,
+    "training_updates": 0,
+    "optimizer_constructors": 0,
+    "WM_forward": 0,
+    "Critic_forward": 0,
+    "terminal": "boundaryPOSTH task loss or Reader physical loss; partial invalid; collection20H truncation bootstraps",
+    "data_role": "ONLINE_TRAIN_ONLY_NEW_STAGE; no independent ego or heldout claim",
+    "automatic_retry": false
+  },
+  "inputs": {
+    "paired_training_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\protocol_CPUFalse_v1.json",
+      "bytes": 10979,
+      "sha256": "932701956482288ea3acdeefb7b39040d5700aaf76cfa8f5368ba4bb9f2e182b"
+    },
+    "paired_checkpoint": null,
+    "paired_health": null,
+    "task_bundle": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+      "bytes": 19375,
+      "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "geometry_catalog": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\geometry_catalog_v1.json",
+      "bytes": 2197,
+      "sha256": "f36298062d6039a6230c9958f0169e57f8544dfd7706ec3b2e988b4796afa33c"
+    },
+    "bridge_qualification": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_bridge_native_v1\\completed_run1\\report.json",
+      "bytes": 11329,
+      "sha256": "f5e020f798a31cb626bca15d36c7783b77cecc8d51f80dbab3f264e80ca49f4b"
+    },
+    "offline_dataset": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\completed_v1\\report.json",
+      "bytes": 8887,
+      "sha256": "c451509bccab0e92b75a738c8a6fddcada4ae94a5d6537aab080c915dd14a879"
+    },
+    "offline_dataset_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\saved_review_v1\\report.json",
+      "bytes": 8873,
+      "sha256": "f19f7f4aa5a27ba36447480c69b338a27fe67dd3758bb6362e453908297560cd"
+    },
+    "physical_parameters": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\completed_v1\\physical_parameters.json",
+      "bytes": 1447,
+      "sha256": "fc2fb4194ef30d60b4fdd625b63105bd84ce9cf26c4a93378ff416a768a75de7"
+    },
+    "geometry_metadata": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_constants.json",
+      "bytes": 91553,
+      "sha256": "330243d3b85abb1e996c2658b9216fe89df9ede53b0c4e035af63deb651f8fd9"
+    },
+    "profile_plan": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\profile_plan_v1.json",
+      "bytes": 53421,
+      "sha256": "5824114c61238fd19f2f3969e371759e001aab5752d9ce5845010ebcc428caf4"
+    }
+  },
+  "sources": {
+    "WM_trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\train_geometry_momentum_wm.py",
+      "bytes": 37229,
+      "sha256": "224a0c9f47e196c626e862aa52d46402a454a6d16f0b497d3720ae74e25ca539"
+    },
+    "structured_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+      "bytes": 4100,
+      "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+    },
+    "momentum": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\momentum_contract.py",
+      "bytes": 4023,
+      "sha256": "983e182d7b8980d44a23db0f143d4a1c48ed483d37522fdba33dca3d5344b0ca"
+    },
+    "rotation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    },
+    "scalar_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "state_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "FK": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\geometry_provider.py",
+      "bytes": 11690,
+      "sha256": "f00da9a2c5deb19261a3ff4e168d79f8aea9784736e0fdd0897ffe9599a3b07b"
+    },
+    "directional": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+      "bytes": 9556,
+      "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+    },
+    "geometry_constants": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_constants.json",
+      "bytes": 91553,
+      "sha256": "330243d3b85abb1e996c2658b9216fe89df9ede53b0c4e035af63deb651f8fd9"
+    },
+    "geometry_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_geometry_arrays.npz",
+      "bytes": 514604,
+      "sha256": "4bafa2e40788f1106dcb497e575304d9bfabc7476fdb910147179325db97570f"
+    },
+    "direction_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\direction_arrays_v1.npz",
+      "bytes": 24503,
+      "sha256": "08dbbe3bfc8c0cbd19dad14510fd48c48351d8102cbeb99ca3d8f735cd1ca053"
+    },
+    "task": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_task_v2.py",
+      "bytes": 15259,
+      "sha256": "1d069f19760cee674abd94e76166cff4aee89b4eab2a3f42b54ce43308d7acaf"
+    },
+    "imagination": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_actor_imagination_v2.py",
+      "bytes": 5601,
+      "sha256": "23bf5342dda374fe682c52dea878c7cf95b044780df74a1f738a710ba1eba96b"
+    },
+    "reader_replay": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\reader_replay_adapter_v2.py",
+      "bytes": 9110,
+      "sha256": "266c4b0609193601e1ec8fbdecf43b04ac8dfc37a817fea6a1bdc6a80462c6cd"
+    },
+    "reference": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_ego_reference_v1\\reference.py",
+      "bytes": 4463,
+      "sha256": "88c85fe21db72ab29f5c8da5a799345205be45ed7ec830e804b2370ccf70bbb0"
+    },
+    "Actor_Critic": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "bytes": 5331,
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "Actor_common": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\common.py",
+      "bytes": 3261,
+      "sha256": "6d6ff994d592c8fec1d46401d7051d0511310281a3d28450db8bd9be8c327f8b"
+    },
+    "replay": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\buffer.py",
+      "bytes": 3651,
+      "sha256": "3048a42d13aa5142a4c42a29b5f7c77df02c5c628f6276bf9d5256a644494d5f"
+    },
+    "chord_contacts": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\contacts.py",
+      "bytes": 5132,
+      "sha256": "79b53c63dd5573c9908d052f29c678f1724ff5be3ffa5b7c077421cbf4788212"
+    },
+    "weighted_support": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\contact_geometry.py",
+      "bytes": 25350,
+      "sha256": "a9e0e19cc826cefe4e6a97a5c7b33f02f04c23585065cb0a273436eb07846d7a"
+    },
+    "paired_trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\train_shared_WM_A1_A2.py",
+      "bytes": 36961,
+      "sha256": "a1bcf9f820e00d7da4ac515dd81d45d39a2c59abd07c85319d1346db384b2439"
+    },
+    "native_reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    },
+    "raw_collector": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_task_acquisition_v1\\collect_tripod_task_v1.py",
+      "bytes": 24841,
+      "sha256": "7c9f9bcfedc56d197ecf8d637ca51ef242ca22751e872b7b8bf290bcddf5b597"
+    },
+    "label_adapter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\dataset_adapter_v1.py",
+      "bytes": 15120,
+      "sha256": "fefba9dd7ff3f7f660a4d126ffc8bcf046388a40b7be10e58dd5515bdc554389"
+    },
+    "dataset_exporter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\export_dataset_v1.py",
+      "bytes": 16314,
+      "sha256": "586eea709f274c966b0d537d02fc072e9b032310a78323ed920844c04f486eed"
+    },
+    "collector": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\collect_online_v1.py",
+      "bytes": 26054,
+      "sha256": "23e5d5284e02a28cd049d839ad755525a90feacc50c2f25a4c68a312eb707f70"
+    },
+    "preparation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\prepare_protocol_v1.py",
+      "bytes": 4271,
+      "sha256": "ec48b681733b68befbb149cf78f8659de33f5fa580baa448f77af8299c4a78a6"
+    }
+  },
+  "offline_budget": "Frozen paired1000 offline recipe has online_H0. This is a separately pinned new stage, no update or reclassification of those counts.",
+  "matching": "Each arm receives same4profile x2dt x20H maxima from same probe030 initial. Early physical/task failures stop that episode without replacement; actual row counts may differ.",
+  "contact_scope": "canonical22 actual signed nativePRE impulses are future supervision, not Actor observation. A2 proxy remains engineered, not measured contact or force.",
+  "safety_scope": "Frozen Reader tick safety and bridge boundaryPOSTH task terminal preserved; acquisition20H truncation may bootstrap. This is not original full2s holding evaluation.",
+  "replay_scope": "Both arms enter common ONLINE_TRAIN pool with explicit arm/profile/stage/alias identities; no hidden split/random row split/deduplication or oldCHECK/fresh reads.",
+  "followup_learning": "load_common_pool exposes arrays/masks/per-mode real rewards. A new nextstage matched updater recipe must explicitly authorize updates; collector never fits."
+}

@@ -1,0 +1,180 @@
+{
+  "schema": "observation_frame0_rest_hold_plan:1",
+  "status": "CPU_PREPARATION_ONLY_NOT_GPU_AUTHORIZED",
+  "GPU_run_authorized": false,
+  "frame": 0,
+  "steps": 60,
+  "dt_s": 0.005,
+  "duration_s": 0.3,
+  "nworld": 1,
+  "nconmax": 192,
+  "njmax": 4096,
+  "hard_process_seconds": 45,
+  "soft_worker_seconds": 40,
+  "automatic_retry": false,
+  "output": "D:\\workspace\\supermimic-observation-grounding-study\\outputs\\rest_hold_frame0_v1",
+  "source_pins": {
+    "worker": {
+      "path": "D:\\workspace\\supermimic-observation-grounding-study\\scripts\\rest_hold_warp.py",
+      "sha256": "8a269b22bc171b8b214ae45ebf7b961fcff93bc3f53e8717dd66e2a2655565b4"
+    },
+    "supervisor": {
+      "path": "D:\\workspace\\supermimic-observation-grounding-study\\scripts\\run_rest_hold.py",
+      "sha256": "242603ec00ecc937698188315e94f2552fbd89355e8e839b4737eb7c5cdf950f"
+    },
+    "protocol": {
+      "path": "D:\\workspace\\supermimic-observation-grounding-study\\protocols\\rest_hold_frame0_v1.json",
+      "sha256": "ef5b6827a030c47c00340620b85a1085acbe8cbcbe8c78f9bb18a3f58b96af29"
+    },
+    "measurement_vendor": {
+      "path": "D:\\workspace\\supermimic-observation-grounding-study\\vendor\\measured_contacts.py",
+      "sha256": "478c3117489bd4a02238f6299a91638e791a751352b772321ce2676b0ec4f96f"
+    },
+    "pure_projection": {
+      "path": "D:\\workspace\\supermimic-observation-grounding-study\\vendor\\target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    },
+    "vendor_provenance": {
+      "path": "D:\\workspace\\supermimic-observation-grounding-study\\vendor\\provenance.json",
+      "sha256": "33f803e409578a3f080d86696272f0086108defd656248b57b4a878227b13377"
+    },
+    "candidate": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\outputs\\native_contact_refined_geometry_v1\\geometric_retarget.npz",
+      "sha256": "539d6247576b9b2e3fb1b143cf17b6ad507e3baea73c5fafcda4e221d9230c8f"
+    },
+    "firstframe": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\outputs\\native_contact_refined_independent_review_v1\\firstframe_geometry_parameters.json",
+      "sha256": "b12d8f796c812f5a54f782c5a97cb060cd941f9ce1772ce7cd88e1805174aa7d"
+    },
+    "model": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\rotating_reference_warp_a0\\model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "context": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed1\\compiled\\fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "robot_kinematics": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    },
+    "original_measurement": {
+      "path": "D:\\workspace\\supermimic-chord-study\\scripts\\controlled_pen_rollout.py",
+      "sha256": "8958dc3a1014ad2dbd0879381996ca3a86ce9acefa686286f41759222745f708"
+    },
+    "original_geometry_math": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\geometry.py",
+      "sha256": "a7962e821feb851414d19125aa096a06858d45fcfee726eb7ba8691316aac56f"
+    },
+    "original_pure_projection": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\src\\target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    },
+    "actual8field_copy_reference": {
+      "path": "D:\\workspace\\supermimic-chord-study\\scripts\\probe_world_model_gradients.py",
+      "sha256": "74420b5a66cc8d3a3fd055b5f1c21b879117592d6259fa90051f94a023d76070"
+    },
+    "reviewed_lifecycle": {
+      "path": "D:\\workspace\\supermimic-control-feasibility-draft\\scripts\\run_braking_microprobe.py",
+      "sha256": "40b397f60e91bf59a1c72ad43f9bd52b42e33a820a695c2ec6e43736fa8a54aa"
+    },
+    "mujoco_warp_io": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\io.py",
+      "sha256": "6fe550047ed4b82c307741f84a8a4800587469c52e5ce292a3073824f3451fa6"
+    },
+    "CPU_checker": {
+      "path": "D:\\workspace\\supermimic-observation-grounding-study\\scripts\\check_rest_hold_cpu.py",
+      "sha256": "2c2d86abd891443e38aa03d0991ae8bc6ed39c4300cf62b2ac46d21546aa609d"
+    },
+    "bounded_IO_vendor": {
+      "path": "D:\\workspace\\supermimic-observation-grounding-study\\vendor\\runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    },
+    "bounded_IO_original": {
+      "path": "D:/workspace/supermimic-c2-confirmation-eval-study/src/runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    }
+  },
+  "protocol": {
+    "path": "D:\\workspace\\supermimic-observation-grounding-study\\protocols\\rest_hold_frame0_v1.json",
+    "sha256": "ef5b6827a030c47c00340620b85a1085acbe8cbcbe8c78f9bb18a3f58b96af29"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-chord-study\\outputs\\rotating_reference_warp_a0\\model.mjb",
+    "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+  },
+  "context": {
+    "path": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed1\\compiled\\fixed_physics_context.npz",
+    "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+  },
+  "candidate": {
+    "path": "D:\\workspace\\supermimic-observation-retarget-study\\outputs\\native_contact_refined_geometry_v1\\geometric_retarget.npz",
+    "sha256": "539d6247576b9b2e3fb1b143cf17b6ad507e3baea73c5fafcda4e221d9230c8f"
+  },
+  "firstframe": {
+    "path": "D:\\workspace\\supermimic-observation-retarget-study\\outputs\\native_contact_refined_independent_review_v1\\firstframe_geometry_parameters.json",
+    "sha256": "b12d8f796c812f5a54f782c5a97cb060cd941f9ce1772ce7cd88e1805174aa7d"
+  },
+  "robot_kinematics": {
+    "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\retarget_palmroot_cpu.py",
+    "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+  },
+  "gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "finite_all_raw_states_and_measurements": true,
+    "clock_absolute_tolerance_s": 2e-06,
+    "actual_ctrl_FP32_bitwise_equals_fixed_initial_projection": true,
+    "complete_raw61states60solver_samples": true,
+    "final_sticky_overflow_bitmask": 0
+  },
+  "joint_lower_rad": [
+    -1.187,
+    -1.484,
+    -1.047,
+    -1.047,
+    -1.047,
+    -0.698,
+    -1.047,
+    -1.047,
+    -1.047,
+    -0.698,
+    -1.047,
+    -1.047,
+    -1.047,
+    -0.698,
+    -1.047,
+    -1.047,
+    -1.047,
+    -0.698,
+    -1.047,
+    -1.047
+  ],
+  "joint_upper_rad": [
+    1.291,
+    0.698,
+    1.57,
+    1.57,
+    1.57,
+    0.698,
+    2.094,
+    1.57,
+    1.57,
+    0.698,
+    2.094,
+    1.57,
+    1.57,
+    0.698,
+    2.094,
+    1.57,
+    1.57,
+    0.698,
+    2.094,
+    1.57
+  ],
+  "scope": "NewN1 zero-velocity frame0 rest intervention, not source velocity reconstruction or original3s success. No pooling into27confirmation."
+}

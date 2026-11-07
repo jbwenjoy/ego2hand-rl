@@ -1,0 +1,11 @@
+--- run_full151_learning_v2.py
++++ run_full151_learning_v3.py
+@@ -8,7 +8,7 @@
+ from full151_native.metadata import write
+ DRIVER=Path('D:/workspace/supermimic-observation-restoration-prefix-study/scripts/run_track_prefix_v3.py')
+ DRIVER_SHA='f4161cb4be7ac2e5e0fc598820a944f4d9a0e7240ee79b4eb68054732f246475'
+-ENTRY=ROOT/'scripts/execute_full151_learning_v2.py'
++ENTRY=ROOT/'scripts/execute_full151_learning_v3.py'
+ HIDDEN=(subprocess.CREATE_NO_WINDOW|subprocess.CREATE_NEW_PROCESS_GROUP) if os.name=='nt' else 0
+ def driver():
+     if sha(DRIVER)!=DRIVER_SHA:raise ValueError('Reviewed identity driver changed')

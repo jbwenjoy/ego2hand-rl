@@ -1,0 +1,93 @@
+{
+  "schema": "observation_candidate_rest_hold_diagnostic:1",
+  "status": "FROZEN_DESIGN_FOR_CPU_AND_ROOT_REVIEW_NOT_GPU_AUTHORIZATION",
+  "candidate_frame": 0,
+  "source_kind": "controlled cached observations -> fixed-palm bone-direction IK -> object-only softpenetration -> native hand-object+self softpenetration; no original robot-q labels",
+  "is_real_ego": false,
+  "independent_training_seed_N": 0,
+  "diagnostic_N": 1,
+  "initialization": {
+    "q": "Candidate frame0 q20 cast once toFP32, never project the physical initial q",
+    "object_pose": "Candidate mapped frame0 SI/wxyz pose cast once toFP32; unqualified metric/frame mapping retained",
+    "wrist": "Original nominal MJB default mocap; no init_keyframe or scene modification",
+    "joint_qvel_and_object_twist": "Explicit designed zero rest intervention; not video measurement or reconstruction",
+    "ctrl": "Candidate frozen qref0 -> same frozen FP32 C2.020 projection once using joint/actuator intersection; hold this constant for all60steps, no actualq feedback target",
+    "external_forces": "xfrc_applied/qfrc_applied zero at initialization, no writes afterward",
+    "post_initialization_state_writes": 0
+  },
+  "physics": {
+    "backend": "mujoco_warp CUDA, original MJB24fd physical structure/options",
+    "context": "Copy actualcontext[0] eight fields into Warp AFTER put_model(nominal), never recompile modified host model",
+    "context_fields": [
+      "body_mass",
+      "body_inertia",
+      "body_iquat",
+      "geom_size",
+      "geom_pos",
+      "geom_friction",
+      "actuator_gainprm",
+      "actuator_biasprm"
+    ],
+    "initialization_sequence": [
+      "put_model(original nominal)",
+      "wp.copy eightactualfields",
+      "put_data nworld1 fixedcapacity",
+      "set_const_0 restore=True",
+      "one startup Warpforward"
+    ],
+    "physics_dt_s": 0.005,
+    "steps": 60,
+    "duration_s": 0.3,
+    "nworld": 1,
+    "nconmax": 192,
+    "njmax": 4096,
+    "per_step": "Only mjwarp.step once then readback/get_data_into/capture_contacts; no extra Warpforward or nativeforward",
+    "raw_states": "61 integration states: explicit initialized state0 plus60postintegration states",
+    "contact_time_semantics": "After step k, solved contact/frame/force describe preintegration solver_t=(k-1)*.005; qpos/qvel/time are postintegration state_t=k*.005. Record both and do not refresh contacts with an extra forward.",
+    "startup_contacts": "Separate startup_forward sample at0, not counted as a stepped response",
+    "capacity": "Read sticky wp_data.overflow exactly once after step60; never clear/reset; require one-world bitmask0 and all recorded nacon/nefc strictly below allocatedcapacity",
+    "force_time_semantics": "actuator_force_native and contactforce both belong to just-completed preintegration solver; rawstates explicitly record forcephase/force_solver_time/prestateindex, solver samples prestate_index=k-1/poststate_index=k. startup forward separate."
+  },
+  "diagnostic_gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "finite_all_raw_states_and_measurements": true,
+    "clock_absolute_tolerance_s": 2e-06,
+    "actual_ctrl_FP32_bitwise_equals_fixed_initial_projection": true,
+    "complete_raw61states60solver_samples": true,
+    "final_sticky_overflow_bitmask": 0
+  },
+  "reporting": "Retain complete60steps for quality failures. Stop only engineering hardexception/nonfinite/softdeadline; preserve partial rawdata and mark incomplete/UNKNOWN rather than fail physical gates on unrun samples. Newrest diagnostic is not original3s task success, no force/contact reference-label creation, no pooling into27modelreplications. If capacityoverflow/countgate fails despite60complete, preservecomplete raw but hold verdictUNKNOWN/physics_inference_qualified=false; capacityOK uses the fixed qualitygates. C2frame0clampedcomponents0 is recorded; no filter treatment effect is inferred.",
+  "bounded_execution": {
+    "worker_soft_wall_seconds": 40,
+    "owned_process_wall_seconds": 45,
+    "reviewed_watchdog_source_sha256": "40b397f60e91bf59a1c72ad43f9bd52b42e33a820a695c2ec6e43736fa8a54aa",
+    "shared_GPU_lock": "D:/workspace/supermimic-chord-study/.locks/single_gpu_training.lock",
+    "automatic_retry": false,
+    "metadata_IO": {
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1",
+      "rule": "Same already serialized payload/temp boundedPermissionErrorrename retry<=.75s/32calls; no resimulation/process/forceflag retry; original40b lifecycle write replaced in memory only."
+    }
+  },
+  "initialization_tolerances": {
+    "candidate_FP32_cast_q_abs_rad": 1.2e-07,
+    "candidate_FP32_cast_pose_abs": 1.2e-07,
+    "startup_robot_FK_max_abs_m": 1e-06,
+    "startup_mocap_max_abs": 1.2e-07,
+    "actual8context_copy": "bitwise FP32 expected"
+  },
+  "C1_enabled": false,
+  "m0": null,
+  "a_brake": null,
+  "physical_reference_qualified_before_probe": false,
+  "retained_limits": [
+    "controlled cached fixture, no real-ego video/camera/scale qualification",
+    "same fixed-palm task redesign and single selected frame",
+    "geometric shallowoverlap/ties/nonconverged trajectory results are preserved",
+    "one rest-hold diagnostic does not establish motionretargeting/forceprediction/globalsafecontrol or realrobot transfer"
+  ]
+}

@@ -1,0 +1,31 @@
+--- build_full151_three_arm_plan_cpu_v2.py
++++ build_full151_three_arm_plan_cpu_v3.py
+@@ -13,8 +13,8 @@
+     ap=argparse.ArgumentParser();ap.add_argument('--role',choices=['engineering_smoke','primary_matched'],required=True);ap.add_argument('--authorize-gpu',action='store_true');ap.add_argument('--paired-smoke',type=Path);a=ap.parse_args()
+     if any(k in sys.modules for k in ('torch','warp','mujoco_warp')):raise AssertionError('Metadata-only builder imported a device framework')
+     tag='smoke40' if a.role=='engineering_smoke' else 'primary2000'
+-    protocol_path=ROOT/f'protocols/full151-v2-three-arm-{tag}-v1.json'
+-    config_paths={m:ROOT/f'configs/full151-v2-{tag}-{m}-seed0-v1.json' for m in METHODS}
++    protocol_path=ROOT/f'protocols/full151-v3-three-arm-{tag}-v1.json'
++    config_paths={m:ROOT/f'configs/full151-v3-{tag}-{m}-seed0-v1.json' for m in METHODS}
+     if protocol_path.exists() or any(p.exists() for p in config_paths.values()):raise FileExistsError('Freeze once; never overwrite')
+     base=read(ROOT/'configs/full151-a0-authorized-v1.json');bundle=base['input_bundle']
+     ready={
+@@ -52,7 +52,7 @@
+     for i,path in enumerate(sorted(x for x in paths if x.endswith('.py'))):include(f'native_all_python_{i:04d}',pin(path))
+     for folder in ('full151_native','full151_intent'):
+         for path in sorted((ROOT/'src'/folder).glob('*.py')):include(folder+'__'+path.name,pin(path))
+-    for key,path in {'worker':ROOT/'scripts/execute_full151_learning_v2.py','supervisor':ROOT/'scripts/run_full151_learning_v2.py','builder':Path(__file__),
++    for key,path in {'worker':ROOT/'scripts/execute_full151_learning_v3.py','supervisor':ROOT/'scripts/run_full151_learning_v3.py','builder':Path(__file__),
+         'eval_worker':ROOT/'scripts/execute_full151_policy_eval_v2.py','eval_supervisor':ROOT/'scripts/run_full151_policy_eval_v2.py','eval_builder':ROOT/'scripts/build_full151_policy_eval_plan_cpu_v2.py'}.items():include(key,pin(path))
+     for key,value in read(ROOT/'configs/full151-matched-material-cones-CPU-authorized-v1.json')['source_pins'].items():include('cone__'+key,value)
+     br=ready_objects['binding_CPU'];cpu_spec=read(checked(br['CPU_spec']))
+@@ -88,7 +88,7 @@
+     write(protocol_path,protocol);source['protocol']=pin(protocol_path)
+     for method,path in config_paths.items():
+         cfg={'schema':'full151_knownrough_native_training_run:2','role':a.role,'method':method,'seed':0,'input_bundle':bundle,
+-            'output':str(ROOT/f'outputs/full151_v2_{tag}_{method}_seed0_v1'),'training':smoke if a.role=='engineering_smoke' else primary,
++            'output':str(ROOT/f'outputs/full151_v3_{tag}_{method}_seed0_v1'),'training':smoke if a.role=='engineering_smoke' else primary,
+             'contact_binding':None if method=='A1L' else objective_spec,'source_pins':source,'protocol':pin(protocol_path),
+             'GPU_run_authorized':bool(a.authorize_gpu),'training_authorized':True,
+             'hard_process_seconds':600 if a.role=='engineering_smoke' else 7200,'soft_worker_seconds':540 if a.role=='engineering_smoke' else 7100,

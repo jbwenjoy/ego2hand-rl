@@ -1,0 +1,107 @@
+{
+  "schema": "frame0_material_contact_hypothesis:3",
+  "hypothesis_id": "H23",
+  "pins": {
+    "model": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\rotating_reference_warp_a0\\model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "context": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed1\\compiled\\fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "baseline": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\outputs\\native_contact_refined_geometry_v1\\geometric_retarget.npz",
+      "sha256": "539d6247576b9b2e3fb1b143cf17b6ad507e3baea73c5fafcda4e221d9230c8f"
+    },
+    "observations": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\observation_only_fixture_v1\\observations.npz",
+      "sha256": "3bdca0ee6fd8d7956cac1ee2b13719db5cb302ceb0130972719032a04b3ec35b"
+    },
+    "rankings": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\contact_intent_v2\\frame0_rankings.json",
+      "sha256": "03a22cbdb2b9b74e6582bc3acc83843d007f9c0a07f0537437e158c326391e33"
+    },
+    "intent_analyzer": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\scripts\\analyze_contact_intent.py",
+      "sha256": "e47df24545c28ccaebd2c3d1e2e084c5e55d2237ab0342d961f276f65d2ca925"
+    },
+    "object_exterior": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\scripts\\pen_outer_surface.py",
+      "sha256": "40491915860d4792b24e48b0935b38e0ec95546f43ce5a7b50ef4edd08ff95c5"
+    },
+    "native_geometry": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\native_filtered_contact_geometry.py",
+      "sha256": "c964d5b300baac57a5353afd3b5aa4cfb381eca1da03ceef712691dd10376c72"
+    },
+    "kinematics": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    },
+    "material_helper": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\scripts\\material_anchors.py",
+      "sha256": "d860c666cf596abe8f374342f191515b4c51b3537d86a64d99e850e8f7fcd37c"
+    },
+    "optimizer": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\scripts\\refine_initial_contacts_seeded_cpu.py",
+      "sha256": "e4e266a182eb6ca3b454f598b322a1240c8c9fe768c0c50d47deabf2d2f76515"
+    },
+    "composite_seeds": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\material_reachability_v1\\composite_seeds.json",
+      "sha256": "3c042e9fe779887683592a0737126f3e07ff1ad4c3d6e3f7680b3ca813c62e3f"
+    },
+    "parent_recipe": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\configs\\frame0-h23-distal-v2.json",
+      "sha256": "fc84c7901fe58afbf66b637074dfde1905f625d14745dd2d00914add3d335b28"
+    },
+    "parent_bindings": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\frame0_h23_distal_v2\\frozen_anchor_bindings.json",
+      "sha256": "bf46e9f772c5e38f1ba732022a356782c55c61a8ca31c96456d54fc44f961f3f"
+    },
+    "parent_optimizer": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\scripts\\refine_initial_contacts_distal_cpu.py",
+      "sha256": "97a7ca22a6671a2a1a3db56546cf5ca23358b0fcaf48d27489dbbae1e48eb736"
+    }
+  },
+  "fingers": [
+    2,
+    3
+  ],
+  "rankings_variant": "source_rigid_mapped",
+  "selection_rule": "H23 fixed observation hypothesis and exact distal-v2 bindings/objective; only optimizer x0 is the composite of two independent point+normal B single-finger solutions. Preserve both nearly identical local starts; no added statistical N or future quality selection.",
+  "weights": {
+    "bone": 1,
+    "native_overlap": 1,
+    "anchor_position": 1,
+    "anchor_normal": 0.25,
+    "q_baseline": 0.03,
+    "q_nominal": 0.001
+  },
+  "anchor_position_scale_m": 0.001,
+  "anchor_inset_m": 0.0003,
+  "max_nfev": 120,
+  "CPU_soft_wall_seconds": 60,
+  "gtol": 1e-08,
+  "ftol": 1e-08,
+  "xtol": 1e-08,
+  "native_overlap_allowance_m": 0.0005,
+  "native_overlap_scale_m": 0.001,
+  "initial_guess": "Independent single-finger point+normal B composite; original qbaseline remains the regularization prior",
+  "fixed": {
+    "object_pose": true,
+    "default_wrist_mocap": true,
+    "morphology_normalized_bone_targets": true,
+    "material_selection_before_optimizer": true
+  },
+  "contacts_known": false,
+  "confidence": null,
+  "PD_target": null,
+  "GPU_authorized": false,
+  "physics_steps": 0,
+  "physical_reference_qualified": false,
+  "scope": "One-frame geometric initialization hypotheses; not trajectory/force qualification. Preserve both outcomes and baseline.",
+  "material_geometry_rule": "ordinal_landmark_to_link4_or_tip_only",
+  "parent_recipe": "D:/workspace/supermimic-observation-contact-intent-study/configs/frame0-h23-distal-v2.json",
+  "initialization_rule": "independent_single_finger_B_composite",
+  "seed_id": "B_midpoint_composite"
+}

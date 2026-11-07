@@ -1,0 +1,243 @@
+{
+  "schema": "phone_convex_timestep_protocol:3",
+  "status": "PREREGISTERED_SEQUENTIAL_ENGINEERING_TIMESTEP_SCREEN_NOT_BLIND_SCIENTIFIC_CONFIRMATION",
+  "created_UTC": "2026-11-06T19:01:30.484878+00:00",
+  "scope": "Same fixed convex phone, COM/inertia assumptions and no-hand tests; refine only the nominal timestep ladder. No physics is performed by this protocol author.",
+  "source_pins": {
+    "v2_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\protocols\\phone_convex_contact_v2.json",
+      "bytes": 22520,
+      "sha256": "6745a6e58ce4507c56ca6fe053a4d16fc2e4e2195cfdae6c74ea1797e6bd5ace"
+    },
+    "v1_numeric_gate_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\protocols\\phone_physics_stage1_v1.json",
+      "bytes": 14384,
+      "sha256": "8981e89aec0993887aad65db1722f80d27470d6553a7bd25760a6ba7556d0505"
+    },
+    "common": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\simulation_convex_v2\\phone_convex_common_v2.py",
+      "bytes": 5490,
+      "sha256": "4460ccba501e46a033e304460796103afb7b2ef4ef822e6d8653f1a496228ae9"
+    },
+    "CPU_run_case_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\simulation_convex_v2\\run_cpu_v2.py",
+      "bytes": 10876,
+      "sha256": "1b6889af2d5d8f1d4366532eab745ddd55aa9d0246aa1a410a5566d89e172965"
+    },
+    "v2_selection_null": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\simulation_convex_v2\\cpu_screen_assessment_v2\\selection.json",
+      "bytes": 17776,
+      "sha256": "2c28cfe462744476db95bad8a837025246c60c9a063c62a54c747928bea7fe78"
+    },
+    "v2_saved_assessment": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\simulation_convex_v2\\cpu_screen_assessment_v2\\report.json",
+      "bytes": 92292,
+      "sha256": "68c14fafd8c6e44cc8d25490671471f4fa5fddb5e4d3f6d03fe843f304d387dd"
+    },
+    "convex_asset": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage2_convex\\completed_v2\\phone_asset.xml",
+      "bytes": 1362,
+      "sha256": "144465c4a10ee29682701dc9fb11e417f241818d76fc8e7d66186b5781f63841"
+    },
+    "convex_geometry_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage2_convex\\completed_v2\\report.json",
+      "bytes": 18069,
+      "sha256": "8e966fb86aea71696959f0476df394b707f12f8abda2054e600ec378b3f3c283"
+    },
+    "models_info": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\object_models\\models_info.json",
+      "bytes": 29485,
+      "sha256": "351e1b25a250606fa4b7500f5aeb800b55050bf1c638d05ceb464f8ddfb32e2b"
+    }
+  },
+  "frozen_references": {
+    "object_geometry_inertia_and_support": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/object"
+    },
+    "shared_solver_material_options": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/shared_physics"
+    },
+    "three_tests": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/tests"
+    },
+    "G2_supported_backend_diagnostics": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/engineering_gates/G2_finite_and_solver"
+    },
+    "G3_to_G8_unchanged_numeric_thresholds_and_equations": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/engineering_gates"
+    },
+    "diagnostic_coverage_and_phase_scope": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/diagnostic_coverage"
+    },
+    "rule": "Resolve the exact pinned v2 file; do not use defaults or read an unfrozen replacement. OriginalG3-G8 bounds remain unchanged, including2mm peak penetration and2deg final timestep orientation difference."
+  },
+  "fixed_parameters": {
+    "mass_kg": 0.2,
+    "sliding_friction": 0.6,
+    "timeconst_s": 0.0025,
+    "damping_ratio": 1.0,
+    "tolerance": 1e-06,
+    "ls_tolerance": 0.01,
+    "refsafe_enabled": true,
+    "solver_change_allowed": false,
+    "contact_material_change_allowed": false,
+    "geometry_COM_inertia_change_allowed": false
+  },
+  "tests": {
+    "names": [
+      "drop",
+      "table_settling",
+      "force_push_release"
+    ],
+    "duration_s": 3.0,
+    "drop_initial_bottom_clearance_m": 0.1,
+    "other_initial_bottom_clearance_m": 0.0005,
+    "push_force_world_N": [
+      2.0,
+      0.0,
+      0.0
+    ],
+    "push_application_point": "instantaneous COM",
+    "push_half_open_interval_s": [
+      1.0,
+      1.2
+    ],
+    "rest_window_s": [
+      2.5,
+      3.0
+    ],
+    "initial_hull_support_rule": "Exact same common4460 compiled-hull vertex support/Rx90/COM-offset initialization; save support operands. Never replace hull support by assumed box thickness."
+  },
+  "screening": {
+    "backend": "CPU_MuJoCo",
+    "timesteps_s": [
+      0.000625,
+      0.0003125,
+      0.00015625
+    ],
+    "mass_kg": 0.2,
+    "sliding_friction": 0.6,
+    "timeconst_s": 0.0025,
+    "test_names": [
+      "drop",
+      "table_settling",
+      "force_push_release"
+    ],
+    "order": "dt as listed, then three tests as listed",
+    "fresh_case_count": 9,
+    "integration_steps": 100800,
+    "state_rows_including_initial": 100809,
+    "all_nine_required_before_selection": true,
+    "adjacent_pairs_s": [
+      [
+        0.000625,
+        0.0003125
+      ],
+      [
+        0.0003125,
+        0.00015625
+      ]
+    ],
+    "pair_comparison_rule": "Only these adjacent coarse/fine pairs enter selection. At shared ticks compare coarse i with fine2i, for all three tests. Save all six comparisons. The shared middle-dt data are reused, not independent replicates.",
+    "timeconst_over_dt_ratios": [
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "selection": {
+    "authority": "Independent saved-only CPU screening assessment",
+    "screening_complete_rule": "All9 exact original case IDs/pins, steps, source/model binding, supported diagnostics and saved arithmetic are fully assessed. Completeness is not physical acceptance.",
+    "pair_eligible_rule": "For the six runs in an adjacent pair, every test at both dt passes originalG2-G6, and all three corresponding originalG7 comparisons pass. Source/input integrity, all9coverage and the pinned finite-sampling geometry qualification must hold. Unknown is not eligible.",
+    "choice_rule": "Among eligible adjacent pairs select the one with largest coarse_dt, in the fixed listed pair order. Do not minimize a metric, select individual tests, change tau, or discard a run.",
+    "none_rule": "If none eligible, selected_timesteps_s=null and no v3confirmation/Warp. Preserve all failures. A further grid or model change requires a new protocol.",
+    "selected_timeconst_s_always": 0.0025,
+    "no_fallback_after_confirmation_failure": true
+  },
+  "confirmation": {
+    "cartesian_grid": {
+      "mass_kg": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "sliding_friction": [
+        0.3,
+        0.6,
+        0.9
+      ]
+    },
+    "timeconst_s": 0.0025,
+    "timesteps_source": "selection_receipt.selected_timesteps_s only",
+    "test_names": [
+      "drop",
+      "table_settling",
+      "force_push_release"
+    ],
+    "fresh_CPU_case_count": 54,
+    "Warp_case_count": 54,
+    "order": "nominal(.2,.6)first; remaining(mass,mu)lexicographic; dt ordered coarse then fine; tests as listed",
+    "integration_steps_per_backend_if_first_pair": 388800,
+    "integration_steps_per_backend_if_second_pair": 777600,
+    "fresh_nominal_six_required": true,
+    "reuse_screen_as_confirmation_forbidden": true,
+    "interpretation": "Same-family engineering parameter-range confirmation, not blind independent scientific confirmation, independent trajectories or real parameter calibration."
+  },
+  "output_ABI": {
+    "case_id_template": "Same v2 {test}_mass{mass:g}_mu{mu:g}_tau{timeconst:g}_dt{dt:g}",
+    "screening_result_schema": "phone_convex_timestep_CPU_screening:3",
+    "screening_assessment_schema": "phone_convex_timestep_CPU_screening_assessment:3",
+    "selection_schema": "phone_convex_timestep_selection:3",
+    "selection_required": [
+      "selected_timeconst_s",
+      "selected_timesteps_s",
+      "eligible_timesteps_s",
+      "screening_complete",
+      "selection_complete",
+      "audit_integrity_qualified",
+      "protocol_pin",
+      "screening_result_pin",
+      "trajectory_pins",
+      "per_adjacent_pair_gate_results"
+    ],
+    "trajectory_pins": "Map all9 exact case IDs to original immutable raw pins; confirmation map all54.",
+    "selected_values": "selected_timeconst_s is always.0025. selected_timesteps_s is one exact pair from screening.adjacent_pairs_s ornull; screening_complete/selection_complete separate coverage from completed selection arithmetic.",
+    "confirmation_assessment_schema": "phone_convex_timestep_CPU_confirmation_assessment:3",
+    "confirmation_required": [
+      "assessment_complete",
+      "audit_integrity_qualified",
+      "confirmation_complete",
+      "CPU_case_count",
+      "CPU_bench_qualified",
+      "producer_result_pin",
+      "protocol_pin",
+      "selected_timeconst_s",
+      "selected_timesteps_s",
+      "trajectory_pins",
+      "selection_receipt_pin"
+    ],
+    "all_data_preserved": "All9screen cases, all6pair comparisons, allfailed/unknown physical gates, and the source diagnostic availability are retained. No positive-case-only report."
+  },
+  "execution_binding": {
+    "before_integration": "Pin this protocol, exact references, common4460/run_case1b688, new thin runner source, asset/hull/visual/models_info, complete process logs and stage inputs; save actual compiled/device options, raw support/COM/inertia, raw state/contact/force/energy/diagnostics as in v2.",
+    "later_phases": "New54CPU and Warp bind the exact selection SHA and selected pair; Warp additionally binds complete CPU54assessment and map54raw pins. No null selection authorizes --run.",
+    "effective_options": "CPUtol1e-6/ls_tol.01 and actual GPUFP32 representations must be read/validated before first integration; keep all supported overflow diagnostics and do not invent a native GPUwarning table."
+  },
+  "scope_limits": {
+    "previous_v1_and_v2_immutable": true,
+    "v2_null_not_replaced": true,
+    "known_prior_failure": "v2tau.0025 push final orientation differed4.391561deg across its two coarser dt; that known failure motivated this new fixed ladder.",
+    "no_pass_claim_from_finer_dt_alone": true,
+    "real_parameter_calibrated": false,
+    "hand_task_qualified": false,
+    "ego_retargeting_qualified": false,
+    "human_force_truth_qualified": false,
+    "author_executed_physics_training_install": false
+  }
+}

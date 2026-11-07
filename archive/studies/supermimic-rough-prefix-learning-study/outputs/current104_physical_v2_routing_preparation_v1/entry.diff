@@ -1,0 +1,40 @@
+--- scripts/probe_current104_physical_fd.py
++++ scripts/probe_current104_physical_fd_v2.py
+@@ -29,7 +29,7 @@
+     if type(p['GPU_run_authorized']) is not bool or type(p['worlds']) is not int or p['worlds']!=1 or p['automatic_retry'] is not False or p['compile_fallback'] is not False:raise ValueError('One world/no retry/no fallback required')
+     for v in all_pins(p):checked(v)
+     protocol=read(checked(p['protocol']));proposal=read(checked(p['parent_proposal']))
+-    if protocol['schema']!='rough_current104_physical_FD_execution_protocol:1' or protocol['protocol_revision']!=2:raise ValueError('Only revised FP32 execution ABI supported')
++    if protocol['schema']!='rough_current104_physical_FD_execution_protocol:1' or protocol['protocol_revision']!=3:raise ValueError('Only revised FP32 execution ABI supported')
+     if protocol['parent_proposal']!=p['parent_proposal'] or p['parent_proposal']!=pin(ROOT/'proposals/current104_samewarp_physical_fd_v2/protocol.json'):raise ValueError('Wrong parent proposal')
+     for key in ('stage','input_bundle','directions','worlds','evaluation_seed','hard_process_seconds','soft_worker_seconds','automatic_retry','compile_fallback'):
+         if p[key]!=protocol[key]:raise ValueError('Protocol alias differs '+key)
+@@ -39,8 +39,8 @@
+     for value in all_pins(proposal):checked(value)
+     b=load_bundle(checked(p['input_bundle']),p['input_bundle']['sha256'])
+     closure=['io.py','metadata.py','bundle.py','bundle_v2.py','native_v2.py','runtime_v2.py',
+-             'controller.py','capacity.py','probe.py','policy_probe.py','evaluation_v2.py','physical_fd.py','probe_transaction_v2.py']
+-    needed=[Path(__file__),ROOT/'scripts/run_current104_physical_fd.py',
++             'controller.py','capacity.py','probe.py','policy_probe.py','evaluation_v2.py','physical_fd_v2.py','probe_transaction_v3.py']
++    needed=[Path(__file__),ROOT/'scripts/run_current104_physical_fd_v2.py',
+             *[ROOT/'src/rough_prefix'/name for name in closure],ROOT/'vendor/runtime_io.py',ROOT/'vendor/measured_contacts.py']
+     for source in needed:
+         if not any(Path(v['path']).resolve()==source.resolve() and v['sha256']==sha(source) for v in p['source_pins'].values()):raise ValueError('Unpinned probe dependency '+str(source))
+@@ -53,7 +53,7 @@
+         container=abi['branch_arrays'] if n==560 else abi['snapshot_arrays']
+         if container.get(key)!=[n,2]:raise ValueError('Missing original FP32 reward terms ABI')
+     output=Path(p['output']).resolve()
+-    if output!=(ROOT/'outputs/current104_physical_FD_v1').resolve():raise ValueError('Exact owned single-attempt output required')
++    if output!=(ROOT/'outputs/current104_physical_FD_v2').resolve():raise ValueError('Exact owned single-attempt output required')
+     if p['GPU_run_authorized']:
+         auth=read(checked(p['source_pins']['Root_authorization']))
+         if auth['schema']!='current104_physical_FD_authorization:1' or auth['GPU_run_authorized'] is not True or Path(auth['output']).resolve()!=output or auth['automatic_retry'] is not False:raise ValueError('Separate byte-bound authorization absent')
+@@ -85,7 +85,7 @@
+         runtime.update(updates);runtime['worker_elapsed_seconds']=time.perf_counter()-STARTED;write(output/'runtime.json',runtime)
+     emit()
+     try:
+-        from rough_prefix.physical_fd import run_physical_probe
++        from rough_prefix.physical_fd_v2 import run_physical_probe
+         result=run_physical_probe({**p,'_worker_started_perf':STARTED},b,output,emit)
+         for value in all_pins(p):checked(value)
+         if sha(path)!=proof['config_sha256']:raise ValueError('Actual config changed during physical probe')

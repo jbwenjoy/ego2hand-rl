@@ -1,0 +1,87 @@
+{
+  "schema": "phone_tripod_replay_dataset_CPU_protocol:1",
+  "saved_only_run_authorized": false,
+  "native_NN_FK_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\completed_v1",
+  "cross_split_alias_policy": "BLOCK_QUALIFICATION_PRESERVE_ALL_ROWS",
+  "inputs": {
+    "collector_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_task_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 6529,
+      "sha256": "2ab629f4803a097ac05be0fce0523fabe9b80d5aec55dc2e5cdd1039015753bb"
+    },
+    "collector_terminal": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_task_acquisition_v1\\process_run1\\terminal.json",
+      "bytes": 1847,
+      "sha256": "f2f8a2fa03493e16191832ceb48d4198a111ceac9e262bfecf9297c52be814ae"
+    },
+    "family_plan": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_task_acquisition_v1\\family_plan_v1.json",
+      "bytes": 616247,
+      "sha256": "397a7ee6d8c673a31ca307b2b8669c160489855077715d73f97253175f23f7e0"
+    },
+    "task_bundle": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+      "bytes": 19375,
+      "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+    },
+    "physical_parameters": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\completed_v1\\physical_parameters.json",
+      "bytes": 1447,
+      "sha256": "fc2fb4194ef30d60b4fdd625b63105bd84ce9cf26c4a93378ff416a768a75de7"
+    },
+    "geometry_metadata": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_constants.json",
+      "bytes": 91553,
+      "sha256": "330243d3b85abb1e996c2658b9216fe89df9ede53b0c4e035af63deb651f8fd9"
+    },
+    "bridge_qualification": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_bridge_native_v1\\completed_run1\\report.json",
+      "bytes": 11329,
+      "sha256": "f5e020f798a31cb626bca15d36c7783b77cecc8d51f80dbab3f264e80ca49f4b"
+    }
+  },
+  "sources": {
+    "exporter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\export_dataset_v1.py",
+      "bytes": 16314,
+      "sha256": "586eea709f274c966b0d537d02fc072e9b032310a78323ed920844c04f486eed"
+    },
+    "adapter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\dataset_adapter_v1.py",
+      "bytes": 15120,
+      "sha256": "fefba9dd7ff3f7f660a4d126ffc8bcf046388a40b7be10e58dd5515bdc554389"
+    },
+    "protocol_maker": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\make_protocol_v1.py",
+      "bytes": 4327,
+      "sha256": "0505a56a33148a2b9a16126ce8579102c514601923afd31b82dd31a21f17c7dc"
+    },
+    "frozen_decode_window": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_impulse_labels_v1\\export_saved_labels_v2.py",
+      "bytes": 9995,
+      "sha256": "df5b5fccd90bf37eba5cecc4151bfbe0742bd5837614c45db4810a510408c062"
+    },
+    "scalar_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "pure_structured_encoder_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+      "bytes": 4100,
+      "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+    }
+  },
+  "contract": {
+    "full_labels_only": "completeH finite no-warning, no partialH labels",
+    "prefix": "finite observed prefix labels separate, never train as H",
+    "WM_eligible": "all physically valid completeH rows, including failed task endpoints",
+    "Actor_start_eligible": "completeH & pre-boundary-task alive; terminal target retained and absorbing",
+    "task_terminal": "source control-boundary POST-H .05m/45deg; any-native-tick event is diagnostic only",
+    "truncation": "collection0.4s may bootstrap; reference2s timeout separate",
+    "field_map_source": "export_dataset_v1.FIELD_MAP",
+    "fresh_or_oldCHECK_TEST_arrays_opened": false,
+    "actual_new_model_FK_forward_steps_NN_calls": 0
+  }
+}

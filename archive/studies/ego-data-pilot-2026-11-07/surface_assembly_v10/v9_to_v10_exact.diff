@@ -1,0 +1,45 @@
+--- frozen_v9_a320422c
++++ v10_full_hardware_q8
+@@ -14,11 +14,12 @@
+ from evaluator_contact_design_v7 import NativeContactDesignEvaluator
+ from scan_body_axis_reference_v7 import pin,read,write,checked,clean,lp_from_probe
+ from strict_support_lp_guarded_v7 import solve_strict_support
++sys.path.insert(0,str(P/'surface_assembly_v9'))
+ from assembly_kinematics_v9 import AssemblyKinematics
+ sys.path.insert(0,str(P/'wrench_residual_v6'))
+ from scaled_wrench_residual_lp_v6 import scaled_wrench_residual_lp
+ 
+-CFG={'seed_names':['original','tilt5'],'q_trust_rad':.45,'q_planner_margin_rad':1e-9,
++CFG={'seed_names':['original','tilt5'],'q_trust_rad':None,'q_planner_margin_rad':1e-9,
+  'palm_translation_trust_m':.025,'rotvec_coordinate_trust_rad':.5,
+  'compression_target_m':25e-6,'pad_gap_window_m':[-.0001,.0002],
+  'closure_gate_m':.0002,'normal_gate_deg':1.,'eq_position_scale_m':.001,
+@@ -44,7 +45,7 @@
+ def main():
+     ap=argparse.ArgumentParser();ap.add_argument('--protocol',type=Path,required=True);ap.add_argument('--run',action='store_true')
+     a=ap.parse_args();protocol=read(a.protocol)
+-    if protocol['schema']!='assembly_then_hard_geometry_support_protocol:9' or protocol['config']!=CFG:raise ValueError('Frozen rules')
++    if protocol['schema']!='assembly_then_hard_geometry_support_protocol:10' or protocol['config']!=CFG:raise ValueError('Frozen rules')
+     for rec in [*protocol['source_pins'].values(),*protocol['inputs'].values()]:checked(rec)
+     if protocol['source_pins']['runner']!=pin(__file__):raise ValueError('Exact runner')
+     for key,total in (('cheap_FK_contract',14),('native_J_contract',87),('native_LP_contract',4)):
+@@ -72,8 +73,8 @@
+           'phone_body_tangent_rows':kin.phone_tangents_body_rows,
+           'original_ego_material_targets_body_m':[v['original_ego_material_target_phone_body_m'] for v in kin.anchors['anchors']],
+           'common_force_point_rule':CFG['common_force_point'],'algorithm_only_physical_model_unchanged':True})
+-        lo=np.r_[np.maximum(e.qlo[:8]+1e-9,qbase[:8]-.45),xb[8:11]-.025,xb[11:]-.5]
+-        hi=np.r_[np.minimum(e.qhi[:8]-1e-9,qbase[:8]+.45),xb[8:11]+.025,xb[11:]+.5]
++        lo=np.r_[e.qlo[:8]+1e-9,xb[8:11]-.025,xb[11:]-.5]
++        hi=np.r_[e.qhi[:8]-1e-9,xb[8:11]+.025,xb[11:]+.5]
+         xs=np.r_[np.full(8,.3),np.full(3,.02),np.full(3,.3)];zl=(lo-xb)/xs;zh=(hi-xb)/xs
+         cosine=float(np.cos(np.deg2rad(1.)));fd=np.asarray(CFG['FD14'])/xs
+         for seedno,x0 in enumerate(initial):
+@@ -268,7 +269,7 @@
+             seeds.append({'seed':seedno,'name':CFG['seed_names'][seedno],'stages':stage_reports,'full_attempts':attempt,'full_returned':successful,'finals':finals})
+             print(json.dumps(clean(seeds[-1])),flush=True)
+         attemptfile.close();audit=ev.audit_model();audit['passed']=True
+-        write(out/'report.json',{'schema':'assembly_then_hard_geometry_support_result:9','status':'COMPLETED_BOUNDED_TWO_SEED_STAGED_SEARCH',
++        write(out/'report.json',{'schema':'assembly_then_hard_geometry_support_result:10','status':'COMPLETED_BOUNDED_TWO_SEED_STAGED_SEARCH',
+           'protocol':pin(a.protocol),'seed_results':seeds,'holding_diagnostic_candidates':sum(v['holding_diagnostic_eligible'] for s in seeds for v in s['finals']),
+           'counts':ev.counts,'static_counts':e.counts,'cheap_FK_counts':kin.counts,'LP_calls':LPcalls,
+           'model_audit':audit,'cheap_model_audit':kin.audit_model(),'wall_seconds':time.perf_counter()-start,

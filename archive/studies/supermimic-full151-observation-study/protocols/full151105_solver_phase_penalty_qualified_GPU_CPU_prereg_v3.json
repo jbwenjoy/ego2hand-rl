@@ -1,0 +1,510 @@
+{
+  "schema": "full151105_penalty_solver_phase_observability_CPU_preregistration:1",
+  "revision": 3,
+  "revision_history": {
+    "previous": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_solver_phase_penalty_observability_CPU_prereg_v2.json",
+      "sha256": "1ec18db963bc2931920bedce3f2bf43e345544798ee4ac1e0f856ac119cea13c"
+    },
+    "change": "Only replace failed CPU native-state conversion with independently confirmed qualified GPU B1 prestate packet. Preserve all full58 original arithmetic gates, physical source/phase/rows, proxy factory/math/sampling, native masks and coverage classification. Native-catalog implementation source remains a prerequisite below, not a science change."
+  },
+  "status": "FROZEN_SOURCE_ONLY_QUALIFIED_GPU_INPUTS_NOT_SCORED_NOT_EXECUTION_AUTHORIZED",
+  "created_UTC": "2026-11-05T16:03:30.794166+00:00",
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "training_authorized": false,
+  "source_pins": {
+    "worker": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\serial_probe105_v2.py",
+      "sha256": "a24c89da47f4aad7acfc9d9dfd1f053518cdc878230716bb2c857127ec13e592"
+    },
+    "native_reader": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\sim.py",
+      "sha256": "47d0523d8b0d569544f2873a2c7c8a17cad27e570154d6220ec98d1a97aa5d20"
+    },
+    "Pen_reader_subclass": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\pen.py",
+      "sha256": "c02906c409aedab59aaf68a5ef80f9dbcea52da10e72137091df81858262819a"
+    },
+    "native_state_pack": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    },
+    "native_rotation": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\rotations.py",
+      "sha256": "0fbb36bc8608dcc9a33edfac7f6551e742380e1e66c70e857b33d6d05cd81e70"
+    },
+    "native_task_cfg": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\pen_spin_env_cfg.py",
+      "sha256": "e012a43b711a25f54c627518f4dd79d683ac34f0b3dc03d6376915feeb8f8fdf"
+    },
+    "Warp_forward": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\forward.py",
+      "sha256": "5777015c762394cf5e26d261f05a1b84d3dfda051de48992d7ef709b06e9c86f"
+    },
+    "Warp_kinematics_source_NOT_executed": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\smooth.py",
+      "sha256": "ac9f763769820b460848c9ba298be7d8ae54815372153f459cdd933d64deaafa"
+    },
+    "Warp_readback": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\io.py",
+      "sha256": "6fe550047ed4b82c307741f84a8a4800587469c52e5ce292a3073824f3451fa6"
+    },
+    "measured_contacts": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\vendor\\measured_contacts.py",
+      "sha256": "478c3117489bd4a02238f6299a91638e791a751352b772321ce2676b0ec4f96f"
+    },
+    "binding3": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_intent\\binding_v3.py",
+      "sha256": "324a64bb3603f0e00b950c204468f932053a9daa11c96559f35c141975b0598e"
+    },
+    "R_objective": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\vendor\\frozen_contact_math\\contact_objective.py",
+      "sha256": "54d9507d824d08baab3639e29d028b325109f51ca3e3fdd3118be341729502ea"
+    },
+    "R_penalty": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\vendor\\frozen_contact_math\\penalty_only_objective.py",
+      "sha256": "cfa53515fb7dc12ae49a2aec2d9ca37603061c1752fc8875f879cf5ea235c914"
+    },
+    "R_geometry": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\vendor\\frozen_contact_math\\contact_geometry.py",
+      "sha256": "a9e0e19cc826cefe4e6a97a5c7b33f02f04c23585065cb0a273436eb07846d7a"
+    },
+    "bundle_loader": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\bundle.py",
+      "sha256": "d2d7b8112e187f980caf6eeb7a834b37a5393109e9a8d70dd745207a357835d5"
+    },
+    "native_actual_context": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\native.py",
+      "sha256": "142cd9b710786d1973c6c518165e1d08bfd3a38b7a65b425819b538e3d025a2f"
+    },
+    "old104_codec_SOURCE_ONLY_not_105_enrollment": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\saved_state_codec_v3.py",
+      "sha256": "8321538887c660456fc50ce8fc37d3b130760212fa63c905310bbd6a079d5156"
+    },
+    "parent_consumer_SOURCE_ONLY_DO_NOT_CALL_RUN_OR_CONVERTER": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\penalty_observability105_v1.py",
+      "sha256": "00e1aea5163c7f6d07ea75755e076d808f171d0a766acbf6a683db8a3c00b22c"
+    },
+    "qualified_GPU_packet_producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\state_replay105_v2.py",
+      "sha256": "9ff9aef6956ca917068834f89524861d6b9ad8492e58cf6504ca404393a403b3"
+    },
+    "qualified_GPU_packet_entry": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\execute_full151_state_replay_v2.py",
+      "sha256": "4f340128ba4709108ee301b395a2533596dd1ecf1f02852dca60d4dbd3ceb073"
+    },
+    "qualified_GPU_packet_supervisor": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\run_full151_state_replay_v2.py",
+      "sha256": "ec243a230e354380389dbded3fc9bebd2e754f38aea5565b5b3e82de971cacc9"
+    },
+    "parent_prereg_writer_SOURCE_ONLY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\preregister_solver_phase_penalty_observability_cpu_v2.py",
+      "sha256": "bf34cdbe45010905b3ee43c9e67df1593e5dbc16e58b0e4489dbebea82ae935f"
+    },
+    "GPU_replay_saved_auditor": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\audit_matched_native_GPU_reader_saved_cpu_v3.py",
+      "sha256": "94172e5214e8412388da0cb243362ee44a588a877ae8c4e591a7bfc5c4363f8a"
+    },
+    "GPU_replay_saved_math": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\matched_reader_saved_math_v1.py",
+      "sha256": "a3301167f5711ddb4750068e0f530823f9e5ddb26edd5654d1854812242405e4"
+    }
+  },
+  "inputs": {
+    "physical_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-gradient-empirical_gradient05-v2.json",
+      "sha256": "034e81fecb3e49a26136740054bb284d600f379bdb7ae1db2c9a6368228af077"
+    },
+    "physical_samples": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\physical_samples.jsonl",
+      "sha256": "c363f20838c6cec1acdc3541c7d250c7cb5980c3d6719ebb7c245d4e13c9071f"
+    },
+    "reward_snapshots": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\reward_snapshots.jsonl",
+      "sha256": "f214ff1b036595d56117363bd87c7b3c876b04af2fb6a1e8f3a2244ad2ee2247"
+    },
+    "physical_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\physical_arrays.npz",
+      "sha256": "962de8ad06f72031339b6fb6a46d9209e604f70c7c2e564b80f3873b5e422e8b"
+    },
+    "branch_index": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\branch_index.json",
+      "sha256": "ae2667c285ca55711035189e5368b4436631c1322346735d9a19a1e179c61aa9"
+    },
+    "snapshot_records": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\snapshot_records.json",
+      "sha256": "114386fd2d049b97c650d9c47e6a02d2509c8c963d5e64b7148ba5d50bbbe1ec"
+    },
+    "donor_records": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_records.json",
+      "sha256": "ecdbcc001cd9c6d06b75e7140dfa6405145ec86fffce0d48d3c53de7da1ef4c2"
+    },
+    "physical_saved_independent1762": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_full_serial_saved_review_v1\\report.json",
+      "sha256": "f5fd0703639308706b4f8bf5deee834e6d207486c63fded8920a6a86fd2a62af"
+    },
+    "objective_spec": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151-v2-declared-H123-GPU-objective-spec-v1.json",
+      "sha256": "08d9fa9936766bdf21bb13dcf0123eebe3a54639266f641f47f9e7bb522c3962"
+    },
+    "previous_bonus_independent523": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_trained_bonus_saved_independent_v1\\report.json",
+      "sha256": "68f413738f47e2068711712772a2e19d0888051ea1f5a936905ea8d0cbeb833a"
+    },
+    "previous_bonus_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_trained_bonus_CPU_v1\\report.json",
+      "sha256": "764a006cc68a5e26aea7d4228ecfc05b7e9f0eb5c955cbd22ea6a21b25a2a7ab"
+    },
+    "previous_bonus_factory_geometry_manifest": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_trained_bonus_CPU_v1\\loader_factory_receipts.json",
+      "sha256": "625b969707678be95a40c80e09988349d703ff3467e185b29b72b6e37e2502ff"
+    },
+    "full151_bundle": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\bundle.json",
+      "sha256": "59406c6214a085afba7efcc2b33880d5c82b409ee4f6485ec71c073fec19dc76"
+    },
+    "native_data": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\clips\\legacy_full151_knownrough\\legacy007_f0200_n0151_H123_SCP8_v1.npz",
+      "sha256": "91fa680ef2da7ebf5397150d5511fa8f3631ed354399f7069438359dfa54f447"
+    },
+    "reference_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\reference_candidate151.npz",
+      "sha256": "aa4f13b146979c7b274f7191100023168ff69032fe5d88125d339e3a56e3be93"
+    },
+    "init_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\init_requested.npz",
+      "sha256": "fd74f89a7b12f4c83daa3525ca3d0ae3832b05e7d17faeb70372d41449991517"
+    },
+    "nominal_model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "A0__initial_readback.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\initial_readback.json",
+      "sha256": "84ca288da6319e4ef26bf4cb6e2f71a78d58ab602e3eb65918bc23d3e22f4424"
+    },
+    "A0__runtime_reset_readback.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\runtime_reset_readback.json",
+      "sha256": "5085585bb41ea9ef3638a42cc097521c549ccb6fbcf8e06db6e183ad28dc42e1"
+    },
+    "A0__control_metadata.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\control_metadata.json",
+      "sha256": "86fe8734b8936d5343754e97e4219bf33e8faecce00e7e10775045ef4433ffa1"
+    },
+    "A0__controller_descriptor.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\controller_descriptor.json",
+      "sha256": "73e5c003e06a2db837db27f6460d97f6e76f539a986cd22b35d242c2dc4b7d3e"
+    },
+    "A0__actual_context_readbacks.npz": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\actual_context_readbacks.npz",
+      "sha256": "681f704b9f44335f7fb3124dc1184f43f8f8982a8fdae7e5c2ba5d1c6a509286"
+    },
+    "A0__expected_context_fields.npz": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\expected_context_fields.npz",
+      "sha256": "d164d5be9939b9430fd27cda11821e76df11dec03922c9e9c6b55cd1b405288d"
+    },
+    "A0__actual8field_copy.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\actual8field_copy.json",
+      "sha256": "772b2a70c098d4560ac41c2fb24c1f121f6a7442f4af4627455a67879ce4c89e"
+    },
+    "A0__nominal_model.mjb": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\nominal_model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "A2__initial_readback.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\initial_readback.json",
+      "sha256": "84ca288da6319e4ef26bf4cb6e2f71a78d58ab602e3eb65918bc23d3e22f4424"
+    },
+    "A2__runtime_reset_readback.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\runtime_reset_readback.json",
+      "sha256": "5085585bb41ea9ef3638a42cc097521c549ccb6fbcf8e06db6e183ad28dc42e1"
+    },
+    "A2__control_metadata.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\control_metadata.json",
+      "sha256": "86fe8734b8936d5343754e97e4219bf33e8faecce00e7e10775045ef4433ffa1"
+    },
+    "A2__controller_descriptor.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\controller_descriptor.json",
+      "sha256": "5e871ed27d6451d34ccd0eed7ed16dd46340ea6801f5714c1cc50ab8b3b55afb"
+    },
+    "A2__actual_context_readbacks.npz": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\actual_context_readbacks.npz",
+      "sha256": "681f704b9f44335f7fb3124dc1184f43f8f8982a8fdae7e5c2ba5d1c6a509286"
+    },
+    "A2__expected_context_fields.npz": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\expected_context_fields.npz",
+      "sha256": "d164d5be9939b9430fd27cda11821e76df11dec03922c9e9c6b55cd1b405288d"
+    },
+    "A2__actual8field_copy.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\actual8field_copy.json",
+      "sha256": "772b2a70c098d4560ac41c2fb24c1f121f6a7442f4af4627455a67879ce4c89e"
+    },
+    "A2__nominal_model.mjb": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\nominal_model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "GPU_replay_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\report.json",
+      "sha256": "0ac1bf85d41c3e6136f820786fab8dd60ff23470bfb8e7182eeb9b9e4bbee8f9"
+    },
+    "GPU_replay_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-matched-native-GPU-reader-v2.json",
+      "sha256": "9573b5ad074904775c07c54f49ffcd43bb354a178fc386a0537827df95210078"
+    },
+    "GPU_replay_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105-matched-native-GPU-reader-replay-prereg-v1.json",
+      "sha256": "fddcf970d7a8e44732fe93e6c83d1918fe017d4d5df159ae5c851a77e15fca6c"
+    },
+    "GPU_replay_identity": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2_watchdog\\engineering_identity.json",
+      "sha256": "42f1e3eb8229e44e522d0aa069654e1330ff30aa132129e61efc630e3252c8e4"
+    },
+    "qualified_GPU_prestate1808": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\prestate1808_qualified_for_future_scoring.npz",
+      "sha256": "4d205ee2c7cc878745f4575e572622eb3033a81a49408d6cef76dda008b56de5"
+    },
+    "GPU_replay_saved_independent": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_saved_independent_v3\\report.json",
+      "sha256": "a31cb81a6e513fea013591a9198b86a0ad398a148164f18a0bedfcdb7ec9c3eb"
+    },
+    "GPU_replay_core_output_manifest": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\output_pins_core.json",
+      "sha256": "d4a22ffdf79411f5c4838c549a7cc40d17b9b8ce8d818545c9714447100143cf"
+    },
+    "GPU_replay_terminal_runtime": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\runtime.json",
+      "sha256": "81a1ad4f2b346cf853e4c5f12c31efb26ee7be929d74e8f048760d6eda00a55a"
+    },
+    "GPU_replay_terminal_completion": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\completion.json",
+      "sha256": "88f00cf83f8d70423daf40ad966393b1cc14ab15b8f057d4bdd6761f336be3cb"
+    },
+    "GPU_replay_watchdog_state": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2_watchdog\\state.json",
+      "sha256": "da359de185114e1695260782f303909d17833927f3e9935ddaf9c70d7ca001f7"
+    },
+    "GPU_replay_post_terminal_CIM": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2_watchdog\\post_terminal_CIM.json",
+      "sha256": "a2acef7a6ed8910f79b84a51ce03576b06d4c44da8a86aa855819fbc268b30ac"
+    },
+    "forensic_solver_position1808": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_converter_forensic_CPU_v1\\solver_position1808_old_rule.npz",
+      "sha256": "5ab8cabee6a958e34de6748dca93f44b7a2c9b1d15c851d3f173d9d872b89627"
+    },
+    "forensic_solver_rotation1808": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_converter_forensic_CPU_v1\\solver_rotation1808_old_rule.npz",
+      "sha256": "0a9513d6d55a4fb41882b6be4c36453b5fd1c93de7e0282a5fb7f632f464e6d6"
+    }
+  },
+  "question": "At identical saved solver pre-state, does the exact trained sampled penalty observe native generated hand-object depth above the original3mm gate? Distinguish finite snapshot coverage from proxy observability, without rerunning physics.",
+  "prior_knowledge": "Previous160 physical+8 WM next20 proxyP were all0; training prior logs can be positive but are different imaginedstates. This is a new sequential exploratory diagnostic, not a blind confirmatory claim or old FD rerun.",
+  "all_rows_schedule": {
+    "physical_samples": 1808,
+    "control_intervals": 452,
+    "paths": [
+      "A0",
+      "A2"
+    ],
+    "each_path_rows": 904,
+    "donor_rows": 1200,
+    "baseline_branch_rows": 96,
+    "perturbation_branch_rows": 512,
+    "four_substeps": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "ordering": "original physical_samples JSONL order; preserve path/mode/k/branch_id/substep/canonical tick/sourceframe, no sample selection",
+    "dependent_replicates": "2fresh saved-action-source paths;152 restored branches include24 baselines. Repeated states/steps/branches not independentN. No archived closed-loop reproduction claim."
+  },
+  "phase_contract": {
+    "raw_pre": "pre_qpos27/pre_qvel26 from previous_raw; interval starts with raw() before env.step; subsequent substep previous_raw is priorpost",
+    "native_solver": "Warp.step calls forward/position/collision/solver on prestate, then implicit integration. Contactdist and xpose remain pre-derived while qpos/qvel/time have advanced.",
+    "readback": "get_data_into copies qpos/qvel and xpos/xquat/contact separately; it does not recompute FK. Sampling is before scene.update/Managerforward.",
+    "forbidden_mismatch": "Never compare15ms lastsolver depth with20ms postintegration proxy. Every1808 proxy input is the corresponding PRE qpos/qvel, not post or nearest endpoint.",
+    "reward_memory": "P_ONLY eagerly calls fullA2base; start0/end151/time=integercontrol k for all4substeps. Penalty itself unmasked by declaredintent. k149 active, no u150, no source confidence or contact label invented."
+  },
+  "converter_prerequisites_ZERO_PROXY_UNTIL_ALL_PASS": {
+    "authority": "Consume only the SHA-bound prestate1808_qualified_for_future_scoring.npz pointed to by the exact matched GPU B1 producer report. No CPU state codec call, no new GPU Reader replay, no repaired/zeroed channels or float64 replacement.",
+    "required_independent_confirmation": "Require exact input GPU_replay_saved_independent schema full151105_matched_native_GPU_reader_saved_independent:1/status PASS_SAVED_NATIVE_REPLAY_REVIEW,29strict true checks and engineering/state_replay/future_scoring_input qualifiedTrue while dense_scoring_eligibilityFalse. Bind its config/producer_report/run_dir/qualified_prestate and auditor/math sources to this same replay. Also retain original forensic23+physical1762 provenance. Producer booleans alone never suffice.",
+    "full58_original_rule_unchanged": "All452 endpoint and160 leading anchors mandatory: handq20/qd20 exactFP32 bits, allother18 abs(delta)<=8*eps32*max(1,abs(actual),abs(reference)). No pose-only gate, tolerance increase, conditioning-envelope substitution, component omission or second-mode choice.",
+    "solver_pose_unchanged": "All1808 original solver PRE position/normalized R versus PRE qpos pairs retain old8eps bounds. Recompute saved pair delta/bounds/flags and bind same raw source rather than running native FK, CPUstate or another GPUquat conversion.",
+    "packet_ABI": {
+      "native_GPU_prestate58": {
+        "shape": [
+          1808,
+          58
+        ],
+        "dtype": "float32",
+        "finite_all": true
+      },
+      "completed_mask": {
+        "shape": [
+          1808
+        ],
+        "dtype": "bool",
+        "all_true": true
+      },
+      "source_pre_row": {
+        "shape": [
+          1808
+        ],
+        "dtype": "int64",
+        "exact_values": "arange(1808)"
+      },
+      "palm_pos": {
+        "shape": [
+          1808,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "palm_rot": {
+        "shape": [
+          1808,
+          3,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "mapping": "hand_qpos20/hand_dof20 integers, object_qpos_start/object_dof_start scalar integers; copied authoritative forensic mapping, not inferred from body IDs"
+    },
+    "ordering": "Row i is EXACT physical_samples original JSONL row i, with same path/mode/k/branch_id/substep/canonical_pre_tick/source_frame. Validate all452 groups/four substeps and160 leading identities; not a new concatenated trajectory and not endpointk+1.",
+    "fixed_palm_and_mapping": "Inherit forensic23 and replay saved proofs for exact pergroup actual Reader palm frames, original qpos/dof indexing/bodyangular convention and fixed-root structure. Record copied palm bytes; no reconstructed palm rotation, no claim of1808 directly measured mocap rows.",
+    "source_and_identity": "Require immutable original physical config/full1762/capacity/source/identity and exact replay OS12 no-timeout exit0 owned-PID absence. Require current source bytes+archived inventory membership and samefile+SHA identity, preserving original path spellings.",
+    "no_implicit_scoring_authority": "Replay future_scoring_inputs_qualified=True is an input qualification, not CPU scoring authorization. Replay dense_scoring_eligibility/proxy_scoring_authorized remainFalse; only a separately frozen Root CPU config may authorize this new consumer.",
+    "old_failure": "CPU state conversion00e1/config160c failure and forensic old5omega FAIL remain unchanged."
+  },
+  "native_depth_label": {
+    "primary": "max(max(0,-contact.dist)) across WORLD0 generated contacts whose exact geom pair is object\u00d7enabledhand, strict >.003m. This is HO-only slice of original3mm physical gate, not whole-task score.",
+    "exact_object_mask": "geoms with bodyid==object/cube as in pinnedworker; enumerate ids/types/names. Noother object/environment contact substituted.",
+    "exact_hand_mask": "pinnedworker regex robot/(right_palm_collision|right_finger[1-5]_(link[1-4]|tip_sensor)_col), enabled contype orconaffinity; enumerate all IDs; compare actual proxy sample_geom_ids/metadata and report excluded/native-only geoms.",
+    "no_wrong_scalar": "measured_hand_object.penetration_m is maximumALLcategories, not HO. Recompute HO percontact and compare saved penetration_by_category_m.hand_object. Save self/other depths separately.",
+    "raw_mapping": "CPUcontacts world-filtered by get_data_into must align original rawWP geom/worldid order. get_data_into reorders CPUefc addresses; do not use CPUefc as original constraint identity.",
+    "no_positive_force_filter": "Primary generated-depth label includes all candidate types and zero-normal-force contacts, consistent with original quality metric. Force>1e-6/efc/typeCONSTRAINT subset is only separately labeled secondary, no primaryrow dropping.",
+    "missing_or_empty": "validempty generatedHO -> observed candidate depth0 with explicitcontactcount0, not proof of no global penetration. Malformed/unknown geom/type/world orcapacity ->UNKNOWN and stop before score; never fillmissing0."
+  },
+  "actual_geometry_binding": {
+    "factory": "one full151_intent.binding_v3.build_penalty_only_objective(exact trainedspec08d9,devicecpu); keep eagerA2forward unchanged, training64basis, originalPformula",
+    "same_actual_geometry": "nominal MJB plusactual host geom_size/geom_pos/geom_friction, same8field readbacks bothpaths; immutable nominalgeomquat/body/joint/mesh topology. Compare existing bonus geometry manifest/sampling hash and register sample_geom_ids/sample_points_body/sample_body_ids buffers for audit.",
+    "scope": "1344 fixedsamples=64pereligiblegeom in existingexactfactory, compiledmesh convexhull/capsule; object exterior union1cylinder+2markerboxes. This is sampled proxy, not native narrowphase equivalence.",
+    "COMradius": "sameCOM0 and nominal enclosingradius once; do not subtractCOM twice or substitute crosssectionradius/native friction. P is geometric and needs no new LP/mask/intent orforceclosure assumption."
+  },
+  "future_scoring_budget_NOT_AUTHORIZED": {
+    "factory_calls": 1,
+    "batch_size": 128,
+    "objective_forwards": 15,
+    "batch_rows": [
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      16
+    ],
+    "scored_rows": 1808,
+    "new_WM_or_Actor_load_or_forward": 0,
+    "new_AD": 0,
+    "new_Env_Warp_physics_nativeFK_collision_query": 0,
+    "passive_costs": "Retain original explicit passive nominalMJB constant/catalog load1 plus the unchanged factory-owned passive MJB read1, separately counted/source-accounted. No CPU state conversion, no new GPU replay, no nativeFK/collision/query. Pure Torch FK inside unchanged proxy is expected.",
+    "capture": "Read-only hook on existinggeometry_proxy forward, returnNone and remove finally. Savefull1808x1344 SDF, actualrawP/BP, minSDF,proxy samplebuffers/geom IDs, pergeom minimumSDF andoptionalexistingweights/support64; no extra geometryforward.",
+    "readonly": "CPU FP32/AMPFalse,CUDA_VISIBLE_DEVICES=-1/notinitialized; allparamsfrozen andbuffers/RNG/Python/NumPy/TorchCPU/inputfiles beforeafterunchanged. Noautograd needed for observability. Savepartial andstopfirstfailure; no retry/tune/resample.",
+    "native_CPU_state_calls": 0,
+    "new_GPU_state_calls": 0,
+    "qualified_packet_rows_read": 1808,
+    "explicit_passive_MJB_constant_catalog_loads": 1,
+    "factory_owned_passive_MJB_reads_source_accounted": 1,
+    "prestate_pose_alignment_rows": 1808
+  },
+  "fixed_analysis": {
+    "original_threshold_m": 0.003,
+    "planning_margin_used": false,
+    "proxy_observed": "actual rawP>0 and separately min_sampled_SDF<-.003 exactsource arithmetic; keep equality at3mm explicit",
+    "continuous": "allrows nativeHO depthm versusproxy sampledepthmax(0,-minSDF), rawPdimensionless andweightedBP=-.1P; no reweighting to conceal zeros",
+    "tables": "All1808 perstep CSV/NPZ, fullconfusion counts and allcontinuous scatter, bypath anddonor/baseline/perturbation separately; rowswithin3mm boundary retained, noCI orindependentNs.",
+    "miss_breakdown": "For nativeHOdepth>3mm andproxyP0, use deepestnativepairhandgeomID: absentproxygeom ->GEOM_SET_COVERAGE_GAP; present andpergeom sampledSDF>=-3mm ->SAME_POSE_PROXY_UNDERSENSITIVITY_CANDIDATE. Cannot uniquely separate finite sampling/objectexterior/narrowphase semantics without laterindependent method.",
+    "false_positive_caveat": "ProxyP>0 withnative observedHOdepth<=3mm isDISAGREEMENT_WITH_GENERATED_CONTACTS, not global geometricfalsepositive because contactabsence is not exhaustivegeometrytruth.",
+    "coverage_question": "Denseprestate positives withold8nextstateP0 support limitedsparse/phasecoverage as one explanation; denseproxy misses at validatedsamepose indicate proxy observability problem. Both maycoexist; do not force exclusive causalstory."
+  },
+  "limits": [
+    "Fresh donor saved-action replay is not original closed-loop archive reproduction. This covers onlytwo fixed action-source paths and restored dependentbranches.",
+    "No WM/Actor/physicalgradient orwholehiddenstate qualification; no native forcegradient ortruehumancontact label.",
+    "Same-state depth/proxy disagreement is not proof of a unique implementation bug or lack of trainingpenalty signal. Existinglocalproxy/compiledqualification failures remain retained.",
+    "Do not reuse next20ms endpoint score with15ms/otherprestep contactdist. Converter/pose guard failure is a blocker, not permission to choose a convenient phase.",
+    "Frozen source-only protocol, not execution authorization. All input/provenance/full58/pose/alignment/sourceguards plus actual newCPUproof and Root separate CPUconfig must precede the firstfactory. OldCPUFAIL and all prior task/proxy qualifications remain retained."
+  ],
+  "native_geometry_catalog_implementation_gate": {
+    "selected_source": "Single selected path: retain original explicit nominalMJB passive constant/catalog load1, samefile+SHA original model. Use original regex+contype-or-conaffinity enabled native hand set, allobject-body geoms andngeom checks exactly. No guessed handgeom count, no sampled21-subset surrogate. No nativeFK/collision/query/modelmutation/upload.",
+    "why": "The factory owns an internal model but does not publicly expose its complete original native catalog. Its sampled geometry metadata is not used as a substitute for native-enabled masks. Retaining the original passive source avoids a new classification evidence chain.",
+    "mapping_verification": "Packet mapping is the independent qualified GPU authority. Original passive MJB named-index constants may only verify agreement and catalog/type/range assumptions, not reconstruct or convert a state.",
+    "exact_load_accounting": {
+      "explicit_passive_MJB_constant_catalog_loads": 1,
+      "factory_owned_passive_MJB_reads_source_accounted": 1,
+      "native_CPU_state_calls": 0,
+      "new_GPU_state_calls": 0
+    },
+    "no_runtime_fallback": "This is the single draft implementation path. Any later no-explicit-load catalog alternative needs a separate frozen source change before execution; no runtime mode search."
+  },
+  "exact_deepest_tie_primary_rule": "For each valid row use ALL contacts with depth exactly equal to that row maximum HO generateddepth. Preserve every exact tie and all handgeom IDs; no firstargmax/epsilon tie expansion. ALL strict>3mm pairs are separate secondary overlapping categories. No positiveforce primary filter.",
+  "draft_execution": {
+    "future_GPU_numeric_arrays_opened": 0,
+    "qualified_packet_NPZ_opened": 0,
+    "new_geometry_values_read": 0,
+    "native_state_calls": 0,
+    "MJB_loads": 0,
+    "objective_factory": 0,
+    "proxy_WM_Actor_forward": 0,
+    "Env_physics_GPU": 0
+  },
+  "runplan_schema": "full151105_solver_phase_penalty_qualified_GPU_CPU_run:1",
+  "role": "same_solver_phase_penalty_observability_GPU_qualified_states",
+  "runplan_keys": [
+    "schema",
+    "role",
+    "protocol",
+    "output",
+    "CPU_run_authorized",
+    "cpu_threads",
+    "source_pins",
+    "cpu_ready"
+  ],
+  "output_prefix": "full151105_solver_phase_penalty_GPU_qualified_CPU_",
+  "GPU_replay_mutable_runtime_evidence": {
+    "exception_exact_filename": "runtime.json",
+    "core_recorded_preterminal_path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\runtime.json",
+    "core_recorded_preterminal_sha256": "d8dcc70a799f4a4065100c76d119f7f8de63b15dda56125e132f1b31f0aef967",
+    "terminal_runtime_input": "GPU_replay_terminal_runtime",
+    "independent_review_input": "GPU_replay_saved_independent",
+    "rule": "Only runtime.json is a known mutable core-manifest entry: entry updates it after core writes output_pins_core.json. Explicitly retain the stale core hash and independently validate current terminal runtime via exact config/source/PID/PPID/creation/command plus watchdog state,OS12,completion andpostterminal ownedPID absence. Do not require the old runtime hash to equal current, conceal its mismatch, or skip any other core manifest pin. Every other immutable core artifact remains strict current SHA. This is not a blanket mutable-source/data exception."
+  },
+  "GPU_packet_prestate_pose_alignment": {
+    "scope": "NEW conservative pre-factory alignment guard, distinct from inherited solverworld-pose versus rawPREq checks and from452/160 full58 tests. No values have been evaluated for this guard in this protocol preparation.",
+    "rows": 1808,
+    "packet_inputs": "native_GPU_prestate58[:,40:43] and[:,43:52], exactpacket palm_pos/palm_rot",
+    "world_reference_inputs": "forensic_solver_position1808.actual [1808,3] and forensic_solver_rotation1808.actual [1808,3,3], with their original rawsource pairs/bounds/flags independently bound",
+    "formula": "Using savedFP32 operands cast toF64, A=palm_rot.transpose(-1,-2); p_ref=sum_j A_ij*(world_solver_position_j-palm_pos_j); R_ref_ij=sum_l A_il*world_solver_rotation_lj. Implement explicit elementwise multiply+sum, not quaternion reconstruction, orthogonalization, FK, state conversion or anotherGPU operation.",
+    "unchanged_arithmetic_scale": "For everyp3/R9 component require abs(packetGPUvalue_F64-derived_reference_F64)<=8*eps32*max(1,abs(packetGPUvalue_F64),abs(derived_reference_F64)). No tolerance increase or tuning.",
+    "save": "All1808 F64derivedreferences/signeddelta/oldbound/componentmask, row identities andcounts, includingzeros/outliers. Label reference as F64derivedalignment arithmetic, not originalGPUFP32truth or newly measured pose.",
+    "failure": "Any nonfinite/malformed/reference/source/row or comparison failure stops before factory/forward; no state repair, selection or changedallowance."
+  },
+  "prerequisites_pending_before_execution": [
+    "New consumer/CLI/checker immutable sources and actual current-source CPU_READY",
+    "Root separately frozen newCPUconfig with CPU_run_authorizedTrue andfreshoutput",
+    "No dense scoring authorization is provided by this source-only protocol"
+  ]
+}

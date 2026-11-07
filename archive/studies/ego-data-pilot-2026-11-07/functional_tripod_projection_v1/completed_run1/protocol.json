@@ -1,0 +1,73 @@
+{
+  "schema": "functional_tripod_saved_geometry_plane_projection_protocol:1",
+  "sources": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_projection_v1\\project_saved_candidates_v1.py",
+      "bytes": 11434,
+      "sha256": "14521c3a245fc45834a306f329e6a7431412fba20d2dd44483851fc43b8fce8b"
+    },
+    "launcher": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_projection_v1\\execute_projection_once_v1.py",
+      "bytes": 3493,
+      "sha256": "ca6df1c8c433e7bef70cc712a90a17a683e1fd0a537a4643729f46a86c8652bf"
+    },
+    "frozen_geometry_solver": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\solve_tripod_geometry_v2.py",
+      "bytes": 25708,
+      "sha256": "1778732382cc6fe9b53b1207c31e459dc603997edd123f4b237591db4a1e1fef"
+    },
+    "plane_helper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\refinement_v1\\separating_plane_refinement_v1.py",
+      "bytes": 10395,
+      "sha256": "75f664e7abefeee5716398c5753f2c9023554b436aae65c1757b3531ed6bcf2e"
+    }
+  },
+  "inputs": {
+    "original_geometry_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\protocol_CPUTrue_run1.json",
+      "bytes": 6057,
+      "sha256": "9d524d37ad39220a85bcd7589820a7e8de2f5cac749a71f3fd42987a1d3d32c8"
+    },
+    "original_geometry_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\completed_v1\\report.json",
+      "bytes": 4966,
+      "sha256": "75c89d096dd8097ded80ed689fbf2b368e732c00828afc8d18edd30626011bff"
+    },
+    "original_geometry_terminal": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\process_geometry_run1\\terminal.json",
+      "bytes": 1838,
+      "sha256": "2e234891b81f55fbf78b4a63f04e5dc18a40f0871c569c58ed550a758e5c6166"
+    },
+    "helper_source_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\refinement_v1\\SOURCE_CONTRACT_v1.json",
+      "bytes": 2161,
+      "sha256": "211ac84707cb2e8be1ae34ddddd1eca0ba604d1455b225b7ca5a18ad4fa64b6e"
+    }
+  },
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_projection_v1\\completed_run1",
+  "CPU_static_run_authorized": true,
+  "neural_training_or_integration_authorized": false,
+  "budget": {
+    "global_wall_s": 240,
+    "entry_wall_s": 45,
+    "final_wall_s": 8,
+    "iterations_per_entry": 20,
+    "full_queries_per_entry": 80,
+    "heavy_queries_per_entry": 3000
+  },
+  "proposal": {
+    "joint_step_trust_rad": 0.02,
+    "interior_target_margin_m": 2e-06,
+    "line_search_fractions": [
+      1.0,
+      0.5,
+      0.25,
+      0.125,
+      0.0625
+    ]
+  },
+  "admission": "All four previous failed candidates retained. Fixed each saved phone pose/q12..19. Actual geometry gate remains three pad[-.1,.2]mm and all nondesignated/self nonpenetration, full22/189/table, original35mm/30deg trust; fresh final required. Interior2um is a search target, not a new qualification gate.",
+  "derivative_scope": "Only approximate current phone support planes guide q0..11. Unknown/far/self proposal matrix rows are unmodelled, never asserted zero physics derivatives. True full geometry validates every trial; no ideal force LP or force claim.",
+  "automatic_retry": false,
+  "unseen_or_real_ego_validation": false
+}

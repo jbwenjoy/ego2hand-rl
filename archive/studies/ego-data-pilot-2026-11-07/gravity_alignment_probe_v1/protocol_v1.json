@@ -1,0 +1,75 @@
+{
+  "schema": "analytic_gravity_alignment_static_probe:1",
+  "inputs": {
+    "support_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\support_preparation_v1\\actual_v1\\report.json",
+      "bytes": 28530,
+      "sha256": "e61954f90e6256cc5c642dc0cb9a6c422d659e3180905e103ceccd0c5764acfe"
+    },
+    "operands": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\support_preparation_v1\\actual_v1\\support_operands_and_controls.npz",
+      "bytes": 6067,
+      "sha256": "78fed48b3e00657c77741804eacbaa644cab1733e44377b8871535346c69734d"
+    },
+    "model": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\seed2_selected_state.npz",
+      "bytes": 8039,
+      "sha256": "05875553843c3a124591781f4eac8e14b8ecfae4ce3e07e504c3526ac5b1ea1a"
+    },
+    "self_recheck": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\seed2_saved_gate_recheck_v2.json",
+      "bytes": 146878,
+      "sha256": "3c4276ecf4fb97efac1a28650df04727bc02ff3e39d210b76c3179f64332f196"
+    },
+    "human_targets": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\frame42_targets.json",
+      "bytes": 11518,
+      "sha256": "2918c7385036c93fc0e81dbba7f72d02ba72f9b26744b9fe8caab3a1b4b2c15f"
+    },
+    "anchors": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\fixed_anchors_and_targets.json",
+      "bytes": 38112,
+      "sha256": "cac45ba762879007da2043c5c588109fed2c34cc5502e963ead8b3e83eeaebcc"
+    }
+  },
+  "source_pins": {
+    "producer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\gravity_alignment_probe_v1\\run_gravity_alignment_probe_v1.py",
+      "bytes": 9576,
+      "sha256": "b1559d9de5c712fcdd3627a9d702f193ed800101b0811ebf282421ae082dee28"
+    },
+    "query": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\convex_query.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    },
+    "interface": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\query_interface_v2.py",
+      "bytes": 3575,
+      "sha256": "5c5785a7d8301404ef62659dc2e3f2ca016d98c8041b96feeb1e4e5c2ac779fe"
+    }
+  },
+  "candidates": [
+    "original",
+    "one_gravity_potential_minimizing_rotation"
+  ],
+  "rule": "P0,P1 are actual saved object closest materialpoints. u=normalize(P1-P0), vperp=(COM-P0)-u*dot(COM-P0,u), gperp=g-u*dot(g,u). theta=atan2(dot(u,cross(vperp,gperp)),dot(vperp,gperp)). Q=proper axis-angle(u,theta), t1=P0+Q(t0-P0), R1=Q R0. Align COM below world contactline, minimize gravitypotential alongthissingleDOF. No freepose optimization.",
+  "degenerate_rule": "Ifnormvperp<=1e-12m ornormgperp<=1e-12m/s2, theta0 andUNDERDETERMINED flag; never chooseangle bycollisionresult.",
+  "fixed": "robotall20q/wrist/geometry/scale andtwo objectmaterialpoints; no reflection. Alloldparameterspreserved.",
+  "checks": "BothposesFK+all22 independent exact phonepairs;189self evidence reused onlyifhandgeometryposes bitidentical; two originalreferrorblocks and all5tiperrors saved. Unknown notPASS.",
+  "budget": {
+    "candidates": 2,
+    "MJBreads": 1,
+    "MjData": 1,
+    "FK": 2,
+    "heavy_independent_queries": 44,
+    "max_pair_points": 4000000,
+    "optimization_integration_training_GPU": 0
+  },
+  "qualification": "No heldobject/support/frictioncone/ego-originalreference successclaim; zero axialgravitytorque isnecessarydescriptoronly."
+}

@@ -1,0 +1,166 @@
+{
+  "source_anchor_pin": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\source_surface_mapping_v11\\source1mm_opposed_side_original_hand_anchors_v1.json",
+    "bytes": 23461,
+    "sha256": "8a2a716c654c4eeb001160813b607cb47d43bd5dd9f6f9733f294f0510b79eb5"
+  },
+  "source_mapping_branch": "source1mm_opposed_side_original_hand",
+  "custom_anchor_JSON_checks": {
+    "status": "PASS_PINNED_JSON_TRIANGLE_CONTRACT",
+    "anchor_pin": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\source_surface_mapping_v11\\source1mm_opposed_side_original_hand_anchors_v1.json",
+      "bytes": 23461,
+      "sha256": "8a2a716c654c4eeb001160813b607cb47d43bd5dd9f6f9733f294f0510b79eb5"
+    },
+    "triangles": [
+      {
+        "finger": "thumb",
+        "side": "hand",
+        "triangle_id": 2332,
+        "barycentric_reconstruction_max_abs_m": 0.0
+      },
+      {
+        "finger": "thumb",
+        "side": "phone",
+        "triangle_id": 511,
+        "barycentric_reconstruction_max_abs_m": 2.0816681711721685e-17
+      },
+      {
+        "finger": "index",
+        "side": "hand",
+        "triangle_id": 1876,
+        "barycentric_reconstruction_max_abs_m": 4.336808689942018e-19
+      },
+      {
+        "finger": "index",
+        "side": "phone",
+        "triangle_id": 41,
+        "barycentric_reconstruction_max_abs_m": 7.988401606873197e-16
+      }
+    ],
+    "compiled_mesh_support_checked": false,
+    "scope": "No model/FK/query/NPZ payload. Global supporting normals require same compiled model at constructor."
+  },
+  "custom_anchor_compiled_checks": {
+    "status": "PASS_SAME_MODEL_COMPILED_VERTICES_AND_OUTWARD_SUPPORT",
+    "evidence": [
+      {
+        "finger": "thumb",
+        "side": "hand",
+        "geom_id": 15,
+        "compiled_vertices_checked": 1982,
+        "support_plane_max_m": 1.5331538152439506e-19
+      },
+      {
+        "finger": "thumb",
+        "side": "phone",
+        "geom_id": 71,
+        "compiled_vertices_checked": 352,
+        "support_plane_max_m": -1.8360242526044585e-17
+      },
+      {
+        "finger": "index",
+        "side": "hand",
+        "geom_id": 28,
+        "compiled_vertices_checked": 1848,
+        "support_plane_max_m": -4.440408566288308e-19
+      },
+      {
+        "finger": "index",
+        "side": "phone",
+        "geom_id": 71,
+        "compiled_vertices_checked": 352,
+        "support_plane_max_m": 6.497098267294158e-18
+      }
+    ],
+    "new_model_loads_FK_forward_queries": 0
+  },
+  "hand_geom_local_points": [
+    [
+      0.0012663906204812044,
+      0.005428449557870582,
+      -0.012140818675526509
+    ],
+    [
+      0.00260880836268085,
+      -0.00218837242069183,
+      -0.009517288141989905
+    ]
+  ],
+  "phone_body_material_points": [
+    [
+      0.03637761530333528,
+      -0.0005560575420145921,
+      0.05322522661716258
+    ],
+    [
+      -0.035863496867390335,
+      -0.0026498313740708573,
+      0.05244460113442494
+    ]
+  ],
+  "hand_geom_local_outward_normals": [
+    [
+      0.4637259309680026,
+      0.6342652242545989,
+      -0.6185999403888774
+    ],
+    [
+      0.734900372309028,
+      -0.241342438328117,
+      -0.6337785656220091
+    ]
+  ],
+  "phone_body_outward_normals": [
+    [
+      0.9999999478172329,
+      -7.810399669336827e-05,
+      0.00031347296075989343
+    ],
+    [
+      -0.9235189435579312,
+      -0.3835528136901654,
+      -1.1397248238615526e-08
+    ]
+  ],
+  "phone_body_tangent_rows": [
+    [
+      [
+        -8.511949801040074e-07,
+        -0.9709682933821465,
+        -0.23920822152642943
+      ],
+      [
+        0.00032305542387360905,
+        0.2392082087770559,
+        -0.970968242780816
+      ]
+    ],
+    [
+      [
+        -1.2525529350844347e-08,
+        4.44046788085064e-10,
+        0.9999999999999998
+      ],
+      [
+        -0.3835528136901654,
+        0.9235189435579313,
+        -5.214287646097712e-09
+      ]
+    ]
+  ],
+  "original_ego_material_targets_body_m": [
+    [
+      0.036377587697410375,
+      -0.0005920799122680879,
+      0.05322409260980507
+    ],
+    [
+      -0.03549749696280712,
+      -0.002982764264943479,
+      0.05243878051385268
+    ]
+  ],
+  "common_force_point_rule": "Actual hand-triangle A, conditionally inside preloaded phone; not native con.pos",
+  "algorithm_only_physical_model_unchanged": true
+}

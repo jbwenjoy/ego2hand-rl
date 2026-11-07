@@ -1,0 +1,15 @@
+--- strict_ccd_module
++++ original_MJB_query_options
+@@ -29,10 +29,8 @@
+                 getattr(m, name)[:] = value[0]
+         self.query_options = {"original_ccd_tolerance": float(m.opt.ccd_tolerance),
+                               "original_ccd_iterations": int(m.opt.ccd_iterations),
+-                              "ccd_tolerance": 1e-10, "ccd_iterations": 100,
+-                              "scope": "CPU geometric-distance numerical refinement only; no saved model or dynamics changed"}
+-        m.opt.ccd_tolerance = self.query_options["ccd_tolerance"]
+-        m.opt.ccd_iterations = self.query_options["ccd_iterations"]
++                              "ccd_tolerance": float(m.opt.ccd_tolerance), "ccd_iterations": int(m.opt.ccd_iterations),
++                              "scope": "CPU geometry-only queries at the original MJB numerical settings; no options/model/dynamics changed"}
+         self.names = [mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, i) or "" for i in range(m.ngeom)]
+         hand = [i for i, name in enumerate(self.names) if re.fullmatch(r"robot/(right_palm_collision|right_finger[1-5]_(link[1-4]|tip_sensor)_col)", name)]
+         obj = [m.geom(name).id for name in ("object/cube", "object/A_bottom", "object/A_top")]

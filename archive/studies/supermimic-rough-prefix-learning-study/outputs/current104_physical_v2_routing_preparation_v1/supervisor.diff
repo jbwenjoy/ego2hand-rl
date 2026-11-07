@@ -1,0 +1,20 @@
+--- scripts/run_current104_physical_fd.py
++++ scripts/run_current104_physical_fd_v2.py
+@@ -8,7 +8,7 @@
+ from rough_prefix.metadata import write
+ DRIVER=Path('D:/workspace/supermimic-observation-restoration-prefix-study/scripts/run_track_prefix_v3.py')
+ DRIVER_SHA='f4161cb4be7ac2e5e0fc598820a944f4d9a0e7240ee79b4eb68054732f246475'
+-ENTRY=ROOT/'scripts/probe_current104_physical_fd.py'
++ENTRY=ROOT/'scripts/probe_current104_physical_fd_v2.py'
+ HIDDEN=(subprocess.CREATE_NO_WINDOW|subprocess.CREATE_NEW_PROCESS_GROUP) if os.name=='nt' else 0
+ def driver():
+     if sha(DRIVER)!=DRIVER_SHA:raise ValueError('Reviewed identity driver changed')
+@@ -35,7 +35,7 @@
+     if proof['status']!='CPU_INPUT_SOURCE_PREFLIGHT_ONLY' or proof['Torch_imported'] or proof['Warp_imported']:raise ValueError('Default CPU boundary failed')
+     return proof
+ def reject_other_workers():
+-    pattern=r'[\\/](probe_current104_physical_fd|evaluate_rough_prefix_pen(?:_v[0-9]+)?|train_rough_prefix_pen(?:_v[0-9]+)?|track_prefix_warp|train_controlled_pen|evaluate_pen_checkpoint|evaluate_confirmation_checkpoint|evaluate_c2_portfolio|probe_world_model_gradients|rest_hold_warp)\.py(?:[\s\"\x27]|$)'
++    pattern=r'[\\/](probe_current104_physical_fd(?:_v[0-9]+)?|evaluate_rough_prefix_pen(?:_v[0-9]+)?|train_rough_prefix_pen(?:_v[0-9]+)?|track_prefix_warp|train_controlled_pen|evaluate_pen_checkpoint|evaluate_confirmation_checkpoint|evaluate_c2_portfolio|probe_world_model_gradients|rest_hold_warp)\.py(?:[\s\"\x27]|$)'
+     query="Get-CimInstance Win32_Process | Where-Object { $_.Name -match 'python' -and $_.ProcessId -ne "+str(os.getpid())+" -and $_.CommandLine -match '"+pattern.replace("'","''")+"' } | Select-Object ProcessId,CommandLine | ConvertTo-Json -Compress"
+     r=subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-Command',query],capture_output=True,text=True,timeout=10,check=True,creationflags=HIDDEN)
+     if r.stdout.strip():raise ValueError('Another project GPU worker exists '+r.stdout)

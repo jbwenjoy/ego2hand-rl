@@ -1,0 +1,117 @@
+{
+  "schema": "phone_fixed_current_state_own_model_action_AD_protocol:1",
+  "CPU_run_authorized": true,
+  "GPU_run_authorized": false,
+  "training_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_action_AD_v1\\completed_run1",
+  "source": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_action_AD_v1\\check_own_AD_v1.py",
+    "bytes": 8141,
+    "sha256": "88aee622b08f6a472fbf365b3fd4413a1d74401d350bdb0bb1a912c8e2ce0f5a"
+  },
+  "sources": {
+    "trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\train_geometry_momentum_wm.py",
+      "bytes": 37229,
+      "sha256": "224a0c9f47e196c626e862aa52d46402a454a6d16f0b497d3720ae74e25ca539"
+    },
+    "structured_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+      "bytes": 4100,
+      "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+    },
+    "momentum": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\momentum_contract.py",
+      "bytes": 4023,
+      "sha256": "983e182d7b8980d44a23db0f143d4a1c48ed483d37522fdba33dca3d5344b0ca"
+    },
+    "rotation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    },
+    "scalar_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "state_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "FK": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\geometry_provider.py",
+      "bytes": 11690,
+      "sha256": "f00da9a2c5deb19261a3ff4e168d79f8aea9784736e0fdd0897ffe9599a3b07b"
+    },
+    "directional": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+      "bytes": 9556,
+      "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+    },
+    "geometry_constants": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_constants.json",
+      "bytes": 91553,
+      "sha256": "330243d3b85abb1e996c2658b9216fe89df9ede53b0c4e035af63deb651f8fd9"
+    },
+    "geometry_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_geometry_arrays.npz",
+      "bytes": 514604,
+      "sha256": "4bafa2e40788f1106dcb497e575304d9bfabc7476fdb910147179325db97570f"
+    },
+    "direction_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\direction_arrays_v1.npz",
+      "bytes": 24503,
+      "sha256": "08dbbe3bfc8c0cbd19dad14510fd48c48351d8102cbeb99ca3d8f735cd1ca053"
+    }
+  },
+  "checkpoint": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_resume1\\checkpoint_5000.pt",
+    "bytes": 1932307,
+    "sha256": "344bac4568f57b8d97973bda06e5568b97fe10e13864f8b3d5a326bcf98dc9a7"
+  },
+  "current_FIT_feature_archive": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_resume1\\prepared_FIT_targets_and_features.npz",
+    "bytes": 3480441,
+    "sha256": "98fd63570bc7048b3037e2ba759bc93e21b05a5c0e245e75d0e7de9d48a9f132"
+  },
+  "physical_design": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\design_contract_v1.json",
+    "bytes": 21374,
+    "sha256": "d3f4d8e0a4c44844fc8d51fb261be32f893ced20aa97a8e6404d1b08f7c229c4"
+  },
+  "fixed_original_TRAIN_row_indices": [
+    0,
+    200,
+    400,
+    683
+  ],
+  "epsilon_rad": [
+    0.001,
+    0.0005
+  ],
+  "engineering_relativeL2_threshold": 0.05,
+  "budget": {
+    "own_CPU_checkpoint_loads": 1,
+    "NN_constructors": 1,
+    "NN_FW": 7,
+    "input_AD_Jacobians": 4,
+    "optimizer_steps": 0,
+    "native": 0
+  },
+  "scope": "Action derivative of same fixed5000 model at4 originalTRAIN current states; cached current-only geometry is action-independent. SO3world-left tangent AD/central geodesic FD; no state/FK-gradient, native physics, Actor, or ego claim.",
+  "root_review": {
+    "source_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_action_AD_v1\\protocol_CPUFalse_v1.json",
+      "bytes": 4684,
+      "sha256": "fddb5849dad114f280d404e74fbe5a417e2bccb4bd8ffc15e78821fe3a3433d6"
+    },
+    "launcher": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_action_AD_v1\\execute_once_v1.py",
+      "bytes": 2245,
+      "sha256": "ef80a54067a2a271407d6f5927dd47350c544599df82525bd00b495e11476566"
+    },
+    "scope": "Four fixed TRAIN states, own model u-only AD and two finite difference scales, actual and normalizedFP32encoded du retained. Not native physical gradients. Zero updates/no retry."
+  }
+}

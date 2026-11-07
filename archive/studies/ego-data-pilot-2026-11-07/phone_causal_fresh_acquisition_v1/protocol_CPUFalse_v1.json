@@ -1,0 +1,186 @@
+{
+  "schema": "phone_new12_controlled_final_acquisition_protocol:1",
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "new_training_authorized": false,
+  "automatic_retry": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_fresh_acquisition_v1\\acquired_v1",
+  "maximum_steps": 23040,
+  "maximum_rows": 240,
+  "maximum_episodes": 24,
+  "source_pins": {
+    "collector": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_fresh_acquisition_v1\\collect_fresh_phone_families_v1.py",
+      "bytes": 19356,
+      "sha256": "689aa6189010457c9ad414701b7105e87073e1cdf74029a946984022c2e9266b"
+    },
+    "frozen_collector_v2": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\collect_phone_episodes_v2.py",
+      "bytes": 15815,
+      "sha256": "48f70d650f8f0f197120bc864f25a7c850b37ceae2fd068eea7e91fef40da17d"
+    },
+    "reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    },
+    "state_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "transition_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "design_builder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_train_design_v1\\build_design.py",
+      "bytes": 22432,
+      "sha256": "41e87243850978bb2ff0767277afe12926e790c5d7edeffe6e7783a7242ee6a4"
+    },
+    "source_derivation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_fresh_acquisition_v1\\source_derivation_v1.json",
+      "bytes": 1777,
+      "sha256": "dd143bd6f28c6a4d9379ba561d073d3150b6c4fef557f4255c6456eeec146a7e"
+    }
+  },
+  "inputs": {
+    "design": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\design_contract_v1.json",
+      "bytes": 21374,
+      "sha256": "d3f4d8e0a4c44844fc8d51fb261be32f893ced20aa97a8e6404d1b08f7c229c4"
+    },
+    "family_plan": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_train_design_v1\\generated_v1\\new_final_family_plan.json",
+      "bytes": 201281,
+      "sha256": "bb547651f8b6137d00d15ab63d16ec29c313bc3365a0c9b05f9a8d9ea38e7600"
+    },
+    "original_family_plan": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\family_plan_v1.json",
+      "bytes": 820546,
+      "sha256": "7336ae9243290158c061791a28f6f5b668cc59091e6c1cbdfa51a0f8f4704739"
+    },
+    "original_acquisition": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 10554,
+      "sha256": "4eaba866d38b51d5edfced2cbc46eb6cd8315c78a0c50b769d7e2b79fecf4559"
+    },
+    "original_identities": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\sample_identities.json",
+      "bytes": 2687154,
+      "sha256": "23b39fe3dd3d1f15b44942e4ac8a8e12082515a3fdc6ba41e34d936fc13f8a56"
+    },
+    "exposure_policy": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_train_design_v1\\generated_v1\\exposure_and_partition_policy.json",
+      "bytes": 747,
+      "sha256": "8171dcdf281a1eb0338b8e4f12ae1f7e6c10e12a78c783627a88739254697380"
+    },
+    "reader_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\independent_reader_review_v1\\actual_golden_v1\\report.json",
+      "bytes": 8888,
+      "sha256": "57d89baa06ec05fa568249dbbca716758de4547cc78ef0061fb70f2df7c45a1c"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    }
+  },
+  "metadata_alias_receipt": {
+    "original_family_count": 48,
+    "new_family_count": 12,
+    "new_family_ids": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011
+    ],
+    "unique_initial_hashes": 12,
+    "unique_whole_control_hashes": 12,
+    "initial_aliases_original48": 0,
+    "control_curve_aliases_original48": 0,
+    "raw_alias_checks": [
+      {
+        "family_id": 1000,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1001,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1002,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1003,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1004,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1005,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1006,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1007,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1008,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1009,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1010,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      },
+      {
+        "family_id": 1011,
+        "initial_alias_original": false,
+        "control_curve_alias_original": false
+      }
+    ]
+  },
+  "budget": {
+    "MJB_reads": 2,
+    "fresh_MjData": 24,
+    "initial_forward_max": 24,
+    "observer_forward": 0,
+    "maximum_integration_steps": 23040,
+    "maximum_H20ms_rows": 240,
+    "training_or_NN_or_optimizer_or_GPU_calls": 0
+  },
+  "held_control_semantics": "Literal preregistered absolute u20 per20ms; old2designated-pad Reader unchanged. No WM/model outputs choose new states/actions, no clipping or action optimization.",
+  "schema_preservation": "Same original trace arrays/phase receipts and H20ms array layout; new family/result namespace only. Partial yH staysNaN and eligibleFalse; observed partial prefix kept. Hardstop-at-H finite targets may remain eligible but termination is not safety/holding.",
+  "qualification": "Fresh controlled q/actions at the same known two mapped phone poses and original assumed physics. Group bothdt by family; not independent ego scenes/episodes or holding benefit. No fit, normalizer update or model selection from this family plan/outcomes."
+}

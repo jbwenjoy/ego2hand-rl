@@ -1,0 +1,84 @@
+--- compare_final_WM_v1.py
++++ compare_final_WM_v2.py
+@@ -8,8 +8,8 @@
+ import numpy as np
+ 
+ HERE=Path(__file__).resolve().parent
+-SCHEMA='phone_tripod_fixed_final_WM_diagnostics_CPU_protocol:1'
+-RESULT='phone_tripod_fixed_final_WM_diagnostics_result:1'
++SCHEMA='phone_tripod_fixed_final_WM_diagnostics_CPU_protocol:2'
++RESULT='phone_tripod_fixed_final_WM_diagnostics_result:2'
+ CHECK='HELDOUT_ACTION_RESPONSE_CHECK_KNOWN_TRAIN_STATE'
+ INPUTS={'final_training_protocol','final_result','final_health','final_terminal',
+         'warm_result','warm_health','tripod_dataset','CHECK_report','fresh_report'}
+@@ -17,7 +17,7 @@
+ RULES=dict(final_paired_round=1000,final_shared_WM_updates=1100,warm_iteration=5000,
+     checkpoint_selection=False,normalizer_or_scale_fitting=False,cpu_threads=4,
+     MON_rows=52,CHECK_rows=1476,CHECK_known=1472,CHECK_sides=1440,CHECK_defined_sides=1436,
+-    fresh_rows=240,fresh_known=228,NPZ_reads=5,checkpoint_CPU_loads=2,WM_constructors=2,
++    fresh_rows=240,fresh_known=228,data_NPZ_reads=5,frozen_geometry_asset_NPZ_reads=2,checkpoint_CPU_loads=2,WM_constructors=2,
+     NN_forward_calls=4,NN_rows=1804,structured_decode_calls=4,
+     Actor_Critic_constructors=0,AD_optimizer_native_GPU_calls=0,
+     old_input='reuse_saved_normalized_input366_FP32_after_raw_normalizer_and_context_equality',
+@@ -75,7 +75,8 @@
+     need(fr['schema']=='phone_fresh12_fixed5000_state_evaluation_result:1' and fr['predicted_complete_rows']==228 and fr['partial_unknown_rows']==12,'Frozen fresh report')
+     need(cr['checkpoint']==fr['checkpoint']==wr['checkpoint'],'Saved warm predictions same checkpoint')
+     need(ds['schema']=='phone_tripod_replay_training_dataset:1' and ds['engineering_qualified'] is True and all(v is True for v in ds['checks'].values()),'Qualified new dataset')
+-    cp=read(checked(cr['protocol']));ca=read(checked(cp['inputs']['causal_acquisition']))
++    cp=read(checked(cr['protocol']));freshp=read(checked(fr['protocol']));ca=read(checked(cp['inputs']['causal_acquisition']))
++    need(cp['inputs']['geometry_catalog']==freshp['inputs']['geometry_catalog'],'Saved CHECK/fresh same geometry catalog')
+     data_pins=dict(MON=ds['partition_arrays']['monitor'],CHECK_saved=cr['outputs']['CHECK_all1476_predictions_and_targets.npz'],
+         CHECK_raw=ca['arrays'][CHECK],CHECK_sides=cr['outputs']['CHECK_all1440_side_response_arrays.npz'],
+         fresh_saved=fr['outputs']['all240_predictions_and_targets.npz'])
+@@ -88,6 +89,7 @@
+         need(t['returncode']==0 and t['protocol']==p['inputs']['final_training_protocol'] and t['source']==p['sources']['offline_trainer'],'Final terminal/protocol')
+         need(fp['inputs']['dataset']==p['inputs']['tripod_dataset'] and fp['inputs']['WM_result']==p['inputs']['warm_result'],'Same new data/warm parent')
+         for k in ['WM_trainer','structured_codec','directional']:need(fp['sources'][k]==p['sources'][k],'Final source join '+k)
++        need(fp['inputs']['geometry_catalog']==cp['inputs']['geometry_catalog']==freshp['inputs']['geometry_catalog'],'Final and both saved normalized-feature catalogs exactly equal')
+         checked(r['checkpoint']);checked(fp['inputs']['geometry_catalog'])
+     out=Path(p['output']);need(out.is_absolute() and out.parent.resolve()==HERE and not out.exists(),'Fresh local output')
+     return p,a,data_pins,out,missing
+@@ -149,10 +151,10 @@
+     import torch
+     torch.set_num_threads(4);torch.set_default_dtype(torch.float32);torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
+     out.mkdir();write(out/'protocol.json',p);start=time.perf_counter();phase='load_saved_arrays'
+-    counts=dict(NPZ_reads=0,checkpoint_CPU_loads=0,WM_constructors=0,NN_forward_calls=0,NN_rows=0,structured_decode_calls=0,Actor_Critic_constructors=0,AD_optimizer_native_GPU_calls=0)
++    counts=dict(data_NPZ_reads=0,frozen_geometry_asset_NPZ_reads=0,checkpoint_CPU_loads=0,WM_constructors=0,NN_forward_calls=0,NN_rows=0,structured_decode_calls=0,Actor_Critic_constructors=0,AD_optimizer_native_GPU_calls=0)
+     try:
+         z={}
+-        for key,value in data_pins.items():z[key]=npz(value);counts['NPZ_reads']+=1
++        for key,value in data_pins.items():z[key]=npz(value);counts['data_NPZ_reads']+=1
+         trainer=loadmod('diagnostic_WM_trainer',checked(p['sources']['WM_trainer']));codec=loadmod('diagnostic_codec',checked(p['sources']['structured_codec']));metrics=loadmod('diagnostic_frozen_metrics',checked(p['sources']['frozen_metrics']))
+         rng0=trainer.rng(torch)
+         final=torch.load(checked(a['final_result']['checkpoint']),map_location='cpu',weights_only=False);counts['checkpoint_CPU_loads']+=1
+@@ -170,7 +172,11 @@
+         weights={k:trainer.tensor_digest(v.state_dict(),torch) for k,v in models.items()};norm0=trainer.tensor_digest(norm,torch);ctx0=trainer.tensor_digest(physical,torch)
+         mon={k:z['MON'][v] for k,v in a['tripod_dataset']['field_map'].items()}
+         need(len(mon['x58'])==52 and mon['WM_eligible'].dtype==np.bool_ and mon['WM_eligible'].all() and mon['complete_H'].all(),'All MON52 complete, no selection')
+-        gap=loadmod('diagnostic_directional',checked(p['sources']['directional']));geometry=gap.DirectionalGapProvider(checked(fp['inputs']['geometry_catalog']))
++        gap=loadmod('diagnostic_directional',checked(p['sources']['directional']));geometry=gap.DirectionalGapProvider(checked(fp['inputs']['geometry_catalog']));counts['frozen_geometry_asset_NPZ_reads']+=2
++        pair_ids=list(geometry.provider.pair_geom_ids)
++        need(pair_ids==sorted(set(pair_ids)) and pair_ids==a['tripod_dataset']['canonical_pair_geom_ids'],'Canonical provider pair ordering')
++        padcols=[pair_ids.index(g) for g in [15,28]]
++        need(padcols[0]<padcols[1] and [pair_ids[j] for j in padcols]==[15,28],'Original two-pad coverage order')
+         F,feature_scope=trainer.precompute_features(dict(x=mon['x58'],u=mon['u20'],h=mon['h'],n=mon['n']),geometry,torch)
+         moninput=((torch.tensor(F,dtype=torch.float64)-norm['input_mean'])/norm['input_std']).float().numpy()
+         C,W,S=z['CHECK_saved'],z['fresh_saved'],z['CHECK_sides'];raw=z['CHECK_raw']
+@@ -191,7 +197,7 @@
+                 keys=['raw222_FP32','head178_F64','prediction58_F64','coverage_probability22_F64','normalized_input366_FP32']
+                 saved={v:d[v] for v in keys};saved['meanFn22_N']=d['meanFn22_N'] if name=='CHECK' else d['meanFn22_prediction_N']
+                 predictions[(name,'warm5000')]=saved
+-        expected={k:RULES[k] for k in counts};need(counts==expected,'Exact 5NPZ/2load/2ctor/4FW/1804row/4decode budget')
++        expected={k:RULES[k] for k in counts};need(counts==expected,'Exact 5dataNPZ+2frozenGeometryNPZ/2load/2ctor/4FW/1804row/4decode budget')
+         imm=dict(weights_raw=all(weights[k]==trainer.tensor_digest(v.state_dict(),torch) for k,v in models.items()),normalizers_raw=norm0==trainer.tensor_digest(norm,torch),physical_context_raw=ctx0==trainer.tensor_digest(physical,torch),raw_RNG=trainer.tree_equal(rng0,trainer.rng(torch),torch),parameters_frozen_no_grad=all(not q.requires_grad and q.grad is None for m in models.values() for q in m.parameters()),no_CUDA=not torch.cuda.is_initialized())
+         need(all(imm.values()),'Inference immutable/no AD/GPU')
+         phase='descriptive_saved_statistics';stats=[];responses=[]
+@@ -210,7 +216,7 @@
+                         J=pred['head178_F64'][:,46:].reshape(-1,22,6);trueJ=mon['impulse22x6'] if name=='MON' else C['true_J22x6_F64'];fn=mon['meanFn22'] if name=='MON' else C['true_meanFn22_N'];cov=mon['coverage22'] if name=='MON' else C['true_coverage22']
+                         r['per_pair22']=metrics.pair_stats(J[ii],trueJ[ii],pred['meanFn22_N'][ii],fn[ii],pred['coverage_probability22_F64'][ii],cov[ii])
+                     else:
+-                        padcols=[5,9];r.update(two_pad_coverage_Brier=float(np.mean((pred['coverage_probability22_F64'][ii][:,padcols]-W['true_two_pad_coverage'][ii])**2)),pair_J22_truth=None,meanFn22_truth=None)
++                        r.update(two_pad_coverage_Brier=float(np.mean((pred['coverage_probability22_F64'][ii][:,padcols]-W['true_two_pad_coverage'][ii])**2)),pair_J22_truth=None,meanFn22_truth=None)
+                     stats.append(r)
+                 if name=='CHECK':
+                     joined=dict(pred,known=known,current_x58=x);arr,r=response_statistics(joined,C,S,metrics,trainer,codec,h)

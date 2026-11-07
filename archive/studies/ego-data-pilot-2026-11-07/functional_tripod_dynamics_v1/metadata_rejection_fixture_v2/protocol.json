@@ -1,0 +1,93 @@
+{
+  "schema": "functional_tripod_native_dynamic_protocol:1",
+  "CPU_run_authorized": false,
+  "training_or_GPU_authorized": false,
+  "dt_s": [
+    0.0003125,
+    0.00015625
+  ],
+  "duration_s": 2.0,
+  "gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483,
+    "tail_triple_pad_force_coverage": 0.95
+  },
+  "old_two_pad_gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "tail_dual_pad_force_coverage": 0.95,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483
+  },
+  "dt_pair_gates": {
+    "final_COM_difference_m": 0.002,
+    "final_orientation_difference_rad": 0.03490658503988659,
+    "require_both_duration_complete": true
+  },
+  "control_routes": [
+    "no_preload_ctrl_equal_q",
+    "normal_1N_each_pad",
+    "normal_3N_each_pad"
+  ],
+  "designated_geom_ids": [
+    15,
+    28,
+    41
+  ],
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_dynamics_v1\\synthetic_never_execute_v2",
+  "inputs": {
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "candidate_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_dynamics_v1\\metadata_rejection_fixture_v2\\candidate_report.json",
+      "bytes": 2693,
+      "sha256": "af8f75e82938a90b9939710ebb70e3017112b5af219aa8384dc4580ce0fe9c87"
+    }
+  },
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_dynamics_v1\\run_functional_tripod_dynamics_v2.py",
+      "bytes": 29554,
+      "sha256": "8fe05fef133aa991e265561bd3a46678f33afe67eda34fc461ee4e543a1f30c9"
+    }
+  },
+  "budget": {
+    "max_candidates": 4,
+    "control_routes": 3,
+    "dt_cases": 2,
+    "maximum_cases": 24,
+    "maximum_integration_steps": 230400
+  }
+}

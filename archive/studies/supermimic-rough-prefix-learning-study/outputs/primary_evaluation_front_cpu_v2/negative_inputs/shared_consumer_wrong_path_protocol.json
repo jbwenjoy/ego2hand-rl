@@ -1,0 +1,117 @@
+{
+  "schema": "rough_prefix_policy_evaluation_protocol:1",
+  "input_bundle": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\input_bundle_v1\\bundle.json",
+    "sha256": "225b34e9ec26ae7d66c805c7312d5f1db76d39a8c6b1627682cda217b5261242"
+  },
+  "source_lineage_N": 1,
+  "independent_ego_N": 0,
+  "physical_reference_qualified": false,
+  "allowed_seeds": [
+    0
+  ],
+  "arms": [
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "order": [
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "attempts_per_arm": 1,
+  "worlds": 1,
+  "reference_states": 16,
+  "control_intervals": 15,
+  "solver_substeps": 60,
+  "postinterval_forward_calls": 15,
+  "hard_process_seconds": 120,
+  "soft_worker_seconds": 110,
+  "automatic_retry": false,
+  "compile_fallback": false,
+  "evaluation_gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "clock_absolute_tolerance_s": 2e-06,
+    "target_rate_max_rad_s": 15.0,
+    "actuator_load_ratio_max": 1.01,
+    "load_charge_max": 0.8,
+    "charge_decay_time_s": 2.0,
+    "drop_center_below_default_wrist_m": 0.15
+  },
+  "initialization": "Same analytic nonzero requested q/qd/object pose/worldtwist, frozen actual8/defaultmocap/initialbaselineu0; original rough_runtime_v2 and controller104 trained descriptor",
+  "actor": "Loaded selected original format104, eval/no grad/no normupdate/no actionnoise, 155 native policyobs, originalEMA scale/clamp/singleC2",
+  "capacity": "No reset during rollout; sticky readonce after60, UNKNOWN on partial",
+  "target_rate": "All15 applied targets and initialization baselineu0, include startup0-to-firstlearnedu0 jump divided by20ms plus14 consecutive20ms updates; report startup separately. Original15rad/s gate retained.",
+  "quality": "Qualityterms disabled as qualified nativeA0; allfinite15intervals recorded once, numeric hard errors partial/UNKNOWN; no quality selection/retry",
+  "protocol_revision": 3,
+  "status": "REGISTERED_FINAL2000_SINGLE_SOURCE_NATIVE_EVALUATION_REQUIRES_SEPARATE_GPU_AUTHORIZATION",
+  "checkpoint_iterations": [
+    2000
+  ],
+  "training_role": "primary_matched",
+  "training_protocol": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\protocols\\rough-prefix-v4.json",
+    "sha256": "02d266c007545e81469c3c9b1ebcd8192d2bfce11726cda670597fd12cb24a2a"
+  },
+  "parent_protocol": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\protocols\\rough-evaluation-v2.json",
+    "sha256": "be6bd26dc5be5e55a4bd40a45f17fba9d07de7eb93dd45771dd61559afcc0806"
+  },
+  "created_utc": "2026-11-03T16:37:16.329878+00:00",
+  "prerequisites": "Actual same-original104 final2000 health plus actualActorCPUload/currenttraining-source closure/processidentity/finalcapacity; newCPU-onlybuilder and independentreview; separateRootGPUauthorization only afterthese pass.",
+  "selection": "Only declared final2000 checkpoint per method, each one fresh one-world native rollout; no model100/best-checkpoint selection/no quality-dependent retry.",
+  "next_arm_gate": "Previousengineering/capacity/identity/savedrawaudit must qualify; physical qualityFAIL retained independently. No automatictraining orre-evaluation.",
+  "claim_scope": "Single-source prefix16/0.3sec, seed0 perarm exploratory final2000. Compare with nativeA0v2 and separate10iter checkpoints descriptively; historicaldirectWarp/old151/C2cohorts remainseparate. No trueego/full3s/replication/CHORDoverallbenefit/forcepredictor/sharedspeedup claim.",
+  "formal_training": "Training remains governed by primaryprotocol4 andseparateperarmRootauthorization. Thisprotocol authorizesno longtraining orcheckpoint migration.",
+  "shared_executed_consumer": {
+    "scripts/evaluate_rough_prefix_pen_v2.py": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\evaluate_rough_prefix_pen_v2.py",
+      "sha256": "000ae4d7f50b4a67363771d33e2527401d702a62c79aaf2989bfcea0d8c62505"
+    },
+    "scripts/run_rough_evaluation_v2.py": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\run_rough_evaluation_v2.py",
+      "sha256": "2c928352726e5e39c65859a8bd8368a4f1984d31b3342d4b6ffba6fbc3dbb337"
+    },
+    "src/rough_prefix/evaluation_v2.py": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\evaluation_v2.py",
+      "sha256": "b1968041abc4d186f46dd527c54bee70bc55c86449d8bf6a8c4c5f2df589815d"
+    },
+    "src/rough_prefix/policy_probe.py": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\probe.py",
+      "sha256": "7bc6c813d2803b4ed2a8f492cb6586ddd0900534bb81668992a88deb046f82f6"
+    },
+    "src/rough_prefix/checkpoint_v2.py": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\checkpoint_v2.py",
+      "sha256": "9f88ea6cd21a071d826dab6a890e1466160a8c619260cae15abd330700df3aca"
+    },
+    "scripts/audit_native_policy_saved_cpu.py": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\audit_native_policy_saved_cpu.py",
+      "sha256": "470840a3e27725879103724950ea9dbf47f8bd59115c40f5684446be6f7893ff"
+    }
+  },
+  "initial_available_A1L_final_evidence": {
+    "outputs/health_primary_a1l_final_v1/report.json": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\health_primary_a1l_final_v1\\report.json",
+      "sha256": "237c6cd6e29f0da7423f9d4858ae536555f1d4ff7ff1dad6e909b70798cb010f"
+    },
+    "outputs/actual_actor_load_primary_a1l_final_v1/report.json": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\actual_actor_load_primary_a1l_final_v1\\report.json",
+      "sha256": "78d2755523df9ddd759bb2ff21e1743bb238e205708ccd7ddf12edde71cea80b"
+    },
+    "outputs/primary_a1l_seed0_v1_watchdog/engineering_identity.json": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a1l_seed0_v1_watchdog\\engineering_identity.json",
+      "sha256": "daaba87d9b3a1b76b14f14188ea7aae9904b617114d7afa7a9295cb65a62ce5a"
+    },
+    "outputs/primary_a1l_seed0_v1/capacity_observation.json": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a1l_seed0_v1\\capacity_observation.json",
+      "sha256": "98f10d2fe1c3d28d361497fdbd78ca38422808d37ac48947aef48fc48a1d5e66"
+    }
+  },
+  "quality_sampling": "All61states/60solver before15nativepostintervalforward; noreset/noassist/noActorNormupdate/noactionnoise/nooptimizer. Retainwholefinitehorizon underqualityfail; numericalharderror partial/UNKNOWN. Startup targetjump included exactly aspredeclared."
+}

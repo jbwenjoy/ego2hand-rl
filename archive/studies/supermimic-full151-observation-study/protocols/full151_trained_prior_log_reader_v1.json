@@ -1,0 +1,55 @@
+{
+  "schema": "full151_trained_prior_saved_log_reader_contract:1",
+  "status": "FROZEN_BEFORE_NUMERIC_LOG_READ",
+  "methods": ["P_ONLY", "A2"],
+  "run_directories": {
+    "P_ONLY": "D:/workspace/supermimic-full151-observation-study/outputs/full151_v3_primary2000_P_ONLY_seed0_v1",
+    "A2": "D:/workspace/supermimic-full151-observation-study/outputs/full151_v3_primary2000_A2_seed0_v1"
+  },
+  "health_reports": {
+    "P_ONLY": "D:/workspace/supermimic-full151-observation-study/outputs/full151_v3_primary_P_ONLY_final2000_health_v1/report.json",
+    "A2": "D:/workspace/supermimic-full151-observation-study/outputs/full151_v3_primary_A2_final2000_health_v1/report.json"
+  },
+  "fixed_counts": {"primary_iterations": 2000, "wm_only_iterations": 200, "policy_updates": 1800, "H": 8, "pi_batch": 128, "candidate_rows_per_update": 1024, "objective_forwards": 14400, "dt_applications": 14400},
+  "iteration_convention": {"raw_log_iteration_zero_based": [200, 1999], "display_completed_training_iteration_one_based": [201, 2000], "policy_update_call": [1, 1800]},
+  "log_semantics": "active_means are FP32 sum over H8 rows with preaction phase<150 divided by max(actual active_rows,1), detached for logging. Physical soft survival/gamma are not included in this denominator.",
+  "equations": {
+    "active_rows": "A_i = sum_{h,b} 1[preaction phase<150]",
+    "logged_mean": "m_i(T) = logged FP32 active sum(T)/max(A_i,1)",
+    "active_weighted_global_mean": "sum_i A_i*m_i(T) / sum_i A_i, evaluated in F64; aggregation of rounded logged means, not reconstruction of original row tensors",
+    "nonzero_mean_update_count_P": "count_i[m_i(P)>0] using exact logged numeric comparison, no tuned epsilon",
+    "nonzero_mean_update_count_other": "count_i[m_i(T)!=0]; not fraction of individual rows with T>0",
+    "P_raw": "square(max_sample(relu(-sampled_hand_object_SDF_m-.003))/.001), dimensionless sampled geometry proxy",
+    "support_raw": "official support-match S, dimensionless; P_ONLY still computes/logs it diagnostically",
+    "P_ONLY_weighted_penalty": "-.1*m_i(P)",
+    "A2_weighted_support": "m_i(w*S); use m_i(S) only after frozen all151 phase_weight1 proof and logged active phase_weight1 check",
+    "total_bonus": "logged m_i(bonus_unscaled); P_ONLY=-.1P; A2=w*S-.1P",
+    "dt_scaled_contribution": ".02*logged or component mean, dt applied once",
+    "identity_residual": "logged bonus minus source formula from logged means, saved as raw arithmetic diagnostic; no post-data accuracy threshold"
+  },
+  "units": {"P": "dimensionless squared normalized sampled SDF excess; not mm depth", "S": "dimensionless soft geometric support match; not force/contact probability", "bonus_unscaled": "dimensionless prior reward rate", "dt_scaled": "per20ms imagined reward contribution before gamma/survival", "active_rows": "imagined H8 sample rows, not physical worlds or independent observations"},
+  "qualification_checklist": [
+    "exact final primary schema2 config/method/2000/128worlds/wm_only200/H8/pi_batch128 and no cleanup errors",
+    "positive final105 health schema/source/checks counts internally consistent; expose actual health total rather than assume it",
+    "health config/checkpoint/run/spec and final result/completion/meta sidecar cross-binding, without loading checkpoint tensors",
+    "exactly1800 complete JSONL rows, calls1..1800, raw iterations200..1999, dt.02, eight forwards anddt applications each",
+    "nonnegative integer active/inactive, sum1024 each, exact cumulative progression/final result and health prefix counters",
+    "same static cumulative metadata/source/spec/buildrng throughout; no logging errors; initial prior metadata allzero counters",
+    "all required method-specific active_mean keys finite; zeroactive means allzero; P nonnegative; duplicate bonus fields match",
+    "metrics2000 rows contiguous0..1999, no prior keys first200, exact per-policy active_mean joins thereafter",
+    "frozen target all151 phase_weight1 verified by positive health source check, with active logged meanweight1",
+    "all1800 rows retained in CSV and plots, no smoothing/subsampling/retry/model evaluation; log/source hash unchanged"
+  ],
+  "known_limits": ["whole H8 raw row states/individual P-positive rows are not saved in this log", "cannot reconstruct discounted survival-weighted actor loss or gradients from active_means", "positive logged P mean is evidence of imagined sampled geometry penalty activation, not actual contact/force or measured native penetration", "arms have distinct learned models/normalizers before prior; separate descriptions only, no causal method comparison", "eight zero-P diagnostic snapshots do not characterize all training imaginations", "schema2 full151 final2000 only; legacy/schema1/prefix/smoke logs are never pooled"],
+  "plot_contract": {"layout": "4rowsx2arms: all1800 rawP means; rawS means; unscaled weighted components and totalbonus; active/inactive row counts", "axes": "linear full data range per panel; all updates retained without smoothing/filtering", "CSV": "all method-specific active_mean fields plus counts, display/raw iterations and derived weighted/dt fields", "CI": false, "winner_selection": false},
+  "authorization": {"saved_JSON_CSV_Matplotlib_only": true, "model_loads": false, "objective_construction": false, "WM_forward": false, "Env": false, "physics": false, "GPU": false},
+  "source_pins": {
+    "prior_hook": {"path": "D:/workspace/supermimic-full151-observation-study/src/full151_native/prior_hook_v1.py", "sha256": "944005bd5bff661b9c9c21e49f7941f991740ccdca445766df0716b6046c6101"},
+    "learning": {"path": "D:/workspace/supermimic-full151-observation-study/src/full151_native/learning_v2.py", "sha256": "2f3b0269dac7b3983b6ecfb7b4c5201c681ebc2ed3fd3199179c08607d59197d"},
+    "runtime": {"path": "D:/workspace/supermimic-full151-observation-study/src/full151_native/runtime.py", "sha256": "d41057c2f849fe645a52c7ffa8b175bac60eb6aa1ed616d756a9df64a286f8c9"},
+    "objective": {"path": "D:/workspace/supermimic-rough-prefix-learning-study/vendor/frozen_contact_math/contact_objective.py", "sha256": "54d9507d824d08baab3639e29d028b325109f51ca3e3fdd3118be341729502ea"},
+    "penalty_only": {"path": "D:/workspace/supermimic-rough-prefix-learning-study/vendor/frozen_contact_math/penalty_only_objective.py", "sha256": "cfa53515fb7dc12ae49a2aec2d9ca37603061c1752fc8875f879cf5ea235c914"},
+    "health_auditor": {"path": "D:/workspace/supermimic-full151-observation-study/scripts/audit_full151_checkpoint_cpu_v2.py", "sha256": "5950b9947b00ed0cfce6a8403a65877db6d71be1d7b01b8c3ad1626bdd5de792"},
+    "native_runner": {"path": "D:/workspace/dex-supermimic-research/src/dex_supermimic/rl/dex_supermimic/runner.py", "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46"}
+  }
+}

@@ -1,0 +1,15 @@
+# 原生奖励与状态相位契约：源码审阅结果
+
+本机冻结Manager.step在4个5ms积分步后计算奖励，再进行末次Manager forward。物体奖励经Entity.root_link_pos/quat读取derived xpos/xquat，来自最后一次solver/kinematics阶段，约为区间起点+15ms；PenSimReader.state直接读取qpos/qvel，已是起点+20ms。两者不能因同一次env.step返回而视为同一物理时刻。
+
+旧同Warp草案v1和未执行worker曾试图以post20状态重算值，对原RewardManager GPU rate作8eps32一致性门。这会把真实5ms运动差当作浮点误差，也会让WMnext20和物理rate15成为不同功能的梯度比较。该假设已在GPU执行前由源码审阅否定，原blocked报告与source快照保留。
+
+修订诊断采用同一postintegration20ms状态、同一preaction goal_k、同一2+8物体公式，在GPU上计算受控诊断标量，与WMnext20的同公式导数比较。它明确不是原RewardManager缓存rate。原生15ms GPU rate、对应derived姿态/目标、权重/dt/scale另存为原奖励诊断；不跨时相作算术相等门。CPU/F64重算只用于同post20功能的数值诊断。phase149仍只有末次区间响应和obs150，没有u150或bootstrap。
+
+接触force6、direct torque、actuator force和self15也来自最后solver阶段，应连同该时刻的contact frame、object pose/COM一起记录。不能把15ms接触点与force直接套用20ms物体旋转/COM而省略时相说明。post20状态、15ms物理测量、controlled20ms score和原奖励15ms score将分别命名。
+
+此问题不影响既有三方法位置/方向门槛：冻结probe.py和policy_probe.py保存的object_pose_w直接来自host.qpos的自由关节7维；grade与saved188同样从此列重建姿态，COMoffset有显式0 guard。host.xpos/xquat仅在标为preintegration的solver诊断中使用。因此无需改旧数值、门槛或重跑物理。此处为源码范围核验，尚未执行新native探针。
+
+训练源、三个已完成的fixedfinal2000结果及旧报告均不修改。该相位发现可能影响如何解释WM想象奖励，但没有单独证明它导致了训练失败，仍需实际同功能、同状态输入的物理差分证据。
+
+[旧草案相位阻断与源码快照](D:/workspace/supermimic-full151-observation-study/outputs/full151105_serial_probe_static_review_v1/report.json) · [旧评价时相限界核验](D:/workspace/supermimic-full151-observation-study/outputs/full151_evaluation_pose_phase_static_scope_v1/report.json)

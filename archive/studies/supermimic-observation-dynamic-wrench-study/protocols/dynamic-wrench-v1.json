@@ -1,0 +1,97 @@
+{
+  "schema": "mapped_observation_dynamic_wrench_design:1",
+  "status": "FIXED_CPU_METHODS_BEFORE_COMPUTATION_NO_GPU",
+  "inputs": {
+    "observations": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/observation_only_fixture_v1/observations.npz",
+      "sha256": "3bdca0ee6fd8d7956cac1ee2b13719db5cb302ceb0130972719032a04b3ec35b"
+    },
+    "observation_manifest": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/observation_only_fixture_v1/manifest.json",
+      "sha256": "9be378406b8c97d0ae211fd70459117eea2e8d026244d2ccab735c3f5778391e"
+    },
+    "candidate": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/outputs/native_contact_refined_geometry_v1/geometric_retarget.npz",
+      "sha256": "539d6247576b9b2e3fb1b143cf17b6ad507e3baea73c5fafcda4e221d9230c8f"
+    },
+    "model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "native_geometry": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/scripts/native_filtered_contact_geometry.py",
+      "sha256": "c964d5b300baac57a5353afd3b5aa4cfb381eca1da03ceef712691dd10376c72"
+    },
+    "kinematics": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/scripts/retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    },
+    "native_LP": {
+      "path": "D:/workspace/supermimic-observation-grounding-study/scripts/diagnose_rest_wrench_feasibility_cpu_v2.py",
+      "sha256": "ba3f0f934ff7cc2ce6d674c92f3a755487bcc0994f04736664c5ceb87f31fdca"
+    }
+  },
+  "observation_read_allowlist": [
+    "time_s",
+    "hand_landmarks_source_w",
+    "object_pose_source_w"
+  ],
+  "candidate_fields": [
+    "time_s",
+    "joint_pos_rad",
+    "mapped_object_pose_w",
+    "source_to_fixed_wrist_R",
+    "source_to_fixed_wrist_translation_m"
+  ],
+  "trajectory": "Original539d151frame nativecontact-refined geometry q/pose, never warmseed frame0 spliced into trajectory",
+  "time": {
+    "dt_s": 0.02,
+    "samples": 151,
+    "duration_s": 3.0,
+    "strict_canonical_time_tolerance_s": 1e-12
+  },
+  "quaternion": "wxyz; validate norms<=1e-6 then explicitly normalize numerical roundoff, sign continuity by consecutive nonnegative dot; shortest relative SO3log, never quaternion-component filtering",
+  "primary_rawFD": {
+    "COM_v": "centered second-order firstdifference; endpoints second-order3point one-sided",
+    "COM_a": "centered3point seconddifference; endpoints second-order4point one-sided",
+    "world_omega": "interior log(R[i+1] R[i-1]^T)/(2dt); endpoints 1.5*adjacent worldlog interval minus .5*next interval (and mirrored at end)",
+    "world_alpha": "second-order firstdifference of worldomega; endpoints3point one-sided",
+    "endpoint_scope": "Designed finite differences, sensitive to boundary/extrapolation/noise, not measured velocities/accelerations or force"
+  },
+  "fixed_sensitivity": {
+    "window_length": 9,
+    "polyorder": 3,
+    "mode": "interp",
+    "translation": "Savitzky-Golay COMposition derivatives1/2",
+    "rotation": "Savitzky-Golay raw worldomega derivatives0/1; original rotation used for Iworld. Not a fully reconstructed smoothed orientation trajectory."
+  },
+  "wrench": {
+    "mass_inertia": "Fixed actualcontext mass/inertia/body_iquat; unchanged nominal body_ipos COM offset",
+    "force_world": "m*(a_COM_world-gravity_world)",
+    "torque_about_COM_world": "Iworld*alpha_world + omega_world cross (Iworld*omega_world)",
+    "Iworld": "Rbodyworld*Rinertialbody*diag(I)*Rinertialbody.T*Rbodyworld.T",
+    "gravity": "Installed model opt.gravity, known simulator prior; not source camera gravity measurement"
+  },
+  "screen": {
+    "conditions": [
+      "static_minus_mg_zero_torque",
+      "rawFD_designed_dynamic",
+      "window9_poly3_sensitivity_designed_dynamic"
+    ],
+    "contacts": "All actual native filtered hand-object generated contact records, native material/condim/priority; any positive contactdist retained and explicitly flagged as potential-contact relaxation, not measured load",
+    "cone": "Installed native pyramidal edges incl condim4 torsion, no normal uppercap, torque row scale.01m; pinned existing helper",
+    "absent": "No generated nativecontact => empty available cone for this screen, absent pair gap remainsUNKNOWN/NaN. Not measured separation or gap0",
+    "scope": "Object-only wrench existence at fixed per-frame geometric q/objectpose. No robot/PD/selfcontact force equilibrium, constitutive contact force, dynamics or continuous trajectory qualification."
+  },
+  "confidence": null,
+  "is_real_ego": false,
+  "velocities_or_forces_measured": false,
+  "contact_or_force_reference_labels_created": false,
+  "GPU_authorized": false,
+  "physics_steps": 0,
+  "selection": "All151 frames and all3 conditions retained, no tuning/success selection, no frame-level independent sample claim"
+}

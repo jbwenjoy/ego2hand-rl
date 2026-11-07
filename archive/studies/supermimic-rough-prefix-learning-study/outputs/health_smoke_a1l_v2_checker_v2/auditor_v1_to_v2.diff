@@ -1,0 +1,32 @@
+--- D:\workspace\supermimic-rough-prefix-learning-study\scripts\audit_rough_checkpoint_cpu.py
++++ D:\workspace\supermimic-rough-prefix-learning-study\scripts\audit_rough_checkpoint_cpu_v2.py
+@@ -1,6 +1,8 @@
+ """Read saved rough104 tensors and evidence on CPU; never construct an Env.
+ 
+ Health is serialization/input/budget/capacity evidence, not task quality.
++V2 preserves V1 and only compares native tuple config values in their JSON wire
++representation, matching the already-written effective_training_config.json.
+ Checkpoint collection prefixes and the later finalized run are separate scopes.
+ """
+ from __future__ import annotations
+@@ -46,6 +48,11 @@
+ def complete_rows(path):
+     data=Path(path).read_bytes();end=data.rfind(b'\n')+1
+     return [json.loads(x) for x in data[:end].splitlines()],data[:end]
++
++def effective_config_equal(saved_config,effective):
++    # Tuple/list share the JSON array ABI. Canonical bytes preserve JSON scalar
++    # types, unlike Python dict equality where True==1 and 1==1.0.
++    return canonical(saved_config)==canonical(effective)
+ 
+ def expected_collect_steps(cfg,iteration):
+     out=[max(cfg['warmup_steps'],cfg['wm_window'])];acc=0.
+@@ -161,7 +168,7 @@
+     check('format104_fromscratch_newvariant',saved.get('format_version')==104 and cfg.get('schema')=='rough_prefix_native_run:1' and cfg.get('role') in ('engineering_smoke','primary_matched') and cfg.get('method') in ('A1L','P_ONLY','A2') and cfg.get('controller')=={'kind':'ROUGH_PREFIX_BASELINE_EMA_C2','format_version':104,'margin_rad':.02,'resume':'from_scratch_only'} and not any(effective.get(k) is not None for k in ('checkpoint','model_checkpoint')))
+     check('config_copy_exact',digest(config_path)==digest(run/'config.json'))
+     check('checkpoint_index_sidecar_SHA',digest(checkpoint)==meta.get('sha256') and meta in complete_rows(run/'checkpoint_index.jsonl')[0] and Path(meta['checkpoint']).resolve()==checkpoint.resolve())
+-    check('checkpoint_effective_config_exact',saved['config']==effective)
++    check('checkpoint_effective_config_exact',effective_config_equal(saved['config'],effective))
+     check('all_saved_tensors_finite',finite(saved))
+     check('module_and_optimizer_names',set(saved.get('modules',{}))==set(saved.get('optimizers',{}))=={'actor','wm','fail_head','critic'})
+     check('native_state_architecture_dimensions',saved.get('context_dim')==368 and saved.get('contact_dim')==15)

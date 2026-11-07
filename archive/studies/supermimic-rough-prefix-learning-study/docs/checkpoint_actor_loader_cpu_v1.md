@@ -1,0 +1,7 @@
+# Evaluation Actor loader, ABI104
+
+`rough_prefix.checkpoint.load_actor_checkpoint(checkpoint, bundle, expected_method, device='cpu')` returns the actual native 155-input/20-output Actor and a JSON-compatible CPU receipt. The Actor is in evaluation mode with gradients disabled. This interface restores no optimizer, replay, simulator or trainer state and cannot resume training.
+
+The loader rejects old3/103. It verifies the frozen controller's canonical signature with exactly the save-time exclusions `latest_actualu_evidence` and `reference_controller_signature`; the root descriptor binds the reloaded bundle, reference, analytic velocity authority, initialization, baseline and source pins. The native reference signature is independently reconstructed from hash-bound saved reader arrays, without rerunning a Reader. The same MJB supplies joint order and the outer hard/ctrl intersection. Full Actor state, including normalization buffers, loads strictly and is checked for finite values. RNG and input checkpoint bytes are preserved.
+
+The [49-check CPU report](../outputs/checkpoint_loader_cpu_v1/report.json) uses synthetic checkpoints and the actual native Actor. It includes 21 negative fixtures and finite forward evaluation. It does not establish that a real training checkpoint was loaded; that validation remains pending the actual engineering smokes. Budget/optimizer/actual-u/capacity health is a separate audit, and physical task quality is not assessed by loading weights.

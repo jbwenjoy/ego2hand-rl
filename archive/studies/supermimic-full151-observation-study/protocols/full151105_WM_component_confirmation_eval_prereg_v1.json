@@ -1,0 +1,375 @@
+{
+  "schema": "full151105_WM_component_confirmation_eval_preregistration:1",
+  "status": "FROZEN_SOURCE_METADATA_SCIENCE_BEFORE_TEST_SCORING_NOT_EXECUTION_AUTHORIZATION",
+  "execution_protocol_schema": "full151105_WM_component_confirmation_CPU_protocol:1",
+  "role": "fixed_common_pre_component_confirmation_all_fresh152",
+  "execution_authorized": false,
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "cpu_threads": 4,
+  "device": "cpu",
+  "precision": "FP32 CPU model and native D52; F64 pair subtraction/normalization and raw58 descriptive errors; AMP false",
+  "output_prefix": "full151105_WM_component_confirmation_CPU_",
+  "iteration": 1000,
+  "arms": [
+    "pointwise",
+    "pointwise_plus_common_pre_response"
+  ],
+  "test_phases": [
+    24,
+    74,
+    124,
+    148
+  ],
+  "criterion": "ALL64_RESPONSE_STRICTLY_LOWER_AND_ALL152_POINTWISE_NOT_HIGHER",
+  "inputs": {
+    "calibration_recipe": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_WM_common_pre_calibration_recipe_v1.json",
+      "sha256": "ea22ab07643c48e9bea24cb4be708a326c88922a57e2a06b97d73dd5d317b5d9"
+    },
+    "training_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_WM_common_pre_calibration_CPU_run_v1.json",
+      "sha256": "c4d20d4002c02e4a1cafce105c76ce1f5c43b26d6b62e3e05a410ab79946f65d"
+    },
+    "calibration_result": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\result.json",
+      "sha256": "748559f586b3859b1816a8c030062b34273eee9ea991cf88b8cdfd4ba55214eb"
+    },
+    "initial_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_component_state.pt",
+      "sha256": "ea051225b7279fc69fbd97725eb15462faaf4b3a6706881f8fe4a05b658a14bf"
+    },
+    "initial_validation": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_validation.json",
+      "sha256": "36c43a9ab4b03edd7f45fe8760fc2743821ecfe2599ea5795b7ade44a04b4186"
+    },
+    "pointwise_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\pointwise_update_1000.pt",
+      "sha256": "54d81c0e1d50e24510a985c90944af328e40f4a69d1c2e1987130af4ea3a719e"
+    },
+    "response_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\pointwise_plus_common_pre_response_update_1000.pt",
+      "sha256": "8e27eaec850d7d0adfd8e50cf426ba8f3414ae58379cefc2af43b4387a59e3e3"
+    },
+    "final_checkpoint_saved_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_final1000_saved_independent_v1\\report.json",
+      "sha256": "daff6c0b4f1d165b054b2431f4cb62476237f65869b9f3e4fff2846b861b36fa"
+    },
+    "sealed_manifest": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_response_seal_v1\\sealed_manifest.json",
+      "sha256": "49ab7382c2234a89b889f1fc8259b48d66ca4e3f7e889abb6856b7dc4f1eecaa"
+    },
+    "release": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_common_pre_confirmation_release_v1\\release.json",
+      "sha256": "ca1520d9f94336b67e89e618ce57d346c043f421f1cfdc42a238eacc0270fe1f"
+    },
+    "test_full_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-fresh-calibration-full-v1.json",
+      "sha256": "1c9863a2174356268d99805ab98d03e9a5efcb57d7cc126dcefb9320c8752570"
+    },
+    "test_full_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_full_v1\\physical_report.json",
+      "sha256": "832ef1814acc962826868aea22d7b4a1548f6e6a66ee4fb7f948ee906b4809d0"
+    },
+    "test_full_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_full_v1\\physical_arrays.npz",
+      "sha256": "5388d861fc683eea9ee2a304a44e3c378e2f8a308f20c244fce11251680cdf9a"
+    },
+    "test_branch_index": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_full_v1\\branch_index.json",
+      "sha256": "cab9325c2e014e7a9222808690cf263c582614063cc3073c3c9001a163b9a182"
+    },
+    "test_snapshot_records": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_full_v1\\snapshot_records.json",
+      "sha256": "4ac88ceb984ab6c79eadc97ee91f4308f3c7dcb280e20f46c74eb4d86fed9189"
+    },
+    "test_full_engineering_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_full_saved_independent_v1\\report.json",
+      "sha256": "15b7da4ecbd9a0455108a9e10d5fbed21d3682d1eef42062bb2e8c2df1d0ec64"
+    }
+  },
+  "source_pins": {
+    "physical_worker": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\serial_probe105_calibration_v1.py",
+      "sha256": "1418b7d61bea7274da51be23593807472e7edd7a1720a8bbd25c98624cff133a"
+    },
+    "calibration_source": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\response_calibration105_v1.py",
+      "sha256": "71efe05da17a37df4111158860443433304f1d57762e2377d4dbafc3b57ca27f"
+    },
+    "native_state": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    },
+    "native_rotations": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\rotations.py",
+      "sha256": "0fbb36bc8608dcc9a33edfac7f6551e742380e1e66c70e857b33d6d05cd81e70"
+    },
+    "final_saved_auditor": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\audit_WM_component_checkpoint_cpu_v2.py",
+      "sha256": "64c38dbed909b98381086cbd0c2cbfad89f8f790108fd07bbe4675ec23b2d47e"
+    },
+    "test_engineering_auditor": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\audit_full151105_calibration_response_saved_cpu_v1.py",
+      "sha256": "b678205744d9a7584ea46985380c1f9f26ec7848abb567e8febe81bfc3b53688"
+    }
+  },
+  "evaluation_sources_to_bind_before_execution": [
+    "src/full151_gradient/component_confirmation105_v1.py",
+    "scripts/confirm_full151_WM_component_cpu_v1.py",
+    "actual focused CPU proof/READY"
+  ],
+  "authority": {
+    "recipe_is_unchanged": true,
+    "final_saved_review_schema": "full151105_WM_component_saved_checkpoint_CPU_review:1",
+    "final_saved_review_status": "PASS_SERIALIZED_COMPONENT_HEALTH_NOT_ACCURACY",
+    "final_review_requires_all_true": true,
+    "final_iteration_scope_key": "final_iteration_scope",
+    "release_schema": "full151105_WM_common_pre_confirmation_release:1",
+    "release_status": "RELEASED_FOR_FROZEN_TWO_ARM_EVAL_ALL152_64_NOT_TUNING",
+    "release_requires": [
+      "scientific_release_authorized=True",
+      "evaluation_only=True",
+      "models_fixed_before_release=True",
+      "all77_sealed_files_current=True",
+      "checkpoint_pins exact both final1000 by samefile+SHA",
+      "sealed_manifest/recipe/training_protocol/test report/engineering-review samefile+SHA"
+    ],
+    "original_seal_remains_unmodified_and_not_self_released": true
+  },
+  "recording": {
+    "expected_headers": {
+      "snapshot_x": {
+        "shape": [
+          8,
+          58
+        ],
+        "dtype": "<f4",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "snapshot_u": {
+        "shape": [
+          8,
+          20
+        ],
+        "dtype": "<f4",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "branch_x_next": {
+        "shape": [
+          152,
+          58
+        ],
+        "dtype": "<f4",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "branch_u": {
+        "shape": [
+          152,
+          20
+        ],
+        "dtype": "<f4",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "completed": {
+        "shape": [
+          152
+        ],
+        "dtype": "|b1",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "snapshot_completed": {
+        "shape": [
+          8
+        ],
+        "dtype": "|b1",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "restore_qualified": {
+        "shape": [
+          152
+        ],
+        "dtype": "|b1",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "direction__plus": {
+        "shape": [
+          8,
+          4,
+          2,
+          20
+        ],
+        "dtype": "<f4",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "direction__minus": {
+        "shape": [
+          8,
+          4,
+          2,
+          20
+        ],
+        "dtype": "<f4",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "direction__centers": {
+        "shape": [
+          8,
+          20
+        ],
+        "dtype": "<f4",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "direction__d_eff": {
+        "shape": [
+          8,
+          4,
+          2,
+          20
+        ],
+        "dtype": "<f8",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "direction__center_offset": {
+        "shape": [
+          8,
+          4,
+          2,
+          20
+        ],
+        "dtype": "<f8",
+        "fortran_order": false,
+        "payload_read": false
+      },
+      "direction__clipped": {
+        "shape": [
+          8,
+          4,
+          2
+        ],
+        "dtype": "|b1",
+        "fortran_order": false,
+        "payload_read": false
+      }
+    },
+    "snapshot_labels": [
+      "A0/24",
+      "A0/74",
+      "A0/124",
+      "A0/148",
+      "A2/24",
+      "A2/74",
+      "A2/124",
+      "A2/148"
+    ],
+    "baseline_branch_id": "s*19+b, b=0,1,2",
+    "branch_endpoint_id": "s*19+3+8*epsilon_index+2*j_ordinal+sign_bit; sign_bit0=-1,1=+1",
+    "pair_id": "s*8+2*j_ordinal+epsilon_index",
+    "direction_array_order": "[snapshot,j_ordinal,epsilon_index,coordinate]",
+    "branch_order": "snapshot, baseline3, epsilon_index, j_ordinal, sign(-,+)",
+    "all_baselines_in_pointwise": 24,
+    "all_perturbed_endpoints_in_pointwise": 128,
+    "total_pointwise_rows": 152,
+    "total_pairs": 64,
+    "no_filtering": "No stable9/contact/force/flat/error/quality masks or checkpoint selection.",
+    "prestate_scope": "X152 repeats each saved snapshot_x 19 times by experimental design. Fresh branch PRE58 was not separately saved/qualified. Rely on independently reviewed INTEGRATION/control/baseline engineering gates without claiming all19 visible PRE58 independent readbacks or hidden identity."
+  },
+  "required_data_guards": [
+    "All completion/snapshot/restore masks true and fresh540 report remains positive.",
+    "Exact branch_index identity/path/phase/type/baseline/j/joint/epsilon/sign and saved snapshot_records joins for every row.",
+    "All3 baseline branch_u FP32 bits equal snapshot_u; direction centers equal it.",
+    "All64 branch_u endpoints FP32 bits match direction__plus/minus[s,j,ei], and every other19 control coordinates match baseline bits.",
+    "actual_du_rad_F64=plus_FP32[j].astype(F64)-minus_FP32[j].astype(F64), finite and strictly positive. No nominal-eps denominator, epsilon added, clipping repair or row deletion.",
+    "Retain requested EPS, all original clipped/asymmetric endpoints, archived legacy_d_eff=(plusF64-minusF64)/(2*requested_eps) dimensionless and center_offset_rad=(plusF64+minusF64)/2-centerF64. Original clipped predicate uses np.array_equal numeric FP32 endpoint comparisons, allowing signed zero.",
+    "Frozen initial/final s52, norm buffers/count/configuration and xi46 must match exactly across arms and initial component; no new normalizer update or scale recomputation from test data."
+  ],
+  "equations": {
+    "D": "Unmodified native state.difference(a,b), 52 dims. q/qd/p/v/omega target-input, rotation Log(R_a^T R_b). No projection/wrap/alternative rotation chart.",
+    "pointwise": "FP32 mean152,52 square(D(pred,target)/frozen_s52). Same exact helper as frozen recipe.",
+    "common_pre": "Tx(z)=native FP32 D(saved common snapshot_x,z), common PRE shared by both endpoints/models/physical targets.",
+    "response": "F64 mean64,52 square(((Tx(pred_plus).double-Tx(pred_minus).double)-(Tx(target_plus).double-Tx(target_minus).double))/s52.double/(actual_du_rad_F64/(1 rad))).",
+    "response_RMSE": "sqrt(response_MSE), descriptive same denominator.",
+    "criterion": "response_arm.response_MSE < pointwise_arm.response_MSE AND response_arm.pointwise_loss <= pointwise_arm.pointwise_loss; exact computed comparisons, no new tolerance or accuracy threshold. Otherwise tradeoff/failure, not task benefit.",
+    "chart": "Frozen recipe only: actual native52 rotation-vector norm STRICTLY < pi-0.01, finite for pointwise and common-pre target/model transforms. Raw trace/clamp diagnostics retained; no extra acos/gate/projection."
+  },
+  "raw_unit_statistics": {
+    "definition": "pred.astype(F64)-target.astype(F64) for all152x58, save full signed errors; per-feature MAE/RMS/maxabs and six blocks separately. No mixed-unit58 total.",
+    "blocks": {
+      "q": {
+        "slice": [
+          0,
+          20
+        ],
+        "unit": "rad",
+        "wrap": false
+      },
+      "qd": {
+        "slice": [
+          20,
+          40
+        ],
+        "unit": "rad/s"
+      },
+      "p": {
+        "slice": [
+          40,
+          43
+        ],
+        "unit": "m"
+      },
+      "R": {
+        "slice": [
+          43,
+          52
+        ],
+        "unit": "dimensionless raw9",
+        "angle_interpretation": false
+      },
+      "v": {
+        "slice": [
+          52,
+          55
+        ],
+        "unit": "m/s"
+      },
+      "omega": {
+        "slice": [
+          55,
+          58
+        ],
+        "unit": "rad/s"
+      }
+    },
+    "R_scope": "Raw9/Frobenius summary only, no angle/geodesic/orthogonalization. Native52 log remains only in predeclared loss."
+  },
+  "runtime_scope": {
+    "new_test_WM_forwards": {
+      "pointwise": 1,
+      "pointwise_plus_common_pre_response": 1,
+      "batch_rows_each": 152
+    },
+    "AD_optimizer_training_Env_FK_geometry_physics_GPU": 0,
+    "model_and_loader_construction_costs": "Declare actual formed evaluator callgraph before execution; do not suppress its strict guards or invent zero passive model costs.",
+    "normalizer_RNG_weights_inputs": "No caller restore to conceal mutation; compare current buffers/config/source files and raw RNG before/after, classify digest assertions as source-backed where appropriate.",
+    "self15": "Finite shape may be preserved as auxiliary; no HO labels/force/task scoring."
+  },
+  "failure_policy": "Any provenance/order/control/finite/chart/denominator mismatch blocks the complete comparison; retain all raw rows/failure evidence, no repair/subset/retry/release broadening. No alternative checkpoint/model/precision/mode search.",
+  "limitations": [
+    "Single seen cache lineage and parent A2 seed0; nominal donor phases already observed. Fresh controlled perturbation responses are not unseen states, independent trajectories or ego data.",
+    "Same visible snapshot input/empirical local baselines do not certify all hidden state/Graph scratch.",
+    "CPU FP32 component confirmation is not historical GPU AMP/native policy training gradient equivalence.",
+    "No true Jacobian, HO-force-gradient, physical-reference, CHORD task benefit or training-method causal qualification.",
+    "Original knownrough reference/task failures, prepolicy100 divergence, proxy misses, old5/9 evidence and egoN0 remain unchanged. H8 stays parked."
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "schema": "rough_current104_physical_FD_execution_protocol:1",
+  "protocol_revision": 3,
+  "status": "ROOT_BOUND_IMPLEMENTATION_CONTRACT_NOT_RUN",
+  "parent_proposal": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\proposals\\current104_samewarp_physical_fd_v2\\protocol.json",
+    "sha256": "ce9a9575b6aa7dc9b5b535bfe1cf7ff5be4db6065dc122ba4860561d40096e09"
+  },
+  "stage": "GPU_physics_then_separateCPU",
+  "input_bundle": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\input_bundle_v1\\bundle.json",
+    "sha256": "225b34e9ec26ae7d66c805c7312d5f1db76d39a8c6b1627682cda217b5261242"
+  },
+  "directions": {
+    "config": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\configs\\current104-physical-directions-CPU-v1.json",
+      "sha256": "b473541b71ec93a892437e6839b085077334f20f1d133d892ee141b7f6b81c16"
+    },
+    "report": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\current104_physical_directions_CPU_v1\\report.json",
+      "sha256": "c18412ba3356db328c431be023474648f1aa20a02440e3885dba83e645843823"
+    },
+    "arrays": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\current104_physical_directions_CPU_v1\\directions_and_FP32_targets.npz",
+      "sha256": "603a54234851ed74ed5685f875e0482295da04f3ba9f5954ede4c537eb76a489"
+    }
+  },
+  "worlds": 1,
+  "evaluation_seed": 0,
+  "hard_process_seconds": 240,
+  "soft_worker_seconds": 220,
+  "automatic_retry": false,
+  "compile_fallback": false,
+  "GPU_run_authorized_by_protocol": false,
+  "branch_order": "snapshot path[A0,A1L,P_ONLY,A2],k[0,4,8,12]; each35: baseline0/1/2 then epsilon[.002,.001] then j0..7 then sign[-1,+1]",
+  "producer_result_schema": {
+    "manifest_schema": "current104_physical_probe_result:1",
+    "manifest_finalized_only_after_owned_supervisor_terminal": true,
+    "files": [
+      "physical_report.json",
+      "physical_arrays.npz",
+      "branch_index.json",
+      "capacity_ledgers.json"
+    ],
+    "snapshot_arrays": {
+      "snapshot_x": [
+        16,
+        58
+      ],
+      "snapshot_u": [
+        16,
+        20
+      ],
+      "donor_next_x": [
+        16,
+        58
+      ],
+      "donor_self15": [
+        16,
+        15
+      ],
+      "snapshot_completed": [
+        16
+      ],
+      "goal_p": [
+        16,
+        3
+      ],
+      "goal_R": [
+        16,
+        3,
+        3
+      ],
+      "goal_p_next": [
+        16,
+        3
+      ],
+      "goal_R_next": [
+        16,
+        3,
+        3
+      ],
+      "donor_object_terms_k": [
+        16,
+        2
+      ],
+      "donor_object_terms_kplus1": [
+        16,
+        2
+      ]
+    },
+    "branch_arrays": {
+      "branch_x_next": [
+        560,
+        58
+      ],
+      "branch_self15": [
+        560,
+        15
+      ],
+      "branch_u": [
+        560,
+        20
+      ],
+      "completed": [
+        560
+      ],
+      "restore_qualified": [
+        560
+      ],
+      "branch_object_terms_k": [
+        560,
+        2
+      ],
+      "branch_object_terms_kplus1": [
+        560,
+        2
+      ]
+    },
+    "partial_placeholders": "NaN float rows only where corresponding completion mask false; never interpreted as measurements. Boolean placeholders false.",
+    "branch_row_keys": [
+      "row_id",
+      "snapshot_id",
+      "path",
+      "k",
+      "type",
+      "baseline_repeat",
+      "j",
+      "epsilon_index",
+      "epsilon_rad",
+      "sign",
+      "actualu",
+      "r_k",
+      "r_kplus1",
+      "restorequalified",
+      "status",
+      "reason"
+    ]
+  },
+  "fresh_baseline": "all48 baseline channel/reward comparisons pass original proposal limits; numerical failures stop before perturbing that snapshot. Native self15 disagreements retained without majority selection.",
+  "setup_call_counter": "Observe actual native simulation forward/step calls from before Env construction through close by stage; scheduled donor+branch2480substeps/620intervalforwards exclude separately counted constructor/reset/warmup.",
+  "identity_and_source": "fresh owned output and retained Popen/actualPID+creation/config/source/terminal nochildren; reviewed40b/f416 lifecycle, no retries; every executed dependency pinned and copied.",
+  "execution_authorization": "protocol and CPU preparation do not authorize GPU. Root creates distinct byte-bound authorized config after implementation CPU and independent review.",
+  "object_reward_arithmetic": "Primary object2+8 terms and sum use original native FP32 formulas on saved58 features and FP32 goal. Save both terms plus scalar FP32 sum. IndependentCPU verifies savedterm FP32sum exactly, each term versus independentF64 geometry within8eps32*max(1,abs(term)), preserving rawdiscrepancies. PhysicalFD subtracts the two saved FP32 scalar values in FP64 then divides2eps, matching prior WM CPU FD; no nearzero difference-relative acceptance gate or FP64 objective replacement.",
+  "revision_history": {
+    "previous_execution_protocol": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\protocols\\current104-physical-fd-execution-v2.json",
+      "sha256": "04ce3940c9f04b333553a3c1002132ae99c2a522ca97c0c9809e06f63ba4a109"
+    },
+    "preserved_failed_attempt_config": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\configs\\current104-physical-FD-authorized_v1.json",
+      "sha256": "b0982350c0f1d761dd7421a69b1b4620b86fb3319159511a84d2de5ef209f0f5"
+    },
+    "preserved_failed_attempt_saved_audit": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\current104_physical_failed_setup_audit_v1\\report.json",
+      "sha256": "7b7516dd2ba0725cf88e455fa6e81c967a6af1a56ce14dc8d2f6b2a370bf51a4"
+    },
+    "new_empty_array_helper": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\probe_transaction_v3.py",
+      "sha256": "43378a259abf3a38c9f06bca98cf50e755de1f99089ddfe28229d86ac1012851"
+    },
+    "new_empty_array_real_Warp_CPU_proof": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\probe_transaction_v3_empty_Warp_CPU_v1\\report.json",
+      "sha256": "987ec351e8a4ad42292ea3ac562db8981f460e9f148a7f90d2b44e647e6f4719"
+    },
+    "change": "Only legal empty-Warp metadata pointer handling and separately versioned routing. Nonempty-null rejects; all scientific data, directions, reward arithmetic, cadence, restore/replay gates, capacities and 220/240 budgets unchanged. Previous attempt is not retried/overwritten."
+  },
+  "implementation_routing": {
+    "worker": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\physical_fd_v2.py",
+    "entry": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\probe_current104_physical_fd_v2.py",
+    "supervisor": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\run_current104_physical_fd_v2.py",
+    "transaction_helper": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\probe_transaction_v3.py",
+    "config_default": "D:\\workspace\\supermimic-rough-prefix-learning-study\\configs\\current104-physical-FD-v2.json",
+    "output": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\current104_physical_FD_v2"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "supermimic_chord_paired_contact_pilot:2",
+  "date": "2026-11-02",
+  "status": "frozen_before_bounded_matched_training_and_A2_outcomes",
+  "reference_npz_sha256": "bb61dbbfe97cdca5ed7453eeea372b6d11007999f463476eaab5cfcd07040f53",
+  "task_acceptance_sha256": "41e7bdd97d07a0f4cac06cefc84d59548407d29332f6836fc5094e5e2f4fc2a3",
+  "contact_target_npz_sha256": "4f1078706e36dc3db890c41cddb4693a0d3512e9be8e43514181ab1637da9cbc",
+  "controller": "joint-hard / enabled-actuator-ctrl intersection on real and imagined absolute targets; EMA residual unchanged",
+  "reference_kind": "fixed-wrist redesign of upstream kinematic clip007 frames200:351, not a new ego demonstration",
+  "primary_budget": {"type": "equal_simulator_transitions_and_optimizer_updates", "iterations": 2000, "num_envs": 128, "warmup_steps": 64, "wm_only_iters": 200, "wm_updates": 4000, "actor_updates": 1800, "critic_updates": 7200, "real_transitions": 648192},
+  "secondary_budget": {"type": "equal_end_to_end_reserved_GPU_wall_time", "seconds": 1200, "selection": "latest complete checkpoint saved before 1200s from process start; do not select by evaluation quality", "include_import_setup_compile_and_training": true, "report_missing_checkpoint_if_compile_consumes_budget": true},
+  "compute_cost": "Report actual GPU reservation wall hours, cold/mixed/warm cache conditions, engineering smoke and failed attempts separately; never equate equal updates to equal compute cost.",
+  "arms": [
+    {"method": "A1L", "objective": "native object/hand/smoothness/load/self-collision objective, bounded real and imagined controller"},
+    {"method": "A2", "objective": "A1L plus explicitly labeled imagination-only geometric contact-intent shaping and penetration prior", "shaping": {"support_weight": 1.0, "penetration_weight": 0.1, "bandwidth_m": 0.001, "penetration_margin_m": 0.003, "penetration_scale_m": 0.001, "train_basis_count": 64, "train_basis_subset": "stride8 of frozen512", "points_per_collision_geom": 64, "phase_contact_weight": 1.0, "phase_switch_weight": 0.5, "unknown_or_known_no_contact_attraction": 0.0, "penetration_prior_always_active": true, "dt_multiplier": 0.02}}
+  ],
+  "shared_settings": {"WM_hidden": [512, 512, 512], "WM_window": 8, "WM_batches": 2, "WM_batch": 256, "policy_batch": 128, "horizon": 8, "critic_epochs": 2, "critic_minibatches": 2, "amp": true, "compile": true, "domain_randomization": false, "observation_noise": false, "external_disturbances": false, "failure_head_in_policy": false, "self_collision_supervision": 0.1, "real_reward_and_WM_reward_parity_unchanged": true},
+  "pilot_seed": 0,
+  "research_conclusion_seeds": [1, 2, 3],
+  "interpretation": ["A2 is a geometric prior, not a qualified force/contact predictor", "Physical task criteria and true contacts are evaluated independently", "A2 includes a penetration prior, so any benefit cannot be attributed solely to wrench support without an additional penalty-only ablation", "The prior A1 trained without explicit target clipping is a separate demo; it is not relabeled as A1L training", "Zero-shot q-only variants are controlled robustness checks, not independent motion/video generalization"]
+}

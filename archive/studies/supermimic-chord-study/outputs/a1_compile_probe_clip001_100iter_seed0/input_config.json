@@ -1,0 +1,41 @@
+{
+  "schema": "supermimic_chord_train:1",
+  "label": "100-iteration compiled/throughput probe; unqualified clip001 initial grasp; not A1 quality evidence",
+  "method": "A1",
+  "seed": 0,
+  "dex_root": "D:/workspace/dex-supermimic-research",
+  "output_dir": "outputs/a1_compile_probe_clip001_100iter_seed0",
+  "reference": {
+    "clips_root": "D:/workspace/dex-supermimic-research/src/dex_supermimic/tasks/pen_spin/data/rawdata/clips",
+    "source_clip_id": "01_single_axis/clip_001",
+    "start_frame": 0,
+    "duration_s": 3.0
+  },
+  "initial_grasp_status": "unqualified; throughput/compile validation only",
+  "compile_fallback": true,
+  "max_attempt_seconds": 600,
+  "training": {
+    "num_envs": 128,
+    "max_iterations": 100,
+    "buffer_steps": 256,
+    "warmup_steps": 64,
+    "wm_only_iters": 20,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "wm_hidden": [512, 512, 512],
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "save_interval": 100,
+    "log_interval": 10,
+    "amp": true,
+    "compile": true,
+    "compile_policy": true,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1
+  }
+}

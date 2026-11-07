@@ -1,0 +1,92 @@
+{
+  "schema": "functional_tripod_native_preload_protocol:1",
+  "native_forward_authorized": false,
+  "integration_training_GPU_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\completed_run1",
+  "budget": {
+    "max_candidates": 2,
+    "native_forward_per_candidate": 40,
+    "total_native_forward": 80,
+    "search_iterations": 2,
+    "FD_control_axes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "final_repeat_forward": 2
+  },
+  "rules": {
+    "FD_step_rad": 0.001,
+    "joint_control_step_trust_rad": 0.02,
+    "damping": 0.001,
+    "line_search_fractions": [
+      1.0,
+      0.5,
+      0.25
+    ],
+    "force_reference": "mass_times_gravity_norm_N",
+    "moment_lever_reference_m": 0.077,
+    "pad_loading_target_N": 0.100001,
+    "pad_deficit_scale_N": 1.0,
+    "routes": [
+      "ctrl_equal_q",
+      "actual_contact_normal_1N",
+      "actual_contact_normal_3N"
+    ],
+    "dt_s": 0.00015625,
+    "rank": "legal_native_loaded_entry_first_then_squared_dimensionless_residual; all raw probes retained"
+  },
+  "inputs": {
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "candidate_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\completed_run1\\report.json",
+      "bytes": 4955,
+      "sha256": "96eec5b034f8271e7f8965bf7e3566b229690c479f5e4ba7c175802e0f2c33ac"
+    }
+  },
+  "source_pins": {
+    "core": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\native_contact_preload_v1.py",
+      "bytes": 12405,
+      "sha256": "567df4edfcce7e025c0930e505e1fda70f7dc076090bbfbb47d14d46ef557dee"
+    },
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\run_native_preload_v1.py",
+      "bytes": 12615,
+      "sha256": "3530b263e721c0ec793d3bdb8c61a3e4f87e4d9080a2ed497474c34a9b480ca0"
+    },
+    "builder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\build_protocol_v1.py",
+      "bytes": 2510,
+      "sha256": "639a99849b6742d5edb966809afac97f1ecd5c9cab30d5402a2b7f1d95ee24e4"
+    },
+    "frozen_physics_helper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_dynamics_v1\\run_functional_tripod_dynamics_v3.py",
+      "bytes": 29569,
+      "sha256": "d433a51df307bf45b40e70bc2c74776654eb2ece65bd2de67ae8163c201fd960"
+    }
+  },
+  "target_wrench_world6_rule": "Default [-mass*gravity_world,0 torque about actual body COM]; API accepts explicit finite WORLD6 for future bounded feedback. Native_loaded_entry does not imply target wrench achieved.",
+  "fixed_pose_rule": "Candidate qpos27/zero qvel; no pose changes, actuation constraints and physical materials unchanged. Same freshData/zero warmstart for everyFW.",
+  "reference_routes": "ctrl=q then same-forward native contact normal total1N/3N PER PAD, evenly split over each actual generated pad contact. Actual verification is separate.",
+  "actual_interpretation": "Only actual native Fn/wrench/ctrl are measurements. Material anchors never enter force proposals. Ideal normals/finite-action Jacobian/GN remain proposals. No all-qacc0, idealLP or wrench-error accuracy gate certifies holding.",
+  "automatic_retry": false
+}

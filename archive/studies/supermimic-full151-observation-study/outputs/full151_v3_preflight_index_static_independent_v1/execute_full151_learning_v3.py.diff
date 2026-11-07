@@ -1,0 +1,29 @@
+--- execute_full151_learning_v2.py
++++ execute_full151_learning_v3.py
+@@ -6,10 +6,16 @@
+ from full151_native.io import read,checked,pin,sha,canonical,jsonable
+ from full151_native.metadata import write,MODE,VARIANT
+ METHODS=('A1L','P_ONLY','A2')
++_ARCHIVE_INDEX={}
+ def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
+ def archived(value,p):
+     checked(value)
+-    return any(Path(v['path']).resolve()==Path(value['path']).resolve() and v['sha256']==value['sha256'] for v in p['source_pins'].values())
++    # The first full source validation still hashes every pin. This index only
++    # avoids repeated Windows filesystem resolution in membership queries.
++    key=id(p)
++    if key not in _ARCHIVE_INDEX:
++        _ARCHIVE_INDEX[key]=(p,{(str(Path(v['path']).resolve()).casefold(),v['sha256']) for v in p['source_pins'].values()})
++    return (str(Path(value['path']).resolve()).casefold(),value['sha256']) in _ARCHIVE_INDEX[key][1]
+ def all_true_report(value):
+     r=read(checked(value));c=r.get('checks')
+     if type(c) is not dict or not c or not all(type(v) is bool and v for v in c.values()) or type(r.get('passed')) is not int or r['passed']!=r.get('total') or r['total']!=len(c):raise ValueError('Incomplete independent CPU readiness/health report')
+@@ -39,7 +45,7 @@
+     if (p['soft_worker_seconds'],p['hard_process_seconds'])!=bounds:raise ValueError('Finite original budget changed')
+     if p['controller']!={'kind':'FULL151_KNOWNROUGH_BASELINE_EMA_C2','format_version':105,'margin_rad':.020,'resume':'from_scratch_only'}:raise ValueError('Controller105 unchanged across arms')
+     for v in p['source_pins'].values():checked(v)
+-    for source in [Path(__file__),ROOT/'scripts/run_full151_learning_v2.py',ROOT/'src/full151_native/learning_v2.py',ROOT/'src/full151_native/prior_hook_v1.py',ROOT/'src/full151_native/training_capacity.py',ROOT/'src/full151_native/controller.py',ROOT/'src/full151_native/runtime.py',ROOT/'src/full151_intent/binding_v3.py']:
++    for source in [Path(__file__),ROOT/'scripts/run_full151_learning_v3.py',ROOT/'src/full151_native/learning_v2.py',ROOT/'src/full151_native/prior_hook_v1.py',ROOT/'src/full151_native/training_capacity.py',ROOT/'src/full151_native/controller.py',ROOT/'src/full151_native/runtime.py',ROOT/'src/full151_intent/binding_v3.py']:
+         if not archived(pin(source),p):raise ValueError('Execution dependency unarchived '+str(source))
+     if p['protocol']!=p['source_pins']['protocol']:raise ValueError('Protocol alias differs')
+     protocol=read(checked(p['protocol']))

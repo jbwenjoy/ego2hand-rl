@@ -1,0 +1,33 @@
+{
+  "schema": "phone_separating_plane_helper_source_contract:1",
+  "status": "SOURCE_ONLY_NOT_EXECUTED",
+  "helper": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\refinement_v1\\separating_plane_refinement_v1.py",
+    "bytes": 10395,
+    "sha256": "75f664e7abefeee5716398c5753f2c9023554b436aae65c1757b3531ed6bcf2e"
+  },
+  "source_pins": {
+    "static_query": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\evaluator_v3.py",
+      "bytes": 23763,
+      "sha256": "090cf6535f5249de4377a0e022ed7c87b555ad69ed7b570f995badb4d2245d57"
+    },
+    "features": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\query_interface_v2.py",
+      "bytes": 3575,
+      "sha256": "5c5785a7d8301404ef62659dc2e3f2ca016d98c8041b96feeb1e4e5c2ac779fe"
+    },
+    "query": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\convex_query.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    }
+  },
+  "API": "phone_gap_jacobian(tripod,full_result) -> dict geom_id:{grad_q12,gap_m,status,support_scope}; phone_margin_linearization; optional pure linear_feasibility_step",
+  "scope": "Phone only q0..11/fixedphone. Native mj_jac inside explicit calls only, two read-only point J per modeled row and counted. No test/import/geometry/Jac/LP/physics run performed.",
+  "sign": "Raw query_phone_frame normal and support sets remain PHONE BODY despite world-named keys. Convert with full_result.k.R/p. n is hand-exit, dgap=n dot(dH-dP).",
+  "nonunique": "Saved unique closest pair used if present; otherwise independent support-set means are a heuristic local plane direction, NOT a certified rotational subgradient/physical nearestpoint/load point.",
+  "missing": "AABB/UNKNOWN/missing normal return gradNone, never zero; Root driver must fresh all214 geometry constraints for every proposal/final.",
+  "trust": "Default q step max.02rad; no phone pose step in this helper; intersects true joint bounds without clip.",
+  "actual_model_FK_query_Jac_LP_steps_NN_calls": 0
+}

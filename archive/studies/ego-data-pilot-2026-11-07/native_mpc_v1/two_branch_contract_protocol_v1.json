@@ -1,0 +1,50 @@
+{
+  "schema": "native_mpc_two_branch_H2_contract_protocol:1",
+  "planning_steps_authorized": true,
+  "actual_chosen_rollout_authorized": false,
+  "source_pins": {
+    "evaluator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_mpc_v1\\rollout_probe_v1.py",
+      "bytes": 16169,
+      "sha256": "e5f17d0b458c48d611feeecc760d26c34dfed9e7bace9159d7f6ee1c69f19b4b"
+    },
+    "checker": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_mpc_v1\\check_rollout_branch_contract_v1.py",
+      "bytes": 9100,
+      "sha256": "b2ae8507705dfd288a685745589529d27a4c6f093ed39e8fd17fa2c3e38182bd"
+    }
+  },
+  "inputs": {
+    "native_search_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\report.json",
+      "bytes": 2336903,
+      "sha256": "ff9d0cdeabd766ba29e1d6da6d049f42aa4dbd92ae7c1bd87301be0a3518438f"
+    },
+    "initial_state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\seed0_rank0_state.npz",
+      "bytes": 7877,
+      "sha256": "5e532341a315bac73280cec3eb18798695fac19fd284e6b046542987dba451ac"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    }
+  },
+  "source_state_rule": "Same exact qpos27/zeroqvel26/ctrl20 seed0rank0; freshData/applied0/warmstart0/time0; one initial forward counted separately.",
+  "controls": "Same original ctrl20 held for both20ms intervals in each of two identical complete-copy branches.",
+  "dt_s": 0.00015625,
+  "control_interval_s": 0.02,
+  "steps_per_control": 128,
+  "horizon_controls": 2,
+  "branches": 2,
+  "maximum_planning_steps": 512,
+  "actual_chosen_steps": 0,
+  "initial_forward_count": 1,
+  "repeat_rule": "Raw equality for all trace/contact24/finalintegration and endpoint physical observations; excludes counters/IDs/walltime.",
+  "no_extra_branch_forward": true,
+  "source_integration_and_physical_derived_digest_unchanged": true,
+  "neural_training_GPU_or_parameter_change": false,
+  "automatic_retry": false,
+  "scope": "Privileged true-model branch interface only, not a holding/controller/policy success test."
+}

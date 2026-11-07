@@ -1,0 +1,45 @@
+{
+  "schema": "current104_physical_probe_CPU_consumer_plan:1",
+  "proposal": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\proposals\\current104_samewarp_physical_fd_v2\\protocol.json",
+    "sha256": "ce9a9575b6aa7dc9b5b535bfe1cf7ff5be4db6065dc122ba4860561d40096e09"
+  },
+  "physical_manifest": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\current104_physical_FD_v2\\physical_manifest.json",
+    "sha256": "1a5dc9401924dff8020e110e444fe6a45373671450fa24ab7f8b005764857195"
+  },
+  "output": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\current104_physical_v2_WM_CPU_v1",
+  "source_pins": {
+    "consumer": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\consume_current104_physical_probe_cpu_v2.py",
+      "sha256": "d89eae2f2712fa00e176048c659fe36eac404a2c81212f52c05efeda6f6199e7"
+    },
+    "math": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\physical_probe_consumer_math.py",
+      "sha256": "bbc5cda303bcaae75af54f339c96d06e52a0b1eda726bf74ce684a995e10f3ab"
+    },
+    "WM_loader": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\world_model_checkpoint_v2.py",
+      "sha256": "ab15f23b569d259cbca587e2b6f883c509ae15584567fcc8c27443787f294a20"
+    },
+    "Actor_loader": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\checkpoint_v2.py",
+      "sha256": "9f88ea6cd21a071d826dab6a890e1466160a8c619260cae15abd330700df3aca"
+    },
+    "bundle_loader": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\bundle_v2.py",
+      "sha256": "db744025a33cc20a524b60980b3e0e37d397858e889a51766edae9cde2cb6d6a"
+    },
+    "io": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\io.py",
+      "sha256": "858526551b2ffa1e9b04c996769846da56210bf3084370064a384053ae196f7d"
+    },
+    "qualification_guard": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\physical_probe_manifest_guard_v2.py",
+      "sha256": "d7ef85935c4cc286ac4ef9b42dbc21854392ea1f20e8756fdf3ee38a74c896f8"
+    }
+  },
+  "CPU_run_authorized": false,
+  "soft_worker_seconds": 180,
+  "automatic_retry": false
+}

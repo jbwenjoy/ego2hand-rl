@@ -1,0 +1,15 @@
+# Phone episode acquisition v1
+
+This is a frozen plan for local simulator data, with no acquisition or training executed by this contract builder. The JSON contract and literal `family_plan_v1.json` are authoritative.
+
+Use both selected v11 seed1/rank0 sources, 24 families each. Every family has the same planned initial state and held commands at both timesteps: 0.0003125 s (64 steps per H) and 0.00015625 s (128). Ten H=20 ms intervals give at most 96 episodes, 960 full transitions and 92,160 native steps. Reset fresh context per episode, perturb only initial q0..7 by at most 0.005 rad, preserve the other12 joints and the phone root, and set all velocities to zero. Reject and record an out-of-range initial proposal; never clip or select by observed initial contact.
+
+Three named action spectra vary q0..7 by at most 0.05 rad and the other12 commands by at most 0.025 rad. Each actuator's whole planned curve has one explicitly recorded scale to respect its true command limits. Mixed, opposed-pad and unipolar profiles broaden coverage without increasing the episode count. The 1mm source index command is close to its positive bound, so balanced bidirectional excitation is limited; the plan records actual ranges rather than claiming uniform20-dimensional coverage.
+
+Within each source and action profile, replicates0..5 are TRAIN,6 VALIDATION and7 TEST: 36/6/6 families overall, with bothdt and every interval grouped. Freeze this before native execution. Export three separately pinned split NPZs so training need not open TEST. Independently audit full source/target integration receipts and command bytes for cross-split aliases; an alias conflict blocks partition qualification, without silently dropping or moving rows.
+
+Keep initial unloading and failed holds. Stop only for nonfinite/warning, COM drift>0.15 m, angle>90 degrees, penetration>5 mm or joint excursion>0.05 rad. Preserve every partial prefix and reason. A training row is eligible exactly when its H is complete, finite and warning-free; all masks and failed rows remain visible. The old2s holding success/failure thresholds do not filter acquisition.
+
+State58 uses body-to-world R, COM position and COM/world velocities. Delta52 uses the world left rotation chart Log(Rnext Rcurrent.T), with saved codec roundtrip evidence. Contacts belong to solver PRE steps, state targets to POST boundaries; lastPRE is H-dt. Pad coverage is the fraction of PRE steps whose sum of positive native decoded normal forces exceeds0.1 N. Preserve raw signed contacts and table/other categories alongside this summary.
+
+Save full initial and per-interval integration vectors, action bytes, state-spec/model/dt identity and exact clocks, including both before-action and after-action source receipts. These support replay and alias tests; they do not make state58 a Markov certificate. This dataset measures simulated local generalization around two mappings of one ego source frame, not real contact-dynamics truth or independent ego trajectories. It does not establish holding or authorize training.

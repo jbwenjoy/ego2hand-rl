@@ -1,0 +1,178 @@
+{
+  "schema": "full151105_three_component_H8_donor_CPU_protocol:1",
+  "role": "three_component_fixed_control_H8_donor_state_error",
+  "status": "ROOT_AUTHORIZED_EXPLORATORY_FIXED_THREE_MODEL_H8_ONCE",
+  "created_UTC": "2026-11-06T02:45:12.425063+00:00",
+  "execution_authorized": true,
+  "CPU_run_authorized": true,
+  "GPU_run_authorized": false,
+  "cpu_threads": 4,
+  "horizon": 8,
+  "batch_windows": 286,
+  "starts_per_path": 143,
+  "model_roles": [
+    "initial_unmodified_A2",
+    "pointwise_final1000",
+    "pointwise_plus_response_final1000"
+  ],
+  "output_prefix": "full151105_three_component_H8_donor_CPU_",
+  "accuracy_gate": null,
+  "proposal": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\full151_component_H8_three_model_rollout_proposal_v1.md",
+    "sha256": "daf460f6614dda946300d6b57df13f0c60ca277c71ea0bd5c776a826d3b4d193"
+  },
+  "inputs": {
+    "calibration_recipe": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_WM_common_pre_calibration_recipe_v1.json",
+      "sha256": "ea22ab07643c48e9bea24cb4be708a326c88922a57e2a06b97d73dd5d317b5d9"
+    },
+    "training_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_WM_common_pre_calibration_CPU_run_v1.json",
+      "sha256": "c4d20d4002c02e4a1cafce105c76ce1f5c43b26d6b62e3e05a410ab79946f65d"
+    },
+    "initial_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_component_state.pt",
+      "sha256": "ea051225b7279fc69fbd97725eb15462faaf4b3a6706881f8fe4a05b658a14bf"
+    },
+    "initial_validation": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_validation.json",
+      "sha256": "36c43a9ab4b03edd7f45fe8760fc2743821ecfe2599ea5795b7ade44a04b4186"
+    },
+    "pointwise_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\pointwise_update_1000.pt",
+      "sha256": "54d81c0e1d50e24510a985c90944af328e40f4a69d1c2e1987130af4ea3a719e"
+    },
+    "response_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\pointwise_plus_common_pre_response_update_1000.pt",
+      "sha256": "8e27eaec850d7d0adfd8e50cf426ba8f3414ae58379cefc2af43b4387a59e3e3"
+    },
+    "final_checkpoint_saved_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_final1000_saved_independent_v1\\report.json",
+      "sha256": "daff6c0b4f1d165b054b2431f4cb62476237f65869b9f3e4fff2846b861b36fa"
+    },
+    "H1_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-state-prediction452-CPU-v1.json",
+      "sha256": "ba8c3669506acfb9fe01441770927dcc656508c94d14a50826b1901b4bc8aa65"
+    },
+    "H1_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\report.json",
+      "sha256": "202b4e15512491b15fd8fc3fa3efb0f1c9da85a17ce359b372ee619ea535175a"
+    },
+    "H1_matched_inputs": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\matched_input_arrays.npz",
+      "sha256": "18a361bbc6a56139e79df5b6891e3aa80e030abebbbee4fa39e3dbe5129e9cb4"
+    },
+    "H1_prediction_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\prediction_arrays.npz",
+      "sha256": "84fe797f5da806160dc891422961afd606bdcda1bb3e96ffc99cb426761261b1"
+    },
+    "H1_identities": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\group_identities452.json",
+      "sha256": "0151e53864bbf26840b4435863c7038a957ba94dd142e8385deadfe18f0d167b"
+    },
+    "H1_saved_independent25": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_saved_independent_v1\\report.json",
+      "sha256": "b2675cbaaa46c5575d5f9084a64c2bf7b28c7eabe13715b600347e5485cc4d20"
+    },
+    "prior_H8_contiguity": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_H8_donor_source_feasibility_v1\\contiguity.json",
+      "sha256": "6512f82401e954eb4e2ae77d45937e6123f50339283fe6a0e382dc221589d0ff"
+    }
+  },
+  "source_pins": {
+    "file_0000__networks.py": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "file_0001__state.py": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    },
+    "file_0002__rotations.py": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\rotations.py",
+      "sha256": "0fbb36bc8608dcc9a33edfac7f6551e742380e1e66c70e857b33d6d05cd81e70"
+    },
+    "file_0003__component_confirmation105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\component_confirmation105_v1.py",
+      "sha256": "f75302fa70a894300ceb3a71492b9cffd973244990f13be26cee5b7e5e112659"
+    },
+    "file_0004__response_calibration105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\response_calibration105_v1.py",
+      "sha256": "71efe05da17a37df4111158860443433304f1d57762e2377d4dbafc3b57ca27f"
+    },
+    "file_0005__component_H8_donor105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\component_H8_donor105_v1.py",
+      "sha256": "0c77dc5255ffd2d7294dabdc7bbaf8ed09e80f3f2bc0eb89fee3954d268a6b13"
+    },
+    "file_0006__diagnose_full151_component_H8_donor_cpu_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\diagnose_full151_component_H8_donor_cpu_v1.py",
+      "sha256": "feab65f7eca3943beeb084cd6961baab90fbee399842fcb1b5b848deab708570"
+    },
+    "file_0007__check_full151_component_H8_donor_cpu_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\check_full151_component_H8_donor_cpu_v1.py",
+      "sha256": "b4d73a6a667a68e300c75f2dd091d62e9f012886ae62d1c666fe33bbfc3c02e2"
+    },
+    "file_0008__component_H8_donor_independent_math_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\component_H8_donor_independent_math_v1.py",
+      "sha256": "4158040c650986e8f65979debbe79648e0f2c5806f1006c289cdb99d6464ea55"
+    },
+    "file_0009__check_component_H8_donor_independent_math_cpu_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\check_component_H8_donor_independent_math_cpu_v1.py",
+      "sha256": "15e009814ea470a813ed39ad2eb5d22621466322678c3a53cf17ff461185c215"
+    },
+    "file_0010__READY.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_component_H8_donor_preparation_CPU_v1\\READY.json",
+      "sha256": "47772391f9ebdb7f62746b7ec10d4a147e2d6660eeb213c286fd6d90df053700"
+    },
+    "file_0011__report.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_component_H8_donor_preparation_CPU_v1\\report.json",
+      "sha256": "d7e96cd91657e80bd4e1830345268a3a7cc587433b68797e819d44c621b47a71"
+    },
+    "file_0012__READY.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_component_H8_independent_math_preparation_v1\\READY.json",
+      "sha256": "d43829e4195160f4246ccb041ef09cccffc47aa1641c2d7e7f24a5ad3ccdfb4f"
+    },
+    "file_0013__report.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_component_H8_source_math_static_independent_v2\\report.json",
+      "sha256": "0d386fa0d22e6b1cf2fef68764db0835b4e5a33310b79fbafb6c79d380f42d6f"
+    },
+    "file_0014__full151105_three_component_H8_donor_CPU_prereg_v1.json": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_three_component_H8_donor_CPU_prereg_v1.json",
+      "sha256": "21781c6174c899df88f55b1457f8c771d30c5007809397cc5f949f1a892c63a6"
+    }
+  },
+  "preregistration": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_three_component_H8_donor_CPU_prereg_v1.json",
+    "sha256": "21781c6174c899df88f55b1457f8c771d30c5007809397cc5f949f1a892c63a6"
+  },
+  "readiness": {
+    "focused_CPU_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_component_H8_donor_preparation_CPU_v1\\READY.json",
+      "sha256": "47772391f9ebdb7f62746b7ec10d4a147e2d6660eeb213c286fd6d90df053700"
+    },
+    "focused_CPU_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_component_H8_donor_preparation_CPU_v1\\report.json",
+      "sha256": "d7e96cd91657e80bd4e1830345268a3a7cc587433b68797e819d44c621b47a71"
+    },
+    "independent_math_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_component_H8_independent_math_preparation_v1\\READY.json",
+      "sha256": "d43829e4195160f4246ccb041ef09cccffc47aa1641c2d7e7f24a5ad3ccdfb4f"
+    },
+    "independent_source_order_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_component_H8_source_math_static_independent_v2\\report.json",
+      "sha256": "0d386fa0d22e6b1cf2fef68764db0835b4e5a33310b79fbafb6c79d380f42d6f"
+    }
+  },
+  "operation_budget": {
+    "trusted_component_file_reads": 3,
+    "native_WM_constructors": 3,
+    "WM_forward_calls": 24,
+    "rows_per_call": 286,
+    "total_predictions": 6864,
+    "AD_optimizer_Actor_original119f_MJB_Env_physics_GPU": 0
+  },
+  "runtime_preconditions": "Before constructing any window, validate oldH1 xi46 bytes against initial component, all298 target->nextPRE full58 links and all300 u held4 substeps. Stop whole run on mismatch.",
+  "rollout_contract": "Each horizon passes previous prediction as both x and dynamics[:58], fixed recorded u; zero174/xi fixed. No state teacher-forcing, prediction clamp/projection, statistics update, sample filtering or rescue.",
+  "scientific_scope": "Exploratory known-donor overlapping-window state errors in six raw units per horizon/path. Initial unmodified A2 has explicit own role, no fabricated final1000 or105 health label. Not Actor imagination, unseen-state/trajectory/ego generalization, physical-gradient or CHORD benefit evidence. No new accuracy gate/CI or training.",
+  "automatic_retry": false
+}

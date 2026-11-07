@@ -1,0 +1,228 @@
+diff --git a/.gitignore b/.gitignore
+index c7bc603..4a816f6 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,4 +1,7 @@
+ .venv/
++.uv-cache/
++.uv-python/
++.cache/
+ __pycache__/
+ *.pyc
+ *.egg-info/
+diff --git a/pyproject.toml b/pyproject.toml
+index 3f453a6..93b9c40 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -20,6 +20,7 @@ dependencies = [
+   "pandas",
+   "pyarrow",
+   "tqdm",
++  "triton-windows==3.8.0.post29; sys_platform == 'win32'",
+ ]
+ 
+ [project.scripts]
+@@ -41,7 +42,12 @@ packages = ["src/supermimic"]
+ 
+ [tool.uv.sources]
+ mjlab = { git = "https://github.com/mujocolab/mjlab", rev = "8bb2bc9e187797689ec82c78c35019afd2fd0376" }
+-torch = { index = "pytorch-cu130", marker = "sys_platform != 'darwin'" }
++torch = [
++  { index = "pytorch-cu130", marker = "sys_platform != 'darwin' and sys_platform != 'win32'" },
++  # Official wheel, SHA-256 verified against the upstream lockfile. Kept locally
++  # because the upstream download-r2 endpoint stalled on this connection.
++  { path = ".cache/downloads/torch-2.14.1+cu130-cp312-cp312-win_amd64.whl", marker = "sys_platform == 'win32'" },
++]
+ warp-lang = { index = "nvidia", marker = "sys_platform != 'darwin'" }
+ 
+ [[tool.uv.index]]
+diff --git a/scripts/media/render_rollout.py b/scripts/media/render_rollout.py
+index 325af9d..ace735e 100644
+--- a/scripts/media/render_rollout.py
++++ b/scripts/media/render_rollout.py
+@@ -9,9 +9,12 @@ from __future__ import annotations
+ 
+ import os
+ import re
++import shutil
+ import subprocess
+ from pathlib import Path
+ 
++import imageio_ffmpeg
++
+ os.environ.setdefault("MUJOCO_GL", "glfw")
+ import mujoco
+ import numpy as np
+@@ -21,6 +24,7 @@ from PIL import Image, ImageDraw, ImageFont
+ from mjlab.asset_zoo.robots.unitree_g1.g1_constants import G1_XML
+ 
+ GHOST_RGBA = "0.25 0.50 1.0 0.22"
++FFMPEG = shutil.which("ffmpeg") or imageio_ffmpeg.get_ffmpeg_exe()
+ 
+ 
+ def two_robot_xml(mjcf: Path, root_body: str) -> str:
+@@ -116,7 +120,7 @@ def main(traj: Path, out_dir: Path, fps: int = 25, seconds: float | None = None,
+         qr, qf = d["robot_qpos"][i, a:b], d["ref_qpos"][i, a:b]
+         T = b - a
+         out = out_dir / f"{name}.mp4"
+-        ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{width}x{height}", "-r", str(fps), "-i", "-",
++        ff = subprocess.Popen([FFMPEG, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{width}x{height}", "-r", str(fps), "-i", "-",
+                                "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-movflags", "+faststart", str(out)], stdin=subprocess.PIPE)
+         # smooth camera: follow a low-passed root position
+         target = qr[0, :3].copy()
+@@ -139,8 +143,8 @@ def main(traj: Path, out_dir: Path, fps: int = 25, seconds: float | None = None,
+         print("wrote", out, f"{T/50:.1f} s")
+     if concat and outputs:
+         lst = out_dir / "concat.txt"
+-        lst.write_text("".join(f"file '{p.resolve()}'\n" for p in outputs))
+-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(lst), "-c", "copy", str(concat)], check=True)
++        lst.write_text("".join(f"file '{p.resolve().as_posix()}'\n" for p in outputs))
++        subprocess.run([FFMPEG, "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(lst), "-c", "copy", str(concat)], check=True)
+         print("wrote", concat)
+ 
+ 
+diff --git a/uv.lock b/uv.lock
+index 04b215c..53c0ad3 100644
+--- a/uv.lock
++++ b/uv.lock
+@@ -1,5 +1,5 @@
+ version = 1
+-revision = 3
++revision = 5
+ requires-python = "==3.12.*"
+ resolution-markers = [
+     "sys_platform == 'win32'",
+@@ -914,7 +914,8 @@ dependencies = [
+     { name = "tensorboard" },
+     { name = "tensordict" },
+     { name = "torch", version = "2.14.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin'" },
+-    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin'" },
++    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin' and sys_platform != 'win32'" },
++    { name = "torch", version = "2.14.1+cu130", source = { path = ".cache/downloads/torch-2.14.1+cu130-cp312-cp312-win_amd64.whl" }, marker = "sys_platform == 'win32'" },
+     { name = "torchrunx" },
+     { name = "tqdm" },
+     { name = "trimesh" },
+@@ -1784,7 +1785,8 @@ dependencies = [
+     { name = "tensorboard" },
+     { name = "tensordict" },
+     { name = "torch", version = "2.14.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin'" },
+-    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin'" },
++    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin' and sys_platform != 'win32'" },
++    { name = "torch", version = "2.14.1+cu130", source = { path = ".cache/downloads/torch-2.14.1+cu130-cp312-cp312-win_amd64.whl" }, marker = "sys_platform == 'win32'" },
+ ]
+ sdist = { url = "https://files.pythonhosted.org/packages/97/0e/142a31e8124255ec9276516c49c6fbe1497f2146ea384a92b81d23e3c525/rsl_rl_lib-5.5.1.tar.gz", hash = "sha256:50129065b35c69735ea197343321145a400af8c1b5fe9a28116fdaf1890fab43", size = 68077, upload-time = "2026-09-09T11:28:51.656Z" }
+ wheels = [
+@@ -1902,8 +1904,10 @@ dependencies = [
+     { name = "scipy" },
+     { name = "tensorboard" },
+     { name = "torch", version = "2.14.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin'" },
+-    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin'" },
++    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin' and sys_platform != 'win32'" },
++    { name = "torch", version = "2.14.1+cu130", source = { path = ".cache/downloads/torch-2.14.1+cu130-cp312-cp312-win_amd64.whl" }, marker = "sys_platform == 'win32'" },
+     { name = "tqdm" },
++    { name = "triton-windows", marker = "sys_platform == 'win32'" },
+     { name = "tyro" },
+     { name = "warp-lang", version = "1.18.0", source = { registry = "https://pypi.nvidia.com/" }, marker = "sys_platform != 'darwin'" },
+     { name = "warp-lang", version = "1.18.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin'" },
+@@ -1927,9 +1931,11 @@ requires-dist = [
+     { name = "pyarrow" },
+     { name = "scipy", specifier = ">=1.15" },
+     { name = "tensorboard", specifier = ">=2.20.0" },
+-    { name = "torch", marker = "sys_platform != 'darwin'", specifier = ">=2.14.0", index = "https://download.pytorch.org/whl/cu130" },
++    { name = "torch", marker = "sys_platform != 'darwin' and sys_platform != 'win32'", specifier = ">=2.14.0", index = "https://download.pytorch.org/whl/cu130" },
+     { name = "torch", marker = "sys_platform == 'darwin'", specifier = ">=2.14.0" },
++    { name = "torch", marker = "sys_platform == 'win32'", path = ".cache/downloads/torch-2.14.1+cu130-cp312-cp312-win_amd64.whl" },
+     { name = "tqdm" },
++    { name = "triton-windows", marker = "sys_platform == 'win32'", specifier = "==3.8.0.post29" },
+     { name = "tyro", specifier = ">=1.0.1" },
+     { name = "warp-lang", marker = "sys_platform != 'darwin'", specifier = ">=1.15.0", index = "https://pypi.nvidia.com/" },
+     { name = "warp-lang", marker = "sys_platform == 'darwin'", specifier = ">=1.15.0" },
+@@ -1993,7 +1999,8 @@ dependencies = [
+     { name = "numpy" },
+     { name = "pyvers" },
+     { name = "torch", version = "2.14.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin'" },
+-    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin'" },
++    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin' and sys_platform != 'win32'" },
++    { name = "torch", version = "2.14.1+cu130", source = { path = ".cache/downloads/torch-2.14.1+cu130-cp312-cp312-win_amd64.whl" }, marker = "sys_platform == 'win32'" },
+ ]
+ wheels = [
+     { url = "https://files.pythonhosted.org/packages/d1/c7/f8d00c73aaeb3e9063aa77e15dda98665d2219d4a6001de6291f0b542f46/tensordict-0.15.2-py3-none-any.whl", hash = "sha256:de06ae274e3944fa09988810701fc7f18394bd6da30c2ecfb4d567ea2108b0d8", size = 787612, upload-time = "2026-10-19T18:34:09.992Z" },
+@@ -2024,7 +2031,6 @@ name = "torch"
+ version = "2.14.1+cu130"
+ source = { registry = "https://download.pytorch.org/whl/cu130" }
+ resolution-markers = [
+-    "sys_platform == 'win32'",
+     "sys_platform == 'emscripten'",
+     "sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'win32'",
+ ]
+@@ -2047,9 +2053,43 @@ dependencies = [
+ wheels = [
+     { url = "https://download-r2.pytorch.org/whl/cu130/torch-2.14.1%2Bcu130-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:6afc5e5944fb0bd927e08d32a11f71d19154001f1c81fa00a6ed81a217451795", upload-time = "2026-09-30T20:23:37Z" },
+     { url = "https://download-r2.pytorch.org/whl/cu130/torch-2.14.1%2Bcu130-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:5359b255ac68c0cabb8293952b38e00f0d1a570815cd87f19b61af702c071410", upload-time = "2026-09-30T20:24:05Z" },
+-    { url = "https://download-r2.pytorch.org/whl/cu130/torch-2.14.1%2Bcu130-cp312-cp312-win_amd64.whl", hash = "sha256:0a09031e93632d14ef49553acd6211ece3ae9cdc0969a369b8c24e3cc4d15be9", upload-time = "2026-09-30T20:25:17Z" },
+ ]
+ 
++[[package]]
++name = "torch"
++version = "2.14.1+cu130"
++source = { path = ".cache/downloads/torch-2.14.1+cu130-cp312-cp312-win_amd64.whl" }
++resolution-markers = [
++    "sys_platform == 'win32'",
++]
++dependencies = [
++    { name = "filelock" },
++    { name = "fsspec" },
++    { name = "jinja2" },
++    { name = "networkx" },
++    { name = "setuptools" },
++    { name = "sympy" },
++    { name = "typing-extensions" },
++]
++wheels = [
++    { filename = "torch-2.14.1+cu130-cp312-cp312-win_amd64.whl", hash = "sha256:0a09031e93632d14ef49553acd6211ece3ae9cdc0969a369b8c24e3cc4d15be9" },
++]
++
++[package.metadata]
++requires-dist = [
++    { name = "filelock" },
++    { name = "fsspec", specifier = ">=0.8.5" },
++    { name = "jinja2" },
++    { name = "networkx", specifier = ">=2.5.1" },
++    { name = "opt-einsum", marker = "extra == 'opt-einsum'", specifier = ">=3.3" },
++    { name = "optree", marker = "extra == 'optree'", specifier = ">=0.13.0" },
++    { name = "pyyaml", marker = "extra == 'pyyaml'" },
++    { name = "setuptools", specifier = ">=77.0.3" },
++    { name = "sympy", specifier = ">=1.13.3" },
++    { name = "typing-extensions", specifier = ">=4.10.0" },
++]
++provides-extras = ["optree", "opt-einsum", "pyyaml"]
++
+ [[package]]
+ name = "torchrunx"
+ version = "0.4.0"
+@@ -2059,7 +2099,8 @@ dependencies = [
+     { name = "fabric" },
+     { name = "numpy" },
+     { name = "torch", version = "2.14.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin'" },
+-    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin'" },
++    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin' and sys_platform != 'win32'" },
++    { name = "torch", version = "2.14.1+cu130", source = { path = ".cache/downloads/torch-2.14.1+cu130-cp312-cp312-win_amd64.whl" }, marker = "sys_platform == 'win32'" },
+ ]
+ sdist = { url = "https://files.pythonhosted.org/packages/cc/80/b760a13db3e41fc2645911c30717cef05f1b200367d98f979226802ab10e/torchrunx-0.4.0.tar.gz", hash = "sha256:adcdbfd82ef633e549ba6e7694bc6eb258f55a6a64c8c59776794b922ae7b3ff", size = 41553, upload-time = "2026-08-04T07:55:09.264Z" }
+ wheels = [
+@@ -2108,6 +2149,15 @@ wheels = [
+     { url = "https://files.pythonhosted.org/packages/c1/09/b7012e5bfae67640f268aa584caa80fe1674f6b0da949046b679972c33e3/triton-3.8.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:e91ffa46d095b252248297292dd22bcbacd53a125a0c2eefbbbf74925a320bc3", size = 247972921, upload-time = "2026-08-28T15:55:53.157Z" },
+ ]
+ 
++[[package]]
++name = "triton-windows"
++version = "3.8.0.post29"
++source = { registry = "https://pypi.org/simple" }
++wheels = [
++    { url = "https://files.pythonhosted.org/packages/ec/bc/b027bba13beb00cd4993a33b7fa89a84ef3a42ecd05d8a0e346526a7dc80/triton_windows-3.8.0.post29-cp312-cp312-win_amd64.whl", hash = "sha256:937ba2ee53b6e664709898537de3eb9eab427a498c04da58f2bd42e1af93e298", size = 52810080, upload-time = "2026-09-28T21:58:35.034Z" },
++    { url = "https://files.pythonhosted.org/packages/89/54/a450dc8f9daf8df9d86630b1feffc9f19a14d5474f507657a22505a41343/triton_windows-3.8.0.post29-cp312-cp312-win_arm64.whl", hash = "sha256:525bc89392c08d6d8531407e0c4f5b1dff35d9a484647b6e5af616a004dd9d5e", size = 48390313, upload-time = "2026-09-28T21:58:42.016Z" },
++]
++
+ [[package]]
+ name = "truststore"
+ version = "0.10.5"

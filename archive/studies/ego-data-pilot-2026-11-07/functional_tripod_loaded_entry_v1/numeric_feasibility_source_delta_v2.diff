@@ -1,0 +1,42 @@
+--- D:\workspace\ego-data-pilot-2026-11-07\functional_tripod_loaded_entry_v1\solve_compression_geometry_v1.py
++++ D:\workspace\ego-data-pilot-2026-11-07\functional_tripod_loaded_entry_v1\solve_compression_geometry_v2.py
+@@ -88,12 +88,26 @@
+         if parent['geometry_pass']:
+             assert c['geometry']['passed'] and c['geometry']['fresh_final_evaluation'] and c['geometry']['unknown']==[]
+             selected.append((byname[c['source_entry']['name']],parent))
+-    assert len(selected)==2 and [p['candidate'] for e,p in selected]==pr['selected_parent_candidates']
++    assert len(selected)==2 # the original eligibility set is unchanged
++    registered={json.dumps(parent['candidate'],sort_keys=True):(entry,parent) for entry,parent in selected}
++    requested=pr['selected_parent_candidates']
++    assert isinstance(requested,list) and 1<=len(requested)<=2
++    keys=[json.dumps(record,sort_keys=True) for record in requested]
++    assert len(set(keys))==len(keys) and all(key in registered for key in keys),'Only an explicit pinned subset of the original2 eligible states'
++    for record in requested:checked(record)
++    selected=[registered[key] for key in keys]
++    retained=read(checked(pr['inputs']['retained_compression_v1_report']))
++    boundary=read(checked(pr['inputs']['retained_numeric_boundary_candidate']))
++    assert retained['schema']=='functional_tripod_geometric_reference_result:1'
++    assert any(v['candidate']==pr['inputs']['retained_numeric_boundary_candidate'] for v in retained['candidates'])
++    assert boundary['geometry']['passed'] is False and boundary['compression_target_pass'] is True
++    assert boundary['source_entry']['name'] in [entry['name'] for entry,parent in selected]
++    assert pr['proposal']['interior_target_margin_m']==2e-6
+     out=Path(pr['output']);assert out.is_absolute() and out.parent==H and not out.exists()
+     assert pr['budget']['iterations_per_entry']==20 and pr['budget']['full_queries_per_entry']==80 and pr['budget']['global_wall_s']==180
+     assert pr['proposal']['joint_step_trust_rad']==.02
+     if not a.run:
+-        print(json.dumps(dict(status='METADATA_ONLY_NO_NATIVE',selected_states=2,q_variables=12,compression_target_m=list(TARGET),steps=0)));return
++        print(json.dumps(dict(status='METADATA_ONLY_NO_NATIVE',selected_states=len(selected),q_variables=12,compression_target_m=list(TARGET),steps=0)));return
+     assert pr['CPU_static_run_authorized'] is True
+     out.mkdir(exist_ok=False);write(out/'protocol.json',pr)
+     base=load(checked(pr['sources']['frozen_geometry_solver']),'frozen_tripod_solver_for_compression')
+@@ -181,8 +195,8 @@
+             phone_pose_and_other8_x_parameters_unchanged=x[12:].tobytes()==fixed,phase_error=phase_error))
+         print(json.dumps(entry_summaries[-1]),flush=True)
+     assert E.E._parameter_digest()==E.model_initial
+-    report=dict(schema='functional_tripod_geometric_reference_result:1',status='COMPLETED_TWO_SAVED_STATE_TRIPOD_COMPRESSION_TARGET_SEARCH',
+-        protocol=pin(a.protocol),model_mjb=previous['model_mjb'],parent_report=pr['inputs']['original_geometry_report'],candidates=results,
++    report=dict(schema='functional_tripod_geometric_reference_result:1',status='COMPLETED_EXPLICIT_SUBSET_TRIPOD_COMPRESSION_TARGET_SEARCH',
++        protocol=pin(a.protocol),model_mjb=previous['model_mjb'],parent_report=pr['inputs']['original_geometry_report'],retained_v1_report=pr['inputs']['retained_compression_v1_report'],retained_v1_numeric_boundary_candidate=pr['inputs']['retained_numeric_boundary_candidate'],explicit_selected_original_eligible_subset=pr['selected_parent_candidates'],candidates=results,
+         summaries=entry_summaries,counts=E.counts,static_geometry_counts=E.E.counts,
+         geometric_QP_calls=qp_count,accepted_projection_steps=accepted,line_search_full_geometry_calls=line_search_calls,
+         qualified_geometry_candidates=sum(v['geometry_pass'] for v in results),compression_target_candidates=sum(v['compression_target_pass'] for v in results),geometry_and_compression_candidates=sum(v['geometry_pass'] and v['compression_target_pass'] for v in results),elapsed_s=time.perf_counter()-start,

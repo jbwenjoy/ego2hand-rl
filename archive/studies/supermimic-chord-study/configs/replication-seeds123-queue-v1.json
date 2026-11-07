@@ -1,0 +1,166 @@
+{
+  "schema": "supermimic_chord_replication_queue:1",
+  "status": "frozen_ready_not_started",
+  "queue_id": "replication_seeds123_v1",
+  "created_utc": "2026-11-02T15:54:55.420447+08:00",
+  "paired_protocol_file": "D:\\workspace\\supermimic-chord-study\\configs\\paired-contact-pilot-v2.json",
+  "paired_protocol_sha256": "a835df9c4ba1450faffdfebb217ceaca6db99e1d3ea3dcf634b6110a389dcae6",
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "seed0_is_pilot_excluded_from_primary_replication_summary": true,
+  "pilot_outcome_known_when_execution_manifest_created": true,
+  "no_tuning_from_pilot_outcome": true,
+  "ordering_rule": {
+    "pairs_adjacent": true,
+    "pair_seed_order": [
+      1,
+      2,
+      3
+    ],
+    "initial_multiset": [
+      [
+        "A1L",
+        "A2"
+      ],
+      [
+        "A1L",
+        "A2"
+      ],
+      [
+        "A2",
+        "A1L"
+      ]
+    ],
+    "assignment": "Python random.Random(20261102).shuffle applied once to the declared multiset",
+    "random_seed": 20261102,
+    "result": [
+      [
+        "A1L",
+        "A2"
+      ],
+      [
+        "A1L",
+        "A2"
+      ],
+      [
+        "A2",
+        "A1L"
+      ]
+    ],
+    "scope": "method order counterbalanced2:1 and fixed before replication runs, independent of observed quality"
+  },
+  "jobs": [
+    {
+      "position": 1,
+      "seed": 1,
+      "method": "A1L",
+      "config": "D:\\workspace\\supermimic-chord-study\\outputs\\training_configs\\replication_seeds123_v1\\a1l_paired_v2_2000iter_seed1.json",
+      "config_sha256": "e63abd363261cd5604259641af0abf0f47eca3e1f1c2175ade3666b6748b57e5",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed1",
+      "observed_seed0_seconds_for_ETA": 923.149317799951
+    },
+    {
+      "position": 2,
+      "seed": 1,
+      "method": "A2",
+      "config": "D:\\workspace\\supermimic-chord-study\\outputs\\training_configs\\replication_seeds123_v1\\a2_paired_v2_2000iter_seed1.json",
+      "config_sha256": "8eccde09aa509bffea617ea8fd3bf87f5380ba6a81159a47b958f2682b21ee8d",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed1",
+      "observed_seed0_seconds_for_ETA": 1355.164834999945
+    },
+    {
+      "position": 3,
+      "seed": 2,
+      "method": "A1L",
+      "config": "D:\\workspace\\supermimic-chord-study\\outputs\\training_configs\\replication_seeds123_v1\\a1l_paired_v2_2000iter_seed2.json",
+      "config_sha256": "50fc8ce09f0555b3c14382f3a87d1406989c3e60f2f5401f8a581b51d77ba655",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed2",
+      "observed_seed0_seconds_for_ETA": 923.149317799951
+    },
+    {
+      "position": 4,
+      "seed": 2,
+      "method": "A2",
+      "config": "D:\\workspace\\supermimic-chord-study\\outputs\\training_configs\\replication_seeds123_v1\\a2_paired_v2_2000iter_seed2.json",
+      "config_sha256": "44fd867e8911f4710d2a8160a434f9b4db80d452e1c5dcb29f77b0cb1269f474",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed2",
+      "observed_seed0_seconds_for_ETA": 1355.164834999945
+    },
+    {
+      "position": 5,
+      "seed": 3,
+      "method": "A2",
+      "config": "D:\\workspace\\supermimic-chord-study\\outputs\\training_configs\\replication_seeds123_v1\\a2_paired_v2_2000iter_seed3.json",
+      "config_sha256": "9d538db90f87862a4cec8c4d3db7ee15434dba7e601a8959bfc5a1cbd511c118",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed3",
+      "observed_seed0_seconds_for_ETA": 1355.164834999945
+    },
+    {
+      "position": 6,
+      "seed": 3,
+      "method": "A1L",
+      "config": "D:\\workspace\\supermimic-chord-study\\outputs\\training_configs\\replication_seeds123_v1\\a1l_paired_v2_2000iter_seed3.json",
+      "config_sha256": "08c5f7898984ade5902b867e44ff9aa75fef49d530a64f5884d6c77a082764bc",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed3",
+      "observed_seed0_seconds_for_ETA": 923.149317799951
+    }
+  ],
+  "source_inventory": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed0\\source\\inventory.json",
+  "source_inventory_sha256": "a92cb6549bd7c72811ffeecd4d8e3d37b534b7398b0b7264dffd8f5e02c51452",
+  "trainer": "D:\\workspace\\supermimic-chord-study\\scripts\\train_controlled_pen.py",
+  "trainer_sha256": "823711c1a7c5876942506986741f20171b3c09a292bf3656bda17c1b5a3fd65a",
+  "audit_script": "D:\\workspace\\supermimic-chord-study\\scripts\\audit_training_checkpoint.py",
+  "audit_script_sha256": "af5e759f0dbcd3e119ac19f8eacb33222b9b214d6f0c2d4cdbd39971af5c666f",
+  "python_executable": "D:/workspace/dex-supermimic-research/.venv/Scripts/python.exe",
+  "queue_output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_seeds123_queue_v1",
+  "per_run_attempt_guard_seconds": 3600,
+  "per_run_process_watchdog_seconds": 3900,
+  "primary_budget": {
+    "iterations": 2000,
+    "num_envs": 128,
+    "wm_updates": 4000,
+    "actor_updates": 1800,
+    "critic_updates": 7200,
+    "real_transitions": 648192
+  },
+  "secondary_budget_seconds": 1200,
+  "cache_policy": "Use same explicit project native Inductor/Triton caches; never clear between jobs; snapshot actual before/after cache inventories in every child run; report different warm histories",
+  "production_prior": "A2 eager geometric prior; native compile/TF32 unchanged in both arms",
+  "execution_policy": {
+    "single_GPU_serial": true,
+    "no_auto_retry": true,
+    "no_quality_based_stopping": true,
+    "fail_stop_on_process_or_CPU_health_error": true,
+    "fresh_process_each_job": true,
+    "from_scratch_no_checkpoint_resume": true,
+    "first_checkpoint_cpu_audit_each_run": 100,
+    "final_cpu_audit_each_run": 2000,
+    "pause_Goal_leaves_queue_and_child_running": true,
+    "do_not_run_external_GPU_evaluations_while_queue_active": true
+  },
+  "estimated_total_seconds_from_pilot_costs": 6834.942458399688,
+  "ETA_scope": "wall reservation estimate only, not a research result; audit and launch overhead extra",
+  "queue_runner_sha256": "72420ce96d7321dbcf8134715feb080d7c60ec668535b8d807cfd6bc269aff04",
+  "queue_runner": "D:\\workspace\\supermimic-chord-study\\scripts\\run_matched_training_queue.py",
+  "launcher": "D:\\workspace\\supermimic-chord-study\\scripts\\start_matched_training_queue.ps1",
+  "launcher_sha256": "b7816e6b8bdfc26c4c21296e0d2a180950adcc9c5f7a8fd86fefbc7eac8983fc",
+  "templates": {
+    "A1L": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed0_restart1\\input_config.json",
+      "sha256": "bdc95cd841c0bfbda704e4642c9dfba835481ffd10b7a04b33a5d4eb80ca2bc9"
+    },
+    "A2": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed0\\input_config.json",
+      "sha256": "7dc6f691525d1478a01546d6b45af2ede958adb3536998c55b45b4858a14158b"
+    }
+  },
+  "clock_policy": {
+    "actual_child_PID_OS_creation": "CIM observed once with parentPID and commandline identity; raw UTC/local timestamps persisted",
+    "strict_secondary1200s": "Use checkpoint completedUTC minus observed exact actual child OS creationUTC; sidecar STARTED elapsed is additional diagnostic, not an exact OS anchor",
+    "missing_OS_timestamp": "Explicitly missing; conservative bounds from Popen prelaunch to actual runtime first observation; do not substitute runtime timestamp or Popen postlaunch as exact actual child creation",
+    "startup_errors": "Outer handler covers initial validation, lock and launch; failed_no_child_started recorded; preserve competing/prior queue state in separate failure note"
+  }
+}

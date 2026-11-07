@@ -1,0 +1,172 @@
+{
+  "schema": "observation_H123_canonical_static_preload_rest_diagnostic:1",
+  "status": "CPU_REVIEW_ONLY_NOT_GPU_AUTHORIZATION",
+  "candidate_frame": 0,
+  "source_kind": "Same frozen canonical H123 baseline-derived geometric q0 as already executed QREF_C2 rest. New fixed target comes from independent static wholehand PD/stiction LP with zero-zeta priority; no source robot-q or force/contact labels.",
+  "is_real_ego": false,
+  "independent_training_seed_N": 0,
+  "diagnostic_N": null,
+  "initialization": {
+    "q": "Canonical H123 baseline candidate q0 unchanged from prior QREFrest, shape1x20 castonceFP32; initial physical q is never projected. Thumbjoint4 is on FP32 lowerbound; originaldouble excess5.05e-8rad is retained.",
+    "object_pose": "Exactly the same mapped objectpose, original MJB defaultmocap/wrist and initialization as prior canonical H123baseline QREFrest.",
+    "wrist": "Original nominal MJB default mocap; no init_keyframe or scene modification",
+    "joint_qvel_and_object_twist": "Explicit designed zero rest intervention; not video measurement or reconstruction",
+    "ctrl": "STATIC_PD_PRELOAD_C2 only: frozen design u0_rad is alreadyFP32; apply same frozen C2.020 exactly once, require bitwiseidentity, then constant60steps. No target/force clipping, actual-q target update, feedback adaptation or trajectory control.",
+    "external_forces": "xfrc_applied/qfrc_applied zero at initialization, no writes afterward",
+    "post_initialization_state_writes": 0
+  },
+  "physics": {
+    "backend": "mujoco_warp CUDA, original MJB24fd physical structure/options",
+    "context": "Copy actualcontext[0] eight fields into Warp AFTER put_model(nominal), never recompile modified host model",
+    "context_fields": [
+      "body_mass",
+      "body_inertia",
+      "body_iquat",
+      "geom_size",
+      "geom_pos",
+      "geom_friction",
+      "actuator_gainprm",
+      "actuator_biasprm"
+    ],
+    "initialization_sequence": [
+      "put_model(original nominal)",
+      "wp.copy eightactualfields",
+      "put_data nworld1 fixedcapacity",
+      "set_const_0 restore=True",
+      "one startup Warpforward"
+    ],
+    "physics_dt_s": 0.005,
+    "steps": 60,
+    "duration_s": 0.3,
+    "nworld": 1,
+    "nconmax": 192,
+    "njmax": 4096,
+    "per_step": "Only mjwarp.step once then readback/get_data_into/capture_contacts; no extra Warpforward or nativeforward",
+    "raw_states": "61 integration states: explicit initialized state0 plus60postintegration states",
+    "contact_time_semantics": "After step k, solved contact/frame/force describe preintegration solver_t=(k-1)*.005; qpos/qvel/time are postintegration state_t=k*.005. Record both and do not refresh contacts with an extra forward.",
+    "startup_contacts": "Separate startup_forward sample at0, not counted as a stepped response",
+    "capacity": "Read sticky wp_data.overflow exactly once after step60; never clear/reset; require one-world bitmask0 and all recorded nacon/nefc strictly below allocatedcapacity",
+    "force_time_semantics": "actuator_force_native and contactforce both belong to just-completed preintegration solver; rawstates explicitly record forcephase/force_solver_time/prestateindex, solver samples prestate_index=k-1/poststate_index=k. startup forward separate."
+  },
+  "diagnostic_gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0,
+    "finite_all_raw_states_and_measurements": true,
+    "clock_absolute_tolerance_s": 0.000002,
+    "actual_ctrl_FP32_bitwise_equals_fixed_initial_projection": true,
+    "complete_raw61states60solver_samples": true,
+    "final_sticky_overflow_bitmask": 0
+  },
+  "reporting": "One prospective canonical PRELOADrest attempt only after separate Rootauthorization, at most45s owned/40sworker. Same primary0.3s restgates as QREF, full60qualityfailure data and engineering/capacity UNKNOWN rules. Prior canonical QREFstaticFAIL remains unchanged and serves a same-q exploratory comparison; sequential known-outcome study with oneprocess percondition, not randomized/statistical replication or newtrainingseed. Do not select best, modifythresholds, retry, or claim motionPASS. Static mathematical witnesses are not force/contact labels or dynamicqualification.",
+  "bounded_execution": {
+    "worker_soft_wall_seconds": 40,
+    "owned_process_wall_seconds": 45,
+    "reviewed_watchdog_source_sha256": "40b397f60e91bf59a1c72ad43f9bd52b42e33a820a695c2ec6e43736fa8a54aa",
+    "shared_GPU_lock": "D:/workspace/supermimic-chord-study/.locks/single_gpu_training.lock",
+    "automatic_retry": false,
+    "metadata_IO": {
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1",
+      "rule": "Same already serialized payload/temp boundedPermissionErrorrename retry<=.75s/32calls; no resimulation/process/forceflag retry; original40b lifecycle write replaced in memory only."
+    }
+  },
+  "initialization_tolerances": {
+    "candidate_FP32_cast_q_abs_rad": 1.2e-7,
+    "candidate_FP32_cast_pose_abs": 1.2e-7,
+    "startup_robot_FK_max_abs_m": 0.000001,
+    "startup_mocap_max_abs": 1.2e-7,
+    "actual8context_copy": "bitwise FP32 expected"
+  },
+  "C1_enabled": false,
+  "m0": null,
+  "a_brake": null,
+  "physical_reference_qualified_before_probe": false,
+  "retained_limits": [
+    "controlled cached fixture, no real-ego video/camera/scale qualification",
+    "same fixed-palm task redesign and single selected frame",
+    "geometric shallowoverlap/ties/nonconverged trajectory results are preserved",
+    "one rest-hold diagnostic does not establish motionretargeting/forceprediction/globalsafecontrol or realrobot transfer",
+    "Warmseed local optimization basin intervention changed q0; no temporal velocities, physicalgrasp, inferred contacts or real-ego labels",
+    "The preload candidate is the baseline-derived H123 condition under a baseline-first convention. H123 geometric and QREF outcomes were already visible when this preload branch was selected; no prospective/blinded candidate-selection claim. Midpoint stays separately retained, not a statistical control.",
+    "Zero-zeta is selected by frozen mathematical priority despite a lower-normal-force bounded-zeta solution. Neither zeta nor contact allocation predicts actual solvedforces.",
+    "Potential thumbjoint4 limitactivation/reaction is excluded in static surrogate; softcontact constitutive law and actualWarpPD/FMA are not certified.",
+    "Target and staticwitness design never read original physical outcomes, but this prospective comparison follows a knownQREFFAIL and is exploratory/sequential. Numerical process variability and N1 limit causal/statistical interpretation."
+  ],
+  "planned_conditions": [
+    {
+      "id": "H123_BASELINE_STATIC_PD_PRELOAD_C2",
+      "order": 1,
+      "seed_id": "B_baseline_composite",
+      "control_condition": "STATIC_PD_PRELOAD_C2",
+      "maximum_attempts": 1,
+      "diagnostic_N_if_executed": 1,
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\frame0_h123_seeded_baseline_v3\\initialization_candidate.npz",
+        "sha256": "57135b4c607f48d844e3977b56065dc6f1b4c8991626fc033651c6d136b89406"
+      },
+      "firstframe": {
+        "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\inputs\\h123_baseline_firstframe_geometry_parameters.json",
+        "sha256": "34c0f36d3b92469087aa2b3300351ca2c63237526c4c9752e2ab98502f04605e"
+      },
+      "preload": {
+        "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\h123_preload_cpu_v1\\baseline\\designed_target_u0.json",
+        "sha256": "eadb33db1ebbf1abc774a16ed551243ba89f6e325e7486d53720e2ac65caa808"
+      },
+      "output": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\outputs\\h123_rest_baseline_preload_v1"
+    }
+  ],
+  "maximum_planned_attempts": 1,
+  "ordered_condition_ids": [
+    "H123_BASELINE_STATIC_PD_PRELOAD_C2"
+  ],
+  "GPU_run_authorized": false,
+  "canonical_candidate": {
+    "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\frame0_h123_seeded_baseline_v3\\initialization_candidate.npz",
+    "sha256": "57135b4c607f48d844e3977b56065dc6f1b4c8991626fc033651c6d136b89406"
+  },
+  "same_q_QREF_background": {
+    "actual_plan": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\outputs\\h123_rest_baseline_v1_watchdog\\plan_snapshot.json",
+      "sha256": "eeb80394888fe4ca0bf515a28c4ffc41f4cda511b442e9260cd13266ba9ccf95"
+    },
+    "evaluation": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\outputs\\h123_rest_baseline_v1\\evaluation.json",
+      "sha256": "a25d62bc4ad93fbc1ce71a9d7190a3e1f6cd7c5640b01935079e89f7cdec46c4"
+    },
+    "original_rest_pass": false,
+    "scope": "Same inputq/pose/model/context; prioroutcome known, unchanged. This is backgroundcomparison, not a rerun or a statisticalreplicate."
+  },
+  "static_design": {
+    "design": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\h123_preload_cpu_v1\\baseline\\designed_target_u0.json",
+      "sha256": "eadb33db1ebbf1abc774a16ed551243ba89f6e325e7486d53720e2ac65caa808"
+    },
+    "report": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\h123_preload_cpu_v1\\baseline\\report.json",
+      "sha256": "6baa079f78749b4796d1cd1782813887667b1f87d01a348da8ae76d5ee234e7a"
+    },
+    "matrices": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\h123_preload_cpu_v1\\baseline\\static_matrices.npz",
+      "sha256": "37905f78c3936e104ecea78d5fa23b8b67b486e09cd33b42ee1e3d8c6515a8a9"
+    },
+    "finalpins": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\h123_preload_cpu_v1\\FINAL_PINS.json",
+      "sha256": "404dff8c62cbf84916e72df28332bea5b199dd1fc6fea22f7e8deb43e0efcadd"
+    },
+    "independent_audit": {
+      "path": "D:\\workspace\\supermimic-observation-warmseed-grounding-study\\outputs\\h123_preload_independent_review_v2\\report.json",
+      "sha256": "00df66005ef2406b487e7e752bf61912f9cb64501363d48f464dcf6087cfccb8"
+    },
+    "selected_LP": "zero_stiction",
+    "normal_force_upper_cap_N": null,
+    "sum_normal_candidate_N": 2.139425053631681,
+    "zeta_is_prediction": false,
+    "limitreaction_modeled": false,
+    "softcontact_constitutive_modeled": false,
+    "physical_reference_qualified": false
+  },
+  "revision_note": "v2 corrects candidate-selection chronology only. Physics, primary gates, static LP selection rule, input q0/pose/u0 and all source files are unchanged; v1 remains preserved."
+}

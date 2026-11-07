@@ -1,0 +1,66 @@
+--- consumer_v1_frozen
++++ consumer_v2_semantic_guard
+@@ -17,6 +17,8 @@
+     baseline_gate,physical_secants,descriptive_agreement,self15_calibration,
+     object_reward,native_rewards,check_terms)
+ 
++from rough_prefix.physical_probe_manifest_guard_v2 import qualify_saved_evidence
++
+ PROPOSAL_PATH=ROOT/'proposals/current104_samewarp_physical_fd_v2/protocol.json'
+ PROPOSAL_SHA='ce9a9575b6aa7dc9b5b535bfe1cf7ff5be4db6065dc122ba4860561d40096e09'
+ LOADER_SHA='ab15f23b569d259cbca587e2b6f883c509ae15584567fcc8c27443787f294a20'
+@@ -52,11 +54,12 @@
+     for item in all_pins(plan):checked(item)
+     for item in all_pins(proposal):checked(item)
+     sources=plan['source_pins']
+-    need(type(sources) is dict and set(sources)=={'consumer','math','WM_loader','Actor_loader','bundle_loader','io'},'Exact consumer source closure required')
++    need(type(sources) is dict and set(sources)=={'consumer','math','WM_loader','Actor_loader','bundle_loader','io','qualification_guard'},'Exact consumer source closure required')
+     for key,file in [('consumer',Path(__file__)),('math',ROOT/'src/rough_prefix/physical_probe_consumer_math.py'),
+                      ('WM_loader',ROOT/'src/rough_prefix/world_model_checkpoint_v2.py'),
+                      ('Actor_loader',ROOT/'src/rough_prefix/checkpoint_v2.py'),
+-                     ('bundle_loader',ROOT/'src/rough_prefix/bundle_v2.py'),('io',ROOT/'src/rough_prefix/io.py')]:
++                     ('bundle_loader',ROOT/'src/rough_prefix/bundle_v2.py'),('io',ROOT/'src/rough_prefix/io.py'),
++                     ('qualification_guard',ROOT/'src/rough_prefix/physical_probe_manifest_guard_v2.py')]:
+         need(sources[key]==pin(file),'Consumer dependency source differs: '+key)
+     need(sources['WM_loader']['sha256']==LOADER_SHA,'Strict CPU WM loader changed')
+     manifest=read(checked(plan['physical_manifest']))
+@@ -75,7 +78,9 @@
+     need(not any(k in sys.modules for k in ('torch','warp','mujoco_warp')),'Framework imported during metadata preflight')
+     ready=(report['status']=='COMPLETED_PHYSICAL_PROBE' and manifest['postterminal_identity_qualified'] and
+            all(report[k] for k in ('engineering_qualified','baseline_all_passed','capacity_finalized','capacity_qualified')))
+-    return plan,proposal,manifest,report,ready
++    semantic=qualify_saved_evidence(manifest)
++    ready=bool(ready and semantic['qualified'])
++    return plan,proposal,manifest,report,ready,semantic
+ 
+ 
+ def torch_reward(x,p,R):
+@@ -88,16 +93,16 @@
+ 
+ def main():
+     ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--run-plan',type=Path,required=True);ap.add_argument('--run',action='store_true')
+-    args=ap.parse_args();plan,p,manifest,physical_report,ready=preflight(args.run_plan)
++    args=ap.parse_args();plan,p,manifest,physical_report,ready,semantic=preflight(args.run_plan)
+     if not args.run:
+-        print(json.dumps({'status':'CPU_METADATA_PREFLIGHT_ONLY','physical_gates_reported_pass':ready,
++        print(json.dumps({'status':'CPU_METADATA_PREFLIGHT_ONLY','physical_gates_reported_and_semantically_pass':ready,'saved_evidence':semantic,
+                           'Torch_imported':False,'WM_forwards':0,'physics_steps':0,'GPU_used':False}));return
+     need(plan['CPU_run_authorized'] is True,'Separate explicit CPU authorization absent')
+     out=Path(plan['output']);out.mkdir(parents=True,exist_ok=False)
+     started=time.perf_counter();deadline=started+plan['soft_worker_seconds']
+-    summary={'schema':'current104_physical_probe_CPU_consumption:1','status':'NOT_RUN_PHYSICAL_UNQUALIFIED',
++    summary={'schema':'current104_physical_probe_CPU_consumption:2','status':'NOT_RUN_PHYSICAL_UNQUALIFIED',
+              'entry':pin(__file__),'runplan':pin(args.run_plan),'proposal':plan['proposal'],'physical_manifest':plan['physical_manifest'],
+-             'models':[],'source_lineage_N':1,'independent_ego_N':0,'physics_steps_added':0,'GPU_used':False,
++             'saved_evidence_semantic_qualification':semantic,'models':[],'source_lineage_N':1,'independent_ego_N':0,'physics_steps_added':0,'GPU_used':False,
+              'model_statuses':{method:'NOT_RUN' for method in ('A1L','P_ONLY','A2')},
+              'WM_forwards':0,'physical_gradient_qualified':False,
+              'scope':'Single seen source/seed0,16dependent snapshots/eight dependent directions each. Local one-step interior-coordinate sampled causal comparison; no CI/p-values, full-Jacobian/contact-force/hardware/generalization/method-superiority qualification.'}
+@@ -109,6 +114,7 @@
+         file=checked(item);(out/(key+'__'+file.name)).write_bytes(file.read_bytes())
+     error=None
+     try:
++        write(out/'saved_evidence_semantic_qualification.json',semantic)
+         if not ready:
+             summary['reason']='Physical terminal/engineering/baseline/capacity/postterminal identity prerequisite not qualified'
+             return 2

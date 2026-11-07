@@ -1,0 +1,302 @@
+{
+  "schema": "constrained_prefix_protocol:1",
+  "status": "FROZEN_NEW_CPU_METHOD_PROTOCOL_NO_RUN_YET",
+  "GPU_authorized": false,
+  "training_authorized": false,
+  "parent_protocol": {
+    "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\proposals\\short_dynamic_tracking_v1\\protocol.json",
+    "sha256": "94ea7cbe03f3e2aaa7bb4f7c8860bae8e599cd4e8e823cbe47220f73ffe101a3"
+  },
+  "inputs": {
+    "observation_fixture": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/observation_only_fixture_v1/observations.npz",
+      "sha256": "3bdca0ee6fd8d7956cac1ee2b13719db5cb302ceb0130972719032a04b3ec35b"
+    },
+    "frozen_full151_geometry": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/outputs/native_contact_refined_geometry_v1/geometric_retarget.npz",
+      "sha256": "539d6247576b9b2e3fb1b143cf17b6ad507e3baea73c5fafcda4e221d9230c8f"
+    },
+    "canonical_H123_q0": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/frame0_h123_seeded_baseline_v3/initialization_candidate.npz",
+      "sha256": "57135b4c607f48d844e3977b56065dc6f1b4c8991626fc033651c6d136b89406"
+    },
+    "frozen_material_anchors": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/frame0_h123_seeded_baseline_v3/frozen_anchor_bindings.json",
+      "sha256": "91022e42f8a3a6ef215695d8975e46fcc92cb88e431018b412eca77db391775f"
+    },
+    "static_preload_design": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/h123_preload_cpu_v1/baseline/designed_target_u0.json",
+      "sha256": "eadb33db1ebbf1abc774a16ed551243ba89f6e325e7486d53720e2ac65caa808"
+    },
+    "PDU_rest_actual": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/outputs/h123_rest_baseline_preload_v1/evaluation.json",
+      "sha256": "69aecde6bb4be45e158c123662877f013387dc25c4b393eacac8a1bbf40e10ee"
+    },
+    "PDU_owner_evidence": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/outputs/h123_preload_owner_execution_v1/completion.json",
+      "sha256": "9ad1452ea20d433e33389c70a9683c31e3c5274f07ac10a69ba9c5066e630e6f"
+    },
+    "rawFD_design_arrays": {
+      "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\outputs\\dynamic_wrench_v2\\designed_wrench_151.npz",
+      "sha256": "60b1ae5bc6fa918ac1d569b44fddefad387a5ee3e45fc8fffe731cdb17516ead"
+    },
+    "rawFD_protocol": {
+      "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\protocols\\dynamic-wrench-v1.json",
+      "sha256": "a6130ef7d91c89963f94d322cafa8c694784badd905361815c16d01383791a66"
+    },
+    "model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "rest_worker_reuse": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/scripts/rest_hold_warp.py",
+      "sha256": "03770389af4f47a9659da015557df04707d574b6c76827d36ded2fa45c47b6a0"
+    },
+    "supervisor_reuse": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/scripts/run_rest_hold.py",
+      "sha256": "2f29bcf1cbe0b96282fb825c18c4ac257de17ddf2e760bce8d200577ddad681f"
+    },
+    "pure_C2": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/vendor/target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    },
+    "kinematics": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/scripts/retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    },
+    "native_filtered_geometry": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/scripts/native_filtered_contact_geometry.py",
+      "sha256": "c964d5b300baac57a5353afd3b5aa4cfb381eca1da03ceef712691dd10376c72"
+    },
+    "material_geometry": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/scripts/material_anchors.py",
+      "sha256": "d860c666cf596abe8f374342f191515b4c51b3537d86a64d99e850e8f7fcd37c"
+    },
+    "registry_background_only": {
+      "path": "D:/workspace/supermimic-shared-reference-study/configs/derived_reference_registry_v1.json",
+      "sha256": "f44d29724a6f8abec13254f375ccbcc16ce12c049599fd3586dc02401a18d5a7"
+    },
+    "registry_API_background_only": {
+      "path": "D:/workspace/supermimic-shared-reference-study/src/shared_reference/reference_registry.py",
+      "sha256": "7ea67f432e75045da2237009d8ceb0e739cad3439c444f2512b93020ac1fe327"
+    },
+    "original_acceptance_math": {
+      "path": "D:/workspace/supermimic-chord-study/src/chord_study/acceptance.py",
+      "sha256": "b7afba11a1bc0b97425b2d1987615bcbe21acb74467759a0b822f932868a9bb4"
+    }
+  },
+  "source_identity": {
+    "proposed_new_id": "legacy_observation_fixture/clip007_f0200_f0216_H123_prefix16_v1",
+    "parent_observation_source_frame_range_half_open": [
+      200,
+      351
+    ],
+    "primary_pose_prefix_local": [
+      0,
+      16
+    ],
+    "primary_pose_source_frame_range_half_open": [
+      200,
+      216
+    ],
+    "rawFD_derivative_support_local": [
+      0,
+      18
+    ],
+    "rawFD_derivative_support_source_range_half_open": [
+      200,
+      218
+    ],
+    "time_s": [
+      0.0,
+      0.3
+    ],
+    "dt_goal_s": 0.02,
+    "goal_states": 16,
+    "source_lineage_group": "Existing controlled cached fixture; original video/camera/scale/confidence unknown, not a new independentmotion",
+    "not_existing_shared10clip_identity": "Current registry only accepts source[0,151), so it must reject migration of this old[200,351) artifact. A distinct prefix manifest/extension is required, not relabeling."
+  },
+  "history": {
+    "previous_turn": "progress: one46-evaluation prefix16 solve and independent artifacts yielded geometry/continuousrange/plannedcontrol failures",
+    "design_proposed_after_previous_outcomes_visible": true,
+    "new_condition": "Cubic B-spline with explicit trajectory/control and sampled-generated-overlap constraints; retains prior objective/anchors/source/objectmotion",
+    "not_retry_of_parent": "Old protocol/results/stencils/weights remain unchanged; this separately frozen method has different curve and constraint representation",
+    "independent_ego_N": 0,
+    "confidence": null
+  },
+  "representation": {
+    "degree": 3,
+    "breaks_s": [
+      0.0,
+      0.02,
+      0.04,
+      0.06,
+      0.08,
+      0.1,
+      0.12,
+      0.14,
+      0.16,
+      0.18,
+      0.2,
+      0.22,
+      0.24,
+      0.26,
+      0.28,
+      0.3
+    ],
+    "end_knot_multiplicity": 4,
+    "interior_knot_multiplicity": 1,
+    "control_points": 18,
+    "joints": 20,
+    "fixed_control_point0": "source64 canonical H123 q0, outside variable vector; no clipping",
+    "free_variables": 340,
+    "requested_initial_guess": "all18 control points repeat q0; no old539d or failed1e67 q1..15 inputs",
+    "continuity": "C2 cubic B-spline on [0,.3], no tail splice or zero terminalvelocity assumption",
+    "joint_range": "All coefficient boxes use actual original MJB hard limits; convex-hull sufficient whole-curve bound with numerical certificate tolerance1e-12rad. Save every raw coefficient/sample/extremum excess without clipping. Not actual-state safety proof.",
+    "reference_qd": "analytic derivative of new B-spline. Native forwardFD of16q separately exported; designed init uses analytic derivative0. No oldstencil reuse.",
+    "object_curve": "unchanged frozen mapped16pose/full151rawFD first16 v/a/worldomega/alpha, old independently checked SO3/quintic module; no new smoother/pose/wrist optimization"
+  },
+  "planning_margins": {
+    "control_inner_margin_rad": 2e-06,
+    "force_margin_Nm": 2e-06,
+    "rate_margin_rad_s": 0.0001,
+    "generated_depth_max_m": 0.002999,
+    "rationale": "Numerical tightening fixed before any LP/nonlinear solve. C2.020/15rad_s/originalforcecaps/3mm qualification are unchanged; margins are not simulator-accuracy or hardware guarantees."
+  },
+  "linear_contract": {
+    "PD_model": "Same actual affine unit-gear PD, fixed static load prior tau_ff32 from q0/uPDU; u_pre64(q,qd) linear in B-spline coefficients",
+    "C2_inner": "15 planned u proposals inside originalFP32 innerbounds plus2e-6rad; final actual pureFP32 NumPy/Torch/originalC2 recomputed and clamp counts retained",
+    "target_rate": "14 planned changes have abs(delta_u)/.02<=14.9999rad_s in planner, finalFP32 gate<=15",
+    "raw_PD_full_interval": "Each 20ms ZOH interval has cubic q and degree-elevated quadratic qd. Track/hold raw affine torque cubic Bernstein controls bounded by intersection actuator/joint caps minus2e-6Nm. Sufficient not necessary full-interval ideal-reference certificate. Re-certify with finalpostC2U32; also audit61FP32 two-grouping samples.",
+    "hold_reference_scope": "Retained restricted-planner condition on moving desired q/qd with held u0; counterfactual reference prediction, not necessary condition for real hold dynamics or general motion. LP infeasibility cannot exclude the motion.",
+    "same_u0": "hold and tracking use same newly designed u0 and same future nonzero initial state",
+    "hardware_velocity": "Do not invent a hard actual-joint-velocity bound from15rad_s target-rate. Report analytical derivative coefficient bounds and samples independently."
+  },
+  "nonlinear_contract": {
+    "fit": "Same frozen6596-residual prefix16 objective/weights/scales/anchors, chain B16 into old300freeq representation; no reweighting, same soft0.5mm allowance is not hardqualification",
+    "geometry_times_s": [
+      0.0,
+      0.005,
+      0.01,
+      0.015,
+      0.02,
+      0.025,
+      0.03,
+      0.035,
+      0.04,
+      0.045,
+      0.05,
+      0.055,
+      0.06,
+      0.065,
+      0.07,
+      0.075,
+      0.08,
+      0.085,
+      0.09,
+      0.095,
+      0.1,
+      0.105,
+      0.11,
+      0.115,
+      0.12,
+      0.125,
+      0.13,
+      0.135,
+      0.14,
+      0.145,
+      0.15,
+      0.155,
+      0.16,
+      0.165,
+      0.17,
+      0.17500000000000002,
+      0.18,
+      0.185,
+      0.19,
+      0.195,
+      0.2,
+      0.20500000000000002,
+      0.21,
+      0.215,
+      0.22,
+      0.225,
+      0.23,
+      0.23500000000000001,
+      0.24,
+      0.245,
+      0.25,
+      0.255,
+      0.26,
+      0.265,
+      0.27,
+      0.275,
+      0.28,
+      0.28500000000000003,
+      0.29,
+      0.295,
+      0.3
+    ],
+    "categories": [
+      "hand_object",
+      "hand_self"
+    ],
+    "constraint_count": 122,
+    "operator": "Per sample/category maximum of generated native depths, clipped at zero for no generated violation, <=2.999mm. NOT signed positive gap. Missing per-pair distance remainsNaN plusmask.",
+    "jacobian": "Deterministic deepest pair/nativecontact-index branch, preserve all ties/branch changes. NativecollisionJac numerical/non-smooth limitations retained; no global exactness certificate.",
+    "coverage": "61point nominal reference sampling only, not continuous collision-free path/actual dynamics. Record other/object-environment contacts without proxy hand mount.",
+    "contact_intent": "Same H123 hand-material/object-local anchor hypothesis across16, unknownconfidence; no online finger/vertex reselection or invented labels. Additional stable contacts not identity-penalized."
+  },
+  "execution": {
+    "phases": [
+      "one phase0 aggregate HiGHS L1 closest-repeatq0 linear feasibility LP",
+      "only if LP success, one SLSQP constrained fit from that raw LP solution"
+    ],
+    "phase0": {
+      "calls_max": 1,
+      "variables": 680,
+      "distance": "sum abs(340 freecontrolpoint deltas from requested repeatedq0),340epigraphs",
+      "tie_break": "none, no secondLP oralternative seed; retain solver-dependent witness",
+      "primal_feasibility_tolerance": 1e-09,
+      "dual_feasibility_tolerance": 1e-09,
+      "time_limit": "remaining whole-worker soft220 seconds",
+      "no_clipping": "LP rawvector kept; any subsequent solver-internal free-bound rounding shift logged, fixedP0never altered"
+    },
+    "SLSQP": {
+      "calls_max": 1,
+      "maxiter": 80,
+      "max_objective_fun_calls": 250,
+      "ftol": 1e-08,
+      "jacobians": "analytic objective and deterministic active geometric branch, linear constraint matrix from basis/control",
+      "callback": "major iterate may be infeasible, not called accepted/qualified; save explicit feasibility"
+    },
+    "soft_wall_seconds": 220,
+    "owned_process_seconds": 240,
+    "automatic_retry": false,
+    "scope_of250": "SLSQP objectivefun calls only; preflight/LP/constraint/jac/callback/unique-trial/collision stages counted independently",
+    "lifecycle": "reviewed40b timer starts beforePopen/import/CIM, actualruntimePID+launcher owned-tree cleanup,159c bounded same-payload metadata commits; finitecleanup extra, not totalwall<=240",
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "-1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "partial": "Atomic selfdescribing latest coefficient/q/constraint/feasibility checkpoint before returnjac/callback, source/PID/plan/time/counters; preserve LP/nonlinear/timeout failures,no fallback"
+  },
+  "qualification": {
+    "curve_coefficient_and_numeric_tolerance_rad": 1e-12,
+    "planned_final_FP32_target_rate_max_rad_s": 15,
+    "sampled_generated_penetration_max_m": 0.003,
+    "joint_state_tolerance_for_future_actual_only_rad": 0.001,
+    "future_actual_position_max_m": 0.02,
+    "future_actual_shaft_max_deg": 20,
+    "requires": "all finite/source/window/P0/basis/curve/control/initialization/artifact checks and an independently reviewed worker/scheduler before any new physics. LP/SLSQP returnstatus alone insufficient. No new physics authorization in this protocol.",
+    "failure_interpretation": "infeasible restricted LP, nonlinear notproved, or failed candidate retained separately; not global motion infeasibility. Convex hull/Bernstein/holdref restrictions sufficient not necessary. NativeABI or algebra PASS doesnotoverride physicalqualification false."
+  },
+  "full_goal_remaining": "This finite prefix is a precursor, not replacement of full151motion, SuperMimic+CHORD physical comparison/sharedlearning/real-ego/hardware objectives. Any future learned-residual controller must bind new ref/init/actualu consistently in real+imag/replay/WM and independently qualify."
+}

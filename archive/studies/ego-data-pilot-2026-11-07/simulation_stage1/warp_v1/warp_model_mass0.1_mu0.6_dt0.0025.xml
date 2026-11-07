@@ -1,0 +1,15 @@
+<mujoco model="hot3d_phone24_asset_stage1">
+  <compiler angle="radian" inertiafromgeom="false" />
+  <option timestep="0.0025" integrator="implicitfast" solver="Newton" iterations="100" ls_iterations="20" cone="pyramidal" jacobian="auto" gravity="0 0 -9.81" tolerance="1e-10" />
+  <asset>
+    <mesh name="phone24_visual" file="D:\workspace\ego-data-pilot-2026-11-07\asset_stage1\meshes\phone24_visual_m.obj" scale="1 1 1" />
+  </asset>
+  <worldbody>
+    <body name="hot3d_phone24" pos="0 0 0" quat="1 0 0 0">
+      <freejoint name="phone24_freejoint" />
+      <inertial pos="-6.89334902126415e-05 -0.0004924760098720671 0.0" mass="0.1" diaginertia="0.00019840516210918832 0.00024184069778760854 4.520917288967572e-05" />
+      <geom name="phone24_visual_only" type="mesh" mesh="phone24_visual" contype="0" conaffinity="0" density="0" group="2" rgba=".22 .24 .28 1" />
+      <geom name="phone24_collision_aabb" type="box" pos="-6.8933490212641502e-05 -0.00049247600987206708 0" size="0.036464649025068629 0.0051579606598764483 0.076977596124501169" contype="1" conaffinity="1" density="0" group="3" rgba=".1 .45 .95 .16" friction="0.6 0.005 0.0001" condim="3" priority="0" margin="0" gap="0" solref="0.02 1" solimp="0.9 0.95 0.001" />
+    </body>
+  <geom name="bench_support" type="plane" size="5 5 0.1" pos="0 0 0" rgba="0.6 0.65 0.7 1" friction="0.6 0.005 0.0001" condim="3" solref="0.02 1" solimp="0.9 0.95 0.001" margin="0" gap="0" priority="0" contype="1" conaffinity="1" /></worldbody>
+</mujoco>

@@ -1,0 +1,11 @@
+--- D:\workspace\supermimic-c2-confirmation-eval-study\scripts\evaluate_c2_portfolio.py
++++ D:\workspace\supermimic-c2-confirmation-eval-study\scripts\evaluate_c2_portfolio_v2.py
+@@ -62,7 +62,7 @@
+     require(p["margin_rad"]==.020 and all(j["margin_rad"]==.020 and j["margin_mrad"]==20 for j in p["jobs"]),"Common margin changed")
+     require(len(p["models"])==9 and len(p["jobs"])==len({j["output_dir"] for j in p["jobs"]})==27,"Nine models/27 distinct jobs required")
+     require(len({j["job_id"] for j in p["jobs"]})==27,"Distinct job identities required")
+-    require(p["per_child_cap_seconds"]==45 and p["whole_queue_budget_seconds"]==600,"Budget changed")
++    require(p["per_child_cap_seconds"]==45 and p["whole_queue_budget_seconds"]==1500,"Budget changed")
+     require(p["automatic_retry"] is False and p["task_quality_stops_queue"] is False, "No retry/quality stopping")
+     require(p["m0"] is None and p["a_brake"] is None and not p["C1_enabled"], "C1 remains disabled")
+     for name,pin in p["source_pins"].items():

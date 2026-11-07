@@ -1,0 +1,444 @@
+{
+  "schema": "phone_convex_contact_protocol:2",
+  "status": "PREREGISTERED_FINITE_ENGINEERING_SCREEN_THEN_SAME_FAMILY_CONFIRMATION_NOT_REAL_CALIBRATION",
+  "created_UTC": "2026-11-06T18:50:23.690986+00:00",
+  "scope": "One free convex phone above an infinite support plane, no hand, actor, training, retargeting, ego rollout or human force truth.",
+  "author_executed_physics": false,
+  "source_pins": {
+    "previous_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\protocols\\phone_physics_stage1_v1.json",
+      "bytes": 14384,
+      "sha256": "8981e89aec0993887aad65db1722f80d27470d6553a7bd25760a6ba7556d0505"
+    },
+    "previous_CPU_saved_assessment": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\simulation_stage1\\cpu_saved_assessment_v1\\report.json",
+      "bytes": 224168,
+      "sha256": "5efa1213b00b284d465d6d3c65a99b5cb45a70eb09325056140591309689ffe2"
+    },
+    "convex_geometry_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage2_convex\\completed_v2\\report.json",
+      "bytes": 18069,
+      "sha256": "8e966fb86aea71696959f0476df394b707f12f8abda2054e600ec378b3f3c283"
+    },
+    "convex_asset": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage2_convex\\completed_v2\\phone_asset.xml",
+      "bytes": 1362,
+      "sha256": "144465c4a10ee29682701dc9fb11e417f241818d76fc8e7d66186b5781f63841"
+    },
+    "collision_hull_OBJ": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage2_convex\\completed_v2\\meshes\\phone24_collision_convex_m.obj",
+      "bytes": 64140,
+      "sha256": "8936115abe82c9a006bf76e50394420c73a472297c2252d5ef52a74f98b9cdd1"
+    },
+    "unchanged_visual_OBJ": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage2_convex\\completed_v2\\meshes\\phone24_visual_m.obj",
+      "bytes": 396551,
+      "sha256": "a4864c1759dc6b363be05b53d0a82da041498e5d727884be594255a2fe92e2e7"
+    }
+  },
+  "history": {
+    "previous_protocol_and_artifacts_immutable": true,
+    "previous_AABB_CPU_result": "18/18 drop cases exceed original2mm penetration limit, maximum9.108566824978025mm; settling/rest/energy and27time-step pairs pass. Preserve as a failure, not replaced by the new hull.",
+    "previous_parity_scope_correction": "Stage1 CPU solver tolerance1e-10 vs the reported Warp put_model floor1e-6 were not algorithmically identical. Original effective values/results remain. New v2 explicitly requests1e-6 on both; no claim this alone explains any prior difference.",
+    "known_before_this_prereg": "Old physical failures and new finite hull geometry metrics are known. This is sequential exploratory engineering selection, not blind preregistration, an independent scientific test or isolated causal attribution of improvement to geometry/timeconst."
+  },
+  "object": {
+    "HOT3D_BOP_id": 24,
+    "name": "cellphone",
+    "collision_model": "one fixed convex hull,352vertices/700triangles",
+    "collision_geom_name": "phone24_collision_convex",
+    "body_name": "hot3d_phone24",
+    "visual_unchanged": true,
+    "model_origin_recentered": false,
+    "COM_body_m": [
+      -6.89334902126415e-05,
+      -0.0004924760098720671,
+      0.0
+    ],
+    "inertia_model": "Explicit uniform original-AABB inertia recomputed from each case mass; do not switch to hull-volume inertia or compiler auto inference.",
+    "AABB_full_size_XYZ_m": [
+      0.07292929805013726,
+      0.010315921319752897,
+      0.15395519224900234
+    ],
+    "mass_COM_inertia_friction_measured": false,
+    "initial_quaternion_wxyz": [
+      0.7071067811865476,
+      0.7071067811865476,
+      0.0,
+      0.0
+    ],
+    "initial_hull_support_rule": "Using all352 actual collision-hull vertices vi in the original body frame and COMc, compute smin=min_i (R*(vi-c))_world_z. Desired worldCOM=(0,0,clearance-smin); root_position=desiredCOM-R*c. Save smin and the resulting minimum world vertex height. Use the collision mesh geom transform/scale too if compilation introduces them; never substitute half the box thickness without verifying equality.",
+    "initial_support_check": "Before integration, verify min_i(root+R*vi)_z equals requested bottom clearance within declared FP32/FP64 input-arithmetic allowance; save raw operands. At this fixed Rx90 hull AABB may give the same value as the old box, but that is checked, not presumed.",
+    "initial_linear_angular_velocity_zero": true
+  },
+  "shared_physics": {
+    "gravity_world_m_s2": [
+      0.0,
+      0.0,
+      -9.81
+    ],
+    "plane_height_world_z_m": 0.0,
+    "support": "Infinite plane, not reconstructed real table",
+    "condim": 3,
+    "cone": "pyramidal",
+    "geom_priority": 0,
+    "geom_solmix": 1.0,
+    "margin_m": 0.0,
+    "gap_m": 0.0,
+    "solimp": [
+      0.9,
+      0.95,
+      0.001,
+      0.5,
+      2.0
+    ],
+    "damping_ratio": 1.0,
+    "torsional_friction_length_m": 0.005,
+    "rolling_friction_length_m": 0.0001,
+    "inactive_friction_dimensions": "Torsion and rolling coefficients stored but inactive with condim3; sliding is the declared grid value on both colliding geoms.",
+    "integrator": "implicitfast",
+    "solver": "Newton",
+    "iterations": 100,
+    "ls_iterations": 20,
+    "tolerance": 1e-06,
+    "ls_tolerance": 0.01,
+    "refsafe_enabled": true,
+    "solver_tolerance_representation_rule": "CPU compiled tolerance equals requested1e-6 and ls_tolerance0.01. Read actual put_model/device values before integration and require their exact FP32 representations of those requests; record dtype/value. Do not merely copy CPU values into a metadata label, allow a hidden floor, or change the SDK to1e-10.",
+    "non_contact_terms": "body_gravcomp0, no actuators/equalities/tendons/fluid or other force inputs. Physical model/options must be the same across CPU/Warp except recorded representational/backend differences.",
+    "solref_rule": "Both contact geoms use positive solref=(timeconst_s,1). Keep refsafe enabled. Save authored and effective values, actual dt/dtype and guard. No disabling refsafe or negative-direct-format substitution."
+  },
+  "timesteps_s": [
+    0.00125,
+    0.000625
+  ],
+  "tests": [
+    {
+      "name": "drop",
+      "duration_s": 3.0,
+      "initial_bottom_clearance_m": 0.1,
+      "external_force_world_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "external_torque_about_COM_world_Nm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rest_window_s": [
+        2.5,
+        3.0
+      ]
+    },
+    {
+      "name": "table_settling",
+      "duration_s": 3.0,
+      "initial_bottom_clearance_m": 0.0005,
+      "external_force_world_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "external_torque_about_COM_world_Nm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rest_window_s": [
+        2.5,
+        3.0
+      ]
+    },
+    {
+      "name": "force_push_release",
+      "duration_s": 3.0,
+      "initial_bottom_clearance_m": 0.0005,
+      "pre_settle_interval_s": [
+        0.0,
+        1.0
+      ],
+      "force_active_half_open_interval_s": [
+        1.0,
+        1.2
+      ],
+      "external_force_world_N": [
+        2.0,
+        0.0,
+        0.0
+      ],
+      "force_application_point": "instantaneous world COM",
+      "external_torque_about_COM_world_Nm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected_external_linear_impulse_world_Ns": [
+        0.4,
+        0.0,
+        0.0
+      ],
+      "release_interval_s": [
+        1.2,
+        3.0
+      ],
+      "rest_window_s": [
+        2.5,
+        3.0
+      ],
+      "motion_required": false,
+      "no_motion_interpretation": "A valid outcome under a mass/friction prior; never fail merely because the phone does not slide."
+    }
+  ],
+  "screening": {
+    "backend": "CPU_MuJoCo",
+    "mass_kg": 0.2,
+    "sliding_friction": 0.6,
+    "timeconst_s": [
+      0.02,
+      0.005,
+      0.0025
+    ],
+    "timesteps_s": [
+      0.00125,
+      0.000625
+    ],
+    "test_names": [
+      "drop",
+      "table_settling",
+      "force_push_release"
+    ],
+    "order": "timeconst descending as listed, then dt as listed, then tests as listed",
+    "case_count": 18,
+    "integration_steps": 64800,
+    "state_rows_including_initial": 64818,
+    "requested_timeconst_over_dt_ratios": {
+      "0.02": [
+        16.0,
+        32.0
+      ],
+      "0.005": [
+        4.0,
+        8.0
+      ],
+      "0.0025": [
+        2.0,
+        4.0
+      ]
+    },
+    "minimum_timeconst_ge_2dt_all_pairs": true,
+    "run_all18_before_selection": true,
+    "no_future_case_metrics_read_by_protocol_author": true
+  },
+  "selection": {
+    "authority": "Independent saved-only CPU screening assessment, not just a producer boolean",
+    "preconditions": "All18 original rows present/valid; no filtered/partial/unsupported cases; independent input/geometry/source arithmetic audit valid.",
+    "eligible_timeconst_rule": "For this exact tau, all six CPU runs pass G1-G6 and all three corresponding coarse/fine pairs pass unchanged G7. Finite sampled geometry limits must also pass. Unknown evidence makes tau ineligible.",
+    "chosen_rule": "selected_timeconst_s=max(eligible_timeconst_s). This is the softest passing authored positive time constant; do not optimize error, speed, force waveform or a preferred trajectory.",
+    "none_rule": "If no tau qualifies, selected_timeconst_s=null; do not run confirmation or Warp. Preserve all18 rows and failures; any next contact/grid change needs a new preregistration.",
+    "no_fallback_rule": "If the selected tau later fails confirmation/parity, report the failure. Do not fall back to a smaller tau within v2.",
+    "no_claim": "Engineering contact/solver configuration selection, not material/timeconstant identification or evidence that nominal mass/friction is correct."
+  },
+  "confirmation": {
+    "CPU_backend": "CPU_MuJoCo",
+    "Warp_backend": "MuJoCo_Warp",
+    "cartesian_grid": {
+      "mass_kg": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "sliding_friction": [
+        0.3,
+        0.6,
+        0.9
+      ]
+    },
+    "timeconst_source": "selection_receipt.selected_timeconst_s only",
+    "timesteps_s": [
+      0.00125,
+      0.000625
+    ],
+    "test_names": [
+      "drop",
+      "table_settling",
+      "force_push_release"
+    ],
+    "case_order": "nominal(.2,.6) first; remaining(mass,mu)lexicographic; dt and test orders as listed",
+    "CPU_case_count": 54,
+    "Warp_case_count": 54,
+    "integration_steps_per_backend": 194400,
+    "state_rows_including_initial_per_backend": 194454,
+    "fresh_CPU_cases_required": true,
+    "screening_nominal_six_must_not_be_relabelled_confirmation": true,
+    "all_cases_preserved": true,
+    "not_independent_scientific_confirmation": true,
+    "scope": "Repeat/parameter-range engineering confirmation in the same model family and synthetic tasks. No participant/trajectory sample count, CI or generalization claim."
+  },
+  "geometry": {
+    "thresholds_m": {
+      "maximum_scanned_vertex_outside_box": 0.0005,
+      "sampled_box_to_scan_p95": 0.002,
+      "sampled_box_to_scan_max": 0.004
+    },
+    "source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage2_convex\\completed_v2\\report.json",
+      "bytes": 18069,
+      "sha256": "8e966fb86aea71696959f0476df394b707f12f8abda2054e600ec378b3f3c283"
+    },
+    "finite_sampling_passes": 3,
+    "finite_sampling_total": 3,
+    "metrics_m": {
+      "maximum_scanned_vertex_outside_collision": 0.0,
+      "sampled_collision_to_scan_p95": 0.0009065834947378722,
+      "sampled_collision_to_scan_max": 0.0018527565192896828
+    },
+    "scope": "Finite deterministic hull sampling, nonuniform and different from box-grid sampling; no continuous Hausdorff/physical-contact truth claim. Original scan defects preserved. Geometry pass is not dynamics pass."
+  },
+  "engineering_gates": {
+    "G1_identity_and_coverage": "Screening requires all18 fresh CPU cases. Confirmation requires all54 fresh CPU cases and all54 matched Warp cases using the one preselected time constant, complete pins, initial-state/force schedules and supported solver-option joins. Keep incomplete or unsupported runs explicitly; no case filtering.",
+    "G2_finite_and_solver": "Finite state, energy, input and exported qacc values; nonzero quaternion norms, nonnegative kinetic energy within roundoff. CPU additionally has zero native instability/capacity/truncation warning counters/history. Warp additionally requires all9 supported sticky overflow bits false, capacities valid and no supported instability/reset/truncation diagnostic in complete process logs/Python warning records. A native CPU-style Warp warning array is NOT_AVAILABLE, not invented or claimed independently observed. Preserve per-backend diagnostic coverage.",
+    "G3_penetration": {
+      "max_observed_candidate_penetration_all_times_m": 0.002,
+      "max_observed_candidate_penetration_rest_window_m": 0.0005
+    },
+    "G4_rest_motion": {
+      "RMS_COM_speed_m_s": 0.01,
+      "max_COM_speed_m_s": 0.02,
+      "RMS_angular_speed_rad_s": 0.1,
+      "max_angular_speed_rad_s": 0.2
+    },
+    "G5_energy": {
+      "passive_window_positive_energy_gain_limit": "max(0.0005 J, 0.10*max(abs(E_window_start),0.005 J))",
+      "windows": "drop/table_settling [0,3]; push [0,1] and [1.2,3] separately",
+      "rule": "max_t(E(t)-E(window_start)) <= limit for each passive window. During push report E(t)-E(start)-applied_work(t); no conservation equality is imposed across unrecorded contact energy. Failure is an engineering result, not evidence identifying mass/friction."
+    },
+    "G6_contacts_and_input": "Each case has generated phone-plane contact during the rest window; push input active tick count and summed impulse match the schedule within floating roundoff. No required displacement, exact ncon or exact contact-force waveform.",
+    "G7_timestep_pair": {
+      "final_COM_position_difference_m": 0.002,
+      "final_orientation_difference_deg": 2.0,
+      "final_COM_velocity_vector_difference_m_s": 0.02,
+      "final_angular_velocity_vector_difference_rad_s": 0.2,
+      "shared_tick_COM_trajectory_RMS_difference_m": 0.003,
+      "first_contact_time_difference_s": 0.005,
+      "rule": "Each backend separately compares both dt for every identical mass/friction/test; preserve signed/component differences and all failed cases."
+    },
+    "G8_CPU_Warp_parity": {
+      "final_COM_position_difference_m": 0.002,
+      "final_orientation_difference_deg": 2.0,
+      "final_COM_velocity_vector_difference_m_s": 0.02,
+      "final_angular_velocity_vector_difference_rad_s": 0.2,
+      "same_tick_COM_trajectory_RMS_difference_m": 0.003,
+      "first_contact_time_difference_s": 0.005,
+      "rule": "Compare all 54 matching cases at the same dt using complete trajectories and native contact/energy summaries. This is bounded software/model parity, not bit identity or a native-contact Jacobian certificate."
+    }
+  },
+  "unchanged_threshold_policy": "All numerical G3-G8 bounds, energy windows/equations, rest window and test inputs are identical to protocol8981. G1 stage counts change and G2 diagnostic availability is explicit; no numerical/physical acceptance bound is relaxed.",
+  "diagnostic_coverage": {
+    "CPU": [
+      "finite raw state/energy/input/qacc",
+      "native warning table and change history",
+      "contact/capacity and process logs"
+    ],
+    "Warp": [
+      "finite raw state/energy/input/qacc",
+      "all9 sticky overflow bits sampled every tick",
+      "solver_niter,nacon,ncollision,nefc and capacity semantics",
+      "complete retained process stdout/stderr",
+      "Python warning records and source-defined supported instability/reset/truncation diagnostics"
+    ],
+    "Warp_native_CPU_style_warning_table": "NOT_AVAILABLE_BY_PINNED_SDK; do not synthesize zeros",
+    "G2_pass_meaning": "Passed all actually supported predeclared diagnostics for that backend; not equal native-warning semantics or a complete hidden-state certificate.",
+    "overflow_or_nonfinite_action": "Preserve raw partial state and offending flags, fail that case and enrollment; never drop/cap a row and continue as qualified.",
+    "phase_rule": "Save states by exact tick. Label native contact geometry/force phases honestly. CPU explicit POST forwards and Warp native PRE contacts/terminal forward can differ in observation work; never treat POST native forces under the previous interval input as solver-PRE impulses or claim force-waveform parity."
+  },
+  "execution_binding_before_each_phase": {
+    "required_pins": [
+      "this_protocol",
+      "source_review",
+      "runner_sources",
+      "asset_and_hull_visual_files",
+      "geometry_report",
+      "backend_package_version_sources",
+      "stage_specific_execution_manifest"
+    ],
+    "preintegration_runtime_validation": [
+      "compiled mass/COM/inertia and exact hull support placement",
+      "contact condim/cone/effective sliding/solref/solimp/margin/gap",
+      "CPU and actual GPU tolerance/ls_tolerance/dtype",
+      "refsafe actual enabled bits and effective tau/dt ratio",
+      "all capacities and supported diagnostic availability",
+      "zero reset force/velocity and no pose teacher forcing"
+    ],
+    "future_stage_joins": "CPU confirmation and Warp both bind the exact independent selection receipt SHA and selected tau; Warp additionally binds CPU confirmation saved assessment/54trajectory pins.",
+    "samefile_and_source_rules": "Validate resolved same-file identity plus exact bytes/SHA; archive current source before execution. Keep all old artifacts and failures unchanged. No mutable progress field is an immutable result pin.",
+    "no_runtime_retuning": "No changes to collision shape, material priors, damping, solimp, tolerances, capacities affecting truncation, contact count semantics, tests or gates after results. Unsupported/failed execution is preserved, not silently rerun."
+  },
+  "output_ABI": {
+    "case_id_template": "{test}_mass{mass:g}_mu{mu:g}_tau{timeconst:g}_dt{dt:g}",
+    "case_file_template": "{case_id}.npz; numeric identity fields remain authoritative, never infer identity only from filename",
+    "required_case_identity": [
+      "case",
+      "test",
+      "mass_kg",
+      "sliding_friction",
+      "timeconst_s",
+      "dt_s",
+      "backend",
+      "trajectory_pin",
+      "metrics",
+      "checks",
+      "completed_steps",
+      "diagnostic_coverage"
+    ],
+    "required_trace_evidence": "All0..N original qpos/qvel plus worldCOM/v/omega, times/ticks/effective dt, T+mgz and independent native energy, scheduled external force/work, per-contact source indices/distances/positions/geoms and native forces when exported, phase labels, capacity/overflow/warning observations. Native force frame availability must be explicit. Preserve empty candidate semantics.",
+    "screening_result_schema": "phone_convex_contact_CPU_screening:2",
+    "selection_receipt_schema": "phone_convex_contact_selection:2",
+    "selection_receipt_required": [
+      "protocol_pin",
+      "screening_result_pin",
+      "trajectory_pins",
+      "audit_integrity_qualified",
+      "selection_complete",
+      "eligible_timeconst_s",
+      "selected_timeconst_s",
+      "per_timeconst_gate_results"
+    ],
+    "trajectory_pins": "Map all18 exact case IDs to original raw trajectory pins; no subset or aliases to different cases.",
+    "per_timeconst_gate_results": "Three records in candidate order; each has timeconst_s, six case IDs with G1-G6 statuses, three timestep pair IDs/G7 statuses, eligible bool and rejection reasons.",
+    "selected_receipt_validation": "selection_complete=true and audit_integrity_qualified=true, all18pins valid, selected=max(eligible) ornull ifempty. A null selection cannot authorize a downstream --run.",
+    "CPU_confirmation_result_schema": "phone_convex_contact_CPU_confirmation:2",
+    "Warp_confirmation_result_schema": "phone_convex_contact_Warp_confirmation:2",
+    "assessment_preserves": [
+      "all cases and physical gate failures",
+      "separate integrity vs engineering qualification",
+      "per-case G1-G6,all timestep G7 pairs,all CPU/Warp G8 pairs",
+      "not_run vs fail vs unknown diagnostic support",
+      "geometry,CPU,Warp,parity qualification separately"
+    ],
+    "always_false": [
+      "real_parameter_calibrated",
+      "ego_retargeting_qualified",
+      "hand_task_qualified",
+      "human_force_truth_qualified"
+    ]
+  },
+  "official_source_review": {
+    "reviewed_UTC": "2026-11-06T18:50:23.690986+00:00",
+    "modeling_URL": "https://mujoco.readthedocs.io/en/stable/modeling.html#solver-parameters",
+    "XML_refsafe_URL": "https://mujoco.readthedocs.io/en/stable/XMLreference.html#option-flag-refsafe",
+    "findings": [
+      "Positive solref means(timeconst,dampratio); larger timeconst is softer and dampratio1 is critically damped in the documented normal-constraint model.",
+      "Official guidance is timeconst>=2*timestep. With refsafe enabled the standard safety rule uses max(solref[0],2*timestep) for active constraints; it is not a guarantee of stability or low penetration.",
+      "Smallest planned tau=.0025s equals2*.00125s. All other requested combinations exceed that bound. Save actual dtype-rounded values and backend support instead of assuming no clamp.",
+      "This benchmark uses implicitfast and positive solref only. It does not invoke the newer discrete-integrator-specific behavior or turn source documentation into runtime observations."
+    ]
+  },
+  "scientific_limits": [
+    "No new real measurements or parameter identification. Uniformbox inertial model and friction grid remain assumptions.",
+    "Lower penetration under a selected solver/contact configuration is not validation of true phone material, human contact forces, hand reach, fixed-wrist feasibility, old policy, cup geometry or ego retargeting.",
+    "Changing hull, solver tolerance and time steps together prevents attributing any difference solely to contact timeconstant or geometry.",
+    "No geometry, MuJoCo, Warp, model, NN or training operation was performed by this protocol author."
+  ]
+}

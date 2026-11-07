@@ -1,0 +1,76 @@
+{
+  "schema": "observation_geometry_native_batch:1",
+  "status": "FROZEN_CPU_RECIPE_NOT_TRAINING_OR_PHYSICAL_AUTHORITY",
+  "source_pins": {
+    "model": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\rotating_reference_warp_a0\\model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "legacy_kinematics": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    },
+    "root_ABI_exporter": {
+      "path": "D:\\workspace\\supermimic-shared-reference-study\\src\\native_reference_abi.py",
+      "sha256": "8cefd4f1e4ec6939b8201c26670a691c913ab0b5e9e9f87347904e4889fd6e2d"
+    },
+    "native_names": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\hand2_constants.py",
+      "sha256": "2a1a37a0c97f3bcab631006ac6e0dc47a1a63a92c7717ac4c6c712314ba35986"
+    },
+    "native_reader": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\commands.py",
+      "sha256": "e1adb7c183aa28dde49f6dc6e7795ed450567e6c54347bd7f1e0543922fcbcf0"
+    },
+    "G1_reader": {
+      "path": "D:\\workspace\\supermimic-shared-reference-study\\src\\shared_reference\\reader.py",
+      "sha256": "8b601a98ac00884625fc55898238e74d5332ed7f165954359e3e6872e1e191bf"
+    },
+    "audit_catalog": {
+      "path": "D:\\workspace\\supermimic-shared-reference-study\\catalogs\\audit_all10.json",
+      "sha256": "ed6dfebd418150ef0296456bc7e0ebd45a394190325ad7d61d05db06eee0bb4c"
+    },
+    "G1_manifest": {
+      "path": "D:\\workspace\\supermimic-shared-reference-study\\outputs\\g1_reader_v1\\manifest.json",
+      "sha256": "58e13461dd73fb2d3b07d42807687651a60cfcf17bf6b978b9cbc0846bb9e618"
+    },
+    "batch_source": {
+      "path": "D:\\workspace\\supermimic-shared-reference-study\\scripts\\build_geometry_native_batch_cpu.py",
+      "sha256": "7c846a9c7b8585b1a2a8bc609eae33a93e9b189d64bc9453054067c6c06071cf"
+    },
+    "G1_package": {
+      "path": "D:\\workspace\\supermimic-shared-reference-study\\src\\shared_reference\\__init__.py",
+      "sha256": "ebeefc1eddf24e4d0286ff9d4c71598e22a1968b868497dfc3f292e677ef9343"
+    },
+    "native_recipe": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\recipe.py",
+      "sha256": "48eb8696a165b12cc90a8012704e46b4ebd65c67e1870363962254f30519851d"
+    },
+    "native_clip_store": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\clip_store.py",
+      "sha256": "869a2c0cbc748db240c8262fc9b34066a09a9da71b271b458250880edf269a6b"
+    }
+  },
+  "source_frame_range_half_open": [
+    0,
+    151
+  ],
+  "catalog_use": "geometry_preparation",
+  "clips": 10,
+  "least_squares": {
+    "temporal_weight": 0.03,
+    "nominal_weight": 0.001,
+    "max_nfev": 80,
+    "ftol": 1e-08,
+    "xtol": 1e-08,
+    "gtol": 1e-08,
+    "initial_each_clip": "robotnominal"
+  },
+  "soft_total_CPU_wall_seconds": 300,
+  "no_quality_selection_or_sourceqfallback": true,
+  "unknown_confidence_preserved": true,
+  "all10_including_holdout_scope": "Geometry auditonly, no learnednormalizer/modelstatistics update. Futuretraincatalog still excludes009/010.",
+  "training_authorized": false,
+  "physical_reference_qualified": false,
+  "GPU_authorized": false
+}

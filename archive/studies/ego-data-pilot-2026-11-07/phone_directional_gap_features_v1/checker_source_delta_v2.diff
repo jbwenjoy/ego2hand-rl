@@ -1,0 +1,38 @@
+--- check_directional_gap_v1.py
++++ check_directional_gap_v2.py
+@@ -61,9 +61,10 @@
+         raw=provider.provider.geometry_arrays[pb['vertices_key']].numpy().astype(np.float64)
+         phone_body=raw@np.array(meta['geom_R'][71]).T+np.array(meta['geom_pos'][71])
+         close(phone_body,z['phone_body_vertices'])
+-        for gid in provider.provider.pair_geom_ids:
++        for gid in [15,28,41]:
+             b=provider.provider.geometry_by_id[gid]
+-            if b['kind']=='mesh':close(provider.provider.geometry_arrays[b['vertices_key']].numpy(),z[f'geom{gid}_vertices'])
++            assert b['kind']=='mesh' and f'geom{gid}_vertices' in z.files
++            close(provider.provider.geometry_arrays[b['vertices_key']].numpy(),z[f'geom{gid}_vertices'])
+     for j,key in enumerate(['state_exact','state_source1mm']):
+         c=read(p['inputs'][key]['path']);assert c['geometry']['passed'] is True and c['compression_target_pass'] is True
+         x=codec.actual_state(c['qpos27_F64'],c['qvel26_F64'],ipos);arrays[key+'_state58_F64']=x
+@@ -100,18 +101,19 @@
+     checks={k:True for k in ['four_closed_form_support_fixtures','compiled_geom_once_and_BODY_COM_frame','all22_pairs_two_named_saved_states_kept','F64_directional_values_not_above_saved_exact_with_numeric_allowance','FP32_diagnostic_scope_and_separate_masks','pure_tensor_descriptor_AD_and_FD_finite','six_Torch_FK_no_native_NN_physics','Torch_rng_unchanged_CPU_only']}
+     report=dict(schema='phone_directional_gap_bounded_tensor_result:1',status='PASS_BOUNDED_DIRECTIONAL_DESCRIPTORS_NOT_EXACT_GAP_OR_CONTACT_TRUTH',protocol=pin(protocol),catalog=p['inputs']['catalog'],sources=p['sources'],inputs=p['inputs'],checks=checks,passed=len(checks),total=len(checks),direction_count=cat['direction_count'],analytic_fixtures=analytic,descriptor_derivative=derivative,
+         counts=dict(provider.counts,analytic_fixture_cases=4,analytic_support_evaluations=support_calls,pure_geometry_AD_calls=2,new_native_model_loads=0,new_native_FK=0,new_native_forward=0,new_physics_steps=0,new_NN_calls=0,training_updates=0,GPU_calls=0),
++        compiled_reference_crosscheck=dict(phone_BODY_vertices=True,raw_mesh_geom_ids=[15,28,41],other_meshes='Source-bound to provider compiled export and prior native FK parity; not independently compared with compression raw export'),
+         numerical_comparison_scope=p['reference_comparison'],exact_gap_qualified=False,formal_floating_certificate=False,full_H_zero_contact_certificate=False,
+         outputs={f.name:pin(f) for f in O.iterdir()},scope='Current ideal compiled convex supports only. Saved exact bounds are source-backed comparison evidence; no fresh exact query. Finite directional descriptor can be loose/more negative, maximizing plane is not unique closest/contact normal. No causal/Markov/force/dynamics certificate.')
+     write(O/'report.json',report);return pin(O/'report.json')
+ 
+ def main():
+-    ap=argparse.ArgumentParser();ap.add_argument('--protocol',type=Path,default=H/'protocol_v1.json');ap.add_argument('--run',action='store_true');a=ap.parse_args()
++    ap=argparse.ArgumentParser();ap.add_argument('--protocol',type=Path,default=H/'protocol_v2.json');ap.add_argument('--run',action='store_true');a=ap.parse_args()
+     p=read(a.protocol)
+     if not a.run:
+         for item in [*p['sources'].values(),*p['inputs'].values()]:checked(item)
+         print(json.dumps(dict(status='METADATA_ONLY_NO_TENSOR_FK',pairs=22,states=2,protocol=pin(a.protocol))));return
+-    assert not (H/'failure_v1.json').exists() and not Path(p['output']).exists(),'Fresh bounded once check'
++    assert not (H/'failure_v2.json').exists() and not Path(p['output']).exists(),'Fresh bounded once check'
+     try:print(json.dumps(run(a.protocol)))
+     except BaseException as e:
+-        write(H/'failure_v1.json',dict(error=repr(e),source=pin(Path(__file__)),automatic_retry=False,new_native_calls=0));raise
++        write(H/'failure_v2.json',dict(error=repr(e),source=pin(Path(__file__)),automatic_retry=False,new_native_calls=0));raise
+ if __name__=='__main__':main()

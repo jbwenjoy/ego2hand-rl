@@ -1,0 +1,15 @@
+--- runtime.py5736
++++ runtime_v2.py
+@@ -221,8 +221,10 @@
+         original_env_init(self,*a,**kw);self._rough_runtime_episode_generation=torch.zeros(self.num_envs,device=self.device,dtype=torch.long);self._rough_runtime_descriptor=copy.deepcopy(descriptor);self._rough_runtime_last_reset=None
+     def reset(self,*,seed=None,env_ids=None,options=None):
+         ids=_ids(self,env_ids);_,info=original_reset(self,seed=seed,env_ids=ids,options=options);_restore_initial_state(self,ids,bundle)
+-        # No second history advance; selected rows receive the corrected init.
+-        self.obs_buf=self.observation_manager.compute(update_history=False,env_ids=ids)
++        # Native reset already initialized/reset the observation timelines once.
++        # True+ids backfills only selected rows and replaces the stale cache;
++        # DelayBuffer.peek does not advance/resample lags. Do not reset again.
++        self.obs_buf=self.observation_manager.compute(update_history=True,env_ids=ids)
+         return self.obs_buf,info
+     def termination(self,x,memory):
+         native=original_termination(self,x,memory)

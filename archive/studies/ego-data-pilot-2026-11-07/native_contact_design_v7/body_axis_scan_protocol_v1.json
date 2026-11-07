@@ -1,0 +1,87 @@
+{
+  "schema": "fixed_wrist_bodyZ_contact_relocation_protocol:7",
+  "CPU_run_authorized": true,
+  "training_GPU_or_steps_authorized": false,
+  "bodyZ_offsets_m": [
+    0.0,
+    0.0245,
+    0.049
+  ],
+  "phone_rotation_and_robot_q20": "Original v6seed0rank0 unchanged",
+  "hypothesis": "Current native pad contacts are near phone-body z49mm; move phone along +bodyZ by0/half/full49mm to change COM lever while reporting human material-location error. Finite geometry hypotheses, no faithful ego success claim.",
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\scan_body_axis_reference_v7.py",
+      "bytes": 9478,
+      "sha256": "81caf8e93b4e1ec70bf58b7e42cc8343fc0624a56e385ae03cf8c097e88bb22b"
+    },
+    "native_wrapper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\evaluator_contact_design_v7.py",
+      "bytes": 8321,
+      "sha256": "26a960d87e4be004afcb74e2616b39ae52dd128983eea2ee6dce25f4692860de"
+    },
+    "LP": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\native_wrench_lp_v7.py",
+      "bytes": 6836,
+      "sha256": "e422b673d4644c15f1d13af2a083bdac2ff97c2fd653ce28fb631f887a6b7012"
+    }
+  },
+  "inputs": {
+    "native_J_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\contract_v1\\report.json",
+      "bytes": 9165,
+      "sha256": "86f9c6ff1662600d0407fb222e47130cda288fea94f25e5d1eee7bdcefce0d7b"
+    },
+    "analytic_LP_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\analytic_contract_v1\\report.json",
+      "bytes": 55298,
+      "sha256": "ff39dcd614c7e17ec5a3bdece0fc6497be15a0b2e4076acc95370bfd507a199d"
+    },
+    "native_search_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\report.json",
+      "bytes": 2336903,
+      "sha256": "ff9d0cdeabd766ba29e1d6da6d049f42aa4dbd92ae7c1bd87301be0a3518438f"
+    },
+    "initial_state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\seed0_rank0_state.npz",
+      "bytes": 7877,
+      "sha256": "5e532341a315bac73280cec3eb18798695fac19fd284e6b046542987dba451ac"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "fixed_human_material_targets": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\fixed_anchors_and_targets.json",
+      "bytes": 38112,
+      "sha256": "cac45ba762879007da2043c5c588109fed2c34cc5502e963ead8b3e83eeaebcc"
+    }
+  },
+  "output_path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\body_axis_scan_v1",
+  "budget": {
+    "initial_forward_max": 3,
+    "additional_inverse_control_forward_max": 3,
+    "independent_final_geometries_max": 3,
+    "LP_max": 3,
+    "steps_training_GPU": 0
+  },
+  "geometry": {
+    "phone_pairs": 22,
+    "self_pairs": 189,
+    "pad_gap_window_m": [
+      -0.0001,
+      0.0002
+    ],
+    "nonpad_self_buffer_m": 0.0,
+    "unknown_fails": true
+  },
+  "ideal_force_moment_gates": {
+    "force_infinity_N": 1e-08,
+    "moment_infinity_Nm": 0.0001,
+    "normal_cap_per_finger_N": 3.0,
+    "true_unsaturated_inverse_PD_and_force_bounds": true
+  },
+  "automatic_retry": false,
+  "holding_or_policy_or_ego_qualification": false
+}

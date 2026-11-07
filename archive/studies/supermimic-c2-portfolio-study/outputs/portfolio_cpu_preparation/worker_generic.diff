@@ -1,0 +1,88 @@
+--- D:\workspace\supermimic-target-inset-study\scripts\evaluate_target_inset_capacity_v2.py
++++ D:\workspace\supermimic-c2-portfolio-study\scripts\evaluate_c2_portfolio.py
+@@ -1,4 +1,4 @@
+-"""C2 capacity-audit v2: original inset/logger plus one post-physics flag read.
++"""Common C2 controller over frozen portfolio checkpoints, no new training.
+ 
+ No training/WM modification. The original t0 initialization is completed before
+ the first actual action interval enables the filter. Default is CPU preflight.
+@@ -47,22 +47,38 @@
+     return audit
+ 
+ 
++def model_for_job(plan,job):
++    matches=[m for m in plan["models"] if m["model_id"]==job["model_id"]]
++    require(len(matches)==1,"Unknown/duplicate model identity")
++    model=matches[0]
++    require(job["trained_method"]==model["method"] and job["training_seed"]==model["training_seed"],"Job/model identity mismatch")
++    return model
++
++
+ def validate(plan_path):
+     p = read(plan_path)
+     require(p["method"] == "C2_TARGET_INSET" and p["training_updates"] == 0, "Wrong condition")
+-    require(p["training_seed"] == 1 and p["evaluation_seed"] == 0, "Frozen seeds changed")
+-    require([j["margin_mrad"] for j in p["jobs"]] == [0,5,20,20,0,5,5,20,0], "Latin order changed")
+-    require(len(p["jobs"]) == len({j["output_dir"] for j in p["jobs"]}) == 9, "Nine distinct jobs required")
+-    require(len({j["job_id"] for j in p["jobs"]}) == 9,"Nine distinct job identities required")
+-    require(p["per_child_cap_seconds"] == 45 and p["whole_queue_budget_seconds"] == 240, "Budget changed")
++    require(p["evaluation_seed"]==0 and p["training_seed_N_per_method"]==3,"Frozen evaluation/seed hierarchy changed")
++    require(p["margin_rad"]==.005 and all(j["margin_rad"]==.005 and j["margin_mrad"]==5 for j in p["jobs"]),"Common margin changed")
++    require(len(p["models"])==9 and len(p["jobs"])==len({j["output_dir"] for j in p["jobs"]})==27,"Nine models/27 distinct jobs required")
++    require(len({j["job_id"] for j in p["jobs"]})==27,"Distinct job identities required")
++    require(p["per_child_cap_seconds"]==45 and p["whole_queue_budget_seconds"]==600,"Budget changed")
+     require(p["automatic_retry"] is False and p["task_quality_stops_queue"] is False, "No retry/quality stopping")
+     require(p["m0"] is None and p["a_brake"] is None and not p["C1_enabled"], "C1 remains disabled")
+     for name,pin in p["source_pins"].items():
+         require(sha(pin["path"]) == pin["sha256"], "Source changed: " + name)
+-    for name in ("checkpoint", "reference", "reference_metadata"):
++    proposal=read(p["source_pins"]["portfolio_proposal"]["path"])
++    require(p["models"]==proposal["models"] and p["blocks"]==proposal["blocks"],"Frozen proposal models/blocks changed")
++    require(len(p["jobs"])==len(proposal["jobs"]),"Proposal job count changed")
++    for model in p["models"]:
++        require(sha(model["checkpoint"])==model["checkpoint_sha256"],"Frozen checkpoint changed")
++        require(sum(j["model_id"]==model["model_id"] for j in p["jobs"])==3,"Three fresh processes per checkpoint required")
++    for name in ("reference", "reference_metadata", "contact_targets", "contact_target_manifest"):
+         require(sha(p[name]["path"]) == p[name]["sha256"], "Input changed: " + name)
+-    for job in p["jobs"]:
+-        expected=["--reference",p["reference"]["path"],"--checkpoint",p["checkpoint"]["path"],
++    for job,original in zip(p["jobs"],proposal["jobs"]):
++        require(all(job[k]==v for k,v in original.items()),"Original proposal job/order changed")
++        model=model_for_job(p,job)
++        expected=["--reference",p["reference"]["path"],"--checkpoint",model["checkpoint"],
+                   "--seed","0","--device","cuda:0","--output",job["output_dir"]]
+         require(job["original_evaluator_args"]==expected,"Original evaluator arguments changed")
+     return p
+@@ -75,13 +91,15 @@
+ 
+ 
+ def run(plan_path, plan, job):
++    model=model_for_job(plan,job)
+     started = time.perf_counter()
+     output, metadata_dir = Path(job["output_dir"]), Path(job["wrapper_metadata_dir"])
+     require(not output.exists() and not metadata_dir.exists(), "No overwrite or retry")
+     metadata_dir.mkdir(parents=True)
+     runtime = {"status":"running","pid":os.getpid(),"parent_pid":os.getppid(),
+                "started_utc":datetime.now(timezone.utc).isoformat(),"plan_sha256":sha(plan_path),
+-               "job_id":job["job_id"],"margin_rad":job["margin_rad"]}
++               "job_id":job["job_id"],"margin_rad":job["margin_rad"],"model_id":model["model_id"],
++               "trained_method":model["method"],"training_seed":model["training_seed"],"checkpoint_sha256":model["checkpoint_sha256"]}
+     def runtime_write():
+         temporary=metadata_dir/"runtime.json.tmp"
+         temporary.write_text(json.dumps(runtime,indent=2)+"\n",encoding="utf-8")
+@@ -182,11 +200,13 @@
+         capacity.update(schema="C2_sticky_capacity_audit:2",job_id=job["job_id"],plan_sha256=sha(plan_path),
+             worker_sha256=sha(__file__),resets_during_rollout=rollout_meta["resets_during_rollout"],
+             control_npz_sha256=sha(output/"control_targets_50hz.npz"),rollout_npz_sha256=sha(output/"rollout.npz"),
+-            checkpoint_sha256=plan["checkpoint"]["sha256"],reference_sha256=plan["reference"]["sha256"])
++            checkpoint_sha256=model["checkpoint_sha256"],reference_sha256=plan["reference"]["sha256"],
++            model_id=model["model_id"],trained_method=model["method"],training_seed=model["training_seed"])
+         (output/"capacity_audit.json").write_text(json.dumps(capacity,indent=2)+"\n",encoding="utf-8")
+         runtime["capacity_audit"]=capacity.copy()
+         condition = {"schema":"C2_target_inset_zero_shot:1","method":"C2_TARGET_INSET",**job,
+-                     "training_seed":1,"evaluation_seed":0,"plan_sha256":sha(plan_path),
++                     "training_seed":model["training_seed"],"trained_method":model["method"],"model_id":model["model_id"],
++                     "checkpoint_sha256":model["checkpoint_sha256"],"evaluation_seed":0,"plan_sha256":sha(plan_path),
+                      "source_hashes":{k:v["sha256"] for k,v in plan["source_pins"].items()},
+                      "control_npz_sha256":sha(output/"control_targets_50hz.npz"),
+                      "capacity_audit_sha256":sha(output/"capacity_audit.json"),

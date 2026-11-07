@@ -1,0 +1,358 @@
+{
+  "schema": "full151105_saved_contact_regime608_preregistration:1",
+  "status": "FROZEN_SOURCE_METADATA_ONLY_ROOT_EXPLICIT_RUN_REQUIRED",
+  "created_UTC": "2026-11-05T18:34:55.443371+00:00",
+  "execution_authorized": false,
+  "GPU_run_authorized": false,
+  "training_authorized": false,
+  "role": "all608_saved_branch_PRE_contact_regime",
+  "cpu_threads": 1,
+  "CLI": {
+    "module": "src/full151_gradient/contact_regime608105_v1.py",
+    "entry": "scripts/diagnose_full151_contact_regime608_saved_cpu_v1.py",
+    "checker": "scripts/check_full151_contact_regime608_saved_cpu_v1.py",
+    "API": [
+      "declaration()",
+      "metadata_preflight(protocol_path, output=None)",
+      "run_analysis(protocol_path, output)"
+    ],
+    "arguments": "--protocol PATH [--output FRESH] [--run]",
+    "default": "JSON/hash/source metadata only; no NPZ decode or contact-regime computation; no output writes",
+    "run_authority": "Only an explicit Root invocation with --run and a fresh output authorizes one saved-data computation. This source-only protocol is not a self-authorization or a run config.",
+    "output_prefix": "full151105_saved_contact_regime608_CPU_"
+  },
+  "inputs": {
+    "research_plan_v0_5": {
+      "path": "D:\\workspace\\supermimic-chord-study\\docs\\research-plan-v0.5.md",
+      "sha256": "6726773e343e94f1fc08aff6513bb4d238bbc8ca7763565f29dd87d8d2a57801"
+    },
+    "physical_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-gradient-empirical_gradient05-v2.json",
+      "sha256": "034e81fecb3e49a26136740054bb284d600f379bdb7ae1db2c9a6368228af077"
+    },
+    "physical_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\physical_report.json",
+      "sha256": "dd6e37f2ca88929bf1c8154b55f63a4d3714f5b62bd4a16b8a11a4f03b2f1917"
+    },
+    "physical_samples": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\physical_samples.jsonl",
+      "sha256": "c363f20838c6cec1acdc3541c7d250c7cb5980c3d6719ebb7c245d4e13c9071f"
+    },
+    "branch_index": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\branch_index.json",
+      "sha256": "ae2667c285ca55711035189e5368b4436631c1322346735d9a19a1e179c61aa9"
+    },
+    "snapshot_records": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\snapshot_records.json",
+      "sha256": "114386fd2d049b97c650d9c47e6a02d2509c8c963d5e64b7148ba5d50bbbe1ec"
+    },
+    "physical_saved_independent1762": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_full_serial_saved_review_v1\\report.json",
+      "sha256": "f5fd0703639308706b4f8bf5deee834e6d207486c63fded8920a6a86fd2a62af"
+    },
+    "geometry_catalog": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_solver_phase_penalty_GPU_qualified_CPU_v1\\geometry_ID_mapping.json",
+      "sha256": "98cfd7f725699fcacdf890219937ef4e443ecd97efc2e431f1b7719d7c3b932c"
+    },
+    "dense_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-solver-phase-penalty-qualified-GPU-CPU-v1.json",
+      "sha256": "53d056b2ff082da3ccd0631526bd74ff24c40cd65dd20ef793e18de150e38442"
+    },
+    "dense_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_solver_phase_penalty_GPU_qualified_CPU_v1\\report.json",
+      "sha256": "416d8dfcfe01a910a406ba78cdddc28628717bce5a45a917b69f6af583699bf2"
+    },
+    "dense_output_pins": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_solver_phase_penalty_GPU_qualified_CPU_v1\\output_pins.json",
+      "sha256": "bd681672327e86a32e5ee729a746d3fae4c18506e6c26ff9f09561cd8f745738"
+    },
+    "dense_saved_independent35": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_solver_phase_penalty_GPU_qualified_saved_independent_v1\\report.json",
+      "sha256": "a4008bde96f5b178751ba454886fd6b646e68ff4c577de345383aa94f1f6485a"
+    },
+    "response_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-saved-action-response-CPU-v1.json",
+      "sha256": "f07239456b8fe2c6cc10eb785e63018447742265472fd81ae24da5d8dc592461"
+    },
+    "response_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_action_response_CPU_v1\\report.json",
+      "sha256": "b7e951f25dd0d45228fd26c80a2b5eac9c56b4cb9248a52cad6209a2cf154689"
+    },
+    "response_output_pins": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_action_response_CPU_v1\\output_pins.json",
+      "sha256": "a8547c596439c309daabd056bcd0c70c8b250ebd0ee3f7078443166edc2eeccf"
+    },
+    "response_raw152": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_action_response_CPU_v1\\all152_branch_raw.npz",
+      "sha256": "80a8a89768c95df419f404669e57eeac0a02863777ee85135e1ffcb83e3bc632"
+    },
+    "response_metadata152": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_action_response_CPU_v1\\all152_branch_metadata.json",
+      "sha256": "5d8baa0218a57de29db5ceea0a7534342672f638d919e03f1b2d9f3977d93553"
+    },
+    "response_decomposition": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_action_response_CPU_v1\\decomposition_arrays.npz",
+      "sha256": "d1efeddd23bab195cc10248e2a106228dcf7a968d5ffd85a99073885d397841f"
+    },
+    "response_pairs64": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_action_response_CPU_v1\\all64_pair_records.json",
+      "sha256": "15224476e770bd0c828209284c357dee6d9277b7f200776fa8eb30cafc4724e1"
+    },
+    "response_guard_summary": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_action_response_CPU_v1\\guard_summary.json",
+      "sha256": "9d1235cf48785a3a1a09146581804ac6702f7fe7ef2369e15042587c8cdfdb30"
+    },
+    "response_saved_independent22": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_action_response_saved_independent_v1\\report.json",
+      "sha256": "b70a9b4e63b13401a86a282046f19a71fb2c5019c185a851e91a1ce6b86de481"
+    },
+    "independent_math_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_contact_regime_independent_math_preparation_v1\\READY.json",
+      "sha256": "921ebbf6e934f704e4ccbda1c92ce6c7c547a91907bd92ab31b44647a2f1c100"
+    }
+  },
+  "source_pins": {
+    "physical_producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\serial_probe105_v2.py",
+      "sha256": "a24c89da47f4aad7acfc9d9dfd1f053518cdc878230716bb2c857127ec13e592"
+    },
+    "measured_contacts": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\vendor\\measured_contacts.py",
+      "sha256": "478c3117489bd4a02238f6299a91638e791a751352b772321ce2676b0ec4f96f"
+    },
+    "Warp_contact_type": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\types.py",
+      "sha256": "712e76f495d3dedcb45acc7c248e226f56144b5fef5d9841d5e04d279fa7fd4f"
+    },
+    "Warp_host_readback": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\io.py",
+      "sha256": "6fe550047ed4b82c307741f84a8a4800587469c52e5ce292a3073824f3451fa6"
+    },
+    "Warp_constraint_type_predicate": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mujoco_warp\\_src\\constraint.py",
+      "sha256": "6806edf7cde19ffca9cf8e463c6b1ee2126eba4896085889193edeab188ba68f"
+    },
+    "catalog_producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\penalty_observability105_v3.py",
+      "sha256": "c4892a933860c0415e4a229c181a94f88755e6c529bd27c5f79bdc56be8da47a"
+    },
+    "response_producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\action_response452105_v2.py",
+      "sha256": "17cb3805ab0e4906f0ca73ff6f289b9bdf525aafd22000af0498387cbac84af3"
+    },
+    "dense_saved_independent35_auditor": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\audit_qualified_solver_phase_penalty_saved_cpu_v1.py",
+      "sha256": "da29a67b1d152a7b73e1cac7bf014c7b5b3d12c9cf42569f9f4239e21e28b43d"
+    },
+    "response_saved_independent22_auditor": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\audit_saved_action_response_cpu_v1.py",
+      "sha256": "0a16aaeefea3ab8c7173aeb114c9d387ec93ee7cc0d88b38fc668383a20554fd"
+    },
+    "response_saved_independent22_math": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\saved_action_response_independent_math_v1.py",
+      "sha256": "72ad09cc29c0877104548dcd127fc0cda47e6ed69986bd8649af96d1566d9cc8"
+    },
+    "independent_contact_math": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\contact_regime_saved_independent_math_v1.py",
+      "sha256": "f14405e569323000769290b513e09c742539ca6bda156c6d486505f591ff7e8a"
+    },
+    "independent_contact_checker": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\check_contact_regime_saved_math_cpu_v1.py",
+      "sha256": "226e85426a14fe0d0994eabfe7225e7823c7e66d3ba83dabad5e9d0912a77259"
+    }
+  },
+  "scope": {
+    "question": "Describe every recorded branch solver-PRE generated-contact regime alongside all previously saved finite-control/encoded-state response descriptors; no selection by response, contact, force or prior stability.",
+    "source_lineage_N": 1,
+    "independent_ego_N": 0,
+    "paths": [
+      "A0",
+      "A2"
+    ],
+    "phases": [
+      0,
+      49,
+      99,
+      149
+    ],
+    "snapshots": 8,
+    "branches": 152,
+    "baseline_branches": 24,
+    "direction_branches": 128,
+    "substeps_per_branch": 4,
+    "primary_sample_rows": 608,
+    "response_epsilon_pairs": 64,
+    "parent_physical_lines": 1808,
+    "selection": "Read the original physical_samples JSONL; branch_id is not None is the sole primary sample selection. Retain all 152*4 rows, including zero-contact, numerical-zero-control and encoded-flat rows. No old stable9 or error-based filter.",
+    "no_new_execution": [
+      "model",
+      "weights",
+      "WM/Actor/objective forward",
+      "AD",
+      "state conversion",
+      "MJB",
+      "native FK/collision/contact query",
+      "physics",
+      "GPU",
+      "training"
+    ]
+  },
+  "provenance": {
+    "pin_equality": "SHA256 plus Path.samefile for identity; slash spelling is not an identity test. Never mutate recorded parent pins.",
+    "source_closure": "Consumer current source/checker/CLI and executed focused proof must be bound at run time. Reuse parent source maps, retaining every unique actual file, canonicalized by resolved filesystem identity plus SHA; do not merge distinct physical copies by SHA.",
+    "required_joins": [
+      "physical saved1762 -> same config/producer_report/run_dir/input bundle and original branch/snapshot files",
+      "dense saved35 -> same config/producer_report/run_dir; geometry_catalog must be its immutable output-pinned complete catalog",
+      "response saved22 -> same config/report/run_dir; raw152/metadata152/decomposition/pairs64/guard_summary must be its immutable output-pinned artifacts",
+      "response original physical config/report/branch/snapshot provenance must be the same full05 physical run",
+      "response saved22 source visible58/control guards remain passed; no new repair or selected passing subset"
+    ]
+  },
+  "native_catalog": {
+    "ngeom": 73,
+    "nbody": 31,
+    "enabled_hand_geom_count": 21,
+    "object_geom_count": 3,
+    "hand_rule": "fullmatch robot/(right_palm_collision|right_finger[1-5]_(link[1-4]|tip_sensor)_col) AND (contype OR conaffinity)",
+    "object_rule": "native_body_id == geometry_catalog.native_object_body_id",
+    "identity_spaces": "Use native geom IDs/native body IDs. FK-local body indices, mocap IDs and raw contact type bits are different spaces. native_geom_catalog.type is a geom enum, not ContactType. No new MJB needed.",
+    "primary_categories": {
+      "hand_object": "has_object AND has_enabled_hand",
+      "hand_self": "both ordered geoms are enabled hand (after HO precedence)",
+      "other": "all remaining generated pairs"
+    },
+    "secondary_descriptors": {
+      "object_nonhand": "has_object AND NOT has_enabled_hand; do not rename the unknown nonhand counterpart static environment",
+      "hand_other": "has_enabled_hand AND NOT has_object AND NOT both_hand",
+      "both_object": "both geoms belong to the object; preserve if present"
+    },
+    "all_pairs": "No force/depth/contact-type prefilter, no pair deduplication; preserve original ordered geom pair and original contact index."
+  },
+  "saved_sample_ABI": {
+    "required_fields": [
+      "path",
+      "phase",
+      "mode",
+      "branch_id",
+      "substep",
+      "pre_time",
+      "post_time",
+      "source_frame",
+      "canonical_pre_tick",
+      "canonical_post_tick",
+      "ctrl",
+      "nacon",
+      "nefc",
+      "contacts",
+      "raw_wp_contact",
+      "raw_efc_force",
+      "raw_efc_type",
+      "measured_hand_object",
+      "hand_object_force_on_object_w_N",
+      "hand_object_moment_about_COM_w_Nm",
+      "direct_torque_included_once",
+      "object_solver_COM",
+      "object_solver_pose",
+      "phase_contract"
+    ],
+    "identity": "Unique (branch_id,substep), branch_id 0..151 and substep 1..4. Join original branch_index, snapshot_records, response_metadata152 by exact branch ID/path/k/type; physical sample phase is k. Preserve raw file line index. Expected baseline=96 PRE rows and direction=512 PRE rows; all8 snapshots each76 PRE rows.",
+    "phase": "Solver quantities and object_solver_COM/pose are the just-completed substep solver PRE integration state, canonical_pre_tick=4*k+substep-1. pre_time/pre_qpos/pre_qvel precede the 5ms integration. post_time/post_qpos/post_qvel are post integration. Do not mix stored contact force/COM with post20ms reward state or convert a new state.",
+    "last_interval": "k149 branch substeps precede terminal obs150. Retain them; no u150/extra decision or bootstrap claim.",
+    "contact_fields": {
+      "contacts[ci]": [
+        "geom[2]",
+        "efc_address (reordered host address)",
+        "dist (m)",
+        "pos[3] (world m)",
+        "frame[3,3] (contact-frame row axes in world)",
+        "force6[6] (original decoded local [N,N,N,Nm,Nm,Nm])"
+      ],
+      "raw_wp_contact": [
+        "geom[nacon,2]",
+        "type[nacon]",
+        "worldid[nacon]",
+        "efc_address[nacon,slot_width]"
+      ],
+      "raw_efc": [
+        "raw_efc_force[nefc]",
+        "raw_efc_type[nefc]"
+      ]
+    },
+    "parser_guards": "nacon/nefc are nonnegative strict integers; contacts/raw arrays have matching counts and original geom order; geom IDs belong to complete catalog; numeric fields finite and exact required shapes. Empty JSON [] may become an empty array only when nacon==0. No truncated/unknown row may be silently represented as empty. Raw slot width is saved, not inferred as a fixed contact dimension."
+  },
+  "geometry_statistics": {
+    "primary": "Compute only from the original saved generated contact dist. Per all/HO/HH/other/object_nonhand/hand_other: count; min_generated_dist=min(dist) or null when absent; observed_candidate_depth=max(0,-dist) over generated rows, or 0 only for a valid empty set. Preserve absent mask.",
+    "clearance": "global_clearance=UNKNOWN on every sample/category, including empty and positive-dist candidates. Not minimum separation over ungenerated pairs.",
+    "threshold": "The inherited 3mm descriptor, if reported, is strict observed_candidate_depth_m>0.003; it does not select rows or confer global geometry/force feasibility.",
+    "source_fields": "Carry original measured_hand_object.penetration_m, penetration_by_category_m and object_environment_contacts as named source evidence. The original penetration_m is all-category, not HO-only."
+  },
+  "force_evidence": {
+    "primary_source": "Retain original decoded contacts[ci].force6; do not call mj_contactForce again, reconstruct pyramid coefficients, infer friction/condim for all contacts, or recompute world force/COM torque.",
+    "type_bits": {
+      "CONSTRAINT": 1,
+      "SENSOR": 2,
+      "constraint_predicate": "raw_type & 1 != 0 (type3 allowed)"
+    },
+    "raw_slot_rule": "Original per-contact integer 1-D slot vector; -1 padding is allowed, all other entries must satisfy 0<=slot<nefc, and at least one nonnegative slot is required for force evidence. No fixed slot count, continuity, or pyramid re-decode assumption.",
+    "secondary_force_eligible": "(raw_type & 1)!=0 AND raw_worldid==0 AND host_efc_address>=0 AND raw_slots have >=1 nonnegative entry AND every nonpadding raw slot is in [0,nefc) AND original force6 is finite.",
+    "secondary_positive_force": "force_eligible AND original force6[0]>1e-6 N (strict). The normal compression component has units N; tangential force components N and local torque components Nm.",
+    "unknowns": "Retain sensor-only, all -1, out-of-range and other force-ineligible generated contacts with independent reason flags. Their decoded zero is not evidence of true zero force. The positive-force subset does not replace primary generated geometry.",
+    "host_vs_raw": "Host efc_address has been reordered by get_data_into. Never use it to index raw_efc_force/type. Keep original raw WP slots/type/worldid and host address separately; no all-contact force re-decode qualification.",
+    "source_helper_active": "Retain original measured_hand_object.active for HO in original HO order; it used only host address>=0 and Fn>1e-6, and is not equivalent to the new raw-slot-qualified secondary descriptor.",
+    "no_new_wrench": "Copy stored hand_object_force_on_object_w_N, hand_object_moment_about_COM_w_Nm, direct_torque_included_once, object_solver_COM/pose unchanged at sample level. Do not sum decoded components into a new world wrench or recompute r cross F/direct torque."
+  },
+  "response_join": {
+    "authority": "All original response raw152/metadata152/decomposition/pairs64, not any author-selected interpretation subset. Join each branch once and each PRE sample to its branch; preserve all128 endpoints and64 pairs.",
+    "raw_arrays": {
+      "predicted_y152_FP32": [
+        8,
+        19,
+        58
+      ],
+      "target_y152_FP32": [
+        8,
+        19,
+        58
+      ],
+      "actual_u152_FP32": [
+        8,
+        19,
+        20
+      ],
+      "original_snapshot_u_FP32": [
+        8,
+        20
+      ]
+    },
+    "branch_order": "snapshot_id*19+offset, offsets0..2 baseline repeats; offsets3..18 preserve original epsilon/j/sign branch order and metadata.",
+    "zero_control": "actual_delta_u20_rad_F64 = plus actual_u_FP32 cast F64 minus minus actual_u_FP32 cast F64. Record coordinate-zero/all20-zero numeric flags, all20 raw bit-equality, and optional absolute-control-zero flag separately. Zero change is not absolute zero action.",
+    "encoded_flat": "Use original FP32 target and prediction endpoints. Record per-feature (plusF64-minusF64)==0 and raw bit-equality independently; p indices40:43 (m), R43:52 raw dimensionless elements. Block all-numeric-zero/all-bit-equal flags never imply physical insensitivity/true derivative or rotate/project R.",
+    "existing_decomposition": "Carry saved centered_model/physical_response_F64, actual coordinate denominator, undefined mask, legacy clipping/d_eff/center_offset/asymmetry as already proven source descriptors; do not recompute EMA/C2 or reinterpret legacy dimensionless d_eff as radians.",
+    "no_selection": "Do not subset contacts, branches, snapshots or endpoints by zero-control, encoded-flat, Fn, regime, old stable9 or observed error. No new stable/accuracy/noise threshold, causal or gradient certificate."
+  },
+  "outputs": {
+    "report_schema": "full151105_saved_contact_regime608_CPU_analysis:1",
+    "success_status": "COMPLETED_ALL608_SAVED_GENERATED_CONTACT_REGIME_NOT_PHYSICAL_CERTIFICATE",
+    "failure_status": "BLOCKED_SAVED_INPUT_CONTACT_OR_RESPONSE_JOIN_NO_REPAIR",
+    "tables": {
+      "sample608": "One record per original branch PRE, including empty; identity/phase/raw counts/categories/source wrench/COM/pose and source measured_hand_object retained. JSON and CSV.",
+      "contact_long": "Every generated contact in original sample/contact-index order, ordered native IDs/names/body IDs/category/flags/dist/depth/pos/frame/original force6/raw type/world/slots/host address/force reasons. JSONL and CSV. Total length data-dependent, no guessed count.",
+      "branch152": "All four PRE rows per original branch with mechanical original branch identity/response descriptors; do not invent a persistent-contact track.",
+      "snapshot8": "All19 branches per exact label, completeness plus separate category descriptions, no outcome-selected subset.",
+      "response_pairs64": "All64 epsilon pairs with original endpoint IDs/actual-delta/numeric and bitwise encoded-flat descriptors; include pointers to all8 paired PRE records. No stable filter."
+    },
+    "provenance": "Protocol snapshot, current consumer/CLI/checker and focused CPU proof/READY pins, canonical unique-source inventory/archive, immutable input/output pins, before/after input/source hash evidence; compact console, full records to files.",
+    "flags": {
+      "physical_gradient_qualified": false,
+      "HO_force_gradient_qualified": false,
+      "whole_hidden_state_qualified": false,
+      "global_clearance_qualified": false,
+      "training_causal_effect_qualified": false
+    }
+  },
+  "failure_policy": "Hash/identity/provenance/shape/finite/count/order/branch-response join failures block the whole analysis, preserve available source/raw/guard/error evidence and do not repair, skip a row or analyze only passing snapshots. A well-formed but force-ineligible contact remains in primary data with explicit reasons; do not silently convert its force to a qualified zero. Fresh output/no overwrite, no retry or fallback.",
+  "pre_execution_scope": {
+    "work_this_protocol_creation": "Source and JSON/hash metadata reads only; no primary contact table/NPZ decode/response computation performed. Independent7 fixture proof is synthetic only.",
+    "focused_future_CPU_contract": "Only new saved parser/bitflag/raw-slot/valid-empty/phase/response-join fixtures; reuse parent1762/35/22 source proofs. No actual whole608 computation or model/native backend during readiness."
+  }
+}

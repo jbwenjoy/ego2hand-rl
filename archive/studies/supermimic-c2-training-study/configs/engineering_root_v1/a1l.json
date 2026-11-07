@@ -1,0 +1,56 @@
+{
+  "schema": "supermimic_chord_train:1",
+  "label": "C2_020 A1L seed0 10iter engineering only; actual actor/critic/H8 path",
+  "method": "A1L",
+  "seed": 0,
+  "dex_root": "D:/workspace/dex-supermimic-research",
+  "output_dir": "outputs/c2_a1l_10iter_seed0_engineering_v1",
+  "reference": {
+    "clips_root": "D:/workspace/dex-supermimic-research/src/dex_supermimic/tasks/pen_spin/data/rawdata/clips",
+    "source_clip_id": "01_single_axis/clip_007",
+    "start_frame": 200,
+    "duration_s": 3.0,
+    "frozen_evaluation_reference": "D:/workspace/supermimic-chord-study/outputs/pilot_rotating_reference_v2/reference.npz"
+  },
+  "initial_grasp_status": "qualified only for 0.3s hold by prespecified native substeps and Warp 5ms checks; original A0 fails subsequent 3s tracking; single-seed pilot",
+  "compile_fallback": false,
+  "max_attempt_seconds": 600,
+  "training": {
+    "num_envs": 128,
+    "max_iterations": 10,
+    "buffer_steps": 1000,
+    "warmup_steps": 64,
+    "wm_only_iters": 2,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "save_interval": 2,
+    "log_interval": 1,
+    "amp": true,
+    "compile": true,
+    "compile_policy": true,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1
+  },
+  "paired_protocol_file": "D:/workspace/supermimic-chord-study/configs/paired-contact-pilot-v2.json",
+  "run_role": "engineering_smoke",
+  "c2_controller": {
+    "kind": "C2_TARGET_INSET",
+    "margin_rad": 0.02,
+    "checkpoint_format_version": 103,
+    "resume": "from_scratch_only"
+  },
+  "c2_protocol_file": "D:\\workspace\\supermimic-c2-training-study\\protocols\\confirmatory_training_draft_v2.json",
+  "c2_protocol_sha256": "1fcb22a159a11db96034f49ce2ec67c9acb8682de4de62d9c117445d3801884e"
+}

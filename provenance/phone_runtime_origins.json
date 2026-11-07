@@ -1,0 +1,327 @@
+{
+  "schema": "phone_runtime_source_origins:1",
+  "scope": "Initial source consolidation only. Math, finite checks, units and thresholds retained; no GPU/performance/training/native execution. Old source trees/data/JSON untouched.",
+  "modules": [
+    {
+      "module": "supermimic_research.runtime.state_contract",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+        "bytes": 6910,
+        "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\state_contract.py",
+        "bytes": 7071,
+        "sha256": "5e55f9496603037807d0624aa93e531b46ffb6b289f2d7052ced82d52c517f4b"
+      },
+      "AST_unchanged_functions": [
+        "TickPlan.__post_init__",
+        "TickPlan._ticks",
+        "TickPlan.declaration",
+        "TickPlan.masks",
+        "TickPlan.native_clock_descriptors",
+        "TickPlan.nominal_time_s",
+        "_field",
+        "_float_array",
+        "_ipos",
+        "_rotate",
+        "_rotation",
+        "from_com_world_state",
+        "to_com_world_state"
+      ],
+      "AST_changed_functions": [],
+      "removed_source_link_functions": []
+    },
+    {
+      "module": "supermimic_research.runtime.state_codec",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+        "bytes": 3472,
+        "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\state_codec.py",
+        "bytes": 3044,
+        "sha256": "bf02fccd0d22fb7683d652ba9a6818385903c801f139955be589fa8ad0109c4b"
+      },
+      "AST_unchanged_functions": [
+        "actual_state",
+        "apply_delta52",
+        "codec_roundtrip",
+        "delta52",
+        "exp_world",
+        "log_world",
+        "quat_R",
+        "skew",
+        "snapshot_state"
+      ],
+      "AST_changed_functions": [],
+      "removed_source_link_functions": []
+    },
+    {
+      "module": "supermimic_research.runtime.rotation",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+        "bytes": 8738,
+        "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\rotation.py",
+        "bytes": 8316,
+        "sha256": "7b909204908645836f196c41c5f8a695397ae6f7515c3253200b1d39bd7fd3da"
+      },
+      "AST_unchanged_functions": [
+        "_numpy",
+        "_schema",
+        "_torch_tensor",
+        "decode_numpy",
+        "decode_torch",
+        "physical_delta_numpy",
+        "predict_next_torch",
+        "require",
+        "so3_exp_torch",
+        "state_action_numpy",
+        "state_action_torch",
+        "validate_state_numpy",
+        "validate_state_torch"
+      ],
+      "AST_changed_functions": [
+        "_codec"
+      ],
+      "removed_source_link_functions": []
+    },
+    {
+      "module": "supermimic_research.runtime.momentum",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\momentum_contract.py",
+        "bytes": 4023,
+        "sha256": "983e182d7b8980d44a23db0f143d4a1c48ed483d37522fdba33dca3d5344b0ca"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\momentum.py",
+        "bytes": 4103,
+        "sha256": "9f22d85b925e5daa687eea2cf428ada39c02409781f50559f04bbb03b05402b4"
+      },
+      "AST_unchanged_functions": [
+        "_mv",
+        "angular_momentum_world",
+        "contact_impulse_required_source",
+        "inertia_world",
+        "momentum_residual_world",
+        "rotation_from_state58",
+        "source_moving_COM_impulse_to_world",
+        "velocities_from_source_impulse"
+      ],
+      "AST_changed_functions": [],
+      "removed_source_link_functions": []
+    },
+    {
+      "module": "supermimic_research.runtime.structured",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+        "bytes": 4100,
+        "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\structured.py",
+        "bytes": 3409,
+        "sha256": "0ffa0dcb2c3f9f803a1335022d43bad61b9ccddee84926277db441900caca854"
+      },
+      "AST_unchanged_functions": [
+        "decode_physical_heads",
+        "encode_observed_numpy"
+      ],
+      "AST_changed_functions": [],
+      "removed_source_link_functions": [
+        "frozen"
+      ]
+    },
+    {
+      "module": "supermimic_research.runtime.geometry",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\geometry_provider.py",
+        "bytes": 11690,
+        "sha256": "f00da9a2c5deb19261a3ff4e168d79f8aea9784736e0fdd0897ffe9599a3b07b"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\geometry.py",
+        "bytes": 11314,
+        "sha256": "f86fa536a66f5a44454d41f5d7e0128e5f1827d58aa6c0f167b5b37a2f2a034a"
+      },
+      "AST_unchanged_functions": [
+        "PhoneGeometryProvider._c",
+        "PhoneGeometryProvider.capsule_centerline_world",
+        "PhoneGeometryProvider.features",
+        "PhoneGeometryProvider.mesh_vertices_world",
+        "PhoneGeometryProvider.poses",
+        "_proper_rotation",
+        "validate_features"
+      ],
+      "AST_changed_functions": [
+        "PhoneGeometryProvider.__init__",
+        "_check_file"
+      ],
+      "removed_source_link_functions": []
+    },
+    {
+      "module": "supermimic_research.runtime.directional",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+        "bytes": 9556,
+        "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\directional.py",
+        "bytes": 9393,
+        "sha256": "3d6d3141ec9e5604628f571af71cadf676bfa220368c80d8fe9df51486a2c709"
+      },
+      "AST_unchanged_functions": [
+        "DirectionalGapProvider.features",
+        "capsule_plane_gaps",
+        "validate_features",
+        "vertex_plane_gaps"
+      ],
+      "AST_changed_functions": [
+        "DirectionalGapProvider.__init__",
+        "checked"
+      ],
+      "removed_source_link_functions": []
+    },
+    {
+      "module": "supermimic_research.runtime.phone_task",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_task_v2.py",
+        "bytes": 15259,
+        "sha256": "1d069f19760cee674abd94e76166cff4aee89b4eab2a3f42b54ce43308d7acaf"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\phone_task.py",
+        "bytes": 15391,
+        "sha256": "9844a952d55f5f36b0d381d67b005c5cb08c0f4cd491dbdabd034bae99264017"
+      },
+      "AST_unchanged_functions": [
+        "EngineeredMaterialSupportProxy.__call__",
+        "PhoneTask.advance_memory",
+        "PhoneTask.control_target",
+        "PhoneTask.flatten_memory",
+        "PhoneTask.initial_memory",
+        "PhoneTask.observation",
+        "PhoneTask.reference",
+        "PhoneTask.rewards",
+        "PhoneTask.termination",
+        "PhoneTask.unflatten_memory",
+        "actor_critic_constructor_contract",
+        "pin",
+        "read",
+        "tensor",
+        "validate_memory_clock",
+        "wm_step_current_only"
+      ],
+      "AST_changed_functions": [
+        "EngineeredMaterialSupportProxy.__init__",
+        "PhoneTask.__init__",
+        "checked"
+      ],
+      "removed_source_link_functions": [
+        "load_source"
+      ]
+    },
+    {
+      "module": "supermimic_research.runtime.ego_reference",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_ego_reference_v1\\reference.py",
+        "bytes": 4463,
+        "sha256": "88c85fe21db72ab29f5c8da5a799345205be45ed7ec830e804b2370ccf70bbb0"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\ego_reference.py",
+        "bytes": 4127,
+        "sha256": "0c2727dfa7af1373d6c53fe1d849f533c062852dc1f97b86f44030929974b060"
+      },
+      "AST_unchanged_functions": [
+        "interpolate_increments",
+        "interval_motion_descriptors",
+        "inverse_rigid",
+        "pose_from_raw",
+        "reanchor_object_reference",
+        "relative_object_increments",
+        "validate_transform"
+      ],
+      "AST_changed_functions": [],
+      "removed_source_link_functions": []
+    },
+    {
+      "module": "supermimic_research.runtime.native_reader",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+        "bytes": 14417,
+        "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\native_reader.py",
+        "bytes": 14174,
+        "sha256": "fc3887f9a7204d204eba3d7f52ba3010ad7e8cdd7a931097edc1fa75f0cb692d"
+      },
+      "AST_unchanged_functions": [
+        "NativePhoneReader.__init__",
+        "NativePhoneReader._control",
+        "NativePhoneReader.audit",
+        "NativePhoneReader.model_digest",
+        "NativePhoneReader.receipt",
+        "NativePhoneReader.reset",
+        "NativePhoneReader.state58",
+        "NativePhoneReader.step_control",
+        "_bits",
+        "pin"
+      ],
+      "AST_changed_functions": [],
+      "removed_source_link_functions": []
+    },
+    {
+      "module": "supermimic_research.runtime.reader_replay",
+      "origin": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\reader_replay_adapter_v2.py",
+        "bytes": 9110,
+        "sha256": "266c4b0609193601e1ec8fbdecf43b04ac8dfc37a817fea6a1bdc6a80462c6cd"
+      },
+      "target": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\reader_replay.py",
+        "bytes": 9110,
+        "sha256": "266c4b0609193601e1ec8fbdecf43b04ac8dfc37a817fea6a1bdc6a80462c6cd"
+      },
+      "AST_unchanged_functions": [
+        "PhoneReaderTaskBridge.__init__",
+        "PhoneReaderTaskBridge.reset",
+        "PhoneReaderTaskBridge.step",
+        "PhoneReaderTaskBridge.step_actor",
+        "build_replay_transition",
+        "online_actor_action",
+        "raw_receipt",
+        "regroup_interval_contacts"
+      ],
+      "AST_changed_functions": [],
+      "removed_source_link_functions": []
+    }
+  ],
+  "new_modules": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\_artifacts.py",
+      "bytes": 704,
+      "sha256": "02ef71a4222aef10776b3ee604dba5a92372e2f22700a235b1f703352940a2e7"
+    }
+  ],
+  "runtime_package_init_empty": true,
+  "path_policy": {
+    "source_fields": "legacy JSON source fields retained as provenance only; no Python source selected or imported through them",
+    "data_fields": "Explicit metadata/catalog/taskbundle arguments, with optional byte-identical external artifact path overrides; original JSON unchanged",
+    "source_SHA": "Legacy source-path SHA guards removed as live-code selectors; origin source hashes live in this provenance mapping",
+    "model_SHA": "Fixed compiled phone model/content guard and all native physics checks retained"
+  },
+  "data_path_API": {
+    "PhoneGeometryProvider": "(metadata_path, *, geometry_arrays_path=None)",
+    "DirectionalGapProvider": "(catalog_path, direction_chunk=64, *, metadata_path=None, geometry_arrays_path=None, direction_arrays_path=None)",
+    "PhoneTask": "(bundle_path, *, mode, geometry, torch_dtype=None, reference_arrays_path=None, support_basis_path=None)",
+    "NativePhoneReader": "(model_path, *, expected_model_sha256=MODEL_SHA, dt_s)"
+  },
+  "verification_pending": "Root will compare old/new small CPU F64 math, geometry outputs and input AD. AST equivalence is source evidence, not a numerical or physical qualification."
+}

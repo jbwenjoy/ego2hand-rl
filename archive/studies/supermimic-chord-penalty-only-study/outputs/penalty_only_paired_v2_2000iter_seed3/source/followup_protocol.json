@@ -1,0 +1,134 @@
+{
+  "schema": "supermimic_chord_penalty_only_followup:1",
+  "method": "P_ONLY",
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "status": "CPU_preparation_no_GPU_authorized",
+  "n3_outcomes_known_before_followup": true,
+  "scientific_scope": "Exploratory after A1L/A2 n3, not retroactive preregistration; existing arms and gates remain unchanged",
+  "inherited_paired_protocol_sha256": "a835df9c4ba1450faffdfebb217ceaca6db99e1d3ea3dcf634b6110a389dcae6",
+  "source_bindings": {
+    "entry": {
+      "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\scripts\\train_controlled_pen.py",
+      "sha256": "f9215ce9605728a4822b00f50f907f78650ebbecb1d920c9fd663996c64c6943"
+    },
+    "penalty_wrapper": {
+      "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\src\\penalty_study\\penalty_only_objective.py",
+      "sha256": "cfa53515fb7dc12ae49a2aec2d9ca37603061c1752fc8875f879cf5ea235c914"
+    },
+    "followup_helper": {
+      "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\src\\penalty_study\\followup.py",
+      "sha256": "75b9f83d37254d5102ce6e2c68b896d88cccea01b155dbe8d5fa5ed30405adfa"
+    },
+    "original_trainer": {
+      "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\source_baselines\\train_controlled_pen.py",
+      "sha256": "823711c1a7c5876942506986741f20171b3c09a292bf3656bda17c1b5a3fd65a"
+    },
+    "entry_diff": {
+      "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\source_baselines\\trainer_unified.diff",
+      "sha256": "4be538e4d3edcf045b266a2b50745e8d35f474d7098b4ae3729f2ce3dc958550"
+    },
+    "allowed_changes": {
+      "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\source_baselines\\allowed_changes.json",
+      "sha256": "ecd8c0c19e4f032fa6860435b61b1bed3dff84643d079c163bb175f57d64e4f3"
+    },
+    "auditor": {
+      "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\scripts\\audit_training_checkpoint.py",
+      "sha256": "954e2238032527767b4536d5845e3ff2a700dae118bd0d101d127bb2f52ebca4"
+    },
+    "queue": {
+      "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\scripts\\run_matched_training_queue.py",
+      "sha256": "fe06715419a7ec863e64cfa4757b0db3cad78bed272d06d7ac5153385ea2ef41"
+    },
+    "launcher": {
+      "path": "D:\\workspace\\supermimic-chord-penalty-only-study\\scripts\\start_matched_training_queue.ps1",
+      "sha256": "92a05ac70750e48da01b065f85e79be9fe85a530a66b299d6f24f9cd5cf895f2"
+    }
+  },
+  "vendored_chord_study_sha256": {
+    "chord_study/__init__.py": "0ef0d6688ca54eec29b14d5d89b9004fff7854555ac874648ed5e38c19fbbf98",
+    "chord_study/acceptance.py": "b7afba11a1bc0b97425b2d1987615bcbe21acb74467759a0b822f932868a9bb4",
+    "chord_study/cli.py": "7b96711d3916b51fd78747b0f3ba38e2f77ada3e19abf564fac426e7b9e08521",
+    "chord_study/contact_geometry.py": "a9e0e19cc826cefe4e6a97a5c7b33f02f04c23585065cb0a273436eb07846d7a",
+    "chord_study/contact_model.py": "b22dd58d180feb920956542ca433d69c76926a58770aad38e91ac7c023729542",
+    "chord_study/contact_objective.py": "54d9507d824d08baab3639e29d028b325109f51ca3e3fdd3118be341729502ea",
+    "chord_study/contacts.py": "79b53c63dd5573c9908d052f29c678f1724ff5be3ffa5b7c077421cbf4788212",
+    "chord_study/evaluation.py": "5cb416e8f5a479d04bef794bfd8a6bc91ae4a29cbb516bf8d6a7e0cdce4ab34e",
+    "chord_study/experiments.py": "905a1e7f36f1a2aa10ef96c291785b2b67dcebd18e409df3b86de6533bec9727",
+    "chord_study/geometry.py": "a7962e821feb851414d19125aa096a06858d45fcfee726eb7ba8691316aac56f",
+    "chord_study/reference.py": "5a43cbf49d69a800f5bcd0b05a04c54abb0ed70a82ed68553f7fdaf23a9be3d5",
+    "chord_study/world_model.py": "03b6d6a1628a50f7e6e0c817c911e96853b6fcbfa610826c0e63b6310f487f80"
+  },
+  "native_inventory": {
+    "path": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed1\\source\\inventory.json",
+    "sha256": "a92cb6549bd7c72811ffeecd4d8e3d37b534b7398b0b7264dffd8f5e02c51452"
+  },
+  "A2_templates": {
+    "1": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\training_configs\\replication_seeds123_v1\\a2_paired_v2_2000iter_seed1.json",
+      "sha256": "8eccde09aa509bffea617ea8fd3bf87f5380ba6a81159a47b958f2682b21ee8d"
+    },
+    "2": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\training_configs\\replication_seeds123_v1\\a2_paired_v2_2000iter_seed2.json",
+      "sha256": "44fd867e8911f4710d2a8160a434f9b4db80d452e1c5dcb29f77b0cb1269f474"
+    },
+    "3": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\training_configs\\replication_seeds123_v1\\a2_paired_v2_2000iter_seed3.json",
+      "sha256": "9d538db90f87862a4cec8c4d3db7ee15434dba7e601a8959bfc5a1cbd511c118"
+    }
+  },
+  "engineering_smoke_training": {
+    "num_envs": 128,
+    "max_iterations": 10,
+    "buffer_steps": 1000,
+    "warmup_steps": 64,
+    "wm_only_iters": 2,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "save_interval": 2,
+    "log_interval": 1,
+    "amp": true,
+    "compile": true,
+    "compile_policy": true,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1
+  },
+  "objective": {
+    "support_coefficient": 0.0,
+    "penetration_coefficient": 0.1,
+    "caller_dt_s": 0.02,
+    "formula": "-.1*penetration_prior"
+  },
+  "penalty_sharing": "Direct exact original A2 terms[geometry_intent_penetration_prior], no duplicated penalty or cancellation",
+  "native_world_model_collect_control_and_thresholds": "unchanged frozen8237 entry body; only prior factory/label/provenance differs",
+  "primary_budget": {
+    "iterations": 2000,
+    "num_envs": 128,
+    "wm_updates": 4000,
+    "aux_failure_updates": 4000,
+    "actor_updates": 1800,
+    "critic_updates": 7200,
+    "real_transitions": 648192
+  },
+  "secondary_OS_wall_seconds": 1200,
+  "same_physical_acceptance_and_512contact_diagnostic": true,
+  "ordering": "P_ONLY seed1,seed2,seed3 on one GPU, fresh runs; no quality stopping/retry",
+  "shared_physical_GPU_lock": "D:/workspace/supermimic-chord-study/.locks/single_gpu_training.lock",
+  "historical_controls": "Prior A1L/A2 seeds1,2,3 are frozen; later new-arm batch is not a contemporaneously randomized3arm experiment",
+  "identification": "P_ONLY-A1L: penalty increment; A2-P_ONLY: support increment conditional on penalty; no full2x2 interaction without support-only"
+}

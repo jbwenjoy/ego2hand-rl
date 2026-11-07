@@ -1,0 +1,31 @@
+--- D:\workspace\supermimic-rough-prefix-learning-study\scripts\compare_primary_initial_cpu.py
++++ D:\workspace\supermimic-rough-prefix-learning-study\scripts\compare_primary_initial_cpu_v2.py
+@@ -1,4 +1,7 @@
+ """Primary raw-initial comparison: healthy completed vs live-prefix runs.
++
++V2 canonicalizes absolute path spelling before comparing aliases; SHA and
++resolved core source path equality remain strict. V1 source/proof are retained.
+ 
+ Each side must already have a content-bound v3 health audit. This comparison
+ never requires the right run to be terminal or compares final trained weights.
+@@ -20,7 +23,7 @@
+ def pin(p):p=Path(p).resolve();return {'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+ def canon(v):return json.dumps(v,sort_keys=True,separators=(',',':'),allow_nan=False)
+ def checked(p):
+-    if set(p)!={'path','sha256'} or not Path(p['path']).is_absolute() or pin(p['path'])!=p:raise ValueError('Missing/changed content-bound artifact')
++    if set(p)!={'path','sha256'} or not Path(p['path']).is_absolute() or pin(p['path'])['sha256']!=p['sha256']:raise ValueError('Missing/changed content-bound artifact')
+     return Path(p['path'])
+ def arrays(p):
+     with np.load(p,allow_pickle=False) as z:return {k:z[k].copy() for k in z.files}
+@@ -38,8 +41,9 @@
+     pins=config['source_pins'];by_path={}
+     for p in pins.values():
+         key=str(Path(p['path']).resolve())
+-        if key in by_path and by_path[key]!=p:raise ValueError('Conflicting pins for same source path')
+-        by_path[key]=p
++        normalized={'path':key,'sha256':p['sha256']}
++        if key in by_path and by_path[key]!=normalized:raise ValueError('Conflicting SHA pins for same resolved source path')
++        by_path[key]=normalized
+     wanted=[ROOT/rel for rel in CORE_REL]+[PURE]
+     entry=[p for p in by_path.values() if p['sha256']==runtime['source_sha256'] and Path(p['path']).name.startswith('train_rough_prefix_pen')]
+     if len(entry)!=1:raise ValueError('Runtime actual entry source missing/ambiguous')

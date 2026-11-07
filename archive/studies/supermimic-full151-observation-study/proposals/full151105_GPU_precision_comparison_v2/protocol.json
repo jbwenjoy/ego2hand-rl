@@ -1,0 +1,157 @@
+{
+  "schema": "full151105_GPU_precision_preregistration:1",
+  "execution_authorized": false,
+  "status": "FROZEN_SOURCE_ONLY_NUMERICAL_MODE_DIAGNOSTIC",
+  "modes": [
+    "FP32_STORAGE_TF32_ALLOWED",
+    "BF16_NET_FP32_INTEGRATE_TF32_ALLOWED"
+  ],
+  "allow_tf32": true,
+  "device": "cuda:0",
+  "evaluation_seed": 0,
+  "soft_worker_seconds": 60,
+  "hard_process_seconds": 90,
+  "automatic_retry": false,
+  "compile_fallback": false,
+  "training_authorized": false,
+  "Env_or_physics_authorized": false,
+  "source_pins": {
+    "training_entry": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\execute_full151_learning_v3.py",
+      "sha256": "8086033a3100deb13970e1f2191a3765a3c61405b73db8e24acb1fd79cc9b8d1"
+    },
+    "training_learning_v2": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\learning_v2.py",
+      "sha256": "2f3b0269dac7b3983b6ecfb7b4c5201c681ebc2ed3fd3199179c08607d59197d"
+    },
+    "native_runner": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+      "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46"
+    },
+    "native_networks": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "native_common": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\common.py",
+      "sha256": "6d6ff994d592c8fec1d46401d7051d0511310281a3d28450db8bd9be8c327f8b"
+    },
+    "strict_CPU_WM_loader": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\world_model_checkpoint.py",
+      "sha256": "119fa7cebc0e9b0727b0160660b1a47822deee2a0e0e9fa5be69465ac5578052"
+    },
+    "new_GPU_precision_consumer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\precision105_v1.py",
+      "sha256": "b292630b290dd2d05f2987c3f0156bb2d301968680e8282ae086f66fb498964f"
+    },
+    "matched_post20_scalar": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\serial_probe105_v2.py",
+      "sha256": "a24c89da47f4aad7acfc9d9dfd1f053518cdc878230716bb2c857127ec13e592"
+    },
+    "installed_torch_precision_API": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\torch\\__init__.py",
+      "sha256": "2d89482562a491093a10c2dcf9a83eea070f02b69b65aa4ae1b95ad23bcdbcaf"
+    },
+    "installed_torch_cuda_flags_API": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\torch\\backends\\cuda\\__init__.py",
+      "sha256": "e3d54b9ddfdfab8c4d49246fd20511386e0e18a494a8e6d93a09ebef69a13427"
+    },
+    "installed_torch_version_source": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\torch\\version.py",
+      "sha256": "84e179afbd773ecf41d671a2fa0dd643758f8830f247d563affe419b52ae7e06"
+    },
+    "source_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\proposals\\full151105_GPU_precision_comparison_v2\\source_review.json",
+      "sha256": "af42d7ba1097424c97ad07a2049abeb3e934b9aaa1e739c8826c88ed15d1ab49"
+    }
+  },
+  "source_review": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\proposals\\full151105_GPU_precision_comparison_v2\\source_review.json",
+    "sha256": "af42d7ba1097424c97ad07a2049abeb3e934b9aaa1e739c8826c88ed15d1ab49"
+  },
+  "inputs": {
+    "checkpoint": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_v3_primary2000_A2_seed0_v1\\train\\model_final.pt",
+      "sha256": "70d0a21d5b2f0238ab745264bf24db08515fef65f072cbe00fb6893a33512a0c"
+    },
+    "CPU_analysis_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-A2-WM-physical-gradient-CPU-v1.json",
+      "sha256": "c7f84bfbff5e3bd62f8f75f4f297917948cc208bc7d8b7f2796c96c0f76f7cbf"
+    },
+    "CPU_analysis_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_A2_WM_physical_gradient_CPU_v1\\report.json",
+      "sha256": "588bff73f32abce3ff756d3bfaf2f503d294f70c57b253766e87246da0131502"
+    },
+    "CPU_saved_independent_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_analysis_saved_independent_v2\\report.json",
+      "sha256": "f382bb580efe865c0d9818197ff1bdfbf678868eefd0a72845fe35d3ccb90404"
+    },
+    "full_physical_saved_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_full_serial_saved_review_v1\\report.json",
+      "sha256": "f5fd0703639308706b4f8bf5deee834e6d207486c63fded8920a6a86fd2a62af"
+    }
+  },
+  "expected_counts": {
+    "strict_CPU_WM_loader_calls": 1,
+    "actual_checkpoint_reads": 2,
+    "WM_forward_calls": 2,
+    "batch_rows_per_forward": 8,
+    "predicted_rows": 16,
+    "u_autograd_calls": 2,
+    "physical_comparison_rows_per_mode": 64,
+    "dependent_direction_groups": 32,
+    "Actor_forwards": 0,
+    "Env_created": false,
+    "physics_steps": 0,
+    "optimizer_updates": 0,
+    "compile_used": false
+  },
+  "model_ABI": {
+    "validation": "Call frozen119f strict CPU consumer with actual final105/health5950 and same bundle before any CUDA initialization. Preserve its two native checkpoint reads and CPU Actor-validation constructor; no Actor inference.",
+    "GPU": "Use the validated frozen native core in this explicit new GPU consumer. Build dynamics278=state58+physicalxi46+zero174 disturbance; native WM consumes actualu20. Do not call CPU wrapper with GPU inputs.",
+    "weights": "Parameter storage remains FP32 and normalizer count dtype remains native; never model.bfloat16(). Only native core.amp toggles False then True. State dictionaries/normalizers must remain byte-equal after transfer and both modes.",
+    "norm_and_integrate": "Same FP32 normalized features must be bitexact across modes. Hook net outputs to observe FP32 versus BF16; output prediction58/logits15/score/gradient_u remain FP32. No whole-forward external BF16 autocast.",
+    "scalar": "Reuse frozen controlled post20 native-formula2+8 score on predicted nextstate and identical goal_k; do not substitute RM derived15 secondary.",
+    "control": "Same eight physical snapshot x58 and executed center u20, no action/EMA/C2 reapplication and no new perturbation or physical query."
+  },
+  "runtime_flags": {
+    "policy": "Explicitly set shared cuda.matmul.allow_tf32=True after strict CPU validation. Keep all other backend/determinism/reduction flags unchanged across both modes, record before AND after each mode, and require equality. No third pass or silent fallback.",
+    "required_readbacks": [
+      "matmul_allow_tf32",
+      "float32_matmul_precision",
+      "allow_bf16_reduced_precision_reduction",
+      "allow_bf16_reduced_precision_reduction_split_k",
+      "allow_fp16_reduced_precision_reduction",
+      "allow_fp16_accumulation",
+      "deterministic_algorithms",
+      "deterministic_warn_only",
+      "cudnn_allow_tf32",
+      "cudnn_deterministic",
+      "cudnn_benchmark",
+      "CUBLAS_WORKSPACE_CONFIG",
+      "NVIDIA_TF32_OVERRIDE",
+      "TORCH_ALLOW_TF32_CUBLAS_OVERRIDE",
+      "CUDA_VISIBLE_DEVICES"
+    ],
+    "optional_getters": "Unsupported reduction getter may record explicit UNAVAILABLE and reason; do not invent a default or change an unrelated flag.",
+    "historical_training_flags": "Source-intended TF32True/configAMPTrue are known; actual training runtime readbacks are UNKNOWN. The new measured flags cannot retroactively establish them.",
+    "nondeterminism": "There is only one forward per mode. No within-mode variability estimate; differences are descriptive mode contrasts, not a unique causal attribution to arithmetic precision."
+  },
+  "comparisons": {
+    "physical_reference": "Same original64 physical finite secants,32groups, unchanged2eps/noise/classifications; retain all rows and clip/center-offset flags.",
+    "gradient": "Compute new per-mode gradient_u dot original F64 d_eff; also preserve nominal coordinate AD. No F32 endpoint subtraction or second EMA.",
+    "CPU": "Compare against existing CPU saved prediction/logit/score/gradient arrays without another CPU forward. CPU-vs-GPU FP32-storage differences jointly involve backend/hardware/TF32 and cannot isolate one cause.",
+    "GPU_pair": "Compare native AMP toggled modes on same device/input/weights/normalizers/flags. Report prediction and gradient deltas and both physical sign/correlation summaries; no best-mode selection.",
+    "qualification": "Finite/shape/source/count/invariance gates are engineering only. No CPU-agreement or physical-gradient accuracy threshold is invented. All mode outputs and any failure/partial must be retained."
+  },
+  "evidence": "Save both8prediction/8x20gradient/terms/scores/logits/normalizedfeatures, pre/post flag dictionaries, actual dtypes, weight/norm hashes, raw CPU/CUDA RNG states with scope, checkpoint/source before+after pins, strict CPU loader receipt and OS-owned lifecycle. Root separately authorizes one GPU-owned process; this file does not.",
+  "scope": {
+    "source_lineage_N": 1,
+    "independent_ego_N": 0,
+    "training_seed": 0,
+    "physical_gradient_qualified": false,
+    "whole_hidden_state_qualified": false,
+    "HO_gradient_qualified": false,
+    "chronology": "Existing CPU and physical results are known; only this numerical-mode comparison is fixed before its GPU observations. No blinded/prospective method-effect or training claim."
+  }
+}

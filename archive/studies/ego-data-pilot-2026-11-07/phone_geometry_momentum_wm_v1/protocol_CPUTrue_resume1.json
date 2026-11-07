@@ -1,0 +1,236 @@
+{
+  "schema": "phone_geometry_momentum_counterfactual_training_CPU_protocol:1",
+  "role": "fresh_current_geometry_pair_momentum_counterfactual_phone_WM",
+  "input_schema": "phone_raw80_current_relative_pose22x12_directional22_366:1",
+  "output_schema": "phone_physical178_meanFn22_coverage_logits22:1",
+  "CPU_run_authorized": true,
+  "GPU_run_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_resume1",
+  "recipe": {
+    "seed": 1731,
+    "cpu_threads": 4,
+    "device": "cpu",
+    "dtype": "float32",
+    "physical_decode_dtype": "float64",
+    "hidden": [
+      128,
+      128
+    ],
+    "activation": "SiLU",
+    "updates": 5000,
+    "checkpoint_updates": [
+      250,
+      1000,
+      5000
+    ],
+    "stop_after_first_healthy_checkpoint": true,
+    "batch": "all2118_absolute_rows_and_all1434_FIT_pairs_each_update",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "adam_epsilon": 1e-08,
+    "foreach": false,
+    "clip_grad_norm": 1.0,
+    "input_std_floor": 1e-06,
+    "geometry_chunk_rows": 4,
+    "head_std_floors": {
+      "q_rad": 0.001,
+      "qd_rad_s": 0.01,
+      "COM_residual_m": 0.0001,
+      "world_dR_rad": 0.001,
+      "force_impulse_Ns": 0.0001,
+      "torque_impulse_Nms": 1e-05
+    },
+    "decoded_velocity_std_floors": {
+      "vCOM_m_s": 0.01,
+      "omega_world_rad_s": 0.1
+    },
+    "CF_action_reference_rad": 1.0,
+    "CF_denominator": "actual_F64_selected_coordinate_du_no_epsilon",
+    "CF_scale": "FIT1434_target_secant_population_std_with_same_physical_unit_floors_per_radian",
+    "physical_block_reduction": "equal_mean_of_q20_qd20_p3_dR3_Jforce66_Jmoment66_block_MSE",
+    "force_reference_N": 1.0,
+    "force_loss": "mean22rows_log1p_pred_N_over_1N_minus_log1p_target_N_over_1N_squared_no_std",
+    "coverage_loss": "BCE_logits_mean_rows_and22pairs",
+    "lambda_absolute_heads": 1.0,
+    "lambda_decoded_velocity": 1.0,
+    "lambda_FIT_response": 1.0,
+    "lambda_meanFn": 1.0,
+    "lambda_coverage": 1.0,
+    "last_layer_initialization": "zero_weights_normalized_physical_mean_Fn_TRAINmean_inverse_softplus_coverage_TRAINmean_logit",
+    "initial_meanFn_floor_N": 0.001,
+    "initial_coverage_probability_clip": 0.0001,
+    "validation": "original114_complete_VAL_state58_only_no_normalizer_fit_no_model_selection",
+    "actionCHECK_TEST_fresh": "hash_only_not_np_load_not_loss_not_normalizer"
+  },
+  "recipe_pin": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\recipe_v1.json",
+    "bytes": 2904,
+    "sha256": "08e8fa47380f58788873c1703f192199918abbd064f9212c2c42828f9e1c75ae"
+  },
+  "inputs": {
+    "original_acquisition": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 10554,
+      "sha256": "4eaba866d38b51d5edfced2cbc46eb6cd8315c78a0c50b769d7e2b79fecf4559"
+    },
+    "original_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\independent_dataset_review_v1\\report.json",
+      "bytes": 9318,
+      "sha256": "718368880239b9858c7f47bc5ef4fed0ca6a07d74d2a72e9fa6d97349966d506"
+    },
+    "causal_acquisition": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_train_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 11208,
+      "sha256": "7d709b7065c289a89f5b0b1c9387c439743f8c6694f4a5bd3552b0b0f0bc4df5"
+    },
+    "causal_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_train_acquisition_v1\\saved_author_review_v1\\report.json",
+      "bytes": 3584,
+      "sha256": "d8ff5fe77ae8277f32be08818f107b5acfe3d275d76a785dd91f98b4c269a4ed"
+    },
+    "original_pair_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_original_train_pair_labels_v1\\completed_v1\\report.json",
+      "bytes": 1884,
+      "sha256": "137796e4bf436a44b17a4fa8fb704969d1bb018e73bf861d797ba1e383044501"
+    },
+    "causal_pair_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_impulse_labels_v1\\completed_v2\\report.json",
+      "bytes": 3766,
+      "sha256": "03ea68558365071f695aa0bd12dd4f7df4b88c835180ead1c1d65877e8e86067"
+    },
+    "causal_pair_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_impulse_labels_v1\\independent_saved_review_v1\\report.json",
+      "bytes": 20140,
+      "sha256": "370d65e86ecf10a985a8e26097fcd1cd36f72d1e819c0036881133b7fde0fd0d"
+    },
+    "pair_role_packaging": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_impulse_labels_v1\\partitioned_v1\\report.json",
+      "bytes": 2096,
+      "sha256": "8d54d9ccb3d000cc6ae194a342015eac449dec1987babd427f331b6b33db2314"
+    },
+    "physical_parameters": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\completed_v1\\physical_parameters.json",
+      "bytes": 1447,
+      "sha256": "fc2fb4194ef30d60b4fdd625b63105bd84ce9cf26c4a93378ff416a768a75de7"
+    },
+    "geometry_catalog": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\geometry_catalog_v1.json",
+      "bytes": 2197,
+      "sha256": "f36298062d6039a6230c9958f0169e57f8544dfd7706ec3b2e988b4796afa33c"
+    },
+    "geometry_proof": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\report.json",
+      "bytes": 7011,
+      "sha256": "baa38632830a0dd035a7029e410f11c5eebb2e7789b8d2f235ddfa5701af60e1"
+    },
+    "directional_proof": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\completed_v2\\report.json",
+      "bytes": 6517,
+      "sha256": "d74363c7c6fbb0cd355e39a200a3a4a8ddd1cee058436ecc13f1121cde7e946e"
+    },
+    "structured_proof": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\completed_v1\\report.json",
+      "bytes": 2469,
+      "sha256": "7ff1e43b9b3b09d499e2e077e92b8b0ab9e3269fd62b14fd80c4aa62a5111ce0"
+    }
+  },
+  "sources": {
+    "trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\train_geometry_momentum_wm.py",
+      "bytes": 37229,
+      "sha256": "224a0c9f47e196c626e862aa52d46402a454a6d16f0b497d3720ae74e25ca539"
+    },
+    "structured_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+      "bytes": 4100,
+      "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+    },
+    "momentum": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\momentum_contract.py",
+      "bytes": 4023,
+      "sha256": "983e182d7b8980d44a23db0f143d4a1c48ed483d37522fdba33dca3d5344b0ca"
+    },
+    "rotation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    },
+    "scalar_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "state_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "FK": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\geometry_provider.py",
+      "bytes": 11690,
+      "sha256": "f00da9a2c5deb19261a3ff4e168d79f8aea9784736e0fdd0897ffe9599a3b07b"
+    },
+    "directional": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+      "bytes": 9556,
+      "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+    },
+    "geometry_constants": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_constants.json",
+      "bytes": 91553,
+      "sha256": "330243d3b85abb1e996c2658b9216fe89df9ede53b0c4e035af63deb651f8fd9"
+    },
+    "geometry_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_geometry_arrays.npz",
+      "bytes": 514604,
+      "sha256": "4bafa2e40788f1106dcb497e575304d9bfabc7476fdb910147179325db97570f"
+    },
+    "direction_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\direction_arrays_v1.npz",
+      "bytes": 24503,
+      "sha256": "08dbbe3bfc8c0cbd19dad14510fd48c48351d8102cbeb99ca3d8f735cd1ca053"
+    }
+  },
+  "resume_checkpoint": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_run1\\checkpoint_0250.pt",
+    "bytes": 1932051,
+    "sha256": "a132d171bc938bd17b0d17b617d14317cacba9063d84cdd5fce6a78d5baa5d20"
+  },
+  "resume_health": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_run1\\health_0250.json",
+    "bytes": 3048,
+    "sha256": "95bdf2913882429e6d6e90256abf8b50b1de78ec0d95fd650bf4162038234c29"
+  },
+  "first_pausepoint": "Stop process after genuine checkpoint250 saved/load-prediction/gradAdamRNG health+ETA. Root then hands off and pausesGoal. Target5000 remains resumable, not achieved at250.",
+  "data_exposure": "OriginalTRAIN684 +1434 FITavailable sides. Baseline36 reused existing original rows, not duplicate absolute loss. CHECK/TEST hash-only; VAL114 fixed health monitor only. Fresh12unacquired.",
+  "root_review": {
+    "parent_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\protocol_CPUTrue_run1.json",
+      "bytes": 10648,
+      "sha256": "f649b8f90c52aced46ca5b5fbf96e534521860bb4d9f3b7f201d41214ba14d8d"
+    },
+    "launcher": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\execute_resume_once_v1.py",
+      "bytes": 3548,
+      "sha256": "39ffd85a579f9bfc8e1c2e8bd7193896d0abea7f65ba04f0dbed2e553970818a"
+    },
+    "parent_saved_payload_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\root_saved_payload_review_v1\\report.json",
+      "bytes": 2923,
+      "sha256": "2da72ee3eeeb19862c7a427603944380016346829b768be7999bb97d624ab19a"
+    },
+    "parent_saved_file_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\saved_run_review_v1\\report.json",
+      "bytes": 4886,
+      "sha256": "76a8600839d820dec4837af58e0599ccf58ce97d173b02fff98cd4c0cd6e49b8"
+    },
+    "first250_health_ETA_pause_already_fulfilled": true,
+    "user_goal_resumed": true,
+    "scope": "Same frozen source, recipe, data, FIT normalizers/digest; restore own model+Adam+raw RNG at250. Additional4750 training updates, lineage5000. Worker diagnostics/counters may carry lineage training counts; report actual resume operations separately. No new experiment, GPU, native, Actor, CHORD policy or ego-benefit qualification."
+  }
+}

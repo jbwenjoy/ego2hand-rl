@@ -1,0 +1,11 @@
+--- D:\workspace\supermimic-observation-grounding-study\scripts\run_rest_hold.py
++++ D:\workspace\supermimic-observation-warmseed-grounding-study\scripts\run_rest_hold.py
+@@ -27,7 +27,7 @@
+     r=subprocess.run(['powershell','-NoProfile','-NonInteractive','-Command',query],capture_output=True,text=True,check=True,timeout=10,creationflags=HIDDEN)
+     assert not r.stdout.strip(),'Another project GPUworker exists: '+r.stdout
+ def main():
+-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--plan',type=Path,default=ROOT/'configs/rest-hold-frame0-v1.json');parser.add_argument('--python',type=Path,default=Path('D:/workspace/dex-supermimic-research/.venv/Scripts/python.exe'));parser.add_argument('--run',action='store_true');a=parser.parse_args();plan=a.plan.resolve(strict=True);proof=preflight(plan,a.python)
++    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--plan',type=Path,default=ROOT/'configs/warmseed-rest-qref-review-v1.json');parser.add_argument('--python',type=Path,default=Path('D:/workspace/dex-supermimic-research/.venv/Scripts/python.exe'));parser.add_argument('--run',action='store_true');a=parser.parse_args();plan=a.plan.resolve(strict=True);proof=preflight(plan,a.python)
+     if not a.run:print(json.dumps(proof,indent=2));return
+     p=read(plan);assert p.get('GPU_run_authorized') is True,'Root has not authorized GPU execution'
+     output=Path(p['output']);assert output.resolve().is_relative_to((ROOT/'outputs').resolve()) and not output.exists(),'No overwrite/retry'

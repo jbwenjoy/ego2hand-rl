@@ -1,0 +1,136 @@
+{
+  "schema": "fixed_wrist_hand2_frame42_geometry_protocol:1",
+  "role": "anatomical_left_reference_to_right_hand2_object_centric_geometry_candidate",
+  "source_inputs": {
+    "targets": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\frame42_targets.json",
+      "bytes": 11518,
+      "sha256": "2918c7385036c93fc0e81dbba7f72d02ba72f9b26744b9fe8caab3a1b4b2c15f"
+    },
+    "hand_loader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\scene_loader_v1.py",
+      "bytes": 2908,
+      "sha256": "5a36cf1d6ac875c3f0cfc3c80b5b28c8c5726ec68d3ac40f731ccee70840b303"
+    },
+    "hand_handoff": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\handoff_v1.json",
+      "bytes": 7468,
+      "sha256": "edb718e1d448ecb4bbee1d94752789a80bf3183169b7c889e5aa693620f2eb92"
+    },
+    "hand_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\completed_v2\\report.json",
+      "bytes": 6041,
+      "sha256": "88202faa3eeb05fa1a98fb726cd599b2cbe256376c2d31b6de5dd38355d15838"
+    },
+    "hand_interface": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\completed_v2\\joint_actuator_interface.json",
+      "bytes": 32094,
+      "sha256": "6e89d9bb3e2fd16b46ddd5d0baeec37c198468338f65b7f4b0556ec8672c9abf"
+    },
+    "phone_asset_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage2_convex\\completed_v2\\report.json",
+      "bytes": 18069,
+      "sha256": "8e966fb86aea71696959f0476df394b707f12f8abda2054e600ec378b3f3c283"
+    }
+  },
+  "frame": 42,
+  "human_hand": "left",
+  "robot_hand": "right",
+  "mapping": "same_digit_0_to_4_to_robot1_to5; no permutation/reflection/truncated angle transfer",
+  "variables": {
+    "robot_hinge_q20": "original compiled hard bounds, rad",
+    "phone_translation_palm_m_bounds": [
+      [
+        -0.18,
+        -0.08,
+        -0.25
+      ],
+      [
+        0.18,
+        0.18,
+        0.05
+      ]
+    ],
+    "phone_rotation_vector_rad_component_bounds": [
+      [
+        -3.141592653589793,
+        -3.141592653589793,
+        -3.141592653589793
+      ],
+      [
+        3.141592653589793,
+        3.141592653589793,
+        3.141592653589793
+      ]
+    ],
+    "scale": 1,
+    "wrist": "fixed exact original source pose"
+  },
+  "uniform_surface_candidate_threshold_m": 0.005,
+  "loss_blocks": {
+    "all5_tip_xyz": {
+      "weight": 1.0,
+      "normalization_m": 0.01
+    },
+    "candidate_surface_witness_xyz": {
+      "weight": 0.5,
+      "normalization_m": 0.005,
+      "witness": "robot distal collision geom nearest point to phone matched to transformed original-scan nearest target"
+    },
+    "candidate_signed_gap": {
+      "weight": 1.0,
+      "normalization_m": 0.002,
+      "target_m": 0.0
+    },
+    "all_phone_hand_and_table_penetration": {
+      "weight": 2.0,
+      "normalization_m": 0.001,
+      "residual": "max(-signed_distance,0)"
+    },
+    "joint_regularizer": {
+      "weight": 0.05,
+      "normalization": "original hard range",
+      "reference": "original source q0"
+    }
+  },
+  "objective": "sum of squares of these dimensionless weighted residuals; same objective for all seeds",
+  "solver": {
+    "method": "scipy.optimize.least_squares(trf)",
+    "jac": "2-point",
+    "max_nfev_per_seed": 80,
+    "ftol": 1e-08,
+    "xtol": 1e-08,
+    "gtol": 1e-08,
+    "loss": "linear"
+  },
+  "seeds": [
+    "original_q0_and_parking_phone",
+    "original_q0_and_proper_Kabsch_tip_alignment",
+    "hard_range_midpoint_q_and_proper_Kabsch_tip_alignment"
+  ],
+  "proper_Kabsch": "SVD rotation with det+1 correction; no reference or object reflection. Raw negative determinant before correction and corrected residual recorded.",
+  "budgets": {
+    "global_static_API_calls_max": 7500,
+    "static_API_calls_include": [
+      "mj_kinematics",
+      "mj_geomDistance"
+    ],
+    "per_seed_static_calls_reserved_max": 2466,
+    "total_optimization_wall_seconds_max": 60,
+    "mj_step": 0,
+    "training_GPU": 0
+  },
+  "selection": {
+    "per_seed": "last complete evaluation if solver exits; if budget reached retain last full evaluation. All states remain in trace.",
+    "global_order": [
+      "strict_nonpenetration_of_all_phone_hand_and_table_pairs_first",
+      "max_penetration_m_ascending",
+      "total_weighted_objective_ascending",
+      "seed_index_ascending"
+    ],
+    "strict_nonpenetration": "all native signed pair distances >=0; no tolerance is introduced",
+    "no_tip_or_grasp_success_gate": true
+  },
+  "failure_policy": "budget/nonfinite/solver failure preserves completed evaluations/seed results; never changes weights/frame/body scale/wrist. Geometric infeasibility remains FAIL/NOT_FEASIBLE.",
+  "interpretation": "Pure geometry candidate, no holding/force/dynamics/ego-method success."
+}

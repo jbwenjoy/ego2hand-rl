@@ -1,0 +1,106 @@
+--- D:\workspace\supermimic-full151-observation-study\src\full151_gradient\serial_probe105_v2.py
++++ D:\workspace\supermimic-full151-observation-study\src\full151_gradient\serial_probe105_calibration_v1.py
+@@ -1,4 +1,4 @@
+-"""Full151/105 inventory-all and same-Warp serial probe, isolated worker v2.
++"""Full151/105 fresh calibration-response physical worker, SOURCE DRAFT v1.
+ No Actor, WM, optimizer or learning. Only Root-authorized run_probe runs physics.
+ """
+ from __future__ import annotations
+@@ -11,9 +11,15 @@
+ from full151_native.metadata import write
+ 
+ PATHS=['A0','A2']
+-PHASES=[0,49,99,149]
++PHASES=[24,74,124,148]
+ JOINTS=[0,4,8,12]
+ EPS=(.002,.001)
++PARENT_WORKER=Path('D:/workspace/supermimic-full151-observation-study/src/full151_gradient/serial_probe105_v2.py')
++PARENT_WORKER_SHA256='a24c89da47f4aad7acfc9d9dfd1f053518cdc878230716bb2c857127ec13e592'
++METHOD_PROPOSAL=Path('D:/workspace/supermimic-full151-observation-study/docs/full151_WM_common_pre_response_calibration_proposal_v1.md')
++METHOD_PROPOSAL_SHA256='a2cb30ba286b55a7b087744648898ad47245be3145472cf03cb202c66377b304'
++RESPONSE_RELEASE_SCOPE='Fresh perturbation responses must be held until both calibration final1000 artifacts are fixed; enforcement is external to this physical worker.'
++DATA_SCOPE='Same two saved-action donors and one seen cache lineage; fresh phase/control responses are not independent states, trajectories, blind tests, or ego generalization.'
+ SCALAR_CONTRACT={'primary':'matched_post20_gpu_score','formula':'controlled FP32 native-formula2+8 directly on captured postintegration x20; GPU FP32 subset sum',
+     'primary_state_phase':'postintegration20ms','goal_phase':'preaction k','units':'controlled formula score/rad','weights':[2.,8.],'sigma_m':[.05,.04],
+     'axis_point_radius_m':.1,'dt_s':.02,'original_native_reward':'derived15ms RewardManager GPU rate terms andsubset sum, secondary only',
+@@ -30,13 +36,18 @@
+ 
+ def validate_config(config,bundle=None):
+     """Metadata-only preflight, with no framework import or donor execution."""
+-    if config.get('schema')!='full151105_same_warp_physical_probe_run:2' or config.get('role')!='full151105_serial_physical_probe':raise ValueError('Explicit105 worker-v2 schema/role required')
+-    if config.get('probe_mode') not in ('inventory_discovery_all','serial_full'):raise ValueError('Worker-v2 supports only inventory_discovery_all or serial_full; legacy phase0 uses frozenv1')
++    if config.get('schema')!='full151105_fresh_calibration_response_physical_run:1' or config.get('role')!='fresh_response_calibration':raise ValueError('New calibration-response schema/role required')
++    if config.get('probe_mode') not in ('inventory_discovery_all','serial_full'):raise ValueError('Calibration worker supports only new-label inventory_discovery_all or serial_full')
+     if type(config.get('GPU_run_authorized')) is not bool or config.get('training_authorized') is not False or config.get('automatic_retry') is not False or config.get('compile_fallback') is not False:raise ValueError('Explicit GPU flag/no-training/no-retry/no-fallback contract required')
+     if type(config.get('evaluation_seed')) is not int or config['evaluation_seed']!=0:raise ValueError('Fixed source seed0 required')
+     if type(config.get('soft_worker_seconds')) not in (int,float) or not 0<config['soft_worker_seconds']<=180 or config.get('hard_process_seconds')!=240:raise ValueError('Fixed bounded physical-probe budget required')
+     proposal=read(checked(config['proposal']));checked(config['protocol']);checked(config['input_bundle'])
+-    for field,value in {'schema':'full151105_same_Warp_control_gradient_diagnostic_proposal:2','primary_scalar_kind':'matched_post20_gpu_score','scalar_contract':SCALAR_CONTRACT,'snapshot_phases':PHASES,'direction_joint_indices':JOINTS,'eps_rad':list(EPS),'baseline_repeats':3,'planned_branches':152,'planned_total_episode_substeps':1808,'physical_reference_qualified':False}.items():
++    method=proposal.get('method_proposal');parent=proposal.get('parent_worker')
++    if method is None or checked(method).resolve()!=METHOD_PROPOSAL.resolve() or method['sha256']!=METHOD_PROPOSAL_SHA256:
++        raise ValueError('Exact common-pre calibration method source pin required')
++    if parent is None or checked(parent).resolve()!=PARENT_WORKER.resolve() or parent['sha256']!=PARENT_WORKER_SHA256:
++        raise ValueError('Frozen original serial worker provenance required; it is not fresh-phase qualification')
++    for field,value in {'schema':'full151105_fresh_calibration_response_physical_proposal:1','role':'fresh_response_calibration','primary_scalar_kind':'matched_post20_gpu_score','scalar_contract':SCALAR_CONTRACT,'snapshot_phases':PHASES,'direction_joint_indices':JOINTS,'eps_rad':list(EPS),'baseline_repeats':3,'planned_branches':152,'planned_total_episode_substeps':1808,'physical_reference_qualified':False}.items():
+         if proposal.get(field)!=value:raise ValueError('Frozen proposal field differs: '+field)
+     if set(config.get('donor_inputs',{}))!=set(PATHS):raise ValueError('Exactly A0/A2 donor action sources required')
+     for name in PATHS:
+@@ -55,15 +66,17 @@
+     for alias in ('controller105','runtime105','native105','policy_probe105','native_pen','native_state','native_snapshot','Warp_support','Warp_io','old104_capacity','measured_contacts','native_sim_reader','native_reward_functions','native_reward_observations','entity_data','manager_environment','reward_manager'):
+         expected=proposal['source_pins'][alias];checked(expected)
+         if expected not in pins.values():raise ValueError('Frozen proposal execution dependency absent from new closure: '+alias)
++    for expected in (method,parent):
++        if expected not in pins.values():raise ValueError('Calibration method/parent source absent from execution closure')
+     transaction=pin(Path(__file__).with_name('transaction105.py'))
+     if transaction not in pins.values():raise ValueError('Executed105 transaction component missing from source closure')
+     if config['probe_mode']=='inventory_discovery_all' and config.get('foreign_inventory_review') is not None:raise ValueError('Discovery-all requires foreign review None; it cannot restore/qualify branches')
+     if config['probe_mode']=='serial_full':validate_review_manifest(config)
+-    elif config.get('foreign_inventory_review') is not None:raise ValueError('Worker-v2 accepts per-snapshot review only for serial_full; no phase0 flat-review fallback')
++    elif config.get('foreign_inventory_review') is not None:raise ValueError('Calibration worker accepts only its new per-snapshot review for serial_full')
+     if bundle is not None:
+         if bundle['descriptor']['input_bundle']!=config['input_bundle'] or np.asarray(bundle['baseline_u150']).shape!=(150,20):raise ValueError('Exact105 bundle/baseline150 required')
+     plan=execution_plan(config['probe_mode'])
+-    return {'schema':'full151105_serial_probe_metadata_preflight:2','probe_mode':config['probe_mode'],'branch_slots':152,
++    return {'schema':'full151105_calibration_response_metadata_preflight:1','probe_mode':config['probe_mode'],'branch_slots':152,
+             'scheduled_branches':plan['branch_count'],'scheduled_snapshots':plan['snapshot_count'],'episode_substeps':plan['episode_substeps'],
+             'GPU_started':False,'WM_or_Actor_forward':False,'Env_created':False,'foreign_inventory_review_pending':config.get('foreign_inventory_review') is None}
+ 
+@@ -129,7 +142,7 @@
+     from . import transaction105
+     required={'worker':pin(__file__),'transaction':pin(transaction105.__file__),'input_bundle':config['input_bundle']}
+     if review.get('schema')!='full151105_foreign_inventory_per_snapshot_source_review:2' or any(review.get(k)!=v for k,v in required.items()) or review.get('source_reviewed_closure_globals') is not True:
+-        raise InventoryReviewRequired('New exact-worker2/transaction/bundle per-snapshot source review required')
++        raise InventoryReviewRequired('New exact-calibration-worker/transaction/bundle per-snapshot source review required')
+     if review.get('approved_probe_modes')!=['serial_full'] or review.get('allowed_snapshot_labels')!=list(SNAPSHOT_LABELS) or review.get('phase0_only') is not False:
+         raise InventoryReviewRequired('Exactly8 full-run snapshot labels required, without phase0 fallback')
+     if review.get('conditional_engineering_only') is not True or review.get('whole_graph_hidden_state_qualified') is not False:
+@@ -168,7 +181,7 @@
+         profile=description.get('profile');phase=int(label.split('/')[1])
+         if type(profile) is not dict or type(profile.get('phase')) is not int or profile['phase']!=phase or profile.get('boundary')!='pre_action' or profile.get('format_version')!=105 or profile.get('mode')!=MODE or profile.get('retarget_variant_id')!=VARIANT or profile.get('strict_native_types_checked') is not True:
+             raise InventoryReviewRequired('Pinned description profile differs from label/105/mode/variant/preaction: '+label)
+-        if topology.get('worker_source')!=review['worker'] or topology.get('transaction_source')!=review['transaction']:raise InventoryReviewRequired('Discovery inventory was not produced by this worker2/component: '+label)
++        if topology.get('worker_source')!=review['worker'] or topology.get('transaction_source')!=review['transaction']:raise InventoryReviewRequired('Discovery inventory was not produced by this calibration worker/component: '+label)
+         actual=description.get('opaque_identity_only')
+         if type(actual) is not list or len(actual)!=len(item['allowed_identity_only']) or {(v['path'],v['type']) for v in actual}!=_allowed_set(item['allowed_identity_only']):raise InventoryReviewRequired('Reviewed table differs from pinned actual opaque description: '+label)
+         owners={v['entry']:v for v in topology['native_entries']}
+@@ -197,7 +210,7 @@
+ 
+ 
+ def branch_schedule(probe_mode='serial_full'):
+-    if probe_mode not in ('serial_full','inventory_discovery_all'):raise ValueError('Worker-v2 has no legacyphase0 mode')
++    if probe_mode not in ('serial_full','inventory_discovery_all'):raise ValueError('Calibration worker has no legacyphase0 mode')
+     rows=[]
+     for s in range(8):
+         base=dict(snapshot_id=s,path=PATHS[s//4],k=PHASES[s%4])
+@@ -377,7 +390,10 @@
+     stage={'name':'imports_and_setup'};counts=defaultdict(lambda:defaultdict(int));phase_seconds=defaultdict(float);phase_clock=[time.perf_counter()]
+     def mark(name):
+         now=time.perf_counter();phase_seconds[stage['name']]+=now-phase_clock[0];phase_clock[0]=now;stage['name']=name
+-    report=dict(schema='full151105_serial_physical_probe_worker_report:3',status='INITIALIZING',
++    report=dict(schema='full151105_calibration_response_worker_report:1',status='INITIALIZING',
++                role='fresh_response_calibration',snapshot_phases=list(PHASES),method_proposal=proposal['method_proposal'],parent_worker=proposal['parent_worker'],
++                intended_response_release_scope=RESPONSE_RELEASE_SCOPE,response_sealing_enforced_by_worker=False,
++                data_scope=DATA_SCOPE,independent_test_trajectory_qualified=False,
+                 engineering_qualified=False,baseline_all_passed=False,capacity_finalized=False,
+                 capacity_qualified=False,source_lineage_N=1,independent_ego_N=0,
+                 probe_mode=mode,planned_full_branch_slots=152,planned_branch_count=planned_branches,planned_episode_substeps=planned_steps,scheduled_substeps=0,optimizer_updates=0,

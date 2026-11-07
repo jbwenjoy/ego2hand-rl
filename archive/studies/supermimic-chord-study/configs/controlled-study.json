@@ -1,0 +1,20 @@
+{
+  "schema": "supermimic_chord_protocol:1",
+  "date": "2026-11-01",
+  "status": "pre_registered_screening_protocol_not_results",
+  "platform": {"os": "native_windows", "gpu": "RTX 5090 32GB", "hand": "Wuji Hand2.2 simulation asset, physical subversion pending", "wrist": "fixed right palm-up", "policy_hz": 50},
+  "data": {"starting_source": "upstream_kinematic", "ego_data_available": false, "target_duration_s": 3.0, "candidate_duration_s": [3.0, 5.0], "split_unit": "original_source_trajectory", "single_clip_generalization_claim": false, "perturbations": {"joint_bias_rad": [0.0, 0.03, 0.06], "time_offset_s": [0.0, 0.02, 0.04]}, "note": "Verify source/reference physical feasibility before calling a trajectory a teacher; preserve source wrist motion and task redesign metadata."},
+  "controlled_physics": {"domain_randomization": false, "observation_noise": false, "external_object_force": false, "external_finger_force": false, "action_mask": false, "object_voc": false, "failure_head": false, "initialization": "same predetermined first-frame state", "evaluation_auto_reset": false, "evaluation_rsi": false},
+  "arms": [
+    {"id": "A0", "method": "execute perturbed reference with zero residual", "status": "to_run"},
+    {"id": "A1", "method": "SuperMimic reference-conditioned residual, native objective", "native_self_collision_head_loss_weight": 0.1, "note": "The 15-D head is self collision; retain its native supervision, separate from new hand-object CHORD targets. Smoke weight=0 is not the formal A1 configuration.", "status": "to_run"},
+    {"id": "A2", "method": "A1 plus independently labeled phase-conditioned hand-object wrench support", "status": "requires_live_contact_and_imagination_validation"},
+    {"id": "A3", "method": "same task/reward/control PPO", "status": "pen_ppo_not_implemented_upstream"}
+  ],
+  "matching": {"same_initial_states": true, "same_reference": true, "same_physics": true, "same_observation_budget": true, "A1_A2_equal_wall_budget": true, "separate_reward_and_optimizer_ablation": true, "seeds_for_research_conclusion": [1, 2, 3], "smoke_seeds_are_not_evidence": true},
+  "screening_thresholds": {"position_m": 0.02, "axis_orientation_deg": 20.0, "penetration_m": 0.003, "joint_limit_margin_rad": 0.001, "wrist_displacement_m": 0.005, "wrist_angle_deg": 5.0, "status": "proposed_not_final_acceptance"},
+  "metrics": ["complete_clip", "position_mean_p95_max_m", "directed_pen_axis_error_deg", "defined_rotation_progress", "drop_and_contact_switches", "penetration", "executed_target_and_joint_limits", "torque_load", "unassisted_free_dynamics", "WM_rollout_error", "contact_calibration", "physical_directional_gradient_agreement"],
+  "cost_ledger_stages": ["data_acquisition", "reconstruction", "retargeting", "teacher_training", "teacher_data", "cold_compile", "simulation_sampling", "world_model_fit", "policy_update", "evaluation", "retry"],
+  "multitrajectory": {"N": [1, 5, 10, 20], "methods": ["independent_models_and_policies", "shared_model_separate_policy_adaptation", "shared_model_and_reference_conditioned_policy", "shared_reference_conditioned_model_free_policy"], "include_pretraining_teacher_retry_cost": true, "condition_on_geometry_and_physics_before_cross_object_claim": true},
+  "claims_prohibited_until_measured": ["CHORD acceleration factor", "real ego generalization", "synthetic equals real ego", "support match proves dynamics", "source multi-embodiment equals multiple demonstrations", "checkpoint saves mean task learned"]
+}

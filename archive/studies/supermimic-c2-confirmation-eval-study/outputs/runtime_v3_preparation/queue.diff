@@ -1,0 +1,29 @@
+--- D:\workspace\supermimic-c2-confirmation-eval-study\scripts\run_c2_portfolio_queue_v2.py
++++ D:\workspace\supermimic-c2-confirmation-eval-study\scripts\run_c2_portfolio_queue_v3.py
+@@ -11,7 +11,7 @@
+ STARTED=time.monotonic()
+ ROOT=Path(__file__).resolve().parents[1]
+ STUDY=Path("D:/workspace/supermimic-chord-study")
+-DEFAULT_PLAN=ROOT/"configs/c2-confirmation-evaluation-v2.json"
++DEFAULT_PLAN=ROOT/"configs/c2-confirmation-evaluation-v3.json"
+ 
+ 
+ def import_path(path,name):
+@@ -20,7 +20,7 @@
+ 
+ 
+ def preflight(plan_path):
+-    worker=import_path(ROOT/"scripts/evaluate_c2_portfolio_v2.py","portfolio_worker_contract")
++    worker=import_path(ROOT/"scripts/evaluate_c2_portfolio_v3.py","portfolio_worker_contract")
+     plan=worker.validate(plan_path)
+     worker.require(Path(plan["source_pins"]["queue"]["path"]).resolve()==Path(__file__).resolve(),"Wrong queue")
+     for index,job in enumerate(plan["jobs"]):
+@@ -31,6 +31,8 @@
+         worker.require(job["command"]==expected,"Frozen worker command changed")
+     lifecycle=import_path(plan["source_pins"]["lifecycle"]["path"],"reviewed_inset_lifecycle")
+     lifecycle.ROOT=STUDY
++    bounded_io=import_path(plan["source_pins"]["runtime_io_helper"]["path"],"bounded_supervisor_io")
++    lifecycle.write=bounded_io.write_json
+     return plan,worker,lifecycle
+ 
+ 

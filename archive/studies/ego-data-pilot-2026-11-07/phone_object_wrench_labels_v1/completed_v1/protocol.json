@@ -1,0 +1,95 @@
+{
+  "schema": "phone_saved_object_wrench_label_protocol:1",
+  "status": "FROZEN_BEFORE_WRENCH_DERIVATION",
+  "actual_new_model_native_NN_physics": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\completed_v1",
+  "inputs": {
+    "acquisition_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 10554,
+      "sha256": "4eaba866d38b51d5edfced2cbc46eb6cd8315c78a0c50b769d7e2b79fecf4559"
+    },
+    "dataset_audit": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\independent_dataset_review_v1\\report.json",
+      "bytes": 9318,
+      "sha256": "718368880239b9858c7f47bc5ef4fed0ca6a07d74d2a72e9fa6d97349966d506"
+    },
+    "sample_identities": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\sample_identities.json",
+      "bytes": 2687154,
+      "sha256": "23b39fe3dd3d1f15b44942e4ac8a8e12082515a3fdc6ba41e34d936fc13f8a56"
+    },
+    "episodes": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\episodes.json",
+      "bytes": 161321,
+      "sha256": "189b2b5af34c3999a57b7da6b705547a1b8464cd3b6ee5920327630233bf4c99"
+    },
+    "source_exact": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\exact_source_original_hand_completed_v1\\seed1_rank0.json",
+      "bytes": 543975,
+      "sha256": "7af27c899e0e7b5252a7eb770a70ef7ec30913f5506881d0462e61af07d28303"
+    },
+    "source_side": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v11\\source1mm_opposed_side_original_hand_completed_v1\\seed1_rank0.json",
+      "bytes": 543004,
+      "sha256": "e07ddb0192b52eb47102ca89b12dc191e80d4d1d1296b4e7ccd9f205633ec8bd"
+    }
+  },
+  "sources": {
+    "exporter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\build_saved_labels.py",
+      "bytes": 19641,
+      "sha256": "e15f8ee0948abbbe7cb0eeec70719ebd2f9cbac472ce81c7b0f312e41c7c5c26"
+    },
+    "frozen_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "state_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "native_reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    },
+    "native_contact_source_audit": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_source_audit_v1\\report.json",
+      "bytes": 11212,
+      "sha256": "599e996613f7c153af07282392b90947a8dd33baa8a0fa4b1108a2e0d4ad9832"
+    },
+    "native_3_11_core_util": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_source_audit_v1\\official_3_11_sources\\src__engine__engine_core_util.c",
+      "bytes": 34115,
+      "sha256": "e1c62922ab54f7693867cb92f393d017bd5f35e67981296cbdc4ac34128ba451"
+    },
+    "native_3_11_core_smooth": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_source_audit_v1\\official_3_11_sources\\src__engine__engine_core_smooth.c",
+      "bytes": 82794,
+      "sha256": "dea0dbe7520a71655623f7da150bce373f861df48539c0303f4989c15c040f0d"
+    }
+  },
+  "analytic_cases": 3,
+  "budget": {
+    "saved_interval_trace_NPZ": 960,
+    "initial_NPZ": 96,
+    "new_model_Native_FK_NN_physics": 0
+  },
+  "rules": {
+    "phone_geom": 71,
+    "contact_force_filter": "NONE; all phone-boundary decoded contacts incl table/nonpad; no Fn cutoff",
+    "contact_transform": "sign*frame.T@localforce6; sign+geom2/-geom1; tau about same PRE COM plus direct moment",
+    "pre_pose": "Episode initial qpos/qvel then previous POST; interval boundaries continuous; no native forward",
+    "body_axes": "Rbody.T vectors at each PRE; torque about moving COM",
+    "source_axes": "Rbody_source.T per PRE vector; origin remains moving COM",
+    "source_fixed_frame": "Rbody_source.T and torque translated to sourceCOM explicitly",
+    "linear_balance": "m*(vCOMend-vCOMstart)-m*g*(returnedn*h)-sum(h*FcontactWorld)",
+    "angular_balance": "(Rend Ibody Rend.T)omegaEnd-(Rstart Ibody Rstart.T)omegaStart-sum(h*tauCOMWorld)",
+    "partial": "Actual n*h prefix, retained separately; never synthesize H target or replace residual byzero",
+    "physics_scope": "Observed simulator decoded-force labels and discrete/omitted-term defects, not realforce truth or successful support",
+    "grouping": "Prior TRAIN/VALIDATION/TEST, family, branch anddt unchanged; complete912 vs partial48 separate"
+  }
+}

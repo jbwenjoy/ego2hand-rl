@@ -1,0 +1,25 @@
+--- run_full151_matched_material_cones_cpu_v1.py
++++ run_full151_matched_material_cones_cpu_v2.py
+@@ -23,9 +23,19 @@
+     if sha(DRIVER)!=DRIVER_SHA:raise ValueError('Qualified lifecycle/identity driver changed')
+     spec=importlib.util.spec_from_file_location('_matched_cone_CPU_owned_identity',DRIVER);d=importlib.util.module_from_spec(spec);spec.loader.exec_module(d);d.ROOT=ROOT;d.WORKER=WORKER
+     identity_python=d.selected_python_identity(a.python)
+-    pre=subprocess.run([str(a.python),str(WORKER),'--protocol',str(protocol)],capture_output=True,text=True,timeout=15,creationflags=HIDDEN,env={**os.environ,'CUDA_VISIBLE_DEVICES':'-1'})
+-    if pre.returncode:raise ValueError('CPU array preflight rejected: '+pre.stderr+pre.stdout)
+-    proof=json.loads(pre.stdout)
++    process=subprocess.Popen([str(a.python),str(WORKER),'--protocol',str(protocol)],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,creationflags=HIDDEN,env={**os.environ,'CUDA_VISIBLE_DEVICES':'-1'})
++    try:stdout,stderr=process.communicate(timeout=15)
++    except BaseException as exc:
++        cleanup={'status':'UNVERIFIED','retained_CPU_launcher_pid':process.pid}
++        try:cleanup['owned_tree_cleanup']=d.lifecycle().stop_owned(process)
++        except BaseException as error:cleanup['cleanup_error']=repr(error)
++        try:process.communicate(timeout=1)
++        except BaseException:
++            if process.stdout:process.stdout.close()
++            if process.stderr:process.stderr.close()
++        raise RuntimeError('CPU preflight interrupted/timeout; no LP permitted; retained owned cleanup '+repr(cleanup)) from exc
++    if process.returncode:raise ValueError('CPU array preflight rejected: '+stderr+stdout)
++    proof=json.loads(stdout)
+     if proof['status']!='CPU_METADATA_ARRAY_PREFLIGHT_ONLY' or proof['LP_calls']!=0 or proof['Torch_Warp_Env_imported']:raise ValueError('Default CPU metadata boundary failed')
+     if not a.run:print(json.dumps(proof,indent=2));return
+     if p['CPU_run_authorized'] is not True or p['soft_worker_seconds']!=30 or p['hard_process_seconds']!=45:raise ValueError('Separate Root finiteCPU authorization required')

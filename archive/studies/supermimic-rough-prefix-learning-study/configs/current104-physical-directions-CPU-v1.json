@@ -1,0 +1,72 @@
+{
+  "schema": "rough_physical_probe_direction_CPU_preparation:1",
+  "GPU_authorized": false,
+  "physical_branches_authorized": false,
+  "automatic_retry": false,
+  "path_order": [
+    "A0",
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "phase_order": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "seed": 2026110401,
+  "direction_count": 8,
+  "epsilons": [
+    0.002,
+    0.001
+  ],
+  "guard_ulps": 8,
+  "pins": {
+    "entry": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\prepare_physical_probe_directions_cpu.py",
+      "sha256": "54c2f5b20777413b8a8c8417ee44ce150c4a92684de66f5481bcb56797d6f720"
+    },
+    "direction_source": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\interior_directions.py",
+      "sha256": "6dbbced8aa3eb3ee24038af54a5eefbf56aaa1396873daf8e27d0b3a5107b182"
+    },
+    "CPU_boundary_contract": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\interior_directions_CPU_v1\\report.json",
+      "sha256": "2256aa1373dbb72d51ef0030684966d6d18a31a833111ff055b1e98c85bd85b6"
+    },
+    "physical_protocol_proposal": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\proposals\\current104_samewarp_physical_fd_v1\\protocol.json",
+      "sha256": "60f390eb8b6e395046ee041f0af58331647551009ea1e872ea07ee413682eded"
+    },
+    "saved_diagnostic_report": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\WM_onpolicy_CPU_diagnostic_v1\\report.json",
+      "sha256": "ba388439767411732785d7000eeed38089fb9cd2aca972dfa7c570a83b21899c"
+    },
+    "saved_predictions": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\WM_onpolicy_CPU_diagnostic_v1\\predictions_truth_baselines_gradients.npz",
+      "sha256": "774af5d1c14f40239639579e149e1ccc6d95b47d55e5e10359623f9756b3321f"
+    },
+    "nominal_model": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\nominal_model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "A0_control_events": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\control_events.json",
+      "sha256": "e291689c8a6ce2eb53415cc6b756081cfe3cd3d86f84cc14577c768bcd628201"
+    },
+    "A1L_control_events": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\control_events.json",
+      "sha256": "d81347396beb622aee3f388473d9dc52da53d35dfc388f689d0beeb5bb55c6f0"
+    },
+    "P_ONLY_control_events": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\control_events.json",
+      "sha256": "c6820a0907a1952ca85d850e88cba853612dc4dd27eaae0c3f22791987f35f47"
+    },
+    "A2_control_events": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\control_events.json",
+      "sha256": "660b9957e1c7d8e0a0253d18fdf750e50b5540fb6477a7cf8dc05a57f3cdf096"
+    }
+  },
+  "output": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\current104_physical_directions_CPU_v1"
+}

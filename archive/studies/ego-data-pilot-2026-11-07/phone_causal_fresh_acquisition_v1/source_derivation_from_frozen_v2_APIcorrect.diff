@@ -1,0 +1,284 @@
+--- D:\workspace\ego-data-pilot-2026-11-07\phone_episode_acquisition_v1\collect_phone_episodes_v2.py
++++ D:\workspace\ego-data-pilot-2026-11-07\phone_causal_fresh_acquisition_v1\collect_fresh_phone_families_v2.py
+@@ -1,108 +1,114 @@
+-"""Execute the frozen48-family plan and export grouped H20ms phone transitions."""
++"""New12 fixed controlled families: SOURCE/CPUFalse draft, no execution on import.
++
++The original v2 native Reader/tick/trace acquisition path is reused. New family
++outcomes are never selected from WM predictions. Same known poses, not new ego.
++"""
+ from pathlib import Path
+ from collections import Counter,defaultdict
+-import argparse,hashlib,json,time
++import argparse,hashlib,importlib.util,json,sys,time
+ import numpy as np
+-from native_phone_reader import NativePhoneReader,pin
+-
+-H=Path(__file__).resolve().parent
++H=Path(__file__).resolve().parent;P=H.parent
++SCHEMA='phone_new12_controlled_final_acquisition_protocol:1'
++RESULT_SCHEMA='phone_new12_controlled_final_acquisition_result:1'
++ROLE='NEW_FINAL_VALIDATION_SEALED_BEFORE_ACQUISITION'
++PLAN_SHA='bb547651f8b6137d00d15ab63d16ec29c313bc3365a0c9b05f9a8d9ea38e7600'
++PARENT_SHA='48f70d650f8f0f197120bc864f25a7c850b37ceae2fd068eea7e91fef40da17d'
++READER_SHA='877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841'
++INPUTS={'design','family_plan','original_family_plan','original_acquisition','original_identities','exposure_policy','reader_contract','model_mjb'}
++
++def pin(path):
++ p=Path(path).resolve(strict=True);b=p.read_bytes();return dict(path=str(p),bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
++def checked(v):
++ p=Path(v['path']);assert p.is_absolute() and pin(p)==v,'Changed absolute pin '+str(p);return p
+ def read(p):return json.loads(Path(p).read_text(encoding='utf8'))
+-def clean(v):
+-    if isinstance(v,np.ndarray):return clean(v.tolist())
+-    if isinstance(v,dict):return {k:clean(x) for k,x in v.items()}
+-    if isinstance(v,(list,tuple)):return [clean(x) for x in v]
+-    if isinstance(v,(float,np.floating)):return float(v) if np.isfinite(v) else None
+-    if isinstance(v,np.integer):return int(v)
+-    if isinstance(v,np.bool_):return bool(v)
+-    return v
+-def write(p,j):
+-    with Path(p).open('x',encoding='utf8') as f:json.dump(clean(j),f,indent=2,allow_nan=False)
+-def save_npz(p,**arrays):
+-    with Path(p).open('xb') as f:np.savez_compressed(f,**arrays)
+-def checked(r):
+-    assert pin(r['path'])==r,'Changed pinned input '+r['path'];return Path(r['path'])
+ def array_sha(a):return hashlib.sha256(np.asarray(a).tobytes()).hexdigest()
+-def receipt_json(r):
+-    return {k:v for k,v in r.items() if k!='integration_state'}|{
+-        'dtype':r['integration_state'].dtype.str,'shape':list(r['integration_state'].shape)}
+-
+-def reset_with_physical_diagnostics(reader,qpos,ctrl):
+-    """Preserve a physically invalid initial episode without hiding structural errors."""
+-    try:return reader.reset(qpos,ctrl)
+-    except ValueError as err:
+-        known=str(err) in ['Known no-aid initial native state','Known finite initial contacts']
+-        d=reader.d
+-        if not known or d is None or np.any(d.xfrc_applied) or np.any(d.qfrc_applied):raise
+-        if str(err)=='Known no-aid initial native state' and not np.any(d.warning.number):raise
+-        # These are additional reads of the failed RESET_FORWARD context only.
+-        # No forward, pose overwrite, native step or retry of this episode.
+-        contact=[]
+-        for ci in range(d.ncon):
+-            c=d.contact[ci];g1,g2=map(int,c.geom);f=np.empty(6)
+-            reader.mj.mj_contactForce(reader.m,d,ci,f)
+-            reader.counts['contact_force_reads']+=1;reader.counts['initial_contact_force_reads']+=1
+-            contact.append(np.r_[0,g1,g2,int(c.dim),int(c.efc_address),c.dist,c.pos,c.frame,f])
+-        try:x=reader.state58()
+-        except ValueError:x=np.full(58,np.nan)
+-        reader.terminated=True
+-        return dict(state58=x,receipt=reader.receipt(),qpos27=d.qpos.copy(),qvel26=d.qvel.copy(),ctrl20=d.ctrl.copy(),
+-            initial_contact_rows24=np.asarray(contact,dtype=np.float64).reshape(-1,24),
+-            initial_pad_normal_N2=np.full(2,np.nan),initial_phone_nonpad_normal_N=float('nan'),
+-            initial_table_normal_N=float('nan'),contact_phase='FAILED_RESET_FORWARD; force summaries unknown; raw retained',
+-            reset_termination='ABORT_INITIAL_NATIVE_WARNING' if np.any(d.warning.number) else 'ABORT_INITIAL_NONFINITE_CONTACT',
+-            reset_error=str(err),warning_numbers=np.array(d.warning.number))
+-
+-def preflight(p):
+-    protocol=read(p)
+-    assert protocol['schema']=='phone_episode_acquisition_protocol:1'
+-    assert type(protocol['CPU_run_authorized']) is bool and protocol['new_training_authorized'] is False
+-    for r in [*protocol['source_pins'].values(),*protocol['inputs'].values()]:checked(r)
+-    assert protocol['source_pins']['collector']==pin(__file__)
+-    design=read(checked(protocol['inputs']['design']));plan=read(checked(protocol['inputs']['family_plan']))
+-    assert design['family_plan']==protocol['inputs']['family_plan']
+-    assert plan['schema']=='phone_episode_family_plan:1' and len(plan['families'])==48
+-    assert plan['maximum_native_integration_steps']==92160 and plan['intervals_per_episode']==10
+-    assert Counter(f['split'] for f in plan['families'])=={'train':36,'validation':6,'test':6}
+-    qrange=np.array(design['actual_limits']['joint_range20x2_F64'])
+-    urange=np.array(design['actual_limits']['actuator_ctrlrange20x2_F64'])
+-    qhash=[];uhash=[]
+-    for i,f in enumerate(plan['families']):
+-        assert f['family_id']==i and f['native_dt_s']==[.0003125,.00015625] and f['substeps_per_H']==[64,128]
+-        old=read(checked(f['source_record']))['native_probe']['raw']
+-        q=np.array(f['initial_qpos27_F64']);u=np.array(f['held_ctrl10x20_F64']);base=np.array(f['base_ctrl20_F64'])
+-        assert q.shape==(27,) and u.shape==(10,20) and base.shape==(20,)
+-        assert np.isfinite(q).all() and np.isfinite(u).all()
+-        assert np.all(q[:20]>=qrange[:,0]) and np.all(q[:20]<=qrange[:,1])
+-        assert np.all(u>=urange[:,0]) and np.all(u<=urange[:,1])
+-        assert np.max(abs(q[:8]-np.array(old['qpos27'])[:8]))<=.005+1e-12
+-        assert q[8:].tobytes()==np.array(old['qpos27'])[8:].tobytes()
+-        assert base.tobytes()==np.array(old['ctrl20']).tobytes()
+-        assert np.max(abs(u[:,:8]-base[:8]))<=.05+1e-12 and np.max(abs(u[:,8:]-base[8:]))<=.025+1e-12
+-        assert array_sha(q)==f['initial_qpos27_raw_F64_sha256']
+-        assert array_sha(u)==f['held_ctrl10x20_raw_F64_sha256']
+-        assert not any(f['initial_qvel26_F64'])
+-        qhash.append(array_sha(q));uhash.append(array_sha(u))
+-    assert len(set(qhash))==48 and len(set(uhash))==48
+-    proof=read(checked(protocol['inputs']['reader_contract']))
+-    assert proof['status']=='PASS_192_NATIVE_STEP_GOLDEN_READER_CONTRACT'
+-    assert proof['passed']==proof['total']==4 and all(v is True for v in proof['checks'].values())
+-    assert proof['counts']['integration_steps']==192
+-    assert proof['reader']==protocol['source_pins']['reader']
+-    out=Path(protocol['output']);assert out.is_absolute() and not out.exists()
+-    return protocol,design,plan,out
+-
+-def main():
+-    ap=argparse.ArgumentParser();ap.add_argument('--protocol',type=Path,required=True);ap.add_argument('--run',action='store_true');args=ap.parse_args()
+-    protocol,design,plan,out=preflight(args.protocol)
+-    if not args.run:
+-        print(json.dumps(dict(status='METADATA_ONLY_NO_MODEL',families=48,episodes=96,max_steps=92160)));return
++def bits(a,b):
++ a,b=np.asarray(a),np.asarray(b);return a.dtype==b.dtype and a.shape==b.shape and a.tobytes()==b.tobytes()
++def input_alias_key(identity,physical_digest):
++ r=identity['source_after_action_receipt']
++ return (r['sha256'],identity['actual_control20_raw_sha256'],identity['dt_s'],identity['requested_substeps'],physical_digest,r['signature'])
++
++def preflight(path):
++ p=read(path)
++ assert p['schema']==SCHEMA and set(p['inputs'])==INPUTS
++ assert type(p['CPU_run_authorized']) is bool and p['new_training_authorized'] is False and p['GPU_run_authorized'] is False
++ assert p['automatic_retry'] is False and p['maximum_steps']==23040 and p['maximum_rows']==240 and p['maximum_episodes']==24
++ for v in [*p['inputs'].values(),*p['source_pins'].values()]:checked(v)
++ assert p['source_pins']['collector']==pin(__file__)
++ assert p['source_pins']['frozen_collector_v2']['sha256']==PARENT_SHA and p['source_pins']['reader']['sha256']==READER_SHA
++ assert p['inputs']['family_plan']['sha256']==PLAN_SHA
++ plan=read(checked(p['inputs']['family_plan']));design=read(checked(p['inputs']['design']))
++ oldplan=read(checked(p['inputs']['original_family_plan']));old=read(checked(p['inputs']['original_acquisition']))
++ assert plan['schema']=='phone_new_fresh_final_family_plan:1' and plan['new_families']==12
++ assert plan['max_native_steps']==23040 and plan['max_H20ms_rows']==240
++ assert [f['family_id'] for f in plan['families']]==list(range(1000,1012)) and len(oldplan['families'])==48
++ assert design['family_plan']==p['inputs']['original_family_plan'] and old['family_plan']==p['inputs']['original_family_plan']
++ assert old['sample_identities']==p['inputs']['original_identities'] and old['rows']==960
++ policy=read(checked(p['inputs']['exposure_policy']))
++ assert policy['fresh_final_family_ids']==list(range(1000,1012)) and policy['fresh_final_not_acquired_or_fit'] is True
++ qrange=np.asarray(design['actual_limits']['joint_range20x2_F64'],dtype=np.float64)
++ urange=np.asarray(design['actual_limits']['actuator_ctrlrange20x2_F64'],dtype=np.float64)
++ oldq={f['initial_qpos27_raw_F64_sha256'] for f in oldplan['families']}
++ oldu={f['held_ctrl10x20_raw_F64_sha256'] for f in oldplan['families']}
++ source_by_branch={f['source_branch']:f['source_record'] for f in oldplan['families']}
++ seenq=[];seenu=[];aliases=[]
++ for f in plan['families']:
++  assert f['split']==ROLE and f['native_dt_s']==[.0003125,.00015625]
++  assert f['original48_family_relabelled'] is False and f['acquired'] is False and f['used_for_fit_or_model_selection'] is False
++  assert f['source_record']==source_by_branch[f['source_branch']]
++  src=read(checked(f['source_record']))['native_probe']['raw']
++  q=np.asarray(f['initial_qpos27_F64'],dtype=np.float64);qv=np.asarray(f['initial_qvel26_F64'],dtype=np.float64)
++  u=np.asarray(f['held_ctrl10x20_F64'],dtype=np.float64);base=np.asarray(f['base_ctrl20_F64'],dtype=np.float64)
++  delta=np.asarray(f['requested_delta10x20_F64'],dtype=np.float64);alpha=np.asarray(f['whole_curve_alpha20_F64'],dtype=np.float64)
++  assert q.shape==(27,) and qv.shape==(26,) and base.shape==(20,) and u.shape==delta.shape==(10,20) and alpha.shape==(20,)
++  assert all(np.isfinite(x).all() for x in [q,qv,u,base,delta,alpha])
++  assert bits(qv,np.zeros(26,dtype=np.float64)) and np.all(q[:20]>=qrange[:,0]) and np.all(q[:20]<=qrange[:,1])
++  assert np.all(u>=urange[:,0]) and np.all(u<=urange[:,1]) and np.all(base>=urange[:,0]) and np.all(base<=urange[:,1])
++  assert np.max(abs(q[:8]-np.asarray(src['qpos27'])[:8]))<=.005+1e-12
++  assert bits(q[8:],np.asarray(src['qpos27'],dtype=np.float64)[8:]) and bits(base,np.asarray(src['ctrl20'],dtype=np.float64))
++  assert abs(q[23:]@q[23:]-1)<=1e-12 and np.all((alpha>=0)&(alpha<=1))
++  assert bits(u,base+delta*alpha) and np.max(abs(u[:,:8]-base[:8]))<=.05+1e-12 and np.max(abs(u[:,8:]-base[8:]))<=.025+1e-12
++  qh,uh=array_sha(q),array_sha(u)
++  assert qh==f['initial_raw_sha256'] and uh==f['control_raw_sha256']
++  aliases.append(dict(family_id=f['family_id'],initial_alias_original=qh in oldq,control_curve_alias_original=uh in oldu))
++  seenq.append(qh);seenu.append(uh)
++ assert len(set(seenq))==len(set(seenu))==12 and not any(a['initial_alias_original'] or a['control_curve_alias_original'] for a in aliases)
++ proof=read(checked(p['inputs']['reader_contract']))
++ assert proof['status']=='PASS_192_NATIVE_STEP_GOLDEN_READER_CONTRACT' and proof['passed']==proof['total']==4 and all(v is True for v in proof['checks'].values())
++ assert proof['counts']['integration_steps']==192 and proof['reader']==p['source_pins']['reader']
++ out=Path(p['output']);assert out.is_absolute() and out.parent.resolve()==H and not out.exists()
++ expected=dict(original_family_count=48,new_family_count=12,new_family_ids=list(range(1000,1012)),unique_initial_hashes=12,unique_whole_control_hashes=12,initial_aliases_original48=0,control_curve_aliases_original48=0,raw_alias_checks=aliases)
++ assert p['metadata_alias_receipt']==expected
++ return p,design,plan,out
++
++def load_frozen_collector(p):
++ path=checked(p['source_pins']['frozen_collector_v2']);sys.path.insert(0,str(path.parent))
++ spec=importlib.util.spec_from_file_location('fresh12_frozen_acquisition_v2',path)
++ mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
++ assert pin(sys.modules[mod.NativePhoneReader.__module__].__file__)==p['source_pins']['reader']
++ return mod
++
++def run_analysis(protocol_path):
++    protocol,design,plan,out=preflight(protocol_path)
++    assert protocol['CPU_run_authorized'] is True
++    frozen=load_frozen_collector(protocol)
++    NativePhoneReader=frozen.NativePhoneReader
++    write,save_npz,receipt_json=frozen.write,frozen.save_npz,frozen.receipt_json
++    reset_with_physical_diagnostics=frozen.reset_with_physical_diagnostics
+     assert protocol['CPU_run_authorized'] is True
+     out.mkdir();write(out/'protocol.json',protocol);started=time.perf_counter()
+     readers={};rows=[];identities=[];episodes=[];source_aliases=defaultdict(list);phase='load_models'
+     try:
+-        for h in plan['native_dt_s']:
++        for h in [.0003125,.00015625]:
+             readers[h]=NativePhoneReader(checked(protocol['inputs']['model_mjb']),dt_s=h)
+         assert len({r.shared_physics_digest for r in readers.values()})==1
++        old_report=read(checked(protocol['inputs']['original_acquisition']))
++        old_identities=read(checked(protocol['inputs']['original_identities']))
++        original_input_aliases=defaultdict(list);fresh_input_aliases=defaultdict(list)
++        for row in old_identities:
++            digest=old_report['model_audits'][str(row['dt_s'])]['shared_physics_digest_without_dt']
++            assert digest==readers[row['dt_s']].shared_physics_digest
++            original_input_aliases[input_alias_key(row,digest)].append(row['sample_id'])
+         for family in plan['families']:
+             fid=family['family_id'];q0=np.array(family['initial_qpos27_F64']);base=np.array(family['base_ctrl20_F64'])
+             commands=np.array(family['held_ctrl10x20_F64'])
+@@ -153,6 +159,7 @@
+                         target_receipt=receipt_json(v['target_receipt']),actual_control20_raw_sha256=array_sha(u),
+                         summary=sm,warning_numbers=v['warning_numbers'])
+                     identities.append(identity)
++                    fresh_input_aliases[input_alias_key(identity,r.shared_physics_digest)].append(sample)
+                     key=(v['source_after_action_receipt']['sha256'],v['target_receipt']['sha256'],array_sha(u),
+                         h,r.n,r.shared_physics_digest,'phone_COM_world_state58:1',v['source_receipt']['signature'])
+                     source_aliases[key].append(sample)
+@@ -167,36 +174,55 @@
+         keys=['x58_F64','u20_F64','y58_F64','target_delta52_F64','native_dt_s_F64','n_substeps_i64',
+               'executed_substeps_i64','complete_H_bool','training_eligible_bool','row_id_i64','family_id_i64',
+               'episode_id_i64','interval_index_i64','contact_summary_F64']
+-        for split in ['train','validation','test']:
++        for split in [ROLE]:
+             chosen=[v for v in rows if v['split']==split]
+             a={k:np.asarray([r[k] for r in chosen],dtype=np.float64 if k in f64 else np.bool_ if k in bools else np.int64) for k in keys}
+             for key,width in widths.items():a[key]=a[key].reshape(-1,width)
+-            dest=out/f'{split}.npz';save_npz(dest,**a);outputs[split]=pin(dest)
++            dest=out/'fresh_final.npz';save_npz(dest,**a);outputs['fresh_final']=pin(dest)
+         aliases=[dict(sample_ids=rr,family_ids=sorted({identities[i]['family_id'] for i in rr}),
+                       splits=sorted({identities[i]['split'] for i in rr})) for rr in source_aliases.values() if len(rr)>1]
+         cross=[v for v in aliases if len(v['splits'])>1]
+         write(out/'sample_identities.json',identities);write(out/'episodes.json',episodes)
++        raw_alias_report=dict(
++            schema='phone_fresh12_raw_identity_alias_receipt:1',
++            initial_and_control_plan_preflight=protocol['metadata_alias_receipt'],
++            fresh_same_input_action_groups=[dict(sample_ids=ids) for ids in fresh_input_aliases.values() if len(ids)>1],
++            cross_original960_same_input_action=[dict(fresh_sample_ids=ids,original_sample_ids=original_input_aliases[key]) for key,ids in fresh_input_aliases.items() if key in original_input_aliases],
++            no_deduplication_or_reassignment=True,
++            key_scope='source_after_action completeINTEGRATION SHA+actualu bytes+actualdt/n+sharedphysics+signature; visible state equality alone is insufficient. Same receipt/action does not remove shared lineages or prove state58 Markov sufficiency.')
++        write(out/'raw_identity_aliases.json',raw_alias_report)
+         audits={str(h):r.audit()|dict(body_ipos_body_m=r.ipos.copy(),joint_range20x2=r.qrange.copy(),actuator_ctrlrange20x2=r.urange.copy()) for h,r in readers.items()}
+         counts={k:sum(r.counts[k] for r in readers.values()) for k in next(iter(readers.values())).counts}
+-        assert counts['integration_steps']<=92160 and len(episodes)==96
+-        summary=dict(schema='phone_episode_acquisition_result:1',status='COMPLETE_GROUPED_NATIVE_ACQUISITION',
+-            protocol=pin(args.protocol),design=protocol['inputs']['design'],family_plan=protocol['inputs']['family_plan'],
++        assert counts['integration_steps']<=23040 and len(episodes)==24 and len(rows)<=240
++        summary=dict(schema=RESULT_SCHEMA,status='COMPLETE_NEW12_CONTROLLED_FINAL_NATIVE_ACQUISITION',
++            protocol=pin(protocol_path),design=protocol['inputs']['design'],family_plan=protocol['inputs']['family_plan'],
+             state_schema='phone_COM_world_state58:1',delta_schema='phone_physical_world_delta52:2',
+             array_schema='phone_episode_H20ms_arrays:1',outputs=outputs,
+             sample_identities=pin(out/'sample_identities.json'),episodes=pin(out/'episodes.json'),
+-            counts=counts,model_audits=audits,rows=len(rows),families=48,episode_count=96,
++            counts=counts,model_audits=audits,rows=len(rows),families=12,episode_count=24,
+             split_counts={s:dict(families=len({e['family_id'] for e in episodes if e['split']==s}),
+                 rows=sum(r['split']==s for r in rows),eligible_rows=sum(r['split']==s and r['training_eligible_bool'] for r in rows),
+-                partial_rows=sum(r['split']==s and not r['complete_H_bool'] for r in rows)) for s in ['train','validation','test']},
++                partial_rows=sum(r['split']==s and not r['complete_H_bool'] for r in rows)) for s in [ROLE]},
+             exact_alias_groups=aliases,cross_partition_alias_groups=cross,partition_qualified=not cross,
++            raw_identity_alias_report=pin(out/'raw_identity_aliases.json'),
++            cross_original_input_action_alias_groups=len(raw_alias_report['cross_original960_same_input_action']),
++            raw_identity_aliases_absent=(not aliases and not raw_alias_report['fresh_same_input_action_groups'] and not raw_alias_report['cross_original960_same_input_action']),
++            planned_maximum_rows=240,planned_maximum_integration_steps=23040,
++            unexecuted_planned_intervals=240-len(rows),fresh_controlled_family_validation_only=True,
+             no_deduplication_or_reassignment=True,original_holding_gate_qualified=False,
+             independent_ego_trajectory_or_real_dynamics_GT_qualified=False,Markov_state58_qualified=False,
+             first_new_learning_training_started=False,elapsed_s=time.perf_counter()-started,
+-            scope='Local native simulated episodes around two mapped ego-frame poses. Bothdt in each family together. Partial records retained with NaN H targets; eligibility is full finite H/no-warning, not safety or holding. No learned model or policy benefit.')
++            scope='New controlled initial q/actions at the same two known source poses and original model. Bothdt remain grouped. Partial/abort/reset failures retained; no learned training, independent ego/scene, Markov, policy or holding qualification.')
+         write(out/'report.json',summary)
+         print(json.dumps(dict(status=summary['status'],rows=len(rows),counts=counts,partition_qualified=not cross)),flush=True)
++        return summary
+     except BaseException as err:
+         write(out/'failure.json',dict(phase=phase,error=repr(err),episodes=episodes,returned_rows=len(rows),
+             counts={str(h):r.counts for h,r in readers.items()},automatic_retry=False));raise
+ 
+-if __name__=='__main__':main()
++if __name__=='__main__':
++ ap=argparse.ArgumentParser();ap.add_argument('--protocol',type=Path,required=True);ap.add_argument('--run',action='store_true');args=ap.parse_args()
++ if args.run:run_analysis(args.protocol)
++ else:
++  protocol,design,plan,out=preflight(args.protocol)
++  print(json.dumps(dict(status='METADATA_ONLY_NO_NATIVE_TORCH_NN_ARRAY_PAYLOAD',families=12,episodes=24,max_H_rows=240,max_steps=23040,CPU_run_authorized=protocol['CPU_run_authorized'],raw_plan_aliases=protocol['metadata_alias_receipt'])))

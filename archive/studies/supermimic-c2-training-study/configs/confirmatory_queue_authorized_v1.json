@@ -1,0 +1,308 @@
+{
+  "schema": "C2_020_prospective_training_queue:1",
+  "status": "frozen_ready_for_authorization",
+  "formal_training_authorized": true,
+  "caps_frozen_from_seed0_smoke": true,
+  "background_queue_continues_when_Goal_paused": true,
+  "checkpoint_format_version": 103,
+  "seeds": [
+    4,
+    5,
+    6
+  ],
+  "queue_runner_sha256": "e50495ac3f48882febd84e42525d2e2a192d34d856d69f2b06a699370cc9c946",
+  "python_executable": "D:/workspace/dex-supermimic-research/.venv/Scripts/python.exe",
+  "trainer": "D:\\workspace\\supermimic-c2-training-study\\scripts\\train_controlled_pen.py",
+  "trainer_sha256": "458f52dd54c208d4f521c34d4737f9930e1aa179474cb197bcc11e001cf38fe8",
+  "audit_script": "D:\\workspace\\supermimic-c2-training-study\\scripts\\audit_c2_training_checkpoint.py",
+  "audit_script_sha256": "ba9979d3f1855be0f78054155ab67e2a1be3b43db007b0b0883bd9482c149afa",
+  "source_inventory": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a1l_10iter_seed0_engineering_v1\\source\\inventory.json",
+  "source_inventory_sha256": "70469b2364f055ee42d8281a5b44de8699abf327cb245d2e8328fa85414226c6",
+  "source_bindings": {
+    "adapter": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\src\\c2_training_adapter.py",
+      "sha256": "4ec7f2c27b8e2a041b8d6929b4f345a02cdabe801215aa28d0340905fb34e6b0"
+    },
+    "pure_projection": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\src\\target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    },
+    "penalty_wrapper": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\src\\penalty_study\\penalty_only_objective.py",
+      "sha256": "cfa53515fb7dc12ae49a2aec2d9ca37603061c1752fc8875f879cf5ea235c914"
+    },
+    "entry": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\scripts\\train_controlled_pen.py",
+      "sha256": "458f52dd54c208d4f521c34d4737f9930e1aa179474cb197bcc11e001cf38fe8"
+    },
+    "original_trainer": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\source_baselines\\original_train_controlled_pen.py",
+      "sha256": "823711c1a7c5876942506986741f20171b3c09a292bf3656bda17c1b5a3fd65a"
+    }
+  },
+  "nominal_model_sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd",
+  "paired_protocol_file": "D:\\workspace\\supermimic-chord-study\\configs\\paired-contact-pilot-v2.json",
+  "paired_protocol_sha256": "a835df9c4ba1450faffdfebb217ceaca6db99e1d3ea3dcf634b6110a389dcae6",
+  "prospective_protocol_file": "D:\\workspace\\supermimic-c2-training-study\\protocols\\final_execution_protocol_v1.json",
+  "prospective_protocol_sha256": "77096ae1b1731738db46470bfdaa831da33a9ae4ff5a57fc04d7f7208775e31e",
+  "schedule_file": "D:\\workspace\\supermimic-c2-training-study\\protocols\\confirmatory_schedule_draft_v1.json",
+  "schedule_sha256": "0dc6d5c93738e7d9ef01a403f9ce2b4c18938169714a5b309d5edce300826d3c",
+  "gate_evidence": {
+    "cpu_real_imag": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\native_control_contract_cpu_v2\\checks.json",
+      "sha256": "20cbe14ec4196dd288bab655c527b06593e5f796914652d2d9f6f0acbb0be36c",
+      "script": "D:\\workspace\\supermimic-c2-training-study\\scripts\\check_c2_control_contract.py",
+      "script_sha256": "b9d50eb6d2c2ec137c27e88c75154ddcc607dd79cd24cebb793531d14320de34"
+    },
+    "cuda_real_imag": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\native_control_contract_warp_v1\\checks.json",
+      "sha256": "5e40e387caf3c6a90bd8a99ffc9a5016cdfe9903b031e3eefba99183dc45937a",
+      "script": "D:\\workspace\\supermimic-c2-training-study\\scripts\\check_c2_control_contract.py",
+      "script_sha256": "b9d50eb6d2c2ec137c27e88c75154ddcc607dd79cd24cebb793531d14320de34"
+    },
+    "pure_projection_AMP": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\target_inset_amp_cuda_v1\\checks.json",
+      "sha256": "9868f9ab079da256f98f0812496ad97f6099ac0673bb122332cfa863c7f15faa",
+      "script": "D:\\workspace\\supermimic-c2-training-study\\scripts\\check_target_inset_amp.py",
+      "script_sha256": "7fab255add85e050fd4c95852b7f67116baaccaa267006237b2c3d360500b056"
+    },
+    "legacy_format103_rejection": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\legacy_checkpoint_rejection_cpu_v1\\checks.json",
+      "sha256": "aab2b3789ec19010bc04291c21bc0f9eed3d3887dd6e8890ed69e4581582d900",
+      "script": "D:\\workspace\\supermimic-c2-training-study\\scripts\\check_legacy_checkpoint_rejection_cpu.py",
+      "script_sha256": "4b1435723c979dd84342e8d87d11b30ec98b498ccde07a799517484620c3a271",
+      "source_binding_sha256": "823711c1a7c5876942506986741f20171b3c09a292bf3656bda17c1b5a3fd65a"
+    },
+    "smoke_A1L": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\engineering_health_v2\\a1l\\report.json",
+      "sha256": "e41919c26fd772af66a2da235993c7be8c7863dafc80ed5eeb17fa7305471189"
+    },
+    "smoke_P_ONLY": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\engineering_health_v2\\p_only\\report.json",
+      "sha256": "07793e9579545a0cf3ffcc48f989fc99d6e15ff39f3f51743b180f6e0957ae0a"
+    },
+    "smoke_A2": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\engineering_health_v2\\a2\\report.json",
+      "sha256": "e39a526d9a86d9e013ee40f30463f447005f79171db78feaffc34bb120ac5264"
+    }
+  },
+  "method_attempt_seconds": {
+    "A1L": 2400,
+    "P_ONLY": 2400,
+    "A2": 2400
+  },
+  "per_run_process_watchdog_seconds": 2700,
+  "runtime_estimate_seconds_by_method_from_engineering": {
+    "A1L": {
+      "low": 780.5581424594857,
+      "high": 1127.4728724414795,
+      "point": 867.2868249549841,
+      "phase_seconds_per_iteration": {
+        "collect": 0.1352978166542016,
+        "wm": 0.21447275002719834,
+        "policy": 0.07111193334761386
+      },
+      "fixed_setup_compile_and_smoke_nonprofile_seconds": 39.74421156647926,
+      "engineering_metrics": {
+        "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a1l_10iter_seed0_engineering_v1\\compiled\\metrics.jsonl",
+        "sha256": "7ff1c0469ffb1e916f53634fb85be8a55b9fccc67c6a953fb1dcd27d81a67666"
+      },
+      "engineering_summary": {
+        "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a1l_10iter_seed0_engineering_v1\\summary.json",
+        "sha256": "e6f0a21717dab13053166aca141d6b52b45fa71868ac67c15c9a0961157ce54d"
+      },
+      "phase_difference_iterations": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "excluded_first_policy_compile_iteration": 2,
+      "scope": "Engineering extrapolation, not a confidence interval. Profiled collect/WM projected2000, policy1800; smoke nonprofile/setup retained once. Frequent smoke save/log overhead is not multiplied200 times. Auditor/queue/entry overhead and cache uncertainty remain separate."
+    },
+    "P_ONLY": {
+      "low": 1134.0322032382132,
+      "high": 1638.04651578853,
+      "point": 1260.0357813757923,
+      "phase_seconds_per_iteration": {
+        "collect": 0.13750518330683312,
+        "wm": 0.21233700000448152,
+        "policy": 0.2870968999923207
+      },
+      "fixed_setup_compile_and_smoke_nonprofile_seconds": 43.576994766985685,
+      "engineering_metrics": {
+        "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_p_only_10iter_seed0_engineering_v1\\compiled\\metrics.jsonl",
+        "sha256": "05775e662791f4f6eb051cde217b423d3e0d91ee9859b1e1eaeaa83760f529c0"
+      },
+      "engineering_summary": {
+        "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_p_only_10iter_seed0_engineering_v1\\summary.json",
+        "sha256": "25487a73deaf84a0bf01685e7801c1cbd137839e613a8fc4b020345790628918"
+      },
+      "phase_difference_iterations": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "excluded_first_policy_compile_iteration": 2,
+      "scope": "Engineering extrapolation, not a confidence interval. Profiled collect/WM projected2000, policy1800; smoke nonprofile/setup retained once. Frequent smoke save/log overhead is not multiplied200 times. Auditor/queue/entry overhead and cache uncertainty remain separate."
+    },
+    "A2": {
+      "low": 1190.3091141808661,
+      "high": 1719.3353871501401,
+      "point": 1322.5656824231846,
+      "phase_seconds_per_iteration": {
+        "collect": 0.13516636666220924,
+        "wm": 0.21250548334016153,
+        "policy": 0.3272904666955583
+      },
+      "fixed_setup_compile_and_smoke_nonprofile_seconds": 38.09914236643817,
+      "engineering_metrics": {
+        "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a2_10iter_seed0_engineering_v1\\compiled\\metrics.jsonl",
+        "sha256": "102ff29b43e3792bf64e7c7912a5e73909e62b380e1bf55f64423746b8fc2012"
+      },
+      "engineering_summary": {
+        "path": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a2_10iter_seed0_engineering_v1\\summary.json",
+        "sha256": "8cd914f035126e24b28fbe4948f2bb563abf21be539d709f62116b8038a6c26c"
+      },
+      "phase_difference_iterations": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "excluded_first_policy_compile_iteration": 2,
+      "scope": "Engineering extrapolation, not a confidence interval. Profiled collect/WM projected2000, policy1800; smoke nonprofile/setup retained once. Frequent smoke save/log overhead is not multiplied200 times. Auditor/queue/entry overhead and cache uncertainty remain separate."
+    }
+  },
+  "estimated_total_seconds_from_pilot_costs": 10349.664866261883,
+  "templates": {
+    "A1L": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\a1l_seed4.json",
+      "sha256": "2b1953585bcfc96701e47edb3a2b5ebf44b7f2506bf09da18772cdfe7d1469d8"
+    },
+    "P_ONLY": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\p_only_seed4.json",
+      "sha256": "d8506218a63bee5c975a94838a80549dd8841a00d0e6085791c87e9adf411a74"
+    },
+    "A2": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\a2_seed4.json",
+      "sha256": "64302f1ab5b052b95034cebca5cdf5f1851d58c2222ae154039275a5bb25003a"
+    }
+  },
+  "jobs": [
+    {
+      "position": 1,
+      "job_id": "confirmatory_seed4_A1L",
+      "model_id": "A1L_trainseed4",
+      "method": "A1L",
+      "seed": 4,
+      "config": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\a1l_seed4.json",
+      "config_sha256": "2b1953585bcfc96701e47edb3a2b5ebf44b7f2506bf09da18772cdfe7d1469d8",
+      "output": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a1l_paired_v2_2000iter_seed4"
+    },
+    {
+      "position": 2,
+      "job_id": "confirmatory_seed4_P_ONLY",
+      "model_id": "P_ONLY_trainseed4",
+      "method": "P_ONLY",
+      "seed": 4,
+      "config": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\p_only_seed4.json",
+      "config_sha256": "d8506218a63bee5c975a94838a80549dd8841a00d0e6085791c87e9adf411a74",
+      "output": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_p_only_paired_v2_2000iter_seed4"
+    },
+    {
+      "position": 3,
+      "job_id": "confirmatory_seed4_A2",
+      "model_id": "A2_trainseed4",
+      "method": "A2",
+      "seed": 4,
+      "config": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\a2_seed4.json",
+      "config_sha256": "64302f1ab5b052b95034cebca5cdf5f1851d58c2222ae154039275a5bb25003a",
+      "output": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a2_paired_v2_2000iter_seed4"
+    },
+    {
+      "position": 4,
+      "job_id": "confirmatory_seed5_P_ONLY",
+      "model_id": "P_ONLY_trainseed5",
+      "method": "P_ONLY",
+      "seed": 5,
+      "config": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\p_only_seed5.json",
+      "config_sha256": "b8ecb4cd303afb046b8503d3cae07a035646227227f342d1475c29e74313dc0b",
+      "output": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_p_only_paired_v2_2000iter_seed5"
+    },
+    {
+      "position": 5,
+      "job_id": "confirmatory_seed5_A2",
+      "model_id": "A2_trainseed5",
+      "method": "A2",
+      "seed": 5,
+      "config": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\a2_seed5.json",
+      "config_sha256": "cb946e9b4d8b1063bc82662ef06d6b42fe152cd0aff5d3435d2c6cd71753b3b7",
+      "output": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a2_paired_v2_2000iter_seed5"
+    },
+    {
+      "position": 6,
+      "job_id": "confirmatory_seed5_A1L",
+      "model_id": "A1L_trainseed5",
+      "method": "A1L",
+      "seed": 5,
+      "config": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\a1l_seed5.json",
+      "config_sha256": "e2cf6c08a9d214f2971a43ed7caeaed994abb4ffea406d94efee761baa964b08",
+      "output": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a1l_paired_v2_2000iter_seed5"
+    },
+    {
+      "position": 7,
+      "job_id": "confirmatory_seed6_A2",
+      "model_id": "A2_trainseed6",
+      "method": "A2",
+      "seed": 6,
+      "config": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\a2_seed6.json",
+      "config_sha256": "bb793686e452bcf092e6861f0e4333a1cfcd9047601091558097c2187050be8d",
+      "output": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a2_paired_v2_2000iter_seed6"
+    },
+    {
+      "position": 8,
+      "job_id": "confirmatory_seed6_A1L",
+      "model_id": "A1L_trainseed6",
+      "method": "A1L",
+      "seed": 6,
+      "config": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\a1l_seed6.json",
+      "config_sha256": "85427e947047d8bc2ff22aeced1f113476a636ebad6378f28ce72cb74ba6e600",
+      "output": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_a1l_paired_v2_2000iter_seed6"
+    },
+    {
+      "position": 9,
+      "job_id": "confirmatory_seed6_P_ONLY",
+      "model_id": "P_ONLY_trainseed6",
+      "method": "P_ONLY",
+      "seed": 6,
+      "config": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_v1\\p_only_seed6.json",
+      "config_sha256": "082975fc1ea57cce6bc5daabf1bb13a04d7d4f4efde58a011fb8225f569c3511",
+      "output": "D:\\workspace\\supermimic-c2-training-study\\outputs\\c2_p_only_paired_v2_2000iter_seed6"
+    }
+  ],
+  "queue_output": "D:\\workspace\\supermimic-c2-training-study\\outputs\\confirmatory_queue_v1",
+  "draft_config_parent": {
+    "path": "D:\\workspace\\supermimic-c2-training-study\\configs\\formal_draft_root_v1\\manifest.json",
+    "sha256": "b5883a840cb4389cc0cab5e7bf624425113d45de30f0c017c31614cbb7a4fb5a"
+  },
+  "first100_scope": "CPU serialization/finiteness/source/controller/40192transitions/WM200+fail200/actor0critic0 health; no physical quality preview. Then notify Root with observed PID/OS CreationDate/ETA; user-requested Goal pause leaves already authorized detached queue running.",
+  "root_authorization": {
+    "authorized_utc": "2026-11-02T17:58:33.866949+00:00",
+    "review_manifest_file": "D:\\workspace\\supermimic-c2-training-study\\configs\\confirmatory_queue_v1.json",
+    "review_manifest_sha256": "fcd2322b9b2574f499c6672f622d21b15834545ea5b740a2512fa3e227a1da84",
+    "review_READY_file": "D:\\workspace\\supermimic-c2-training-study\\outputs\\prospective_preparation_v1\\READY.json",
+    "review_READY_sha256": "e9b2fe6caecd5ae8caa228bb121cffe799a2cef84f1b2336866eefde24cf6607",
+    "scope": "One detached serial queue of these9fromscratch2000iteration runs; no automaticretry/resume, qualityselection or source/config changes. Same controlledclip and acceptance. User authorized the active research goal and controlled experiments.",
+    "background_queue_continues_when_Goal_paused": true,
+    "conditional_Goal_pause": "After firstactualmodel100health and measured ETA, Root pauses Goal as user requested; do not stop this authorized background queue.",
+    "clock_clarification": "One20ms absolute command is held across four5ms physics substeps; the protocol wording does not mean4x20ms."
+  }
+}

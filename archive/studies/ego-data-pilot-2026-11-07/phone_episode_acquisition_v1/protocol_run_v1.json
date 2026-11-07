@@ -1,0 +1,43 @@
+{
+  "schema": "phone_episode_acquisition_protocol:1",
+  "CPU_run_authorized": true,
+  "new_training_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1",
+  "source_pins": {
+    "collector": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\collect_phone_episodes_v1.py",
+      "bytes": 13118,
+      "sha256": "df18152a47993f8e301a36550e9e24ea129a3a56a77df5f124cec32f7253a12f"
+    },
+    "reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    }
+  },
+  "inputs": {
+    "design": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\design_contract_v1.json",
+      "bytes": 21374,
+      "sha256": "d3f4d8e0a4c44844fc8d51fb261be32f893ced20aa97a8e6404d1b08f7c229c4"
+    },
+    "family_plan": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\family_plan_v1.json",
+      "bytes": 820546,
+      "sha256": "7336ae9243290158c061791a28f6f5b668cc59091e6c1cbdfa51a0f8f4704739"
+    },
+    "reader_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\independent_reader_review_v1\\actual_golden_v1\\report.json",
+      "bytes": 8888,
+      "sha256": "57d89baa06ec05fa568249dbbca716758de4547cc78ef0061fb70f2df7c45a1c"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    }
+  },
+  "automatic_retry": false,
+  "maximum_steps": 92160,
+  "scope": "Native controlled local acquisition with grouped initial states/actions and bothdt. No holding success, real ego dynamics or learning qualification."
+}

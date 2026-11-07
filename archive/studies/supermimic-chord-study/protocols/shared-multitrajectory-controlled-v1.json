@@ -1,0 +1,495 @@
+{
+  "schema": "shared_multitrajectory_controlled_protocol:1",
+  "status": "DRAFT_CPU_BOUND_NOT_EXECUTION_AUTHORIZATION",
+  "GPU_authorized": false,
+  "training_executed": false,
+  "teacher_dataset_generated": false,
+  "inventory": {
+    "path": "D:\\workspace\\supermimic-chord-study\\outputs\\shared_multitrajectory_inventory_v1\\inventory.json",
+    "sha256": "32eabdb7933d54d7777a7beb16ea31dfc17641ca27e6d1a8c47d2342798a42d7"
+  },
+  "source_bindings": {
+    "native_reference": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\pen.py",
+      "sha256": "c02906c409aedab59aaf68a5ef80f9dbcea52da10e72137091df81858262819a",
+      "class": "PenMDP",
+      "method": "reference",
+      "line": 119,
+      "end_line": 122
+    },
+    "native_reference_observation": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\pen.py",
+      "sha256": "c02906c409aedab59aaf68a5ef80f9dbcea52da10e72137091df81858262819a",
+      "class": "PenMDP",
+      "method": "observation",
+      "line": 174,
+      "end_line": 180
+    },
+    "native_control": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\pen.py",
+      "sha256": "c02906c409aedab59aaf68a5ef80f9dbcea52da10e72137091df81858262819a",
+      "class": "PenMDP",
+      "method": "control_target",
+      "line": 86,
+      "end_line": 117
+    },
+    "native_memory": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\pen.py",
+      "sha256": "c02906c409aedab59aaf68a5ef80f9dbcea52da10e72137091df81858262819a",
+      "class": "PenSimReader",
+      "method": "memory",
+      "line": 295,
+      "end_line": 342
+    },
+    "native_collect": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+      "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46",
+      "class": "DexSuperMimicRunner",
+      "method": "collect",
+      "line": 378,
+      "end_line": 509
+    },
+    "native_sample_starts": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+      "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46",
+      "class": "DexSuperMimicRunner",
+      "method": "sample_starts",
+      "line": 676,
+      "end_line": 687
+    },
+    "native_WM_loss": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+      "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46",
+      "class": "DexSuperMimicRunner",
+      "method": "fit_world_model",
+      "line": 511,
+      "end_line": 614
+    },
+    "native_imagination": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+      "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46",
+      "class": "DexSuperMimicRunner",
+      "method": "policy_update",
+      "line": 689,
+      "end_line": 830
+    },
+    "native_learner": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+      "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46",
+      "class": "DexSuperMimicRunner",
+      "method": "learn",
+      "line": 832,
+      "end_line": 908
+    },
+    "native_model_transfer_guard": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+      "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46",
+      "class": "DexSuperMimicRunner",
+      "method": "load_model_only",
+      "line": 630,
+      "end_line": 654
+    },
+    "native_replay_sample": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\buffer.py",
+      "sha256": "3048a42d13aa5142a4c42a29b5f7c77df02c5c628f6276bf9d5256a644494d5f",
+      "class": "ReplayBuffer",
+      "method": "sample",
+      "line": 29,
+      "end_line": 69
+    },
+    "native_pertrajectory_wrist": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\commands.py",
+      "sha256": "e1adb7c183aa28dde49f6dc6e7795ed450567e6c54347bd7f1e0543922fcbcf0",
+      "class": "SingleHandTrackingCommand",
+      "method": "_configure_fixed_wrist_reference",
+      "line": 294,
+      "end_line": 343
+    },
+    "single_bundle_objective": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\contact_objective.py",
+      "sha256": "54d9507d824d08baab3639e29d028b325109f51ca3e3fdd3118be341729502ea",
+      "class": "GeometricContactObjective",
+      "method": "forward",
+      "line": 180,
+      "end_line": 194
+    },
+    "current_singleclip_entry": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\scripts\\train_controlled_pen.py",
+      "sha256": "458f52dd54c208d4f521c34d4737f9930e1aa179474cb197bcc11e001cf38fe8",
+      "exact_guard": "if len(selected) != 1:",
+      "line": 250
+    }
+  },
+  "existing_work_reused": {
+    "conceptual_plan": "configs/controlled-study.json multitrajectory + docs/research-plan-v0.3.md section4",
+    "data_inventory": "outputs/source-inventory.json",
+    "existing_executable_shared_training_protocol_found": false,
+    "scope": "This artifact adds source-bound operational contracts, not another conceptual-only plan"
+  },
+  "lineage_policy": {
+    "all10_lineage": "upstream_01_single_axis_original_parent_unknown_ALL10",
+    "all10_split_group": "upstream_01_single_axis_original_parent_unknown_ALL10",
+    "independent_video_split_claim": false,
+    "heldout_claim": "controlled trajectory holdout within the same conservatively grouped lineage only",
+    "historical_exposure": "All10clips inspected by kinematic and initialization screens;001 engineering and007training/eval seen;009staticcontrol seen. This draft is posthoc to those exposures, not virgin data or blind ego generalization."
+  },
+  "data_tracks": {
+    "seen_reference_cost_curve": {
+      "N": [
+        1,
+        5,
+        10
+      ],
+      "prefix_order": [
+        "clip_007",
+        "clip_001",
+        "clip_002",
+        "clip_003",
+        "clip_004",
+        "clip_005",
+        "clip_006",
+        "clip_008",
+        "clip_009",
+        "clip_010"
+      ],
+      "train_eval_overlap_intentional": true,
+      "claim": "Costs/quality on already conditioned references only, no trajectory holdout"
+    },
+    "controlled_within_lineage_holdout": {
+      "training_pool": [
+        "clip_007",
+        "clip_001",
+        "clip_002",
+        "clip_003",
+        "clip_004",
+        "clip_005",
+        "clip_006",
+        "clip_008"
+      ],
+      "N": [
+        1,
+        5,
+        8
+      ],
+      "validation": [
+        "clip_009"
+      ],
+      "test": [
+        "clip_010"
+      ],
+      "prefix_order": [
+        "clip_007",
+        "clip_001",
+        "clip_002",
+        "clip_003",
+        "clip_004",
+        "clip_005",
+        "clip_006",
+        "clip_008"
+      ],
+      "test_not_loaded_into_training": true,
+      "no_independent_video_generalization": true
+    },
+    "N20": {
+      "status": "NOT_AVAILABLE",
+      "reason": "Only10source clips exist; slicing, augmentation or embodiments must not be counted as20independent trajectories"
+    }
+  },
+  "input_and_label_boundary": {
+    "demonstrator_input_allowlist": [
+      "hand_landmarks_source_w",
+      "object_pose_source_w",
+      "time_s"
+    ],
+    "forbidden_demonstrator_inputs": [
+      "cached reference_qpos",
+      "cached link_pos_w",
+      "cached wrist_pose_w",
+      "solverforces",
+      "teacheractualq",
+      "sourcevelocity labels",
+      "trajectory onehot/filename embedding"
+    ],
+    "reference_goals": {
+      "desired_q20": "Observation-only IK output, derivedrobot command goal, not sourceproprio or measuredteacherq",
+      "desired_link_positions63": "Knownrobot FK of derivedgoalq, not cached source link labels",
+      "desired_object_axis_points6": "Controlled observation objectpose mapped into fixedpalm task; camera/scale remainunqualified",
+      "future_reference": "Only declared exogenous precomputed command schedule; never futuretrue physical states/contacts or policyoutputs"
+    },
+    "actor155": {
+      "goal89": "derivedq20+objectaxis6+derivedFKlinks63",
+      "current66": "robotq20+robotqd20+currentobjectaxis6+previousaction20",
+      "source": "Current controlled rollout supplies these robot/object observations; realimage estimation and sensor errors are not qualified",
+      "robot_proprio_at_execution_allowed": true,
+      "actor_sees_teacher_state_or_forces": false
+    },
+    "WM_physics": {
+      "state58": "actualrobotq20/qd20+objectp3/R9/v3/w3 in palmframe",
+      "input_u20": "Actualexecuted FP32C2absolute target",
+      "context": "Frozenactual physics46 + pinnedexogenous174 layout, no trajectoryID/reference needed for physicaltransition",
+      "labels": "True simulator x1 plus native15selfcollision labels; these are robot/simulator supervision, not no-proprio video labels",
+      "loss": "Unchanged native state loss+selfcollision BCE .1; no targetcontact/support loss added"
+    },
+    "teacher_optional": {
+      "currently_available": false,
+      "if_added": "Separate dataset must store actualq/qd/objecttwist/executedu/controlmemory and provenance, not equate actualq with PDtarget; cost and retries charged to all applicable conditions"
+    }
+  },
+  "sharing_conditions": {
+    "I0": "IndependentWM+actor pertrajectory",
+    "S1": "SharedWM then separate actor adaptation, deferred until explicit safe transfer loader exists",
+    "S2": "SharedWM+single reference-conditioned actor",
+    "primary_pair": [
+      "I0",
+      "S2"
+    ],
+    "model_free_secondary": "Native generic PPO path exists, but matched controlled3arm/controller/prior pipeline remains a separate implementation/gate, not automatically comparable"
+  },
+  "objective_arms": {
+    "A1L": "unchanged native objective",
+    "P_ONLY": "native + dt*(-.1*sameP)",
+    "A2": "native + dt*(knownphase_support-.1*sameP)",
+    "placement": "Imagination policyreward only; dt=.02 once; native realreward/WMloss unchanged; targets independent/fixed perreference",
+    "scope": "Soft geometric prior ablation, not a qualified force/contact dynamics predictor"
+  },
+  "reference_and_replay_contract": {
+    "native_already_supported": "Concatenated frames/trajectoryboundaries, memory(start,end,time), pertrajectory velocity/rebasing; CPU exactsource boundary contract attached",
+    "ID_policy": "Stableint64trajectory/sourceID only in provenance/audit/sampler, not actor/WMinputs. Referencecontent itself identifies commands and may be memorized",
+    "memory": "All EMA/action/load/camera/frozentarget state stays perworld/replay; localtime resets within selectedtrajectory; integeroffsets exactly representable (<2^24 for existingfloat32memory)",
+    "replay": "Everytransition records actualu/residual/memory plus catalogID/globalframe/sourceframe; everywindow masked at done/reset/trajectorychange",
+    "sampling": "Freeze uniformpertrajectory initialstrata and realtransition quotas; disable adaptive outcome-based trajectorysampling for primary comparison; log pertrajectory transitions/updates",
+    "A2_bundles": "Concatenate or index immutablepertrajectory targetbundles in exactly the samecatalog order as references, bind eachSHA/start/end; knownunknown masks remainseparate; no currentspolicy targetrefresh",
+    "no_live_future_state": true
+  },
+  "split_and_statistics": {
+    "trajectory_holdout": "External validation/test env+catalog never contribute replay, actor/WMnormalizers, samplerstatistics, modelselectiongradients or contacttargets for training",
+    "native_env_holdout_not_trajectory_holdout": true,
+    "training_seed_DRAFT": [
+      7,
+      8,
+      9
+    ],
+    "engineering_seed": 0,
+    "process_repeats_per_checkpoint_pertrajectory": 3,
+    "checkpoint_primary_endpoint": "All3fixed freshprocess repeats pass everyfrozen taskgate",
+    "hierarchy": "processes nested in checkpoint×trajectory, trajectories repeated within trainingseed andsame lineage; methodseed N=3, not frames/processes/clips independentdemo N",
+    "failed_init_or_missing_run": "UNQUALIFIED/PENDING/NOT_RUN, not taskFAIL or droppedfromdenominator; preserve enrolledrefs and qualificationcoverage"
+  },
+  "budget_DRAFT": {
+    "status": "NOT_EXECUTED",
+    "per_N_aggregate_equal_across_objective_and_sharing_conditions": {
+      "1": {
+        "real_transitions": 648192,
+        "WM_optimizer_steps": 4000,
+        "failure_head_optimizer_steps": 4000,
+        "actor_optimizer_steps": 1800,
+        "critic_optimizer_steps": 7200,
+        "shared_max_iterations": 2000,
+        "shared_wm_only_iters": 200,
+        "shared_warmup_steps": 64,
+        "independent_runs": 1,
+        "independent_iterations_each": 2000,
+        "independent_warmup_each": 64,
+        "status": "DRAFT_NOT_EXECUTED"
+      },
+      "5": {
+        "real_transitions": 3240960,
+        "WM_optimizer_steps": 20000,
+        "failure_head_optimizer_steps": 20000,
+        "actor_optimizer_steps": 9000,
+        "critic_optimizer_steps": 36000,
+        "shared_max_iterations": 10000,
+        "shared_wm_only_iters": 1000,
+        "shared_warmup_steps": 320,
+        "independent_runs": 5,
+        "independent_iterations_each": 2000,
+        "independent_warmup_each": 64,
+        "status": "DRAFT_NOT_EXECUTED"
+      },
+      "8": {
+        "real_transitions": 5185536,
+        "WM_optimizer_steps": 32000,
+        "failure_head_optimizer_steps": 32000,
+        "actor_optimizer_steps": 14400,
+        "critic_optimizer_steps": 57600,
+        "shared_max_iterations": 16000,
+        "shared_wm_only_iters": 1600,
+        "shared_warmup_steps": 512,
+        "independent_runs": 8,
+        "independent_iterations_each": 2000,
+        "independent_warmup_each": 64,
+        "status": "DRAFT_NOT_EXECUTED"
+      },
+      "10": {
+        "real_transitions": 6481920,
+        "WM_optimizer_steps": 40000,
+        "failure_head_optimizer_steps": 40000,
+        "actor_optimizer_steps": 18000,
+        "critic_optimizer_steps": 72000,
+        "shared_max_iterations": 20000,
+        "shared_wm_only_iters": 2000,
+        "shared_warmup_steps": 640,
+        "independent_runs": 10,
+        "independent_iterations_each": 2000,
+        "independent_warmup_each": 64,
+        "status": "DRAFT_NOT_EXECUTED"
+      }
+    },
+    "derivation": "128*(64N+2000N/.4)=648192N;2WM/failsteps periteration; actor after200Nwarmup;4criticsteps peractor. IndependentN×2000runs andshared(2000N,wm_only200N,warmup64N) matchaggregatecounts, subject to measuredledger checks/newentry implementation.",
+    "batch_and_horizon": {
+      "num_envs": 128,
+      "WM_batch": 256,
+      "policy_batch": 128,
+      "H": 8,
+      "WM_batches": 2
+    },
+    "replay_total_capacity": {
+      "aggregate_transition_slots": 128000,
+      "shared_buffer_steps": 1000,
+      "independent_buffer_rows_each": "1000/N for declaredN=1/5/8/10",
+      "scope": "Draft equalaggregate retainedslots, not equalpeakmemory or equal samplehistory distributions; must record actualbytes/strata"
+    },
+    "secondary_equal_wall": {
+      "method_total_wall_s": "1200*N DRAFT",
+      "starts": "ActualOScreation of first attributable stage, includes setup/pretraining/adaptation and allmethodprocesses/retries",
+      "selection": "Latestwholecheckpoint strictly complete before methodtotaldeadline; never qualitybest. Independentincomplete models explicitlyNOT_RUN/PENDING",
+      "main_fixed_budget_not_replaced": true
+    },
+    "shared_pretraining": "No freeall10pretraining beforeN1. Primary fromscratch per(N,seed,arm,sharingcondition); transfertrack records parent/dataexposure and charges full pretrainingcost.",
+    "teacher_budget": "Primary proposes0externalteachertransitions; ifrequired changeversionbeforeexecution andfreeze identical teacherdata/teacherbudget acrossarms. Retarget/initsearch/failedteacher attempts stillcharged.",
+    "do_not_claim": "No sharedspeedup/breakeven until matchedquality+inclusivecost measured"
+  },
+  "cost_ledger_contract": {
+    "stages": [
+      "datafetch",
+      "observationexport",
+      "reconstruction/calibration",
+      "IK/contactintent",
+      "initphysicalqualification",
+      "teachertraining",
+      "teacherrollouts",
+      "coldcompile/warmcache",
+      "sharedWMpretraining",
+      "pernewtrajectoryadaptation",
+      "realcollection",
+      "WMfit",
+      "actorcriticupdate",
+      "validation",
+      "fixedfinalevaluation",
+      "engineeringfailure/retry"
+    ],
+    "fields": [
+      "parentcheckpoint/dataSHA",
+      "stageID",
+      "actualPID+OScreation",
+      "UTCstart/end",
+      "wallCPU/GPUmemory",
+      "realtransitions",
+      "alloptimizersteps",
+      "teachertransitions",
+      "invalid/notrunreason",
+      "cachetemperature"
+    ],
+    "accounting": "Report uniqueexperimentcost and inclusive percondition cost separately; nesteddriver/child/evaluator wall scopes not summed. Shared commondata cost never silentlyomitted or counted as free. Everyattempt retained."
+  },
+  "engineering_and_stops": {
+    "CPU_now": "Inventory/allowlist/exactnative referenceboundary only",
+    "DRAFT_smoke": "Seed0,N2,128env,H8,10iter with wm_only2 soactor/prior is exercised; qualificationfirst mandatory. Does not countasformaldata or selectquality.",
+    "formal": "NoGPUuntil newentry/loader/sampler/bundles/parity/checkpointauditor+allreference init/physicaltaskprotocol pass andRootauthorizes",
+    "caps": "Measuredsmoke determinesengineeringwall/VRAM caps beforeformal freeze; no borrowed1200/3600guarantee",
+    "stop": "Engineeringnonfinite/sourcehash/capacity/deadline -> failstop/noautomaticretry. Qualityfailureskeepfulltrajectory/latch, do not earlyselect or stopqueue; referenceend naturalcompletion",
+    "training_resume": "Not supported by current103adapter; new shared/transfer format+explicit contracts required, no changingversion bits to bypass loader"
+  },
+  "physical_launch_prerequisites": {
+    "currently_qualified_observation_derived_initializations": 0,
+    "observation_rest_baseline": {
+      "path": "D:/workspace/supermimic-observation-grounding-study/outputs/rest_hold_frame0_v1/evaluation.json",
+      "status": "qualifiedmeasurement_but_restFAIL",
+      "does_not_disprove_motion": true
+    },
+    "v1_contact_hypotheses": "H23/H123 objectwrenchinfeasible; correctedmapping/newcandidatework not yet a qualified multi-trajectory init registry",
+    "requirements": [
+      "Eachreference camera/scale/frame/handedness limitations explicit",
+      "Observationderivedq/object/freeinitialqvel plus separatelyderivedtargetu verified; noobjectassistance/qprojection",
+      "Actualbackend shortphysicalqualification and fulltargettask protocol perreference beforetraining",
+      "No sourceegoindependence or force/crossbodyqualification claim"
+    ],
+    "CPU_inventory_allowed_while_pending": true
+  },
+  "implementation_gaps": [
+    {
+      "id": "G1",
+      "source": "current_singleclip_entry",
+      "change": "New isolatedmulti catalog freeze/observationderivedreference+perclip provenance, remove singleclipguard only in newentry; currentfrozenentry unchanged",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "G2",
+      "source": "native_memory",
+      "change": "Qualify each selectedtrajectory t0 q/qd/object/EMA/u pairing; currentwrapper references motion.joint_pos and is not proven wrong, but multiinitregistry andevidence missing",
+      "status": "UNQUALIFIED"
+    },
+    {
+      "id": "G3",
+      "source": "single_bundle_objective",
+      "change": "Multireference contacttarget registry/prefixmapping/hash+phaseknownmasks; singlebundle cannot be reused bylocaltime for allrefs",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "G4",
+      "source": "native_replay_sample",
+      "change": "Trajectoryquota/provenance and externalholdout split; envholdout alone is not trajectoryholdout. Actor norm/sample_starts currently use alltrainingenvs including WMheldoutenvs",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "G5",
+      "source": "native_model_transfer_guard",
+      "change": "Distinctshared checkpoint schema/explicitcatalogchange transfer with statelayout/physics/controller/norm contracts; oldexactreferencesignature andformat103fromscratch rules must not be silentlybypassed",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "G6",
+      "source": "native_learner",
+      "change": "Aggregatebudgets/initialwarmup/pertrajectoryadaptation/teacher accounting plus fairnessaudit; sharedmaxiters alone would changeactorbudget if warmupnot scaled",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "G7",
+      "source": "native_reference_observation",
+      "change": "Use onlyobservationderivedq/FKgoals for intendedno-demoproprio route; cachedreferenceq/link fields confineddiagnosticupperbound, never silentlyprimary",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "G8",
+      "source": "native_WM_loss",
+      "change": "Retain same58state/u/native15selfcollisionloss/normalization; referenceconditioningbelongs actor/reward. Auditphysicalgradient/calibration pertrajectory; no force-label invention",
+      "status": "CONTRACT_ONLY"
+    }
+  ],
+  "CPU_evidence": {
+    "exact_native_reference_boundary": {
+      "status": "PASS_exact_native_methods_CPU_synthetic_only",
+      "trajectory_lengths": [
+        2,
+        3,
+        1
+      ],
+      "cases": 4,
+      "boundary_clamp_and_globaloffsets": true,
+      "command_increments_localtime_only": true,
+      "CUDA_initialized": false,
+      "does_not_validate_new_multitrajectory_training": true
+    },
+    "forbidden_export_fields_rejected": [
+      "reference_qpos",
+      "wrist_pose_source_w",
+      "link_pos_w",
+      "contact_force",
+      "trajectory_id"
+    ],
+    "observation_exports": 10,
+    "labels_exported": false,
+    "source_hashes_verified": 10,
+    "all10_same_lineage_splitgroup": true
+  }
+}

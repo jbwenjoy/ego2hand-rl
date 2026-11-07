@@ -1,0 +1,20 @@
+--- D:\workspace\supermimic-observation-contact-intent-study\scripts\refine_initial_contacts_seeded_cpu.py
++++ D:\workspace\supermimic-observation-contact-intent-study\scripts\refine_initial_contacts_h123_seeded_cpu.py
+@@ -74,7 +74,7 @@
+                                 'anchor_normal': .25, 'q_baseline': .03, 'q_nominal': .001}
+     assert recipe['anchor_position_scale_m'] == .001 and recipe['anchor_inset_m'] == .0003
+     assert recipe['max_nfev'] == 120 and recipe['CPU_soft_wall_seconds'] == 60
+-    assert recipe['fingers'] == [2, 3]
++    assert recipe['fingers'] == [1, 2, 3]
+     assert recipe['initialization_rule'] == 'independent_single_finger_B_composite'
+     assert recipe['seed_id'] in ('B_baseline_composite', 'B_midpoint_composite')
+     assert recipe['rankings_variant'] == 'source_rigid_mapped'
+@@ -100,7 +100,7 @@
+     seed_entry = next(s for s in seed_catalog['seeds'] if s['seed_id'] == recipe['seed_id'])
+     qinit = np.asarray(seed_entry['joint_pos_rad'], dtype=np.float64)
+     assert qinit.shape == (20,) and np.isfinite(qinit).all()
+-    assert np.array_equal(qinit[np.r_[0:4,12:20]], qbase[np.r_[0:4,12:20]])
++    assert np.array_equal(qinit[np.r_[12:20]], qbase[np.r_[12:20]])
+     identity = np.eye(20)
+     with geometry_only():
+         g = NativeFilteredContactGeometry(pins['model']['path'], pins['context']['path'])

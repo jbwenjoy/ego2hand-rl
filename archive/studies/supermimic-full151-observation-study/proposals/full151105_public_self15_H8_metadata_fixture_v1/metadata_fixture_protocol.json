@@ -1,0 +1,146 @@
+{
+  "schema": "full151105_public_self15_H8_donor_CPU_protocol:1",
+  "role": "three_public_self15_components_fixed_control_H8_donor_state_error",
+  "output_prefix": "full151105_public_self15_H8_donor_CPU_",
+  "execution_authorized": false,
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "training_authorized": false,
+  "automatic_retry": false,
+  "model_roles": [
+    "unwrapped_baseline",
+    "shared_public_losses",
+    "shared_public_plus_cross_target_consistency"
+  ],
+  "cpu_threads": 4,
+  "horizon": 8,
+  "batch_windows": 286,
+  "starts_per_path": 143,
+  "accuracy_gate": null,
+  "evaluate_donor_self15": true,
+  "inputs": {
+    "H1_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-state-prediction452-CPU-v1.json",
+      "sha256": "ba8c3669506acfb9fe01441770927dcc656508c94d14a50826b1901b4bc8aa65"
+    },
+    "H1_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\report.json",
+      "sha256": "202b4e15512491b15fd8fc3fa3efb0f1c9da85a17ce359b372ee619ea535175a"
+    },
+    "H1_matched_inputs": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\matched_input_arrays.npz",
+      "sha256": "18a361bbc6a56139e79df5b6891e3aa80e030abebbbee4fa39e3dbe5129e9cb4"
+    },
+    "H1_prediction_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\prediction_arrays.npz",
+      "sha256": "84fe797f5da806160dc891422961afd606bdcda1bb3e96ffc99cb426761261b1"
+    },
+    "H1_identities": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\group_identities452.json",
+      "sha256": "0151e53864bbf26840b4435863c7038a957ba94dd142e8385deadfe18f0d167b"
+    },
+    "H1_saved_independent25": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_saved_independent_v1\\report.json",
+      "sha256": "b2675cbaaa46c5575d5f9084a64c2bf7b28c7eabe13715b600347e5485cc4d20"
+    },
+    "prior_H8_contiguity": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_H8_donor_source_feasibility_v1\\contiguity.json",
+      "sha256": "6512f82401e954eb4e2ae77d45937e6123f50339283fe6a0e382dc221589d0ff"
+    },
+    "initial_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_component_state.pt",
+      "sha256": "ea051225b7279fc69fbd97725eb15462faaf4b3a6706881f8fe4a05b658a14bf"
+    },
+    "initial_validation": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_validation.json",
+      "sha256": "36c43a9ab4b03edd7f45fe8760fc2743821ecfe2599ea5795b7ade44a04b4186"
+    },
+    "training_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_boundary_public_self15_matched_training_CPU_run_v1.json",
+      "sha256": "b0a3f743aca334636f7dfa05c271a507b494c4fd73555169e311e88428ed59de"
+    },
+    "training_result": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_public_self15_matched_training_CPU_v1\\result.json",
+      "sha256": "3cd20048a3806f5009cae266db4ce403642c9eed9d9b940b5316bfa413d73ae0"
+    },
+    "final_pair_manifest": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_public_self15_matched_training_CPU_v1\\paired_checkpoint_1000.json",
+      "sha256": "08f3a341437d0290779fdcba4557fed263289e492cc965e2ff08cbe9d3e924c3"
+    },
+    "final_saved_health": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_public_self15_final1000_saved_independent_v1\\report.json",
+      "sha256": "8566053e9cfdad2024575b0fe9a67a12e3f9c5f2d0d9190fbf95d1c2c25b8619"
+    },
+    "public15_eval_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_boundary_public_self15_final_evaluation_CPU_run_v1.json",
+      "sha256": "109b4ebaa2b58e0a5c213fe315095853c6ad81abd2347190090eb0d979927dbd"
+    },
+    "public15_eval_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_public_self15_final_evaluation_CPU_v1\\report.json",
+      "sha256": "0be1c8d0a7ba9ac446451ab3f7246945a4d5e937ab6202e465c768d89bbd52ff"
+    },
+    "public15_eval_saved_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_public_self15_final_prediction_saved_independent_v1\\report.json",
+      "sha256": "071cf051463565677f9702f1db6664ae6bf36a05ab4f35ff1fec3f55c603b205"
+    },
+    "public15_eval_prepared": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_public_self15_final_evaluation_CPU_v1\\prepared_inputs_and_context.npz",
+      "sha256": "f7ba9df0bbbd4a629f9b3f7643a7cf7f83706f2a9f723c893cae1ec0525dde29"
+    },
+    "donor_self15_producer_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_donor300_cached_self15_saved_CPU_v1\\report.json",
+      "sha256": "f48f6dc72519951b14e5ed07a65a968e031a9ac43cb037f2d75610b0b72b5121"
+    },
+    "donor_self15_labels": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_donor300_cached_self15_saved_CPU_v1\\joined300_cached_sensor_labels.json",
+      "sha256": "6ef0588502e91a0dfe517540171b344230233582702abe2594b550a411b3d227"
+    },
+    "donor_self15_saved_independent": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_donor300_cached_self15_saved_independent_v1\\report.json",
+      "sha256": "984eaf79abeee16feea365d715f92c789877b3f37d063c0a2fbcce758331b3cb"
+    }
+  },
+  "source_pins": {
+    "file_0000__public_self15_H8_donor105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\public_self15_H8_donor105_v1.py",
+      "sha256": "f124aca35d8478c7b421e0721351c66a23007567ca940f5263db6a07eb7f27b0"
+    },
+    "file_0001__diagnose_full151_public_self15_H8_donor_cpu_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\diagnose_full151_public_self15_H8_donor_cpu_v1.py",
+      "sha256": "dfe33eadf6378492a9e787f097d600e0f4e6b4459a7880bda1effe256828050b"
+    },
+    "file_0002__check_full151_public_self15_H8_donor_cpu_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\check_full151_public_self15_H8_donor_cpu_v1.py",
+      "sha256": "eb1e34fbdcfdf2cc35ba8ff247c32fca8b6a5eea2040a4509e6039e9ed4a094f"
+    },
+    "file_0003__component_H8_donor105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\component_H8_donor105_v1.py",
+      "sha256": "0c77dc5255ffd2d7294dabdc7bbaf8ed09e80f3f2bc0eb89fee3954d268a6b13"
+    },
+    "file_0004__boundary_public_self15_final_evaluation105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_public_self15_final_evaluation105_v1.py",
+      "sha256": "81ad78161c75b1720a77aead414ccb6c5a447b0f614e5e597a940aaa1ea77419"
+    },
+    "file_0005__boundary_public_self15_training105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_public_self15_training105_v1.py",
+      "sha256": "796c360539961143fe1f588fd18eb08e4b168d141b34daee23da802a72194e7e"
+    },
+    "file_0006__boundary_impulse_component105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_impulse_component105_v1.py",
+      "sha256": "003aac369bcac69dff9312c79837a8faf5a583473898fdb64515aa7608b60317"
+    },
+    "file_0007__boundary_self15_cached_saved105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_self15_cached_saved105_v1.py",
+      "sha256": "97b74e0173bb6d95b55c59d924db7c5502c83cf610907c6c3aa357d54808da5e"
+    },
+    "file_0008__public_self15_H8_donor_contract_v1.md": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\public_self15_H8_donor_contract_v1.md",
+      "sha256": "096e3f38b67c711905429a4a7d4480e87a2b1f478ff45369724c31ce7126cdbc"
+    }
+  },
+  "source_contract": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\public_self15_H8_donor_contract_v1.md",
+    "sha256": "096e3f38b67c711905429a4a7d4480e87a2b1f478ff45369724c31ce7126cdbc"
+  },
+  "status": "ROOT_METADATA_FIXTURE_NOT_ACTUAL_RUN_AUTHORIZATION"
+}

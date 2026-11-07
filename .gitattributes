@@ -1,0 +1,8 @@
+# Historical source hashes refer to bytes, including original line endings.
+# Preserve bytes across Git add/checkout rather than applying Windows EOL rules.
+* -text
+# Exact imported snapshots are checked by content hashes, not reformatted.
+archive/** -whitespace
+provenance/git/** -whitespace
+src/dex_supermimic/** -whitespace
+src/chord_study/** -whitespace

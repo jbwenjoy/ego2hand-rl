@@ -1,0 +1,675 @@
+{
+  "schema": "full151_knownrough_native_training_run:1",
+  "role": "engineering_smoke",
+  "method": "A1L",
+  "seed": 0,
+  "input_bundle": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\bundle.json",
+    "sha256": "59406c6214a085afba7efcc2b33880d5c82b409ee4f6485ec71c073fec19dc76"
+  },
+  "output": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_A1L_smoke40_v1",
+  "training": {
+    "num_envs": 128,
+    "buffer_steps": 256,
+    "warmup_steps": 64,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "log_interval": 1,
+    "amp": true,
+    "compile": false,
+    "compile_policy": false,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1,
+    "utd": 0.4,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "max_iterations": 40,
+    "wm_only_iters": 20,
+    "save_interval": 40
+  },
+  "contact_binding": null,
+  "source_pins": {
+    "input_bundle": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\bundle.json",
+      "sha256": "59406c6214a085afba7efcc2b33880d5c82b409ee4f6485ec71c073fec19dc76"
+    },
+    "input__reference_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\reference_candidate151.npz",
+      "sha256": "aa4f13b146979c7b274f7191100023168ff69032fe5d88125d339e3a56e3be93"
+    },
+    "input__init_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\init_requested.npz",
+      "sha256": "fd74f89a7b12f4c83daa3525ca3d0ae3832b05e7d17faeb70372d41449991517"
+    },
+    "input__control_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\control_candidate150.npz",
+      "sha256": "5c37566f2e1be6fb2a1f6ba0ffc6f53a0632879e7095518e720a147edf191df2"
+    },
+    "input__parent_scp_receipt": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\receipt.json",
+      "sha256": "c5c31f917e2ebd4024719632fd945bcda83bbeccb682b5f6f5aa6bf4c44668be"
+    },
+    "input__parent_scp_independent173": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_scp_saved_independent_v1\\report.json",
+      "sha256": "378d88e0b7885e8dad8f2a131316407112e77a9b754f33177ce07d4cba174c42"
+    },
+    "input__parent_scp_lifecycle32": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_SCP_saved_lifecycle_independent_v1\\report.json",
+      "sha256": "a04eb7a95c613c9cbddf2b78ae48866406e4aebcce9b745ae7f7ffb7e9f09fe8"
+    },
+    "input__model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "input__actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "input__observation_fixture": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\observation_only_fixture_v1\\observations.npz",
+      "sha256": "3bdca0ee6fd8d7956cac1ee2b13719db5cb302ceb0130972719032a04b3ec35b"
+    },
+    "input__observation_manifest": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\observation_only_fixture_v1\\manifest.json",
+      "sha256": "9be378406b8c97d0ae211fd70459117eea2e8d026244d2ccab735c3f5778391e"
+    },
+    "input__native_data": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\clips\\legacy_full151_knownrough\\legacy007_f0200_n0151_H123_SCP8_v1.npz",
+      "sha256": "91fa680ef2da7ebf5397150d5511fa8f3631ed354399f7069438359dfa54f447"
+    },
+    "input__native_recipe": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\recipe.json",
+      "sha256": "f4c2b8eb17fe5c3284d4274a2b93b1a8d1677c6fb90f96d39a225402dbc0ffa7"
+    },
+    "input__native_sidecar": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\clips\\legacy_full151_knownrough\\legacy007_f0200_n0151_H123_SCP8_v1.provenance.json",
+      "sha256": "bac1e673662f743bfc5ea0a54ac591e89a1273fc369990d17cafab6d1e0a879c"
+    },
+    "input__native_reader_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\native_reader_arrays.npz",
+      "sha256": "025ca038ba2662ab52eb2ca30a3fa1bae2142c6dcf9b131838c474e5f436d2b8"
+    },
+    "input__native_reader_proof": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\native_reader_proof.json",
+      "sha256": "9998d1ad47e79fd83f5fc244361122b747036503ae2eb323e78b50c4dce44f69"
+    },
+    "input__native_manifest": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\native_manifest.json",
+      "sha256": "b4f564de49ddf253fa6c2829837693e793d43a48e373aa198eeabe2443427c3d"
+    },
+    "input__build_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151-native-input-cpu-v1.json",
+      "sha256": "b0297f4b32e065728237922a55cafc9699c990820ff7ed286646eb02fefe6ced"
+    },
+    "input__build_source__builder": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\build_full151_native_input_cpu_v1.py",
+      "sha256": "fab4cf378ac8d86bece727fa117563025031c0fd15d6e974f38461cb7ca95b88"
+    },
+    "input__build_source__bundle_loader": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\bundle.py",
+      "sha256": "d2d7b8112e187f980caf6eeb7a834b37a5393109e9a8d70dd745207a357835d5"
+    },
+    "input__build_source__io": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\io.py",
+      "sha256": "ece3fe9db321c1a6bb6b74b36a1d5ed9fcadf7b3664cc3271f71e2ccb0fafd34"
+    },
+    "input__build_source__metadata": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\metadata.py",
+      "sha256": "9cde9d16588933a623cf5ba82af223d37208b775536146eab3be39148cc0579f"
+    },
+    "input__build_source__package_init": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\__init__.py",
+      "sha256": "017a90afc96c5100fde547c2f4bed368459c5046fa63a9f8acfc0ca4f46c1f05"
+    },
+    "input__build_source__native_exporter": {
+      "path": "D:\\workspace\\supermimic-shared-reference-study\\src\\native_reference_abi.py",
+      "sha256": "8cefd4f1e4ec6939b8201c26670a691c913ab0b5e9e9f87347904e4889fd6e2d"
+    },
+    "input__build_source__native_reader": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\commands.py",
+      "sha256": "e1adb7c183aa28dde49f6dc6e7795ed450567e6c54347bd7f1e0543922fcbcf0"
+    },
+    "input__build_source__native_constants": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\hand2_constants.py",
+      "sha256": "2a1a37a0c97f3bcab631006ac6e0dc47a1a63a92c7717ac4c6c712314ba35986"
+    },
+    "input__build_source__native_recipe": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\recipe.py",
+      "sha256": "48eb8696a165b12cc90a8012704e46b4ebd65c67e1870363962254f30519851d"
+    },
+    "input__build_source__native_clip_store": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\clip_store.py",
+      "sha256": "869a2c0cbc748db240c8262fc9b34066a09a9da71b271b458250880edf269a6b"
+    },
+    "input__build_source__pure_control760": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_control.py",
+      "sha256": "76026dbdcdfdecf4680820b24da088e1d123e86ceb8b42a2bbd60a5412103b6d"
+    },
+    "input__build_source__atomic_metadata_writer": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\vendor\\runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    },
+    "readiness__input_CPU16": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\receipt.json",
+      "sha256": "82c8659df54000b156e82bfa6b4a64435e1cacd89a8d5ee6cdc1776a497340aa"
+    },
+    "readiness__input_independent67": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_saved_independent_v2\\report.json",
+      "sha256": "947f9def1b39eaa5b16663c5ff6c487e452a8997ffdf08d3a024a105620bc0bf"
+    },
+    "readiness__core_CPU61_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_core_READY_v1\\READY.json",
+      "sha256": "c0ee7b750a8e806b5559012dd720b632c4d2c34b3c2b6255090fc34fde1a8c85"
+    },
+    "readiness__native_A0_CPU44_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\READY_full151_native_A0_v1.json",
+      "sha256": "a8034dd45f27b19c6a1c5769c1d5b5107fabc240ce7b1576d43d47de7e53776c"
+    },
+    "readiness__consumers_CPU65_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\READY_checkpoint_consumers_v1.json",
+      "sha256": "bc226c8846c493a2a76b419d84f892c152bdaa7a7bd9eccf961215cbbe1d9208"
+    },
+    "readiness__A0_front_static27": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_A0_front_static_review_v1\\report.json",
+      "sha256": "e60038e5766330d4ae25dd2e84b0f9b86cdd603f012de3af1516b5e67a5f64b1"
+    },
+    "native_python_0000": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\__init__.py",
+      "sha256": "69e500b946a5eac94ccfc2c43946432242cb6944bb0fd492b9ac2e4516ae439d"
+    },
+    "native_python_0001": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native_python_0002": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\inhand_cube.py",
+      "sha256": "f1d8e9100fb02249641370909cd48caf637adcd3df1be9feeeed14eaa801cb78"
+    },
+    "native_python_0003": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\pen.py",
+      "sha256": "4fb90cda82389929ada682c0890f0d32f55b741abd8dc71dcbec7488e4f2a8c6"
+    },
+    "native_python_0004": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resource_utils.py",
+      "sha256": "3eae98256db487f46885aa629dd26e10df83b27d4637d47e6a0e0803c04ea225"
+    },
+    "native_python_0005": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\wuji_hand.py",
+      "sha256": "7df1dfd9637701812e62604da0c2293a4e885ae0c0615220ff6174ed73da798d"
+    },
+    "native_python_0006": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\wuji_hand2.py",
+      "sha256": "91eed8ea9fc00f5663229359ca6b650552ff8fbd5f21d180648bb15b7ba98916"
+    },
+    "native_python_0007": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\__init__.py",
+      "sha256": "0d8f010d7acd76f33669915b03ac2bd6c4c32698908a13f9a4b6889b030ef5bb"
+    },
+    "native_python_0008": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\__init__.py",
+      "sha256": "1b0c2dba4f3d7b227979332d731704098cf4633d0946b07f322c0b1b6e4656b0"
+    },
+    "native_python_0009": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\buffer.py",
+      "sha256": "3048a42d13aa5142a4c42a29b5f7c77df02c5c628f6276bf9d5256a644494d5f"
+    },
+    "native_python_0010": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\cli.py",
+      "sha256": "418ae1b2792a2395bf9aae779d50da57158c6bd7147f66f269f82b121c668c64"
+    },
+    "native_python_0011": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\common.py",
+      "sha256": "6d6ff994d592c8fec1d46401d7051d0511310281a3d28450db8bd9be8c327f8b"
+    },
+    "native_python_0012": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\config.py",
+      "sha256": "11889b65b5da121ea613d402b3ef9e7bc854d57462f96830af9b644a0b031323"
+    },
+    "native_python_0013": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\experiments.py",
+      "sha256": "ad6ee2959d55ea03b67a8d75451786e805793012ed08396a44bc10e2f35c276a"
+    },
+    "native_python_0014": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\kinematics.py",
+      "sha256": "efca0cd2587a36d6208c5754e5ef91806c5fd0f6898500855bc78c3bd3c26cca"
+    },
+    "native_python_0015": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\mdp.py",
+      "sha256": "5515dceaab115d97796bdcc6124ecd2bac691f0ef56b7b01ef6bcb12ffcf33ea"
+    },
+    "native_python_0016": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\metrics.py",
+      "sha256": "339478151feb281999c05c905df5cd5ef9da03d41e0b16acfa3b1c0bf6d428cb"
+    },
+    "native_python_0017": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "native_python_0018": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\observations.py",
+      "sha256": "75aafb1448c181bb340838e671d2d167b5523452b6f400473b93862fcf6f6bb8"
+    },
+    "native_python_0019": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\pen.py",
+      "sha256": "c02906c409aedab59aaf68a5ef80f9dbcea52da10e72137091df81858262819a"
+    },
+    "native_python_0020": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\rotations.py",
+      "sha256": "0fbb36bc8608dcc9a33edfac7f6551e742380e1e66c70e857b33d6d05cd81e70"
+    },
+    "native_python_0021": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+      "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46"
+    },
+    "native_python_0022": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\sim.py",
+      "sha256": "47d0523d8b0d569544f2873a2c7c8a17cad27e570154d6220ec98d1a97aa5d20"
+    },
+    "native_python_0023": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\snapshot.py",
+      "sha256": "87a70d8715c35e5b2fb433912ae6229715c61738543f10b404547c7415009782"
+    },
+    "native_python_0024": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    },
+    "native_python_0025": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\viser.py",
+      "sha256": "6590988486d73f8da032ef180301cd0e1a31c48fe79b61e486b79e19bd343895"
+    },
+    "native_python_0026": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\__init__.py",
+      "sha256": "8eebd2267050bcfaa5fd47100b760cf6924e6cb7374e91c3f4a6b1d7944ac2c1"
+    },
+    "native_python_0027": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\__init__.py",
+      "sha256": "9ffcbf5e4c5377ce7dd1e73ee2612de482f15c70a968e9212bb83c8dcc871bd6"
+    },
+    "native_python_0028": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native_python_0029": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\recipe.py",
+      "sha256": "3ffde3b30004ffbb56c89905b5a7e592f59222f0d9cf4271cbc2c2a5ef55c0c6"
+    },
+    "native_python_0030": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\task.py",
+      "sha256": "5706c0976c65e40913e9467070a42a390587e3f7f1867379e4046cc92140bb7e"
+    },
+    "native_python_0031": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand2\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native_python_0032": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand2\\env_cfgs.py",
+      "sha256": "bd8368e547c12035ce331d0bdadf6b23531c57b084280a56da1a747157634469"
+    },
+    "native_python_0033": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand2\\hand2_constants.py",
+      "sha256": "206efbd718b5d0fadcf87f5abf4edd957796b5043f5787b6c2488dbe093ed760"
+    },
+    "native_python_0034": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand2\\task.py",
+      "sha256": "8afebcf0ca8bd2a52e7c6378d286b1162bb2699094d5736fc75f1e9f1cf388eb"
+    },
+    "native_python_0035": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand\\__init__.py",
+      "sha256": "8f94eb6ede77c8df4f88f090f21a623eeada2a7e48f1032c325fe3e15798ddb1"
+    },
+    "native_python_0036": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand\\env_cfgs.py",
+      "sha256": "4388529a313a5f62929e3ad61a3e43a873846c38f3df8a56419f9f77e87e4019"
+    },
+    "native_python_0037": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand\\task.py",
+      "sha256": "42b1791dd71580b36560b63afe59f7c6242d7d37bacb63881f7d65c86741c889"
+    },
+    "native_python_0038": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\__init__.py",
+      "sha256": "0c794af6136684e67ecbf97833365be66219d71034babc5a265ca4c6c370caef"
+    },
+    "native_python_0039": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\_env_utils.py",
+      "sha256": "d2b4a6c124229baf009fc70094a05a72fc807b1af41c075c790be6376cc4db21"
+    },
+    "native_python_0040": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\actions.py",
+      "sha256": "6016c424772838f82708521fba56e679087509e2514b00d6a06169b631d34944"
+    },
+    "native_python_0041": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\cage.py",
+      "sha256": "88c8ab9766beb86fd79d3bbddc1bdcef75a8b4bd7a2972d6d741e8f1d74ef0a9"
+    },
+    "native_python_0042": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\command_visualization.py",
+      "sha256": "da15ca9aa35c9b388549b3d80e1dcd104d6f4597a034ad328919898cf56673db"
+    },
+    "native_python_0043": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\commands.py",
+      "sha256": "fcb08b9084b123562d026833673dbe82884e99ed14981c70106fe8565ccab5ed"
+    },
+    "native_python_0044": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\curriculums.py",
+      "sha256": "4416e85e97de1e077ffef36d090216714516fb3267ad27e3845cb9f3d50f9c05"
+    },
+    "native_python_0045": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\__init__.py",
+      "sha256": "c94602917864fac7b1da8deb58391239458fca18d1997090939ab58ff57a5ac8"
+    },
+    "native_python_0046": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\disturbance.py",
+      "sha256": "069925204b10de2517e378db3befd192233e7be8f39683f6081539061dd6ab1c"
+    },
+    "native_python_0047": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\joint_reset.py",
+      "sha256": "5111ef1f0e27ff687e89451acd0d8d541bb164f0b3fc953134eef0c650d1fd88"
+    },
+    "native_python_0048": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\randomization.py",
+      "sha256": "417e01a4d5088453032d5d63e127d6d05292742b15bd5c9eb3e3c556b02be4f3"
+    },
+    "native_python_0049": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\reset.py",
+      "sha256": "f8098a0f0f4a5de9fa755ac2a64b300ac3f1f8ab853d44d8089a3e185efd5bc3"
+    },
+    "native_python_0050": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\events.py",
+      "sha256": "5c7b7dfeac68b25c0bea4c4aac2792097a209a6a26de16a6a5f1fd1dd6ca3b11"
+    },
+    "native_python_0051": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\metrics.py",
+      "sha256": "d2f7614d6ec958b20b522e6de2ae3786df4cf1a0cb92b8177e77467e065cc31d"
+    },
+    "native_python_0052": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\observations.py",
+      "sha256": "75ba9e7d24fc006e7e8ff04c0d23d8bffbf87b14eb80f4946187b0e14b68cddc"
+    },
+    "native_python_0053": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\rewards.py",
+      "sha256": "666d5c5e12828a8f3e7756b27bcf1edfa643ef56d1d97b0e6221bf72b5076cc0"
+    },
+    "native_python_0054": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\runtime_state.py",
+      "sha256": "ab6c14f4a21b047df2ddd07418bff69b2f945e24ae968260a7ebab08c940c994"
+    },
+    "native_python_0055": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\terminations.py",
+      "sha256": "e9acf8e78627b8a7b97003251fcd6d5c9ef67afe28889f1c2ac979c013eec458"
+    },
+    "native_python_0056": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\types.py",
+      "sha256": "cf4f7b0850df8f1af8fdc0e0f6f7f722c76367c8b789bbce48530ca2eb826025"
+    },
+    "native_python_0057": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\reorient_constants.py",
+      "sha256": "8b638bebbc2d0212c97650e2d1b1d6d1e783f4234ac17bb1a49790a8e568ea35"
+    },
+    "native_python_0058": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\reorient_env_cfg.py",
+      "sha256": "26154a4455fc83be67e53de502ed4f9b59c983a4e067a9328925b6ad222dd577"
+    },
+    "native_python_0059": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\reorient_terms.py",
+      "sha256": "b6669ac458c2a7dac5f05d82f900bfcfe49cec5be3dbb527a3882212383566f2"
+    },
+    "native_python_0060": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native_python_0061": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\curriculum.py",
+      "sha256": "408685ef772dab13c67a7b98887ffcb723df881d84eddc398586f645ddc64c16"
+    },
+    "native_python_0062": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\math.py",
+      "sha256": "3cf32b00c48862738ecab4503ec2478b2255b7c10b29eea88ea89a628f7786dd"
+    },
+    "native_python_0063": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\reward_decorators.py",
+      "sha256": "a0bfe12109f12ff14554d7da7a0d8b709960f6af91bbb7bbde820d8c26eb0385"
+    },
+    "native_python_0064": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native_python_0065": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\__init__.py",
+      "sha256": "81c298aa8d5c19b9b23dbbe9b2c0952a618bfd84c2e44db22f13bedb86523e4f"
+    },
+    "native_python_0066": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native_python_0067": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\env_cfgs.py",
+      "sha256": "ebfd258d34e3f41e5957b382ecbccfc5b79a5b545680ed1138343d508414e083"
+    },
+    "native_python_0069": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\__init__.py",
+      "sha256": "5b8b6e092b0478c94fa6ac2cc5e619febf56f2931ab6dcfcccb02402460ac665"
+    },
+    "native_python_0070": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\actions.py",
+      "sha256": "45e105031dfd195db25be70adceffd32c371cee671e9e5839cd1ccf12a8e73d0"
+    },
+    "native_python_0072": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\contact_events.py",
+      "sha256": "faab349f098248740cfdd0490d04a982c93dadeeb3b33a340243e1d28066ce2c"
+    },
+    "native_python_0073": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\curriculum_utils.py",
+      "sha256": "f03a359a42fc3637204c20d1eed78fd7563414f135e57d8123b839091df662ad"
+    },
+    "native_python_0074": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\curriculums.py",
+      "sha256": "208cd3443cfd3290b18bf87a1c7be08cfadc7b22fc790c58270d01fb7418fb34"
+    },
+    "native_python_0075": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\events.py",
+      "sha256": "8b8d9ca253b4a5a4c516e5bd4ac4b7adb674d4388a07712d12664e0496653544"
+    },
+    "native_python_0076": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\metrics.py",
+      "sha256": "a01d9031a61a01e3cc74b4b173817763e473eff030a06d6c37af647ab221a9f8"
+    },
+    "native_python_0077": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\observations.py",
+      "sha256": "74df1caa679d83f4cc3dd488845d452e7f3c2aecef7ad09b2d3ab6e9faf56cfa"
+    },
+    "native_python_0078": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\rewards.py",
+      "sha256": "fad15431729a9df98d0681707d112ccca133c0ad5f589eb18f00212bb6e69c5c"
+    },
+    "native_python_0079": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\terminations.py",
+      "sha256": "230a6373de7a9147cfa30789c245c464a82378c96d722b9eac1adf71fe7e1c5d"
+    },
+    "native_python_0080": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\visualization.py",
+      "sha256": "42a2720b4fff39cfc2c17fd0f31a0aa804d86698439ab9f81a24e26eb6734f2d"
+    },
+    "native_python_0081": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\pen_spin_env_cfg.py",
+      "sha256": "e012a43b711a25f54c627518f4dd79d683ac34f0b3dc03d6376915feeb8f8fdf"
+    },
+    "native_python_0082": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\task.py",
+      "sha256": "488d85eb40dbe991dcff854918aca3fe48d51812992dda7c74b0e3ed8c0e17ac"
+    },
+    "native_python_0083": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\__init__.py",
+      "sha256": "c94602917864fac7b1da8deb58391239458fca18d1997090939ab58ff57a5ac8"
+    },
+    "native_python_0085": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\download.py",
+      "sha256": "062348c62e62467f38883d2694e2a50506f49f4b0b61bb1420b5dc3919a27f70"
+    },
+    "full151__checkpoint.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\checkpoint.py",
+      "sha256": "abea7d23db082cc98b5ba77fdaa3fafcac87e8241663e9219b11742997376916"
+    },
+    "full151__controller.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\controller.py",
+      "sha256": "b81c5376caaed93941078600983afa6356df60f01be50dcc2b9c259b19a257e0"
+    },
+    "full151__native.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\native.py",
+      "sha256": "142cd9b710786d1973c6c518165e1d08bfd3a38b7a65b425819b538e3d025a2f"
+    },
+    "full151__probe.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\probe.py",
+      "sha256": "38112d5d50eeb48ecc926815327f8d57c9ba0784289b8b42dd7eb02b71f13a56"
+    },
+    "full151__runtime.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\runtime.py",
+      "sha256": "d41057c2f849fe645a52c7ffa8b175bac60eb6aa1ed616d756a9df64a286f8c9"
+    },
+    "full151__world_model_checkpoint.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\world_model_checkpoint.py",
+      "sha256": "119fa7cebc0e9b0727b0160660b1a47822deee2a0e0e9fa5be69465ac5578052"
+    },
+    "qualified_identity_v3": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\scripts\\run_track_prefix_v3.py",
+      "sha256": "f4161cb4be7ac2e5e0fc598820a944f4d9a0e7240ee79b4eb68054732f246475"
+    },
+    "qualified_lifecycle": {
+      "path": "D:\\workspace\\supermimic-control-feasibility-draft\\scripts\\run_braking_microprobe.py",
+      "sha256": "40b397f60e91bf59a1c72ad43f9bd52b42e33a820a695c2ec6e43736fa8a54aa"
+    },
+    "local_atomic_writer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\vendor\\runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    },
+    "local_measured_contacts": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\vendor\\measured_contacts.py",
+      "sha256": "478c3117489bd4a02238f6299a91638e791a751352b772321ce2676b0ec4f96f"
+    },
+    "actual_projection": {
+      "path": "D:\\workspace\\supermimic-c2-training-study\\src\\target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    },
+    "capacity_observer": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\capacity.py",
+      "sha256": "7380bef76a4c6af5c65204d0bf9f5921d68826072a71a77656f1b4b2fda3844a"
+    },
+    "original_full151_clock_evaluator": {
+      "path": "D:\\workspace\\supermimic-chord-study\\scripts\\evaluate_pen_checkpoint.py",
+      "sha256": "efa80b51e24881438136b924be15b90fa286b3d129b397a06851d66bd73193e3"
+    },
+    "readiness__native_A0_engineering_enrollment": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_A0_engineering_enrollment_v1.json",
+      "sha256": "e575762b7309d61055e6b885af5015805ecf8bdee9307d12b529d2ef14ed37e0"
+    },
+    "readiness__training_CPU_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_learning_preparation_v1\\READY.json",
+      "sha256": "80d9315b13d4f67120ed75e92d74c076c95f369ca6db707fb6a13dc28ed5ef9f"
+    },
+    "learning_full151__evaluation.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\evaluation.py",
+      "sha256": "e9f0c6537b133187a5b7f1de5dbf289af477d99b2b1d6050a6544088322e87fd"
+    },
+    "learning_full151__learning.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\learning.py",
+      "sha256": "e9f194a07fd97acfcb08f93543005077db63102025fd5625f52c15070da1db92"
+    },
+    "learning_full151__policy_probe.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\policy_probe.py",
+      "sha256": "e4d0025b4029e89b1cb1e857ae4353e161ad120166a23a54bd7a58557b9fe288"
+    },
+    "learning_full151__training_capacity.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\training_capacity.py",
+      "sha256": "b7137f4824b8375a6c2670deb5f88e75203fa04403731b5115475f80902c97ef"
+    },
+    "worker": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\execute_full151_learning_v1.py",
+      "sha256": "35930af7f6a0e1cc3f501d0e18a680ce8eef71f4fbbad523f53a8039f04e2119"
+    },
+    "supervisor": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\run_full151_learning_v1.py",
+      "sha256": "84fb1cd15465ece891d9f3c9ed85384e2b30789a78ed474f16bbc3d180183009"
+    },
+    "plan_builder": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\build_full151_learning_plan_cpu_v1.py",
+      "sha256": "aca3693ed847d798452eebce725eb5772195c41ccb2563acef71c6b1da479390"
+    },
+    "checker__check_full151_training_cpu.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\check_full151_training_cpu.py",
+      "sha256": "bc77009d6985423bd25dab7d4c656505ba101575bc054095032e43f96bd46e01"
+    },
+    "checker__audit_full151_checkpoint_cpu_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\audit_full151_checkpoint_cpu_v1.py",
+      "sha256": "1fb9da1e721fc3fb01559a7a526eb67efaa9dbff5d9753e6b97546a383213fa9"
+    },
+    "training_CPU_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_training_CPU_v1\\report.json",
+      "sha256": "82ccc51e45d17438505fffadb5df77bdabab26445e99f83962a52c1a3e874a02"
+    },
+    "protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151-native-a1l-smoke40-v1.json",
+      "sha256": "1a91c99423c6c1ba985313d3920400d4a5319d8b1d4af7fd4a1b0ee77a68a31f"
+    }
+  },
+  "protocol": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151-native-a1l-smoke40-v1.json",
+    "sha256": "1a91c99423c6c1ba985313d3920400d4a5319d8b1d4af7fd4a1b0ee77a68a31f"
+  },
+  "GPU_run_authorized": true,
+  "training_authorized": true,
+  "hard_process_seconds": 600,
+  "soft_worker_seconds": 540,
+  "automatic_retry": false,
+  "compile_fallback": false,
+  "controller": {
+    "kind": "FULL151_KNOWNROUGH_BASELINE_EMA_C2",
+    "format_version": 105,
+    "margin_rad": 0.02,
+    "resume": "from_scratch_only"
+  },
+  "evaluation_gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "clock": {
+      "schema": "full151_native_clock:1",
+      "dtype": "float32",
+      "physics_dt_s": 0.005,
+      "physics_steps": 600,
+      "control_substeps": 4,
+      "expected_rule": "sequential_float32_add_from_zero",
+      "bitexact_expected_time": true,
+      "canonical_time_rule": "integer_physics_tick_times_0p005",
+      "nominal_drift_gate_s": 5e-05,
+      "legacy_prefix_2us_diagnostic_only": true
+    },
+    "legacy_prefix_2us_diagnostic_only_s": 2e-06,
+    "target_rate_max_rad_s": 15.0,
+    "actuator_load_ratio_max": 1.01,
+    "load_charge_max": 0.8,
+    "charge_decay_time_s": 2.0,
+    "drop_center_below_default_wrist_m": 0.15
+  },
+  "readiness": {
+    "native_A0_engineering_enrollment": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_A0_engineering_enrollment_v1.json",
+      "sha256": "e575762b7309d61055e6b885af5015805ecf8bdee9307d12b529d2ef14ed37e0"
+    },
+    "training_CPU_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_learning_preparation_v1\\READY.json",
+      "sha256": "80d9315b13d4f67120ed75e92d74c076c95f369ca6db707fb6a13dc28ed5ef9f"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+--- D:\workspace\supermimic-full151-observation-study\src\full151_gradient\state_replay105_v1.py
++++ D:\workspace\supermimic-full151-observation-study\src\full151_gradient\state_replay105_v2.py
+@@ -19,8 +19,8 @@
+ ROLE='full151105_native_GPU_state_replay'
+ KEYS={'schema','role','protocol','output','source_pins','CPU_ready','CPU_contract_report','GPU_run_authorized',
+       'training_authorized','Env_or_physics_authorized','automatic_retry','compile_fallback','soft_worker_seconds','hard_process_seconds','evaluation_seed','device','allow_tf32'}
+-OWN={'module':ROOT/'src/full151_gradient/state_replay105_v1.py','entry':ROOT/'scripts/execute_full151_state_replay_v1.py',
+-     'supervisor':ROOT/'scripts/run_full151_state_replay_v1.py','checker':ROOT/'scripts/check_full151_state_replay_cpu_v1.py'}
++OWN={'module':ROOT/'src/full151_gradient/state_replay105_v2.py','entry':ROOT/'scripts/execute_full151_state_replay_v2.py',
++     'supervisor':ROOT/'scripts/run_full151_state_replay_v2.py','checker':ROOT/'scripts/check_full151_state_replay_cpu_v2.py'}
+ EXPECTED={'native_state_calls':2260,'native_state_returned':2260,'native_state_batch_size':1,'converted_rows':2260,
+     'pre_rows':1808,'known_post20_rows':452,'endpoint_comparisons':452,'anchor_comparisons':160,'solver_pose_comparisons':1808,
+     'native_CPU_state_calls':0,'new_MJB_loads':0,'factory_calls':0,'objective_WM_Actor_forward':0,'weights_loads':0,'AD_calls':0,
+@@ -165,7 +165,7 @@
+       'cudnn_allow_tf32':torch.backends.cudnn.allow_tf32,'cudnn_deterministic':torch.backends.cudnn.deterministic,'cudnn_benchmark':torch.backends.cudnn.benchmark,
+       'deterministic_algorithms':torch.are_deterministic_algorithms_enabled(),'deterministic_warn_only':torch.is_deterministic_algorithms_warn_only_enabled(),
+       'bf16_reduced_precision':get(mat,'allow_bf16_reduced_precision_reduction'),'fp16_reduced_precision':get(mat,'allow_fp16_reduced_precision_reduction'),
+-      'fp16_accumulation':get(mat,'allow_fp16_accumulation'),'bf16_splitK':get(mat,'allow_bf16_reduction_split_k'),
++      'fp16_accumulation':get(mat,'allow_fp16_accumulation'),'bf16_splitK':get(mat,'allow_bf16_reduced_precision_reduction_split_k'),
+       'autocast_enabled_CUDA':torch.is_autocast_enabled('cuda'),'autocast_dtype_CUDA':str(torch.get_autocast_dtype('cuda')),
+       'environment':{k:os.environ.get(k) for k in ('CUDA_VISIBLE_DEVICES','NVIDIA_TF32_OVERRIDE','TORCH_ALLOW_TF32_CUBLAS_OVERRIDE','CUBLAS_WORKSPACE_CONFIG')}}
+ 
+--- D:\workspace\supermimic-full151-observation-study\scripts\check_full151_state_replay_cpu_v1.py
++++ D:\workspace\supermimic-full151-observation-study\scripts\check_full151_state_replay_cpu_v2.py
+@@ -3,7 +3,7 @@
+ from pathlib import Path
+ import numpy as np
+ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
+-from full151_gradient import state_replay105_v1 as s
++from full151_gradient import state_replay105_v2 as s
+ 
+ 
+ def main():

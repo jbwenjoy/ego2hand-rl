@@ -1,0 +1,219 @@
+{
+  "schema": "native_soft_contact_equilibrium_protocol:6",
+  "CPU_static_run_authorized": true,
+  "training_GPU_integration_authorized": false,
+  "automatic_retry": false,
+  "inputs": {
+    "seed_qualified": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\seed2_selected_state.npz",
+      "bytes": 8039,
+      "sha256": "05875553843c3a124591781f4eac8e14b8ecfae4ce3e07e504c3526ac5b1ea1a"
+    },
+    "seed_aligned": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\gravity_alignment_probe_v1\\gravity_line_aligned_state.npz",
+      "bytes": 7642,
+      "sha256": "1108e31b14efefd39f8d460c96eca038e42390335dc013b2026f43da70b3f1a7"
+    },
+    "old_geometry_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\protocol_v2.json",
+      "bytes": 8406,
+      "sha256": "4aa1ab581d151fd35de33d5e6e463f4aac615f878b26e3dc751a18e720a022c3"
+    },
+    "fixed_anchors": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\fixed_anchors_and_targets.json",
+      "bytes": 38112,
+      "sha256": "cac45ba762879007da2043c5c588109fed2c34cc5502e963ead8b3e83eeaebcc"
+    },
+    "human_targets": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v1\\frame42_targets.json",
+      "bytes": 11518,
+      "sha256": "2918c7385036c93fc0e81dbba7f72d02ba72f9b26744b9fe8caab3a1b4b2c15f"
+    },
+    "support_parent": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\support_preparation_v1\\actual_v1\\report.json",
+      "bytes": 28530,
+      "sha256": "e61954f90e6256cc5c642dc0cb9a6c422d659e3180905e103ceccd0c5764acfe"
+    },
+    "compiled_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "compiled_model": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "interface_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\static_contract_v1\\report.json",
+      "bytes": 7548,
+      "sha256": "afd284903b9cdd6de61a64ccef5aa673abf1442cd5ef3f5aa4659093f73bd158"
+    },
+    "LP_fixtures": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\gravity_support_design_v3\\preparation_v3\\report.json",
+      "bytes": 30093,
+      "sha256": "acc84560b71977aa68c266aa00bfe1dcfe81f9bf6b4e0f54491804fd2afd3443"
+    },
+    "seed_polished_A": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_contact_polish_v4\\completed_v1\\seed0_selected_state.npz",
+      "bytes": 8046,
+      "sha256": "710e90e2f1475f6525d5f23a5c9b1fc1e33994803b4434e2b0955b0dab2ad9f6"
+    },
+    "seed_polished_B": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_contact_polish_v4\\completed_v1\\seed1_selected_state.npz",
+      "bytes": 8045,
+      "sha256": "1bd731a9aa280647d9a1bf52bd60a837d3ec5c9378578d261693de5a8711a042"
+    },
+    "closure_result": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_contact_polish_v4\\completed_v1\\report.json",
+      "bytes": 506934,
+      "sha256": "bf30f9372ead185d02a864a8d895a07392b1bd6ca62ecd9866710cca783176ff"
+    },
+    "closure_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_contact_polish_v4\\protocol_v4_run1.json",
+      "bytes": 8904,
+      "sha256": "d23e12a6059d080103418c76fb3c19b8df3bdeb33a326d9670970fa2746314dd"
+    },
+    "preloaded_seed0": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\preload_v1\\seed0_preload_state.npz",
+      "bytes": 5156,
+      "sha256": "558103a4192b1c7458d5d1227e2ceecf1c032f93492c8c395c36e44d9cdd760f"
+    },
+    "preloaded_seed1": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\preload_v1\\seed1_preload_state.npz",
+      "bytes": 5162,
+      "sha256": "0117112ce9f0ee29de757c5c149929078d3dcfb45706162cf836eb5efe66d54d"
+    },
+    "preload_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\preload_v1\\report.json",
+      "bytes": 20340,
+      "sha256": "f90c1be30e0c265bbe956752c84449e4852936badaf069c415b37c74b78abfa8"
+    },
+    "native_forward_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\four_forward_contract_v1\\report.json",
+      "bytes": 20528,
+      "sha256": "56115986f66c6ace3e337504fa347bcd7bf4df1f904f427e7a6ee4e2462723bd"
+    },
+    "native_source_audit": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_source_audit_v1\\report.json",
+      "bytes": 11212,
+      "sha256": "599e996613f7c153af07282392b90947a8dd33baa8a0fa4b1108a2e0d4ad9832"
+    }
+  },
+  "source_pins": {
+    "evaluator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\evaluator_v3.py",
+      "bytes": 23763,
+      "sha256": "090cf6535f5249de4377a0e022ed7c87b555ad69ed7b570f995badb4d2245d57"
+    },
+    "residual_LP": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\gravity_support_design_v3\\support_residual_lp_v3.py",
+      "bytes": 8694,
+      "sha256": "371fd53ba989345164f14f664954768c552c43e30aaf68fd62fd010e26d22237"
+    },
+    "pair_helper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\support_preparation_v1\\prepare_support_v1.py",
+      "bytes": 16104,
+      "sha256": "068d7a887dc0edecd3e02825288e0430cbc0b7d0a2bf24723f851b92ef9df89b"
+    },
+    "segment_helper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\solve_contact_first_v2.py",
+      "bytes": 26045,
+      "sha256": "7a2deeb196fa24bcac6c33f17ebe9862f9129b055a92fbaad8e5491ae8c86fdb"
+    },
+    "convex_query": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\convex_query.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    },
+    "query_interface": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\query_interface_v2.py",
+      "bytes": 3575,
+      "sha256": "5c5785a7d8301404ef62659dc2e3f2ca016d98c8041b96feeb1e4e5c2ac779fe"
+    },
+    "initial_loader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\scene_loader_v1.py",
+      "bytes": 2908,
+      "sha256": "5a36cf1d6ac875c3f0cfc3c80b5b28c8c5726ec68d3ac40f731ccee70840b303"
+    },
+    "previous_static_runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\solve_gravity_contact_v3.py",
+      "bytes": 20187,
+      "sha256": "6a155cbfd42454115adfed978dc59eaf6f10d19cf609de930c6901fb9e5b874d"
+    },
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\solve_native_equilibrium_v6.py",
+      "bytes": 19740,
+      "sha256": "5e5f97d61ccbfd3fa732300bdab44cc48e4bd0cdfdddf6294752d16a068a456e"
+    },
+    "native_evaluator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\evaluator_native_v6.py",
+      "bytes": 19267,
+      "sha256": "0a7a15cf16d98066920de3a95dc7b0b1a9faf61d387c24cf43a1b38f1aa2a16f"
+    }
+  },
+  "start_input_aliases": [
+    "preloaded_seed0",
+    "preloaded_seed1"
+  ],
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1",
+  "budgets": {
+    "total_seconds": 300,
+    "per_seed_seconds": 150,
+    "final_reserve_seconds": 30,
+    "native_forward_per_seed": 8000,
+    "native_forward_budget_scope": "Search forward cap only; up to6 additional final/repeat forward perseed for3shortlist. Actual attempted/returned/data counts allsaved.",
+    "final_geometry_heavy_total": 4000,
+    "final_geometry_heavy_per_seed": 2000,
+    "atomic_overrun": "A started native forward or hull may complete afterdeadline; record actualcost, noautomaticretry."
+  },
+  "model_digest_period": 128,
+  "characteristic_length_m": 0.077,
+  "search_trust_translation_m": 0.03,
+  "search_trust_rotation_rad": 0.35,
+  "finite_difference": {
+    "q_rad": 0.0001,
+    "translation_m": 1e-05,
+    "rotation_rad": 0.0001,
+    "ctrl_rad": 0.0001
+  },
+  "solver": {
+    "method": "scipy.optimize.least_squares/TRF",
+    "max_nfev": 300,
+    "ftol": 1e-10,
+    "xtol": 1e-10,
+    "gtol": 1e-08,
+    "xscale": "q.2rad,p.02m,rot.2rad,ctrl.2rad; trueq/ctrl bounds andproperphonepose localtrustbox"
+  },
+  "pad_compression_limit_m": 0.0001,
+  "pad_compression_penalty_start_m": 8e-05,
+  "pad_normal_penalty_start_N": 2.8,
+  "joint_acceleration_scale_rad_s2": 0.1,
+  "penalty_length_m": 1e-05,
+  "weights": {
+    "object_wrench": 1000.0,
+    "nonpad_penetration": 1000.0,
+    "pad_compression": 1000.0,
+    "pad_normal_budget": 1000.0,
+    "missing_pad_load": 10.0,
+    "anchor_fidelity": 0.01,
+    "tip_style": 0.05
+  },
+  "entry_gates": {
+    "COM_acceleration_infinity_m_s2": 0.01,
+    "angular_acceleration_infinity_rad_s2": 0.1,
+    "joint_acceleration_infinity_rad_s2": 0.1,
+    "native_other_penetration_m": 1e-09,
+    "native_other_normal_force_N": 1e-08,
+    "minimum_pad_normal_N": 0.1,
+    "maximum_pad_normal_N": 3.0
+  },
+  "final_shortlist_count": 3,
+  "final_shortlist_min_scaled_difference": 0.0001,
+  "new_initialization_hypothesis": "Designatedtwo sensorcolliders may start in atmost0.1mm native compliant compression. Thisis a newmodel-based engineering initialization, not calibrated softpad or old nonnegativegap qualification. Allother phone/self exact margins >=0 final. Rootheldwrist/scale/geometry/material/gains/limits unchanged. No objectforces/gravcomp/equalities/mocap.",
+  "objective": "Actual native ma/(mg),Ialpha/(mg*.077) andall20 jointqacc atzero velocity. Physicalequilibrium strongly prioritized over measuredreferencefidelity; unchangedsource anchors/tips error reported. Nativeother penetration/normal budgets penalized but penalties never qualification.",
+  "selection": "Register every actual optimizerbase including promotion fromcachedFD without newforward; preserve originalevaluation purpose. Baseonly ordered by nativeentrypass then objective. Verify first3 distinct scaledstates/seed by all22phone exact+all189 self near/AABB, explicit\u2212.1mm..+.2mm padwindow, allother>=0, independentfreshrepeat. Globalmodelaudit.passed mandatory. Unknown/timeouts neverpass.",
+  "repeat": "FreshMjData eachprobe, qvel/act/warmstart/applied0, oneforward only. Repeatbitcompare physical rawfields excluding probeID column, withownwarning andentrygates. Rawfirst/repeat stored; not a stabilitycertificate.",
+  "qualifications": "Staticnative-equilibrium proposals only. Original two-second freeobject allcase gates+both timestep diagnostics remain independent andunchanged. No integration,learnedweights,trainer,policybenefit orrealcalibration here.",
+  "failure_preservation": "Unknownnative events keepraw/warnings beforethrow; failedattempt params retained; row/registration/Jaclogs savedbefore finalmodelaudit. Failedmodelaudit globally invalidatesprovisionalcandidates, keepsoldverification evidence."
+}

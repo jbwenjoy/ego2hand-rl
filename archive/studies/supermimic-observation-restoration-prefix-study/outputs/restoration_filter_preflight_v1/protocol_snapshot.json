@@ -1,0 +1,272 @@
+{
+  "schema": "restoration_prefix_protocol:1",
+  "status": "FROZEN_NEW_RESTORATION_FILTER_METHOD_BEFORE_ANY_SOLVE",
+  "GPU_authorized": false,
+  "training_authorized": false,
+  "parent_protocol": {
+    "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\protocols\\constrained-prefix-v1.json",
+    "sha256": "0798ea7aa6da6f56684067992906bbba3136f9e15b413f743674f54159ad2e6d"
+  },
+  "input_parent_protocol": {
+    "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\proposals\\short_dynamic_tracking_v1\\protocol.json",
+    "sha256": "94ea7cbe03f3e2aaa7bb4f7c8860bae8e599cd4e8e823cbe47220f73ffe101a3"
+  },
+  "inputs": {
+    "observation_fixture": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/observation_only_fixture_v1/observations.npz",
+      "sha256": "3bdca0ee6fd8d7956cac1ee2b13719db5cb302ceb0130972719032a04b3ec35b"
+    },
+    "frozen_full151_geometry": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/outputs/native_contact_refined_geometry_v1/geometric_retarget.npz",
+      "sha256": "539d6247576b9b2e3fb1b143cf17b6ad507e3baea73c5fafcda4e221d9230c8f"
+    },
+    "canonical_H123_q0": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/frame0_h123_seeded_baseline_v3/initialization_candidate.npz",
+      "sha256": "57135b4c607f48d844e3977b56065dc6f1b4c8991626fc033651c6d136b89406"
+    },
+    "frozen_material_anchors": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/frame0_h123_seeded_baseline_v3/frozen_anchor_bindings.json",
+      "sha256": "91022e42f8a3a6ef215695d8975e46fcc92cb88e431018b412eca77db391775f"
+    },
+    "static_preload_design": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/h123_preload_cpu_v1/baseline/designed_target_u0.json",
+      "sha256": "eadb33db1ebbf1abc774a16ed551243ba89f6e325e7486d53720e2ac65caa808"
+    },
+    "PDU_rest_actual": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/outputs/h123_rest_baseline_preload_v1/evaluation.json",
+      "sha256": "69aecde6bb4be45e158c123662877f013387dc25c4b393eacac8a1bbf40e10ee"
+    },
+    "PDU_owner_evidence": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/outputs/h123_preload_owner_execution_v1/completion.json",
+      "sha256": "9ad1452ea20d433e33389c70a9683c31e3c5274f07ac10a69ba9c5066e630e6f"
+    },
+    "rawFD_design_arrays": {
+      "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\outputs\\dynamic_wrench_v2\\designed_wrench_151.npz",
+      "sha256": "60b1ae5bc6fa918ac1d569b44fddefad387a5ee3e45fc8fffe731cdb17516ead"
+    },
+    "rawFD_protocol": {
+      "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\protocols\\dynamic-wrench-v1.json",
+      "sha256": "a6130ef7d91c89963f94d322cafa8c694784badd905361815c16d01383791a66"
+    },
+    "model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "rest_worker_reuse": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/scripts/rest_hold_warp.py",
+      "sha256": "03770389af4f47a9659da015557df04707d574b6c76827d36ded2fa45c47b6a0"
+    },
+    "supervisor_reuse": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/scripts/run_rest_hold.py",
+      "sha256": "2f29bcf1cbe0b96282fb825c18c4ac257de17ddf2e760bce8d200577ddad681f"
+    },
+    "pure_C2": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/vendor/target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    },
+    "kinematics": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/scripts/retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    },
+    "native_filtered_geometry": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/scripts/native_filtered_contact_geometry.py",
+      "sha256": "c964d5b300baac57a5353afd3b5aa4cfb381eca1da03ceef712691dd10376c72"
+    },
+    "material_geometry": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/scripts/material_anchors.py",
+      "sha256": "d860c666cf596abe8f374342f191515b4c51b3537d86a64d99e850e8f7fcd37c"
+    },
+    "registry_background_only": {
+      "path": "D:/workspace/supermimic-shared-reference-study/configs/derived_reference_registry_v1.json",
+      "sha256": "f44d29724a6f8abec13254f375ccbcc16ce12c049599fd3586dc02401a18d5a7"
+    },
+    "registry_API_background_only": {
+      "path": "D:/workspace/supermimic-shared-reference-study/src/shared_reference/reference_registry.py",
+      "sha256": "7ea67f432e75045da2237009d8ceb0e739cad3439c444f2512b93020ac1fe327"
+    },
+    "original_acceptance_math": {
+      "path": "D:/workspace/supermimic-chord-study/src/chord_study/acceptance.py",
+      "sha256": "b7afba11a1bc0b97425b2d1987615bcbe21acb74467759a0b822f932868a9bb4"
+    }
+  },
+  "source_identity": {
+    "proposed_new_id": "legacy_observation_fixture/clip007_f0200_f0216_H123_prefix16_v1",
+    "parent_observation_source_frame_range_half_open": [
+      200,
+      351
+    ],
+    "primary_pose_prefix_local": [
+      0,
+      16
+    ],
+    "primary_pose_source_frame_range_half_open": [
+      200,
+      216
+    ],
+    "rawFD_derivative_support_local": [
+      0,
+      18
+    ],
+    "rawFD_derivative_support_source_range_half_open": [
+      200,
+      218
+    ],
+    "time_s": [
+      0.0,
+      0.3
+    ],
+    "dt_goal_s": 0.02,
+    "goal_states": 16,
+    "source_lineage_group": "Existing controlled cached fixture; original video/camera/scale/confidence unknown, not a new independentmotion",
+    "not_existing_shared10clip_identity": "Current registry only accepts source[0,151), so it must reject migration of this old[200,351) artifact. A distinct prefix manifest/extension is required, not relabeling."
+  },
+  "retarget_variant_id": "H123_cubic_minimax_restoration_filtered_prefix16_v1",
+  "seed_candidate": {
+    "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\outputs\\constrained_prefix_geometry_v1\\candidate.npz",
+    "sha256": "64aa2cfe44f20fee4546b07c4546916c95d57771404cb5fb4e39156206ad9b43"
+  },
+  "seed_manifest": {
+    "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\outputs\\constrained_prefix_geometry_v1\\manifest.json",
+    "sha256": "808c8cfa18be823a743a07c15a5ec50d4facc7fd535799101ddc292488929dd6"
+  },
+  "seed_report": {
+    "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\outputs\\constrained_prefix_geometry_v1\\report.json",
+    "sha256": "fda5074d8d304e04caf9d2aaa67571e4d959242787c53585a5d1584f8e7ef2a4"
+  },
+  "linear_contract": {
+    "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\outputs\\constrained_prefix_geometry_v1\\linear_contract.npz",
+    "sha256": "7c68e959378077297c08c7b4aa9a1b27b8bcdc6a6716f9ef6a7773b1d8a14be8"
+  },
+  "linear_metadata": {
+    "path": "D:\\workspace\\supermimic-observation-constrained-prefix-study\\outputs\\constrained_prefix_geometry_v1\\linear_contract_metadata.json",
+    "sha256": "9b97912fb9a219b6a8cde9b5150e888bb6ca710586c4380ce2594ee3c0602a15"
+  },
+  "history": {
+    "new_design_after_known_previous_outcomes": true,
+    "old_protocol_results_immutable": true,
+    "why": "Previous normal terminal passed linear/controller contracts but5of61generateddepths exceed3mm. This method separates minimax restoration from decreasing fit steps rather than extending old80iterations or reweighting.",
+    "old_seed_is_not_qualified": "A derived model-reference control vector only, not actual robot state or physical demonstration. No copied rest/shared/ego qualification.",
+    "independent_ego_N": 0,
+    "contact_confidence": null
+  },
+  "invariants": {
+    "curve": "Same18point clampedcubic/P0source64 fixed/340vars/16q/61geometry samples; analytic derivatives/nativeFD distinct.",
+    "object_and_pose": "Frozen same mappedobject/full151rawFD-derived SO3/p quintic, defaultfixedwrist; no tail splice or new smoother.",
+    "fit": "Same original6596residuals/weights/scales/materialH123hypothesis, not changed by restoration objective.",
+    "linear": "Reuse exactsaved5960x340linearA/rhs/coeffbounds/staticprior; no newLP. Numericcontrol2e-6rad/force2e-6Nm/rate14.9999planning remain.",
+    "geometry": "Operational61x2maximumgenerateddepth,2.999mmplanning and3mmoriginalqualification; absentgapNaN/maskunknown/ties retained, no positivegap or continuousclearance claim.",
+    "planning_margins": {
+      "control_inner_margin_rad": 2e-06,
+      "force_margin_Nm": 2e-06,
+      "rate_margin_rad_s": 0.0001,
+      "generated_depth_max_m": 0.002999,
+      "rationale": "Numerical tightening fixed before any LP/nonlinear solve. C2.020/15rad_s/originalforcecaps/3mm qualification are unchanged; margins are not simulator-accuracy or hardware guarantees."
+    },
+    "dimensions": {
+      "n_control": 18,
+      "joints": 20,
+      "free_variables": 340,
+      "R_augmented_variables": 341,
+      "fit_rows": 6596,
+      "sampled_geometry_rows": 122,
+      "fit_frames": 16,
+      "geometry_samples": 61
+    }
+  },
+  "arithmetic_tolerances": {
+    "depth_m": 1e-12,
+    "depth_scaled_mm": 1e-09,
+    "linear_native_row_units": 1e-12,
+    "coefficient_rad": 1e-12,
+    "direction_zero_rad": 1e-12,
+    "scope": "Predeclared FP64 arithmetic only, all raw/exact0798 booleans retained. Not collisionaccuracy/modelerror bound. Finalphysical3mm/C2/rate15/forcecaps unchanged and independently strict-audited."
+  },
+  "restoration": {
+    "calls_max": 1,
+    "solver": "SLSQP",
+    "variables": "[absolute340controls,slack_mm]",
+    "initial_x": "exactprevious normallyreturned terminal64aa x340; no historyselection",
+    "initial_slack_mm": "max(0,max(actual122depth_mm)-2.999)+1e-6",
+    "slack_bounds": [
+      0,
+      null
+    ],
+    "objective": "min slack_mm ONLY,gradient[0x340,1]; no fit or surrogate force objective",
+    "constraints": "Originalsaved linear inequalities/coeffbounds AND seed\u00b1.05rad coefficient trustbox,122trueoperational d_mm(x)<=2.999+slack",
+    "seed_coefficient_trust_box_rad": 0.05,
+    "trust_box_applies_to": "restoration R only, not subsequent F",
+    "maxiter": 60,
+    "max_objective_fun_calls": 200,
+    "ftol": 1e-09,
+    "terminal_gate": "Only normal returned R.x controls. Forcefresh61nativecollision reevaluation then original122/linear/coeff/Rtrust feasibility at arithmetic tolerances. Do not infer from successcode orslack0. Report augmentedslack/status separately.",
+    "if_gate_fails": "Stop pipeline,savefailedRterminal/partial;noF,noalternative seed/modes orweights,not globalinfeasibilityproof."
+  },
+  "fit_filter": {
+    "outer_majors_max": 8,
+    "initial_accepted": "Normallyreturned Rterminal only after actualraworiginal feasibility gate",
+    "bounds": "Originalcoefficientbox and originalsavedlinear inequalities; no inheritedR\u00b1.05box. Permajor stepinf<=.02rad.",
+    "QP": {
+      "calls_per_major_max": 1,
+      "solver": "SLSQP on340-step,allconstraintslinearized",
+      "initial_step": "zero",
+      "objective": "0.5||r+J*d||^2+0.5*1e-4||d||^2;g=J.T*r,H=J.T*J+1e-4I",
+      "mu": 0.0001,
+      "constraints": "C*d<=2.999-d_current_mm,originalA*d<=b-A*x_current,originalcoefbox-relativebounds andstepbox\u00b1.02",
+      "maxiter": 25,
+      "max_objective_fun_calls": 100,
+      "ftol": 1e-09,
+      "proposal_gate": "Only normalterminalQPd;independentfinite/linearizedgeometry/linear/step/box checks atdeclaredarithmetic tolerances,maxabsd>1e-12,actualxchanges,g.dot(d)<0. Status alone insufficient; noQP historyselection."
+    },
+    "alphas": [
+      1,
+      0.5,
+      0.25,
+      0.125,
+      0.0625,
+      0.03125
+    ],
+    "Armijo_c1": 0.0001,
+    "acceptance": "In fixedalphaorder, firstactualtrial with finitechangedx, actual122/linear/coefffeasible at arithmetic tolerances AND originalcost_trial<originalcost_current AND cost_trial<=cost_current+1e-4*alpha*g.dot(d). Realquery with NaN/mask/ties/logs,not predictedQP qualification.",
+    "accepted_sequence": "Each acceptedstate retains61-sample reference feasibility and decreases originalfitcost; neither proves continuousgeometry/actualphysics.",
+    "normal_stops": "8majors;noQPreliableterminal;QP100funbudget;nonfinite/zero/non-descentproposal;no acceptedalpha. Stopwithout newQP/trust/mode/weight/alpha fallback. ZeroacceptedFsteps returnsRterminal labelled F_NO_ACCEPTED_STEP,notfitimprovement.",
+    "native_J_limitations": "Deterministic active min/maxJac local/nonsmooth/numeric limits unchanged. Actualvalidation/strictcost filter does not make derivatives global or exact."
+  },
+  "canonical_selection": {
+    "normal_only": "Pipeline normaltermination -> last algorithmicallyaccepted Fstate (Rterminal ifF0steps). Not minimumcost or bestfeasibility fromhistory.",
+    "finalfresh": "Before normaloutput forcefresh61evaluation; canonicalremains samealgorithmstate iffreshbranch causesfail,markunqualified,nofallback.",
+    "timeouts": "Rbudget/soft340/hard360/engineeringerror -> partial lastaccepted checkpoint only,no canonicalcandidate,noautomaticretry. ControlledQP100funbudget is a normalFstopwithreason.",
+    "phase_R_if_failed": "FailednormalRterminal is a separatediagnostic,not a qualifiedpipelinecanonical."
+  },
+  "logging": {
+    "every_R_major": "actualfitcost,slack,max/sum122violation,rawlinear/bounds/trust,selectedpair/contact/ties/branchsignature andJacsignature,statevector/hash/counters/wall. Robjective stillslack only.",
+    "every_F_major_and_trial": "basecost/rawviolations/activepairs/ties/Jsig,QPterminal/status/predicted-only residuals,gTd,eachfixedalpha actualcost/constraints/branchsignature,accept/reject reason. Trial lognotmislabelledmajor.",
+    "checkpoints": "samepayload159c atomicNPZ+header PID/plan/source/time/phase/lastaccepted andseparateactualfeasibility; interruptedpartialnotcanonical.",
+    "counts": "R,SLSQP_QPs,QPfun/gradient,actualfit/constraint/freshgeometry/uniquevectors/trials/acceptedstates separately counted;sharedg totalsnotresummed."
+  },
+  "execution": {
+    "soft_wall_seconds": 340,
+    "owned_process_seconds": 360,
+    "automatic_retry": false,
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "-1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "lifecycle": "40b reviewedactualruntimePID+venv-ownedtree/CIM,159c boundedmetadataIO; timerstarts beforePopen andimports; finitecleanup extra,not totalwall<=360",
+    "defaultcheck": "NoLP/minimize/solvercalls. Checksource/seed/exactmatrix/P0/shapes/finite andonefit16+61geometry; recordcalls.",
+    "authorization": "Thisprotocol doesnot authorize a formalrun byitself;Rootseparatehashboundplan aftersource/math checks."
+  },
+  "final_controller_and_future_physics": {
+    "bundles": "Newrestored_prefix_separate_bundles:1 reference/init/control,keep9bee NPZfieldnames;newvariant/protocol andexplicitparent0798/inputparent94ea/ref/sourceplanSHA.",
+    "final_audit": "RecomputepostC2FP32/NumPy-Torch-originalparity/rate15/hull/Bernstein+61FP32caps/savedgenerated3mm gates. Raw/exact andarithmetictolerancesseparate,none becomesmeasuredstate/force.",
+    "init": "Designnonzeroanalyticqdot plusfrozenobjectworldv/omega ->nativebodyangular;actualreadbacknulluntilruntime.",
+    "future_campaign": "Atmost separatelyreviewedH0hold/newu0 thenT0tracking,newmatchedinit15targets/14updates/60steps/0assist/actual8readbacks/finalstickyoverflow. GPUremainsfalseuntilallCPU+workercontracts reviewed.",
+    "full_goal": "A0.3prefix doesnotcompletefull151motion,learningresidual+CHORD benefit/sharedcost/trueego orhardware objectives. No newtraining here;checkpointhealthy+ETA pausecondition remains forlaterlongtraining."
+  }
+}

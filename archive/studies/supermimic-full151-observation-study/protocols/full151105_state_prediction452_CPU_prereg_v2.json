@@ -1,0 +1,397 @@
+{
+  "schema": "full151105_state_prediction452_CPU_preregistration:1",
+  "status": "FROZEN_SOURCE_ONLY_NO_MODEL_OR_ARRAY_EXECUTION_AUTHORIZED",
+  "created_UTC": "2026-11-05T16:56:39.846838+00:00",
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "training_authorized": false,
+  "parent_qualified_input_protocol": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_solver_phase_penalty_qualified_GPU_CPU_prereg_v4.json",
+    "sha256": "c9a746f929d5943a03067c67d5b28f23e09b093084c2cde07cfae05f5db60028"
+  },
+  "previous_same_loader_config_SOURCE_ONLY": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-A2-WM-physical-gradient-CPU-v1.json",
+    "sha256": "c7f84bfbff5e3bd62f8f75f4f297917948cc208bc7d8b7f2796c96c0f76f7cbf"
+  },
+  "source_pins": {
+    "strict105_WM_loader": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\world_model_checkpoint.py",
+      "sha256": "119fa7cebc0e9b0727b0160660b1a47822deee2a0e0e9fa5be69465ac5578052"
+    },
+    "strict105_Actor_validator": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\checkpoint.py",
+      "sha256": "abea7d23db082cc98b5ba77fdaa3fafcac87e8241663e9219b11742997376916"
+    },
+    "bundle_loader": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\bundle.py",
+      "sha256": "d2d7b8112e187f980caf6eeb7a834b37a5393109e9a8d70dd745207a357835d5"
+    },
+    "native_WorldModel": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "native_state_pack_integrate": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    },
+    "native_rotations": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\rotations.py",
+      "sha256": "0fbb36bc8608dcc9a33edfac7f6551e742380e1e66c70e857b33d6d05cd81e70"
+    },
+    "physical_producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\serial_probe105_v2.py",
+      "sha256": "a24c89da47f4aad7acfc9d9dfd1f053518cdc878230716bb2c857127ec13e592"
+    },
+    "pure_group_helper": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\penalty_observability105_v1.py",
+      "sha256": "00e1aea5163c7f6d07ea75755e076d808f171d0a766acbf6a683db8a3c00b22c"
+    },
+    "qualified_replay_metadata_helper": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\penalty_observability105_v3.py",
+      "sha256": "c4892a933860c0415e4a229c181a94f88755e6c529bd27c5f79bdc56be8da47a"
+    },
+    "shared_metadata_hook_helpers": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\trained_bonus_analysis105_v1.py",
+      "sha256": "9c34ea62f2aab6c1492bc544e916ef5c6d77348452e282501a148047a9505fbd"
+    },
+    "matched_replay_contract": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\state_replay105_v2.py",
+      "sha256": "9ff9aef6956ca917068834f89524861d6b9ad8492e58cf6504ca404393a403b3"
+    },
+    "pure_PD_parameters760": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_control.py",
+      "sha256": "76026dbdcdfdecf4680820b24da088e1d123e86ceb8b42a2bbd60a5412103b6d"
+    }
+  },
+  "inputs": {
+    "physical_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-gradient-empirical_gradient05-v2.json",
+      "sha256": "034e81fecb3e49a26136740054bb284d600f379bdb7ae1db2c9a6368228af077"
+    },
+    "physical_samples": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\physical_samples.jsonl",
+      "sha256": "c363f20838c6cec1acdc3541c7d250c7cb5980c3d6719ebb7c245d4e13c9071f"
+    },
+    "reward_snapshots": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\reward_snapshots.jsonl",
+      "sha256": "f214ff1b036595d56117363bd87c7b3c876b04af2fb6a1e8f3a2244ad2ee2247"
+    },
+    "physical_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\physical_arrays.npz",
+      "sha256": "962de8ad06f72031339b6fb6a46d9209e604f70c7c2e564b80f3873b5e422e8b"
+    },
+    "branch_index": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\branch_index.json",
+      "sha256": "ae2667c285ca55711035189e5368b4436631c1322346735d9a19a1e179c61aa9"
+    },
+    "snapshot_records": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\snapshot_records.json",
+      "sha256": "114386fd2d049b97c650d9c47e6a02d2509c8c963d5e64b7148ba5d50bbbe1ec"
+    },
+    "donor_records": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_records.json",
+      "sha256": "ecdbcc001cd9c6d06b75e7140dfa6405145ec86fffce0d48d3c53de7da1ef4c2"
+    },
+    "physical_saved_independent1762": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_full_serial_saved_review_v1\\report.json",
+      "sha256": "f5fd0703639308706b4f8bf5deee834e6d207486c63fded8920a6a86fd2a62af"
+    },
+    "full151_bundle": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\bundle.json",
+      "sha256": "59406c6214a085afba7efcc2b33880d5c82b409ee4f6485ec71c073fec19dc76"
+    },
+    "reference_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\reference_candidate151.npz",
+      "sha256": "aa4f13b146979c7b274f7191100023168ff69032fe5d88125d339e3a56e3be93"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "GPU_replay_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\report.json",
+      "sha256": "0ac1bf85d41c3e6136f820786fab8dd60ff23470bfb8e7182eeb9b9e4bbee8f9"
+    },
+    "GPU_replay_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-matched-native-GPU-reader-v2.json",
+      "sha256": "9573b5ad074904775c07c54f49ffcd43bb354a178fc386a0537827df95210078"
+    },
+    "GPU_replay_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105-matched-native-GPU-reader-replay-prereg-v1.json",
+      "sha256": "fddcf970d7a8e44732fe93e6c83d1918fe017d4d5df159ae5c851a77e15fca6c"
+    },
+    "GPU_replay_identity": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2_watchdog\\engineering_identity.json",
+      "sha256": "42f1e3eb8229e44e522d0aa069654e1330ff30aa132129e61efc630e3252c8e4"
+    },
+    "qualified_GPU_prestate1808": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\prestate1808_qualified_for_future_scoring.npz",
+      "sha256": "4d205ee2c7cc878745f4575e572622eb3033a81a49408d6cef76dda008b56de5"
+    },
+    "GPU_replay_saved_independent": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_saved_independent_v3\\report.json",
+      "sha256": "a31cb81a6e513fea013591a9198b86a0ad398a148164f18a0bedfcdb7ec9c3eb"
+    },
+    "GPU_replay_core_output_manifest": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\output_pins_core.json",
+      "sha256": "d4a22ffdf79411f5c4838c549a7cc40d17b9b8ce8d818545c9714447100143cf"
+    },
+    "GPU_replay_terminal_runtime": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\runtime.json",
+      "sha256": "81a1ad4f2b346cf853e4c5f12c31efb26ee7be929d74e8f048760d6eda00a55a"
+    },
+    "GPU_replay_terminal_completion": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\completion.json",
+      "sha256": "88f00cf83f8d70423daf40ad966393b1cc14ab15b8f057d4bdd6761f336be3cb"
+    },
+    "GPU_replay_watchdog_state": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2_watchdog\\state.json",
+      "sha256": "da359de185114e1695260782f303909d17833927f3e9935ddaf9c70d7ca001f7"
+    },
+    "GPU_replay_post_terminal_CIM": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2_watchdog\\post_terminal_CIM.json",
+      "sha256": "a2acef7a6ed8910f79b84a51ce03576b06d4c44da8a86aa855819fbc268b30ac"
+    },
+    "forensic_solver_position1808": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_converter_forensic_CPU_v1\\solver_position1808_old_rule.npz",
+      "sha256": "5ab8cabee6a958e34de6748dca93f44b7a2c9b1d15c851d3f173d9d872b89627"
+    },
+    "forensic_solver_rotation1808": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_converter_forensic_CPU_v1\\solver_rotation1808_old_rule.npz",
+      "sha256": "0a9513d6d55a4fb41882b6be4c36453b5fd1c93de7e0282a5fb7f632f464e6d6"
+    },
+    "GPU_raw_all2260": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_matched_native_GPU_reader_v2\\native_GPU_all2260_raw.npz",
+      "sha256": "f854a6b88bf5a327452520d6f0dc60bcc5722afc2c99dac0a00504a68a8debba"
+    },
+    "GPU_endpoint_identities": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_converter_forensic_CPU_v1\\endpoint_identities.json",
+      "sha256": "976567f39c9903f93b2e1702e4f2d3469cd03d96f79a7b6bb2c20bbc4e5174c1"
+    },
+    "GPU_anchor_identities": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_converter_forensic_CPU_v1\\anchor_identities.json",
+      "sha256": "e9f7f0228ae70b6267e3dea2a0cac3795fd9d2bb20024dcffd0a82fb6329fe1d"
+    },
+    "forensic_raw_all2260": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_converter_forensic_CPU_v1\\raw_conversion_all2260.npz",
+      "sha256": "86466338c4a6b74512e593d340ab0f9024999d0bcf8be781cbf1552e937ed64d"
+    },
+    "input_bundle": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\bundle.json",
+      "sha256": "59406c6214a085afba7efcc2b33880d5c82b409ee4f6485ec71c073fec19dc76"
+    },
+    "fixed_A2_checkpoint": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_v3_primary2000_A2_seed0_v1\\train\\model_final.pt",
+      "sha256": "70d0a21d5b2f0238ab745264bf24db08515fef65f072cbe00fb6893a33512a0c"
+    },
+    "fixed_A2_final_health": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_v3_primary_A2_final2000_health_v1\\report.json",
+      "sha256": "13b705b7421402091fde5bb431e835360f71185d80beceb72ccf4cefff92f574"
+    },
+    "fixed_A2_health_auditor": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\audit_full151_checkpoint_cpu_v2.py",
+      "sha256": "5950b9947b00ed0cfce6a8403a65877db6d71be1d7b01b8c3ad1626bdd5de792"
+    },
+    "fixed_A2_training_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151-v3-primary2000-A2-seed0-v1.json",
+      "sha256": "eb7a45da30ff730cf364d5434c26e9f69f424f0b56ff5ea95dbee1c8b36661e8"
+    },
+    "fixed_A2_fixed_physics_context": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_v3_primary2000_A2_seed0_v1\\fixed_physics_context.npz",
+      "sha256": "c700b7b4add0420f3f84fbfc8f8bbf62e4d29ce61325f81666eb0918cf97ddc2"
+    }
+  },
+  "runplan_schema": "full151105_state_prediction452_CPU_run:1",
+  "role": "fixed_A2_WM_all452_state_prediction_error",
+  "runplan_keys": [
+    "schema",
+    "role",
+    "protocol",
+    "output",
+    "CPU_run_authorized",
+    "cpu_threads",
+    "source_pins",
+    "cpu_ready"
+  ],
+  "output_prefix": "full151105_state_prediction452_CPU_",
+  "cpu_threads": 4,
+  "question": "One-step teacher-forced state58 prediction error of one fixed A2 final2000 WM across every existing452 full05 control interval; no score, gradient, rollout or causal method comparison.",
+  "fixed_model": {
+    "method": "A2",
+    "iteration": 2000,
+    "training_role": "primary_matched",
+    "training_run": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_v3_primary2000_A2_seed0_v1",
+    "authority": "Use exact fixed_A2 checkpoint/health/auditor/config/bundle pins without relabeling or changing dictionary path spelling. Loader has strict existing aliases; no monkeypatch or guard bypass. No cross-arm model or checkpoint choice."
+  },
+  "dataset": {
+    "groups": 452,
+    "donor": 300,
+    "baseline": 24,
+    "direction": 128,
+    "paths": [
+      "A0",
+      "A2"
+    ],
+    "six_path_mode_groups": "All path\u00d7{donor,baseline,direction} retained, original group order, all phases including149. Never treat repeated/restored states as independentN.",
+    "join_key": [
+      "path",
+      "k",
+      "branch_id"
+    ],
+    "source": "GPU_raw_all2260.native_GPU_state58_raw[2260,58] F32 plus completed_mask allTrue; qualified_GPU_prestate1808 verifies first1808 samebytes. Use original physical_samples row order and explicit endpoint_identities.",
+    "grouping": "Call source-bound pure group_rows(samples,rewards) or identical independently checked keyed join:452groups, four contiguous rows with substeps1..4, source_frame200+k, canonicalticks4k..4k+4 and originalFP32clock recurrence. Groups are not one continuous global trajectory.",
+    "x0": "For group g with physical pre-row indices[i0,i1,i2,i3], x0=GPUraw[i0]. Verify i1=i0+1,i2=i0+2,i3=i0+3 and matchingpacket source_pre_row. Do not use a later PRE or post20 state.",
+    "u": "u=physical_samples[i0].ctrl, exact FP32 absolute executed target20. Require all four groupctrl uint32bytes equal; bind branch/donor source metadata and original source/capacity review. Do not rerun Actor, EMA, hardclip, C2, bias subtraction or control reconstruction.",
+    "x1": "x1=GPUraw[1808+g] in explicit forensic/replay endpoint order; require endpoint_identity[g] equals group key and last_sample_index i3. Retain all452 nativeGPU replay/reference full58 oldbits+8eps qualification and original reward_snapshot.physics endpoint identity; no new conversion or threshold.",
+    "terminal": "k149 maps predecision149 to post20ms observation150. Keep its one-step state response; no u150, bootstrap, extra policy decision or autoregressive rollout."
+  },
+  "context": {
+    "physical_xi_dim": 46,
+    "privileged_task_context_dim_NOT_xi": 368,
+    "disturbance_dim": 174,
+    "loader": "Strict119f validates training actual128\u00d746 reader_context andactual8 against samebundle. Bind physical full1762/replay29 provenance to sameinputbundle/actualcontext. Broadcast one frozenxi46 perrow pluszero174 exactly as existingwrapper; do not call this full physical hiddenstate."
+  },
+  "API": {
+    "loader": "load_world_model_checkpoint(checkpoint,bundle,\"A2\",training_run,health_report,expected_health_auditor=originalpin,expected_iteration=2000)->(frozenCPUwrapper,receipt)",
+    "forward": "with torch.no_grad(): predicted58,self15_logits=wm(x0_FP32CPU[452,58],actualu_FP32CPU[452,20])",
+    "positive_batch_supported": "Frozen wrapper requires x.ndim2/x.shape1=58/x.shape0>0/u.shape=(batch,20), not batch8 or128. Norm buffers are frozen and no update method is called.",
+    "no_extra_adapters": "Use existing strict wrapper; do not invent another unused WM loader or bypass it with device transfers."
+  },
+  "expected_counts": {
+    "strict_WM_loader_calls": 1,
+    "checkpoint_torch_loads_internal": 2,
+    "Actor_validation_constructors_internal": 1,
+    "Actor_forwards": 0,
+    "passive_MJB_constant_loads_internal": 2,
+    "WM_forwards": 1,
+    "WM_batch_rows": 452,
+    "predicted_rows": 452,
+    "AD_calls": 0,
+    "optimizer_updates": 0,
+    "objective_factories_or_forwards": 0,
+    "native_state_conversions": 0,
+    "new_Env_Warp_physics_nativeFK_collision_GPU": 0,
+    "passive_MJB_constant_loads_caller": 1,
+    "passive_MJB_constant_loads_total": 3
+  },
+  "metrics": {
+    "signed_errors": "For every row and feature, e=predicted.astype(F64)-truth.astype(F64), preserve all452\u00d758 values. No q wrapping, repair, clipping, normalization or projection. No scalar combining differentunits.",
+    "groups": [
+      {
+        "name": "q",
+        "slice": [
+          0,
+          20
+        ],
+        "units": "rad",
+        "component_RMSE": "sqrt(mean(e**2)) over selectedrows\u00d720; also report\u00d71000 mrad"
+      },
+      {
+        "name": "qd",
+        "slice": [
+          20,
+          40
+        ],
+        "units": "rad/s",
+        "component_RMSE": "sqrt(mean(e**2)) over selectedrows\u00d720"
+      },
+      {
+        "name": "p",
+        "slice": [
+          40,
+          43
+        ],
+        "units": "m",
+        "component_RMSE": "sqrt(mean(e**2))",
+        "vector_RMS": "sqrt(mean(sum_j(e**2))) over selectedrows; also mm"
+      },
+      {
+        "name": "R",
+        "slice": [
+          43,
+          52
+        ],
+        "units": "dimensionless",
+        "component_RMSE": "sqrt(mean(e**2)) over selectedrows\u00d79",
+        "Frobenius_RMS": "sqrt(mean(sum_j(e**2))) over flat9; rawF64matrix difference only, no acos/quaternion/geodesic/orthogonalization/projection"
+      },
+      {
+        "name": "v",
+        "slice": [
+          52,
+          55
+        ],
+        "units": "m/s",
+        "component_RMSE": "sqrt(mean(e**2))",
+        "vector_RMS": "sqrt(mean(sum_j(e**2)))"
+      },
+      {
+        "name": "omega",
+        "slice": [
+          55,
+          58
+        ],
+        "units": "rad/s",
+        "component_RMSE": "sqrt(mean(e**2))",
+        "vector_RMS": "sqrt(mean(sum_j(e**2)))"
+      }
+    ],
+    "coverage": "Per-feature RMSE/MAE/maxabs and raw signed errors; eachblock above for all452 and sixpathmodegroups. Keep every row in phase/path/mode curves, annotate repeatedbranch identity andmode. Optional byphase descriptors retain counts, no CI/invented accuracy gate or selectivefilter.",
+    "self15": "Native WM emits452\u00d715 selfcollision logits; save finite raw outputs as execution evidence only. No HO contact/force head and no contactaccuracy metric in this stage.",
+    "explicitly_not_computed": [
+      "taskscore",
+      "controlled goal reconstruction",
+      "original15msreward",
+      "gradient",
+      "physicalFD",
+      "angleprojection",
+      "autoregressive prediction",
+      "Actoroutput",
+      "objective/P/SDF"
+    ]
+  },
+  "precision_scope": "Strict119f constructs CPUWM amp=False. Inputs are exact saved nativeGPUFP32 bytes, but forward is FP32CPU shadow, not actual trainingGPU BF16net/FP32integrate or a hardware/batch invariant equality claim. No .to(cuda), no precision fallback/search.",
+  "invariants": [
+    "checkpointbytes/currentinput-sourcepins unchanged",
+    "WM fullweights/normbuffers unchanged beforeafter",
+    "Python/NumPy/TorchCPU RNG unchanged withoutmanualrestore",
+    "x0/u/truth andcontext tensors unchanged",
+    "allparametersrequires_gradFalse/no.grad/eval mode",
+    "CUDA remains uninitialized, Warp notimported",
+    "one loader/twocheckpointreads/oneWMforward/zeroAD budget observed"
+  ],
+  "source_closure": "Keep every required actual file, but canonical flatarchive uses resolvedsamefile+SHA identity once per physicalfile. Preserve firstrecorded pin spelling; never merge differentphysicalcopies solely becauseSHA matches. Namedsemanticinput pins/joins remain separate. Required-source checks use membership byidentity+SHA, not alias key strings. Do not recursively re-expand oldlogical maps multiple times.",
+  "fail_policy": "Missing/wrong provenance, any malformed/misaligned row/control/context/source/nonfinite/count/invariance violation stops andpreservespartial with no retry. Finite predictionerror magnitude is a result, not an engineering gate or reason to omit a row. No accuracythreshold/qualitywinner added.",
+  "source_only_feasibility": {
+    "module_memory": "No architecturebatchcap found. F32dynamics+u452\u00d7298\u22480.54MB, three452\u00d7512 activations\u22482.78MB before allocator/workspaces. Loader peak includes fullcheckpoint payloads andActorvalidation; not benchmarked or guaranteed by these lower-order estimates.",
+    "model_parameters": "NativeWorldModel dynamics278+u20 input298, hidden512\u00d73, outputdelta52+self15;integrate returnsstate58. Zero174 is the frozenwrapper contract, not inferred from a full physicalstate serializer.",
+    "execution_here": {
+      "model_loads": 0,
+      "NPZ_arrays_opened": 0,
+      "native_state_conversions": 0,
+      "WM_Actor_objective_forward": 0,
+      "AD_Env_physics_GPU": 0
+    }
+  },
+  "limits": [
+    "OnefixedA2checkpoint, one source/seed, twofresh savedaction-source donor paths and dependentbranches, not crossmethodcausal evidence.",
+    "Teacher-forced one-interval stateerror is not multisteprollout accuracy or physical/controlgradient qualification; existing5/9direction result unchanged.",
+    "State58+u20+xi46+zero174 omits physical fullhiddenstate/cache/warmstart; empiricalbaseline scope andGraphscratchUNKNOWN remain.",
+    "No nativeHOforce/contact/clearance or humanlabel qualification; no taskscore or new geometry/contactquery.",
+    "Allfuture model/array/FWexecution requires newcurrent-sourceCPUproof and Root explicit freshconfig authorization."
+  ],
+  "revision": 2,
+  "revision_history": {
+    "previous": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_state_prediction452_CPU_prereg_v1.json",
+      "sha256": "b4455ad0ab927933b2b4d53f56b5da118f3d7e2da89a94cd901fc7fbab0a6a7e"
+    },
+    "change": "Source-accounted passive MJB cost only: caller bundle validation1 plus strict105 loader internal2 (Actor bundle revalidation1 and Actor explicit constants1), total3. No loader/validation skipped, sameone452forward, no model/array execution or scientific change."
+  },
+  "passive_MJB_source_accounting": {
+    "evidence": "Normal-success source callgraph, not a globally instrumented actualload count. No model loads performed for this metadata correction.",
+    "caller": "new consumer calls full151_native.bundle.load_bundle once; bundle.py75 invokes pure_control760.load_actual_pd, which unconditionally calls MjModel.from_binary_path once at prefix_control.py54.",
+    "strict_loader": "world_model_checkpoint.py111 calls load_actor_checkpoint once. checkpoint.py136 calls _validated_bundle; checkpoint.py100 reloads bundle once, producing anotherload_actual_pd/MJB1. checkpoint.py160 explicitly calls MjModel.from_binary_path once. Strict WM internal total2.",
+    "total": "caller1 + strictinternal2 =3 passive MJB constant loads. Cached Python helper module does not cache model instances. Retain all validation and existing105 guards unchanged."
+  }
+}

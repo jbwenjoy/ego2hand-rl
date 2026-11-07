@@ -1,0 +1,32 @@
+--- evaluation.py_frozen_v1
++++ evaluation_v2.py
+@@ -12,6 +12,19 @@
+ from .io import checked, pin, jsonable
+ from .metadata import write
+ 
++
++def configure_full_horizon_terminations(env_cfg):
++    """Validate installed play configuration before removing quality-only stop.
++
++    play=True has already removed object_orientation_error. Reject unknown or
++    missing terms instead of silently accepting a different termination model.
++    """
++    expected = {'time_out', 'unstable', 'object_position_error', 'reference_end'}
++    if set(env_cfg.terminations) != expected:
++        raise ValueError('Unexpected installed play termination keys')
++    env_cfg.terminations.pop('object_position_error')
++    if set(env_cfg.terminations) != {'time_out', 'unstable', 'reference_end'}:
++        raise ValueError('Full-horizon evaluation termination contract differs')
+ 
+ def run_evaluation(config, bundle, output, emit):
+     import torch
+@@ -61,8 +74,7 @@
+     env_cfg.actions['joint_pos'].mask_prob = 0.
+     env_cfg.sim.nconmax = 192; env_cfg.sim.njmax = 4096
+     # The same complete finite horizon as A0. Quality is scored afterward.
+-    env_cfg.terminations.pop('object_position_error')
+-    env_cfg.terminations.pop('object_orientation_error')
++    configure_full_horizon_terminations(env_cfg)
+     if set(env_cfg.events) != {'reset_to_reference_state', 'pen_dimensions'} or any(
+             group.enable_corruption for group in env_cfg.observations.values()):
+         raise ValueError('Unexpected exogenous event, DR, or observation noise')

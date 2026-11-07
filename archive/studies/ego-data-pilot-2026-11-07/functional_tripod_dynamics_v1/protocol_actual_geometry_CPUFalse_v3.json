@@ -1,0 +1,123 @@
+{
+  "schema": "functional_tripod_native_dynamic_protocol:1",
+  "CPU_run_authorized": false,
+  "training_or_GPU_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_dynamics_v1\\actual_geometry_screen_v3",
+  "dt_s": [
+    0.0003125,
+    0.00015625
+  ],
+  "duration_s": 2.0,
+  "gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483,
+    "tail_triple_pad_force_coverage": 0.95
+  },
+  "old_two_pad_gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "tail_dual_pad_force_coverage": 0.95,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483
+  },
+  "dt_pair_gates": {
+    "final_COM_difference_m": 0.002,
+    "final_orientation_difference_rad": 0.03490658503988659,
+    "require_both_duration_complete": true
+  },
+  "control_routes": [
+    "no_preload_ctrl_equal_q",
+    "normal_1N_each_pad",
+    "normal_3N_each_pad"
+  ],
+  "designated_geom_ids": [
+    15,
+    28,
+    41
+  ],
+  "inputs": {
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "candidate_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\completed_v1\\report.json",
+      "bytes": 4966,
+      "sha256": "75c89d096dd8097ded80ed689fbf2b368e732c00828afc8d18edd30626011bff"
+    }
+  },
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_dynamics_v1\\run_functional_tripod_dynamics_v3.py",
+      "bytes": 29569,
+      "sha256": "d433a51df307bf45b40e70bc2c74776654eb2ece65bd2de67ae8163c201fd960"
+    },
+    "protocol_builder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_dynamics_v1\\build_protocol_v3.py",
+      "bytes": 3556,
+      "sha256": "a75b9212c32880e78b0c4b69f5a126276ee567c7a9d045cb2f8037b9fadb8a5d"
+    },
+    "parent_two_pad_runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_source_mapping_dynamics_v11\\run_source_mapping_dynamics_v11.py",
+      "bytes": 35343,
+      "sha256": "fe0cb9074bc5d3df768aba7b8cef697efe41d22904fba2ae91672ca1901de1f2"
+    },
+    "original_holding_runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\run_cpu_holding_v1.py",
+      "bytes": 16650,
+      "sha256": "32511cbee40363ab87ed38868f654ae80035dbc739f1a74ddc22e612dfa4d504"
+    }
+  },
+  "budget": {
+    "max_candidates": 4,
+    "control_routes": 3,
+    "dt_cases": 2,
+    "maximum_cases": 24,
+    "maximum_integration_steps": 230400
+  },
+  "preload_rule": {
+    "desired_normal_N_each": [
+      0,
+      1,
+      3
+    ],
+    "no_preload": "ctrl=q when legal",
+    "inverse_PD": "tau_act=bias-passive+sum(J_hand.T@F_on_object); u=(tau-offset)/gain; never clamp",
+    "geometry_anchor_FK_world_tolerance_m": 1e-10,
+    "geometry_normal_FK_tolerance": 1e-10,
+    "tangential_load": "No extra feedforward tangential load in this bounded normal-preload ablation. Native friction must supply actual support; no static acceleration gate."
+  },
+  "automatic_retry": false,
+  "source_stage": "UNFROZEN_REVIEW_REQUIRED_NOT_EXECUTION_AUTHORIZATION",
+  "scope": "All predeclared geometry candidates and all three available controls/both dt retained. No labels-only pass; initial actual native Fn and all2s dynamic gates decide nominal outcome. New designated41 changes the functional experiment; old2pad result remains separately reported."
+}

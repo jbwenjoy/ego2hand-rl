@@ -1,0 +1,218 @@
+{
+  "schema": "full151_input_cpu_protocol:1",
+  "output": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_cpu_input_v1",
+  "source_identity": {
+    "legacy_source_frames_half_open": [
+      200,
+      351
+    ],
+    "local_states": 151,
+    "duration_s": 3.0,
+    "goal_dt_s": 0.02,
+    "solver_diagnostic_dt_s": 0.005,
+    "planned_targets": 150,
+    "target_indices": [
+      0,
+      149
+    ],
+    "terminal_state_only_index": 150,
+    "inactive_clamp_last_target_index": 149,
+    "shared_source_0_151": false,
+    "independent_ego_N": 0
+  },
+  "execution": {
+    "joint_LP_calls": 20,
+    "per_joint_time_limit_s": 5.0,
+    "retries": 0,
+    "lambda_coefficient": 4.0,
+    "GPU": false,
+    "physics": false,
+    "training": false
+  },
+  "linear_contract": {
+    "degree": 3,
+    "control_points": 153,
+    "fixed_controls": "Exact saved P0/P1, no endpoint velocity recomputation or initial velocity repair",
+    "decision_per_joint": 453,
+    "inequalities_per_joint": 2402,
+    "objective": "mean151 absolute fit + 4*mean151 absolute control-coefficient second-difference",
+    "initial_target": "Real-affine LP k0 is fixed actual u0_FP32; final original760 proposal/C2 must independently reproduce exactly. Never patch exported U0.",
+    "targets": "150, k0..149; no u150; 149 consecutive rate updates plus zero startup jump",
+    "planning_margins": {
+      "control_rad": 2e-06,
+      "force_Nm": 2e-06,
+      "target_rate_rad_s": 0.0001
+    },
+    "original_target_rate_rad_s": 15,
+    "raw_Ax_minus_b_and_bounds_tolerance": 1e-12,
+    "HiGHS_feasibility_tolerance": 1e-09,
+    "LP_success_is_not_certificate": true,
+    "constraint_scope": "Hard joint control hull, inset targets, 149 target-rate inequalities and tracking-only whole-segment affine reference-PD Bernstein force. No coupled collision/contact constraints.",
+    "no_retry_or_history_selection": true
+  },
+  "object_numeric_tolerances": {
+    "object_COM_world_m": 1e-12,
+    "object_v_world_m_s": 1e-10,
+    "object_a_world_m_s2": 1e-08,
+    "object_rotation_w": 1e-12,
+    "object_omega_world_rad_s": 1e-10,
+    "object_alpha_world_rad_s2": 1e-08
+  },
+  "selected_fields": {
+    "observations": [
+      "time_s",
+      "hand_landmarks_source_w",
+      "object_pose_source_w",
+      "wrist_pose_source_w",
+      "landmark_confidence_known",
+      "object_confidence_known",
+      "wrist_confidence_known"
+    ],
+    "derived_geometry": [
+      "time_s",
+      "joint_pos_rad",
+      "mapped_object_pose_w",
+      "joint_lower_rad",
+      "joint_upper_rad"
+    ],
+    "designed_FD": [
+      "time_s",
+      "object_pose_mapped_w",
+      "raw_v_world_m_s",
+      "raw_a_world_m_s2",
+      "raw_omega_world_rad_s",
+      "raw_alpha_world_rad_s2"
+    ],
+    "anchor_reference": [
+      "control_points_rad",
+      "q_goal_rad",
+      "analytic_qd16_rad_s",
+      "mapped_object_pose_w",
+      "object_COM_world_m",
+      "object_v_world_m_s",
+      "object_a_world_m_s2",
+      "object_rotation_w",
+      "object_omega_world_rad_s",
+      "object_alpha_world_rad_s2"
+    ],
+    "anchor_init": [
+      "q_init_requested_FP32_rad",
+      "qd_init_requested_FP32_rad_s",
+      "object_pose_init_requested_FP32_w",
+      "object_bodyorigin_v_requested_FP32_world_m_s",
+      "object_angular_requested_FP32_body_rad_s",
+      "object_angular_requested_FP32_world_rad_s",
+      "u_planned0_FP32_rad"
+    ],
+    "anchor_control": [
+      "control__fp32_old_export__tau_ff_static0_FP32_Nm",
+      "control__fp32_old_export__tracking_u_exec_15_FP32_rad"
+    ]
+  },
+  "inputs": {
+    "observations": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/observation_only_fixture_v1/observations.npz",
+      "sha256": "3bdca0ee6fd8d7956cac1ee2b13719db5cb302ceb0130972719032a04b3ec35b"
+    },
+    "derived_geometry": {
+      "path": "D:/workspace/supermimic-observation-retarget-study/outputs/native_contact_refined_geometry_v1/geometric_retarget.npz",
+      "sha256": "539d6247576b9b2e3fb1b143cf17b6ad507e3baea73c5fafcda4e221d9230c8f"
+    },
+    "designed_FD": {
+      "path": "D:\\workspace\\supermimic-observation-dynamic-wrench-study\\outputs\\dynamic_wrench_v2\\designed_wrench_151.npz",
+      "sha256": "60b1ae5bc6fa918ac1d569b44fddefad387a5ee3e45fc8fffe731cdb17516ead"
+    },
+    "model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "static_preload": {
+      "path": "D:/workspace/supermimic-observation-contact-intent-study/outputs/h123_preload_cpu_v1/baseline/designed_target_u0.json",
+      "sha256": "eadb33db1ebbf1abc774a16ed551243ba89f6e325e7486d53720e2ac65caa808"
+    },
+    "observations_manifest": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\observation_only_fixture_v1\\manifest.json",
+      "sha256": "9be378406b8c97d0ae211fd70459117eea2e8d026244d2ccab735c3f5778391e"
+    },
+    "observation_cues_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\observation_intent_cues_v1\\READY.json",
+      "sha256": "5036fefbf82dd5ac2f59d0a1b0faec88234450530c74226bbe2d4c1d5d096ddd"
+    },
+    "anchor_reference": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\outputs\\restored_prefix_control_export_v1\\reference_bspline.npz",
+      "sha256": "acbfab4c77d6fcffe7d67d65d6c8ab61a99f4808d302bc06fdc95ee5bd085df2"
+    },
+    "anchor_init": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\outputs\\restored_prefix_control_export_v1\\init_requested.npz",
+      "sha256": "fd74f89a7b12f4c83daa3525ca3d0ae3832b05e7d17faeb70372d41449991517"
+    },
+    "anchor_control": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\outputs\\restored_prefix_control_export_v1\\planned_control.npz",
+      "sha256": "185dcd52f7c693b5956070d8c8c51654576a34cb74e129bf6d35680e780ada56"
+    },
+    "anchor_reference_manifest": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\outputs\\restored_prefix_control_export_v1\\reference_manifest.json",
+      "sha256": "8e19a415efc502ca10f1a0fe53a81e1fdef858cc819fc38b69ac89344d004311"
+    },
+    "anchor_init_manifest": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\outputs\\restored_prefix_control_export_v1\\init_manifest.json",
+      "sha256": "2e7322bac27558f4a2a2161e99bdbfeb861572a865aebadebb3eaadc829f95e4"
+    },
+    "anchor_control_manifest": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\outputs\\restored_prefix_control_export_v1\\control_manifest.json",
+      "sha256": "f5656b6040a09487c911f323dfb51093b1b089e09f0f74dc005821094ecceaea"
+    },
+    "module_math_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\READY_continuous_control_v1.json",
+      "sha256": "b4b24d5d763f7b0ac92d2e7623600e93a6191f2d700365f01108beaa5960da5d"
+    }
+  },
+  "sources": {
+    "producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\build_full151_input_cpu_v1.py",
+      "sha256": "c7b6f650a9cd577f01b62f4a39fab573b928719d88b89c14d5707f1ebd34a0a7"
+    },
+    "continuous_control": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\continuous_control.py",
+      "sha256": "3c32f3022d5bade3b6acfd0423c94b4f0dcee3b8f4832a6f0cbd45c9c2da4d17"
+    },
+    "object_curves": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\object_curves.py",
+      "sha256": "e6aec6d31ca06a7c0d1f1389f07abbcb04f7ee6adc829b738a9765b4952bf895"
+    },
+    "io": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\io.py",
+      "sha256": "1727f40a66e8ebf4bbf7b1271252a0f01948be714820b6430b0b020ba9a36224"
+    },
+    "package_init": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\__init__.py",
+      "sha256": "cac7f2dadbe1f9cffba229c32de01f11c792e9be50bc501d1f2232ae3f3b9486"
+    },
+    "frozen_control": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_control.py",
+      "sha256": "76026dbdcdfdecf4680820b24da088e1d123e86ceb8b42a2bbd60a5412103b6d"
+    },
+    "frozen_object_math": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_curves.py",
+      "sha256": "aa03e4c8584c600875a7a6737f1c2f6d72fe63d4dd36be2e31f858ceb0bde384"
+    },
+    "original_C2": {
+      "path": "D:/workspace/supermimic-observation-warmseed-grounding-study/vendor/target_inset.py",
+      "sha256": "2d88859c62d2833633f8b09a3be42d11c943e0c3422095e1d941100cb1bf86f4"
+    }
+  },
+  "limitations": [
+    "CPU-only controller-input scaffold; no native151 environment, reset/replay, checkpoint or training integration here.",
+    "The mapped object frame is a per-frame palm-root task redesign, not calibrated ego camera extrinsics. Source scale/camera/semantics/confidence remain unqualified.",
+    "Derived539d q is an allowed geometry output, never a recorded robot answer. Original source joint/control/contact arrays are not loaded.",
+    "Analytic reference velocity, native FD diagnostic and actual target-update rate are distinct; 15rad/s is a target-update limit, not a hardware qdot limit.",
+    "Contact geometry is unknown after this fit. Old539d collision certificates do not transfer to the fitted path; no FK/collision query in this run.",
+    "Observation-only closest-point cues remain UNKNOWN human-contact labels and are prohibited as A2 contact targets. Fixed H123 anchors cannot be tiled across full151.",
+    "Whole-interval exact-real affine reference-PD Bernstein caps plus601 FP32 samples are surrogate checks, not measured contact/actuator force or a physical safety certificate.",
+    "No full-motion success, CHORD benefit, time acceleration, multi-trajectory transfer, real-ego or hardware claim."
+  ]
+}

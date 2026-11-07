@@ -1,0 +1,40 @@
+{
+  "schema": "supermimic_chord_pilot_acceptance:1",
+  "status": "frozen_pilot_simulation_criteria_not_hardware_safety_limits",
+  "reference_npz_sha256": "c9b84dbbcaf532385f7dc22a1723c783a4ffed7077c255f629a8edfa202d94b1",
+  "fixed_before_formal_A1_A2": true,
+  "sample_semantics": "control samples at 50Hz, not a continuous-time contact certificate",
+  "position_max_m": 0.02,
+  "shaft_angle_max_deg": 20.0,
+  "penetration_max_m": 0.003,
+  "progress_frame": {
+    "mode": "projected_shaft_rotation",
+    "normal_w": [
+      -0.4855690644055201,
+      0.1965685611819915,
+      0.8518118832507501
+    ],
+    "dominant_rotation_energy_fraction": 0.8545625476839926,
+    "rotation_increment_eigenvalues": [
+      0.0008504093591774635,
+      0.00572626200287589,
+      0.03864325828690338
+    ],
+    "target_net_progress_deg": 63.93525098181745,
+    "target_shaft_excursion_deg": 64.33219358377673,
+    "target_shaft_path_deg": 100.85032440758928,
+    "fit_source": "reference minimal shaft increments only; no policy data",
+    "meaning": "integrated minimal shaft rotation projected on a fixed reference axis; excludes unobservable axial roll and is not winding count"
+  },
+  "progress_abs_error_max_deg": 30.0,
+  "progress_endpoint_error_max_deg": 20.0,
+  "angular_step_max_deg": 90.0,
+  "drop_center_below_wrist_m": 0.15,
+  "allow_object_environment_contacts": false,
+  "actuator_load_ratio_max": 1.01,
+  "load_charge_max": 0.8,
+  "charge_decay_time_s": 2.0,
+  "target_speed_abs_max_rad_s": 15.0,
+  "joint_limit_margin_rad": 0.001,
+  "source": "preliminary 250mm pen pilot task definition; freeze before formal comparisons; changes require a new protocol"
+}

@@ -1,0 +1,163 @@
+{
+  "schema": "hand2_phone_matched_constant_u_baseline_CPU_protocol:1",
+  "CPU_run_authorized": false,
+  "training_or_GPU_authorized": false,
+  "automatic_retry": false,
+  "baseline_selection": {
+    "seed": 0,
+    "rank": 0
+  },
+  "acceleration_descriptors_only": [
+    "COM_acceleration_infinity_m_s2",
+    "angular_acceleration_infinity_rad_s2",
+    "joint_acceleration_infinity_rad_s2"
+  ],
+  "gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "tail_dual_pad_force_coverage": 0.95,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483
+  },
+  "dt_s": [
+    0.0003125,
+    0.00015625
+  ],
+  "duration_s": 2.0,
+  "dt_pair_gates": {
+    "final_COM_difference_m": 0.002,
+    "final_orientation_difference_rad": 0.03490658503988659,
+    "require_both_duration_complete": true
+  },
+  "inputs": {
+    "equilibrium_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\protocol_native_search_v6_run1.json",
+      "bytes": 11427,
+      "sha256": "96f693127628ecba00a07ad4b72594ce5a6d37906d2ea45ac25215522c3777e6"
+    },
+    "equilibrium_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\report.json",
+      "bytes": 2336903,
+      "sha256": "ff9d0cdeabd766ba29e1d6da6d049f42aa4dbd92ae7c1bd87301be0a3518438f"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    }
+  },
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_constant_u_baseline_v1\\run_cpu_constant_u_baseline_v1.py",
+      "bytes": 30609,
+      "sha256": "1750796f7c21d39f706c912f0cafbe9e8c6c871b5fdb65840227cc5fa5ae04d2"
+    },
+    "scene": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\scene.py",
+      "bytes": 6257,
+      "sha256": "6913e917c50ab520b9af94206e030a4a83c4186d9aad8ad6ab4ca45dc145f147"
+    },
+    "old_holding_runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\run_cpu_holding_v1.py",
+      "bytes": 16650,
+      "sha256": "32511cbee40363ab87ed38868f654ae80035dbc739f1a74ddc22e612dfa4d504"
+    },
+    "parent_holding_v4": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v4\\run_cpu_native_equilibrium_holding_v4.py",
+      "bytes": 29300,
+      "sha256": "4c68fdf3a6adaf8fc1433b384c131c1d6cd8bbf6d20b586114244cbd9800e332"
+    },
+    "source_preservation47": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_constant_u_baseline_v1\\source_preservation_v1.json",
+      "bytes": 3938,
+      "sha256": "56afe027e97b4e327602769e2191205752713cfa05f8d3b79c1fdc4f3a44f4f1"
+    },
+    "source_derivation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_constant_u_baseline_v1\\source_derivation_v1.json",
+      "bytes": 2312,
+      "sha256": "3786568ef072dda08eea6d3882f283707873f9e9bb4e55591335bbb4b964b711"
+    }
+  },
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_constant_u_baseline_v1\\cpu_v1",
+  "registered_init_and_command": {
+    "state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\seed0_rank0_state.npz",
+      "bytes": 7877,
+      "sha256": "5e532341a315bac73280cec3eb18798695fac19fd284e6b046542987dba451ac"
+    },
+    "x46": [
+      0.4505105540722586,
+      -0.1887673370662404,
+      0.7022367360254801,
+      -0.23323680846308248,
+      -0.845953479766371,
+      0.5669823191794047,
+      1.3856926683052437,
+      1.0970776928899442,
+      -0.863328316583884,
+      0.27261776189459697,
+      1.0294965430140826,
+      0.43972267979321766,
+      -0.10932789375512818,
+      -0.14035572275499802,
+      0.0025119008953089074,
+      0.17803092412247978,
+      0.319688554955577,
+      -0.23895150303179627,
+      -0.12949049779670038,
+      -0.006433781443888266,
+      0.08040793252051986,
+      -0.005209486345790302,
+      -0.1042795331494061,
+      -1.4196500520798985,
+      -1.060869670921084,
+      0.38113813985782613,
+      0.4748279984946605,
+      -0.17445392278850827,
+      0.7282482532195952,
+      -0.20937491863835808,
+      -0.804220157580979,
+      0.5718222158889521,
+      1.4609013767203791,
+      1.1147113782035143,
+      -0.8554989542766233,
+      0.277574963432921,
+      1.0365496417646987,
+      0.44047900977739474,
+      -0.09596820152921345,
+      -0.13923949853150733,
+      0.00947186386350602,
+      0.17881636057492012,
+      0.3305505828201769,
+      -0.23282617754071888,
+      -0.12003729352936984,
+      -0.005261076275469311
+    ],
+    "controller": "constant saved x46[26:], no clamps/adaptation/replanning",
+    "velocity": "zero26"
+  },
+  "scope": "One explicitly authorized matched constant-u dynamic baseline; all original model/material/solver/gains/actuator caps and original2s case/pair truth gates unchanged. Only three static acceleration selection gates are descriptive, never relabeled passed. Global model audit, physical repeats, loaded/capped pads, unchanged compression window and full independent22/189 geometry remain prerequisites. No substitute rank if selected evidence fails.",
+  "matched_future_MPC": "Future MPC comparison must bind this exact init/model/bounds and both timesteps; this baseline alone is not a policy effect.",
+  "maximum_integration_steps": 19200,
+  "initial_pad_compression_window_m": [
+    -0.0001,
+    0.0002
+  ],
+  "no_training_GPU_object_aid_or_parameter_tuning": true
+}

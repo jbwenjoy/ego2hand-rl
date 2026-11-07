@@ -1,0 +1,49 @@
+{
+  "schema": "conditional_saved_contact_COM_axis_LP_protocol:1",
+  "saved_LP_run_authorized": true,
+  "LP_calls": 1,
+  "delta_bounds_m": [
+    0.0,
+    0.075
+  ],
+  "normal_cap_per_finger_N": 3.0,
+  "source_pins": {
+    "designer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\reference_seed_design_v7\\axis_lever_LP_v1\\run_saved_axis_lp_v1.py",
+      "bytes": 8777,
+      "sha256": "919c2407583ed14ac678fdc5b23e79d45548e9251d85820174223746833cf735"
+    },
+    "native_PD_LP_contract_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\native_wrench_lp_v7.py",
+      "bytes": 6836,
+      "sha256": "e422b673d4644c15f1d13af2a083bdac2ff97c2fd653ce28fb631f887a6b7012"
+    }
+  },
+  "inputs": {
+    "native_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\contract_v1\\report.json",
+      "bytes": 9165,
+      "sha256": "86f9c6ff1662600d0407fb222e47130cda288fea94f25e5d1eee7bdcefce0d7b"
+    },
+    "probe0": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\contract_v1\\probe0.json",
+      "bytes": 75108,
+      "sha256": "c43c7db29a8162a13af28aa6c6cf12827bcae889de7902116bcec5822c433e2f"
+    },
+    "original_v6_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\report.json",
+      "bytes": 2336903,
+      "sha256": "ff9d0cdeabd766ba29e1d6da6d049f42aa4dbd92ae7c1bd87301be0a3518438f"
+    }
+  },
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\reference_seed_design_v7\\axis_lever_LP_v1\\actual_v1",
+  "linprog_options": {
+    "primal_feasibility_tolerance": 1e-09,
+    "dual_feasibility_tolerance": 1e-09
+  },
+  "objective": "min delta_bodyZ_m; native4ray lambda>=0; hard sum force=-mg; hard sum moment_about_COM0 -cross(axis,-mg)*delta=0",
+  "conditional_assumption": "Original world contact points/normals, same robot q20/J/PD context; phone COM translated along original body+Z world axis only. Actual new contact geometry not asserted.",
+  "required_followup": "Root fresh-pose original-control native/geofinal validation and recomputed current-contact LP; only strict newcandidate can get additional proposed-control forward. No oldlambda reuse as actual truth.",
+  "new_native_model_forward_steps_NN_GPU_authorized": false,
+  "automatic_retry": false
+}

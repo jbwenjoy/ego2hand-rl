@@ -1,0 +1,30 @@
+--- prior_static_snapshot/builder
++++ phase2/builder
+@@ -12,13 +12,16 @@
+     if cp.exists() or pp.exists():raise FileExistsError('Freeze once, never overwrite/retry')
+     base=read(ROOT/'configs/full151-v2-policy-eval-primary2000_A2_seed0-v2.json')
+     source=dict(base['source_pins']);source.pop('protocol',None)
+-    proposal=pin(ROOT/'protocols/full151_same_warp_control_gradient_proposal_v1.json')
++    proposal=pin(ROOT/'protocols/full151_same_warp_control_gradient_proposal_v2.json')
+     ready={'transaction_CPU_READY':pin(ROOT/'outputs/full151105_transaction_preparation_CPU_v1/READY.json'),
+       'transaction_CPU_report':pin(ROOT/'outputs/full151105_transaction_preparation_CPU_v1/report.json'),
+-      'schema2_WM_CPU_report':pin(ROOT/'outputs/full151_schema2_pair_WM_loader_CPU_v1/report.json')}
++      'schema2_WM_CPU_report':pin(ROOT/'outputs/full151_schema2_pair_WM_loader_CPU_v1/report.json'),
++      'serial_CPU_READY':pin(ROOT/'outputs/full151105_serial_probe_preparation_CPU_v2/READY.json'),
++      'serial_CPU_report':pin(ROOT/'outputs/full151105_serial_probe_preparation_CPU_v2/report.json')}
+     source['gradient_proposal']=proposal
+     for key,value in ready.items():source['gradient_'+key]=value
+     for key,value in read(checked(ready['transaction_CPU_READY']))['source_pins'].items():source['transaction_CPU_source_'+key]=value
++    for key,value in read(checked(ready['serial_CPU_READY']))['source_pins'].items():source['serial_CPU_source_'+key]=value
+     for key,value in read(checked(ready['schema2_WM_CPU_report']))['source_pins'].items():source['WM_CPU_source_'+key]=value
+     for key,path in {'gradient_entry':ROOT/'scripts/execute_full151_gradient_v1.py','gradient_supervisor':ROOT/'scripts/run_full151_gradient_v1.py','gradient_builder':Path(__file__),'physical_serial_probe':ROOT/'src/full151_gradient/serial_probe105_v1.py','transaction105':ROOT/'src/full151_gradient/transaction105.py'}.items():
+         ast.parse(path.read_text(encoding='utf-8'));source[key]=pin(path)
+@@ -38,7 +41,7 @@
+     protocol={'schema':'full151105_physical_probe_execution_protocol:1','input_bundle':base['input_bundle'],'proposal':proposal,'mode_counts':MODES,
+       'scientific_scope':'Fixed two-donor8snapshot152branch proposal retained; smoke is only necessary native restore qualification. Inventory discovery/baseline failure never counts as physical gradient evidence.',
+       'no_target_or_quality_selection':True,'training_authorized':False,'actual_reference_physical_qualified':False,'independent_ego_N':0,
+-      'exact_scalar':'primary_native_GPU_reward_rate_terms object_pos/object_rot and original GPU FP32 sum captured after original RewardManager.compute before Manager.forward, goal_k. Preserve weights/dt/scale/order. CPU_rescore_secondary with fixed8eps32 diagnostic, k+1 diagnostic only. rate*.02 is derived, not claimed exact original step-term cache. Terminal150 has no policy bootstrap.',
++      'exact_scalar':'matched_post20_gpu_score: controlled native-formula FP32GPU 2+8 score from captured postintegration state58 at20ms and preaction goal_k. Exact same state-time/function for WMnext20 comparison. OriginalRewardManager GPU rate terms use derived15ms pose and are secondary, never equality-gated to20ms. CPU/F64 rescores of20ms are same-phase arithmetic diagnostics only; k+1 diagnostic. Terminal150 has no policy bootstrap.',
+       'foreign_rule':'Initial None permits discovery only if any opaque objects. Future explicit source-pinned type/path review and mutable sidecars; never blanket acceptance of all foreign internals.',
+       'retry':False,'hard_process_seconds':240,'soft_worker_seconds':180}
+     write(pp,protocol);source['gradient_protocol']=pin(pp)

@@ -1,0 +1,95 @@
+{
+  "schema": "full151_native_witness_probe:1",
+  "output": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_witness_probe_v1",
+  "epsilon_rad": 1e-05,
+  "states": [
+    17,
+    335,
+    489,
+    330
+  ],
+  "pair_indices": [
+    228,
+    77,
+    243,
+    193
+  ],
+  "case_names": [
+    "worst_HO",
+    "worst_self",
+    "tie_HO",
+    "tie_self"
+  ],
+  "queries": 164,
+  "unique_FD_gate_m_per_rad": 0.001,
+  "normal_stable_dot_lower": 0.999999,
+  "source_base_distance_tolerance_m": 1e-12,
+  "choice": "Worst HO and worstself plus tiedHO/self with greatest saved tied-normal spread, chosen before any new FD. All20 coordinate ±epsilon retained.",
+  "sources": {
+    "producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\probe_native_witness_cpu_v2.py",
+      "sha256": "a1178e23748065fd5d53f7759ee4cd0b14219a2ff4b1499372c94a9a584193a3"
+    },
+    "oracle": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\native_witness.py",
+      "sha256": "942bef50bb73629daab9c25404810169d9acf448ffcf1dbe3db29672578fdf2b"
+    },
+    "row_helper": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\contact_row_oracle_v2.py",
+      "sha256": "143eaa3dd68dc6cbb579a84126767bf6d95f6225200ffa2e40c3e318a5f5583a"
+    },
+    "io": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\io.py",
+      "sha256": "1727f40a66e8ebf4bbf7b1271252a0f01948be714820b6430b0b020ba9a36224"
+    },
+    "package_init": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\__init__.py",
+      "sha256": "cac7f2dadbe1f9cffba229c32de01f11c792e9be50bc501d1f2232ae3f3b9486"
+    },
+    "native_geometry": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\native_filtered_contact_geometry.py",
+      "sha256": "c964d5b300baac57a5353afd3b5aa4cfb381eca1da03ceef712691dd10376c72"
+    },
+    "kinematics": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\scripts\\retarget_palmroot_cpu.py",
+      "sha256": "60a2496633415e65f1b851e44992f5f703be61981c05d9ae6948dc5804eda9e3"
+    }
+  },
+  "inputs": {
+    "model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "reference": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_cpu_input_v1\\reference_bspline151.npz",
+      "sha256": "7c0210a2e3185a17cce72381f66dd3275811395ff6667c9ab77f8663105334c9"
+    },
+    "saved_geometry": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_failed_candidate_geometry_v1\\sampled_native_geometry.npz",
+      "sha256": "a4c6fd89427296a27e6ee2f3eda59541d7b0673ba9778604bde6167f771c0223"
+    },
+    "saved_raw_contacts": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_failed_candidate_geometry_v1\\native_contacts.jsonl",
+      "sha256": "578b5d14bda6bd4da80f3abbc11e737133fa8a39df9381a20c7eeadc9d6b6d5e"
+    },
+    "old_local_branch_proof": {
+      "path": "D:\\workspace\\supermimic-observation-retarget-study\\outputs\\native_filtered_contact_local_checks_v2\\report.json",
+      "sha256": "e26dcb2cfbcde7876170d5deaa1092b11ac0c48b37d31f86444724334fd6c238"
+    }
+  },
+  "limitations": [
+    "Four local static poses, not a trajectory optimization/physical rollout. No prior601fullquery is repeated.",
+    "Only two designated worst unique branches may pass local centralFD gate; tied cases remain one-sided/min-branch diagnostics, never a global differentiability certificate.",
+    "Original1e-3m/rad gate and1e-5rad epsilon inherited from previously qualified local-check convention, frozen before newFD results.",
+    "Each actual generated native contact gets its own pointJacobian. Native indices cannot be treated as persistent material/feature identities across configurations.",
+    "FD qhard excursions are reported without clipping/drop; these test the static kinematic function, not feasible control/action directions or dynamics.",
+    "CPU-only164freshcollision+165FKCOM including constructor. Dynamics/force/geomDistance/optimization APIs deny/count; no WM/GPU/training.",
+    "If the two designated local unique gates fail or change branch, preserve failure; no automatic alternate-pose/eps retry or coupled solve using a false derivative qualification.",
+    "Stability predicates detect inventory/normal changes, not persistent feature identity or all future branches. Native indices are not tracking labels."
+  ],
+  "prelaunch_revision": "v1 never executed; v2 adds detected contact-count/selected-native-order stability for the two required unique local branches, and nonfinite-FD diagnostic hardening. Fixed states/eps/query budget/tolerance and source geometry unchanged."
+}

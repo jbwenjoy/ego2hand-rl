@@ -1,0 +1,73 @@
+{
+  "schema": "gravity_retarget_static_interface_contract_protocol:1",
+  "inputs": {
+    "old_operands": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\support_preparation_v1\\actual_v1\\support_operands_and_controls.npz",
+      "bytes": 6067,
+      "sha256": "78fed48b3e00657c77741804eacbaa644cab1733e44377b8871535346c69734d"
+    },
+    "seed2_result": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\seed2_result.json",
+      "bytes": 257038,
+      "sha256": "bd6c4282ad930ce7556980bc527c06e01fd8137c8099619b8cafeebb5e574362"
+    },
+    "aligned_state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\gravity_alignment_probe_v1\\gravity_line_aligned_state.npz",
+      "bytes": 7642,
+      "sha256": "1108e31b14efefd39f8d460c96eca038e42390335dc013b2026f43da70b3f1a7"
+    }
+  },
+  "source_pins": {
+    "interface": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\evaluator_v3.py",
+      "bytes": 23763,
+      "sha256": "090cf6535f5249de4377a0e022ed7c87b555ad69ed7b570f995badb4d2245d57"
+    },
+    "checker": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\check_static_interface_v3.py",
+      "bytes": 6252,
+      "sha256": "1f4fa86f563c3a1271eca321bd3f9e889280e0788cacc72663c1e01fd43e6f95"
+    },
+    "query": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\convex_query.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    },
+    "query_interface": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\geometry_query_v2\\query_interface_v2.py",
+      "bytes": 3575,
+      "sha256": "5c5785a7d8301404ef62659dc2e3f2ca016d98c8041b96feeb1e4e5c2ac779fe"
+    },
+    "pairing_helper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\support_preparation_v1\\prepare_support_v1.py",
+      "bytes": 16104,
+      "sha256": "068d7a887dc0edecd3e02825288e0430cbc0b7d0a2bf24723f851b92ef9df89b"
+    },
+    "segment_helper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_geometry_v2\\solve_contact_first_v2.py",
+      "bytes": 26045,
+      "sha256": "7a2deeb196fa24bcac6c33f17ebe9862f9129b055a92fbaad8e5491ae8c86fdb"
+    }
+  },
+  "fixed_cases": [
+    "seed2",
+    "98deggravityaligned",
+    "seed2palmY+10um",
+    "alignedpalmY+10um"
+  ],
+  "max_evaluations": 4,
+  "max_heavyqueries": 200,
+  "deadline_seconds": 30,
+  "q20_unchanged": "Allfour have identicalq20, validatesworldselfcacheindependentofphoneFD",
+  "actual_LP_calls": 0,
+  "integration_optimization_training_GPU": 0,
+  "scope": "Staticinterfacecontractonly, not finalnewrunrecipe or authorization for optimization.",
+  "search_constraint_args": {
+    "pad_gap_window_m": [
+      5e-05,
+      0.00015
+    ],
+    "nonpad_buffer_m": 5e-05,
+    "self_buffer_m": 5e-05
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schema": "full151105_boundary_public_self15_matched_training_recipe:1",
+  "status": "FROZEN_NUMERICAL_RECIPE_BEFORE_PUBLIC_SELF15_TRAINING",
+  "created_UTC": "2026-11-06T06:56:15.861752+00:00",
+  "recipe": {
+    "iterations": 1000,
+    "checkpoint_iterations": [
+      100,
+      1000
+    ],
+    "fullbatch_rows": 152,
+    "cpu_threads": 4,
+    "device": "cpu",
+    "dtype": "float32",
+    "amp": false,
+    "optimizer": "AdamW",
+    "lr": 0.0001,
+    "weight_decay": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "optimizer_eps": 1e-08,
+    "optimizer_foreach": false,
+    "clip_norm": 1.0,
+    "lambda_state": 1.0,
+    "lambda_mode": 1.0,
+    "lambda_imp": 1.0,
+    "lambda_cons_by_arm": {
+      "shared_public_losses": 0.0,
+      "shared_public_plus_cross_target_consistency": 1.0
+    },
+    "native_log_chart_margin_rad": 0.01,
+    "normalizers_frozen": true,
+    "physical_context_frozen": true,
+    "fixed_fullbatch_order": true,
+    "compute_consistency_both_arms": true,
+    "initial_parity_from_first_training_forward": true,
+    "save_pre_post_clip_named_gradients": true,
+    "log_every_iteration": true,
+    "resume_supported": false,
+    "lambda_self15": 0.1,
+    "self15_reduction": "sum_features_then_mean_rows",
+    "native_pair_reduction": "mean_rows_of_FP32_state_row_plus_weighted_self15_sum_row",
+    "window_length": 1,
+    "all_rows_valid": true,
+    "native15_label_only_JSON": true
+  },
+  "source_proposal": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\full151_boundary_public_self15_supervision_recipe_proposal_v1.md",
+    "sha256": "9f4aaa362e6a86023c834b0f9730236ac9cffdbcdb81b40dab7ef7d81759c0da"
+  },
+  "previous_recipe_preserved": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_boundary_impulse_matched_training_recipe_v1.json",
+    "sha256": "ed5e6cc378f80d94e1771607b8fd4ed1198ce31eec80e17c0465d9933ae4f855"
+  },
+  "fixed_component": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_impulse_component105_v1.py",
+    "sha256": "003aac369bcac69dff9312c79837a8faf5a583473898fdb64515aa7608b60317"
+  },
+  "source_targets": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_boundary_impulse_targets_CPU_v1\\all152_boundary_impulse_targets.npz",
+    "sha256": "bc22e2b0d6a6ff333f8431eee689134814df1ea7059e8346f27e74f7b0392f80"
+  },
+  "cached15_label_only_JSON": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_cached_self15_saved_CPU_v1\\joined152_cached_sensor_labels.json",
+    "sha256": "8b900a1b63d620aff3a96474b81f47f9dcd92efaaae1bb83dbbc2c364a63f698"
+  },
+  "cached15_saved_review7": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_cached_self15_saved_independent_v1\\report.json",
+    "sha256": "caa1474c84f297f1080432427a5be6665cf21f47a1d680dd8e442a5c30d3d18f"
+  },
+  "native_configuration": {
+    "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\config.py",
+    "sha256": "11889b65b5da121ea613d402b3ef9e7bc854d57462f96830af9b644a0b031323"
+  },
+  "native_runner": {
+    "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+    "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46"
+  },
+  "loss_semantics": "Per row s=mean52((native_D52/effective_s52)^2)FP32; c=sum15(BCEWithLogits(logits15,target15))FP32. Lstate=mean152(s), Lself15sum=mean152(c), Lnativepair=mean152(s+FP32(.1)*c). Lpublic=FP32(Lnativepair+Lmode)+F64(Limp); Ltotal=Lpublic+lambda_cons*F64(Lcons), lambda_cons0/control,1/method. Bothcomputeall. No15mean substitution, rewarddt/windowfactor, classweight, gating or labeloracleinput.",
+  "checkpoint_contract": {
+    "schema": "full151105_boundary_public_self15_WM_component:1",
+    "pair_schema": "full151105_boundary_public_self15_matched_pair:1",
+    "initial_schema": "full151105_boundary_public_self15_matched_initial:1",
+    "checkpoint_tag": "AFTER_OPTIMIZER_I",
+    "gradient_snapshot_tag": "PRE_OPTIMIZER_I",
+    "ordered_parameters": "Native WM named_parameters then aux_head weight/bias; actual16. No new Parameter for existing15 outputs.",
+    "digest_contract": "fit_input_digest matches original e427; fit_label_digest retains oldimpulse labels; add fit_self15_label_digest and fit_combined_label_digest; allcached15rows/order same botharms.",
+    "loss_snapshot": "Detached PRE-I actual native delta/scale-square,self15logits/target/BCEelements,point/selfsum/nativepair rowoperands,8namedscalars,0extraFW."
+  },
+  "first_checkpoint_pause": "BOTH new100 checkpoints must pass NEW saved-health reader and ETA receipt saved. Then pause Goal per user; historical100/1000 health does not substitute. Job background continuation to fixed1000 must be explicit protocol bool.",
+  "eligibility_before_training": "Newsource+meaningfulToy checks, independentSOURCEreview, newreaderREADY, originalinitialparity10, targetdataset8, cached15saved7, allimmutablepins. This numerical recipe is not actualtraining authorization.",
+  "scientific_limits": "Known old152 W1 source-dependent robot training data and cached15 lastsolver~15ms vs statePOST20. No blind/ego/multitrajectory/physicalgradient/forcecapacity/task/CHORD/hardware qualification. Prior no-self15 fixed1000 negative result remains; no outcome-tuned lambda search."
+}

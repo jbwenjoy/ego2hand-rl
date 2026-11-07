@@ -1,0 +1,41 @@
+schema = 1
+description = "Consolidated matched offline driver; no frozen historical run is silently reclassified"
+
+[artifacts]
+manifest = "artifacts.toml"
+task = "phone_task"
+geometry = "geometry_catalog"
+tripod_dataset = "tripod_dataset"
+old_original = "old_original_TRAIN"
+old_pair_labels = "old_pair_labels"
+warmstart = "warm_WM_result"
+
+[model]
+hidden = [128, 128]
+geometry_chunk_rows = 4
+
+[sampling]
+WM_batch = 8
+tripod_WM_rows = 4
+old_WM_rows = 4
+Actor_batch = 8
+
+[optimizer]
+WM_lr = 0.0001
+actor_lr = 0.0001
+critic_lr = 0.0003
+
+[training]
+authorized = false
+device = "cpu"
+cpu_threads = 4
+seed = 1733
+common_WM_updates = 100
+updates = 1000
+horizon = 2
+microbatch = 2
+first_checkpoint = 100
+stop_after_first_healthy = true
+output = "../runs/phone_offline"
+resume_artifact = ""
+resume_health = ""

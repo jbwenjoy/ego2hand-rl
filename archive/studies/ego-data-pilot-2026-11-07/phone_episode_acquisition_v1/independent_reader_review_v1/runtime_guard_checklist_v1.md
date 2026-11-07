@@ -1,0 +1,11 @@
+# Native phone20ms reader: minimum retained contract
+
+Source-only review of the frozen constant-hold loop, native branch observer and COM/world-state codec. No new model/FK/step was run.
+
+1. Keep native3.11.0 and pinned original MJB/identified gains, true joint/control limits, contact materials/solver, fixed wrist and scale. Explicit dt is the only planned model-option change. Reject opaque callbacks, gravity compensation, equality/mocap/flex/plugins or assistance.
+2. Reset each family/dt into fresh MjData with exact input qpos/qvel/ctrl and explicit initial warmstart/time/zero applied forces. Set dt before exactly one initial `mj_forward`, matching the old baseline. Do not refresh or reset warmstart every step; a full-state restore is a separate route.
+3. Hold one finite, legal absoluteu20 for exactly64/128 native steps per20ms, never clamp. Count initial forwards, steps, contactForce reads and failures separately.
+4. Tick i: one `mj_step`; afterward contact/frame/force/energy still belong to solverPRE i, while qpos/qvel/time are POST i+1. A second forward/kinematics observer would change this evidence. Store explicit integer ticks plus native clock readback separately.
+5. POSTstate58=q20/qd20/pCOM3/Rbody9/vCOMworld3/omegaworld3. Use `pCOM=root+Rbody*ipos`, `omegaworld=Rbody*omega_body`, `vCOM=vroot+omegaworld×Rbody*ipos`. BodyR is not inertialR. Preserve raw quaternion/norm, root and rawvelocity; no repair/projection. The physical worldLog delta52 codec is not the nativeWM52 chart.
+6. Keep every generated contact raw24 row including zero/weakFn and actualgeom/efc/dim. Derived positiveFn aggregates have declared thresholds; no generatedcontact is not globalclearance. Check per-tick finite/warnings/zeroaid/constantctrl/fixedpalm, retain attempted/finite counts and partial failures. PRE energy is not POST energy.
+7. For the small actual contract, pin oldconstant-u firsttrace inputs for bothdt, one shared model owner, identical one-forward reset, then64+128=192steps. Compare every rawPOSTqpos/qvel bit, properCOM/worldomega/phase and oldPRE records wherecaptured. This is a narrow reader/pipeline match, not new holding/Markov/generalization qualification. No actual execution until formed source and Root coordination.

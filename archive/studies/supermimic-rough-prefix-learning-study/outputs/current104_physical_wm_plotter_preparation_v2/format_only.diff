@@ -1,0 +1,33 @@
+--- summarize_current104_physical_wm_saved.py
++++ summarize_current104_physical_wm_saved_v2.py
+@@ -120,7 +120,7 @@
+ def main():
+     ap=argparse.ArgumentParser(description=__doc__)
+     ap.add_argument('--input',type=Path,default=ROOT/'outputs/current104_physical_v2_WM_CPU_v1')
+-    ap.add_argument('--output',type=Path,default=ROOT/'outputs/current104_physical_v2_WM_summary_v1')
++    ap.add_argument('--output',type=Path,default=ROOT/'outputs/current104_physical_v2_WM_summary_v2')
+     ap.add_argument('--run',action='store_true');args=ap.parse_args()
+     report,pins,rows,secants,coverage,sign_rows,self_rows=load_saved(args.input)
+     need(not any(k in sys.modules for k in ('torch','warp','mujoco_warp')),'Framework import not permitted')
+@@ -168,7 +168,7 @@
+     ax.set(xticks=(0,1),xticklabels=('epsilon 2 mrad','epsilon 1 mrad'),yticks=np.arange(3),yticklabels=METHODS,title='Sign agreement: stable nonflat only')
+     fig.colorbar(image,ax=ax,fraction=.04,pad=.04,label='Descriptive sign agreement [%]')
+     ax=fig.add_subplot(gs[1,2]);ax.axis('off');ax.set_title('Native self-collision15 calibration\nSame fixed fresh-donor truth; 240 dependent slots',pad=20)
+-    body=[[v['model'],f"{v['truth_positive_slots']}/240",f"{v['BCE']:.5f}",f"{v['Brier']:.5f}",'N/A' if v['display_F1'] is None else f"{v['display_F1']:.4f}"] for v in self_rows]
++    body=[[v['model'],f"{v['truth_positive_slots']}/240",f"{v['BCE']:.3e}",f"{v['Brier']:.3e}",'N/A' if v['display_F1'] is None else f"{v['display_F1']:.4f}"] for v in self_rows]
+     table=ax.table(cellText=body,colLabels=['WM','Truth +','BCE','Brier','F1*'],cellLoc='center',loc='center',colWidths=[.19,.23,.20,.20,.18]);table.auto_set_font_size(False);table.set_fontsize(10);table.scale(1.05,2.15)
+     for (i,j),cell in table.get_celld().items():
+         cell.set_edgecolor('#c7c7c7')
+@@ -178,9 +178,9 @@
+     handles += [Line2D([],[],color='#333333',marker=markers[e],linestyle='none',label=f'epsilon {e*1000:g} mrad') for e in EPS]
+     handles += [Line2D([],[],color='#333333',linestyle='--',label='AD = physical slope')]
+     fig.legend(handles=handles,loc='upper center',bbox_to_anchor=(.5,.905),ncol=7,frameon=False,fontsize=10)
+-    fig.suptitle('Current104: saved one-step WM gradients versus same-world physical secants',fontsize=19,y=.978)
+-    fig.text(.5,.94,'All completed finite rows and outliers retained; common scatter axes/units; no quality selection',ha='center',fontsize=11)
+-    fig.text(.055,.094,'One seen source, training seed0: 16 dependent snapshots x 8 directions; two epsilon rows reuse each direction. Physical results are shared across all 3 WMs.',fontsize=10)
++    fig.suptitle('Current104 fresh source-action donors: WM gradients versus physical secants',fontsize=19,y=.978)
++    fig.text(.5,.94,'Fresh replay of fixed source actions, not archived Actor closed-loop trajectories; archival drift reported separately',ha='center',fontsize=11)
++    fig.text(.055,.094,'One seen source/seed0: 16 dependent fresh-donor snapshots x 8 directions; two epsilon rows reuse each direction. All finite rows/outliers retained; physical results shared by 3 WMs.',fontsize=10)
+     fig.text(.055,.068,'Primary objective: native FP32 object2+8 at ref k. AD uses the saved effective FP32 direction; nominal direction and ref k+1 remain separate diagnostics.',fontsize=10)
+     fig.text(.055,.042,'No CI/p-values or method-superiority/generalization claim. Sampled interior-coordinate comparison only; not full-motion, full-Jacobian, force, ego or hardware qualification.',fontsize=10)
+     png=out/'physical_secants_WM_summary.png';svg=out/'physical_secants_WM_summary.svg'

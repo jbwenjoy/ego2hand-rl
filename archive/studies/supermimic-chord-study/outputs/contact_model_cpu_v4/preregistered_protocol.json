@@ -1,0 +1,37 @@
+{
+  "version": 4,
+  "written_before_collection": true,
+  "device": "CPU only",
+  "source_initial_grasp": "D:\\workspace\\supermimic-chord-study\\outputs\\initial_grasp_scan\\substeps_v2\\selected_reference.npz",
+  "source_reference_sha256": "0ac0e188025f3430c97a5e049cc31078e463879af47985151a80a57439afbb3d",
+  "reset_seed_groups": {
+    "train": 24,
+    "validation": 4,
+    "test": 4
+  },
+  "states_per_reset_seed": 4,
+  "pair_directions_per_state": 12,
+  "paired_epsilons_rad": [
+    0.002,
+    0.006
+  ],
+  "paired_transition_count": 6272,
+  "contact_free_stress": "every fourth reset seed lifts object 8cm; diagnostic only, no stable-grasp success claim",
+  "same_data_same_initialization_same_minibatches_same_updates": true,
+  "updates_per_model": 3000,
+  "secant_weight": 0.25,
+  "loss": "support MSE + .25 contact BCE; intervention model adds weighted robust normalized support secant response",
+  "validation_selection_common": "support MSE + .25 BCE + secant_weight*normalized secant loss",
+  "frozen_objective": "negative support MSE to independent nominal one-step selected-grasp teacher collected before interventions",
+  "qualification": {
+    "stable_nonflat_direction_count_min": 16,
+    "stable_nonflat_sign_min": 0.75,
+    "stable_nonflat_correlation_min": 0.5,
+    "test_states_min": 8,
+    "actual_improvement_fraction_strictly_greater_than": 0.5,
+    "known_no_contact_support_rmse_max": 0.1,
+    "known_no_contact_support_max": 0.25
+  },
+  "qualification_limit": "local candidate status only, no actor use unless qualified; no CHORD/ego task success inference",
+  "max_cpu_wall_seconds": 120
+}

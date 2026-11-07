@@ -1,0 +1,50 @@
+--- D:\workspace\supermimic-c2-confirmation-eval-study\scripts\run_c2_portfolio_queue.py
++++ D:\workspace\supermimic-c2-confirmation-eval-study\scripts\run_c2_portfolio_queue_v2.py
+@@ -11,7 +11,7 @@
+ STARTED=time.monotonic()
+ ROOT=Path(__file__).resolve().parents[1]
+ STUDY=Path("D:/workspace/supermimic-chord-study")
+-DEFAULT_PLAN=ROOT/"configs/c2-confirmation-evaluation-v1.json"
++DEFAULT_PLAN=ROOT/"configs/c2-confirmation-evaluation-v2.json"
+ 
+ 
+ def import_path(path,name):
+@@ -20,7 +20,7 @@
+ 
+ 
+ def preflight(plan_path):
+-    worker=import_path(ROOT/"scripts/evaluate_c2_portfolio.py","portfolio_worker_contract")
++    worker=import_path(ROOT/"scripts/evaluate_c2_portfolio_v2.py","portfolio_worker_contract")
+     plan=worker.validate(plan_path)
+     worker.require(Path(plan["source_pins"]["queue"]["path"]).resolve()==Path(__file__).resolve(),"Wrong queue")
+     for index,job in enumerate(plan["jobs"]):
+@@ -98,17 +98,17 @@
+             worker.require(worker.sha(plan_path)==state["plan_sha256"],"Plan changed after preflight")
+             state["status"]="running";write()
+             for job in state["jobs"]:
+-                remaining=600-(time.monotonic()-STARTED);cap=min(45,remaining-45)
++                remaining=1500-(time.monotonic()-STARTED);cap=min(45,remaining-45)
+                 worker.require(cap>0,"Whole-queue scheduling budget exhausted")
+                 job.update(status="running",effective_child_cap_seconds=cap);write()
+                 observer=lambda pid,parent:lifecycle.observe_actual_pid(pid,parent,plan["source_pins"]["worker"]["path"],plan_path,job["output_dir"])
+                 process=lifecycle.watch(job["command"],Path(job["wrapper_metadata_dir"]),root/(job["job_id"]+"_process"),
+                                         hard_seconds=cap,observer=observer)
+                 job["process"]=process
+-                worker.require(time.monotonic()-STARTED<=600,"Whole-queue budget exceeded after child")
++                worker.require(time.monotonic()-STARTED<=1500,"Whole-queue budget exceeded after child")
+                 worker.require(process["status"]=="completed" and process["exit_code"]==0,"Engineering failure; no retry/next job")
+                 job["health"]=health(plan,job,worker)
+-                worker.require(time.monotonic()-STARTED<=600,"Whole-queue budget exceeded after health")
++                worker.require(time.monotonic()-STARTED<=1500,"Whole-queue budget exceeded after health")
+                 job["status"]="completed";write()
+             state["status"]="completed_27_jobs"
+     except BaseException as error:
+@@ -117,7 +117,7 @@
+         state.update(status="engineering_failed",error=repr(error));raise
+     finally:
+         state.update(finished_utc=datetime.now(timezone.utc).isoformat(),whole_queue_wall_seconds=time.monotonic()-STARTED,
+-                     whole_budget_scope="600s scheduling/stop-request budget with45s cleanup reserve; child independent timer<=45s, not OS hard realtime")
++                     whole_budget_scope="1500s scheduling/stop-request budget with45s cleanup reserve; child independent timer<=45s, not OS hard realtime")
+         write()
+ 
+ 

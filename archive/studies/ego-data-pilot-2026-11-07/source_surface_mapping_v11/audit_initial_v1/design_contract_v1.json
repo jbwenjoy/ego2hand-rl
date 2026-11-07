@@ -1,0 +1,29 @@
+{
+  "schema": "source_normal_aware_material_mapping_design_review:11",
+  "scope": "Source and saved geometry only; no actual assembly, FK, force solve, physics or training qualification.",
+  "source_material_contract": {
+    "phone_frame": "Original phone BODY coordinates, meters, outward normals. Never substitute inertial axes, geom compiler frame, a reflected hand, or a rescaled object.",
+    "exact_branch": "Keep original ego-derived convex-projected point bytes and the named actual phone triangle/normal. Thumb source triangle367; index source triangle6. Proximity is not a measured contact or force label.",
+    "region_branch": "Only the separately named preregistered1mm branch: enumerate all real filled phone triangles whose closest point lies inside the algorithmic1mm ball. Keep all finite candidates and the predeclared normal-angle/distance/ID rank. This radius is not a measured uncertainty or confidence interval.",
+    "normal_contract": "Retain the actual source triangle outward normal and explicit frame. At edges or vertices the selected face normal is a named conditional choice, not a unique physical contact normal or an averaged replacement.",
+    "hand_contract": "Both branches retain original307 hand triangles2332/1876, vertex order, filled-triangle projected points, barycentrics and geom-local outward normals. Functional pad/pressure area UNKNOWN.",
+    "kinematics_contract": "Hand points/normals move with their real geom transforms; phone points/normals move with the proper phone SE3. For assembly use point closure and tangent normal equations plus the opposed-normal branch, not only positional proximity.",
+    "lineage_contract": "Carry source artifact hash, branch name, triangle and vertex IDs, barycentrics, original ego target, chosen material point, displacement, source-normal difference, boundary distances and original scan-proximity semantics into every subsequent record. New anchor schemas require a new guarded consumer route; do not bypass or edit the frozen307-only K interface."
+  },
+  "finite_named_branches": [
+    {"name": "exact_source_original_hand", "phone_triangles": [367, 6], "phone_point_rule": "Exact original projected source points", "hand_triangles": [2332, 1876], "faithful_source_proximity_retention": "Exact geometry reference only, not human contact truth"},
+    {"name": "source1mm_opposed_side_original_hand", "phone_triangles": [511, 41], "phone_point_rule": "Preregistered actual filled-triangle projection within1mm, ranked before any FK/force outcome", "hand_triangles": [2332, 1876], "faithful_source_proximity_retention": "Algorithmic sensitivity branch; never pool with exact-source claims"}
+  ],
+  "concrete_risks": [
+    "Old CAD B was4.81/4.74mm from original ego material targets and changed phone outward normals by61.03/58.01degrees; it was not the same face with a negligible positional perturbation.",
+    "A submillimetre move can cross a phone bevel/facet boundary and change its normal greatly. Material distance alone does not bound normal error.",
+    "The1mm thumb choice is at a triangle edge; a selected one-face normal is not a unique native contact normal. Keep boundary status and eventual whole native manifold.",
+    "Original three noncontact digit descriptors are28.8/48.8/55.7mm from the scan and outside the source5mm unsigned-proximity criterion. They do not provide additional source-labelled support contacts.",
+    "Point antipodal angles are only circular-Coulomb pure force-pair descriptors under assumedmu=.7. They are not a gravity-specific wrench certificate, a native pyramidal4-ray proof, or an impossibility statement for actual multi-contact patches/holding.",
+    "Near-vertex hand anchors and unknown pad functionality remain unresolved by changing phone targets. Native generated contact positions, normals, Jacobians and complete geometry must remain separate final evidence."
+  ],
+  "physical_parameters": "Mass.2kg andmu.7 are unchanged nominal assumptions, not measurements or source-geometry calibration.",
+  "source_only_design_review_qualified": true,
+  "assembly_force_holding_or_ego_contact_qualified": false,
+  "new_model_FK_LP_physics_training_calls": 0
+}

@@ -1,0 +1,96 @@
+{
+  "plan_schema": "restoration_dynamic_prefix_plan:1",
+  "bundle_schema": "restored_prefix_separate_bundles:1",
+  "retarget_variant_id": "H123_cubic_minimax_restoration_filtered_prefix16_v1",
+  "conditions": [
+    "H0_MATCHED_DYNAMIC_INIT_HOLD",
+    "T0_MATCHED_DYNAMIC_INIT_TRACK"
+  ],
+  "bundle_aliases": [
+    "reference_manifest",
+    "init_manifest",
+    "control_manifest"
+  ],
+  "other_required_pins": [
+    "protocol",
+    "constrained_protocol",
+    "input_parent_protocol",
+    "export_receipt",
+    "model",
+    "context",
+    "robot_kinematics"
+  ],
+  "reference_required": [
+    "time_s",
+    "q_goal_rad",
+    "analytic_qd16_rad_s",
+    "mapped_object_pose_w",
+    "planned_time61_s",
+    "object_COM_world_m",
+    "object_rotation_w",
+    "object_v_world_m_s",
+    "object_omega_world_rad_s"
+  ],
+  "initial_fields": {
+    "q_init_requested_FP32_rad": [
+      20
+    ],
+    "qd_init_requested_FP32_rad_s": [
+      20
+    ],
+    "object_pose_init_requested_FP32_w": [
+      7
+    ],
+    "object_bodyorigin_v_requested_FP32_world_m_s": [
+      3
+    ],
+    "object_angular_requested_FP32_body_rad_s": [
+      3
+    ],
+    "object_angular_requested_FP32_world_rad_s": [
+      3
+    ],
+    "u_planned0_FP32_rad": [
+      20
+    ]
+  },
+  "control_fields": {
+    "track": "control__fp32_old_export__tracking_u_exec_15_FP32_rad",
+    "hold": "control__fp32_old_export__hold_u_exec_15_FP32_rad",
+    "proposed": "control__fp32_old_export__u_pre_16_FP32_rad"
+  },
+  "steps": 60,
+  "physics_dt_s": 0.005,
+  "planned_targets": 15,
+  "postinit_control_updates_before_steps": [
+    5,
+    9,
+    13,
+    17,
+    21,
+    25,
+    29,
+    33,
+    37,
+    41,
+    45,
+    49,
+    53,
+    57
+  ],
+  "grade": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "clock_absolute_tolerance_s": 2e-06,
+    "target_rate_max_rad_s": 15.0,
+    "actuator_load_ratio_max": 1.01,
+    "load_charge_max": 0.8,
+    "charge_decay_time_s": 2.0,
+    "drop_center_below_default_wrist_m": 0.15
+  },
+  "qualification": "CPU/input/static/predicted qualification only; no GPU authorization or runtime readback yet"
+}

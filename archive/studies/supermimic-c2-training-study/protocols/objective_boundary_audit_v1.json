@@ -1,0 +1,24 @@
+{
+  "schema": "C2_training_objective_readonly_audit:1",
+  "status": "STATIC_OLD_SOURCE_BOUNDARY_VERIFIED_NEW_ADAPTER_UNRUN",
+  "GPU_used": false,
+  "P_ONLY": {
+    "path": "D:/workspace/supermimic-chord-penalty-only-study/src/penalty_study/penalty_only_objective.py",
+    "sha256": "cfa53515fb7dc12ae49a2aec2d9ca37603061c1752fc8875f879cf5ea235c914",
+    "line41": "penalty = base_terms[geometry_intent_penetration_prior]",
+    "line42": "bonus = -.1 * penalty",
+    "result": "Direct sharedP use verified. Retain value/state-gradient formula and no dt inside. Never replace with subtraction of support from a combinedA2bonus.",
+    "historical_docstring": "The frozen docstring predates later GPU runs. New runtime qualification belongs in new metadata; do not silently rewrite this historical frozen module."
+  },
+  "A2": {
+    "path": "D:/workspace/supermimic-chord-study/src/chord_study/contact_objective.py",
+    "sha256": "54d9507d824d08baab3639e29d028b325109f51ca3e3fdd3118be341729502ea",
+    "forward_line180": "Frame indexing uses same PenMDP start/time/end convention",
+    "formula_line189": "bonus=weight*support_match-.1*penetration",
+    "metadata_line165": "dt_applied_inside_module=False, caller_dt_s=.02",
+    "scope_line167": "Distance-band ghosts, failed local qualification, derivative/dynamics distinction and sampling limitations remain explicit"
+  },
+  "geometry": {"path": "D:/workspace/supermimic-chord-study/src/chord_study/contact_geometry.py", "sha256": "a9e0e19cc826cefe4e6a97a5c7b33f02f04c23585065cb0a273436eb07846d7a", "contract": "Same true external pen patches, sample/basis/radius and saved-index first-winner support maximum. C2 changes controller inputs, not geometry or tolerance/penetration rules."},
+  "new_adapter_pending": "Real/imag C2 parity, native reward/WMloss isolation and objective timing must be checked against the actual new source; this static audit does not imply they already pass.",
+  "first100_historical_reference": {"path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/health_ckpt100_root/report.json", "expected100_transition_count": 40192, "expected100_updates": {"wm": 200, "fail_head": 200, "actor": 0, "critic": 0}, "scope": "Historical budget accounting reference only; not a freshseed outcome or actor qualification"}
+}

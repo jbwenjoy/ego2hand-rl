@@ -1,0 +1,11 @@
+--- src/rough_prefix/physical_fd.py
++++ src/rough_prefix/physical_fd_v2.py
+@@ -90,7 +90,7 @@
+     from .native_v2 import install_actual_context
+     from .policy_probe import expected_control
+     from .capacity import CapacityObserver
+-    from .probe_transaction_v2 import ProbeTransaction
++    from .probe_transaction_v3 import ProbeTransaction
+     from .bundle import FIELDS
+ 
+     output=Path(output);deadline=config['_worker_started_perf']+config['soft_worker_seconds']

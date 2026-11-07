@@ -1,0 +1,51 @@
+{
+  "schema": "saved_native_rank0_contact_wrench_upper_bound_protocol:1",
+  "saved_only_two_LP_authorized": true,
+  "source": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\wrench_upper_bound_saved_v1\\run_saved_v1.py",
+    "bytes": 6364,
+    "sha256": "113ab36eb3e402a7fec9bda6b3b1e4c5bb224281734e712be3877af9a3ce8200"
+  },
+  "seed": 0,
+  "rank": 0,
+  "contact_count": 3,
+  "mu": 0.7,
+  "per_finger_cap_N": 3,
+  "LP_solves": 2,
+  "force_scale_N": 1.962,
+  "moment_scale_Nm": 0.151074,
+  "gravity_world_m_s2": [
+    0,
+    0,
+    -9.81
+  ],
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\wrench_upper_bound_saved_v1\\actual_v1",
+  "inputs": {
+    "native_search_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\report.json",
+      "bytes": 2336903,
+      "sha256": "ff9d0cdeabd766ba29e1d6da6d049f42aa4dbd92ae7c1bd87301be0a3518438f"
+    },
+    "holding_scene_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\scene.py",
+      "bytes": 6257,
+      "sha256": "6913e917c50ab520b9af94206e030a4a83c4186d9aad8ad6ab4ca45dc145f147"
+    },
+    "native_frame_source_audit": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_source_audit_v1\\report.json",
+      "bytes": 11212,
+      "sha256": "599e996613f7c153af07282392b90947a8dd33baa8a0fa4b1108a2e0d4ad9832"
+    }
+  },
+  "linprog_options": {
+    "primal_feasibility_tolerance": 1e-09,
+    "dual_feasibility_tolerance": 1e-09
+  },
+  "objective": "min t subject to -t <= (Wlambda - target)/scale <= t; lambda>=0,t>=0",
+  "rays": "sign*(normal +/- mu*tangent1), sign*(normal +/- mu*tangent2), unnormalized rays with unit local normal coefficient",
+  "load_grouping": "All contacts/rays belonging to each original finger summed once; thumb1+index2 points",
+  "secondary_case": "Identical fixed three points and rays, removes only both per-finger caps",
+  "scope": "Optimistic fixed saved point-force geometry; no hand torque/PD limit, no soft contact realization or stability, no physical/global infeasibility qualification",
+  "no_native_model_FK_forward_steps_NN_GPU": true,
+  "automatic_retry": false
+}

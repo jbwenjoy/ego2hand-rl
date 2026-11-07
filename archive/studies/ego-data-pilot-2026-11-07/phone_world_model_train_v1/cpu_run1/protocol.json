@@ -1,0 +1,100 @@
+{
+  "schema": "phone_world_model_training_protocol:1",
+  "role": "fresh_phone_family_state_and_contact_summary",
+  "CPU_run_authorized": true,
+  "GPU_run_authorized": false,
+  "recipe": {
+    "seed": 1729,
+    "cpu_threads": 4,
+    "dtype": "float32",
+    "device": "cpu",
+    "hidden": [
+      128,
+      128
+    ],
+    "activation": "SiLU",
+    "updates": 5000,
+    "checkpoint_updates": [
+      250,
+      1000,
+      5000
+    ],
+    "batch": "all_complete_TRAIN_rows",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "adam_epsilon": 1e-08,
+    "foreach": false,
+    "clip_grad_norm": 1.0,
+    "input_std_floor": 1e-06,
+    "physical_delta_std_floor": 1e-06,
+    "logforce_std_floor": 0.001,
+    "head_initialization": "zero_last_weights_delta_mean_coverage_mean_logforce_mean",
+    "coverage_initial_probability_clip": 0.001,
+    "lambda_delta": 1.0,
+    "lambda_coverage": 1.0,
+    "lambda_logforce": 1.0,
+    "background_continue_to_final": true
+  },
+  "input_schema": "phone_COM_world58_absolute_u20_h_s_nsubsteps80:1",
+  "output_schema": "phone_normalized_world_delta52_pad_coverage2_logforce5:1",
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\cpu_run1",
+  "inputs": {
+    "dataset_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 10554,
+      "sha256": "4eaba866d38b51d5edfced2cbc46eb6cd8315c78a0c50b769d7e2b79fecf4559"
+    },
+    "dataset_saved_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\independent_dataset_review_v1\\report.json",
+      "bytes": 9318,
+      "sha256": "718368880239b9858c7f47bc5ef4fed0ca6a07d74d2a72e9fa6d97349966d506"
+    },
+    "acquisition_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\protocol_run_v2.json",
+      "bytes": 2535,
+      "sha256": "c2e8283f7f60d1148fe75872974615be0e6aeffc747d8e04f74ea339ebb6e3cb"
+    }
+  },
+  "source_pins": {
+    "trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\train_phone_wm_v2.py",
+      "bytes": 28494,
+      "sha256": "1234ea0491edcd23e3d15d32959a39bbac2f851b2514b17b5e2c41d87c5fd9b9"
+    },
+    "CLI": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\train_phone_wm_cpu_v2.py",
+      "bytes": 1067,
+      "sha256": "cbf3c93fecbf4e0eb58ef3f9ce1e2cf9f751b7f9d26ea1c6d512c3cfb4e02f72"
+    },
+    "adapter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    },
+    "independent_source_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\independent_source_review_v1\\report.json",
+      "bytes": 7791,
+      "sha256": "803fb515934df6537af4355648f640f1478bdc685d0f006c5569022ccc5d1512"
+    },
+    "revision": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\source_revision_v2.json",
+      "bytes": 2168,
+      "sha256": "27aa2ae18578bcfb2915d758d680c691ea9466fd782d4aca98dc3105828c105f"
+    },
+    "raw_byte_guard": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\raw_tensor_guard_contract_v2.json",
+      "bytes": 799,
+      "sha256": "e9df830391d79f911ca37c0ec6b2256c977dd73f6a672fd6d750f6c1d44710b8"
+    }
+  },
+  "dataset_audit_schema": "phone_episode_acquisition_saved_independent:1",
+  "dataset_audit_status": "PASS_SAVED_ALL_EPISODE_FAMILY_H20MS_STATE_CONTACT_SPLIT_RECEIPTS",
+  "automatic_retry": false,
+  "first_healthy_checkpoint_user_requested_goal_pause": true,
+  "scope": "New CPU phone conditional world model with simulated family data only; no oldweights, policy or ego generalization claim."
+}

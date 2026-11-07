@@ -1,0 +1,53 @@
+{
+  "schema": "raw_hot3d61_fixed_palm_object_intent_protocol:1",
+  "sources": {
+    "builder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_ego_reference_v1\\build_reference_v1.py",
+      "bytes": 7941,
+      "sha256": "f68b5029184c8c7bbcfe30bf16f20419f0f4744271cac91748c1f7da496e52a8"
+    },
+    "reference": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_ego_reference_v1\\reference.py",
+      "bytes": 4463,
+      "sha256": "88c85fe21db72ab29f5c8da5a799345205be45ed7ec830e804b2370ccf70bbb0"
+    },
+    "codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    }
+  },
+  "inputs": {
+    "raw_poses": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\ego_hand_geometry_v1\\raw_profile_and_poses.json",
+      "bytes": 533316,
+      "sha256": "215141c6a3f802e26084aecb5afbade6371c791619bdb3a9baca80ef311201a6"
+    },
+    "frame_identities": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\ego_hand_geometry_v1\\frame_identities.json",
+      "bytes": 18235,
+      "sha256": "f7c6ba1c5fc46be6d5d240fbfdf7e5dbf2497415d15acf1118720b99bb4d3607"
+    },
+    "anchor_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\completed_run1\\report.json",
+      "bytes": 4955,
+      "sha256": "96eec5b034f8271e7f8965bf7e3566b229690c479f5e4ba7c175802e0f2c33ac"
+    },
+    "physical_parameters": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\completed_v1\\physical_parameters.json",
+      "bytes": 1447,
+      "sha256": "fc2fb4194ef30d60b4fdd625b63105bd84ce9cf26c4a93378ff416a768a75de7"
+    }
+  },
+  "source_frames": [
+    42,
+    102
+  ],
+  "source_hand": "left",
+  "robot_hand": "right",
+  "pose_convention": "F64 normalized raw quaternions, proper SE3; no matrix projection or reflection",
+  "relative_rule": "T_wo=inv(T_world_wrist) T_world_phone; delta=inv(T_wo[0]) T_wo[k]; robot_T=robot_initial_T delta",
+  "time_rule": "Original integer ref_timestamp_ns differences; preserve61 source samples and duration.20ms grid stays inside span, no stretch to2s/extrapolation.",
+  "robot_anchor_scope": "All two compression candidates retained with original geometry flags. Reference intent only; physical admission stays separate.",
+  "native_NN_training_authorized": false
+}

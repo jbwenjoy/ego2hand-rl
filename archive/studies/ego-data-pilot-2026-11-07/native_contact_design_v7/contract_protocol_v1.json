@@ -1,0 +1,44 @@
+{
+  "schema": "same_forward_native_contact_design_contract:7",
+  "CPU_forward_authorized": true,
+  "step_LP_learning_GPU_authorized": false,
+  "source_pins": {
+    "wrapper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\evaluator_contact_design_v7.py",
+      "bytes": 8321,
+      "sha256": "26a960d87e4be004afcb74e2616b39ae52dd128983eea2ee6dce25f4692860de"
+    },
+    "base": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\evaluator_native_v6.py",
+      "bytes": 19267,
+      "sha256": "0a7a15cf16d98066920de3a95dc7b0b1a9faf61d387c24cf43a1b38f1aa2a16f"
+    },
+    "checker": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\check_contact_design_contract_v1.py",
+      "bytes": 7371,
+      "sha256": "2a1968d7a8a9ea83f9427ede67c77f57766a81eb15515343617d1a7a6e9e2339"
+    }
+  },
+  "inputs": {
+    "old_native_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\report.json",
+      "bytes": 2336903,
+      "sha256": "ff9d0cdeabd766ba29e1d6da6d049f42aa4dbd92ae7c1bd87301be0a3518438f"
+    },
+    "old_rank0_state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\seed0_rank0_state.npz",
+      "bytes": 7877,
+      "sha256": "5e532341a315bac73280cec3eb18798695fac19fd284e6b046542987dba451ac"
+    }
+  },
+  "rule": "Exactly same frozen seed0rank0 x46 twice, fresh native MjData each; base forward once then only hand-contact jacobians at native con.pos/hand geom body.",
+  "maximum_native_forwards": 2,
+  "positive_Fn_filter": false,
+  "no_static_acceleration_gate": true,
+  "contact_points_not_arbitrary_witness_or_centroid": true,
+  "model_digest_period": 1,
+  "expected_same_geometry_contacts": 3,
+  "all_PD_limit_flags_and_unitgear_saved": true,
+  "repeat_rule": "Raw contact/J/PD/context numerical fields byte-equal, excluding diagnostic probe ID and cumulative counters.",
+  "automatic_retry": false
+}

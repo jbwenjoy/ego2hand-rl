@@ -1,0 +1,54 @@
+{
+  "schema": "phone_momentum_saved_TRAIN_and_analytic_contract_protocol:1",
+  "source": {
+    "verifier": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\verify_contract_v1.py",
+      "bytes": 9485,
+      "sha256": "8c2c42e5f8d8c95a1e46db78b94eb6b5cfd954e33087aca7d6906bba1c931fcf"
+    },
+    "core": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\momentum_contract.py",
+      "bytes": 4023,
+      "sha256": "983e182d7b8980d44a23db0f143d4a1c48ed483d37522fdba33dca3d5344b0ca"
+    },
+    "launcher": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\execute_once_v1.py",
+      "bytes": 2995,
+      "sha256": "c7e69a045908a26b361f01f27a9612bf64df9706497aa78260f46a4e5acddb1d"
+    }
+  },
+  "inputs": {
+    "physical_parameters": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\completed_v1\\physical_parameters.json",
+      "bytes": 1447,
+      "sha256": "fc2fb4194ef30d60b4fdd625b63105bd84ce9cf26c4a93378ff416a768a75de7"
+    },
+    "train_npz": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\train.npz",
+      "bytes": 906424,
+      "sha256": "13fb610ebab36d11ad83e04631d7ee8c404dfee13586d9a3eff4bf3ab8ecefb1"
+    },
+    "published_all960_labels": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\completed_v1\\all960_interval_wrench_labels_and_residuals.npz",
+      "bytes": 441266,
+      "sha256": "33964399a329163db9c6c4900581da2cadcee200547de31be49d93f5f18499a6"
+    },
+    "published_row_identities": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\completed_v1\\all960_row_identities.json",
+      "bytes": 328729,
+      "sha256": "b49680b6d6ca02e5b043c405c30e549274fd2deda3fd350265842021d2a8071a"
+    },
+    "label_interface": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\label_interface_v1.json",
+      "bytes": 2559,
+      "sha256": "b77678113b49becf20bb7ef519d2baed753aeede7938c8dc8c7bdcecea4f5101"
+    }
+  },
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\completed_run1",
+  "neural_training_authorized": false,
+  "native_physics_authorized": false,
+  "primary": "all 684 original eligible TRAIN rows, no fit or model selection; both impulse residual units separate",
+  "fixtures": "rotated anisotropic independent NumPy closure; world covariance; ballistic; analytic impulse AD; wrong axes/origin",
+  "partial_rows": "original 36 TRAIN partial targets excluded by original eligibility, never replaced with H targets",
+  "scope": "nominal momentum-only reusable loss/velocity closure, no position/R integration/contact causality qualification"
+}

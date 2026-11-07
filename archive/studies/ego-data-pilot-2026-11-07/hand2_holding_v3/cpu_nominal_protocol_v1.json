@@ -1,0 +1,76 @@
+{
+  "schema": "hand2_phone_support_CPU_holding_protocol:3",
+  "CPU_run_authorized": true,
+  "training_or_GPU_authorized": false,
+  "automatic_retry": false,
+  "gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "tail_dual_pad_force_coverage": 0.95,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483
+  },
+  "dt_s": [
+    0.0003125,
+    0.00015625
+  ],
+  "duration_s": 2.0,
+  "dt_pair_gates": {
+    "final_COM_difference_m": 0.002,
+    "final_orientation_difference_rad": 0.03490658503988659,
+    "require_both_duration_complete": true
+  },
+  "inputs": {
+    "support_pose_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\protocol_refine_from_closed_v5_run1.json",
+      "bytes": 10172,
+      "sha256": "c5d2bab395b73e7f0e7edd3f451f513e3bf896ea1d1225a3657b4d8f7672b584"
+    },
+    "support_pose_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\support_refinement_v5_run1\\report.json",
+      "bytes": 512025,
+      "sha256": "38881cf58f18f3d59771de5f78d80df201ed0b39ada22fd606462736a6df7ab8"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    }
+  },
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v3\\run_cpu_support_holding_v3.py",
+      "bytes": 26451,
+      "sha256": "ab6b5f5d5475a3159fd2f51b04c57287815a91d32d50363d847e394c3a0d4a28"
+    },
+    "scene": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\scene.py",
+      "bytes": 6257,
+      "sha256": "6913e917c50ab520b9af94206e030a4a83c4186d9aad8ad6ab4ca45dc145f147"
+    },
+    "old_holding_runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\run_cpu_holding_v1.py",
+      "bytes": 16650,
+      "sha256": "32511cbee40363ab87ed38868f654ae80035dbc739f1a74ddc22e612dfa4d504"
+    }
+  },
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v3\\cpu_nominal_v1",
+  "scope": "Metadata-only fixture; no backend/model/steps authorization.",
+  "root_scope": "Exactly one metadata-enrolled support-pose seed0 andbothdt, rejectedseed1 retained. Nonzero pointmoment residual not waived as strictstatics; only actual unassisted meshholding gates decide2s result. Original robot/material/limits andallpercase/pair gates unchanged."
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "phone_directional_gap_bounded_tensor_contract:1",
+  "pure_tensor_geometry_authorized": true,
+  "native_NN_training_physics_authorized": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\completed_v1",
+  "sources": {
+    "provider": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+      "bytes": 9556,
+      "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+    },
+    "checker": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\check_directional_gap_v1.py",
+      "bytes": 9712,
+      "sha256": "dc9966d750a13881ec0a2cb3f303ec3b72cdde6559a673075cbeb30fb671cf04"
+    },
+    "catalog_builder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\build_catalog_v1.py",
+      "bytes": 5182,
+      "sha256": "440d18cb75c07e8d2fd5c475245c03b6301e47d47037421e57c82050d25971c2"
+    }
+  },
+  "inputs": {
+    "catalog": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\geometry_catalog_v1.json",
+      "bytes": 2197,
+      "sha256": "f36298062d6039a6230c9958f0169e57f8544dfd7706ec3b2e988b4796afa33c"
+    },
+    "provider_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\report.json",
+      "bytes": 7011,
+      "sha256": "baa38632830a0dd035a7029e410f11c5eebb2e7789b8d2f235ddfa5701af60e1"
+    },
+    "state_exact": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\completed_run1\\exact_source__source_middle_anchor_nearest_phone_candidate.json",
+      "bytes": 229560,
+      "sha256": "085616a2bdee60f7f2d84f5444ae6a47fb8fb8caa2f4000196577bdcaea6cad5"
+    },
+    "state_source1mm": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\completed_run2\\source1mm__index_material_toward_COM_30mm_candidate.json",
+      "bytes": 225178,
+      "sha256": "c7304aabad9425bf23f7b5a4e1be6d1cb70a7ee58ece9c0ed6ffb19ce6096209"
+    },
+    "reference_compiled_geometry": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\completed_run2\\compiled_geometry_and_limits.npz",
+      "bytes": 124674,
+      "sha256": "3cd9198dd5c3361a5e04c7feb105120bc9a718dcf81cba0c9d47ab462e6a56d8"
+    }
+  },
+  "budget": {
+    "saved_states": 2,
+    "canonical_pairs": 22,
+    "dtypes": [
+      "float64",
+      "float32"
+    ],
+    "pure_Torch_descriptor_FK_calls": 6,
+    "pure_geometry_AD_calls": 2,
+    "analytic_fixture_cases": 4,
+    "new_native_model_loads": 0,
+    "new_native_FK": 0,
+    "new_native_forward": 0,
+    "new_physics_steps": 0,
+    "new_NN_calls": 0
+  },
+  "reference_comparison": {
+    "exact_source_rows_only": true,
+    "F64_arithmetic_allowance_m": 1e-09,
+    "F32_diagnostic_allowance_m": 5e-06,
+    "allowances_are_not_geometry_gates": true
+  },
+  "AD": {
+    "state": "exact",
+    "pair_geom_id": 13,
+    "q_index": 0,
+    "FD_h_rad": 1e-07,
+    "scope": "descriptor arithmetic only, no physics gradient claim"
+  },
+  "masks": {
+    "direction_descriptor_known": "finite implemented support arithmetic",
+    "pose_known": "frozen compiled Torch FK",
+    "exact_gap_known": false,
+    "closest_normal_known": false,
+    "formal_float_certificate_known": false,
+    "full_H_causal_zero_known": false
+  }
+}

@@ -1,0 +1,317 @@
+--- executed_v1_79207
++++ formed_v2_8c24
+@@ -1,4 +1,4 @@
+-"""Full151/105 same-Warp serial executed-u probe; lazy Env/device imports.
++"""Full151/105 inventory-all and same-Warp serial probe, isolated worker v2.
+ No Actor, WM, optimizer or learning. Only Root-authorized run_probe runs physics.
+ """
+ from __future__ import annotations
+@@ -30,8 +30,8 @@
+ 
+ def validate_config(config,bundle=None):
+     """Metadata-only preflight, with no framework import or donor execution."""
+-    if config.get('schema')!='full151105_same_warp_physical_probe_run:1' or config.get('role')!='full151105_serial_physical_probe':raise ValueError('Explicit105 physical-probe schema/role required')
+-    if config.get('probe_mode') not in ('engineering_restore_smoke','serial_full'):raise ValueError('Unknown physical-probe mode')
++    if config.get('schema')!='full151105_same_warp_physical_probe_run:2' or config.get('role')!='full151105_serial_physical_probe':raise ValueError('Explicit105 worker-v2 schema/role required')
++    if config.get('probe_mode') not in ('engineering_restore_smoke','inventory_discovery_all','serial_full'):raise ValueError('Unknown physical-probe mode')
+     if type(config.get('GPU_run_authorized')) is not bool or config.get('training_authorized') is not False or config.get('automatic_retry') is not False or config.get('compile_fallback') is not False:raise ValueError('Explicit GPU flag/no-training/no-retry/no-fallback contract required')
+     if type(config.get('evaluation_seed')) is not int or config['evaluation_seed']!=0:raise ValueError('Fixed source seed0 required')
+     if type(config.get('soft_worker_seconds')) not in (int,float) or not 0<config['soft_worker_seconds']<=180 or config.get('hard_process_seconds')!=240:raise ValueError('Fixed bounded physical-probe budget required')
+@@ -57,11 +57,14 @@
+         if expected not in pins.values():raise ValueError('Frozen proposal execution dependency absent from new closure: '+alias)
+     transaction=pin(Path(__file__).with_name('transaction105.py'))
+     if transaction not in pins.values():raise ValueError('Executed105 transaction component missing from source closure')
+-    if config.get('foreign_inventory_review') is not None:checked(config['foreign_inventory_review'])
++    if config['probe_mode']=='inventory_discovery_all' and config.get('foreign_inventory_review') is not None:raise ValueError('Discovery-all requires foreign review None; it cannot restore/qualify branches')
++    if config['probe_mode']=='serial_full':validate_review_manifest(config)
++    elif config.get('foreign_inventory_review') is not None:raise ValueError('Worker-v2 accepts per-snapshot review only for serial_full; no phase0 flat-review fallback')
+     if bundle is not None:
+         if bundle['descriptor']['input_bundle']!=config['input_bundle'] or np.asarray(bundle['baseline_u150']).shape!=(150,20):raise ValueError('Exact105 bundle/baseline150 required')
+-    return {'schema':'full151105_serial_probe_metadata_preflight:1','probe_mode':config['probe_mode'],'branch_slots':152,
+-            'scheduled_branches':152 if config['probe_mode']=='serial_full' else 3,'episode_substeps':1808 if config['probe_mode']=='serial_full' else 16,
++    plan=execution_plan(config['probe_mode'])
++    return {'schema':'full151105_serial_probe_metadata_preflight:2','probe_mode':config['probe_mode'],'branch_slots':152,
++            'scheduled_branches':plan['branch_count'],'scheduled_snapshots':plan['snapshot_count'],'episode_substeps':plan['episode_substeps'],
+             'GPU_started':False,'WM_or_Actor_forward':False,'Env_created':False,'foreign_inventory_review_pending':config.get('foreign_inventory_review') is None}
+ 
+ 
+@@ -118,26 +121,79 @@
+     return {'values':pin(directory/'inventory_values.npz'),'topology':pin(directory/'inventory_topology.json'),'description':pin(directory/'transaction_description.json')}
+ 
+ 
+-def reviewed_foreign_inventory(config,tx,bundle):
+-    """An explicit new source-bound review is necessary; None means discovery."""
++SNAPSHOT_LABELS=tuple(path+'/'+str(k) for path in PATHS for k in PHASES)
++
++
++def _review_header(review,config):
++    """Pure schema/label/scope guards; never treats headers as physical proof."""
+     from . import transaction105
+-    review_pin=config.get('foreign_inventory_review');description=tx.describe()
+-    if review_pin is None:raise InventoryReviewRequired('Initial105 inventory discovery: no foreign/closure review supplied; no branches qualified')
+-    review=read(checked(review_pin))
+     required={'worker':pin(__file__),'transaction':pin(transaction105.__file__),'input_bundle':config['input_bundle']}
+-    if review.get('schema')!='full151105_foreign_inventory_source_review:1' or any(review.get(k)!=v for k,v in required.items()) or review.get('source_reviewed_closure_globals') is not True:
+-        raise InventoryReviewRequired('Foreign/closure review is not for this exact105 worker/transaction/bundle')
+-    allowed=review.get('allowed_identity_only')
+-    if not isinstance(allowed,list) or any(set(v)!={'path','type','reason'} or not all(isinstance(v[k],str) and v[k] for k in v) for v in allowed):raise InventoryReviewRequired('Explicit per-path/type/reason opaque review required')
+-    actual={(v['path'],v['type']) for v in description['opaque_identity_only']}
+-    if actual!={(v['path'],v['type']) for v in allowed}:raise InventoryReviewRequired('Actual opaque inventory differs from reviewed exact set')
++    if review.get('schema')!='full151105_foreign_inventory_per_snapshot_source_review:2' or any(review.get(k)!=v for k,v in required.items()) or review.get('source_reviewed_closure_globals') is not True:
++        raise InventoryReviewRequired('New exact-worker2/transaction/bundle per-snapshot source review required')
++    if review.get('approved_probe_modes')!=['serial_full'] or review.get('allowed_snapshot_labels')!=list(SNAPSHOT_LABELS) or review.get('phase0_only') is not False:
++        raise InventoryReviewRequired('Exactly8 full-run snapshot labels required, without phase0 fallback')
++    if review.get('conditional_engineering_only') is not True or review.get('whole_graph_hidden_state_qualified') is not False:
++        raise InventoryReviewRequired('Limited empirical scope and UNKNOWN whole-hidden-state limitation must remain explicit')
++    tables=review.get('per_snapshot')
++    if type(tables) is not dict or set(tables)!=set(SNAPSHOT_LABELS):raise InventoryReviewRequired('Per-snapshot tables must have exactly8 labels')
++    for label,item in tables.items():
++        if type(item) is not dict or set(item)!={'inventory','allowed_identity_only','source_reviewed_closure_globals'} or item['source_reviewed_closure_globals'] is not True:
++            raise InventoryReviewRequired('Per-label inventory/source-review/table keyset differs: '+label)
++        if type(item['inventory']) is not dict or set(item['inventory'])!={'description','topology'}:raise InventoryReviewRequired('Per-label actual description/topology pins required: '+label)
++        _allowed_set(item['allowed_identity_only'])
++    return tables
++
++
++def _allowed_set(allowed):
++    if type(allowed) is not list or not allowed or any(type(v) is not dict or set(v)!={'path','type','reason'} or not all(type(v[k]) is str and v[k] and '*' not in v[k] for k in ('path','type')) or type(v['reason']) is not str or not v['reason'] for v in allowed):
++        raise InventoryReviewRequired('Explicit nonempty exactpath/type/reason list required; no wildcard')
++    paths=[v['path'] for v in allowed]
++    if len(set(paths))!=len(paths):raise InventoryReviewRequired('Duplicate or conflicting opaque paths are forbidden')
++    return {(v['path'],v['type']) for v in allowed}
++
++
++def validate_review_manifest(config):
++    """Saved-only exact8-label source joins; no framework import or execution."""
++    review_pin=config.get('foreign_inventory_review')
++    if review_pin is None:raise InventoryReviewRequired('Full serial requires actual eight-snapshot reviewed manifest')
++    review=read(checked(review_pin));tables=_review_header(review,config)
+     for value in review.get('source_pins',{}).values():checked(value)
+     if not review.get('source_pins'):raise InventoryReviewRequired('Independent foreign source review pins missing')
+-    return {'review':review_pin,'actual_opaque_count':len(actual),'qualification_scope':'Source-reviewed identity-only handles plus later empirical restore/baseline gates; no general serializer guarantee'}
++    for label,item in tables.items():
++        desc_path=checked(item['inventory']['description']);top_path=checked(item['inventory']['topology'])
++        if desc_path.name!='transaction_description.json' or top_path.name!='inventory_topology.json' or desc_path.parent!=top_path.parent:raise InventoryReviewRequired('Actual description/topology artifact route differs: '+label)
++        description=read(desc_path);topology=read(top_path)
++        if description.get('schema')!='full151105_probe_transaction_inventory:1' or description.get('label')!=label or description.get('strict_native_types_checked') is not True:raise InventoryReviewRequired('Description is not exact actual native snapshot label: '+label)
++        if topology.get('worker_source')!=review['worker'] or topology.get('transaction_source')!=review['transaction']:raise InventoryReviewRequired('Discovery inventory was not produced by this worker2/component: '+label)
++        actual=description.get('opaque_identity_only')
++        if type(actual) is not list or len(actual)!=len(item['allowed_identity_only']) or {(v['path'],v['type']) for v in actual}!=_allowed_set(item['allowed_identity_only']):raise InventoryReviewRequired('Reviewed table differs from pinned actual opaque description: '+label)
++        owners={v['entry']:v for v in topology['native_entries']}
++        for value in actual:
++            match=re.match(r'^native_entry\[(\d+)\]\.value\[(\d+)\]',value['path'])
++            if match:
++                owner=owners.get(int(match[1]));position=int(match[2])
++                if owner is None or position>=len(owner['members']):raise InventoryReviewRequired('Opaque owner absent from actual topology: '+label)
++                # Tuple/closure leaves are not separately serialized by v1dump.
++                # Exact leaf type comes from pinneddescription + source review,
++                # not a fabricated full recursive JSON reconstruction.
++                if match.end()==len(value['path']) and owner['members'][position]['type']!=value['type']:raise InventoryReviewRequired('Direct opaque ownerfield type differs: '+label)
++    return review
++
++
++def reviewed_foreign_inventory(config,tx,bundle):
++    if config['probe_mode']!='serial_full':raise InventoryReviewRequired('Only serial_full can consume the per-snapshot source review')
++    review=validate_review_manifest(config);label=tx.label
++    if label not in SNAPSHOT_LABELS:raise InventoryReviewRequired('Unexpected current snapshot label; no fallback')
++    item=review['per_snapshot'][label];actual=tx.describe()['opaque_identity_only']
++    if len(actual)!=len(item['allowed_identity_only']) or {(v['path'],v['type']) for v in actual}!=_allowed_set(item['allowed_identity_only']):
++        raise InventoryReviewRequired('Current exact opaque paths/types differ from reviewed snapshot '+label)
++    return {'review':config['foreign_inventory_review'],'snapshot_label':label,'discovery_inventory':item['inventory'],
++        'actual_opaque_count':len(actual),'qualification_scope':'Source-reviewed per-label identity handles; later3baseline gates are local empirical evidence only',
++        'whole_graph_hidden_state_qualified':False}
+ 
+ 
+ def branch_schedule(probe_mode='serial_full'):
+-    if probe_mode not in ('serial_full','engineering_restore_smoke'):raise ValueError('Unknown probe mode')
++    if probe_mode not in ('serial_full','engineering_restore_smoke','inventory_discovery_all'):raise ValueError('Unknown probe mode')
+     rows=[]
+     for s in range(8):
+         base=dict(snapshot_id=s,path=PATHS[s//4],k=PHASES[s%4])
+@@ -145,24 +201,24 @@
+         slots += [dict(type='direction',baseline_repeat=None,j=j,epsilon_index=e,epsilon_rad=eps,sign=sign)
+                   for e,eps in enumerate(EPS) for j in range(4) for sign in (-1,1)]
+         for slot in slots:
+-            scheduled=probe_mode=='serial_full' or (s==0 and slot['type']=='baseline')
++            scheduled=probe_mode=='serial_full' or (probe_mode=='engineering_restore_smoke' and s==0 and slot['type']=='baseline')
+             rows.append(dict(row_id=len(rows),**base,**slot,joint_index=None if slot['j'] is None else JOINTS[slot['j']],actualu=None,r_k=None,r_kplus1=None,
+-                             scheduled=scheduled,restorequalified=False,status='NOT_RUN',reason='not_executed' if scheduled else 'not_scheduled_engineering_restore_smoke'))
++                             scheduled=scheduled,restorequalified=False,status='NOT_RUN',reason='not_executed' if scheduled else 'not_scheduled_'+probe_mode))
+     return rows
+ 
+ 
+ def execution_plan(probe_mode):
+     """Pure mode/index contract; no donor file, framework or model access."""
+-    rows=branch_schedule(probe_mode);full=probe_mode=='serial_full'
++    rows=branch_schedule(probe_mode);full=probe_mode=='serial_full';discovery=probe_mode=='inventory_discovery_all';long=full or discovery
+     snapshots=[dict(snapshot_id=s,path=PATHS[s//4],k=PHASES[s%4],source_frame=200+PHASES[s%4],
+-        scheduled=full or s==0,status='NOT_RUN',reason='not_executed' if full or s==0 else 'not_scheduled_engineering_restore_smoke',
++        scheduled=long or s==0,status='NOT_RUN',reason='not_executed' if long or s==0 else 'not_scheduled_engineering_restore_smoke',
+         integration_roundtrip_bitexact=False,inventory_construction_completed=False,foreign_review_qualified=False,
+         full_native_restore_qualified=False,baseline3_qualified=False,longclock_qualified=False) for s in range(8)]
+-    return {'probe_mode':probe_mode,'donors':PATHS if full else PATHS[:1],'capture_phases':PHASES if full else [0],
+-        'donor_intervals':150 if full else 1,'donor_state_rows':601 if full else 5,
+-        'snapshot_ticks':[4*k for k in (PHASES if full else [0])],
+-        'next_ticks':[4*k+4 for k in (PHASES if full else [0])],
+-        'episode_substeps':1808 if full else 16,'branch_count':152 if full else 3,'snapshot_count':8 if full else 1,
++    return {'probe_mode':probe_mode,'donors':PATHS if long else PATHS[:1],'capture_phases':PHASES if long else [0],
++        'donor_intervals':150 if long else 1,'donor_state_rows':601 if long else 5,
++        'snapshot_ticks':[4*k for k in (PHASES if long else [0])],
++        'next_ticks':[4*k+4 for k in (PHASES if long else [0])],
++        'episode_substeps':1808 if full else 1200 if discovery else 16,'branch_count':152 if full else 0 if discovery else 3,'snapshot_count':8 if long else 1,
+         'branch_slots':rows,'snapshot_slots':snapshots}
+ 
+ 
+@@ -182,6 +238,30 @@
+     directions.update(d_eff=np.full((8,4,2,20),np.nan,np.float64),center_offset=np.full((8,4,2,20),np.nan,np.float64),
+         centers=np.full((8,20),np.nan,np.float32),clipped=np.zeros((8,4,2),bool))
+     return arrays,directions
++
++
++def instrument_transaction_calls(tx,report):
++    """Count actual host API entries/returns; no state/physics/flag operation."""
++    for owner,name,label in ((tx,'begin','transaction_begin'),(tx,'finish','transaction_finish'),(tx.native,'restore','native_snapshot_restore')):
++        original=getattr(owner,name)
++        def counted(*args,_original=original,_label=label,**kwargs):
++            report[_label+'_attempted']+=1
++            result=_original(*args,**kwargs)
++            report[_label+'_returned']+=1
++            return result
++        setattr(owner,name,counted)
++
++
++def completion_scope(probe_mode):
++    """Non-vacuous qualification vocabulary; this never grades live data."""
++    execution_plan(probe_mode)
++    discovery=probe_mode=='inventory_discovery_all';full=probe_mode=='serial_full'
++    return {'status':'COMPLETED_INVENTORY_DISCOVERY' if discovery else 'COMPLETED_PHYSICAL_PROBE' if full else 'COMPLETED_ENGINEERING_RESTORE_SMOKE',
++        'inventory_discovery_only':discovery,'gradient_qualified':False,'whole_graph_hidden_state_qualified':False,
++        'empirical_visible_state_baseline_scope':'NOT_RUN_INVENTORY_ONLY' if discovery else 'Local3-replay visible-state andscore repeatability, not hidden-state certificate',
++        'capacity_scope':'Actual fresh donors plusinitialization only' if discovery else 'Actual donors andrestored branch attempts',
++        'clock_scope':'Actual fresh donor sequentialFP32 clock only' if discovery else 'Actual donor andbranch sequentialFP32 clock',
++        'full_serial_qualification_scope':'NOT_RUN_INVENTORY_ONLY' if discovery else 'Local empirical finite-interval completion only; not true physical Jacobian'}
+ 
+ 
+ def baseline_errors(x,truth,reward,truth_reward):
+@@ -293,7 +373,7 @@
+     stage={'name':'imports_and_setup'};counts=defaultdict(lambda:defaultdict(int));phase_seconds=defaultdict(float);phase_clock=[time.perf_counter()]
+     def mark(name):
+         now=time.perf_counter();phase_seconds[stage['name']]+=now-phase_clock[0];phase_clock[0]=now;stage['name']=name
+-    report=dict(schema='full151105_serial_physical_probe_worker_report:2',status='INITIALIZING',
++    report=dict(schema='full151105_serial_physical_probe_worker_report:3',status='INITIALIZING',
+                 engineering_qualified=False,baseline_all_passed=False,capacity_finalized=False,
+                 capacity_qualified=False,source_lineage_N=1,independent_ego_N=0,
+                 probe_mode=mode,planned_full_branch_slots=152,planned_branch_count=planned_branches,planned_episode_substeps=planned_steps,scheduled_substeps=0,optimizer_updates=0,
+@@ -302,7 +382,12 @@
+                 source_action_semantics='Fresh native replay of fixed action-source arrays; not archived-state or closed-loop Actor reproduction',
+                 fullstate_scope='Visited native+explicit sidecar inventory, INTEGRATION and empirical3baseline gates; opaque internals are source-reviewed, not a universal serializer proof',
+                 episode_step_attempted=0,episode_step_returned=0,control_interval_attempted=0,control_interval_returned=0,
+-                scalar_contract=SCALAR_CONTRACT)
++                scalar_contract=SCALAR_CONTRACT,gradient_qualified=False,whole_graph_hidden_state_qualified=False,
++                transaction_begin_attempted=0,transaction_begin_returned=0,transaction_finish_attempted=0,transaction_finish_returned=0,
++                native_snapshot_restore_attempted=0,native_snapshot_restore_returned=0,
++                integration_get_attempted=0,integration_get_returned=0,integration_set_attempted=0,integration_set_returned=0,
++                state_write_scope='Native initialization/reset/actual8 setup plus same-value INTEGRATION roundtrips; never zero-state-writes claim',
++                donor_clock_qualified=False,empirical_visible_state_baseline_scope='NOT_RUN')
+     wall=time.perf_counter();error=None
+     if pin(PURE_PATH)['sha256']!=PURE_SHA256:raise ValueError('Frozen C2 changed')
+     spec=importlib.util.spec_from_file_location('_physical_probe_C2',PURE_PATH)
+@@ -413,7 +498,8 @@
+                                 sig=int(mujoco.mjtState.mjSTATE_INTEGRATION);size=mujoco.mj_stateSize(model,sig)
+                                 statebuf=wp.empty((1,size),dtype=wp.float32,device=env.device)
+                                 def integration():
+-                                    mjwarp.get_state(env.sim.wp_model,env.sim.wp_data,statebuf,sig);wp.synchronize()
++                                    report['integration_get_attempted']+=1
++                                    mjwarp.get_state(env.sim.wp_model,env.sim.wp_data,statebuf,sig);wp.synchronize();report['integration_get_returned']+=1
+                                     return statebuf.numpy().copy()
+                                 def raw():
+                                     wp.synchronize_device(env.device)
+@@ -578,13 +664,20 @@
+                                             Transaction105.__init__(tx,env,reader,capacity_observer=observer,source_action=actions[k].copy(),label=name+'/'+str(k),
+                                                 expected_phase=k,external_roots=external)
+                                             record['inventory_construction_completed']=True
++                                            instrument_transaction_calls(tx,report)
++                                            report['integration_set_attempted']+=1
+                                             mjwarp.set_state(env.sim.wp_model,env.sim.wp_data,statebuf,sig)
++                                            report['integration_set_returned']+=1
+                                             if not np.array_equal(integration().view(np.uint32),integ.view(np.uint32)):raise ValueError('INTEGRATION set/get roundtrip differs')
+                                             tx.verify_current();record['integration_roundtrip_bitexact']=True
+                                             record['inventory']=tx.describe()
+                                             record['inventory_archive']=dump_inventory(tx,pathdir/('snapshot_'+str(k)+'_inventory'),integ,actions[k])
+-                                            record['foreign_review']=reviewed_foreign_inventory(config,tx,bundle)
+-                                            record['foreign_review_qualified']=True
++                                            if mode=='inventory_discovery_all':
++                                                record.update(foreign_review=None,foreign_review_status='REVIEW_PENDING',foreign_review_qualified=False,
++                                                    native_restore_qualification_scope='NOT_RUN_INVENTORY_ONLY')
++                                            else:
++                                                record['foreign_review']=reviewed_foreign_inventory(config,tx,bundle)
++                                                record['foreign_review_qualified']=True
+                                         except BaseException as exc:
+                                             record.update(status='INVENTORY_REVIEW_REQUIRED' if isinstance(exc,InventoryReviewRequired) else 'INVALID',reason=repr(exc),construction_or_review_error=repr(exc))
+                                             if 'inventory_archive' not in record:
+@@ -593,7 +686,8 @@
+                                             except BaseException as saving:exc.add_note('Secondary discovery-save failure: '+repr(saving))
+                                             raise
+                                         local_txs[k]=(tx,integ.copy())
+-                                        record.update(status='CAPTURED',reason=None)
++                                        record.update(status='REVIEW_PENDING' if mode=='inventory_discovery_all' else 'CAPTURED',
++                                            reason='Inventory captured withoutrestore orforeign qualification' if mode=='inventory_discovery_all' else None)
+                                         mark(name+'/donor')
+                                     outcome=interval(k);local_events.append(dict(phase=k,actualu=ctx['expected_u'],**outcome))
+                                     if k in PHASES:
+@@ -622,7 +716,8 @@
+                                     legacy_mixed_q_maxabs_descriptive_only=donor_delta_q,legacy_mixed_qd_maxabs_descriptive_only=donor_delta_v,
+                                     archival_drift_flag=donor_delta_q>2e-5 or donor_delta_v>2e-4,
+                                     archive_quality_not_regraded=True))
+-                                for k in (PHASES if mode=='serial_full' else [0]):
++                                for k in capture_phases:
++                                    if mode=='inventory_discovery_all':continue
+                                     sid=path_i*4+PHASES.index(k);tx,integ=local_txs[k];baseline_pass=[]
+                                     for row in rows[sid*19:(sid+1)*19]:
+                                         if not row['scheduled']:continue
+@@ -657,7 +752,9 @@
+                                             if row['baseline_repeat']==2 and not all(baseline_pass):raise ValueError('Three fresh baseline replay gates failed; no perturbations/retry')
+                                             if row['baseline_repeat']==2:
+                                                 for b in range(3):arrays['restore_qualified'][sid*19+b]=True;rows[sid*19+b]['restorequalified']=True
+-                                                snapshots[sid].update(baseline3_qualified=True,full_native_restore_qualified=True,status='BASELINE3_QUALIFIED')
++                                                snapshots[sid].update(baseline3_qualified=True,full_native_restore_qualified=False,
++                                                    empirical_visible_state_baseline_qualified=True,
++                                                    native_restore_qualification_scope='Visible-state/inventory repeatability only; wholehidden graphstate UNKNOWN',status='BASELINE3_QUALIFIED')
+                                         else:
+                                             if len(baseline_pass)!=3 or not all(baseline_pass):raise ValueError('Directions cannot precede3 qualified fresh baselines')
+                                             arrays['restore_qualified'][bid]=True;row['restorequalified']=True
+@@ -680,19 +777,27 @@
+                         if cleanup_errors:
+                             report.setdefault('cleanup_errors',[]).append(dict(path=name,errors=cleanup_errors))
+                             if not body_exception:raise RuntimeError('Unqualified physical probe cleanup')
+-                report.update(status='COMPLETED_PHYSICAL_PROBE' if mode=='serial_full' else 'COMPLETED_ENGINEERING_RESTORE_SMOKE',
+-                    engineering_qualified=True,baseline_all_passed=len(baseline_gates)==planned_snapshots*3 and all(v['passed'] for v in baseline_gates),
++                discovery=mode=='inventory_discovery_all'
++                report.update(completion_scope(mode),engineering_qualified=True,
++                    baseline_all_passed=False if discovery else len(baseline_gates)==planned_snapshots*3 and all(v['passed'] for v in baseline_gates),
+                     capacity_finalized=len(ledgers)==planned_donors and all(v['ledger']['finalized'] for v in ledgers),
+                     capacity_qualified=len(ledgers)==planned_donors and all(v['ledger']['engineering_capacity_qualified'] for v in ledgers))
+-                if int(arrays['completed'].sum())!=planned_branches or int(arrays['snapshot_completed'].sum())!=planned_snapshots or report['scheduled_substeps']!=planned_steps or report['episode_step_returned']!=planned_steps or not report['capacity_qualified'] or not report['baseline_all_passed']:
++                if int(arrays['completed'].sum())!=planned_branches or int(arrays['snapshot_completed'].sum())!=planned_snapshots or report['scheduled_substeps']!=planned_steps or report['episode_step_returned']!=planned_steps or report['episode_step_attempted']!=planned_steps or report['control_interval_returned']!=planned_steps//4 or report['control_interval_attempted']!=planned_steps//4 or not report['capacity_qualified'] or (not discovery and not report['baseline_all_passed']):
+                     raise ValueError('Incomplete physical probe coverage/capacity')
+-                report.update(foreign_inventory_qualified=all(v['foreign_review_qualified'] for v in snapshots if v['scheduled']),
+-                    restore_inventory_qualified=all(arrays['restore_qualified'][v['row_id']] for v in rows if v['scheduled']),
++                if discovery and (baseline_gates or arrays['restore_qualified'].any() or arrays['restore_inventory_bitexact'].any() or any(report[k] for k in ('transaction_begin_attempted','transaction_finish_attempted','native_snapshot_restore_attempted'))):
++                    raise ValueError('Discovery-all mustnever restore/begin/finish/qualify a baseline orbranch')
++                if report['integration_set_attempted']!=planned_snapshots or report['integration_set_returned']!=planned_snapshots:raise ValueError('Exactlyone same-value integration roundtrip per snapshot required')
++                expected_gets=2*planned_snapshots+planned_branches
++                if report['integration_get_attempted']!=expected_gets or report['integration_get_returned']!=expected_gets:raise ValueError('Actual integration serializer read count differs')
++                report.update(foreign_inventory_qualified=False if discovery else all(v['foreign_review_qualified'] for v in snapshots if v['scheduled']),
++                    restore_inventory_qualified=False if discovery else all(arrays['restore_qualified'][v['row_id']] for v in rows if v['scheduled']),
+                     full_serial_qualified=mode=='serial_full',longclock_qualified=mode=='serial_full',
+-                    longclock_scope='Full151 sequentialFP32 clock checked' if mode=='serial_full' else 'PENDING_ENGINEERING_SMOKE_ONLY',
++                    donor_clock_qualified=mode in ('serial_full','inventory_discovery_all'),
++                    longclock_scope='Full151 donorandbranch sequentialFP32 clock checked' if mode=='serial_full' else 'DONOR_ONLY_NO_RESTORED_LONGCLOCK_QUALIFICATION' if discovery else 'PENDING_ENGINEERING_SMOKE_ONLY',
+                     baseline_gate_count=len(baseline_gates),no_next_policy_at_terminal150=True)
+                 for snapshot in snapshots:
+-                    if snapshot['scheduled']:snapshot['longclock_qualified']=mode=='serial_full'
++                    if snapshot['scheduled']:
++                        snapshot['longclock_qualified']=mode=='serial_full';snapshot['donor_clock_checked']=mode in ('serial_full','inventory_discovery_all')
+     except BaseException as exc:
+         error=exc;report.update(status='INVENTORY_REVIEW_REQUIRED' if isinstance(exc,InventoryReviewRequired) else 'FAILED_ENGINEERING_PARTIAL',
+             engineering_qualified=False,baseline_all_passed=False,full_serial_qualified=False,error=repr(exc))

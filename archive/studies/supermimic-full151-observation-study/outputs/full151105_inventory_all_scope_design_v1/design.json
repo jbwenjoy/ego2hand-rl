@@ -1,0 +1,187 @@
+{
+  "schema": "full151105_inventory_all_per_snapshot_source_design:1",
+  "status": "INTERFACE_DESIGN_ONLY_NOT_IMPLEMENTATION_OR_EXECUTION_QUALIFICATION",
+  "GPU_authorized": false,
+  "training_authorized": false,
+  "owner_interfaces_agreed": {
+    "new_worker": "full151_gradient.serial_probe105_v2 (Windows owner; source pin pending final READY)",
+    "config_schema_revision": 2,
+    "execution_protocol_revision": 2,
+    "worker_report_revision": 3,
+    "manifest_schema": "full151105_foreign_inventory_per_snapshot_source_review:2",
+    "Root_fronts": "New front_v2/builder_v4 owned by Root; no changes made by this design"
+  },
+  "discovery_all": {
+    "probe_mode": "inventory_discovery_all",
+    "donor_order": [
+      "A0",
+      "A2"
+    ],
+    "phases": [
+      0,
+      49,
+      99,
+      149
+    ],
+    "ordered_snapshot_labels": [
+      "A0/0",
+      "A0/49",
+      "A0/99",
+      "A0/149",
+      "A2/0",
+      "A2/49",
+      "A2/99",
+      "A2/149"
+    ],
+    "planned_donor_intervals": 300,
+    "planned_donor_state_rows": 1202,
+    "planned_episode_substeps": 1200,
+    "planned_native_control_forward_returns": 300,
+    "planned_capture_count": 8,
+    "native_snapshot_restore_calls": 0,
+    "transaction_begin_calls": 0,
+    "planned_executed_branches": 0,
+    "planned_INTEGRATION_set_get_roundtrips": 8,
+    "state_write_scope": "0 Snapshot.restore/branch is not 0 state setters: each retained INTEGRATION roundtrip invokes set_state and must be counted separately.",
+    "fixed152branchABI_if_retained": "All slots scheduled=False, status NOT_RUN, completion/restore qualification masks false, no fake0-valued force/state data for unexecuted branches.",
+    "completion_semantics": "All8 valid inventories and donor data saved, source/capacity/clock/coverage retained. This only completes discovery, never restore/baseline/gradient qualification. Empty-baseline all([]) must not imply a pass.",
+    "foreign_None_behavior": "Only absent foreign-review gate is deferred. After valid snapshot construction/INTEGRATION/current verification save REVIEW_PENDING and continue next scheduled donor capture. No bypass for unknown unsupported mutable classes or invalid snapshot/profile.",
+    "fatal_behavior": "Profile/API/INTEGRATION/nonfinite/capacity/clock/I/O/deadline failure stops with partial records and explicit NOT_RUN slots. No retry, recapture fallback, opaque type wildcard or source mutation.",
+    "clock_scope": "Fresh-donor sequentialFP32 tick/50us checks can be reported in their observed donor scope. No branch-longclock or native restored-state qualification follows.",
+    "cost_scope": "1200 is scheduled donor integration substeps only. Constructor, graph capture/warmup, checked reset, extra forward and INTEGRATION APIs are separately observed, not hidden or summed as episode steps."
+  },
+  "per_snapshot_manifest": {
+    "schema": "full151105_foreign_inventory_per_snapshot_source_review:2",
+    "required_top_fields": [
+      "schema",
+      "worker",
+      "transaction",
+      "input_bundle",
+      "source_pins",
+      "source_reviewed_closure_globals",
+      "approved_probe_modes",
+      "allowed_snapshot_labels",
+      "per_snapshot"
+    ],
+    "worker_transaction_bundle": "Exact current immutable pins; full-run worker must match the worker that captured/reviewed the source inventory. Do not silently translate old792/source1 manifest.",
+    "source_reviewed_closure_globals": "True only after the new active hook/global/default/keyword-default source delta is reviewed; not whole foreign/CUDA state serialization.",
+    "approved_probe_modes": [
+      "serial_full"
+    ],
+    "allowed_snapshot_labels": [
+      "A0/0",
+      "A0/49",
+      "A0/99",
+      "A0/149",
+      "A2/0",
+      "A2/49",
+      "A2/99",
+      "A2/149"
+    ],
+    "per_snapshot_keys": [
+      "A0/0",
+      "A0/49",
+      "A0/99",
+      "A0/149",
+      "A2/0",
+      "A2/49",
+      "A2/99",
+      "A2/149"
+    ],
+    "per_snapshot_value": {
+      "inventory": {
+        "description": "actual source pin for this label",
+        "topology": "actual source pin for this label"
+      },
+      "allowed_identity_only": [
+        {
+          "path": "exact observed path",
+          "type": "exact observed qualified type",
+          "reason": "per-item source-grounded conditional reason"
+        }
+      ],
+      "source_reviewed_closure_globals": "literalTrue after review"
+    },
+    "strict_checks": [
+      "Exactly8 ordered top labels and exactly8 per_snapshot keys; no missing/duplicate/unknown label.",
+      "Each saved description.label/profile.phase/pre_action/mode105/bundle and topology worker+transaction identity matches its label/selected source.",
+      "No duplicate(path,type), no extra allowed-item keys beyond path/type/reason, no wildcard or implicit type allowance.",
+      "Each label allowed set exactly equals its saved actual opaque set and exactly equals the newly constructed runtime transaction opaque set for that label.",
+      "Topology resolves the containing native entry, member and owner where represented. Tuple-contained leaf type/length is not always independently encoded: description supplies leaf type and explicit source review supplies owner semantics; do not claim full independent reconstruction from topology.",
+      "No union of8sets, no stripping native_entry indices, no fallback to phase0 schema1 or previous label.",
+      "Every source/document/inventory pin is current and all newly referenced flat source pins are included in execution archive closure.",
+      "Keep manifest/config/review mappings outside env/reader to avoid introducing new DFS entries; select the label review after the actual inventory is captured."
+    ],
+    "required_limits": {
+      "conditional_engineering_only": true,
+      "whole_graph_hidden_state_qualified": false,
+      "graph_hidden_scratch_dependence": "UNKNOWN_NOT_EXHAUSTIVELY_PROVED_OR_RESTORED"
+    },
+    "cannot_fill_yet": "This file defines an ABI, not any actual8inventory allowlist. Actual per-label descriptions/topologies do not yet exist for this new discovery-all run."
+  },
+  "full152_after_review": {
+    "mode": "serial_full",
+    "planned_snapshot_count": 8,
+    "baseline_repeats_per_snapshot": 3,
+    "planned_baseline_branches": 24,
+    "planned_direction_branches": 128,
+    "planned_total_branches": 152,
+    "planned_episode_substeps": 1808,
+    "qualification": "Fresh run recaptures in-process pointers. Every label exact inventory and its3fresh baselines must pass before that label directions; old phase0 zero-error baseline is not a substitute. Source/sample/force/clock/labels stay same pinned proposal2.",
+    "hidden_state_boundary": "Observed inventory bytes and same-input baseline reproducibility are empirical scope only. Graph executable cache and hidden scratch remain unqualified as a universal physical/full-state restore certificate.",
+    "not_authorized_here": true
+  },
+  "minimal_source_review_checklist": [
+    "New mode schedules only fresh donors and8captures, no call path to tx.branch/begin/native.restore.",
+    "Correct smoke/full/discovery interval and drift indices; no index600 against one-interval buffer.",
+    "All8 per-label source/global/opaque tables selected strictly with no schema1 fallback.",
+    "Discovery-only completion has0baseline/0branch and all native/gradient qualification claims false.",
+    "Original processed residual/cache/actualu, four5ms steps plus one Managerforward, no state/force assistance unchanged.",
+    "Main controlledGPUscore(raw20ms,goal_k), original RM15ms secondary andself15 lastsolver phase are preserved.",
+    "Full body counters/attempted+returned scopes, external cumulative capacity OR/UNKNOWN and cleanup remain fail-closed.",
+    "Default metadata import stays noTorch/Warp; actual CPU planning proof source-bound; retained20s preflight cleanup/240s watch/sharedlock/OS identity unchanged.",
+    "No arbitrary model/WM/Actor loads or forward during physical discovery. Future CPU WM consumption stays a separate process/source/runplan."
+  ],
+  "source_pins": {
+    "producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\record_inventory_all_scope_design_cpu_v1.py",
+      "sha256": "063e47a40e177a62d4a38847f624563e47ff1076fd479f5a2ee388a54c462352"
+    },
+    "worker792_phase2_reference_only": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\serial_probe105_v1.py",
+      "sha256": "79207ad27252157036915360696442924176b22692464a3ea855c879656c104d"
+    },
+    "transaction105_unchanged_reference": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\transaction105.py",
+      "sha256": "f1bd0eafed58783a6efbb78a0ba40da086b36851119eddd00e29fcddb972a55c"
+    },
+    "phase0_foreign_manifest": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_phase0_foreign_inventory_source_review_v1\\foreign_review_v1.json",
+      "sha256": "b39297cd117331a439cdc7bd965a3482e41633f7468cbff225660e4367603290"
+    },
+    "phase0_source_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_phase0_foreign_inventory_source_review_v1\\report.json",
+      "sha256": "05089482e125df61df236caf96aa5d77d640577db1b49032318d3ea0301be098"
+    },
+    "phase0_execution_handle_limits": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_stream_graph_source_review_v1\\report.json",
+      "sha256": "366d85938abd251f0e7a5e18f0e831e61008bd4bba6113b011f6ff229c18f85b"
+    },
+    "phase0_discovery_saved38": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_native_inventory_discovery_saved_review_v1\\report.json",
+      "sha256": "6bd5e1a2290ba09b121daf211300ccdeb04eacaab1cc8afbe683a7c47dcd82ce"
+    },
+    "parent_proposal2": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151_same_warp_control_gradient_proposal_v2.json",
+      "sha256": "eedde4fff0fbf687ffcf32cc7e826a4c5190f2c4971281f6802f38162734d6b0"
+    }
+  },
+  "execution": {
+    "production_imports": 0,
+    "model_loads": 0,
+    "Env": 0,
+    "WM_Actor_forward": 0,
+    "native_Reader_FK_collision_step_forward": 0,
+    "GPU": 0
+  }
+}

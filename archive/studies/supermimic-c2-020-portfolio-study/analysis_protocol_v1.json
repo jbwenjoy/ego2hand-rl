@@ -1,0 +1,72 @@
+{
+  "schema": "C2_common_controller_020_followup_analysis:1",
+  "status": "CPU_prepared_no_portfolio_results",
+  "proposal_file": "D:/workspace/supermimic-chord-study/configs/c2-common-controller-020-followup-proposal-v1.json",
+  "scope": "Exploratory sequential20mrad followup after known5mrad portfolio outcomes, same nine already trained final2000 policies. No training, independent confirmation or dose-optimality claim.",
+  "methods": [
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "training_seeds": [
+    1,
+    2,
+    3
+  ],
+  "training_seed_N_per_method": 3,
+  "process_repeats_per_checkpoint": 3,
+  "expected_jobs": 27,
+  "margin_rad": 0.02,
+  "margin_selection": "20mrad was declared/tested in the earlier single A1Lseed1 engineering trial, before the5mrad portfolio. This followup was declared after knowing5mrad did not transfer to all policies. No new doses or best-dose selection.",
+  "evaluation_seed": 0,
+  "checkpoint_selection": "Exactly the nine proposal final2000 checkpoint hashes, all27 predefined jobs in original proposal order; no best checkpoint/repeat or budget selection.",
+  "metric_helper_sha256": "5bbe7c85a8ac75d9435f1ed6c64a28ee52a28b8b2ca2171c51787fd5bfbe5b78",
+  "C2_target_helper_sha256": "9c683d8c0a51b3267c1cfa265355f86d7d34a30b4095c01ba8056f31e2d26ba2",
+  "reference_npz_sha256": "bb61dbbfe97cdca5ed7453eeea372b6d11007999f463476eaab5cfcd07040f53",
+  "nominal_model_sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd",
+  "task_protocol_sha256": "41e7bdd97d07a0f4cac06cefc84d59548407d29332f6836fc5094e5e2f4fc2a3",
+  "contact_target_npz_sha256": "4f1078706e36dc3db890c41cddb4693a0d3512e9be8e43514181ab1637da9cbc",
+  "identity": "Actual method/model/seed/checkpoint bind through plan model_id, trained_method, training_seed, raw checkpoint_training_config, condition/runtime/capacity sidecar and original file hashes. Legacy raw 'A1 deterministic actor' names the common Actor class and is not the experimental method.",
+  "control_contract": "All methods use the same20mrad FP32 command projection/logger. Original t0 initialization precedes filtering; complete qpos/qvel/ctrl/cache/u_prev and public physical initial fields match.150intervals drive151states; original bounded proposal, executed/cache/readback and raw joint_target[1:] agree, original EMA residual unchanged. Recorded physical states are never clipped.",
+  "capacity_contract": "One read of unreset sticky wp_data.overflow after150th real step, actual one world and flag0, sidecar=runtime=health, condition and raw/control hashes, no reset, source/plan/job/model identity. Unknown/missing/nonzero capacity cannot become0 or a physically qualified task failure.",
+  "endpoints": [
+    "all original frozen task gates independently recomputed",
+    "actual20-joint excess separately from bounded targets",
+    "position/shaft/progress, no-drop, depth/load/rate",
+    "all150x20 clamp components and150control-tick trigger fractions",
+    "solver-active real contacts and independently recomputed COM support512 against frozen kinematic intent as diagnostic",
+    "full evaluator/child-supervisor/queue costs and historical training costs with different scopes"
+  ],
+  "hierarchy": {
+    "checkpoint": "Retain each of three process outcomes; report passes/3, all3pass, mixed/all3fail, continuous mean/median/min/max and worst error. These are process repeats, not new learned policies.",
+    "method": "Exactly three checkpoint/training-seed summaries. Report the three seed pass-count profiles and number of seeds with all3pass/mixed/all3fail. Aggregate seed-level process means and seed-level worst metrics descriptively; do not label nine processes as nine training seeds.",
+    "paired": "Pair A1L/P_ONLY/A2 by training seed, comparing the three-process mean and worst summaries; retain every seed. Repeat-level block differences may be displayed, but statistical N remains3 training-seed pairs, with no CI or population significance."
+  },
+  "order": "Exact proposal27job order. Overall method positions are balanced3/3/3; pair-before counts are5:4 or4:5. Seed-specific perfect counterbalancing is not claimed.",
+  "background": "Original0controller, prior single-checkpoint engineering trials and the5mrad portfolio are separate historical cohorts. No pooling, replacement, best-of-two-dose or union-of-success selection.",
+  "missingness": "Running/not-run/engineering-censored/missing or integrity-invalid jobs remain PENDING/NOT_RUN/INVALID with qualified task=null. Incomplete checkpoint groups cannot receive a zero fail count or a complete method comparison.",
+  "contact_score_limits": "Official unit-friction-cone geometric support/tolerance-band score, object COM origin, fixed512basis/radius/target hash. Does not match force amplitudes, impose finger identity, qualify a force/dynamics predictor or determine task success.",
+  "cost_limit": "All final2000 models share nominal update/transition counts, not equal training compute. Current evaluation child/queue wall and historical training process/caching/engineering costs remain separate. Wall time is not GPU kernel busy time.",
+  "retained_limits": [
+    "20mrad cohort is sequential followup declared after observing5mrad portfolio; no pooled54job inference or success-based dose selection",
+    "historical sequential training and known earlier outcomes",
+    "post-hoc common-controller choice",
+    "single object/reference/physical initial condition",
+    "fresh-process numerical variation",
+    "local contact-proxy and compiled-precision qualification failures",
+    "no support-only unconditional mechanism attribution",
+    "no original ego video lineage, independent new-motion or hardware safety/generalization evidence"
+  ],
+  "no_confidence_intervals": true,
+  "no_best_repeat_selection": true,
+  "no_frame_N": true,
+  "training_updates": 0,
+  "C1_enabled": false,
+  "m0": null,
+  "a_brake": null,
+  "dose_comparison": "Optional20minus5 differences use each fixed checkpoint three-process means/worst/ranges with identical checkpoint/reference/task/initial identities verified. Sequential batches with known earlier outcomes and different numerical noise/order/cache contexts do not identify an unconditional dose effect. Report both doses separately, never choose the best outcome across them.",
+  "prior5mrad_comparison": {
+    "path": "D:\\workspace\\supermimic-c2-portfolio-study\\outputs\\analysis_v1\\comparison.json",
+    "sha256": "b450d2a313fb16f617af47893551ba8f0208da67c997caf465c2a256752b4bc2"
+  }
+}

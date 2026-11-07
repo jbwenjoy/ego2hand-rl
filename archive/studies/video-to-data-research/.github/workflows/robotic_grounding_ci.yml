@@ -1,0 +1,198 @@
+# Copyright (c) 2026, NVIDIA CORPORATION. All rights reserved.
+#
+# NVIDIA CORPORATION and its licensors retain all intellectual property
+# and proprietary rights in and to this software, related documentation
+# and any modifications thereto. Any use, reproduction, disclosure or
+# distribution of this software and related documentation without an express
+# license agreement from NVIDIA CORPORATION is strictly prohibited.
+name: Robotic Grounding CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'robotic_grounding/**'
+      - '.github/workflows/robotic_grounding_ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'robotic_grounding/**'
+      - '.github/workflows/robotic_grounding_ci.yml'
+  workflow_dispatch:
+
+# Cancel in-progress runs for the same PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ## ------------------------------------------
+  ## Linting and formatting (pre-commit)
+  ## ------------------------------------------
+  lint:
+    name: pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pre-commit
+        run: |
+          python -m pip install --upgrade pip
+          pip install pre-commit
+      - name: Cache pre-commit environments
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ hashFiles('robotic_grounding/.pre-commit-config.yaml') }}
+          restore-keys: |
+            pre-commit-
+      - name: Run pre-commit
+        run: |
+          cd robotic_grounding
+          pre-commit run --show-diff-on-failure --files $(git ls-files .)
+
+  ## ------------------------------------------
+  ## Unit tests that need neither a GPU nor IsaacLab
+  ## ------------------------------------------
+  unit:
+    name: unit tests (CPU)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Materialize released E2E expert
+        run: |
+          git lfs install --local
+          git lfs pull --include="robotic_grounding/source/robotic_grounding/robotic_grounding/assets/policies/e2e_example/tissue_box/vega_sharpa_policy.onnx" --exclude=""
+          policy_path="robotic_grounding/source/robotic_grounding/robotic_grounding/assets/policies/e2e_example/tissue_box/vega_sharpa_policy.onnx"
+          test -s "$policy_path"
+          if head -n 1 "$policy_path" | grep -q '^version https://git-lfs.github.com/spec/v1'; then
+            echo "Released E2E expert is still a Git LFS pointer: $policy_path" >&2
+            exit 1
+          fi
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Ensure ffprobe is available
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+      - name: Install groot_finetune dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install "torch>=2.7.0" --index-url https://download.pytorch.org/whl/cpu
+          pip install onnxruntime==1.24.4
+          pip install -r robotic_grounding/groot_finetune/requirements.txt
+          pip install -r robotic_grounding/groot_finetune/closed_loop/requirements.txt
+      - name: Run groot_finetune tests
+        run: |
+          cd robotic_grounding
+          python -m pytest groot_finetune/ -q
+
+  ## ------------------------------------------
+  ## Build & Test (GPU required)
+  ## ------------------------------------------
+  build_and_test:
+    name: Build & Test
+    needs: [lint]
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 180
+    env:
+      DOCKER_IMAGE: robotic-grounding-ci-${{ github.run_id }}
+      NGC_API_KEY: ${{ secrets.NGC_API_KEY }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: NGC Login
+        run: |
+          if [ -n "$NGC_API_KEY" ]; then
+            echo "Logging into NGC registry..."
+            docker login -u \$oauthtoken -p $NGC_API_KEY nvcr.io
+            echo "Successfully logged into NGC registry"
+          else
+            echo "NGC_API_KEY not available - skipping NGC login"
+          fi
+      - name: Build Docker image
+        run: |
+          echo "::group::Build Docker image"
+          time docker build -f robotic_grounding/workflow/Dockerfile -t $DOCKER_IMAGE ./robotic_grounding
+          echo "::endgroup::"
+      - name: Run E2E tests
+        run: |
+          echo "::group::E2E Tests"
+          docker run --name robotic-grounding-e2e-${{ github.run_id }} \
+            --entrypoint bash --gpus all --network=host \
+            -v ${{ github.workspace }}/robotic_grounding/tests:/workspace/video_to_data/robotic_grounding/tests \
+            -e ACCEPT_EULA=Y \
+            -e OMNI_KIT_ACCEPT_EULA=yes \
+            -e OMNI_KIT_DISABLE_CUP=1 \
+            -e ISAAC_SIM_HEADLESS=1 \
+            -e ISAAC_SIM_LOW_MEMORY=1 \
+            -e WANDB_MODE=disabled \
+            -e CI=true \
+            -e PYTHONUNBUFFERED=1 \
+            $DOCKER_IMAGE \
+            -c "\${ISAACLAB_PATH}/isaaclab.sh -p -m pytest \
+              /workspace/video_to_data/robotic_grounding/tests/test_train_e2e.py \
+              /workspace/video_to_data/robotic_grounding/tests/test_retarget_pipeline_e2e.py -v"
+          echo "::endgroup::"
+      - name: Cleanup
+        if: always()
+        run: |
+          docker rm robotic-grounding-e2e-${{ github.run_id }} 2>/dev/null || true
+          docker rmi $DOCKER_IMAGE 2>/dev/null || true
+
+  ## ------------------------------------------
+  ## FlashCHORD native image & tests (GPU required)
+  ## ------------------------------------------
+  flash_chord_build_and_test:
+    name: FlashCHORD Build & Test
+    needs: [lint]
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 180
+    env:
+      DOCKER_IMAGE: flash-chord-ci-${{ github.run_id }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Materialize FlashCHORD assets
+        run: |
+          git lfs install --local
+          git lfs pull --include="robotic_grounding/flash_chord/**" --exclude=""
+          mapfile -t lfs_paths < <(git lfs ls-files -n | grep '^robotic_grounding/flash_chord/')
+          # Validate the current tracked set, including any documentation media.
+          test "${#lfs_paths[@]}" -gt 0
+          for path in "${lfs_paths[@]}"; do
+            test -s "$path"
+            if head -c 64 "$path" | grep -a -q '^version https://git-lfs.github.com/spec/v1'; then
+              echo "FlashCHORD asset is still a Git LFS pointer: $path" >&2
+              exit 1
+            fi
+          done
+      - name: Build FlashCHORD image
+        run: |
+          docker build \
+            -f robotic_grounding/flash_chord/docker/Dockerfile \
+            -t "$DOCKER_IMAGE" \
+            robotic_grounding/flash_chord
+      - name: Run FlashCHORD tests
+        run: |
+          docker run --rm \
+            --runtime=nvidia --gpus all \
+            -e WANDB_MODE=disabled \
+            "$DOCKER_IMAGE" \
+            python -m pytest -q --disable-warnings -ra
+      - name: Cleanup
+        if: always()
+        run: docker rmi "$DOCKER_IMAGE" 2>/dev/null || true

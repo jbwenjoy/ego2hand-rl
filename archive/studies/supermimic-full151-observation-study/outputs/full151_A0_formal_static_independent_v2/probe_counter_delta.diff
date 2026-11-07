@@ -1,0 +1,69 @@
+--- old_probe
++++ current_probe
+@@ -151,7 +151,9 @@
+         raise ValueError('Actual Warp time/dt must match declared FP32 .005 clock ABI')
+     expected_clock = fp32_clock_trace()
+     states, solver, contacts, events, transitions = [], [], [], [], []
+-    forward_calls = 0; error = None; capacity = {'status': 'UNKNOWN'}
++    api_counts = {'step_attempted': 0, 'step_returned': 0,
++                  'forward_attempted': 0, 'forward_returned': 0}
++    error = None; capacity = {'status': 'UNKNOWN'}
+     original_step, original_forward = env.sim.step, env.sim.forward
+     def sample(index):
+         if time.perf_counter() > deadline: raise TimeoutError('Full151 A0 finite worker deadline')
+@@ -193,11 +195,15 @@
+     def step():
+         if len(states) > 600: raise ValueError('No601st integration step or extra terminal action permitted')
+         if time.perf_counter() > deadline: raise TimeoutError('Full151 deadline before next physical step')
+-        original_step(); sample(len(states))
++        api_counts['step_attempted'] += 1
++        original_step()
++        api_counts['step_returned'] += 1
++        sample(len(states))
+     def forward():
+-        nonlocal forward_calls
+-        forward_calls += 1
+-        return original_forward()
++        api_counts['forward_attempted'] += 1
++        result = original_forward()
++        api_counts['forward_returned'] += 1
++        return result
+     try:
+         sample(0); initial = bundle['arrays']['init']; default = mujoco.MjData(model)
+         expected_q = default.qpos.astype(np.float32)
+@@ -251,8 +257,11 @@
+             if not np.array_equal(postphase, np.array([k+1])): raise ValueError('Terminal observation/command advancement mismatch')
+             if bool(terminated.any()): raise FloatingPointError('Hard native instability; partial retained, noreset/retry')
+             if k < 149 and bool(truncated.any()): raise ValueError('Unexpected earlytimeout; no statewrites to continue')
+-            if k % 10 == 9: emit(status='running', phase='full151_native_A0', control_intervals=k+1, physics_steps=len(solver))
+-        if len(states) != 601 or len(solver) != 600 or forward_calls != 150:
++            if k % 10 == 9: emit(status='running', phase='full151_native_A0', control_intervals=k+1,
++                physics_steps=api_counts['step_returned'], sampled_solver_rows=len(solver), episode_API_counts=dict(api_counts))
++        if len(states) != 601 or len(solver) != 600 or api_counts != {
++                'step_attempted': 600, 'step_returned': 600,
++                'forward_attempted': 150, 'forward_returned': 150}:
+             raise ValueError('Full151 native cadence/coverage differs')
+         if not bool(events[-1]['truncated'][0]) or not bool(events[-1]['reference_end'][0]) or any(bool(e['reference_end'][0]) for e in events[:-1]):
+             raise ValueError('Natural end must be lastphase149 timeout with terminalobs150')
+@@ -271,7 +280,8 @@
+             if error is None: error = exc
+         capacity = observer.snapshot()
+         cc = int(env.sim.wp_data.contact.geom.shape[0]); jc = int(env.sim.wp_data.efc.force.shape[-1])
+-        capacity.update(final_read_after_solver_step=len(solver), contact_capacity=cc, constraint_capacity=jc,
++        capacity.update(final_read_after_returned_episode_step=api_counts['step_returned'],
++            final_read_after_sampled_solver_row=len(solver), contact_capacity=cc, constraint_capacity=jc,
+             resets_during_probe=0, flag_shape_is_world_count=False,
+             maximum_recorded_nacon=None if not states else max(s['nacon'] for s in states),
+             maximum_recorded_nefc=None if not states else max(s['nefc'] for s in states))
+@@ -305,7 +315,10 @@
+         if result is None: result = {'status': 'GRADING_INVALID_UNKNOWN', 'native_A0_pass': None, 'criteria': GATES}
+         if error is not None: result.update(status='INCOMPLETE_OR_INVALID_ENGINEERING_UNKNOWN', native_A0_pass=None, error=repr(error))
+         result.update(complete=error is None and len(states)==601 and len(solver)==600,
+-            physical_steps=len(solver), native_postinterval_forward_calls=forward_calls, control_intervals=len(events),
++            physical_steps=api_counts['step_returned'], native_postinterval_forward_calls=api_counts['forward_returned'],
++            episode_API_counts=dict(api_counts), sampled_state_rows=len(states), sampled_solver_rows=len(solver),
++            counter_scope='Only this probe episode after startup readback; counts describe API attempts/returns, not device-kernel calls.',
++            construction_reset_setup_API_counts='UNKNOWN_NOT_WHOLEPROCESS_OBSERVED', control_intervals=len(events),
+             optimizer_updates=0, resets_after_start=0, physical_reference_qualified=False,
+             native_reward_transition_count=len(transitions), selfcollision15_is_not_handobject=True,
+             preservation_errors=preservation_errors,

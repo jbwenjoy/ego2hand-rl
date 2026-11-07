@@ -1,0 +1,111 @@
+{
+  "schema": "full151_knownrough_native_input_CPU:1",
+  "output": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1",
+  "inputs": {
+    "reference_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\reference_candidate151.npz",
+      "sha256": "aa4f13b146979c7b274f7191100023168ff69032fe5d88125d339e3a56e3be93"
+    },
+    "init_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\init_requested.npz",
+      "sha256": "fd74f89a7b12f4c83daa3525ca3d0ae3832b05e7d17faeb70372d41449991517"
+    },
+    "control_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\control_candidate150.npz",
+      "sha256": "5c37566f2e1be6fb2a1f6ba0ffc6f53a0632879e7095518e720a147edf191df2"
+    },
+    "parent_scp_receipt": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_contact_coupled_scp_v1\\receipt.json",
+      "sha256": "c5c31f917e2ebd4024719632fd945bcda83bbeccb682b5f6f5aa6bf4c44668be"
+    },
+    "parent_scp_independent173": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_scp_saved_independent_v1\\report.json",
+      "sha256": "378d88e0b7885e8dad8f2a131316407112e77a9b754f33177ce07d4cba174c42"
+    },
+    "parent_scp_lifecycle32": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_SCP_saved_lifecycle_independent_v1\\report.json",
+      "sha256": "a04eb7a95c613c9cbddf2b78ae48866406e4aebcce9b745ae7f7ffb7e9f09fe8"
+    },
+    "model": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/rotating_reference_warp_a0/model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "observation_fixture": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\observation_only_fixture_v1\\observations.npz",
+      "sha256": "3bdca0ee6fd8d7956cac1ee2b13719db5cb302ceb0130972719032a04b3ec35b"
+    },
+    "observation_manifest": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\observation_only_fixture_v1\\manifest.json",
+      "sha256": "9be378406b8c97d0ae211fd70459117eea2e8d026244d2ccab735c3f5778391e"
+    }
+  },
+  "sources": {
+    "builder": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\build_full151_native_input_cpu_v1.py",
+      "sha256": "fab4cf378ac8d86bece727fa117563025031c0fd15d6e974f38461cb7ca95b88"
+    },
+    "bundle_loader": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\bundle.py",
+      "sha256": "d2d7b8112e187f980caf6eeb7a834b37a5393109e9a8d70dd745207a357835d5"
+    },
+    "io": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\io.py",
+      "sha256": "ece3fe9db321c1a6bb6b74b36a1d5ed9fcadf7b3664cc3271f71e2ccb0fafd34"
+    },
+    "metadata": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\metadata.py",
+      "sha256": "9cde9d16588933a623cf5ba82af223d37208b775536146eab3be39148cc0579f"
+    },
+    "package_init": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_native\\__init__.py",
+      "sha256": "017a90afc96c5100fde547c2f4bed368459c5046fa63a9f8acfc0ca4f46c1f05"
+    },
+    "native_exporter": {
+      "path": "D:\\workspace\\supermimic-shared-reference-study\\src\\native_reference_abi.py",
+      "sha256": "8cefd4f1e4ec6939b8201c26670a691c913ab0b5e9e9f87347904e4889fd6e2d"
+    },
+    "native_reader": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\commands.py",
+      "sha256": "e1adb7c183aa28dde49f6dc6e7795ed450567e6c54347bd7f1e0543922fcbcf0"
+    },
+    "native_constants": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\hand2_constants.py",
+      "sha256": "2a1a37a0c97f3bcab631006ac6e0dc47a1a63a92c7717ac4c6c712314ba35986"
+    },
+    "native_recipe": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\recipe.py",
+      "sha256": "48eb8696a165b12cc90a8012704e46b4ebd65c67e1870363962254f30519851d"
+    },
+    "native_clip_store": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\clip_store.py",
+      "sha256": "869a2c0cbc748db240c8262fc9b34066a09a9da71b271b458250880edf269a6b"
+    },
+    "pure_control760": {
+      "path": "D:\\workspace\\supermimic-observation-prefix-study\\src\\prefix_control.py",
+      "sha256": "76026dbdcdfdecf4680820b24da088e1d123e86ceb8b42a2bbd60a5412103b6d"
+    },
+    "atomic_metadata_writer": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\vendor\\runtime_io.py",
+      "sha256": "159c0d11e50017a4b5fab511e6594efb290955c5ee4a543f67374b7ed19675d1"
+    }
+  },
+  "known_rough_reference": true,
+  "physical_reference_qualified": false,
+  "geometric_candidate_qualified": false,
+  "training_authorized": false,
+  "GPU": false,
+  "scope": "OneactualnativeABIexport151BODYFK+actualCPUReader+newstrictbundle validation; no geometrycollision/solve/Env/dynamics. ParentSCPFAIL preserved, not an automaticgeometryqualificationpromotion.",
+  "source_frames_half_open": [
+    200,
+    351
+  ],
+  "goal_states": 151,
+  "control_intervals": 150,
+  "independent_ego_N": 0,
+  "contact_intent_target_ready": false,
+  "old_checkpoint_migration": false
+}

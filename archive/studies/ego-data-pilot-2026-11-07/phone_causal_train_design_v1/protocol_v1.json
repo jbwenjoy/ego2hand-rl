@@ -1,0 +1,156 @@
+{
+  "schema": "phone_causal_training_design_protocol:1",
+  "status": "FROZEN_RULES_BEFORE_METADATA_SELECTION_AND_NEW_ACQUISITION",
+  "execute_native_or_NN_training": false,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_train_design_v1\\generated_v1",
+  "inputs": {
+    "acquisition_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 10554,
+      "sha256": "4eaba866d38b51d5edfced2cbc46eb6cd8315c78a0c50b769d7e2b79fecf4559"
+    },
+    "dataset_audit": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\independent_dataset_review_v1\\report.json",
+      "bytes": 9318,
+      "sha256": "718368880239b9858c7f47bc5ef4fed0ca6a07d74d2a72e9fa6d97349966d506"
+    },
+    "family_plan": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\family_plan_v1.json",
+      "bytes": 820546,
+      "sha256": "7336ae9243290158c061791a28f6f5b668cc59091e6c1cbdfa51a0f8f4704739"
+    },
+    "acquisition_design": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\design_contract_v1.json",
+      "bytes": 21374,
+      "sha256": "d3f4d8e0a4c44844fc8d51fb261be32f893ced20aa97a8e6404d1b08f7c229c4"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "hand_scene_XML": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\hand2_phone_scene.xml",
+      "bytes": 34342,
+      "sha256": "c30fe58424aa13097a176985e274f0e08436a20b66abcc0f4dba7802d6bf6125"
+    },
+    "restore_saved_fixture": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\independent_restore_review_v1\\actual_fixture_v1\\report.json",
+      "bytes": 11917,
+      "sha256": "53f28d8a339de17aaa0eca3f2cd98c9716a16ecb37924be8b4f91c588da63ff6"
+    },
+    "exposed_TEST_evaluation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_evaluation_v1\\completed_v1\\report.json",
+      "bytes": 93324,
+      "sha256": "c1b15cf3c5547f2d766b470edb9cb88a96b22736c03294483437f9f2bc21bd99"
+    },
+    "momentum_contract_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\completed_run2\\report.json",
+      "bytes": 3037,
+      "sha256": "fe1821ab9ae5c0238d05af4aeb5c867652a3f34f83c77c17823989e39def75ed"
+    }
+  },
+  "sources": {
+    "generator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_train_design_v1\\build_design.py",
+      "bytes": 22432,
+      "sha256": "41e87243850978bb2ff0767277afe12926e790c5d7edeffe6e7783a7242ee6a4"
+    },
+    "causal_input_validator": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_train_design_v1\\causal_contract.py",
+      "bytes": 5066,
+      "sha256": "ce58c0ff44b8e384d876cf8af76f07479680228249abd4acc0ca3e20a19a2a77"
+    },
+    "reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    },
+    "phone_state_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "phone_delta_decoder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    },
+    "momentum_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\momentum_contract.py",
+      "bytes": 4023,
+      "sha256": "983e182d7b8980d44a23db0f143d4a1c48ed483d37522fdba33dca3d5344b0ca"
+    }
+  },
+  "rules": {
+    "source_partition": "originalTRAIN only, original48 roles never relabelled",
+    "fit_replicate": 0,
+    "action_check_replicate": 5,
+    "profiles": "all3 per source",
+    "source_intervals": [
+      0,
+      2,
+      5
+    ],
+    "native_dt_s": [
+      0.0003125,
+      0.00015625
+    ],
+    "actuator_axes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "nominal_side_step_rad": 0.01,
+    "actual_absdu_min_rad": 1e-06,
+    "step_bound": "half truelegal remainingcontrolmargin; no clipping/stepup",
+    "global_order": "ALL72 baselines first; then all20 axes xnegative/positive for each source",
+    "restore": "freshData+setState full before-action integration, then setu; no extra observerforward; baseline source-after-action receipt+H replay must match; retainfailures",
+    "zero_mask": "none certified; allfalse. WholeH path certificates are supervision-only, never deployed known inputs.",
+    "old_task_designated_pads": [
+      15,
+      28
+    ],
+    "fresh_final_ids": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011
+    ],
+    "fresh_final_seeds": "new SHA namespace phone_causal_fresh_final_v1; distinct literalq/curves vsoriginal48",
+    "no_new_physics_or_training_authorized": true
+  },
+  "budgets": {
+    "stage1_contexts": 72,
+    "baseline_branches": 72,
+    "side_records": 2880,
+    "max_native_steps_if_later_authorized": 283392,
+    "fresh_final12_families2dt10H_max_native_steps": 23040,
+    "actual_native_NN_AD_training": 0
+  }
+}

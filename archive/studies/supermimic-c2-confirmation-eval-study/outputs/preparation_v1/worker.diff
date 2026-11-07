@@ -1,0 +1,66 @@
+--- D:\workspace\supermimic-c2-020-portfolio-study\scripts\evaluate_c2_portfolio.py
++++ D:\workspace\supermimic-c2-confirmation-eval-study\scripts\evaluate_c2_portfolio.py
+@@ -67,19 +67,31 @@
+     require(p["m0"] is None and p["a_brake"] is None and not p["C1_enabled"], "C1 remains disabled")
+     for name,pin in p["source_pins"].items():
+         require(sha(pin["path"]) == pin["sha256"], "Source changed: " + name)
+-    proposal=read(p["source_pins"]["portfolio_proposal"]["path"])
+-    require(p["models"]==proposal["models"] and p["blocks"]==proposal["blocks"],"Frozen proposal models/blocks changed")
+-    require(len(p["jobs"])==len(proposal["jobs"]),"Proposal job count changed")
++    index=read(p["source_pins"]["audited_model_index"]["path"])
++    schedule=read(p["source_pins"]["frozen_schedule"]["path"])
++    require(index["status"]=="passed","Nine-final training audit not passed")
++    require({(m["method"],m["training_seed"]) for m in p["models"]}=={(a,s) for a in ("A1L","P_ONLY","A2") for s in (4,5,6)},"Wrong prospective cohort")
++    require(len(index["models"])==9 and len(schedule["evaluation_jobs"])==27,"Authority counts changed")
++    byid={m["model_id"]:m for m in index["models"]}
++    for model in p["models"]:
++        authority=byid[model["model_id"]]
++        require(model["method"]==authority["trained_method"] and model["training_seed"]==authority["training_seed"] and model["checkpoint"]==authority["checkpoint"] and model["checkpoint_sha256"]==authority["checkpoint_sha256"],"Audited final identity changed")
++        require(sha(model["contract_file"]["path"])==model["contract_file"]["sha256"],"Checkpoint contract changed")
++        require(read(model["contract_file"]["path"])=={k:v for k,v in model.items() if k!="contract_file"},"Contract/plan model mismatch")
++        for name,evidence in model["independent_inputs"].items():
++            require(sha(evidence["path"])==evidence["sha256"],"Model evidence changed: "+name)
++    for job,original in zip(p["jobs"],schedule["evaluation_jobs"]):
++        require(all(job[k]==v for k,v in original.items()),"Prospectively frozen evaluation order changed")
+     for model in p["models"]:
+         require(sha(model["checkpoint"])==model["checkpoint_sha256"],"Frozen checkpoint changed")
+         require(sum(j["model_id"]==model["model_id"] for j in p["jobs"])==3,"Three fresh processes per checkpoint required")
+     for name in ("reference", "reference_metadata", "contact_targets", "contact_target_manifest"):
+         require(sha(p[name]["path"]) == p[name]["sha256"], "Input changed: " + name)
+-    for job,original in zip(p["jobs"],proposal["jobs"]):
+-        require(all(job[k]==v for k,v in original.items()),"Original proposal job/order changed")
++    for job in p["jobs"]:
+         model=model_for_job(p,job)
+         expected=["--reference",p["reference"]["path"],"--checkpoint",model["checkpoint"],
+-                  "--seed","0","--device","cuda:0","--output",job["output_dir"]]
++                  "--seed","0","--device","cuda:0","--output",job["output_dir"],
++                  "--checkpoint-contract",model["contract_file"]["path"]]
+         require(job["original_evaluator_args"]==expected,"Original evaluator arguments changed")
+     return p
+ 
+@@ -99,7 +111,8 @@
+     runtime = {"status":"running","pid":os.getpid(),"parent_pid":os.getppid(),
+                "started_utc":datetime.now(timezone.utc).isoformat(),"plan_sha256":sha(plan_path),
+                "job_id":job["job_id"],"margin_rad":job["margin_rad"],"model_id":model["model_id"],
+-               "trained_method":model["method"],"training_seed":model["training_seed"],"checkpoint_sha256":model["checkpoint_sha256"]}
++               "trained_method":model["method"],"training_seed":model["training_seed"],"checkpoint_sha256":model["checkpoint_sha256"],
++               "training_checkpoint_format":103,"checkpoint_contract_sha256":model["contract_file"]["sha256"]}
+     def runtime_write():
+         temporary=metadata_dir/"runtime.json.tmp"
+         temporary.write_text(json.dumps(runtime,indent=2)+"\n",encoding="utf-8")
+@@ -201,10 +214,13 @@
+             worker_sha256=sha(__file__),resets_during_rollout=rollout_meta["resets_during_rollout"],
+             control_npz_sha256=sha(output/"control_targets_50hz.npz"),rollout_npz_sha256=sha(output/"rollout.npz"),
+             checkpoint_sha256=model["checkpoint_sha256"],reference_sha256=plan["reference"]["sha256"],
+-            model_id=model["model_id"],trained_method=model["method"],training_seed=model["training_seed"])
++            model_id=model["model_id"],trained_method=model["method"],training_seed=model["training_seed"],
++            training_checkpoint_format=103,checkpoint_contract_sha256=model["contract_file"]["sha256"])
+         (output/"capacity_audit.json").write_text(json.dumps(capacity,indent=2)+"\n",encoding="utf-8")
+         runtime["capacity_audit"]=capacity.copy()
+-        condition = {"schema":"C2_target_inset_zero_shot:1","method":"C2_TARGET_INSET",**job,
++        condition = {"schema":"C2_trained_confirmation:1","cohort":"fresh_training_seed4_5_6_common_C2_020",
++                     "training_checkpoint_format":103,"checkpoint_contract_sha256":model["contract_file"]["sha256"],
++                     "training_controller_evidence":model["training_run"],"method":"C2_TARGET_INSET",**job,
+                      "training_seed":model["training_seed"],"trained_method":model["method"],"model_id":model["model_id"],
+                      "checkpoint_sha256":model["checkpoint_sha256"],"evaluation_seed":0,"plan_sha256":sha(plan_path),
+                      "source_hashes":{k:v["sha256"] for k,v in plan["source_pins"].items()},

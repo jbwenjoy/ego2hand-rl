@@ -1,0 +1,28 @@
+schema = 1
+
+[profiles.hand2_windows]
+purpose = "Current fixed-wrist Hand2 phone and SuperMimic experiments"
+python = "3.12"
+numpy = "2.4.2"
+torch = "2.14.1+cu130"
+mujoco = "3.11.0"
+mujoco_warp = "3.11.0"
+warp_lang = "1.14.0"
+mjlab = "1.6.0"
+origin = "dex-supermimic-research"
+
+[profiles.g1_windows]
+purpose = "Historical G1 Windows upstream; separate environment"
+mujoco = "3.16"
+origin = "supermimic-windows"
+
+[profiles.manipulation]
+purpose = "Historical manipulation upstream; separate environment"
+torch = "2.9.1"
+mjlab = "1.5.3"
+origin = "supermimic-manipulation-research"
+
+[profiles.video_to_data]
+purpose = "V2D and FlashCHORD references; separate environment"
+origin = "video-to-data-research"
+installation = "Use the archived upstream project configuration for the selected component"

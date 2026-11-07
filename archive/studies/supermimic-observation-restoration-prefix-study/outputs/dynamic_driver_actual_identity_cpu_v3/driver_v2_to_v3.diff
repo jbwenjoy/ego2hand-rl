@@ -1,0 +1,80 @@
+--- run_track_prefix_v2.py
++++ run_track_prefix_v3.py
+@@ -62,7 +62,39 @@
+     return {'status':'NO_OWNED_PID_REMAINING' if not rows else 'PID_PRESENT_REQUIRES_IDENTITY_REVIEW','queried_pids':clean,'actual_CIM_rows':rows,'scope':'Retained launcher/runtime actual PIDs only; not a machine-wide GPU idleness certificate'}
+ 
+ 
+-def qualify_terminal_identity(result,runtime,post,*,plan,output,command,plan_sha,worker_sha):
++def command_executable(command_line):
++    """Parse Windows' actual command line, including quoted executable paths."""
++    if not isinstance(command_line,str) or not command_line.strip():raise ValueError('Missing OS command line')
++    if os.name=='nt':
++        import ctypes
++        from ctypes import wintypes
++        shell=ctypes.WinDLL('shell32',use_last_error=True);kernel=ctypes.WinDLL('kernel32',use_last_error=True)
++        shell.CommandLineToArgvW.argtypes=(wintypes.LPCWSTR,ctypes.POINTER(ctypes.c_int));shell.CommandLineToArgvW.restype=ctypes.POINTER(wintypes.LPWSTR)
++        kernel.LocalFree.argtypes=(ctypes.c_void_p,);kernel.LocalFree.restype=ctypes.c_void_p
++        count=ctypes.c_int();argv=shell.CommandLineToArgvW(command_line,ctypes.byref(count))
++        if not argv:raise OSError(ctypes.get_last_error(),'CommandLineToArgvW failed')
++        try:
++            if count.value<1:raise ValueError('Empty parsed OS command')
++            return argv[0]
++        finally:kernel.LocalFree(argv)
++    import shlex
++    return shlex.split(command_line)[0]
++
++
++def selected_python_identity(chosen_python):
++    """This supervisor must run in the chosen venv; resolve its actual base file.
++
++    sys.executable may be the venv redirector. The worker OS executable must be
++    compared to sys._base_executable, not to that redirector's distinct file.
++    """
++    chosen=Path(chosen_python).resolve(strict=True)
++    if not os.path.samefile(chosen,sys.executable):raise ValueError('Run supervisor through the same selected virtual-environment Python')
++    raw=Path(sys._base_executable)
++    base=raw.resolve(strict=True)
++    return {'chosen_python':str(chosen),'supervisor_sys_executable':sys.executable,'base_executable_raw':str(raw),'base_executable_resolved':str(base),'base_executable_sha256':sha(base),'venv_selected_samefile':True,'base_alias_resolved_samefile':os.path.samefile(raw,base),'scope':'Supervisor is running in the selected venv; its actual base Python file is independently compared to the observed worker OS executable'}
++
++
++def qualify_terminal_identity(result,runtime,post,*,plan,output,command,plan_sha,worker_sha,python_identity):
+     """Pure fail-closed identity gate; exit0 alone never qualifies a run."""
+     checks={}
+     def need(name,value):checks[name]=bool(value)
+@@ -76,8 +108,10 @@
+         expected_parent=supervisor if pid==launcher else launcher
+         need('runtime_actual_PID_parent_match',positive_pid(pid) and runtime.get('pid')==pid and observed.get('pid')==pid and runtime.get('parent_pid')==expected_parent and observed.get('parent_pid')==expected_parent)
+         need('watch_command_equals_launched_command',result.get('command')==list(map(str,command)) and norm(result.get('worker_output'))==norm(output))
+-        line=norm(observed.get('command_line',''));exe=norm(observed.get('executable_path',''))
+-        need('OS_command_worker_plan_output_bound',bool(exe) and exe in line and all(norm(Path(path).resolve()) in line for path in (WORKER,plan,output)) and '--run' in line)
++        raw_line=observed.get('command_line','');line=norm(raw_line);first=command_executable(raw_line);exe=observed.get('executable_path','')
++        need('chosen_venv_supervisor_identity_samefile',os.path.samefile(python_identity['chosen_python'],python_identity['supervisor_sys_executable']) and python_identity.get('venv_selected_samefile') is True)
++        need('OS_command_exe_expected_base_samefile',os.path.samefile(first,exe) and os.path.samefile(exe,python_identity['base_executable_raw']) and os.path.samefile(exe,python_identity['base_executable_resolved']) and sha(exe)==python_identity['base_executable_sha256'])
++        need('OS_command_worker_plan_output_bound',all(norm(Path(path).resolve()) in line for path in (WORKER,plan,output)) and '--run' in line)
+         need('runtime_source_plan_bound',runtime.get('plan_sha256')==plan_sha and runtime.get('source_sha256')==worker_sha)
+         captured=result.get('runtime_metadata',{})
+         need('watched_runtime_matches_terminal_identity',all(captured.get(k)==runtime.get(k) for k in ('pid','parent_pid','started_utc','plan_sha256','source_sha256')) and captured.get('pid')==pid)
+@@ -93,12 +127,12 @@
+         checks['identity_parse_error']=False;error=repr(exc)
+     else:error=None
+     qualified=bool(checks) and all(checks.values())
+-    return {'status':'ENGINEERING_OS_IDENTITY_QUALIFIED' if qualified else 'ENGINEERING_OS_IDENTITY_UNQUALIFIED_UNKNOWN','engineering_identity_qualified':qualified,'checks':checks,'parse_error':error,'actual_pid':result.get('actual_pid'),'launcher_pid':result.get('launcher_pid'),'physical_outcome_qualified_by_supervisor':False,'next_condition_permitted_by_identity':qualified,'scope':'Process identity/exit gate only. Separate raw/full-horizon/capacity/controller/quality audit is still required; no automatic next condition or physics retry.'}
++    return {'status':'ENGINEERING_OS_IDENTITY_QUALIFIED' if qualified else 'ENGINEERING_OS_IDENTITY_UNQUALIFIED_UNKNOWN','engineering_identity_qualified':qualified,'checks':checks,'parse_error':error,'actual_pid':result.get('actual_pid'),'launcher_pid':result.get('launcher_pid'),'selected_python_identity':python_identity,'physical_outcome_qualified_by_supervisor':False,'next_condition_permitted_by_identity':qualified,'scope':'Process identity/exit gate only. Separate raw/full-horizon/capacity/controller/quality audit is still required; no automatic next condition or physics retry.'}
+ 
+ 
+ def main():
+     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--plan',type=Path,required=True);parser.add_argument('--python',type=Path,default=Path('D:/workspace/dex-supermimic-research/.venv/Scripts/python.exe'));parser.add_argument('--run',action='store_true');args=parser.parse_args()
+-    plan=args.plan.resolve(strict=True);proof=preflight(plan,args.python)
++    plan=args.plan.resolve(strict=True);python_identity=selected_python_identity(args.python);proof=preflight(plan,args.python);proof['selected_python_identity']=python_identity
+     if not args.run:print(json.dumps(proof,indent=2));return
+     p=read(plan)
+     if p.get('GPU_run_authorized') is not True:raise ValueError('Root has not authorized this hash-bound plan')
+@@ -122,7 +156,7 @@
+         life.write(logs/'post_terminal_CIM.json',post)
+         try:terminal_runtime=read(output/'runtime.json')
+         except Exception as exc:terminal_runtime={'read_error':repr(exc)}
+-        identity=qualify_terminal_identity(result,terminal_runtime,post,plan=plan,output=output,command=command,plan_sha=proof['plan_sha256'],worker_sha=proof['worker_sha256'])
++        identity=qualify_terminal_identity(result,terminal_runtime,post,plan=plan,output=output,command=command,plan_sha=proof['plan_sha256'],worker_sha=proof['worker_sha256'],python_identity=python_identity)
+         identity.update(supervisor_sha256=sha(__file__),plan_sha256=proof['plan_sha256'],worker_sha256=proof['worker_sha256'])
+         life.write(logs/'engineering_identity.json',identity)
+     print(json.dumps({'watchdog_status':result.get('status'),**identity},indent=2))

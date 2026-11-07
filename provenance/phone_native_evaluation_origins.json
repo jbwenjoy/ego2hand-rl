@@ -1,0 +1,67 @@
+{
+  "schema": "phone_shared_native_evaluation_origins:1",
+  "old_sources": {
+    "original_tripod_gate_helpers": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_dynamics_v1\\run_functional_tripod_dynamics_v3.py",
+      "bytes": 29569,
+      "sha256": "d433a51df307bf45b40e70bc2c74776654eb2ece65bd2de67ae8163c201fd960"
+    },
+    "controlled_native_kernel": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\controlled_native_kernel_v1.py",
+      "bytes": 10595,
+      "sha256": "1eb38dfdf2bc0afe1ad146238dc22202eef30950db3ff0cead316a17a41e9dd9"
+    },
+    "TaskController": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\check_zero_controller_v2.py",
+      "bytes": 9002,
+      "sha256": "5a57cc89c36382c1e272b2497fdaeff9aafc6ea83ba77ce16a7c57fd27a93840"
+    }
+  },
+  "new_sources": {
+    "native_evaluation": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\native_evaluation.py",
+      "bytes": 18639,
+      "sha256": "48a2d82e53e4040edc0e53d6d3e8def308967c2c8dc635bf89fb84f44f1c543c"
+    },
+    "controller": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\controller.py",
+      "bytes": 2488,
+      "sha256": "73d9297ed607f50c4bc90b65e05c3a84e7094f1a8ce823a074dad373fad0b679"
+    }
+  },
+  "AST_exact": {
+    "pin": true,
+    "write": true,
+    "model_digest_except_dt": true,
+    "assert_model": true,
+    "contact_snapshot": true,
+    "dt_pair_summary": true,
+    "evaluate_case_controlled": true,
+    "DESIGNATED": true,
+    "DTS": true,
+    "DURATION": true,
+    "OLD_GATES": true,
+    "GATES": true,
+    "PAIR_GATES": true,
+    "TaskController.__call__": true
+  },
+  "passed": 14,
+  "total": 14,
+  "changed_source_linking": [
+    "No frozen source-file import or sibling path selection. Shared helpers and gates are local package functions.",
+    "TaskController.__init__ defaults to canonical package state_codec and checks explicit dt/phone; callback body is exactly original.",
+    "Generic make_variant only packs explicit q27/u20/truebounds/provenance, no GN/static or checkpoint schema requirements."
+  ],
+  "unchanged_semantics": [
+    "Original 2s duration and both dt; native tick PRE contact-force vs POST qpos/qvel/COM, abort and tail masks.",
+    "Original tripod and parallel old-two-pad success gates; incomplete duration cannot pass dt-pair qualification.",
+    "Original callback integration300 mutation guard and finite true ctrlrange, no clamping, pose resets or object aids.",
+    "Original root translational freejoint velocity tail metric retained, not relabeled COM velocity."
+  ],
+  "scope": "SOURCE/AST only.0NN/model/native forward/step/training. Root will separately qualify saved zero-controller two-dt traces; no native equivalence is claimed here.",
+  "prior_runtime_origins_preserved": {
+    "path": "D:\\workspace\\supermimic-research\\provenance\\phone_runtime_origins.json",
+    "bytes": 12860,
+    "sha256": "f5de59b9b836b20c218d4c4e8b38112dff78e38121992d633868e6fc90ce7422"
+  }
+}

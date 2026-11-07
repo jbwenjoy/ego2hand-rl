@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco model="hot3d_phone24_convex_candidate_stage2">
+  <compiler angle="radian" meshdir="meshes" inertiafromgeom="false" />
+  <option timestep=".005" integrator="implicitfast" solver="Newton" iterations="10" ls_iterations="20" cone="pyramidal" jacobian="auto" gravity="0 0 -9.81" />
+  <asset>
+    <mesh name="phone24_visual" file="phone24_visual_m.obj" scale="1 1 1" />
+    <mesh name="phone24_convex_collision" file="phone24_collision_convex_m.obj" scale="1 1 1" />
+  </asset>
+  <worldbody>
+    <body name="hot3d_phone24" pos="0 0 0" quat="1 0 0 0">
+      <freejoint name="phone24_freejoint" />
+      <inertial pos="-6.8933490212641502e-05 -0.00049247600987206708 0" mass="0.2" diaginertia="0.00039681032421837664 0.00048368139557521708 9.0418345779351441e-05" />
+      <geom name="phone24_visual_only" type="mesh" mesh="phone24_visual" contype="0" conaffinity="0" density="0" group="2" rgba=".22 .24 .28 1" />
+      <geom name="phone24_collision_convex" type="mesh" pos="0 0 0" contype="1" conaffinity="1" density="0" group="3" rgba=".1 .45 .95 .16" friction="0.59999999999999998 0.0050000000000000001 0.0001" condim="4" priority="0" margin="0" gap="0" solref="0.02 1" solimp="0.90000000000000002 0.94999999999999996 0.001 0.5 2" mesh="phone24_convex_collision" />
+    </body>
+  </worldbody>
+</mujoco>

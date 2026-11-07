@@ -1,0 +1,59 @@
+{
+  "schema": "rough_prefix_policy_evaluation_protocol:1",
+  "status": "FINITE_ENGINEERING_CHECKPOINT_PHYSICAL_EVALUATION",
+  "input_bundle": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\input_bundle_v1\\bundle.json",
+    "sha256": "225b34e9ec26ae7d66c805c7312d5f1db76d39a8c6b1627682cda217b5261242"
+  },
+  "source_lineage_N": 1,
+  "independent_ego_N": 0,
+  "physical_reference_qualified": false,
+  "allowed_seeds": [
+    0
+  ],
+  "checkpoint_iterations": [
+    10
+  ],
+  "arms": [
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "order": [
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "attempts_per_arm": 1,
+  "worlds": 1,
+  "reference_states": 16,
+  "control_intervals": 15,
+  "solver_substeps": 60,
+  "postinterval_forward_calls": 15,
+  "hard_process_seconds": 120,
+  "soft_worker_seconds": 110,
+  "automatic_retry": false,
+  "compile_fallback": false,
+  "evaluation_gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "clock_absolute_tolerance_s": 2e-06,
+    "target_rate_max_rad_s": 15.0,
+    "actuator_load_ratio_max": 1.01,
+    "load_charge_max": 0.8,
+    "charge_decay_time_s": 2.0,
+    "drop_center_below_default_wrist_m": 0.15
+  },
+  "initialization": "Same analytic nonzero requested q/qd/object pose/worldtwist, frozen actual8/defaultmocap/initialbaselineu0; original rough_runtime_v2 and controller104 trained descriptor",
+  "actor": "Loaded selected original format104, eval/no grad/no normupdate/no actionnoise, 155 native policyobs, originalEMA scale/clamp/singleC2",
+  "capacity": "No reset during rollout; sticky readonce after60, UNKNOWN on partial",
+  "target_rate": "All15 applied targets and initialization baselineu0, include startup0-to-firstlearnedu0 jump divided by20ms plus14 consecutive20ms updates; report startup separately. Original15rad/s gate retained.",
+  "quality": "Qualityterms disabled as qualified nativeA0; allfinite15intervals recorded once, numeric hard errors partial/UNKNOWN; no quality selection/retry",
+  "prerequisites": "Saved actual104 health+actualCPU Actorload+sourceclosure+independent CPU eval review; separate hashbound GPUconfigs only",
+  "claim_scope": "Single seed engineering10 checkpoint finite0.3s task measurements; no methodbenefit/trueego/full3s/forceprediction qualification. nativeA0v2 distinct from historicaldirectWarpT0.",
+  "formal_training": "Notauthorized by this evaluation protocol; new formalprotocol after all three finiteevaluations and identity/capacity/104consumer qualify; user firsthealthyckpt+ETA pause retained."
+}

@@ -1,0 +1,242 @@
+{
+  "schema": "full151105_saved_action_response_CPU_preregistration:1",
+  "status": "FROZEN_SOURCE_ONLY_NO_ACTUAL_DECOMPOSITION_AUTHORIZATION",
+  "created_UTC": "2026-11-05T17:24:54.657443+00:00",
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "training_authorized": false,
+  "runplan_schema": "full151105_saved_action_response_CPU_run:1",
+  "role": "saved_fixed_state_offset_vs_finite_action_response",
+  "runplan_keys": [
+    "schema",
+    "role",
+    "protocol",
+    "output",
+    "CPU_run_authorized",
+    "cpu_threads",
+    "source_pins",
+    "cpu_ready"
+  ],
+  "output_prefix": "full151105_saved_action_response_CPU_",
+  "cpu_threads": 1,
+  "inputs": {
+    "state452_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-state-prediction452-CPU-v1.json",
+      "sha256": "ba8c3669506acfb9fe01441770927dcc656508c94d14a50826b1901b4bc8aa65"
+    },
+    "state452_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\report.json",
+      "sha256": "202b4e15512491b15fd8fc3fa3efb0f1c9da85a17ce359b372ee619ea535175a"
+    },
+    "state452_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\prediction_arrays.npz",
+      "sha256": "84fe797f5da806160dc891422961afd606bdcda1bb3e96ffc99cb426761261b1"
+    },
+    "state452_input_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\matched_input_arrays.npz",
+      "sha256": "18a361bbc6a56139e79df5b6891e3aa80e030abebbbee4fa39e3dbe5129e9cb4"
+    },
+    "state452_identities": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_CPU_v1\\group_identities452.json",
+      "sha256": "0151e53864bbf26840b4435863c7038a957ba94dd142e8385deadfe18f0d167b"
+    },
+    "state452_saved_independent25": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_state_prediction452_saved_independent_v1\\report.json",
+      "sha256": "b2675cbaaa46c5575d5f9084a64c2bf7b28c7eabe13715b600347e5485cc4d20"
+    },
+    "physical_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-gradient-empirical_gradient05-v2.json",
+      "sha256": "034e81fecb3e49a26136740054bb284d600f379bdb7ae1db2c9a6368228af077"
+    },
+    "physical_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\physical_report.json",
+      "sha256": "dd6e37f2ca88929bf1c8154b55f63a4d3714f5b62bd4a16b8a11a4f03b2f1917"
+    },
+    "physical_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\physical_arrays.npz",
+      "sha256": "962de8ad06f72031339b6fb6a46d9209e604f70c7c2e564b80f3873b5e422e8b"
+    },
+    "branch_index": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\branch_index.json",
+      "sha256": "ae2667c285ca55711035189e5368b4436631c1322346735d9a19a1e179c61aa9"
+    },
+    "snapshot_records": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\snapshot_records.json",
+      "sha256": "114386fd2d049b97c650d9c47e6a02d2509c8c963d5e64b7148ba5d50bbbe1ec"
+    },
+    "physical_saved_independent1762": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_full_serial_saved_review_v1\\report.json",
+      "sha256": "f5fd0703639308706b4f8bf5deee834e6d207486c63fded8920a6a86fd2a62af"
+    },
+    "A0_control_metadata": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\control_metadata.json",
+      "sha256": "86fe8734b8936d5343754e97e4219bf33e8faecce00e7e10775045ef4433ffa1"
+    },
+    "A2_control_metadata": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\control_metadata.json",
+      "sha256": "86fe8734b8936d5343754e97e4219bf33e8faecce00e7e10775045ef4433ffa1"
+    }
+  },
+  "source_pins": {
+    "state452_producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\state_prediction452105_v1.py",
+      "sha256": "5cd15a0a3fefd2f17bbb971944fbc7c47fa8faaab473a9164728583598e2e240"
+    },
+    "physical_branch_schedule": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\serial_probe105_v2.py",
+      "sha256": "a24c89da47f4aad7acfc9d9dfd1f053518cdc878230716bb2c857127ec13e592"
+    },
+    "native_state_units": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    }
+  },
+  "question": "Separate fixed-WM baseline coordinate prediction bias from finite action-response error using existing saved endpoints; no inference, gradients, score or new simulation.",
+  "coverage": {
+    "snapshots": 8,
+    "labels": [
+      "A0/0",
+      "A0/49",
+      "A0/99",
+      "A0/149",
+      "A2/0",
+      "A2/49",
+      "A2/99",
+      "A2/149"
+    ],
+    "restored_rows": 152,
+    "baseline_rows": 24,
+    "baseline_repeats_per_snapshot": 3,
+    "perturbation_rows": 128,
+    "pairs": 64,
+    "original_joint_indices": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "eps_rad": [
+      0.002,
+      0.001
+    ],
+    "signs": [
+      -1,
+      1
+    ],
+    "selection": "Allrestoredbranch rows mechanically selected bysourceavailability, excluding300donors. No oldstable9/currenterror/noisefloor selection; all128/all64 retained. Dependent source/seed, notindependentN."
+  },
+  "guards": {
+    "provenance": "Require complete state452 actualreport/config/arrays/identities/source/independent25 PASS andoriginalphysical1762/config/branchindex/arrays/snapshotrecords, allcurrentSHA. Samefile+SHA foridentity, preserve recordedpin spelling. No physicalgradient/hiddenstate qualificationupgrade.",
+    "join": "Eachrestored group branch_id maps exactlyonce to originalbranch_index.row_id; matchpath/k/mode/snapshot/j ordinal/joint_index/eps_index/epsrad/sign mechanically. Threebaselines originalrepeat slots; no sort byoutputs. Retainnative actuator/joint-index mapping frombothcontrolmetadataJSON, noMJB.",
+    "same_visible_state": "Before fixed-state interpretation, all19 pre_x rows per snapshot must equal originalsnapshot_x visible58. q20/qd20 compareFP32uint32bits; other18 exactnumericFP32equality, retaining rawbits/signedzero differences. This checksvisible58 only, not hidden graphscratch/sensorstate.",
+    "baseline_u0": "All3 baseline actualu20 bitexact to physical_arrays.snapshot_u[s] originalu0. PreserveeachrawF32array.",
+    "perturbed_u": "For eachperturb row all19 coordinates other than declaredjoint_index bitexactu0; onlydeclaredj maychange. Actualu must matchoriginalbranch_u anddirection__plus/minus metadata, noActor/EMA/C2/clippingreconstruction.",
+    "failure": "Anyprovenance/count/prestate/umapping failure preservesallrawrows andguardmasks/mismatches, returnsBLOCKED_FIXED_VISIBLE_STATE_OR_CONTROL_MAPPING_NO_REPAIR, forbidsfixedstateinterpretation. No passed-snapshot subset or repair."
+  },
+  "baseline_statistics": {
+    "means": "Per snapshot F64coordinate mean of3 baseline target58, prediction58, actualu20 independently: ybar_phys,ybar_WM,ubar. Statisticalreferences only, notphysicalstates/actions. NevercastmeanbacktoF32, project/normalizeR or score/rerun it.",
+    "bias": "b=ybar_WM-ybar_phys per58coordinate.",
+    "noise": "For target/pred/u separately save3rawF32replicates+bits, perfeature range(max-min), centeredpopulationvariance(ddof0), maxabs centereddeviation. Empiricaldescriptors only, no bound/floor/stable/accuracygate, noCI/perrowpositivefraction."
+  },
+  "endpoint_responses": {
+    "physical": "r_phys_i=F64(target_i)-ybar_phys_s for all128perturbendpoints.",
+    "model": "r_WM_i=F64(pred_i)-ybar_WM_s.",
+    "residual": "e_response=r_WM-r_phys.",
+    "bias_identity": "E_i=F64(pred_i)-F64(target_i)=b_s+e_response_i algebraically; saveF64closure_residual without a tunedpassgate.",
+    "control": "Save du_i=F64(actualu_i)-ubar and relative-to-originalu0, all20coords. KeeprawsourceFP32values/bits andnumericzero flags."
+  },
+  "pair_secants": {
+    "pairing": "All64(snapshot,j,eps_index) pairs, oneoriginalminus/plus; castrawF32 endpointvalues toF64 BEFORE subtraction.",
+    "actual_delta_u_rad": "F64(uplus)-F64(uminus), vector20 rad.",
+    "halfstep_rad": "actual_delta_u_rad/2, separatelynamedradquantity.",
+    "denominator": "actual_delta_u_rad[j] rad, not2requestedeps.",
+    "physical": "(F64(yplus)-F64(yminus))/actual_delta_u_rad[j].",
+    "model": "(F64(predplus)-F64(predminus))/actual_delta_u_rad[j]; secantresidual=model-physical.",
+    "undefined": "Ifdenom==0 retainallrawrows/numerators/pair, NaNsecants+definedFalsemask; nofill0/drop/divide0. Inconsistentnegativeorder conflictswithsource\u00b1metadata andblocksprovenance; no relabeling.",
+    "asymmetry": "Save hplus=F64(uplus[j])-F64(u0[j]),hminus=F64(u0[j])-F64(uminus[j]),hplus-hminus, midpointoffset=(F64(uplus)+F64(uminus))/2-F64(u0), actual_delta_u_rad20 andhalfs; do notstateclipped/asymmetricchord iscentralderivativeatu0.",
+    "legacy_d_eff_dimensionless": "Archived direction__d_eff=(F64(uplus)-F64(uminus))/(2requested_eps_rad), DIMENSIONLESS, nothalfstep_rad. Keepandverifyoriginalvalues; itdoesnotreplaceactual_delta_u_rad primarydenom.",
+    "legacy_center_offset_rad": "Archived direction__center_offset israd; keepandverifyagainstactualplus/minus/u0 source.",
+    "legacy_clip_bool": "Useandverify archiveddirection__clipped exactly. Originaldefinition comparesactualendpoints to u0\u00b1np.float32(eps)*unit inoriginalFP32arithmetic; neverflagclipmerelybecauseactual_delta!=2eps (rounding can differ). No newC2/limits/parameter reconstruction.",
+    "interpretation": "Finiteasymmetriccoordinate secants, notuniquetruephysicalJacobian. Keepallrawzero/nonzero/undefined/clipped pairs. Do notreplaceoldnominalFD/old5of9 or introduce stablefilters."
+  },
+  "units": [
+    {
+      "block": "q",
+      "slice": [
+        0,
+        20
+      ],
+      "state_unit": "rad",
+      "secant_unit": "rad/rad"
+    },
+    {
+      "block": "qd",
+      "slice": [
+        20,
+        40
+      ],
+      "state_unit": "rad/s",
+      "secant_unit": "(rad/s)/rad"
+    },
+    {
+      "block": "p",
+      "slice": [
+        40,
+        43
+      ],
+      "state_unit": "m",
+      "secant_unit": "m/rad"
+    },
+    {
+      "block": "R",
+      "slice": [
+        43,
+        52
+      ],
+      "state_unit": "dimensionless",
+      "secant_unit": "1/rad"
+    },
+    {
+      "block": "v",
+      "slice": [
+        52,
+        55
+      ],
+      "state_unit": "m/s",
+      "secant_unit": "(m/s)/rad"
+    },
+    {
+      "block": "omega",
+      "slice": [
+        55,
+        58
+      ],
+      "state_unit": "rad/s",
+      "secant_unit": "(rad/s)/rad"
+    }
+  ],
+  "outputs": "Allraw152states/controls, baselinebias/noisedescriptors,128centeredresponses+errors+actualdu,64pairs+definedmasks/numerators/secants/legacyfields. Perfeature andseparateblock RMS/MAE/maxabs; Rraw9/Frobenius only,noangles/projection/mixed58norm. Counts/zero/defineddescriptions, no newlabels/winners.",
+  "precision_limits": [
+    "Physicaltargets are existingGPUFP32bytes; modelpredictions existingFP32CPUshadow. No precision/physics causeisolation.",
+    "Onlysamevisible58 ischecked; hiddenwarmstarts/graphscratch unknown, A2/0contactpayload differences retained.",
+    "Baselinebias cancellation isalgebra, not originaltrainingcausality, HO/force/contact orphysicalgradientqualification.",
+    "OnefixedA2checkpoint/source/seed/dependentbranches; no oldstable9filter or newscore/goal/H8study."
+  ],
+  "execution_budget": {
+    "new_model_load_or_FW": 0,
+    "AD": 0,
+    "objective": 0,
+    "state_conversion": 0,
+    "MJB": 0,
+    "Env_physics_GPU": 0,
+    "training": 0,
+    "score_or_goal": 0,
+    "H8windows": 0
+  },
+  "authorizer": "DefaultnewCLI JSON/hashonly; actualsavednumericrunrequiresnewcurrentCPUproof andRootfreshCPUauthorizedconfig. Sourceclosureuniqueactualsamefile+SHA, neverSHAonlymergecopies; namedsemanticpins retained.",
+  "execution_here": {
+    "prediction_NPZ_arrays_opened": 0,
+    "response_or_secant_calculations": 0,
+    "model_FW_AD_MJB_Env_physics_GPU": 0
+  }
+}

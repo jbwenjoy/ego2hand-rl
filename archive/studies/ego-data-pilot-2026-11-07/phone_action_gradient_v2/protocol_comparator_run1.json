@@ -1,0 +1,116 @@
+{
+  "schema": "phone_full20_WM_native_secant_comparison_protocol:1",
+  "CPU_run_authorized": true,
+  "parameter_updates_authorized": false,
+  "checkpoint_iteration": 5000,
+  "observable59_blocks": {
+    "q20": [
+      0,
+      20
+    ],
+    "qd20": [
+      20,
+      40
+    ],
+    "COM3": [
+      40,
+      43
+    ],
+    "world_rotation3": [
+      43,
+      46
+    ],
+    "COM_velocity3": [
+      46,
+      49
+    ],
+    "world_omega3": [
+      49,
+      52
+    ],
+    "coverage2": [
+      52,
+      54
+    ],
+    "log_min_force2": [
+      54,
+      56
+    ],
+    "log_endpoint_force2": [
+      56,
+      58
+    ],
+    "log_nonpad_force1": [
+      58,
+      59
+    ]
+  },
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\comparison_completed_v1",
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\compare_model_native_v1.py",
+      "bytes": 10824,
+      "sha256": "95ca9450fb24da4f9ba06df694fcd7504182db9a45dade7a9951375b000d453e"
+    },
+    "trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\train_phone_wm_v2.py",
+      "bytes": 28494,
+      "sha256": "1234ea0491edcd23e3d15d32959a39bbac2f851b2514b17b5e2c41d87c5fd9b9"
+    },
+    "source_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\comparator_source_review_v1\\report.json",
+      "bytes": 6842,
+      "sha256": "fd5cdae41249de18d1100350a9eb2219848526abca0e8ab886405377f953a2c2"
+    }
+  },
+  "inputs": {
+    "selection": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\design_v2_all20\\selection_v2_all20.json",
+      "bytes": 1521247,
+      "sha256": "23a0b10cef90133d1e909de346a49aae019a24881d4b72ed0c7a894755edea51"
+    },
+    "operands": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\design_v1\\selected_operands_v1.npz",
+      "bytes": 38419,
+      "sha256": "8021b1e0c8578fe107d349462945164b4d5006acead3b968f75850b5b2e05fb4"
+    },
+    "native_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\native_completed_v1\\report.json",
+      "bytes": 4174,
+      "sha256": "cb87540db14a9baf96aedcd03729c95c6dc1c87a0ea902521c5d836eccdbf078"
+    },
+    "native_saved_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\native_saved_review_v1\\report.json",
+      "bytes": 7935,
+      "sha256": "839d054e3f2f579bac9108f29a3bc9115e97c2c0e534939b520de9ae3d700524"
+    },
+    "checkpoint": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\cpu_run1\\checkpoint_5000.pt",
+      "bytes": 598379,
+      "sha256": "f2e51432377bcd68b235b0f5dbeb6953a3a411f586e008e0ee4a08111a3b1f1f"
+    },
+    "design": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\design_v1\\design_contract_v1.json",
+      "bytes": 16879,
+      "sha256": "a761f42f259a63e7705a1360c1481a3b707c1f4be50d80b8907f7ffdb37fbae0"
+    },
+    "all20_addendum": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\design_v2_all20\\design_addendum_v2_all20.json",
+      "bytes": 8201,
+      "sha256": "c1b16754ad38987184bb96c5ae95bb3db7963fc14fb628363b06a85ec90fbc50"
+    }
+  },
+  "counts_budget": {
+    "checkpoint_loads": 1,
+    "model_constructors": 1,
+    "NN_forward": 500,
+    "action_AD_jacobians": 12,
+    "NN_parameter_updates": 0,
+    "native_steps": 0,
+    "TEST_arrays_read": 0
+  },
+  "native_context_data_qualified": true,
+  "native_strict_protocol_order_conformance": false,
+  "method": "One-sided native/model finite response uses actualF64 du; modelAD vs ownFD uses FP32 inputseparation. No accuracy threshold/no claim of native analytic Jacobian.",
+  "automatic_retry": false
+}

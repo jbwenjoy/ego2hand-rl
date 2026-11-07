@@ -1,0 +1,13 @@
+# CPU geometry → native ABI batch
+
+All ten pinned observation exports were read through the new strict G1 audit catalog with `use="geometry_preparation"`. Every clip uses source frames `[0,151)` and unchanged source timestamps. This is a geometry audit of all ten clips, including009/010; no model/normalizer was fitted or updated. The future controlled training catalog still excludes009/010.
+
+The recipe and source/model/reader/exporter hashes were frozen before optimization. Each clip creates a new palmroot `RobotKinematics` instance and restarts at nominal q. The bone-only least-squares weights are .03 temporal/.001 nominal, max80 evaluations, tolerances1e-8. The original cached robotq/link/wrist arrays were not used. Confidence remains unknown. No sourceq fallback or quality-based clip selection occurred.
+
+All1510 frames were retained. Two optimizer results hit the evaluation limit: clip001 frame117 and clip010 frame60. Their finite q, residual, Jacobian, gradient, active-mask and status/message records remain in the clip output. Maximum bone-angle errors reach94.27°/94.39° in clips003/004; maximum geometric goal finite-difference speed is39.19rad/s in clip001. These are limitations, not tracking success or an actual executed-target rate measurement.
+
+Each geometric NPZ retains q, mapped object pose, source-to-fixed-palm R/t, macro FK/normalized targets, bone errors and joint bounds. `optimizer_all_frames.json` and `optimizer_full_arrays.npz` retain all per-frame optimizer outputs. The Root exporter recomputes native BODY21 from derived q and uses the original default fixed robot palm as wrist. Macro FK21 was not renamed into native link positions; their maximum pointwise difference remains37.6mm.
+
+All ten derived four-field NPZ files were loaded by the real `resolve_recipe` and `SingleHandTrackingReader` on CPU. Lengths are151 each, prefixes span0..1510, q and the reader's goal-qvel are exact FP32 matches. Object/wrist transforms and native BODY links match within1e-6. Joint velocities use each clip's own end pair, and the real object-velocity helper was also checked at each clip's first/last pair. No cross-clip derivative is substituted. These finite differences are designed reference derivatives, not measured velocities.
+
+`READY.json` binds the batch report, native reader audit, index/recipe and all clip products. `report.json` marks training and physical reference qualification false. The process recorded zero forbidden forward/step/collision/force calls, all native tensors on CPU and Torch CUDA uninitialized. The8.672s module clock includes third-party imports, excludes interpreter startup, and is not GPU time or shared-learning speedup. Per-clip timers are nested in that wall time.

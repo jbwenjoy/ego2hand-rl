@@ -1,0 +1,118 @@
+{
+  "schema": "native_true_model_MPC_feasibility_protocol:1",
+  "CPU_run_authorized": true,
+  "training_or_GPU_authorized": false,
+  "automatic_retry": false,
+  "config": {
+    "actual_control_intervals_max": 100,
+    "control_interval_s": 0.02,
+    "native_dt_s": 0.00015625,
+    "substeps_per_control": 128,
+    "planning_horizon_controls": 2,
+    "optimized_actuator_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "remaining_ctrl": "original seed control",
+    "FD_absolute_control_step_rad": 0.01,
+    "per_interval_trust_rad": 0.05,
+    "Gauss_Newton_iterations_max": 2,
+    "line_search_scales": [
+      1.0,
+      0.5,
+      0.25
+    ],
+    "damping_residual_weight": 0.01,
+    "cost_improvement_absolute_min": 1e-09,
+    "branches_per_interval_max": 26,
+    "planning_steps_max": 665600,
+    "selection_requires_all_original_horizon_safety_limits": true,
+    "planning_wall_budget_s": 600.0,
+    "model_digest_period_branches": 128,
+    "cost_scales": {
+      "position_m": 0.005,
+      "rotation_rad": 0.08726646259971647,
+      "COM_velocity_m_s": 0.01,
+      "omega_world_rad_s": 0.2,
+      "posture_rad": 0.15,
+      "posture_weight": 0.03,
+      "joint_velocity_weight": 0.01,
+      "minimum_pad_N": 0.1,
+      "soft_mean_pad_budget_N": 3.0
+    },
+    "scope": "Privileged simulator feasibility oracle, no policy, training, real-time or SuperMimic/CHORD benefit claim."
+  },
+  "gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "tail_dual_pad_force_coverage": 0.95,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483
+  },
+  "output_path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_mpc_v1\\feasibility_fine_v1",
+  "inputs": {
+    "controller_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_mpc_v1\\run_mpc_feasibility_v1.py",
+      "bytes": 22141,
+      "sha256": "6068c704636c2bdf8ceca63b60268718767458299d283d9d0d99a1ee299cab7c"
+    },
+    "branch_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_mpc_v1\\rollout_probe_v1.py",
+      "bytes": 16169,
+      "sha256": "e5f17d0b458c48d611feeecc760d26c34dfed9e7bace9159d7f6ee1c69f19b4b"
+    },
+    "branch_fixture_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_mpc_v1\\two_branch_contract_v1\\report.json",
+      "bytes": 5428,
+      "sha256": "deccdc90ebad3238e04a7d2fd935a42bc5b4dbc7afbc3499e2952b48fe997ea1"
+    },
+    "candidate_state": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\seed0_rank0_state.npz",
+      "bytes": 7877,
+      "sha256": "5e532341a315bac73280cec3eb18798695fac19fd284e6b046542987dba451ac"
+    },
+    "native_search_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\report.json",
+      "bytes": 2336903,
+      "sha256": "ff9d0cdeabd766ba29e1d6da6d049f42aa4dbd92ae7c1bd87301be0a3518438f"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "matched_constant_u_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_constant_u_baseline_v1\\cpu_v1\\report.json",
+      "bytes": 17223,
+      "sha256": "81b49b29f57b5ab05aa8d71c986a77b893a3e85aaee500d9db7f2517c21a51d2"
+    }
+  },
+  "initialization": "Exact fixture seed0rank0 qpos/zeroqvel/ctrl, original MJB, one initial forward only. Full integration-state boundary required equal fixture source_state_before.",
+  "reference": "Fixed original COM/R/q20 for all100 intervals. No rolling target or object pose reset.",
+  "planning": "H2 true-model clones;8 original thumb/index actuators; rest12 fixed. All FD/line steps counted separately. Original horizon safety limits required for execution.",
+  "actual": "Only first20ms of selected branch executed, exactly128 native steps; complete intervals must match selected prediction integration state bits. Original2s case and earlyabort limits unchanged.",
+  "admission": "Fixture-bound fixed seed0rank0 with all nonacceleration geometry/load/budget/repeat/model gates. Three original static acceleration gates descriptive only, old records unchanged.",
+  "qualification": "Single fine-dt bounded oracle only. No two-dt, calibrated dynamics, ego tracking, learned policy or method benefit claim."
+}

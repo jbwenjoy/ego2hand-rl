@@ -1,0 +1,89 @@
+--- original_format3_evaluator
++++ explicit103_evaluator
+@@ -1,7 +1,7 @@
+ """Same-backend Warp evaluation of a fixed first-frame pen reference.
+ 
+-No checkpoint means A0 zero residual. A checkpoint evaluates its deterministic
+-actor (A1). Both cases use the same play=True scene, reference, initial state,
++This copy explicitly accepts only the frozen original format103 trained C2
++checkpoints. Its deterministic residual actor uses the same play=True scene, reference, initial state,
+ 50 Hz controller, actual Warp physics, and strict no-reset/no-assist protocol.
+ Tracking failures are latched while physics continues to the fixed 3s endpoint,
+ so A0/A1 metrics use the same time interval. Only instability/hard errors censor
+@@ -28,7 +28,10 @@
+ import torch
+ import warp as wp
+ 
+-STUDY_ROOT = Path(__file__).resolve().parents[1]
++STUDY_ROOT = Path("D:/workspace/supermimic-chord-study")
++sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
++from checkpoint103_contract import validate_checkpoint
++sys.path.insert(0, str(STUDY_ROOT / "scripts"))
+ sys.path.insert(0, str(STUDY_ROOT / "src"))
+ 
+ from chord_study.evaluation import evaluate
+@@ -45,7 +48,8 @@
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--reference", type=Path, required=True)
+-    parser.add_argument("--checkpoint", type=Path)
++    parser.add_argument("--checkpoint", type=Path, required=True)
++    parser.add_argument("--checkpoint-contract", type=Path, required=True)
+     parser.add_argument("--clips-root", type=Path)
+     parser.add_argument("--seed", type=int, default=0)
+     parser.add_argument("--device", default="cuda:0")
+@@ -122,11 +126,13 @@
+     checkpoint = None
+     actor = None
+     if args.checkpoint:
++        model_contract=json.loads(args.checkpoint_contract.read_text(encoding="utf-8-sig"))
++        if args.checkpoint.resolve()!=Path(model_contract["checkpoint"]).resolve() or sha256(args.checkpoint)!=model_contract["checkpoint_sha256"]:
++            raise ValueError("Original103 checkpoint path/hash differs from independently frozen contract")
+         checkpoint = torch.load(args.checkpoint.resolve(strict=True), map_location=args.device, weights_only=False)
+-        if checkpoint["config"].get("task") != "hand2-pen-spin" or checkpoint.get("format_version") != 3:
+-            raise ValueError("expected a format-3 Hand2 pen SuperMimic checkpoint")
+-        if checkpoint.get("joint_names") != list(RIGHT_FINGER_JOINT_NAMES) or checkpoint["config"]["control_hz"] != 50:
+-            raise ValueError("checkpoint joint order/control clock does not match the evaluation contract")
++        checkpoint_descriptor=validate_checkpoint(checkpoint,model_contract)
++        if checkpoint.get("joint_names") != list(RIGHT_FINGER_JOINT_NAMES):
++            raise ValueError("runtime native joint order differs from103 contract")
+         state = checkpoint["modules"]["actor"]
+         mean_key = "norm._mean" if "norm._mean" in state else "norm.mean"
+         actor = Actor(state[mean_key].numel()).to(args.device)
+@@ -159,6 +165,20 @@
+         robot_geoms = {i for i in range(model.ngeom) if re.fullmatch(r"robot/(right_palm_collision|right_finger[1-5]_(link[1-4]|tip_sensor)_col)",model.geom(i).name)}
+         if tuple(env.scene["robot"].joint_names) != tuple(RIGHT_FINGER_JOINT_NAMES):
+             raise ValueError("runtime joint ordering differs from the declared contract")
++        # Compare immutable reference arrays with the native training signature;
++        # this reads reference data, never predicted/live future physical state.
++        import hashlib
++        reference_hash=hashlib.sha256()
++        for field in ("joint_pos","object_pose","link_pos"):
++            reference_hash.update(motion._frames[field].cpu().numpy().tobytes())
++        reference_hash.update(motion.group.trajectory_end.cpu().numpy().tobytes())
++        runtime_reference_signature=reference_hash.hexdigest()
++        if runtime_reference_signature!=checkpoint["reference_signature"]:
++            raise ValueError("Runtime fixed reference differs from trained103 reference signature")
++        action_term=env.action_manager.get_term("joint_pos")
++        lower,upper=action_term.target_position_limits
++        if cpu(lower)[0].tolist()!=checkpoint["c2_controller"]["target_lower_rad"] or cpu(upper)[0].tolist()!=checkpoint["c2_controller"]["target_upper_rad"]:
++            raise ValueError("Runtime outer hard/ctrl bounds differ from trained103 controller")
+         rows = []
+         contact_frames = []
+         first_failure = None
+@@ -273,9 +293,14 @@
+                 "checkpoint": str(args.checkpoint.resolve()) if args.checkpoint else None,
+                 "checkpoint_sha256": sha256(args.checkpoint) if args.checkpoint else None,
+                 "checkpoint_iteration": checkpoint.get("iteration") if checkpoint else None,
++                "checkpoint_format_version": checkpoint["format_version"],
++                "checkpoint_contract_sha256": sha256(args.checkpoint_contract),
++                "checkpoint103_validation": checkpoint_descriptor,
++                "checkpoint_controller": checkpoint_descriptor["controller"],
++                "runtime_reference_signature": runtime_reference_signature,
+                 "checkpoint_training_config": checkpoint.get("config") if checkpoint else None,
+                 "checkpoint_contact_head_semantics": "upstream 15-dimensional finger self-collision, not hand-object CHORD contact",
+-                "policy": "A1 deterministic actor" if actor is not None else "A0 zero residual",
++                "policy": "C2-trained "+checkpoint_descriptor["trained_method"]+" deterministic residual actor",
+                 "resets_during_rollout": 0, "object_state_writes_after_initialization": 0,
+                 "initialization": "env initial reset only, first source frame; no hold, no RSI, zero command phase at t0",
+                 "domain_randomization": False, "observation_corruption": False, "external_disturbances": False,

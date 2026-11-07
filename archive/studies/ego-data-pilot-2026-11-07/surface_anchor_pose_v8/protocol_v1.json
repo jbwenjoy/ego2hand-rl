@@ -1,0 +1,145 @@
+{
+  "schema": "fixed_surface_material_q8_phone6_search_protocol:8",
+  "CPU_run_authorized": true,
+  "config": {
+    "seed_names": [
+      "original",
+      "tilt5"
+    ],
+    "variables": "q_first8,t_palm3,rotvec_palm3; remaining12q fixed",
+    "q_trust_rad": 0.45,
+    "translation_trust_m": 0.025,
+    "rotvec_coordinate_trust_rad": 0.5,
+    "compression_target_m": 2.5e-05,
+    "pad_gap_window_m": [
+      -0.0001,
+      0.0002
+    ],
+    "normal_alignment_gate_deg": 1.0,
+    "anchor_closure_gate_m": 0.0002,
+    "max_search_evaluations_per_seed": 1000,
+    "max_search_heavy_queries_per_seed": 6000,
+    "max_search_wall_seconds_per_seed": 120.0,
+    "max_final_heavy_queries_per_seed": 3000,
+    "max_final_wall_seconds_per_seed": 60.0,
+    "max_nfev": 100,
+    "FD_steps14": [
+      0.0001,
+      0.0001,
+      0.0001,
+      0.0001,
+      0.0001,
+      0.0001,
+      0.0001,
+      0.0001,
+      1e-05,
+      1e-05,
+      1e-05,
+      0.0001,
+      0.0001,
+      0.0001
+    ],
+    "shortlist_per_seed": 3,
+    "cache_max_entries": 128,
+    "final_geometries_max": 6,
+    "native_forward_max": 18,
+    "final_native_LP_max": 12,
+    "normal_cap_per_finger_N": 3.0,
+    "weights": {
+      "closure_per_0p1mm": 5.0,
+      "normal_difference": 10.0,
+      "scaled_wrench6": 100.0,
+      "negative_geometry_per_0p1mm": 50.0,
+      "q_style_per_0p3rad": 0.02,
+      "translation_style_per_0p02m": 0.005,
+      "rotvec_style_per_0p3rad": 0.005
+    }
+  },
+  "output_path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_anchor_pose_v8\\completed_v1",
+  "automatic_retry": false,
+  "source_pins": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_anchor_pose_v8\\solve_surface_anchor_pose_v8.py",
+      "bytes": 16463,
+      "sha256": "61c073624aa3cbf82ebea6ed1c6dbfe0a7a64f0f796479dfd603aaf28a20cfb7"
+    },
+    "native_wrapper": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\evaluator_contact_design_v7.py",
+      "bytes": 8321,
+      "sha256": "26a960d87e4be004afcb74e2616b39ae52dd128983eea2ee6dce25f4692860de"
+    },
+    "native_base": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\evaluator_native_v6.py",
+      "bytes": 19267,
+      "sha256": "0a7a15cf16d98066920de3a95dc7b0b1a9faf61d387c24cf43a1b38f1aa2a16f"
+    },
+    "static_geometry": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\retarget_gravity_v3\\evaluator_v3.py",
+      "bytes": 23763,
+      "sha256": "090cf6535f5249de4377a0e022ed7c87b555ad69ed7b570f995badb4d2245d57"
+    },
+    "scaled_wrench_LP": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\wrench_residual_v6\\scaled_wrench_residual_lp_v6.py",
+      "bytes": 8853,
+      "sha256": "bee7223fd8d7c22acd0481b9228d2a38d16130eee12743ae3e4c39a78dd4a651"
+    },
+    "native_wrench_LP": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\native_wrench_lp_v7.py",
+      "bytes": 6836,
+      "sha256": "e422b673d4644c15f1d13af2a083bdac2ff97c2fd653ce28fb631f887a6b7012"
+    },
+    "strict_native_witness_LP": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\strict_support_lp_guarded_v7.py",
+      "bytes": 7383,
+      "sha256": "6395a7d9d6f182426585dbc1e77a7a08a5c19324ae2463e894372d611f5491b1"
+    },
+    "native_LP_adapter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\scan_body_axis_reference_v7.py",
+      "bytes": 9478,
+      "sha256": "81caf8e93b4e1ec70bf58b7e42cc8343fc0624a56e385ae03cf8c097e88bb22b"
+    }
+  },
+  "inputs": {
+    "surface_anchors": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\contact_patch_v7\\paired_surface_anchors_v1.json",
+      "bytes": 18391,
+      "sha256": "307e91a728c14fc4f799465649bc11f71c1b0be0971a3ec289d2a1acfaf565bb"
+    },
+    "native_search_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_equilibrium_v6\\completed_v1\\report.json",
+      "bytes": 2336903,
+      "sha256": "ff9d0cdeabd766ba29e1d6da6d049f42aa4dbd92ae7c1bd87301be0a3518438f"
+    },
+    "reference_design": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\reference_seed_design_v7\\report.json",
+      "bytes": 20255,
+      "sha256": "02ad38111fac7aaef2705bc3e5cac97e1e42a5b698f6cac86b840e40481adb62"
+    },
+    "native_J_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\contract_v1\\report.json",
+      "bytes": 9165,
+      "sha256": "86f9c6ff1662600d0407fb222e47130cda288fea94f25e5d1eee7bdcefce0d7b"
+    },
+    "native_LP_analytic_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\native_contact_design_v7\\analytic_contract_v1\\report.json",
+      "bytes": 55298,
+      "sha256": "ff39dcd614c7e17ec5a3bdece0fc6497be15a0b2e4076acc95370bfd507a199d"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    }
+  },
+  "surface_model": "Fixed projected points on actual filled triangles. hand points/normals in compiled geom frame; phone points/normals in body frame. Functional pad/finite pressure area UNKNOWN.",
+  "conditional_force_model": "Object force applied at phone material B, hand reaction at fixed hand material A; closure target B\u2212A=\u221225um*nH and normal opposition. This conditional model can have a small tangent-force couple while A!=B. No direct torsion; conservative8ray requires equal actual normal for subset interpretation.",
+  "final_validation": "At most3shortlist/seed: complete22+189 independent geometry, new actual native multi-contact/J, native4ray minimax and force-hard/moment-box LP; requested moment1e\u22124Nm gate unchanged, solver box inset1e\u221210Nm. Possible2extra fresh native command probes each for preload/repeat. No actual dynamics steps.",
+  "budget_scope": "Perseed static search at most1000evals/6000heavy/120s; final cooperative geometry budget3000heavy/60s, plus bounded18total native forwards and12final LPs. Report all actual counters and budget stops. Load/save overhead separately included in measured wall time.",
+  "original_goal_and_qualification": "Same fixed physical model/wrist/scale/gains/materials; original ego material targets retained. Search success does not qualify faithful ego tracking, real parameters, learned method, native equilibrium or2s holding.",
+  "training_GPU_or_physics_steps_authorized": false
+}

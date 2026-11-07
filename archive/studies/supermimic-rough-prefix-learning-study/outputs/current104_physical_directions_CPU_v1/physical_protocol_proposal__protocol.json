@@ -1,0 +1,696 @@
+{
+  "schema": "current104_same_Warp_physical_FD_proposal:1",
+  "status": "DRAFT_NOT_AUTHORIZED_NOT_IMPLEMENTED_NOT_RUN",
+  "created_utc": "2026-11-04T03:45:28.596563+00:00",
+  "GPU_run_authorized": false,
+  "training_authorized": false,
+  "automatic_retry": false,
+  "basis": "Post CPU-diagnostic design; known CPU175/288 out-of-domain pairs motivate a declared symmetric interior-coordinate experiment. This is not a pre-CPU preregistration.",
+  "purpose": "Local one-control-interval absolute-target causal FD versus all3 frozen104 WMs, on same nativeWarp backend/cadence and newly captured complete snapshots.",
+  "implementation": {
+    "worker": null,
+    "supervisor": null,
+    "checker": null,
+    "status": "PENDING_source_implementation_and_independent_CPU_review_then_separate_Root_authorization"
+  },
+  "inputs": {
+    "CPU_protocol": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\protocols\\rough-wm-onpolicy-cpu-diagnostic-v1.json",
+      "sha256": "18ef4ad5b39c8ea4ef178665c78d44e9cb3f34f59a56ca2917b9403defd415f7"
+    },
+    "CPU_runplan": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\configs\\WM-onpolicy-CPU-diagnostic-runplan-v2.json",
+      "sha256": "f0076db1c26954d324878933cccb36e942f28ac4cdf800d5b16eaa5208867ef6"
+    },
+    "CPU_result_read_as_provenance_only": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\WM_onpolicy_CPU_diagnostic_v1\\report.json",
+      "sha256": "ba388439767411732785d7000eeed38089fb9cd2aca972dfa7c570a83b21899c"
+    },
+    "models": [
+      {
+        "method": "A1L",
+        "seed": 0,
+        "iteration": 2000,
+        "checkpoint": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a1l_seed0_v1\\train\\model_final.pt",
+          "sha256": "5a3f48d6cbf24e0a177f57e21ed6ce83992ac01bbc3af273653633bae2cea59c"
+        },
+        "training_config": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a1l_seed0_v1\\config.json",
+          "sha256": "1bfdb47bfd9adcf5e2adcf9b8646a8f48f545c6d25cc7c01eec22aa7dc09fdaa"
+        },
+        "actual_physical_context": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a1l_seed0_v1\\fixed_physics_context.npz",
+          "sha256": "c700b7b4add0420f3f84fbfc8f8bbf62e4d29ce61325f81666eb0918cf97ddc2"
+        },
+        "final_health": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\health_primary_a1l_final_v1\\report.json",
+          "sha256": "237c6cd6e29f0da7423f9d4858ae536555f1d4ff7ff1dad6e909b70798cb010f"
+        }
+      },
+      {
+        "method": "P_ONLY",
+        "seed": 0,
+        "iteration": 2000,
+        "checkpoint": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_p_only_seed0_v1\\train\\model_final.pt",
+          "sha256": "c73044119386d8041eaed3e28ab456b5b0a973e220773f1fddc406cb72b22bbe"
+        },
+        "training_config": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_p_only_seed0_v1\\config.json",
+          "sha256": "9dcfac7422d3e23b76b234dde835b00f98b70b319db45db3b675b9f557bebcb3"
+        },
+        "actual_physical_context": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_p_only_seed0_v1\\fixed_physics_context.npz",
+          "sha256": "c700b7b4add0420f3f84fbfc8f8bbf62e4d29ce61325f81666eb0918cf97ddc2"
+        },
+        "final_health": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\health_primary_p_only_final_v1\\report.json",
+          "sha256": "2ace47609b3700d9b725566c9cb1efa50e3baea4204f103a71135dc15006219d"
+        }
+      },
+      {
+        "method": "A2",
+        "seed": 0,
+        "iteration": 2000,
+        "checkpoint": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a2_seed0_v1\\train\\model_final.pt",
+          "sha256": "6cb4659e34e02b230b1e6449b186fb99817f6e0c3e732c453f6946d883363210"
+        },
+        "training_config": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a2_seed0_v1\\config.json",
+          "sha256": "bb241593481f3159dc5f9e54d4aaa5aec42580ef62751a09c938f6c715c1f432"
+        },
+        "actual_physical_context": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\primary_a2_seed0_v1\\fixed_physics_context.npz",
+          "sha256": "c700b7b4add0420f3f84fbfc8f8bbf62e4d29ce61325f81666eb0918cf97ddc2"
+        },
+        "final_health": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\health_primary_a2_final_v1\\report.json",
+          "sha256": "4c14c0bd69f174802212d0af1af7960273057c32d0ca6ed1a26a46d22fea08e5"
+        }
+      }
+    ],
+    "saved_trajectories": [
+      {
+        "name": "A0",
+        "directory": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2",
+        "state_rows": 61,
+        "physics_intervals": 60,
+        "control_transitions": 15,
+        "input_pins": {
+          "raw_states.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\raw_states.npz",
+            "sha256": "e1e8aa736178a5ac49a9e2cbfc6583b95e50e6fc4c1e67936e17edf3f1b5d494"
+          },
+          "control_events.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\control_events.json",
+            "sha256": "e291689c8a6ce2eb53415cc6b756081cfe3cd3d86f84cc14577c768bcd628201"
+          },
+          "solver_samples.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\solver_samples.json",
+            "sha256": "85e4cd851b5c6dd90759fda690f63bce0bf1ec7c773b54dc092ad7238b646b75"
+          },
+          "config.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\config.json",
+            "sha256": "f69d638095408a5b6906674b73dcac4d5c7ee0771558d1b0e6321a99d51f8aef"
+          },
+          "evaluation.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\evaluation.json",
+            "sha256": "659f734b9f2cfeeb2770371c5c5330ce62a0e14efbda56c14a00890913fe6ddd"
+          },
+          "result.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\result.json",
+            "sha256": "5b060cdc9c90139b8ecdb19f2d16c8c21d205e758986f8b57659f826ff8df0d3"
+          },
+          "runtime.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\runtime.json",
+            "sha256": "742a8ae4db7fc6e1692abaf94e742bb3efc504b412886d78c569c249e5e6259a"
+          },
+          "capacity_audit.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\capacity_audit.json",
+            "sha256": "7bb7a88e0579b7a0e51d35b7b948f2c93d71f490ef2a8dbd18996bf8dc9d206c"
+          },
+          "requested_initialization_and_control.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\requested_initialization_and_control.npz",
+            "sha256": "ab0c31d4387a0177bca8d59109ba2ae9f5779fedbcd0e58719a72a4be61b6e3f"
+          },
+          "actual_context_readbacks.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\actual_context_readbacks.npz",
+            "sha256": "681f704b9f44335f7fb3124dc1184f43f8f8982a8fdae7e5c2ba5d1c6a509286"
+          },
+          "expected_context_fields.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\expected_context_fields.npz",
+            "sha256": "d164d5be9939b9430fd27cda11821e76df11dec03922c9e9c6b55cd1b405288d"
+          },
+          "nominal_model.mjb": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\nominal_model.mjb",
+            "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+          },
+          "controller_descriptor.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\controller_descriptor.json",
+            "sha256": "b8cbcc0e2f283fe3032a6b3bbfed7ec75e73d5b361d80da6108d6474f31fa315"
+          }
+        }
+      },
+      {
+        "name": "A1L",
+        "directory": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1",
+        "state_rows": 61,
+        "physics_intervals": 60,
+        "control_transitions": 15,
+        "input_pins": {
+          "raw_states.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\raw_states.npz",
+            "sha256": "7ad0affbce1e6c369dc131a6af29af4ca026a7af43b8fcc844440f4d8ecb892a"
+          },
+          "control_events.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\control_events.json",
+            "sha256": "d81347396beb622aee3f388473d9dc52da53d35dfc388f689d0beeb5bb55c6f0"
+          },
+          "solver_samples.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\solver_samples.json",
+            "sha256": "04ffff316f466c798800ae97f0d21f2917dff2fbad3112a276c3b4ca6d5fd468"
+          },
+          "config.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\config.json",
+            "sha256": "254189ed3ec79ba3732e9fe6215920b9ebc9a9d8e6a561817af8469420c844c5"
+          },
+          "evaluation.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\evaluation.json",
+            "sha256": "392bf251238548c2be0919a462a134cfc1ed4511966fba51373a4079e8829e8b"
+          },
+          "result.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\result.json",
+            "sha256": "33a159f580ee7ebfd6af1fbbad14e167cf1bf6f34da3baeae294ac49908630ae"
+          },
+          "runtime.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\runtime.json",
+            "sha256": "7e373958803db5d6cd2a618a0ba265ea68dc7ae188d39655902dd7006c7c422c"
+          },
+          "capacity_audit.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\capacity_audit.json",
+            "sha256": "c663e43f7307b5770ef28acb1f3448428a0888ba17587f5c614dc2af33caf836"
+          },
+          "requested_initialization_and_control.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\requested_initialization_and_control.npz",
+            "sha256": "ab0c31d4387a0177bca8d59109ba2ae9f5779fedbcd0e58719a72a4be61b6e3f"
+          },
+          "actual_context_readbacks.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\actual_context_readbacks.npz",
+            "sha256": "681f704b9f44335f7fb3124dc1184f43f8f8982a8fdae7e5c2ba5d1c6a509286"
+          },
+          "expected_context_fields.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\expected_context_fields.npz",
+            "sha256": "d164d5be9939b9430fd27cda11821e76df11dec03922c9e9c6b55cd1b405288d"
+          },
+          "nominal_model.mjb": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\nominal_model.mjb",
+            "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+          },
+          "controller_descriptor.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\controller_descriptor.json",
+            "sha256": "f34f3124fca3d4dc72f6716e12e846c49b84cf7a45211f63f1a02595b0e78ad0"
+          }
+        }
+      },
+      {
+        "name": "P_ONLY",
+        "directory": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1",
+        "state_rows": 61,
+        "physics_intervals": 60,
+        "control_transitions": 15,
+        "input_pins": {
+          "raw_states.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\raw_states.npz",
+            "sha256": "45ee1b22a355342a6355fcff3706989a5d1031725c5d5276c49e078e6ccce93d"
+          },
+          "control_events.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\control_events.json",
+            "sha256": "c6820a0907a1952ca85d850e88cba853612dc4dd27eaae0c3f22791987f35f47"
+          },
+          "solver_samples.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\solver_samples.json",
+            "sha256": "8e0a62cc2e85e2ae1113f61a7d5687a732f75d0dd210bc8a5948e887c60e6c77"
+          },
+          "config.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\config.json",
+            "sha256": "ad22dc95d909ab5266d10391c4f3110d52234cda50d28602789fd2c3b25ae9d0"
+          },
+          "evaluation.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\evaluation.json",
+            "sha256": "cb7e7b256e7d8fde308747dbc71f44871135ca1360184100c656e553a403712e"
+          },
+          "result.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\result.json",
+            "sha256": "1203d66fb238b78073faf1b6206eb3bd04d4f96c1cb9a982ea55a51c9ff4e4b0"
+          },
+          "runtime.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\runtime.json",
+            "sha256": "d1657ec9cf293845d9fdf25ef5b3a1fdba0662ea2f77d8ebf32588acd7a7c19e"
+          },
+          "capacity_audit.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\capacity_audit.json",
+            "sha256": "c663e43f7307b5770ef28acb1f3448428a0888ba17587f5c614dc2af33caf836"
+          },
+          "requested_initialization_and_control.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\requested_initialization_and_control.npz",
+            "sha256": "ab0c31d4387a0177bca8d59109ba2ae9f5779fedbcd0e58719a72a4be61b6e3f"
+          },
+          "actual_context_readbacks.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\actual_context_readbacks.npz",
+            "sha256": "681f704b9f44335f7fb3124dc1184f43f8f8982a8fdae7e5c2ba5d1c6a509286"
+          },
+          "expected_context_fields.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\expected_context_fields.npz",
+            "sha256": "d164d5be9939b9430fd27cda11821e76df11dec03922c9e9c6b55cd1b405288d"
+          },
+          "nominal_model.mjb": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\nominal_model.mjb",
+            "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+          },
+          "controller_descriptor.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\controller_descriptor.json",
+            "sha256": "f1f3a265cdb7fd7d99db7432d842f00adb5a3a8195f75fc8bbe241359ce1a308"
+          }
+        }
+      },
+      {
+        "name": "A2",
+        "directory": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1",
+        "state_rows": 61,
+        "physics_intervals": 60,
+        "control_transitions": 15,
+        "input_pins": {
+          "raw_states.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\raw_states.npz",
+            "sha256": "a997ec9ea1ad50a56fc48fbd59773216e8e00c786b4ad32cae6b4e6044aac45d"
+          },
+          "control_events.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\control_events.json",
+            "sha256": "660b9957e1c7d8e0a0253d18fdf750e50b5540fb6477a7cf8dc05a57f3cdf096"
+          },
+          "solver_samples.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\solver_samples.json",
+            "sha256": "d3a2b4279b502f0f88b514e63739a3cf01ddf0dab2af07545a29b7d738038227"
+          },
+          "config.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\config.json",
+            "sha256": "2a23324b2a6aec257b4ede4c039b8996986a88162c55dcb5241f49ff1a6664fc"
+          },
+          "evaluation.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\evaluation.json",
+            "sha256": "358d0cd419c42b227f769b1a40c587098d6732bee8c634f53a8757bd62511eba"
+          },
+          "result.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\result.json",
+            "sha256": "5a9608bfed1573cb357176086bfdf9817d09a80b132edbc6738d4e50d13f25b6"
+          },
+          "runtime.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\runtime.json",
+            "sha256": "95f7ffbaa4dc726555b61e5734804ecf3b5ec69f7464803ea70971592797c9e7"
+          },
+          "capacity_audit.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\capacity_audit.json",
+            "sha256": "c663e43f7307b5770ef28acb1f3448428a0888ba17587f5c614dc2af33caf836"
+          },
+          "requested_initialization_and_control.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\requested_initialization_and_control.npz",
+            "sha256": "ab0c31d4387a0177bca8d59109ba2ae9f5779fedbcd0e58719a72a4be61b6e3f"
+          },
+          "actual_context_readbacks.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\actual_context_readbacks.npz",
+            "sha256": "681f704b9f44335f7fb3124dc1184f43f8f8982a8fdae7e5c2ba5d1c6a509286"
+          },
+          "expected_context_fields.npz": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\expected_context_fields.npz",
+            "sha256": "d164d5be9939b9430fd27cda11821e76df11dec03922c9e9c6b55cd1b405288d"
+          },
+          "nominal_model.mjb": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\nominal_model.mjb",
+            "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+          },
+          "controller_descriptor.json": {
+            "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\controller_descriptor.json",
+            "sha256": "6f430230a8798608733d79fa56c718e4b221a3f7822f1fd1c0efb1d1b2513095"
+          }
+        }
+      }
+    ],
+    "input_bundle": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\input_bundle_v1\\bundle.json",
+      "sha256": "225b34e9ec26ae7d66c805c7312d5f1db76d39a8c6b1627682cda217b5261242"
+    },
+    "reference_arrays": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\outputs\\restored_prefix_control_export_v1\\reference_bspline.npz",
+      "sha256": "acbfab4c77d6fcffe7d67d65d6c8ab61a99f4808d302bc06fdc95ee5bd085df2"
+    },
+    "init_arrays": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\outputs\\restored_prefix_control_export_v1\\init_requested.npz",
+      "sha256": "fd74f89a7b12f4c83daa3525ca3d0ae3832b05e7d17faeb70372d41449991517"
+    },
+    "baseline_control_arrays": {
+      "path": "D:\\workspace\\supermimic-observation-restoration-prefix-study\\outputs\\restored_prefix_control_export_v1\\planned_control.npz",
+      "sha256": "185dcd52f7c693b5956070d8c8c51654576a34cb74e129bf6d35680e780ada56"
+    },
+    "actual_context": {
+      "path": "D:/workspace/supermimic-chord-study/outputs/a1l_paired_v2_clip007_2000iter_seed1/compiled/fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    }
+  },
+  "source_authorities": {
+    "native_snapshot": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\snapshot.py",
+      "sha256": "87a70d8715c35e5b2fb433912ae6229715c61738543f10b404547c7415009782"
+    },
+    "native_state_reader_and_sensor": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\pen.py",
+      "sha256": "c02906c409aedab59aaf68a5ef80f9dbcea52da10e72137091df81858262819a"
+    },
+    "native_state": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    },
+    "native_SimReader": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\sim.py",
+      "sha256": "47d0523d8b0d569544f2873a2c7c8a17cad27e570154d6220ec98d1a97aa5d20"
+    },
+    "native_Manager_step": {
+      "path": "D:\\workspace\\dex-supermimic-research\\.venv\\Lib\\site-packages\\mjlab\\envs\\manager_based_rl_env.py",
+      "sha256": "2f4b7eaca3c00c455187710b1c008bff6635d257bb7cc498637f87dd3345cbbf"
+    },
+    "rough_runtime": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\runtime_v2.py",
+      "sha256": "4cbef95884334bfccff8f801d8ff5b083f7399e7ff2f3b530c2fe3548d8ff497"
+    },
+    "rough_controller": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\controller.py",
+      "sha256": "7f934ba79d95d2e78e3260ed6ed863ef1eaea9cb43fded8fd356a5e3e043fddf"
+    },
+    "rough_native_environment": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\native_v2.py",
+      "sha256": "0ef31160a482a8b2c7ee11cf733d8ecc6f3bfe270c121a2812e09284e3eb095e"
+    },
+    "rough_policy_orchestration": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\evaluation_v2.py",
+      "sha256": "b1968041abc4d186f46dd527c54bee70bc55c86449d8bf6a8c4c5f2df589815d"
+    },
+    "rough_policy_probe": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\policy_probe.py",
+      "sha256": "5fd28e98545105a4669dd174bbd1ee6c98d2f4b10b3256187e8b7e59fc9fe90f"
+    },
+    "rough_A0_probe": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\probe.py",
+      "sha256": "7bc6c813d2803b4ed2a8f492cb6586ddd0900534bb81668992a88deb046f82f6"
+    },
+    "WM104_loader": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\world_model_checkpoint_v2.py",
+      "sha256": "ab15f23b569d259cbca587e2b6f883c509ae15584567fcc8c27443787f294a20"
+    },
+    "state58_codec": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\saved_state_codec_v3.py",
+      "sha256": "8321538887c660456fc50ce8fc37d3b130760212fa63c905310bbd6a079d5156"
+    }
+  },
+  "historical_experience": {
+    "old_serial_plan": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\wm_gradient_probe_serial\\plan.json",
+      "sha256": "3790343453073972a2a239092a9669f94fe5806ca6eeb1930734297d0875ba75"
+    },
+    "old_serial_summary": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\wm_gradient_probe_serial\\summary.json",
+      "sha256": "505986e597d83e2068daabce34ca02c54fab724c1111fbff42627e47a655da02"
+    },
+    "old_serial_source_current_bytes": {
+      "path": "D:\\workspace\\supermimic-chord-study\\scripts\\probe_world_model_gradients.py",
+      "sha256": "74420b5a66cc8d3a3fd055b5f1c21b879117592d6259fa90051f94a023d76070"
+    },
+    "old_Manager_microprobe_source": {
+      "path": "D:\\workspace\\supermimic-control-feasibility-draft\\scripts\\braking_microprobe.py",
+      "sha256": "1ca8c81993c0576539573214405d8dcf6b02a8473e6c10815e82e20af40fd347"
+    },
+    "interpretation": "Old296 serial qualification belongs to oldformat3/151reference/controller. A later Manager microprobe failed baseline despite exact restore. Neither result qualifies current104; fullsnapshot plus fresh replay gates remain mandatory."
+  },
+  "selection": {
+    "trajectory_order": [
+      "A0",
+      "A1L",
+      "P_ONLY",
+      "A2"
+    ],
+    "phase_k": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "state_count": 16,
+    "one_source_lineage": true,
+    "training_seed": 0,
+    "quality_or_signal_based_state_selection": false,
+    "best_attempt_selection": false,
+    "source_window_half_open": [
+      200,
+      216
+    ],
+    "reference_qualified": false
+  },
+  "donor": {
+    "worlds": 1,
+    "environment_allocation": "One native Manager world per path; finish donor/snapshots/branches in that same instance before close; no cross-world solve used as truth.",
+    "action_source": {
+      "A0": "15x20 exact declared zero raw actions; original A0 event file has no action field, do not pretend it was logged.",
+      "A1L_P_ONLY_A2": "exact control_events[k].action[0], FP32, all15; actor_raw_action equality checked, no live Actor inference or new noise"
+    },
+    "length": "15 transitions,60x5ms,15 normal Manager postinterval forwards,16 observations; no auto reset or quality truncation",
+    "init": "same checked bundle analytic nonzero qd/object world-v/body-omega, q/object/mocap/u0; no original source robot q or cached wrist substitution",
+    "model_context_order": "nominalMJB upload -> actual8 host/devicecopy -> set_const_0(restore=True) -> verify all8+xi46 -> first reset -> full initial readback",
+    "instrumentation": "read/copy/synchronize only; do not add forward, sense, observation compute, controller process or physical step",
+    "snapshot_phase": "phase k immediately before process_action; k>0 is after previous original Manager forward/command/sense/obs; k0 after checked reset",
+    "archive_comparison": "compare all61 q/qvel and executedu timeline, report selected snapshot and next-state drifts in physical units; do not replace any original quality outcome or pick a donor that resembles archive",
+    "archive_gate": "initialization/u/context identity is setup-required; subsequent q/qvel/object drift is a separately reported archival-reproduction flag, not a replacement for fresh baseline qualification",
+    "fresh_WM_inputs": "derive native58 from actual newly captured donor and nominal executedu, not silently reuse archivedx at a drifted state; retain oldCPU matrix as separate inputs/cost"
+  },
+  "snapshot_contract": {
+    "integration_signature": "mjSTATE_INTEGRATION via actual installed mj_stateSize/get_state/set_state; exact integer signature/version recorded",
+    "required_integration_channels": [
+      "time",
+      "qpos",
+      "qvel",
+      "act",
+      "qacc_warmstart",
+      "ctrl",
+      "qfrc_applied",
+      "xfrc_applied",
+      "mocap_pos",
+      "mocap_quat",
+      "eq_active",
+      "userdata",
+      "plugin/integration channels if present"
+    ],
+    "full_inprocess_snapshot": "same-instance WarpTaskSnapshot semantics: all reachable wp_model/wp_data arrays including warmstart/contact/constraint caches, whitelisted task/manager tensors/containers, object identities and Python/NumPy/TorchCPU/CUDA RNG",
+    "walker_limit": "Native walker does not traverse function closures, clone NumPy arrays or arbitrary rough_prefix custom classes. Explicit copies/inventory/restore of every used external mutable controller/observer/cache sidecar are mandatory, not inferred from integration exact0.",
+    "integration_limit": "INTEGRATION does not include derived/contact/sensordata/overflow. Its set_state does not itself clear overflow. Full WarpTaskSnapshot array restoration can rewind those flags; distinguish the two operations in logs.",
+    "extra_explicit_sidecars": [
+      "full PEN memory including phase/start/end/age/counters/c1/c2/a1/a2/frozen target/limits",
+      "ActionTerm raw/processed/targets/validmask and controller pending state",
+      "observation history/delay/cache",
+      "termination/manual-reset pending state",
+      "physics/episode/command counters",
+      "compiled graph/model/data identities"
+    ],
+    "restore": "outside branch only: full snapshot.restore(); exact readback; integration set/get exact; explicit sidecar equality; no forward to make a failed restore look plausible",
+    "inside_branch_state_writes": 0,
+    "only_inside_branch_intervention": "executed absolute target after original action processing; original action-manager physical ctrl writes remain normal",
+    "no_reduced_state_restart": "qpos/qvel-only, mj_resetData, cross-world clone, nativeCPU solve are prohibited truth substitutes"
+  },
+  "branch": {
+    "baseline_repetitions_per_snapshot": 3,
+    "physics_steps": 4,
+    "physics_dt_s": 0.005,
+    "control_dt_s": 0.02,
+    "cadence": "original env.step(source_raw_action): original process/update residual memory, apply held cached target4 times, original scene updates/termination/reward then exactly one original forward/command/sense/obs",
+    "intervention_hook": "after original process_actions, replace cached executed_targets with chosen lawful absolute target; preserve raw action, processed EMA c1/c2 and phase semantics; verify actual native ctrl bitexact at all4substeps",
+    "original_policy_probe_limit": "Do not run the original probe baseline+EMA/C2 actualtarget assertion unchanged on perturbation branches: it correctly rejects intentional absoluteu interventions. New observer must independently validate originalsource EMA sidecars and separately validate declared actualu_override, without mutating the frozen original probe.",
+    "controller_semantics": "do not reconstruct residual from a previously clamped target; no second C2 projection, no clipping/resampling perturbations, no added state/object/force assistance",
+    "phase": "x at snapshot k; x1 rawpostintegration20ms; physical objective current ref k primary, k+1 tracking secondary; no u15",
+    "execution_order": "per path: full donor; phase0 baseline0/1/2 then directions; phase4,8,12 likewise; fixed model-independent directions; close then nextpath",
+    "failure": "exact restore/setup/capacity/nonfinite failure immediately stops; a numerical output replay failure is judged after the predeclared3baseline repetitions, then stops before perturbations. Preserve all partial/NOT_RUN cells; no retry/new donor or luckybaseline selection.",
+    "baseline_quality_failure": "position/shaft/taskquality never selects snapshots or aborts a finite engineering-valid branch"
+  },
+  "directions": {
+    "count_per_snapshot": 8,
+    "shared_by_all3_models": true,
+    "seed": 2026110401,
+    "PRNG": "NumPy default_rng",
+    "eps_target_L2_rad": [
+      0.002,
+      0.001
+    ],
+    "coordinate_roundoff_guard": "8*eps_float32*max(1,abs(saved_actualu_j),abs(L_C2_j),abs(U_C2_j)); NEW_PROPOSED pre-physical FP32 arithmetic allowance, not a physical tolerance",
+    "mask": "free_j = min(saved_actualu_j-L_C2_j,U_C2_j-saved_actualu_j) >= .002 + coordinate_roundoff_guard_j, using actual FP32 inner(hardjoint intersect ctrlrange) bounds of the frozen C2_020 controller; require new donor baselineu bitexact to saved_actualu, never recompute a favorable mask after replay",
+    "construction": "path order A0/A1L/P_ONLY/A2 then phase0/4/8/12; each state draw standard_normal((8,20)), retain raw20 and full20-unit vectors; zero non-free raw coordinates then L2 normalize once; same resulting8directions used for every WM",
+    "empty_or_numerically_zero": "record NO_FREE_COORDINATES/ZERO_MASKED_VECTOR and all required omitted branches; never resample or select by response",
+    "domain": "plusminus=(savedu.astype(float64) +/- eps*direction_float64).astype(float32); save all effectiveFP32directions and crossing masks, validate before physics; violation is invalid branch, no clamp; no internalctrl clipping may erase intended target difference unnoticed",
+    "scope": "symmetric interior-coordinate subspace, not complete tangent cone; bound-near face-normal/one-sided inward directions remain untested",
+    "full_dimension_CPU_evidence": "prior180CPU/full20-random FD results and175skips retained separately; new masked directions never relabeled as their completion"
+  },
+  "counts_maximum": {
+    "snapshots": 16,
+    "direction_cases": 128,
+    "central_FD_pairs": 256,
+    "perturbation_branches": 512,
+    "baseline_branches": 48,
+    "all_branches": 560,
+    "branch_substeps": 2240,
+    "branch_native_forwards": 560,
+    "donor_transitions": 60,
+    "donor_substeps": 240,
+    "donor_native_forwards": 60,
+    "startup_forwards": 4,
+    "total_physics_substeps": 2480,
+    "total_postinterval_forwards": 620,
+    "aggregate_simulated_time_s": 12.4,
+    "physical_branch_cost_not_multiplied_by_WM_count": true,
+    "WM_directional_AD_values": 384,
+    "maximum_WM_vs_physical_slope_comparisons_including_both_eps": 768,
+    "if_mask_or_gate_fails": "actual counts lower; retain planned560 denominator and exact omitted-reason table"
+  },
+  "numerical_gates": {
+    "source": "Legacy numbers are preexisting old296 rules, not inherited qualification. Extensions explicitly NEW_PROPOSED before any new physical result.",
+    "integration_restore_abs_atol": {
+      "value": 0.0,
+      "origin": "LEGACY_old296"
+    },
+    "full_arrays_memory_RNG_ctrl_readback": {
+      "value": "bitexact",
+      "origin": "NEW_PROPOSED_stronger_complete-state gate"
+    },
+    "baseline_output_vs_fresh_donor": {
+      "q_maxabs_rad": {
+        "value": 2e-05,
+        "origin": "LEGACY_old296_position-channel rule"
+      },
+      "object_p_maxabs_m": {
+        "value": 2e-05,
+        "origin": "LEGACY_old296_position-channel rule"
+      },
+      "object_R_entry_maxabs": {
+        "value": 2e-05,
+        "origin": "LEGACY_old296_position-channel rule; also report SO3 angle without an extra hidden gate"
+      },
+      "qd_maxabs_rad_s": {
+        "value": 0.0002,
+        "origin": "LEGACY_old296_velocity-channel rule"
+      },
+      "object_v_maxabs_m_s": {
+        "value": 0.0002,
+        "origin": "LEGACY_old296_velocity-channel rule"
+      },
+      "object_omega_maxabs_rad_s": {
+        "value": 0.0002,
+        "origin": "LEGACY_old296_velocity-channel rule"
+      },
+      "unscaled_object_reward_abs": {
+        "value": 2e-05,
+        "origin": "LEGACY_old296; now refk primary rather than silently refk+1"
+      },
+      "all3_required": true
+    },
+    "clock_abs_s": {
+      "value": 2e-06,
+      "origin": "CURRENT_codec/raw timeline contract; raw drift retained"
+    },
+    "archival_drift_flags": "same per-channel output tolerances above, separately named; no tuning after observations",
+    "real_signal_numerator_floor": {
+      "value": 1e-05,
+      "origin": "LEGACY_old296 unscaled reward numerator"
+    },
+    "repeat_noise_multiplier": {
+      "value": 10.0,
+      "origin": "LEGACY_old296"
+    },
+    "noise": "max(baseline3 reward peak-to-peak, max|baseline - fresh donor nextstate reward|)",
+    "stable_nonflat": "both epsilon |rplus-rminus| > max(1e-5,10*noise), signs agree, relative slope disagreement <=.5",
+    "epsilon_relative_slope_disagreement": {
+      "value": 0.5,
+      "origin": "LEGACY_old296"
+    },
+    "flat_or_unstable": "report separately; never count as sign-correct or delete from denominators",
+    "threshold_retuning_after_result": false
+  },
+  "sensor_force_and_time": {
+    "authoritative_self15": "native PenSimReader.attach_capture reward_snapshot.contact plus original finger_collision.data.found, copied at original reward compute after4steps and before original Managerforward; no extra sense/query or HO substitution",
+    "state58_label": "reward_snapshot.physics and independent rawpostintegration20ms q/qvel transform; save both and check agreement",
+    "force_label": "original reward_snapshot.torque and per5ms preintegration actuator/contact solver quantities; before/afterforward records kept separate",
+    "per5ms": "full q/qvel/rawclock/control/externalforces/nacon/nefc + original wp contact type/geom/efc association + contact dist/point/frame/force6 with conventions + solverCOM/pose; explicit pre/post indices and times",
+    "contact_phase": "native self15/torque at lastsolver~kdt+.015; x1 at kdt+.020; no forward20ms contact substituted for15ms label",
+    "sensor_cache": "Keep every original scene.update(.005), which invalidates sensor caches. A naked4directsteps then reader.contact can return restored donor cache and is prohibited. Per5ms before scene.update cache is not authoritative; use reward_snapshot contact as native training label and record direct rawbuffer/cached found with exact readpoint.",
+    "force_causality": "force-on-object normal and direct contact moment preserved; no force invented from proximity; no net-wrench causal attribution from asynchronous samples",
+    "binary_contact_gradient": "save fresh labels for calibration; no continuous physical derivative of binary contact or force prediction qualification claimed"
+  },
+  "capacity": {
+    "expected_oneworld_capacities": {
+      "contacts": 192,
+      "constraints": 4096
+    },
+    "no_silent_capacity_change": true,
+    "external_host_ledger": "must live outside snapshot traversal and never be restored/cleared",
+    "readpoints": [
+      "before each snapshot.restore OR all flags into host ledger",
+      "after each branch OR all flags into host ledger",
+      "donor terminal before any restore",
+      "final before close"
+    ],
+    "reason": "snapshot.restore rewrites Warp overflow array to snapshot value, so a single finalsticky0 cannot qualify priorbranches",
+    "required": "every rawflag array finite/readable int and OR0, no reset/truncation, perstep actual maxima within actual capacities; unknown/nonzero invalidates engineering and stops",
+    "save": "all rawflag arrays, event/read IDs, branch/phase, shape,dtype,capacity,maxcounts and accumulatedOR with no guessed nworld"
+  },
+  "analysis": {
+    "objective": "same unscaled native object2+8 terms/radius.1/scales.05/.04 as frozenCPU protocol, at fixed refk primary; refk+1 separate tracking diagnostics",
+    "all_models": "evaluate all3WM gradients at the same freshdonor native58/xi46/zero174/actualu before comparing each to shared physical slopes",
+    "outputs": [
+      "physical rplus/rminus/baseline3 for all slots",
+      "3WM directional derivatives and their masked-coordinate norms",
+      "finite/domain/effectiveinput/saturation/noise/flat/stable classifications",
+      "q/qd/p/R/v/omega response deltas",
+      "source archive drifts and fresh replay errors",
+      "native self15 label consistency and logits/calibration kept separate"
+    ],
+    "force_saturation": "record effective PD force saturation and actual ctrl deltas; do not call saturation-induced flatness a contact-gradient failure",
+    "statistics": "sign agreement/correlation only for stated stable nonflat slots with complete denominators/coverage and path/phase breakdown. Snapshot/direction rows are dependent; one seen source/seed0, no inferential method-superiority CI/p-value.",
+    "no_accuracy_or_sign_success_threshold": true,
+    "no_suggested_step_or_policy_improvement_branches": true,
+    "qualification": "local one-step sampled interior-coordinate causal agreement only, conditional on complete replay gates; not fullstate/control-face/contact-force/global dynamics/CHORD cross-embodiment/ego/hardware qualification"
+  },
+  "cost_and_lifecycle": {
+    "new_teacher_cost": "all new donor capture and perturbation/baseline physical transitions are new probe/teacher costs, never charged to original matched training or old quality scores",
+    "ledger": [
+      "sourcecopy/CPUpreflight",
+      "model/context/graph setup",
+      "donor replay perpath",
+      "snapshot capture/restore",
+      "baseline physics",
+      "FD physics",
+      "WM CPU evaluation",
+      "host transfers/serialization/analysis",
+      "failed attempts/cleanup"
+    ],
+    "nested_times_not_added": true,
+    "record_external_process_wall": true,
+    "soft_worker_seconds": {
+      "value": 220,
+      "status": "NEW_PROPOSED_ENGINEERING_LIMIT"
+    },
+    "hard_owned_process_seconds": {
+      "value": 240,
+      "status": "NEW_PROPOSED_ENGINEERING_LIMIT"
+    },
+    "future_execution": "reviewed sharedGPUlock/reject worker/lifecycle exactOSPID/creation and bounded ownedtree cleanup, no retry; source/code/actualplan must be separately frozen and Root-authorized",
+    "quality_failure_not_execution_retry": true
+  },
+  "generator": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\build_samewarp_fd_proposal_cpu.py",
+    "sha256": "e1e265bdfd663344749ba3434797613dddeb33bde679b3c905304350b39ec462"
+  }
+}

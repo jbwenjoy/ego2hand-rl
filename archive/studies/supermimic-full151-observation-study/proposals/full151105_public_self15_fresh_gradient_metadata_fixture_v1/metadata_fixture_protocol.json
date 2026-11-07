@@ -1,0 +1,182 @@
+{
+  "schema": "full151105_public_self15_fresh_gradient_CPU_protocol:1",
+  "role": "exploratory_common_visible_fresh_endpoints_and_object_score_uVJP",
+  "input_aliases": [
+    "fresh_arrays",
+    "fresh_branch_index",
+    "fresh_config",
+    "fresh_engineering_saved540",
+    "fresh_report",
+    "fresh_snapshot_records",
+    "native_evaluation_protocol",
+    "native_evaluation_report",
+    "native_evaluation_saved12",
+    "physical_context_buffers",
+    "prior_task_gradient_protocol",
+    "prior_task_gradient_report",
+    "prior_task_gradient_saved27"
+  ],
+  "model_roles": [
+    "unwrapped_baseline",
+    "shared_public_losses",
+    "shared_public_plus_cross_target_consistency"
+  ],
+  "test_phases": [
+    24,
+    74,
+    124,
+    148
+  ],
+  "output_prefix": "full151105_public_self15_fresh_gradient_CPU_",
+  "cpu_threads": 4,
+  "score_contract": {
+    "function": "serial_probe105_calibration_v1.controlled_object_score_FP32",
+    "terms": "2_position_plus_8_shaft_endpoints",
+    "state_phase": "matched_POST20",
+    "goal_phase": "k",
+    "VJP_reduction": "score.sum()",
+    "includes_self15": false,
+    "includes_other_reward": false
+  },
+  "expected_counts": {
+    "own_trusted_torch_loads": 3,
+    "native_WM_constructors": 1,
+    "raw_deepcopies": 2,
+    "native_FW_attempted": 6,
+    "native_FW_returned": 6,
+    "endpoint_predictions": 456,
+    "center_predictions": 24,
+    "aux_head_FW": 4,
+    "uVJP_calls": 3,
+    "native_difference_calls": 7,
+    "optimizer_Actor_119f_MJB_Env_physics_GPU": 0
+  },
+  "physical_floor_rule": {
+    "minimum_score": 1e-05,
+    "empirical_multiplier": 10.0,
+    "two_eps_relative_disagreement_max": 0.5,
+    "relative_slope_denominator_floor": 1e-12,
+    "classification_slope_denominator": "2*requested_epsilon_rad",
+    "classification_scope": "Shared physical32groups, both epsilon rows retained for both models; descriptive only"
+  },
+  "comparison_modes": [
+    "actual_coordinate_secant",
+    "legacy_nominal_epsilon_effective_direction"
+  ],
+  "endpoint_input_scope": "SNAPSHOT8_REPEAT19_COMMON_VISIBLE_DESIGN_NOT_ACTUAL_PRE152",
+  "fresh_impulse_or_consistency_loss": false,
+  "actual_NPZ_model_FW_AD_reads": 0,
+  "CPU_run_authorized": false,
+  "GPU_run_authorized": false,
+  "training_authorized": false,
+  "Env_or_physics_authorized": false,
+  "checkpoint_iteration": 1000,
+  "inputs": {
+    "native_evaluation_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_boundary_public_self15_final_evaluation_CPU_run_v1.json",
+      "sha256": "109b4ebaa2b58e0a5c213fe315095853c6ad81abd2347190090eb0d979927dbd"
+    },
+    "native_evaluation_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_public_self15_final_evaluation_CPU_v1\\report.json",
+      "sha256": "0be1c8d0a7ba9ac446451ab3f7246945a4d5e937ab6202e465c768d89bbd52ff"
+    },
+    "native_evaluation_saved12": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_public_self15_final_prediction_saved_independent_v1\\report.json",
+      "sha256": "071cf051463565677f9702f1db6664ae6bf36a05ab4f35ff1fec3f55c603b205"
+    },
+    "physical_context_buffers": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_public_self15_final_evaluation_CPU_v1\\physical_context_buffers.npz",
+      "sha256": "3b62003bdf921bf768d462579273d9a883a2e2ed8955536f1ed7b1f9deec857e"
+    },
+    "fresh_config": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151105-fresh-calibration-full-v1.json",
+      "sha256": "1c9863a2174356268d99805ab98d03e9a5efcb57d7cc126dcefb9320c8752570"
+    },
+    "fresh_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_full_v1\\physical_report.json",
+      "sha256": "832ef1814acc962826868aea22d7b4a1548f6e6a66ee4fb7f948ee906b4809d0"
+    },
+    "fresh_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_full_v1\\physical_arrays.npz",
+      "sha256": "5388d861fc683eea9ee2a304a44e3c378e2f8a308f20c244fce11251680cdf9a"
+    },
+    "fresh_branch_index": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_full_v1\\branch_index.json",
+      "sha256": "cab9325c2e014e7a9222808690cf263c582614063cc3073c3c9001a163b9a182"
+    },
+    "fresh_snapshot_records": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_full_v1\\snapshot_records.json",
+      "sha256": "4ac88ceb984ab6c79eadc97ee91f4308f3c7dcb280e20f46c74eb4d86fed9189"
+    },
+    "fresh_engineering_saved540": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_fresh_calibration_full_saved_independent_v1\\report.json",
+      "sha256": "15b7da4ecbd9a0455108a9e10d5fbed21d3682d1eef42062bb2e8c2df1d0ec64"
+    },
+    "prior_task_gradient_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_component_task_gradient_CPU_run_v1.json",
+      "sha256": "92e7351a2bd3226a2474f02c239d61a717e4407cc02d002f3f7f64dab67d2a6f"
+    },
+    "prior_task_gradient_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_component_task_gradient_CPU_v1\\report.json",
+      "sha256": "f27f257defb29b95532b1cc1b7faa26b7b3144cf73a38f6fd2da2c8a2cca9960"
+    },
+    "prior_task_gradient_saved27": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_component_task_gradient_saved_independent_v1\\report.json",
+      "sha256": "362ea1b688f0374f3653711952b2364e2960638b4a618035d7cc882d9bc3f646"
+    }
+  },
+  "source_contract": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\public_self15_fresh_gradient_contract_v1.md",
+    "sha256": "dbdc02123ed5c7cf814d96da04605d7f2a6979ac1adf3b5aeafd24c9a840be15"
+  },
+  "source_pins": {
+    "file_0000__public_self15_fresh_gradient105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\public_self15_fresh_gradient105_v1.py",
+      "sha256": "7700904f0fcb1bc296dc9b860bf4ea784098ff915c7b7b318f30feb16586b037"
+    },
+    "file_0001__diagnose_full151_public_self15_fresh_gradient_cpu_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\diagnose_full151_public_self15_fresh_gradient_cpu_v1.py",
+      "sha256": "a3ac81882aaf4872e49463d0f3230a842f65c6f2ca4f4f0b753b55fbc6114bed"
+    },
+    "file_0002__check_full151_public_self15_fresh_gradient_cpu_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\check_full151_public_self15_fresh_gradient_cpu_v1.py",
+      "sha256": "e5ff54455e923da985521cd63d75ee837473879e0746f03bc8aff714983e8414"
+    },
+    "file_0003__boundary_public_self15_final_evaluation105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_public_self15_final_evaluation105_v1.py",
+      "sha256": "81ad78161c75b1720a77aead414ccb6c5a447b0f614e5e597a940aaa1ea77419"
+    },
+    "file_0004__component_task_gradient105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\component_task_gradient105_v1.py",
+      "sha256": "bc7d310a1b70f84cf257b973596ae5e01ad9e0cd3a1abe1e4e0a32e26b1a0921"
+    },
+    "file_0005__serial_probe105_calibration_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\serial_probe105_calibration_v1.py",
+      "sha256": "1418b7d61bea7274da51be23593807472e7edd7a1720a8bbd25c98624cff133a"
+    },
+    "file_0006__component_confirmation105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\component_confirmation105_v1.py",
+      "sha256": "f75302fa70a894300ceb3a71492b9cffd973244990f13be26cee5b7e5e112659"
+    },
+    "file_0007__response_calibration105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\response_calibration105_v1.py",
+      "sha256": "71efe05da17a37df4111158860443433304f1d57762e2377d4dbafc3b57ca27f"
+    },
+    "file_0008__boundary_impulse_component105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_impulse_component105_v1.py",
+      "sha256": "003aac369bcac69dff9312c79837a8faf5a583473898fdb64515aa7608b60317"
+    },
+    "file_0009__component_H8_donor105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\component_H8_donor105_v1.py",
+      "sha256": "0c77dc5255ffd2d7294dabdc7bbaf8ed09e80f3f2bc0eb89fee3954d268a6b13"
+    },
+    "file_0010__boundary_component_initial_parity105_v1.py": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_component_initial_parity105_v1.py",
+      "sha256": "2b5019b9bba1fe70258101dd35e77b7a1a691883ae53eeacd5fb9b9204af66e2"
+    },
+    "file_0011__public_self15_fresh_gradient_contract_v1.md": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\public_self15_fresh_gradient_contract_v1.md",
+      "sha256": "dbdc02123ed5c7cf814d96da04605d7f2a6979ac1adf3b5aeafd24c9a840be15"
+    }
+  }
+}

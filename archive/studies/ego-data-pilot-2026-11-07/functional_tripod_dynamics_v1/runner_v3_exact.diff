@@ -1,0 +1,29 @@
+--- run_functional_tripod_dynamics_v2.py
++++ run_functional_tripod_dynamics_v3.py
+@@ -103,7 +103,7 @@
+         screen.append(dict(candidate_id=cid,eligible_geometry=not reasons,reasons=reasons,
+             source_geometry=entry['candidate'],source_state_npz=entry['state_npz'],
+             geometry_unknown=g.get('unknown'),pad_bindings_count=len(candidate.get('pad_bindings',[]))))
+-        if not reasons:selected.append(dict(candidate=candidate,**entry))
++        if not reasons:selected.append(dict(candidate_data=candidate,**entry))
+     if len(set(ids))!=len(ids):raise ValueError('Unique candidate IDs')
+     if c['budget']!=dict(max_candidates=4,control_routes=3,dt_cases=2,maximum_cases=24,maximum_integration_steps=230400):raise ValueError('Fixed finite budget')
+     return c,out,binding,selected,screen
+@@ -149,7 +149,7 @@
+     Desired normal commands are not measured contact loads; no tangential load
+     or static-qacc criterion is inserted. All routes remain predeclared.
+     """
+-    c=item['candidate'];q=np.asarray(c['qpos27_F64'],dtype=np.float64)
++    c=item['candidate_data'];q=np.asarray(c['qpos27_F64'],dtype=np.float64)
+     with np.load(checked(item['state_npz']),allow_pickle=False) as z:
+         if z['qpos27_F64'].dtype!=np.float64 or z['qvel26_F64'].dtype!=np.float64 or z['qpos27_F64'].tobytes()!=q.tobytes() or z['qvel26_F64'].tobytes()!=np.asarray(c['qvel26_F64'],dtype=np.float64).tobytes():raise ValueError('Raw candidate state binding')
+     if np.any(q[:20]<m.jnt_range[:20,0]) or np.any(q[:20]>m.jnt_range[:20,1]) or abs(float(q[23:]@q[23:])-1)>1e-12:raise ValueError('Hardware joints/native quaternion')
+@@ -302,7 +302,7 @@
+             np.savez_compressed(out/'actual_frozen_model_parameters.npz',**parameter_arrays)
+             preparation=[]
+             for item in selected:
+-                phase='prepare_'+item['candidate']['candidate_id'];rv,raw=prepare_controls(m,item,mujoco,np,counts);routes.extend(rv);preparation.append(dict(candidate=item['candidate'],raw=raw,routes=rv))
++                phase='prepare_'+item['candidate_data']['candidate_id'];rv,raw=prepare_controls(m,item,mujoco,np,counts);routes.extend(rv);preparation.append(dict(candidate=item['candidate'],raw=raw,routes=rv))
+             write(out/'control_preparation.json',preparation)
+             available=[v for v in routes if v['available']];endpoints={v['name']:[] for v in available}
+             for variant in available:

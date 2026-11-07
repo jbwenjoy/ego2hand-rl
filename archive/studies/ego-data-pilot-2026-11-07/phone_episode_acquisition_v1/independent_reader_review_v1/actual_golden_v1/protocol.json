@@ -1,0 +1,74 @@
+{
+  "schema": "native_phone_reader_golden_contract_protocol:1",
+  "CPU_contract_execute_authorized": true,
+  "expected_steps_by_dt": {
+    "0.0003125": 64,
+    "0.00015625": 128
+  },
+  "F64_observer_abs_bound": 2e-12,
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\independent_reader_review_v1\\actual_golden_v1",
+  "inputs": {
+    "old_constant_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_constant_u_baseline_v1\\cpu_v1\\report.json",
+      "bytes": 17223,
+      "sha256": "81b49b29f57b5ab05aa8d71c986a77b893a3e85aaee500d9db7f2517c21a51d2"
+    },
+    "model_binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "model": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "trace_64": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_constant_u_baseline_v1\\cpu_v1\\matched_constant_u_seed0_rank0__dt312500ns\\trace.npz",
+      "bytes": 305692,
+      "sha256": "37d5b016db20dfca0607b3a4bb4725b8ca998f488cd7841bdfb73d39fc1cad0e"
+    },
+    "trace_128": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_constant_u_baseline_v1\\cpu_v1\\matched_constant_u_seed0_rank0__dt156250ns\\trace.npz",
+      "bytes": 556977,
+      "sha256": "d92e8e51a6080380d3dfe7dc08f8108a93e2038ce128a31ba214dad3ba5d7eb5"
+    }
+  },
+  "source_pins": {
+    "reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    },
+    "checker": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\independent_reader_review_v1\\run_golden_contract_v1.py",
+      "bytes": 9922,
+      "sha256": "83157ae48bb13f7e0543512e7af35239e9237be7703a3806e3e70a0d7a96080f"
+    },
+    "codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "state_contract": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "old_constant_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_constant_u_baseline_v1\\run_cpu_constant_u_baseline_v1.py",
+      "bytes": 30609,
+      "sha256": "1750796f7c21d39f706c912f0cafbe9e8c6c871b5fdb65840227cc5fa5ae04d2"
+    }
+  },
+  "budget": {
+    "MJB_reads": 2,
+    "fresh_MjData": 2,
+    "initial_forward": 2,
+    "integration_steps": 192,
+    "max_integration_steps": 256,
+    "observer_forward": 0,
+    "NN_training_GPU": 0
+  },
+  "scope": "One sequential pair of oldconstant firstH controls and resets. No collector job, no additional native tests or retries."
+}

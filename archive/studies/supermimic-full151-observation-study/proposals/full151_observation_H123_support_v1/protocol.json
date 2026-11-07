@@ -1,0 +1,126 @@
+{
+  "schema": "full151_observation_H123_support_CPU_protocol:1",
+  "contact_intent_variant_id": "source_rigid_H123_surface_projection_all151_v1",
+  "reference_variant_id": "legacy_H123_full151_SCP8_knownrough_v1",
+  "reference_states": 151,
+  "control_intervals": 150,
+  "source_window_half_open": [
+    200,
+    351
+  ],
+  "inputs": {
+    "observation_cues": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\observation_intent_cues_v1\\observation_intent_cues.npz",
+      "sha256": "a700c7c0ac6d04694830d7c5508a46a382e1b2923a052025217a06d7956232db"
+    },
+    "cue_metadata": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\observation_intent_cues_v1\\metadata.json",
+      "sha256": "5fc44a9947a277098f85c644eb44ddc5ce3427899e984f40827fe96dbb46a84d"
+    },
+    "cue_receipt": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\observation_intent_cues_v1\\receipt.json",
+      "sha256": "a03e5eb847d39c05e3ad7b9b595e2fc0bb6a295b47ff43f7719014f5c9fbae19"
+    },
+    "H123_declaration": {
+      "path": "D:\\workspace\\supermimic-observation-contact-intent-study\\outputs\\frame0_h123_seeded_baseline_v3\\frozen_anchor_bindings.json",
+      "sha256": "91022e42f8a3a6ef215695d8975e46fcc92cb88e431018b412eca77db391775f"
+    },
+    "full151_input_bundle": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\bundle.json",
+      "sha256": "59406c6214a085afba7efcc2b33880d5c82b409ee4f6485ec71c073fec19dc76"
+    },
+    "model": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\rotating_reference_warp_a0\\model.mjb",
+      "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+    },
+    "actual_context": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed1\\compiled\\fixed_physics_context.npz",
+      "sha256": "5edd125973015c034d45e47092786b7fac105a06af52864582afa08d8660b89a"
+    },
+    "legacy_basis_archive_only": {
+      "path": "D:\\workspace\\supermimic-chord-study\\outputs\\reference_contact_targets_v1\\contact_targets.npz",
+      "sha256": "4f1078706e36dc3db890c41cddb4693a0d3512e9be8e43514181ab1637da9cbc"
+    }
+  },
+  "sources": {
+    "producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\build_full151_observation_intent_targets_cpu_v1.py",
+      "sha256": "826e4139d0619e609bd6e8fb183871bbe91a46eb758773234a73a7fe703a8f25"
+    },
+    "contacts_math": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\vendor\\frozen_contact_math\\contacts.py",
+      "sha256": "79b53c63dd5573c9908d052f29c678f1724ff5be3ffa5b7c077421cbf4788212"
+    },
+    "cue_module": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151\\observation_intent_cues.py",
+      "sha256": "d9eddb561f3954376bc9e44a82d81e0c29f716838452142b072d949c47938e2c"
+    },
+    "cue_producer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\export_observation_intent_cues_cpu.py",
+      "sha256": "23645e2fe879295a4b8ff63fe9ab81c514ae0d05cc6efd9e961c947d3628da84"
+    },
+    "prior16_binding_interface_read_only": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\contact_binding.py",
+      "sha256": "7e137945099cbee3781e311573ac7170c80674aef83e65378e56c73a66b78fa3"
+    },
+    "prior16_producer_interface_read_only": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\build_prefix_contact_targets_cpu.py",
+      "sha256": "2a406c15621a2e444cdcdc75873395bc11b2f988fc504e139be68c9022a17be6"
+    }
+  },
+  "output": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_declared_H123_surface_targets_v1",
+  "mask_rule": "declared_H123_all151_AND_numeric_unambiguous_geometry; frame_known=any_active; no_distance_threshold",
+  "declaration": "PersistentH123 membership is a new explicit task-design hypothesis. Each surface point/normal comes from its own source-rigid frame; no frame0material transport or16padding. H123 parent file is read only for hypothesis_id, not material points/q.",
+  "geometry_mask": "cue surface_point_numeric_valid AND surface_normal_valid_unambiguous AND NOT geometric_branch_unknown. Invalid slot is unknown, never release.",
+  "human_masks": "human_contact_known/present and confidence_known stay allFalse under human_contact_unknown_mask=True. Declared_intent_mask is separate allTrue H123 membership, not human-contact truth.",
+  "numeric_support": {
+    "basis_count": 512,
+    "basis_seed": 0,
+    "training_stride": 8,
+    "mu": 0.1,
+    "edges": 8,
+    "normal_ray": true,
+    "unit_force_rays": true,
+    "active_threshold": 0.001,
+    "moment_radius_divisions": 1
+  },
+  "normal_and_origin": "closest surface BODYpoint minus nominal MJB body_ipos(COM); normal_inward=-cue outward. Torque=cross(point_COM,unitforce)/enclosing_COM_radius once.",
+  "normalization": "NominalMJB max(norm(geom_pos-COM)+geom_rbound). Cylinder-crosssection7.45mm is NOT this normalization radius. Actualbodymass/inertia are not force-amplitude targets.",
+  "phase": "0 unknown ifallslotinvalid;3 continuous-declared-H123 ifanyactive. weights0/1; known_no_contactFalse. 2/4 unused. No speed/distance/switch threshold introduced.",
+  "reward": "Reuse frozen official tolerance-band global union support math(tolerance.1,var.1,threshold.001), no finger-specific/extra-contact penalty; future bonus=phase_weight*score-.1*penetration_prior, penetration alwaysactive3mm/1mm; dt.02 caller once only. Adapter future, not implemented/authorized here.",
+  "nondegeneracy_gate": "Every declared-known frame has finite nonnegative support and >1e-3 direction in512 andfixed64 subset. Empty-declaration/allunknownnegative control mustyieldexactzero. Nonzero is not forceclosure/physical friction/demand feasibility.",
+  "absence_and_degeneracy": "No explicit release exists, known_no_contact remainsFalse. Ifall151unknown: A2=penalty-only, cannot test support; forbid describing it as nondegenerate support experiment. Perframeinvalid attraction0; penetration stillactive.",
+  "allowed_reads": {
+    "cue": "Only producer keys tuple; sourcegeometry/time/pose/confidence/unknown fields",
+    "reference_npz": [
+      "time_s",
+      "mapped_object_pose_w"
+    ],
+    "legacy_basis_archive": [
+      "support_basis"
+    ],
+    "H123_declaration": [
+      "hypothesis_id"
+    ],
+    "model": "MjModel immutable constants only"
+  },
+  "forbidden_inputs": [
+    "any robot q for target construction",
+    "generated robot contacts",
+    "A0 or learnedpolicy contacts/forces/quality",
+    "old16target/support/phase",
+    "upstream robotproprioception",
+    "repeat/pad16",
+    "knownhuman inferred from proximity",
+    "release inferred from missingpairs"
+  ],
+  "future_binding_contract": "new full151_observation_declared_intent_binding:1 andnewtargetschema; do not masquerade as old robotkinematic manifest. independenttarget numericready mayTrue butobjective_loading_permitted=False pending reviewedadapter+referencebridge/CPUgradient/phase/mask tests.",
+  "future_demand_cone_diagnostic": "Separate fixed CPU protocol may use analytic reference a/worldomega/worldalpha plus actualmass/inertia/gravity to form COM-BODY requiredwrench. Nonnegative H123 ray cone NNLS/LP diagnostic only; no target/mask/threshold alteration or claim physical feasibility from nonzero support.",
+  "chronology": "Sequential exploratory hypothesis after A1L baseline history known to Root. Producer consumes no baseline/learnedphysicaloutcomes and selects no hyperparameters from those outcomes; not blinded method-selection evidence.",
+  "physical_reference_qualified": false,
+  "local_proxy_qualification": "FAILED_RETAINED_EXPLORATORY_ONLY",
+  "compiled_precision_qualification": "FAILED_RETAINED_NOT_REVALIDATED",
+  "GPU_authorized": false,
+  "native_queries_authorized": false,
+  "training_authorized": false
+}

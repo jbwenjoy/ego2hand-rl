@@ -1,0 +1,97 @@
+{
+  "schema": "rough_prefix_policy_evaluation_protocol:1",
+  "status": "NEW_IMPLEMENTATION_QUALIFICATION_AFTER_PRE_ENV_FAILURE",
+  "input_bundle": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\input_bundle_v1\\bundle.json",
+    "sha256": "225b34e9ec26ae7d66c805c7312d5f1db76d39a8c6b1627682cda217b5261242"
+  },
+  "source_lineage_N": 1,
+  "independent_ego_N": 0,
+  "physical_reference_qualified": false,
+  "allowed_seeds": [
+    0
+  ],
+  "checkpoint_iterations": [
+    10
+  ],
+  "arms": [
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "order": [
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "attempts_per_arm": 1,
+  "worlds": 1,
+  "reference_states": 16,
+  "control_intervals": 15,
+  "solver_substeps": 60,
+  "postinterval_forward_calls": 15,
+  "hard_process_seconds": 120,
+  "soft_worker_seconds": 110,
+  "automatic_retry": false,
+  "compile_fallback": false,
+  "evaluation_gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "clock_absolute_tolerance_s": 2e-06,
+    "target_rate_max_rad_s": 15.0,
+    "actuator_load_ratio_max": 1.01,
+    "load_charge_max": 0.8,
+    "charge_decay_time_s": 2.0,
+    "drop_center_below_default_wrist_m": 0.15
+  },
+  "initialization": "Same analytic nonzero requested q/qd/object pose/worldtwist, frozen actual8/defaultmocap/initialbaselineu0; original rough_runtime_v2 and controller104 trained descriptor",
+  "actor": "Loaded selected original format104, eval/no grad/no normupdate/no actionnoise, 155 native policyobs, originalEMA scale/clamp/singleC2",
+  "capacity": "No reset during rollout; sticky readonce after60, UNKNOWN on partial",
+  "target_rate": "All15 applied targets and initialization baselineu0, include startup0-to-firstlearnedu0 jump divided by20ms plus14 consecutive20ms updates; report startup separately. Original15rad/s gate retained.",
+  "quality": "Qualityterms disabled as qualified nativeA0; allfinite15intervals recorded once, numeric hard errors partial/UNKNOWN; no quality selection/retry",
+  "prerequisites": "Saved actual104 health+actualCPU Actorload+sourceclosure+independent CPU eval review; separate hashbound GPUconfigs only",
+  "claim_scope": "Single seed engineering10 checkpoint finite0.3s task measurements; no methodbenefit/trueego/full3s/forceprediction qualification. nativeA0v2 distinct from historicaldirectWarpT0.",
+  "formal_training": "Notauthorized by this evaluation protocol; new formalprotocol after all three finiteevaluations and identity/capacity/104consumer qualify; user firsthealthyckpt+ETA pause retained.",
+  "parent_protocol": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\protocols\\rough-evaluation-v1.json",
+    "sha256": "945f8add04dd4ea217f976a141ed4d75b85007594092506e4d2f20b7e10087a1"
+  },
+  "engineering_correction": {
+    "prior_configuration": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\configs\\a1l-policy-evaluation-v1.json",
+      "sha256": "db925cd9c8b1697a579b83cb2ebc0df4281eae477ad7b456f3bd2d94b8b35862"
+    },
+    "prior_worker_failure": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_smoke_a1l_v1\\failure.json",
+      "sha256": "ba92e38ee81eeced6c0b7fb98eb235de73bf1a2ebe45db7486d383d8d3343fbb"
+    },
+    "prior_runtime": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_smoke_a1l_v1\\runtime.json",
+      "sha256": "fbfc974b44c318311838c96123928ba2d3032b52a5cbe90778b3e14fac76f397"
+    },
+    "prior_watchdog": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_smoke_a1l_v1_watchdog\\state.json",
+      "sha256": "f93552e6b533340aed057defa7f946979ee86ff1d8bde130ac7aad6f5de6b6c7"
+    },
+    "prior_identity": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_smoke_a1l_v1_watchdog\\engineering_identity.json",
+      "sha256": "683bc217db2326c8e29ade9e938be7b45e1d65c7d9bd24bfd25761c2882655df"
+    },
+    "prior_source": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\evaluation.py",
+      "sha256": "f9d372449a70a5e72436981f1836deb35e7da7ab4455572b0e7c0262c8de6046"
+    },
+    "cause": "play factory already removed orientation termination; root unconditional secondpop caused KeyError beforeEnv/probe. CPU priorproof was static only for factorybranch.",
+    "probe_solver_samples": 0,
+    "environment_objects_created": 0,
+    "prior_quality": "NOT_ASSESSED",
+    "GPU_device_initialization": "Occurred before factory; not represented as noGPU attempt",
+    "repair": "New evaluation_v2 strict actualplaytermination schema thenremove position only; actualfactory CPU parity with Native2 A0 required; allcontrols/data/thresholds unchanged",
+    "new_implementation_attempts_per_arm": 1,
+    "selection": "No priorphysicalquality existed; unused P/A2 v1 configs superseded without execution; failedcost andsource retained."
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "schema": "rough_saved_WM_CPU_runplan:1",
+  "protocol": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\protocols\\rough-wm-onpolicy-cpu-diagnostic-v1.json",
+    "sha256": "18ef4ad5b39c8ea4ef178665c78d44e9cb3f34f59a56ca2917b9403defd415f7"
+  },
+  "CPU_run_authorized": true,
+  "automatic_retry": false,
+  "output": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\WM_onpolicy_CPU_diagnostic_v1",
+  "source_pins": {
+    "entry": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\scripts\\diagnose_saved_world_models_cpu.py",
+      "sha256": "4812b8dafdec7e9a2a2c0cf01946650e7df748714d2b2c0b9657e44bf67acdb3"
+    },
+    "state_codec": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\saved_state_codec_v3.py",
+      "sha256": "8321538887c660456fc50ce8fc37d3b130760212fa63c905310bbd6a079d5156"
+    },
+    "WM_loader": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\src\\rough_prefix\\world_model_checkpoint_v2.py",
+      "sha256": "ab15f23b569d259cbca587e2b6f883c509ae15584567fcc8c27443787f294a20"
+    }
+  },
+  "input_arithmetic_atol": 1e-07,
+  "datasets": {
+    "A0": {
+      "audit": {
+        "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_saved_audit_v2\\report.json",
+        "sha256": "b4628e21c6843e2a88d4fbb9dfb9814b48b6fadddaafcdfc2988804fd1505805"
+      },
+      "codec_input_pins": {
+        "raw_states.npz": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\raw_states.npz",
+          "sha256": "e1e8aa736178a5ac49a9e2cbfc6583b95e50e6fc4c1e67936e17edf3f1b5d494"
+        },
+        "control_events.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\control_events.json",
+          "sha256": "e291689c8a6ce2eb53415cc6b756081cfe3cd3d86f84cc14577c768bcd628201"
+        },
+        "nominal_model.mjb": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\nominal_model.mjb",
+          "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+        },
+        "startup_initialization_checks.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\startup_initialization_checks.json",
+          "sha256": "e6495fe3274740402526b8831f70b6c71bffdb1e1b7dae95e189fc313055ec8e"
+        },
+        "capacity_audit.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\capacity_audit.json",
+          "sha256": "7bb7a88e0579b7a0e51d35b7b948f2c93d71f490ef2a8dbd18996bf8dc9d206c"
+        },
+        "requested_initialization_and_control.npz": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v2\\requested_initialization_and_control.npz",
+          "sha256": "ab0c31d4387a0177bca8d59109ba2ae9f5779fedbcd0e58719a72a4be61b6e3f"
+        }
+      }
+    },
+    "A1L": {
+      "audit": {
+        "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\policy_saved_audit_primary_a1l_v1\\report.json",
+        "sha256": "159c0ba9e2768389ab72477012dde5d281ca39d9eac2f5092f742a20d670c656"
+      },
+      "codec_input_pins": {
+        "raw_states.npz": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\raw_states.npz",
+          "sha256": "7ad0affbce1e6c369dc131a6af29af4ca026a7af43b8fcc844440f4d8ecb892a"
+        },
+        "control_events.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\control_events.json",
+          "sha256": "d81347396beb622aee3f388473d9dc52da53d35dfc388f689d0beeb5bb55c6f0"
+        },
+        "nominal_model.mjb": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\nominal_model.mjb",
+          "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+        },
+        "startup_initialization_checks.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\startup_initialization_checks.json",
+          "sha256": "e6495fe3274740402526b8831f70b6c71bffdb1e1b7dae95e189fc313055ec8e"
+        },
+        "capacity_audit.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\capacity_audit.json",
+          "sha256": "c663e43f7307b5770ef28acb1f3448428a0888ba17587f5c614dc2af33caf836"
+        },
+        "requested_initialization_and_control.npz": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a1l_seed0_v1\\requested_initialization_and_control.npz",
+          "sha256": "ab0c31d4387a0177bca8d59109ba2ae9f5779fedbcd0e58719a72a4be61b6e3f"
+        }
+      }
+    },
+    "P_ONLY": {
+      "audit": {
+        "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\policy_saved_audit_primary_p_only_v1\\report.json",
+        "sha256": "8bf3f567832bbc550e0ed451ed857f94e0031226e5ec1c185497fcc716ad1c91"
+      },
+      "codec_input_pins": {
+        "raw_states.npz": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\raw_states.npz",
+          "sha256": "45ee1b22a355342a6355fcff3706989a5d1031725c5d5276c49e078e6ccce93d"
+        },
+        "control_events.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\control_events.json",
+          "sha256": "c6820a0907a1952ca85d850e88cba853612dc4dd27eaae0c3f22791987f35f47"
+        },
+        "nominal_model.mjb": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\nominal_model.mjb",
+          "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+        },
+        "startup_initialization_checks.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\startup_initialization_checks.json",
+          "sha256": "e6495fe3274740402526b8831f70b6c71bffdb1e1b7dae95e189fc313055ec8e"
+        },
+        "capacity_audit.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\capacity_audit.json",
+          "sha256": "c663e43f7307b5770ef28acb1f3448428a0888ba17587f5c614dc2af33caf836"
+        },
+        "requested_initialization_and_control.npz": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_p_only_seed0_v1\\requested_initialization_and_control.npz",
+          "sha256": "ab0c31d4387a0177bca8d59109ba2ae9f5779fedbcd0e58719a72a4be61b6e3f"
+        }
+      }
+    },
+    "A2": {
+      "audit": {
+        "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\policy_saved_audit_primary_a2_v1\\report.json",
+        "sha256": "b5211ea496edea0ab454a3ceae0fe84778a0d74d9610e05b26cf5c38d761ad6d"
+      },
+      "codec_input_pins": {
+        "raw_states.npz": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\raw_states.npz",
+          "sha256": "a997ec9ea1ad50a56fc48fbd59773216e8e00c786b4ad32cae6b4e6044aac45d"
+        },
+        "control_events.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\control_events.json",
+          "sha256": "660b9957e1c7d8e0a0253d18fdf750e50b5540fb6477a7cf8dc05a57f3cdf096"
+        },
+        "nominal_model.mjb": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\nominal_model.mjb",
+          "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+        },
+        "startup_initialization_checks.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\startup_initialization_checks.json",
+          "sha256": "e6495fe3274740402526b8831f70b6c71bffdb1e1b7dae95e189fc313055ec8e"
+        },
+        "capacity_audit.json": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\capacity_audit.json",
+          "sha256": "c663e43f7307b5770ef28acb1f3448428a0888ba17587f5c614dc2af33caf836"
+        },
+        "requested_initialization_and_control.npz": {
+          "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\eval_primary_a2_seed0_v1\\requested_initialization_and_control.npz",
+          "sha256": "ab0c31d4387a0177bca8d59109ba2ae9f5779fedbcd0e58719a72a4be61b6e3f"
+        }
+      }
+    }
+  },
+  "proofs": {
+    "codec32": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\saved_state_codec_cpu_v4\\report.json",
+      "sha256": "73c4670cf8cd75a3a66215e16dae475279f1a94a436a86025a98144ab1a36629"
+    },
+    "loader55": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\world_model_checkpoint_cpu_v2\\report.json",
+      "sha256": "996126e760c32a130c7f50d0f7a043f830031beaff20a45cc289a8e06a2cdd8f"
+    }
+  },
+  "scope": "Exactly fixed protocol180 statepredictions and288 potentialinternalFDpairs/576targetrows; no physicalintervention/WMtraining or modelselection."
+}

@@ -1,0 +1,23 @@
+--- 5b595_reviewed
++++ 0c77_frozen
+@@ -199,8 +199,6 @@
+         rng=c._rng(torch,np);rng_sha=c._rng_digest(rng);cf.save_raw_rng(out,'before',rng,np)
+         with np.load(checked(i['H1_matched_inputs']),allow_pickle=False) as f:
+             old={k:f[k].copy() for k in ('pre_x452_FP32','target_x452_FP32','actual_u452_FP32','all_substep_u452x4x20_FP32')}
+-        data,starts=assemble_donor_windows(old,read(checked(i['H1_identities'])),np)
+-        np.savez_compressed(out/'matched_donor_windows286.npz',**data);c._write_json(out/'all286_window_identities.json',starts)
+         with np.load(checked(i['H1_prediction_arrays']),allow_pickle=False) as f:old_xi=f['physical_xi46_FP32'].copy()
+         phase='trusted_component_files'
+         initial=torch.load(checked(i['initial_component']),map_location='cpu',weights_only=False);counters['component_file_reads']+=1
+@@ -209,6 +207,11 @@
+             payloads[arm]=torch.load(checked(i[alias]),map_location='cpu',weights_only=False);counters['component_file_reads']+=1
+             require(same(payloads[arm]['protocol'],i['training_protocol']),'Fixed final run protocol')
+         receipt=read(checked(i['initial_validation']));verify_xi(initial['physical_xi46'],old_xi,np,torch)
++        # xi byte identity must pass before window construction or native ctor.
++        # assemble then independently gates all298 links/all300 held controls.
++        phase='all_source_gates_before_window_construction'
++        data,starts=assemble_donor_windows(old,read(checked(i['H1_identities'])),np)
++        np.savez_compressed(out/'matched_donor_windows286.npz',**data);c._write_json(out/'all286_window_identities.json',starts)
+         x0=torch.from_numpy(data['initial_x286_FP32']);u=torch.from_numpy(data['actual_u286x8_FP32']);xi=initial['physical_xi46']
+         memory_before=c._tensor_digest({'initial_x':x0,'controls':u,'xi':xi},torch);outputs={};invariants={};all_stats=[]
+         for role in MODEL_ROLES:

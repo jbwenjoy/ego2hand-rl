@@ -1,0 +1,121 @@
+{
+  "schema": "rough_prefix_learning_protocol:1",
+  "status": "FINITE_ENGINEERING_STAGE_FORMAL_TRAINING_NOT_AUTHORIZED",
+  "input_bundle": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\input_bundle_v1\\bundle.json",
+    "sha256": "225b34e9ec26ae7d66c805c7312d5f1db76d39a8c6b1627682cda217b5261242"
+  },
+  "retarget_variant_id": "H123_cubic_minimax_restoration_filtered_prefix16_v1",
+  "source_window_half_open": [
+    200,
+    216
+  ],
+  "source_lineage_N": 1,
+  "independent_ego_N": 0,
+  "physical_reference_qualified": false,
+  "shared10_enrollment": false,
+  "reference_states": 16,
+  "control_intervals": 15,
+  "duration_s": 0.3,
+  "control_dt_s": 0.02,
+  "physics_dt_s": 0.005,
+  "allowed_roles": [
+    "native_a0",
+    "engineering_smoke"
+  ],
+  "allowed_seeds": [
+    0
+  ],
+  "scientific_scope": "New rough observation-derived reference pilot. Historical directWarpH0/T0 and old151training/evaluation cohorts remain separate. No CHORD/ego/full3s benefit inferred from engineering checks.",
+  "controller": {
+    "baseline": "same frozen absoluteu15 + native EMAresidual then originalhard/controlbounds then singleC2_020",
+    "memory": "residual c1/c2/a1/a2 unchanged; init0, baseline not hidden in history",
+    "checkpoint_format": 104,
+    "fromscratch_only": true,
+    "goal_velocity": "analytic Bspline qd16 and quintic worldv/omega; readerFD retained diagnostic",
+    "physics_labels": "Measured simulator x/x1/qd/actualu only, no analytic teacherforcing",
+    "reference_reward_phase": "native currentpreactionk commonallarms",
+    "physical_eval_phase": "poststatekplus1 vs referencekplus1"
+  },
+  "runtime": {
+    "phase0_only_reset": true,
+    "actual8_fixed_allworlds": true,
+    "worldangular_Entity_API_and_nativebody_readback": true,
+    "startup_bodyomega_arithmetic_atol_rad_s": 1e-06,
+    "actual_q_qd_pose_u0_mocap_FP32_exact": true,
+    "natural_end": "phase14 producesobs15/done+timeout, no u15/futurebootstrap",
+    "replay": "retainterminalrow/masknextresetepisode",
+    "imagined_H8": "finiteinactiveinputs,survival0,deadrows excludedfromcriticnormloss and activegradient",
+    "no_source_robot_labels": true,
+    "no_exogenous_or_postreset_object_assist": true
+  },
+  "native_A0": {
+    "attempts": 1,
+    "worlds": 1,
+    "steps": 60,
+    "postinterval_forward_calls": 15,
+    "train_runner_or_optimizer": false,
+    "quality_failure_does_not_truncate": true,
+    "only_unstable_harderrors_partial": true,
+    "sticky_overflow": "readonceafter60neverresetduringprobe",
+    "initialization": "same frozen nonzeroanalytic initialstate/baselineu0; no oldzero-rest substitution",
+    "history": "nativeManager cadence distinctfromdirectWarpT0;new baselinecommonforfuturearms",
+    "soft_worker_seconds": 110,
+    "hard_Popen_import_setup_worker_seconds": 120,
+    "unknown_or_engineering_failure_stops_smokes": true
+  },
+  "engineering_smoke_training": {
+    "num_envs": 128,
+    "max_iterations": 10,
+    "buffer_steps": 256,
+    "warmup_steps": 16,
+    "wm_only_iters": 2,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "save_interval": 10,
+    "log_interval": 1,
+    "amp": true,
+    "compile": false,
+    "compile_policy": false,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1,
+    "utd": 0.4
+  },
+  "smoke_order": [
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "smoke_prerequisites": "NewA0fullcoverage/capacity/exactOSidentity pass independentofquality;CPUcontracts/input/sourcehashes;separatehash-boundGPUauthorization",
+  "prior": {
+    "A1L": "native reward only",
+    "P_ONLY": "-.1P exact shared penetration",
+    "A2": "frozen16declaredH123geometricintent support-.1P",
+    "human_contact_observation_known": false,
+    "policy_contact_defined_target": false,
+    "missing_contact_gap": "UNKNOWN, not knownabsence",
+    "dt": ".02 appliedonce onlyinpolicy imagination",
+    "proxy_qualification": "local proxy failed exploratory; noforceorgradientqualificationupgrade"
+  },
+  "bounds": {
+    "automatic_retry": false,
+    "compile_fallback": false,
+    "overwrite": false,
+    "engineer_error": "partial/UNKNOWN preserve sourcesandlogs no retry",
+    "quality_error": "retain full finitehorizon outcome",
+    "formal_longtraining": "newprotocol/checkpointloader/evaluation and smokes required beforeauthorization",
+    "user_pause_condition": "Onnewlongtraining firsthealthycheckpoint+ETA pauseGoal withauthorized queuecontinuing; no pausefromCPUengineeringprogress"
+  }
+}

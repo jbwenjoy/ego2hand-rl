@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "supermimic-research"
+version = "0.1.0"
+description = "Shared Wuji Hand2 SuperMimic and contact-dynamics research runtime"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=2,<2.5"]
+
+[project.optional-dependencies]
+learning = ["torch>=2.7"]
+native = ["mujoco~=3.11.0"]
+
+[project.scripts]
+supermimic-research = "supermimic_research.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+dex_supermimic = [
+  "tasks/pen_spin/data/recipe/*.json",
+  "tasks/pen_spin/LICENSE",
+  "tasks/pen_spin/NOTICE",
+  "tasks/dex_reorient/LICENSE",
+  "tasks/dex_reorient/NOTICE",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

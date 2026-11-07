@@ -1,0 +1,58 @@
+--- original/run_matched_training_queue.py
++++ P_ONLY/run_matched_training_queue.py
+@@ -63,7 +63,7 @@
+     for relative, expected in inventory["files"].items():
+         assert digest(Path(inventory["dex_root"]) / relative) == expected, f"Dex source changed: {relative}"
+     assert Path(manifest["python_executable"]).is_file()
+-    assert len(manifest["jobs"]) == 6
++    assert len(manifest["jobs"]) == 3
+     configurations = []
+     for position, job in enumerate(manifest["jobs"], 1):
+         assert job["position"] == position and digest(job["config"]) == job["config_sha256"]
+@@ -81,7 +81,7 @@
+         assert cfg["run_role"] == "primary_matched_arm" and cfg["compile_fallback"] is False
+         destination = (ROOT / cfg["output_dir"]).resolve()
+         assert destination == Path(job["output"]).resolve() and destination.is_relative_to(ROOT / "outputs")
+-        assert (cfg["method"] == "A2") == bool(cfg.get("contact_objective"))
++        assert (cfg["method"] == "P_ONLY") == bool(cfg.get("contact_objective"))
+         if cfg.get("contact_objective"):
+             contact = cfg["contact_objective"]
+             bundle, reference = Path(contact["bundle_dir"]), Path(contact["reference_file"])
+@@ -93,19 +93,23 @@
+                      "geometry_module_sha256": ROOT / "src/chord_study/contact_geometry.py"}
+             assert all(digest(file) == contact["expected_hashes"][name] for name, file in files.items())
+         configurations.append(cfg)
+-    for i, seed in enumerate(manifest["seeds"]):
+-        pair = manifest["jobs"][2*i:2*i+2]
+-        assert {j["method"] for j in pair} == {"A1L", "A2"} and all(j["seed"] == seed for j in pair)
++    assert manifest["seeds"] == [1, 2, 3]
++    for job, seed in zip(manifest["jobs"], manifest["seeds"]):
++        assert job["method"] == "P_ONLY" and job["seed"] == seed
++        sys.path.insert(0, str(ROOT / "src"))
++        from penalty_study.followup import validate as validate_followup
++        validate_followup(read(job["config"]), ROOT)
+     assert all(cfg["training"] == configurations[0]["training"] and cfg["reference"] == configurations[0]["reference"] for cfg in configurations)
+     return {"status": "passed", "checked_utc": utc(), "native_files_verified": len(inventory["files"]),
+-            "job_count": 6, "no_GPU_or_torch_import": "torch" not in sys.modules,
++            "job_count": 3, "no_GPU_or_torch_import": "torch" not in sys.modules,
+             "jobs": [{k: j[k] for k in ("position", "seed", "method", "config_sha256")} for j in manifest["jobs"]]}
+ 
+ 
+ @contextmanager
+ def gpu_queue_lock():
+     import msvcrt
+-    path = ROOT / ".locks/single_gpu_training.lock"
++    # One physical GPU is shared with the original study; use its exact lock.
++    path = Path("D:/workspace/supermimic-chord-study/.locks/single_gpu_training.lock")
+     path.parent.mkdir(exist_ok=True)
+     with path.open("a+b") as stream:
+         if not path.stat().st_size:
+@@ -140,7 +144,7 @@
+     with destination.with_suffix(".stdout.log").open("w", encoding="utf-8") as out, destination.with_suffix(".stderr.log").open("w", encoding="utf-8") as err:
+         process = subprocess.run([manifest["python_executable"], manifest["audit_script"], "--run", job["output"],
+                                   "--iteration", str(iteration), "--output-dir", str(destination)],
+-                                 stdout=out, stderr=err, env={**os.environ, "CUDA_VISIBLE_DEVICES": ""}, timeout=120)
++                                 stdout=out, stderr=err, env={**os.environ, "CUDA_VISIBLE_DEVICES": "-1"}, timeout=120)
+     assert process.returncode == 0 and read(destination / "report.json")["status"] == "passed", f"CPU health audit failed: {destination}"
+ 
+ 

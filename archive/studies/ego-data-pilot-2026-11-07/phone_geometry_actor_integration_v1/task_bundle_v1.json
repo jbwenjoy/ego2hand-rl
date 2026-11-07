@@ -1,0 +1,740 @@
+{
+  "schema": "phone_fixed_wrist_ego61_tripod_task:1",
+  "task_id": "ego1856_42_102_exact_GN_probe030_functional_tripod",
+  "model": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+    "bytes": 18200660,
+    "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+  },
+  "sources": {
+    "task": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_task_v1.py",
+      "bytes": 13449,
+      "sha256": "478c29489136992ec0fc2b4444d2403d4f1a91968270a2f9c3973a0a42014cf2"
+    },
+    "reader_replay": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\reader_replay_adapter_v1.py",
+      "bytes": 8182,
+      "sha256": "ee0bb2aa849fabcc4aea630245081dbc320a048035ebea2cf01e9c7f89b5baaa"
+    },
+    "imagination": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_actor_imagination_v1.py",
+      "bytes": 3895,
+      "sha256": "2c192659604c6e9da510bcb55d13ad60e0b3fe124e3c9599b7b627a76d900bd1"
+    },
+    "metadata": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\metadata_preflight_v1.py",
+      "bytes": 2685,
+      "sha256": "80934a991109212389be8064e260181dc6c81e94428e0850db49b6c4296dfc08"
+    },
+    "native_reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    },
+    "world_model": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\train_geometry_momentum_wm.py",
+      "bytes": 37229,
+      "sha256": "224a0c9f47e196c626e862aa52d46402a454a6d16f0b497d3720ae74e25ca539"
+    },
+    "structured_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+      "bytes": 4100,
+      "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+    },
+    "directional": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+      "bytes": 9556,
+      "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+    },
+    "compiled_FK": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\geometry_provider.py",
+      "bytes": 11690,
+      "sha256": "f00da9a2c5deb19261a3ff4e168d79f8aea9784736e0fdd0897ffe9599a3b07b"
+    },
+    "reference": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_ego_reference_v1\\reference.py",
+      "bytes": 4463,
+      "sha256": "88c85fe21db72ab29f5c8da5a799345205be45ed7ec830e804b2370ccf70bbb0"
+    },
+    "Actor_Critic": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "bytes": 5331,
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "Actor_common": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\common.py",
+      "bytes": 3261,
+      "sha256": "6d6ff994d592c8fec1d46401d7051d0511310281a3d28450db8bd9be8c327f8b"
+    },
+    "old_state_not_used": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "bytes": 1950,
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    },
+    "replay": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\buffer.py",
+      "bytes": 3651,
+      "sha256": "3048a42d13aa5142a4c42a29b5f7c77df02c5c628f6276bf9d5256a644494d5f"
+    },
+    "upstream_runner": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+      "bytes": 54563,
+      "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46"
+    },
+    "upstream_pen_mdp": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\pen.py",
+      "bytes": 19332,
+      "sha256": "c02906c409aedab59aaf68a5ef80f9dbcea52da10e72137091df81858262819a"
+    },
+    "chord_contacts": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\contacts.py",
+      "bytes": 5132,
+      "sha256": "79b53c63dd5573c9908d052f29c678f1724ff5be3ffa5b7c077421cbf4788212"
+    },
+    "weighted_support": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\contact_geometry.py",
+      "bytes": 25350,
+      "sha256": "a9e0e19cc826cefe4e6a97a5c7b33f02f04c23585065cb0a273436eb07846d7a"
+    }
+  },
+  "initial": {
+    "source_preload_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\completed_run1\\report.json",
+      "bytes": 29901,
+      "sha256": "ed23a37b18f844ed9c346dabb1bee664014f14743d99a1f4f4c1a7434a76ac9c"
+    },
+    "source_probe": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_native_preload_v1\\completed_run1\\probe_030.json",
+      "bytes": 30740,
+      "sha256": "8396acc6099dc3a812f9a20a2a2bf8df8702c802dc3bb2d7a71eada752e5ad15"
+    },
+    "source_candidate": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\completed_run1\\exact_source__source_middle_anchor_nearest_phone_candidate.json",
+      "bytes": 229560,
+      "sha256": "085616a2bdee60f7f2d84f5444ae6a47fb8fb8caa2f4000196577bdcaea6cad5"
+    },
+    "qpos27_F64": [
+      0.9003363722093097,
+      0.04038687586451288,
+      0.029990434218657262,
+      0.8692773991503583,
+      -0.8630142896540195,
+      0.4723261063043457,
+      1.1251006155772207,
+      0.40869516803025907,
+      -0.7823472396439576,
+      0.17034875490121784,
+      1.124359533260123,
+      0.7696150545328048,
+      -0.10932789375512818,
+      -0.14035572275499802,
+      0.0025119008953089074,
+      0.17803092412247978,
+      0.319688554955577,
+      -0.23895150303179627,
+      -0.12949049779670038,
+      -0.006433781443888266,
+      -0.16432721864782343,
+      0.08061976277936019,
+      0.46608009257879446,
+      0.6631518610716088,
+      0.5578056431815778,
+      -0.2527668780534653,
+      0.43033867935749465
+    ],
+    "qvel26_F64": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "ctrl20_F64": [
+      0.9540725596015607,
+      0.024327446938353262,
+      0.09342495791598021,
+      0.9212036286683376,
+      -0.8521691841269621,
+      0.47862446621760996,
+      1.2096555156408788,
+      0.4616205692273283,
+      -0.770797690018839,
+      0.19486041263694848,
+      1.209931801108178,
+      0.8227152985979983,
+      -0.09596820153323679,
+      -0.13923949853232023,
+      0.009471863848499424,
+      0.17881636057296924,
+      0.33055058281933053,
+      -0.23282617752485685,
+      -0.12003729352915586,
+      -0.005261076275423867
+    ],
+    "native_PRE_state58_F64": [
+      0.9003363722093097,
+      0.04038687586451288,
+      0.029990434218657262,
+      0.8692773991503583,
+      -0.8630142896540195,
+      0.4723261063043457,
+      1.1251006155772207,
+      0.40869516803025907,
+      -0.7823472396439576,
+      0.17034875490121784,
+      1.124359533260123,
+      0.7696150545328048,
+      -0.10932789375512818,
+      -0.14035572275499802,
+      0.0025119008953089074,
+      0.17803092412247978,
+      0.319688554955577,
+      -0.23895150303179627,
+      -0.12949049779670038,
+      -0.006433781443888266,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.16394185328030345,
+      0.08059625045337662,
+      0.46576668365994334,
+      0.5018350528159041,
+      -0.8527493741892671,
+      0.14484503645300428,
+      0.2887702102388165,
+      0.007322970967267528,
+      -0.9573704297579084,
+      0.815336338846668,
+      0.5222689718105278,
+      0.2499235395877819,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "raw_qpos_qvel_ctrl_receipt": {
+      "qpos27": {
+        "dtype": "<f8",
+        "shape": [
+          27
+        ],
+        "sha256": "69f9af1b555c0d64ae5b4e21d76cb4e82f211354ef0a08a62d8a0c6a49100863"
+      },
+      "qvel26": {
+        "dtype": "<f8",
+        "shape": [
+          26
+        ],
+        "sha256": "46f531b7ea0428fbf2c3ca2b60e8dc33d6bbfa000e0fd1b489c5e39140a47006"
+      },
+      "ctrl20": {
+        "dtype": "<f8",
+        "shape": [
+          20
+        ],
+        "sha256": "8ce2bab77c2a1616bef18bee5519600b10452c5dc7522afb8a15fb0d5db3066f"
+      }
+    },
+    "source_phase": "FRESH_ZERO_VELOCITY_NATIVE_FORWARD",
+    "source_is_static_native_PRE": true,
+    "source_full_integration300_receipt_available": false,
+    "future_reset_actual_integration_receipt_required": true,
+    "source_three_pad_initial_Fn_N": [
+      1.4852859405565542,
+      1.0809508495304838,
+      1.434625044351917
+    ],
+    "holding_qualified": false
+  },
+  "joint_range20x2": [
+    [
+      -1.187,
+      1.291
+    ],
+    [
+      -1.484,
+      0.698
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -0.698,
+      0.698
+    ],
+    [
+      -1.047,
+      2.094
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -0.698,
+      0.698
+    ],
+    [
+      -1.047,
+      2.094
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -0.698,
+      0.698
+    ],
+    [
+      -1.047,
+      2.094
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -0.698,
+      0.698
+    ],
+    [
+      -1.047,
+      2.094
+    ],
+    [
+      -1.047,
+      1.57
+    ]
+  ],
+  "actuator_ctrlrange20x2": [
+    [
+      -1.187,
+      1.291
+    ],
+    [
+      -1.484,
+      0.698
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -0.698,
+      0.698
+    ],
+    [
+      -1.047,
+      2.094
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -0.698,
+      0.698
+    ],
+    [
+      -1.047,
+      2.094
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -0.698,
+      0.698
+    ],
+    [
+      -1.047,
+      2.094
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -1.047,
+      1.57
+    ],
+    [
+      -0.698,
+      0.698
+    ],
+    [
+      -1.047,
+      2.094
+    ],
+    [
+      -1.047,
+      1.57
+    ]
+  ],
+  "action": {
+    "kind": "bounded_symmetric_absolute_target_residual_with_EMA",
+    "normalized_dim": 20,
+    "nominal_max_residual_rad": 0.05,
+    "alpha": 0.5,
+    "symmetric_residual_scale20_rad": [
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05,
+      0.05
+    ],
+    "target_lower20": [
+      -1.187,
+      -1.484,
+      -1.047,
+      -1.047,
+      -1.047,
+      -0.698,
+      -1.047,
+      -1.047,
+      -1.047,
+      -0.698,
+      -1.047,
+      -1.047,
+      -1.047,
+      -0.698,
+      -1.047,
+      -1.047,
+      -1.047,
+      -0.698,
+      -1.047,
+      -1.047
+    ],
+    "target_upper20": [
+      1.291,
+      0.698,
+      1.57,
+      1.57,
+      1.57,
+      0.698,
+      2.094,
+      1.57,
+      1.57,
+      0.698,
+      2.094,
+      1.57,
+      1.57,
+      0.698,
+      2.094,
+      1.57,
+      1.57,
+      0.698,
+      2.094,
+      1.57
+    ],
+    "unavailable_zero_scale_axes": [],
+    "clamp": false,
+    "base_ctrl_is_measured_legal_preload_control": true,
+    "encoder_bias": 0,
+    "noise": false,
+    "mask": false
+  },
+  "reference_report": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_ego_reference_v1\\completed_v1\\report.json",
+    "bytes": 4883,
+    "sha256": "044ecb2207933d73f652da90915f5d2fdc30857e2db98d9b6ece2ae63f820759"
+  },
+  "reference_arrays": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_ego_reference_v1\\completed_v1\\exact_source__source_middle_anchor_nearest_phone__compression_target_projection.npz",
+    "bytes": 48822,
+    "sha256": "ca93b2115322b43c9e9445856c3573ea7e41aff41add3d8d4984059600bf9897"
+  },
+  "reference_frame_rule": "state boundary k -> action interval[k,k+1] -> POST reward against reference k+1, then memory advances",
+  "source_duration_s": 2.00000849,
+  "duration_s": 2.0,
+  "control_dt_s": 0.02,
+  "control_intervals": 100,
+  "native_dt_s": [
+    0.0003125,
+    0.00015625
+  ],
+  "native_substeps": [
+    64,
+    128
+  ],
+  "task_designated_geom_ids": [
+    15,
+    28,
+    41
+  ],
+  "model_canonical_pair_geom_ids": [
+    0,
+    2,
+    8,
+    11,
+    13,
+    15,
+    21,
+    24,
+    26,
+    28,
+    34,
+    37,
+    39,
+    41,
+    47,
+    50,
+    52,
+    54,
+    60,
+    63,
+    65,
+    67
+  ],
+  "model_training_original_designated_ids": [
+    15,
+    28
+  ],
+  "contact_template": [
+    {
+      "hand_geom_id": 15,
+      "source_world_contact_position_m": [
+        -0.13942085514733216,
+        0.03481881357030944,
+        0.5114221248951408
+      ],
+      "point_BODY_COM_m": [
+        0.03631087662537599,
+        0.002598927697824491,
+        0.058788078765334366
+      ],
+      "force_on_object_unit_normal_BODY": [
+        -0.9869835573431358,
+        -0.1603233557427872,
+        -0.012644332234680323
+      ],
+      "source_decoded_Fn_N": 1.4852859405565542,
+      "source_contact_frame_world3x3": [
+        [
+          -0.3604187731135925,
+          -0.274080182850194,
+          -0.8916155905748268
+        ],
+        [
+          -0.10271700141966887,
+          0.9617068437776682,
+          -0.25410463248541443
+        ],
+        [
+          0.9271178596093621,
+          0.0,
+          -0.37476989526021903
+        ]
+      ],
+      "scope": "Native solver contact position transported as a hypothetical material anchor; not certified filled-surface/nearest point or real ego contact"
+    },
+    {
+      "hand_geom_id": 28,
+      "source_world_contact_position_m": [
+        -0.1695697236927411,
+        0.019885284467939645,
+        0.4502128443029243
+      ],
+      "point_BODY_COM_m": [
+        -0.0330373914934441,
+        -0.0037687093577780805,
+        0.053420443915167294
+      ],
+      "force_on_object_unit_normal_BODY": [
+        0.4836166836612974,
+        0.8752798999659759,
+        5.00196545729317e-09
+      ],
+      "source_decoded_Fn_N": 1.0809508495304838,
+      "source_contact_frame_world3x3": [
+        [
+          -0.5036985822241008,
+          0.1460637359228219,
+          0.85144179091333
+        ],
+        [
+          0.07436969820190281,
+          0.9892751816599202,
+          -0.1257130181846325
+        ],
+        [
+          -0.8606723454688135,
+          0.0,
+          -0.5091592223904142
+        ]
+      ],
+      "scope": "Native solver contact position transported as a hypothetical material anchor; not certified filled-surface/nearest point or real ego contact"
+    },
+    {
+      "hand_geom_id": 41,
+      "source_world_contact_position_m": [
+        -0.1694823296366852,
+        0.0038322147130412975,
+        0.45329726367531553
+      ],
+      "point_BODY_COM_m": [
+        -0.035114343222254665,
+        -0.0023498942138870087,
+        0.06957270580770435
+      ],
+      "force_on_object_unit_normal_BODY": [
+        0.8289184066709219,
+        0.4972303191535761,
+        -0.2562348235438995
+      ],
+      "source_decoded_Fn_N": 1.434625044351917,
+      "source_contact_frame_world3x3": [
+        [
+          -0.04514687345110974,
+          0.4883197888915586,
+          0.8714961523692996
+        ],
+        [
+          0.025262979229871255,
+          0.872664760246971,
+          -0.4876658672734103
+        ],
+        [
+          -0.9986608742200831,
+          -3.469446951953614e-18,
+          -0.051734498180415575
+        ]
+      ],
+      "scope": "Native solver contact position transported as a hypothetical material anchor; not certified filled-surface/nearest point or real ego contact"
+    }
+  ],
+  "basis": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\support_basis512_v1.npz",
+    "bytes": 23792,
+    "sha256": "31abb1d3251ee0c43d9e5518e12aff572f7de526dac72c321072c52afb9ba939"
+  },
+  "support": {
+    "radius_m": 0.077,
+    "mu_actual_assumed": 0.7,
+    "mu_design": 0.4949747468305832,
+    "cone_edges": 8,
+    "proximity_bandwidth_m": 0.001,
+    "basis_count": 512,
+    "reference_kind": "engineered static native-loaded tripod capability template, not ego contact/force truth",
+    "normal_assumption": "Frozen source BODY normals; no closest-normal inference",
+    "current_point_assumption": "same hand material anchors transported by current FK",
+    "observed_contact_known": false,
+    "force_truth_known": false,
+    "friction_certificate": false,
+    "eight_edge_proxy_is_not_native_condim3_pyramidal_four_edge_solver": true,
+    "mass_friction_and_material_parameters_measured": false
+  },
+  "reward": {
+    "A1": "2exp(-COMerror\u00b2/.01\u00b2)+8exp(-R_Froberror\u00b2/(8sin(10deg/2)\u00b2))-.1 action_rate-2 joint_limit; times.02",
+    "A2": "A1+.02*CHORD tolerance-band unit-wrench-support match of engineered material proxy",
+    "actual_contact_and_force_reward_known": false,
+    "no_native_holding_success_reward_claim": true,
+    "coefficients_not_tuned_on_future_policy": true
+  },
+  "actor_obs_dim": 222,
+  "critic_dim": 222,
+  "memory_dim": 83,
+  "policy_observation": "privileged simulator state; no RGB estimator/deployment certificate",
+  "limitations": [
+    "Human-left wrist-relative object intent borrowed for robot-right fixed wrist; no full hand/contact retarget.",
+    "Current WM fitted original two-pad local states, not these new tripod-loaded dynamics: task/state/contact distribution mismatch.",
+    "Current contact proxy may hallucinate capability; unknown actual contact/normal/force masks stay distinct from proxy-known.",
+    "state58 omits warmstart/history: no Markov or full-MjData certificate.",
+    "Old pen palm-frame/right-Exp state,15self-contact reward and old norm/weights are not compatible."
+  ]
+}

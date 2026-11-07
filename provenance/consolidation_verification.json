@@ -1,0 +1,30 @@
+{
+  "schema": "supermimic_source_consolidation_verification:1",
+  "timestamp_UTC": "2026-11-07T12:38:37.538078+00:00",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\consolidate_sources.py",
+    "bytes": 16756,
+    "sha256": "ded4d29aa2ab8b2e0e215223d3340e84b847b6dc0828411c172dd719536811b5"
+  },
+  "inventory": {
+    "path": "D:\\workspace\\supermimic-research\\provenance\\workspace_inventory.json",
+    "bytes": 2961960,
+    "sha256": "6d039cd6622dd4b1b3ecd075648266d1684b4df74773069faa4aa7984ba769f8"
+  },
+  "legacy_roots": 24,
+  "copied_source_files": 6002,
+  "copied_source_bytes": 98734788,
+  "git_binary_patches": 4,
+  "checks": {
+    "all6002_origin_and_target_rawbytes_equal": true,
+    "all6002_target_size_SHA_match_ledger": true,
+    "no_copied_pt_npz_npy_mjb_mesh_video_suffix": true,
+    "all4_git_patch_size_SHA_match": true,
+    "second_apply_only_verified_existing6006": true,
+    "inventory_preserved_on_idempotent_apply": true,
+    "no_target_samefile_as_origin": true,
+    "no_target_reparse_points": true
+  },
+  "excluded_scope": "Environment/cache/git, binary datasets/arrays/checkpoints/simulator assets/media, result/geometry JSON outside explicit <=1MiB config/design/protocol selection. Exact policy and path/category size summaries are in inventory. No other workspace projects were traversed for import.",
+  "scope": "Author verification of byte-preserving COPY. No old-file writes/moves/deletes/junctions, no environment install, NN/native/GPU or performance changes. Logical external file-size summaries are not content-digested artifact proofs; live excluded logs may grow."
+}

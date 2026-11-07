@@ -1,0 +1,57 @@
+{
+  "schema": "contact_patch_design_recommendations:7",
+  "catalog_report": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\contact_patch_v7\\report.json",
+    "bytes": 17069,
+    "sha256": "b4c50cee9d414f08e9624d25aafff4ff36b29eea06b1344ec6bf2175ab581fd6"
+  },
+  "catalog": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\contact_patch_v7\\facet_catalog_v1.json",
+    "bytes": 21709920,
+    "sha256": "930f0c1992dcf05f69edfe7ad4b9aa92b06d0a7c187b03ab5589229593e41154"
+  },
+  "localization": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\contact_patch_v7\\contact_localization_v1.json",
+    "bytes": 20847,
+    "sha256": "680bd61c4d1bf96407bd90711601e191db413faffc6b49b1109fb077d77b6247"
+  },
+  "geometry_provenance": "Both saved poses recover identical compiled FP32 geom-local vertices; no native model read. Raw STL paths are crossreferences only; compiler geom frames differ from raw asset/body frames.",
+  "surface_scope": "Full convex collider, including any convexification of mounts/cavities. Functional tactile/rubber pad material, compliance, true pressure distribution and effective friction per CAD face are UNKNOWN.",
+  "native_point_observations": [
+    {
+      "contact_index": 0,
+      "hand_geom": 15,
+      "hand_nearest_surface_distance_um": 9.72788490248302,
+      "phone_nearest_surface_distance_um": 9.806210476449044,
+      "ego_corresponding_material_distance_mm": 4.809399183356695
+    },
+    {
+      "contact_index": 1,
+      "hand_geom": 28,
+      "hand_nearest_surface_distance_um": 8.717383885943924,
+      "phone_nearest_surface_distance_um": 8.736785148912135,
+      "ego_corresponding_material_distance_mm": 4.736622546251864
+    },
+    {
+      "contact_index": 2,
+      "hand_geom": 28,
+      "hand_nearest_surface_distance_um": 8.741157564704757,
+      "phone_nearest_surface_distance_um": 8.730549959843925,
+      "ego_corresponding_material_distance_mm": 4.737906112486767
+    }
+  ],
+  "index_pair_separation_um": 6.494110683662188,
+  "boundary_caution": "The <=1um boundary classifier refers to this fixed Qhull planar/near-coplanar group partition. It can be a tessellation/curvature boundary, not a macroscopic sharp CAD edge. A native penetrating contact position is not a certified closest surface pair.",
+  "feasible_next_proposal_constraints": [
+    "Select a named connected physical hull facet/group as a conditional geometric region; retain triangle/vertex IDs, full polygon and plane-error bounds. Do not infer that the largest flat mounting/back face is a functional pad.",
+    "Use barycentric points inside actual filled triangles, with their true world transforms and normals. Do not turn a group centroid or an arbitrary support-feature crosspair into a physical contact point.",
+    "Prefer genuinely opposed phone surface normals and hand outward normals toward the object; keep actual nonpad/self/table exclusions and joint/controller bounds. Contact-point wrench leverage must use the actual feasible surface points and current object COM, not area/centroid alone.",
+    "A finite-patch proposal requires nearly opposed contacting surfaces plus a positive-area, physically reachable overlap of their projected polygons and bounded face nonplanarity. Current three native contacts, including two index points 6.494um apart, do not establish such an area or independent torque capacity.",
+    "Keep all native contacts grouped by anatomical finger for force budget. An ideal wrench LP remains a conditional point-force design; native contact law, actuator feasibility and unchanged dynamic hold gates require separate evidence."
+  ],
+  "ego_comparison": "Compare fixed phone-body material coordinates and source unsigned scan-proximity regions at frame42. Human left/robot right are not mirrored; no assumption that near-surface points are measured contact/forces, that all ego material points match the native seed, or that coordinates establish a grasp.",
+  "source_geometry_parameters_are_changed": false,
+  "functional_pad_qualified": false,
+  "static_or_dynamic_grasp_qualified": false,
+  "new_model_or_physics_calls": 0
+}

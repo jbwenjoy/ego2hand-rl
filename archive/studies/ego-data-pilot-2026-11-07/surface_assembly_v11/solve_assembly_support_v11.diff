@@ -1,0 +1,59 @@
+--- solve_assembly_support_v10.py
++++ solve_assembly_support_v11.py
+@@ -14,8 +14,9 @@
+ from evaluator_contact_design_v7 import NativeContactDesignEvaluator
+ from scan_body_axis_reference_v7 import pin,read,write,checked,clean,lp_from_probe
+ from strict_support_lp_guarded_v7 import solve_strict_support
+-sys.path.insert(0,str(P/'surface_assembly_v9'))
+-from assembly_kinematics_v9 import AssemblyKinematics
++sys.path.insert(0,str(P/'surface_assembly_v11'))
++from assembly_kinematics_v11 import AssemblyKinematics
++from anchor_validation_v11 import validate_anchor_bundle
+ sys.path.insert(0,str(P/'wrench_residual_v6'))
+ from scaled_wrench_residual_lp_v6 import scaled_wrench_residual_lp
+ 
+@@ -45,9 +46,11 @@
+ def main():
+     ap=argparse.ArgumentParser();ap.add_argument('--protocol',type=Path,required=True);ap.add_argument('--run',action='store_true')
+     a=ap.parse_args();protocol=read(a.protocol)
+-    if protocol['schema']!='assembly_then_hard_geometry_support_protocol:10' or protocol['config']!=CFG:raise ValueError('Frozen rules')
++    if protocol['schema']!='assembly_then_hard_geometry_support_protocol:11' or protocol['config']!=CFG:raise ValueError('Frozen rules')
+     for rec in [*protocol['source_pins'].values(),*protocol['inputs'].values()]:checked(rec)
+     if protocol['source_pins']['runner']!=pin(__file__):raise ValueError('Exact runner')
++    anchor_bundle,anchor_json_checks=validate_anchor_bundle(protocol['inputs']['surface_anchors']['path'],protocol['inputs']['surface_anchors'])
++    if anchor_bundle['branch']!=protocol['anchor_branch']:raise ValueError('Explicit source mapping branch')
+     for key,total in (('cheap_FK_contract',14),('native_J_contract',87),('native_LP_contract',4)):
+         proof=read(checked(protocol['inputs'][key]))
+         if proof['passed']!=total or proof['total']!=total or any(v is not True for v in proof['checks'].values()):raise ValueError('Prior numeric contract '+key)
+@@ -65,9 +68,10 @@
+         tilt=next(v for v in design['four_proposed_seeds'] if v['name']=='tilt_to_force_cone')
+         initial=[xb.copy(),np.r_[qbase[:8],tilt['phone_root_translation_palm_m'],tilt['phone_rotation_vector_palm_rad']]]
+         ev=NativeContactDesignEvaluator.from_existing_pilot(max_heavy_queries=40000,digest_check_period=128);e=ev.geometry
+-        kin=AssemblyKinematics(e,qrest12=qbase[8:]);e.anchors=kin.hand_points.copy();e.anchor_targets=kin.phone_points.copy();e.material=kin.phone_points.copy()
++        kin=AssemblyKinematics(e,anchors_path=protocol['inputs']['surface_anchors']['path'],expected_anchor_pin=protocol['inputs']['surface_anchors'],qrest12=qbase[8:]);e.anchors=kin.hand_points.copy();e.anchor_targets=kin.phone_points.copy();e.material=kin.phone_points.copy()
+         if kin.anchor_pin!=protocol['inputs']['surface_anchors'] or not bits(qbase,np.asarray(kin.anchors['source_pose']['qpos27'])[:20]):raise ValueError('Same declared original material/source pose')
+         write(out/'algorithm_surface_configuration.json',{'source_anchor_pin':protocol['inputs']['surface_anchors'],
++          'source_mapping_branch':protocol['anchor_branch'],'custom_anchor_JSON_checks':anchor_json_checks,'custom_anchor_compiled_checks':kin.compiled_anchor_checks,
+           'hand_geom_local_points':kin.hand_points,'phone_body_material_points':kin.phone_points,
+           'hand_geom_local_outward_normals':kin.hand_normals,'phone_body_outward_normals':kin.phone_normals,
+           'phone_body_tangent_rows':kin.phone_tangents_body_rows,
+@@ -125,7 +129,7 @@
+                 k=cheap(z);s=e.evaluate(k['q20'],x[8:11],x[11:],exact_all=False)
+                 if s['unknown']:
+                     write(out/f'unknown_seed{seedno}_attempt{attempt}.json',s);raise ValueError('Unknown collision evidence')
+-                s['fixed_material_line_scope']='Caller v9 engineering triangle material points from frozen307 anchors; not original ego material targets or actual native contact line.'
++                s['fixed_material_line_scope']='Caller v11 pinned source-region material points; exact source and algorithmic1mm branches remain distinct. Not actual native contact line.'
+                 if (not bits(s['q20_rad'],k['q20'])
+                     or np.max(abs(s['anchors_world_m']-k['A_hand_world_m']))>5e-12
+                     or np.max(abs(s['anchor_targets_world_m']-k['B_phone_world_m']))>5e-12):
+@@ -269,8 +273,8 @@
+             seeds.append({'seed':seedno,'name':CFG['seed_names'][seedno],'stages':stage_reports,'full_attempts':attempt,'full_returned':successful,'finals':finals})
+             print(json.dumps(clean(seeds[-1])),flush=True)
+         attemptfile.close();audit=ev.audit_model();audit['passed']=True
+-        write(out/'report.json',{'schema':'assembly_then_hard_geometry_support_result:10','status':'COMPLETED_BOUNDED_TWO_SEED_STAGED_SEARCH',
+-          'protocol':pin(a.protocol),'seed_results':seeds,'holding_diagnostic_candidates':sum(v['holding_diagnostic_eligible'] for s in seeds for v in s['finals']),
++        write(out/'report.json',{'schema':'assembly_then_hard_geometry_support_result:11','status':'COMPLETED_BOUNDED_TWO_SEED_STAGED_SEARCH',
++          'protocol':pin(a.protocol),'anchor_branch':protocol['anchor_branch'],'seed_results':seeds,'holding_diagnostic_candidates':sum(v['holding_diagnostic_eligible'] for s in seeds for v in s['finals']),
+           'counts':ev.counts,'static_counts':e.counts,'cheap_FK_counts':kin.counts,'LP_calls':LPcalls,
+           'model_audit':audit,'cheap_model_audit':kin.audit_model(),'wall_seconds':time.perf_counter()-start,
+           'new_steps_training_GPU':0,'scope':'Fixed material surface assembly and hard geometry precede support. Common A is conditional, not actual native con.pos. Original fixed model/wrist; no faithful ego, calibrated pad, policy or holding qualification.'})

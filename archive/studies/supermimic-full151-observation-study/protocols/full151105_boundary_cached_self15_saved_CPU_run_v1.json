@@ -1,0 +1,107 @@
+{
+  "schema": "full151105_cached_self15_label_evaluation_CPU_protocol:1",
+  "role": "all152_cached_native15_sensor_labels_saved_only",
+  "CPU_run_authorized": true,
+  "GPU_run_authorized": false,
+  "training_authorized": false,
+  "automatic_retry": false,
+  "accuracy_gate": null,
+  "preregistration": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_boundary_cached_self15_saved_CPU_prereg_v1.json",
+    "sha256": "9b804097f752e113f0a382da6715dd0921f67a71393c6cdd6515a1289c86554c"
+  },
+  "source_contract": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\full151_boundary_final_self15_evaluation_source_contract_v1.md",
+    "sha256": "a535112324eeddb9113ebf47b2d68e379c3ddf5f191604eea498e756a30254f5"
+  },
+  "inputs": {
+    "native_eval_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_boundary_component_final_evaluation_CPU_run_v2.json",
+      "sha256": "109af01d681e046fdad753be23bf7db7c32728cfc9bab3028d83c220a3fd375f"
+    },
+    "native_eval_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_component_final_evaluation_CPU_v2\\report.json",
+      "sha256": "6d244e4a9cf91d4a397d3e3b66090a278150ab9edb30c6e3159fd713ac6bcc0e"
+    },
+    "baseline_forward152": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_component_final_evaluation_CPU_v2\\unwrapped_baseline_forward152.npz",
+      "sha256": "ef9c317485986472e7187f8f2e4513733899bfad9e21ece738b7c20937963c9a"
+    },
+    "control_forward152": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_component_final_evaluation_CPU_v2\\shared_public_losses_forward152.npz",
+      "sha256": "dbbf4d4008452349bc8fcd41a8e495e6e7f771d61e94b8af186de58665f9650d"
+    },
+    "method_forward152": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_component_final_evaluation_CPU_v2\\shared_public_plus_cross_target_consistency_forward152.npz",
+      "sha256": "64e5c15912f3df2e4897a172d33a0f422c99af3eb04c749bc5432a28c85fc182"
+    },
+    "native_eval_group152": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_component_final_evaluation_CPU_v2\\group152_identities.json",
+      "sha256": "c7cf95231922e8b831a532af7bb58b50a4ac48d37297128bf78c345b6b1a8122"
+    },
+    "target_protocol": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\protocols\\full151105_saved_boundary_impulse_target_dataset_CPU_run_v1.json",
+      "sha256": "a961db4a1de16dbf1a16ee03655792c603cd8b5aa7d6eb332ab5120f6aed4140"
+    },
+    "target_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_boundary_impulse_targets_CPU_v1\\report.json",
+      "sha256": "318366deb991c1a875593c41156bdbbbf1266c39b772d41ecf0bebb54e6c1d81"
+    },
+    "target_group152": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_boundary_impulse_targets_CPU_v1\\group152_identities.json",
+      "sha256": "c7cf95231922e8b831a532af7bb58b50a4ac48d37297128bf78c345b6b1a8122"
+    },
+    "reward_snapshots": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\reward_snapshots.jsonl",
+      "sha256": "f214ff1b036595d56117363bd87c7b3c876b04af2fb6a1e8f3a2244ad2ee2247"
+    },
+    "sensor_mapping_A0": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A0\\sensor_label_mapping.json",
+      "sha256": "e4c534d5868f941b03dccc1f19fdfbf17848b9766e5d91e18bfb331d66bbed2a"
+    },
+    "sensor_mapping_A2": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_gradient_empirical_gradient05_v2\\donor_A2\\sensor_label_mapping.json",
+      "sha256": "e4c534d5868f941b03dccc1f19fdfbf17848b9766e5d91e18bfb331d66bbed2a"
+    },
+    "physical_saved_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_full_serial_saved_review_v1\\report.json",
+      "sha256": "f5fd0703639308706b4f8bf5deee834e6d207486c63fded8920a6a86fd2a62af"
+    }
+  },
+  "source_pins": {
+    "consumer": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_self15_cached_saved105_v1.py",
+      "sha256": "97b74e0173bb6d95b55c59d924db7c5502c83cf610907c6c3aa357d54808da5e"
+    },
+    "CLI": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\evaluate_full151_boundary_cached_self15_saved_cpu_v1.py",
+      "sha256": "cd6ddd68900bed85e75c43b20634713512624ee40ad165a3f17f2e7d2e039c86"
+    },
+    "checker": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\check_full151_boundary_cached_self15_saved_cpu_v1.py",
+      "sha256": "cd2a94b9c82746bbae0dc884acb700e8bcf5d6593e88a821a0613e2fea033efb"
+    },
+    "source_contract": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\full151_boundary_final_self15_evaluation_source_contract_v1.md",
+      "sha256": "a535112324eeddb9113ebf47b2d68e379c3ddf5f191604eea498e756a30254f5"
+    },
+    "READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_cached_self15_saved_preparation_CPU_v1\\READY.json",
+      "sha256": "835c4edefd7b99fa6a87cac7543f91273abce268940b20874d206fddaf064c71"
+    },
+    "cpu_proof": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_cached_self15_saved_preparation_CPU_v1\\report.json",
+      "sha256": "93c82b25140481ae385d3bf14be14e8897e7182ab676808bf4f803bc2c847537"
+    },
+    "input_route_source": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_cached_self15_input_routes_source_only_v1\\input_routes.json",
+      "sha256": "993708a8e6ddb30fff57d578af1063aa46435b71225805f0f9c9b54772f1b404"
+    },
+    "Root_protocol_builder": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\scripts\\freeze_boundary_cached_self15_protocol_cpu_v1.py",
+      "sha256": "4f8a24fea6d667f7f7ce412b798bec6527e8a8c8607b6d7521ee71becc91d672"
+    }
+  },
+  "output_prefix": "full151105_boundary_cached_self15_saved_CPU_",
+  "output": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_cached_self15_saved_CPU_v1"
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "supermimic_chord_initial_grasp_protocol:1",
+  "scope": "training initialization selection only; not held-out, not a teacher, not an ego result",
+  "source_group": "01_single_axis",
+  "candidate_stride_frames": 25,
+  "source_dt_s": 0.02,
+  "continuation_frames_required": 151,
+  "hold_duration_s": 0.3,
+  "measurement_dt_s": 0.02,
+  "velocity_groups": [
+    "zero",
+    "source_fd"
+  ],
+  "position_error_limit_m": 0.02,
+  "directed_axis_error_limit_deg": 20.0,
+  "penetration_limits_m": {
+    "hand_object": 0.003,
+    "hand_self": 0.003,
+    "other": 0.003
+  },
+  "joint_limit_margin_rad": 0.001,
+  "drop_rules": [
+    "object COM below initial COM by more than 0.02m",
+    "any solved object contact with non-hand support"
+  ],
+  "initial_contact_rule": "at least one solver-active hand-object contact; count is not a grasp stability certificate",
+  "control": "fixed wrist, hand target held at initial reference q, zero residual and no assistance/state correction",
+  "pass_rule": "all initial and all sampled hold limits satisfied; no instability, drop or non-hand support",
+  "selection_order": [
+    "prefer source_fd pass for compatibility with existing reset/evaluator",
+    "lowest maximum penetration over all categories",
+    "lowest maximum hold position error",
+    "lowest maximum hold shaft-angle error",
+    "lexical clip ID",
+    "lowest source start frame"
+  ],
+  "data_split": "all source-release clips share unknown-video-parent split_group; no validation/test claim",
+  "failure_handling": "continue bounded hold on tracking failure, stop only on nonfinite state; retain failures",
+  "interpretation": "0.3s hold screening does not establish feasibility of the following 3s motion"
+}

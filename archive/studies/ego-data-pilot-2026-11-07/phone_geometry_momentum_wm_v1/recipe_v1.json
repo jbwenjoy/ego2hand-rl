@@ -1,0 +1,74 @@
+{
+  "schema": "phone_geometry_momentum_counterfactual_recipe:1",
+  "recipe": {
+    "seed": 1731,
+    "cpu_threads": 4,
+    "device": "cpu",
+    "dtype": "float32",
+    "physical_decode_dtype": "float64",
+    "hidden": [
+      128,
+      128
+    ],
+    "activation": "SiLU",
+    "updates": 5000,
+    "checkpoint_updates": [
+      250,
+      1000,
+      5000
+    ],
+    "stop_after_first_healthy_checkpoint": true,
+    "batch": "all2118_absolute_rows_and_all1434_FIT_pairs_each_update",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "adam_epsilon": 1e-08,
+    "foreach": false,
+    "clip_grad_norm": 1.0,
+    "input_std_floor": 1e-06,
+    "geometry_chunk_rows": 4,
+    "head_std_floors": {
+      "q_rad": 0.001,
+      "qd_rad_s": 0.01,
+      "COM_residual_m": 0.0001,
+      "world_dR_rad": 0.001,
+      "force_impulse_Ns": 0.0001,
+      "torque_impulse_Nms": 1e-05
+    },
+    "decoded_velocity_std_floors": {
+      "vCOM_m_s": 0.01,
+      "omega_world_rad_s": 0.1
+    },
+    "CF_action_reference_rad": 1.0,
+    "CF_denominator": "actual_F64_selected_coordinate_du_no_epsilon",
+    "CF_scale": "FIT1434_target_secant_population_std_with_same_physical_unit_floors_per_radian",
+    "physical_block_reduction": "equal_mean_of_q20_qd20_p3_dR3_Jforce66_Jmoment66_block_MSE",
+    "force_reference_N": 1.0,
+    "force_loss": "mean22rows_log1p_pred_N_over_1N_minus_log1p_target_N_over_1N_squared_no_std",
+    "coverage_loss": "BCE_logits_mean_rows_and22pairs",
+    "lambda_absolute_heads": 1.0,
+    "lambda_decoded_velocity": 1.0,
+    "lambda_FIT_response": 1.0,
+    "lambda_meanFn": 1.0,
+    "lambda_coverage": 1.0,
+    "last_layer_initialization": "zero_weights_normalized_physical_mean_Fn_TRAINmean_inverse_softplus_coverage_TRAINmean_logit",
+    "initial_meanFn_floor_N": 0.001,
+    "initial_coverage_probability_clip": 0.0001,
+    "validation": "original114_complete_VAL_state58_only_no_normalizer_fit_no_model_selection",
+    "actionCHECK_TEST_fresh": "hash_only_not_np_load_not_loss_not_normalizer"
+  },
+  "loss_contract": "Absolute2118 physical targets plus1434 FIT finite secants; six physical unit blocks equal. Decoded velocity separate2block MSE. All five declared coefficients1, no CHECK-selected weights.",
+  "units": {
+    "joint_delta40": "20rad and20rad/s",
+    "COM_ballistic_residual3": "m",
+    "world_left_rotation3": "rad",
+    "pair22_impulse6": "3Ns then3Nms in frozen source BODY axes, moments about moving COM",
+    "meanFn": "N, softplus(raw)*1N",
+    "coverage": "fraction of solverPRE ticks Fn>.1N; BCE logits"
+  },
+  "endpoint_or_physics_scope": "Observed defects remain labels; predicted velocities use structured momentum closure. Position/R independent. No wholeH zero-mask, holding, trueJac, Actor or CHORD benefit claim."
+}

@@ -1,0 +1,194 @@
+{
+  "schema": "full151_knownrough_matched_training_protocol:2",
+  "allowed_methods": [
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "allowed_roles": [
+    "engineering_smoke",
+    "primary_matched"
+  ],
+  "allowed_seeds": [
+    0
+  ],
+  "input_bundle": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\bundle.json",
+    "sha256": "59406c6214a085afba7efcc2b33880d5c82b409ee4f6485ec71c073fec19dc76"
+  },
+  "objective_spec": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\configs\\full151-v2-declared-H123-GPU-objective-spec-v1.json",
+    "sha256": "08d9fa9936766bdf21bb13dcf0123eebe3a54639266f641f47f9e7bb522c3962"
+  },
+  "readiness": {
+    "native_A0_engineering_enrollment": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_A0_engineering_enrollment_v1.json",
+      "sha256": "e575762b7309d61055e6b885af5015805ecf8bdee9307d12b529d2ef14ed37e0"
+    },
+    "learning_CPU_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_prior_learning_preparation_v1\\READY.json",
+      "sha256": "bde5dfff946b9bb9c9d70a5d12d1c8a0b958878a03af5e0bd2615ca861e69df6"
+    },
+    "binding_CPU_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\READY_full151_intent_binding_v3.json",
+      "sha256": "87e91298c153a453fdaeafbb8ce38ecfb2e8ef482d4c3cfcc38adaa8f4b0cbef"
+    },
+    "health_auditor_CPU_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\READY_full151_three_arm_health_v2.json",
+      "sha256": "72e30a6c09535ce58d312f6d18fe3d8d9e10e238a259f0e7b92ac6751cdddb44"
+    },
+    "matched_cone_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_matched_actual_material_cones_CPU_v1\\report.json",
+      "sha256": "bdc55ba26c66dc24ba1f70a68144e7435dc91b629843047d84f90179fa515b36"
+    },
+    "matched_cone_saved_numeric_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_matched_material_cones_saved_numeric_independent_v1\\report.json",
+      "sha256": "320469e25229aad71b80528abcc3c97c5501894f14acbf6c5328600615f7f552"
+    },
+    "learning_CPU_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_prior_learning_CPU_v1\\report.json",
+      "sha256": "c9453bcedc59366ebcc251cd9a85ffe3a087f277b46f94a1edd02a800141e415"
+    },
+    "binding_CPU_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_intent_binding_CPU_v3\\report.json",
+      "sha256": "2ae0ad5373e1391a5fc1c5bb80073783831e8846b2f0df904f073c95cb82f80c"
+    },
+    "health_auditor_CPU_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_three_arm_health_CPU_v1\\report.json",
+      "sha256": "ce9395e92a3f426e765825c712dce60fc4119e93d787184a7bdc85f7dd8361f9"
+    }
+  },
+  "CPU_report_contracts": {
+    "learning_CPU": {
+      "schema": "full151_prior_learning_CPU_contract:1",
+      "status": "PASS"
+    },
+    "binding_CPU": {
+      "schema": "full151_declared_H123_exploratory_binding_CPU_contract:1",
+      "status": "PASS_CPU_FACTORY_ENROLLMENT_AND_FROZEN_MATH_ONLY"
+    },
+    "health_auditor_CPU": {
+      "schema": "full151105_three_arm_health_auditor_CPU_contract:1",
+      "status": "PASS_NEW_THREE_ARM_HEALTH_CPU_CONTRACTS_ONLY"
+    }
+  },
+  "engineering_smoke_training": {
+    "num_envs": 128,
+    "buffer_steps": 256,
+    "warmup_steps": 64,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "log_interval": 1,
+    "amp": true,
+    "compile": false,
+    "compile_policy": false,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1,
+    "utd": 0.4,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "max_iterations": 40,
+    "wm_only_iters": 20,
+    "save_interval": 40
+  },
+  "primary_matched_training": {
+    "num_envs": 128,
+    "buffer_steps": 256,
+    "warmup_steps": 64,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "log_interval": 1,
+    "amp": true,
+    "compile": false,
+    "compile_policy": false,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1,
+    "utd": 0.4,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "max_iterations": 2000,
+    "wm_only_iters": 200,
+    "save_interval": 100
+  },
+  "reference_states": 151,
+  "control_intervals": 150,
+  "physical_reference_qualified": false,
+  "contact_targets_are_human_truth": false,
+  "clock_contract": {
+    "schema": "full151_native_clock:1",
+    "dtype": "float32",
+    "physics_dt_s": 0.005,
+    "physics_steps": 600,
+    "control_substeps": 4,
+    "expected_rule": "sequential_float32_add_from_zero",
+    "bitexact_expected_time": true,
+    "canonical_time_rule": "integer_physics_tick_times_0p005",
+    "nominal_drift_gate_s": 5e-05,
+    "legacy_prefix_2us_diagnostic_only": true
+  },
+  "evaluation_gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "clock": {
+      "schema": "full151_native_clock:1",
+      "dtype": "float32",
+      "physics_dt_s": 0.005,
+      "physics_steps": 600,
+      "control_substeps": 4,
+      "expected_rule": "sequential_float32_add_from_zero",
+      "bitexact_expected_time": true,
+      "canonical_time_rule": "integer_physics_tick_times_0p005",
+      "nominal_drift_gate_s": 5e-05,
+      "legacy_prefix_2us_diagnostic_only": true
+    },
+    "legacy_prefix_2us_diagnostic_only_s": 2e-06,
+    "target_rate_max_rad_s": 15.0,
+    "actuator_load_ratio_max": 1.01,
+    "load_charge_max": 0.8,
+    "charge_decay_time_s": 2.0,
+    "drop_center_below_default_wrist_m": 0.15
+  },
+  "hypothesis": "H123 source-surface declaration fixed before H12345 comparison; no highercoverage winner selection. mu.1 support fingerprint unchanged; native material condim4 conditional151 witness is separate evidence, not actualcontact/force/handreach.",
+  "method_difference": "A1L: no objective import/instance; P_ONLY: same -.1 penetration; A2: same penetration +1 support. Only imagination soft=True reward +.02*unscaledbonus; native phase<150 mask/realcollection/WMfit/controller/optimizers unchanged.",
+  "fairness": "Same seed0/128worlds/context/reference/controller/budget/source table; raw four parameter initializations independently matched. Entire prior import/build/to RNG compared before firstcollect. No warmstart/modelresume or quality checkpoint selection.",
+  "primary_budget_counts": {
+    "real_transitions": 648192,
+    "wm": 4000,
+    "fail_head": 4000,
+    "actor": 1800,
+    "critic": 7200
+  },
+  "smoke_budget_counts": {
+    "real_transitions": 20992,
+    "wm": 80,
+    "fail_head": 80,
+    "actor": 20,
+    "critic": 80
+  },
+  "qualification_limits": "Prior GPU eager engineering only after actualsmoke; historical proxy/compiled precision failure retained; physical/contact gradients and realego benefits unqualified. Current source SCP geometry and A0 task failures retained.",
+  "lifecycle": "One fresh output per fixed config. Smoke soft540/hard600; primary soft7100/hard7200. No retry/compile fallback. User conditional Goalpause after first healthy newlystarted primary checkpoint and ETA; owned detached job may continue."
+}

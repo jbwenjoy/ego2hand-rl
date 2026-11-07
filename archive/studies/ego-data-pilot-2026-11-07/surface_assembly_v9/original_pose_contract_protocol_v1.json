@@ -1,0 +1,46 @@
+{
+  "schema": "single_original_pose_assembly_FK_contract:9",
+  "source_pins": {
+    "assembly": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v9\\assembly_kinematics_v9.py",
+      "bytes": 9109,
+      "sha256": "6eb8feaf190a5ae4951122851100ddd713454456db94ca3bf69dbc587a30dbfd"
+    },
+    "checker": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\surface_assembly_v9\\check_assembly_original_pose_v1.py",
+      "bytes": 6910,
+      "sha256": "7f28aeaf23cd74e14329a1067ace66729f2b3588a377d0d420fac6e9d098bf6d"
+    },
+    "initial_loader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_stage1\\scene_loader_v1.py",
+      "bytes": 2908,
+      "sha256": "5a36cf1d6ac875c3f0cfc3c80b5b28c8c5726ec68d3ac40f731ccee70840b303"
+    }
+  },
+  "inputs": {
+    "anchors": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\contact_patch_v7\\paired_surface_anchors_v1.json",
+      "bytes": 18391,
+      "sha256": "307e91a728c14fc4f799465649bc11f71c1b0be0971a3ec289d2a1acfaf565bb"
+    },
+    "binding": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\binding.json",
+      "bytes": 13585,
+      "sha256": "eac467d75cdc4dfeaf707196744920f405f4287813272e603bc3a37f6c9473f8"
+    },
+    "compiled_model": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    }
+  },
+  "CPU_FK_authorized": true,
+  "maximum_pose_queries": 1,
+  "maximum_mj_kinematics": 1,
+  "maximum_mj_comPos": 1,
+  "forward_RNE_passive_geometry_J_LP_steps_GPU_authorized": false,
+  "comparison_absolute_bound_m_or_dimensionless": 5e-12,
+  "tangent_rule": "Original directed first phone triangle edge, numerical tangent orthogonalization only; normal antiparallel branch is separate.",
+  "model_loading": "One standalone original compiled model, shared with the assembly object. No second comparison model is loaded; normal caller passes its already-owned e.",
+  "automatic_retry": false
+}

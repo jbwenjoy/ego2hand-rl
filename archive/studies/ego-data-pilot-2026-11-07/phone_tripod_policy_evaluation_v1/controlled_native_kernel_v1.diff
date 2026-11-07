@@ -1,0 +1,54 @@
+--- frozen_evaluate_case
++++ controlled_evaluate_case
+@@ -1,4 +1,4 @@
+-def evaluate_case(m,variant,dt,case_dir,phone,pg,table,pads,mujoco,np,counts):
++def evaluate_case_controlled(m,variant,dt,case_dir,phone,pg,table,pads,mujoco,np,counts,controller):
+     """Original 2s native loop and old gates; three-pad classification additive."""
+     q0=np.asarray(variant['qpos27'],dtype=float);ctrl=np.asarray(variant['ctrl20'],dtype=float);m.opt.timestep=dt
+     d=mujoco.MjData(m);counts['MjData']+=1;d.qpos[:]=q0;d.qvel[:]=0;d.ctrl[:]=ctrl;d.qacc_warmstart[:]=0
+@@ -18,7 +18,24 @@
+         'pre_penetration_m','pre_self_penetration_m','pre_qfrc_actuator','pre_actuator_force','pre_solver_niter',
+         'pre_actuator_length20','pre_actuator_velocity20','pre_actuator_force_margin20x2','pre_joint_actuator_force_margin20x2']
+     rows={k:[] for k in keys};contact_rows=[];geometry_samples=[];terminate='COMPLETE';attempted_steps=0
++    # A declared control hook is the sole new mutation of d.ctrl. No state/force resets.
++    stride=round(.02/dt)
++    if stride not in (64,128) or abs(stride*dt-.02)>1e-15:raise ValueError('Integer20ms control stride')
++    control_records=[];pre_ctrl=[]
++    sig=mujoco.mjtState.mjSTATE_INTEGRATION;size=mujoco.mj_stateSize(m,sig)
++    if int(sig)!=16383 or size!=300:raise ValueError('Frozen integration receipt shape')
+     for tick in range(steps):
++        if tick%stride==0:
++            before=np.empty(size);after=np.empty(size);mujoco.mj_getState(m,d,before,sig)
++            requested=np.asarray(controller(tick,dt,m,d),dtype=np.float64)
++            mujoco.mj_getState(m,d,after,sig)
++            counts['controller_receipt_reads']=counts.get('controller_receipt_reads',0)+2
++            if before.tobytes()!=after.tobytes():raise ValueError('Controller mutated native integration state')
++            if requested.shape!=(20,) or not np.isfinite(requested).all() or np.any(requested<m.actuator_ctrlrange[:,0]) or np.any(requested>m.actuator_ctrlrange[:,1]):raise ValueError('Finite legal absolute command, no clamp')
++            ctrl=requested.copy();d.ctrl[:]=ctrl
++            control_records.append(dict(pre_tick=tick,time_s=tick*dt,ctrl20_F64=ctrl.tolist()))
++            counts['controller_calls']=counts.get('controller_calls',0)+1
++        pre_ctrl.append(ctrl.copy())
+         mujoco.mj_step(m,d);counts['integration_steps']+=1;attempted_steps+=1
+         values=[d.time,d.qpos,d.qvel,d.qacc,d.energy,d.qfrc_actuator,d.actuator_force]
+         if not all(np.isfinite(x).all() for x in values):terminate='ABORT_NONFINITE';break
+@@ -52,7 +69,8 @@
+     oldnonpad=r['pre_phone_nonpad_normal_N']+r['pre_pad_normal_N'][:,2]
+     oldmetrics['max_phone_nonpad_normal_force_N']=float(oldnonpad.max());oldgates=dict(duration_complete=gates['duration_complete'])
+     for k,v in oldmetrics.items():oldgates[k]=v is not None and (v>=OLD_GATES[k] if k=='tail_dual_pad_force_coverage' else v<=OLD_GATES[k])
+-    np.savez_compressed(case_dir/'trace.npz',**r,ctrl20=ctrl,ctrl_margin20x2=np.asarray(variant['ctrl_margin20x2']),initial_qpos27=q0,initial_COM_world3=COM0,
++    write(case_dir/'control_schedule.json',control_records)
++    np.savez_compressed(case_dir/'trace.npz',**r,pre_executed_ctrl20=np.asarray(pre_ctrl[:completed]),ctrl20=ctrl,ctrl_margin20x2=np.asarray(variant['ctrl_margin20x2']),initial_qpos27=q0,initial_COM_world3=COM0,
+         pre_old_two_pad_phone_nonpad_normal_N=oldnonpad,contact_rows=np.asarray(contact_rows,dtype=float).reshape(-1,24),
+         sample_pre_tick=np.asarray([v['pre_tick'] for v in geometry_samples]),sample_pre_qpos=np.asarray([v['pre_qpos'] for v in geometry_samples]),
+         sample_pre_geom_xpos=np.asarray([v['geom_xpos'] for v in geometry_samples]),sample_pre_geom_xmat=np.asarray([v['geom_xmat'] for v in geometry_samples]))
+@@ -65,7 +83,9 @@
+         velocity_metric_semantics='Preserved root translational freejoint qvel RMS; angular body qvel norm is frame invariant, not a new COM-velocity gate.',
+         contact_row_columns=['pre_tick','geom1','geom2','dim','efc_address','distance_m','position3','frame9','local_wrench6'],
+         nonpad_metric_definition='Maximum across PRE ticks of the SUM of positive Fn over every phone contact with non-designated hand geoms; same aggregation as original two-pad gate. old_two_pad also includes all positive Fn on geom41.',
+-        no_external_forces_equality_mocap_or_pose_reset=True,static_zero_acceleration_entry_required=False)
++        no_external_forces_equality_mocap_or_pose_reset=True,static_zero_acceleration_entry_required=False,
++        control_schedule=pin(case_dir/'control_schedule.json'),control_scope='Planned50Hz controller only; trace pre_executed_ctrl20 is actual perPRE-tick command. Legacy trace ctrl20 is last command and ctrl_margin20x2 describes initial source only. Raw integration receipts protect callback state; no full-MjData certificate.',
++        native_loop_and_physical_success_gates_from='frozen functional_tripod_dynamics_v3, unchanged after insertion of explicit control hook and schedule fields')
+     write(case_dir/'summary.json',summary)
+     endpoint=dict(dt_s=dt,final_COM_world_m=r['post_COM'][-1].tolist(),final_quaternion_wxyz=r['post_qpos'][-1,23:27].tolist(),
+         actual_final_time_s=float(d.time),termination=terminate,finite_steps_saved=completed,original_case_pass=summary['nominal_holding_dynamics_pass'])

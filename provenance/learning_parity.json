@@ -1,0 +1,187 @@
+{
+  "schema": "phone_learning_migration_parity:1",
+  "status": "PASS_NARROW_CPU_WM_PORT_AND_SAVED_ACTOR_CRITIC_COPY_PARITY",
+  "checks": {
+    "fixed_warm5000_and_saved_features_norm_context": true,
+    "strict_same_layers_weights": true,
+    "raw222_head178_decoded58_CPU_forward_parity": true,
+    "fixed_u_input_AD_finite_parity_no_parameter_gradient": true,
+    "new_actual_Dex_imports_bound_to_identical_copy_ledger": true,
+    "paired100_serialized_norms_and_stored_prediction_health_fixtures": true
+  },
+  "passed": 6,
+  "total": 6,
+  "artifact_manifest": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\artifacts.toml",
+    "bytes": 2417,
+    "sha256": "baf6a2ac5c96645c230e6326eb9ddc8635270fb442e6d5fe7e6ed613b8536ac5"
+  },
+  "warm_result": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_resume1\\result.json",
+    "bytes": 1129,
+    "sha256": "ece5f7c85eb78c6727dddd246256475742971554662bd96a572e8f9525c58723"
+  },
+  "warm_checkpoint": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_resume1\\checkpoint_5000.pt",
+    "bytes": 1932307,
+    "sha256": "344bac4568f57b8d97973bda06e5568b97fe10e13864f8b3d5a326bcf98dc9a7"
+  },
+  "legacy_WM_source": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\train_geometry_momentum_wm.py",
+    "bytes": 37229,
+    "sha256": "224a0c9f47e196c626e862aa52d46402a454a6d16f0b497d3720ae74e25ca539"
+  },
+  "new_WM_source": {
+    "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\world_model.py",
+    "bytes": 13536,
+    "sha256": "2bfd9307e0686b27cba055093aae51f1bdc59d506384283e3f809caf59e54192"
+  },
+  "prepared_features": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\cpu_resume1\\prepared_FIT_targets_and_features.npz",
+    "bytes": 3480441,
+    "sha256": "98fd63570bc7048b3037e2ba759bc93e21b05a5c0e245e75d0e7de9d48a9f132"
+  },
+  "fixed_feature_rows": [
+    0,
+    1
+  ],
+  "feature_source_role": "Existing FIT cache only for parity, no fitting or data reselection",
+  "comparisons": {
+    "raw222": {
+      "shape": [
+        2,
+        222
+      ],
+      "dtype": "torch.float32",
+      "max_abs_error": 0.0
+    },
+    "physical178": {
+      "shape": [
+        2,
+        178
+      ],
+      "dtype": "torch.float64",
+      "max_abs_error": 0.0
+    },
+    "decoded58": {
+      "shape": [
+        2,
+        58
+      ],
+      "dtype": "torch.float64",
+      "max_abs_error": 0.0
+    },
+    "u20_gradient": {
+      "shape": [
+        2,
+        20
+      ],
+      "dtype": "torch.float64",
+      "max_abs_error": 0.0
+    },
+    "u_direction": {
+      "shape": [
+        2
+      ],
+      "dtype": "torch.float64",
+      "max_abs_error": 0.0
+    }
+  },
+  "input_AD_direction": [
+    -0.991405999164138,
+    -0.6685032090044474
+  ],
+  "paired100_checkpoint": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\gpu_run1\\paired_checkpoint_0100.pt",
+    "bytes": 39210825,
+    "sha256": "9c773938665bffe4d52893cb8a9abfc53e4d4bf4d103a2beaf36383464f6b7eb"
+  },
+  "paired100_health": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\gpu_run1\\health_0100.json",
+    "bytes": 2575,
+    "sha256": "60da7c3b4895d04062be10319fd961acdf76bee5c62dcd7b9c720744ee2e1959"
+  },
+  "stored_prediction_fixture": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\gpu_run1\\health_readback_0100.npz",
+    "bytes": 11296,
+    "sha256": "79d055e8b249aa3f93df751b9d77e20ca214da8021e357553245b1064a7c817a"
+  },
+  "stored_prediction_pairs": [
+    "WM",
+    "A1_tracking_Actor",
+    "A1_tracking_Critic",
+    "A2_engineered_material_proxy_Actor",
+    "A2_engineered_material_proxy_Critic"
+  ],
+  "copied_Dex_imports": {
+    "networks": {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "bytes": 5331,
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "common": {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\common.py",
+      "bytes": 3261,
+      "sha256": "6d6ff994d592c8fec1d46401d7051d0511310281a3d28450db8bd9be8c327f8b"
+    }
+  },
+  "serialized_Actor_Critic_states": {
+    "A1_tracking/stateactor": {
+      "weight_tensor_count": 12,
+      "normalizer_tensor_count": 4,
+      "raw_digest": "45e66f6de55b5a8930bc9dfe0a9cb33e436b848e7de2a1908a4d4f20128f2ef2"
+    },
+    "A1_tracking/statecritic": {
+      "weight_tensor_count": 14,
+      "normalizer_tensor_count": 4,
+      "raw_digest": "8f0cd7c1f4b4e46367f021659cc6a8a6f47e1c2085e8212f75b195688e37e71a"
+    },
+    "A1_tracking/statecritic_target": {
+      "weight_tensor_count": 14,
+      "normalizer_tensor_count": 4,
+      "raw_digest": "397157b75761bc34223c9af1640b101c10d58604160aba1a55c4545a3fb2ad80"
+    },
+    "A2_engineered_material_proxy/stateactor": {
+      "weight_tensor_count": 12,
+      "normalizer_tensor_count": 4,
+      "raw_digest": "30c23a794921005812120649d5446804f5ed53c4709130c519fdb3d65a587562"
+    },
+    "A2_engineered_material_proxy/statecritic": {
+      "weight_tensor_count": 14,
+      "normalizer_tensor_count": 4,
+      "raw_digest": "bfecc21a557715713b8ddf527cd78649f2a5747d42d5290e41658ca849949554"
+    },
+    "A2_engineered_material_proxy/statecritic_target": {
+      "weight_tensor_count": 14,
+      "normalizer_tensor_count": 4,
+      "raw_digest": "98caeed637763d3b902e1b2b68c0db20d35bf3dcd874dbb2de7567120d8b973f"
+    }
+  },
+  "copy_ledger": {
+    "path": "D:\\workspace\\supermimic-research\\provenance\\dex_chord_import.json",
+    "bytes": 87315,
+    "sha256": "1fa4500765c60d548a5d0b25673ed43721016ed4bc47aac2d4a91c5fe830eae1"
+  },
+  "calls": {
+    "own_CPU_checkpoint_loads": 2,
+    "WM_constructors": 2,
+    "WM_forward": 2,
+    "CPU_input_AD_grad_calls": 2,
+    "Actor_Critic_constructors": 0,
+    "Actor_Critic_forward": 0,
+    "optimizer_constructors": 0,
+    "optimizer_updates": 0,
+    "native_model_FK_forward_steps": 0,
+    "CUDA_calls": 0
+  },
+  "validation_source": {
+    "path": "D:\\workspace\\supermimic-research\\scripts\\check_learning_parity.py",
+    "bytes": 10785,
+    "sha256": "eb0180f663fd26a624137532a98ae91e388529ebe5034947bc7488c0f7139871"
+  },
+  "scope": [
+    "Two actual saved366 features and one unchanged fixed warm5000 checkpoint. Old and new WM each perform one CPU batch2 forward and one fixed scalar input-u AD.",
+    "Actor/Critic code bytes/import locations, paired100 serialized raw states/norms and existing before/after prediction health fixtures are checked. No new Actor/Critic forward or constructor.",
+    "No optimizer, parameter gradient, training, native model/physics or CUDA. This is migration parity, not evidence of learned model accuracy, physical-action gradients, contact, holding or policy benefit."
+  ]
+}

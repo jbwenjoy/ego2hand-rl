@@ -1,0 +1,140 @@
+{
+  "schema": "full151_knownrough_native_training_protocol:1",
+  "allowed_roles": [
+    "engineering_smoke",
+    "primary_matched"
+  ],
+  "allowed_methods": [
+    "A1L"
+  ],
+  "allowed_seeds": [
+    0
+  ],
+  "input_bundle": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_input_v1\\bundle.json",
+    "sha256": "59406c6214a085afba7efcc2b33880d5c82b409ee4f6485ec71c073fec19dc76"
+  },
+  "reference_states": 151,
+  "control_intervals": 150,
+  "engineering_smoke_training": {
+    "num_envs": 128,
+    "buffer_steps": 256,
+    "warmup_steps": 64,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "log_interval": 1,
+    "amp": true,
+    "compile": false,
+    "compile_policy": false,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1,
+    "utd": 0.4,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "max_iterations": 40,
+    "wm_only_iters": 20,
+    "save_interval": 40
+  },
+  "primary_matched_training": {
+    "num_envs": 128,
+    "buffer_steps": 256,
+    "warmup_steps": 64,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "log_interval": 1,
+    "amp": true,
+    "compile": false,
+    "compile_policy": false,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1,
+    "utd": 0.4,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "max_iterations": 2000,
+    "wm_only_iters": 200,
+    "save_interval": 100
+  },
+  "readiness": {
+    "native_A0_engineering_enrollment": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_A0_engineering_enrollment_v1.json",
+      "sha256": "e575762b7309d61055e6b885af5015805ecf8bdee9307d12b529d2ef14ed37e0"
+    },
+    "training_CPU_READY": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_learning_preparation_v1\\READY.json",
+      "sha256": "80d9315b13d4f67120ed75e92d74c076c95f369ca6db707fb6a13dc28ed5ef9f"
+    },
+    "engineering_smoke_health": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151_native_A1L_smoke40_health_v1\\report.json",
+      "sha256": "04e51a7b04d06058c7923dbd1df03e63f9fe39bb2c7c3bc1d79aa7cab357b215"
+    }
+  },
+  "physical_reference_qualified": false,
+  "geometric_candidate_qualified": false,
+  "known_rough_reference": true,
+  "contact_objective": null,
+  "clock_contract": {
+    "schema": "full151_native_clock:1",
+    "dtype": "float32",
+    "physics_dt_s": 0.005,
+    "physics_steps": 600,
+    "control_substeps": 4,
+    "expected_rule": "sequential_float32_add_from_zero",
+    "bitexact_expected_time": true,
+    "canonical_time_rule": "integer_physics_tick_times_0p005",
+    "nominal_drift_gate_s": 5e-05,
+    "legacy_prefix_2us_diagnostic_only": true
+  },
+  "evaluation_gates": {
+    "object_position_max_m": 0.02,
+    "directed_shaft_error_max_deg": 20.0,
+    "actual_joint_hard_excess_max_rad": 0.001,
+    "penetration_any_category_max_m": 0.003,
+    "object_nonhand_candidate_contact_count_max": 0,
+    "external_force_max_abs": 0.0,
+    "clock": {
+      "schema": "full151_native_clock:1",
+      "dtype": "float32",
+      "physics_dt_s": 0.005,
+      "physics_steps": 600,
+      "control_substeps": 4,
+      "expected_rule": "sequential_float32_add_from_zero",
+      "bitexact_expected_time": true,
+      "canonical_time_rule": "integer_physics_tick_times_0p005",
+      "nominal_drift_gate_s": 5e-05,
+      "legacy_prefix_2us_diagnostic_only": true
+    },
+    "legacy_prefix_2us_diagnostic_only_s": 2e-06,
+    "target_rate_max_rad_s": 15.0,
+    "actuator_load_ratio_max": 1.01,
+    "load_charge_max": 0.8,
+    "charge_decay_time_s": 2.0,
+    "drop_center_below_default_wrist_m": 0.15
+  },
+  "initialization": "Native fromscratch RNG; no warmstart/resume/checkpoint input. New105 identity only.",
+  "capacity_scope": "Frozen sticky observer starts after Env constructor; constructor/startup graph before observer UNKNOWN. Read before each reset/checkpoint and one final. Fixed192/4096; no automatic expansion.",
+  "quality_scope": "Parent SCP and A0 task FAIL retained. Training uses native soft error termination .05m/60degrees and reference phase150 terminal. Record phase histogram; a budget of164 worldsteps does not imply all150 phases visited.",
+  "comparison_scope": "Current source observation-derived full151 A1L only. P_ONLY/A2 independent full151 intent/wrench bindings MISSING. Prior results known; no blind prospective causal improvement claim.",
+  "learning_scope": "Real Manager/DexRunner, native replay collection/WM/failure/Actor/critic; actual four module optimizer hook counts and raw initialization saved. H8 hard-bound masking preserves native soft survival semantics.",
+  "pause_scope": "After starting primary training, independently inspect first healthy indexed checkpoint100 and estimate remaining time using measured smoke policy cost plus live WM-only cost; then pause Goal while owned hidden supervisor continues.",
+  "attempt_policy": "One run per fresh output/config; no retry/fallback. Smoke soft540/hard600; primary soft7100/hard7200. Failures and old bytes retained."
+}

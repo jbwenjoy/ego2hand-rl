@@ -1,0 +1,114 @@
+{
+  "schema": "full151105_boundary_component_initial_parity_preregistration:1",
+  "role": "real_initial_boundary_component_function_parity",
+  "status": "FROZEN_BEFORE_REAL_INITIAL_COMPONENT_LOAD_OR_FORWARD",
+  "inputs": {
+    "target_report": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_boundary_impulse_targets_CPU_v1\\report.json",
+      "sha256": "318366deb991c1a875593c41156bdbbbf1266c39b772d41ecf0bebb54e6c1d81"
+    },
+    "target_arrays": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_boundary_impulse_targets_CPU_v1\\all152_boundary_impulse_targets.npz",
+      "sha256": "bc22e2b0d6a6ff333f8431eee689134814df1ea7059e8346f27e74f7b0392f80"
+    },
+    "target_saved8": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_boundary_impulse_targets_independent_v1\\report.json",
+      "sha256": "3703c02f0e72753582ab5e8ff52b7ab79bc5409220e06e7fd7282a0e009851ed"
+    },
+    "target_source_inventory": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_boundary_impulse_targets_CPU_v1\\source_inventory.json",
+      "sha256": "99fb98d0470c324b37db57162c335b4a91d658d2554926a6657837cfe89ada96"
+    },
+    "initial_component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_component_state.pt",
+      "sha256": "ea051225b7279fc69fbd97725eb15462faaf4b3a6706881f8fe4a05b658a14bf"
+    },
+    "initial_validation": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_calibration_CPU_v1\\initial_validation.json",
+      "sha256": "36c43a9ab4b03edd7f45fe8760fc2743821ecfe2599ea5795b7ade44a04b4186"
+    },
+    "initial_saved_health29": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_WM_common_pre_final1000_saved_independent_v1\\report.json",
+      "sha256": "daff6c0b4f1d165b054b2431f4cb62476237f65869b9f3e4fff2846b861b36fa"
+    },
+    "component_ready": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_impulse_component_preparation_CPU_v1\\READY.json",
+      "sha256": "707f09cca3ca92ee743bc82eb3212db29b68b1e29517f79351c22f45b43ed291"
+    },
+    "component_source_review": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_component_source_review_v1\\report.json",
+      "sha256": "126f177396526dc372c87308423dacc7b12b138c64309edcddb72fb2b723de56"
+    },
+    "recipe_draft": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\full151_boundary_impulse_matched_loss_recipe_draft_v1.md",
+      "sha256": "5926e869f69e1ab6a5ea7aac7d5dee4f0b9adc4b2d2686dfc6b6a6a488f785b2"
+    }
+  },
+  "source_pins": {
+    "component": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_impulse_component105_v1.py",
+      "sha256": "003aac369bcac69dff9312c79837a8faf5a583473898fdb64515aa7608b60317"
+    },
+    "initial_loader": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\component_H8_donor105_v1.py",
+      "sha256": "0c77dc5255ffd2d7294dabdc7bbaf8ed09e80f3f2bc0eb89fee3954d268a6b13"
+    },
+    "initial_loader_helper": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\component_confirmation105_v1.py",
+      "sha256": "f75302fa70a894300ceb3a71492b9cffd973244990f13be26cee5b7e5e112659"
+    },
+    "common_IO_native_chart": {
+      "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\response_calibration105_v1.py",
+      "sha256": "71efe05da17a37df4111158860443433304f1d57762e2377d4dbafc3b57ca27f"
+    },
+    "native_WM_networks": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "native_state_difference": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    }
+  },
+  "budget": {
+    "trusted_own_initial_torch_loads": 1,
+    "native_WM_constructors": 1,
+    "raw_WM_deepcopies": 2,
+    "zero_head_template": 1,
+    "WM_forward_calls": 3,
+    "forward_batch_size": 152,
+    "predicted_rows": 456,
+    "AD_optimizer_Actor_original119f_MJB_Env_physics_GPU_training": 0
+  },
+  "execution": {
+    "device": "cpu",
+    "cpu_threads": 4,
+    "native_storage_forward": "FP32 ampFalse samebatch/inference_mode",
+    "baseline": "raw original loaded initialWM, not fabricatedfinal1000 or native105payload",
+    "wrappers": "shared_public_losses + shared_public_plus_cross_target_consistency, samezero14head/rawinitial/norm/xi/context, rawclonesbeforehook",
+    "inputs": "samefrozen all152 x58/u20; dynamics=state58+xi46+zero174; nolabels/modes/impulses asforwardinputs",
+    "context": "all152 g/P/DeltaT exactbytes beforefixedscalar,actualm/I fromfrozen source buffers, effective52=max(delta_norm.std,error_floor) exactinitial",
+    "checks": [
+      "all152pred58+self15baselinevsbothwrappersbitexact",
+      "all12z+2mode logits exactzero (no gate)",
+      "oneforward/hook/head perwrapper, no sharedstorage or capturecache",
+      "rawparentandclonesallparams/norm/hostconfiguration unchanged beforeafter",
+      "physicalcontext/inputsunchanged",
+      "raw Python/NumPy/TorchCPU RNGvalues andbytes beforeafter equal; no restore toconceal"
+    ],
+    "saved": "full152 inputs/outputs/auxmasks/rawRNG,sourcearchive/outputpins,counts andsemanticreceipt"
+  },
+  "evaluate_auxiliary_losses": true,
+  "diagnostic_loss_coefficients": {
+    "lambda_state": 1.0,
+    "lambda_mode": 1.0,
+    "lambda_imp": 1.0,
+    "lambda_cons_control": 0.0,
+    "lambda_cons_method": 1.0
+  },
+  "native_point": "native state.difference(pred,target) FP32/nativeLog chartguard .01, mean((delta52/effective52)^2); no duplicatedLog or other pairloss",
+  "loss_scope": "Inference-only initial diagnostics; coefficients do not constitute a frozen training recipe or new scientific accuracy gate. No AD/update/checkpoint.",
+  "accuracy_gate": null,
+  "output_prefix": "full151105_boundary_component_initial_parity_CPU_",
+  "scope": "Only actual initialsamefunction construction/runtime; not trained quality, self15postfit preservation, physicalgradient/reference/task/ego/benefit qualification."
+}

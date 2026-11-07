@@ -1,0 +1,105 @@
+{
+  "schema": "phone_physics_stage1_protocol:1",
+  "status": "PREREGISTERED_ENGINEERING_BENCH_NOT_REAL_PARAMETER_CALIBRATION",
+  "scope": "Single free phone collision box above a fixed horizontal support plane; no hand, policy, retargeting, training or ego-trajectory qualification.",
+  "author_executed_physics": false,
+  "object": {
+    "HOT3D_BOP_id": 24,
+    "name": "cellphone",
+    "dataset_revision": "30fe9674782f32e1e5edba98476b6ff4300132c5",
+    "nominal_approximate_full_size_XYZ_m": [0.073, 0.010, 0.154],
+    "reported_baked_AABB_approximate_full_size_XYZ_m": [0.0729293, 0.0103159, 0.1539552],
+    "reported_baked_AABB_unrounded_full_size_XYZ_m": [0.07292929805013726, 0.010315921319752897, 0.15395519224900234],
+    "exact_size_rule": "Bind the asset builder's unrounded baked-meter AABB min/max/center/size before execution. Use those exact dimensions in collision and inertia, not these rounded descriptive values.",
+    "collision_model": "one box fitted to the baked scanned visual mesh AABB",
+    "visual_mesh_is_collision_truth": false,
+    "COM_rule": "COM is the AABB center, a uniform-density box assumption; not a measured phone COM.",
+    "inertia_rule": "In body XYZ, Ixx=m*(sy^2+sz^2)/12; Iyy=m*(sx^2+sz^2)/12; Izz=m*(sx^2+sy^2)/12. Use each case mass and exact bound asset full sizes. Inertial pose must explicitly place COM at the baked AABB center.",
+    "body_axes": "Original baked asset XYZ; local Y is the thinnest axis and local Z the longest.",
+    "initial_quaternion_wxyz": [0.7071067811865476, 0.7071067811865476, 0.0, 0.0],
+    "root_translation_rule": "For each test set desired world COM=(0,0,sy/2+bottom_clearance). Set root_position=desired_COM-R_world_from_body*baked_AABB_center. Do not equate original mesh origin with COM.",
+    "initial_COM_velocity_world_m_s": [0.0, 0.0, 0.0],
+    "initial_angular_velocity_world_rad_s": [0.0, 0.0, 0.0]
+  },
+  "assumptions": {
+    "mass_measured": false,
+    "friction_measured": false,
+    "nominal_mass_kg": 0.2,
+    "nominal_sliding_friction": 0.6,
+    "fixed_torsional_friction_length_m": 0.005,
+    "fixed_rolling_friction_length_m": 0.0001,
+    "parameter_interpretation": "A small, declared prior grid for engineering sensitivity, not posterior estimates or HOT3D ground truth. Preserve all cases; never select the best matching mass/friction and call it identified.",
+    "gravity_world_m_s2": [0.0, 0.0, -9.81],
+    "plane_height_world_z_m": 0.0,
+    "plane_static": true,
+    "phone_free_joint": true,
+    "body_gravcomp": 0.0,
+    "no_actuators_equalities_tendons_fluid_or_external_forces_except_declared_push": true,
+    "friction_pair_rule": "The bench explicitly overrides asset-default condim4 to condim3 with pyramidal cone: sliding per grid, stored torsional length 0.005m and rolling length 0.0001m both inactive at condim3. Bind actual effective phone-plane sliding friction to the case value, with no silent geom priority/max mixing that changes it. Both geoms use the same coefficients, priority, solref and solimp. Record the asset's original defaults without editing its bytes. All coefficients are assumptions, not calibrated material properties."
+  },
+  "cases": {
+    "cartesian_grid": {"mass_kg": [0.1, 0.2, 0.3], "sliding_friction": [0.3, 0.6, 0.9]},
+    "case_order": "nominal (0.2,0.6) first, then remaining (mass,friction) lexicographic order; all three tests and both time steps per case",
+    "case_count": 9,
+    "timesteps_s": [0.0025, 0.00125],
+    "time_step_interpretation": "Fixed predeclared coarse/fine pair; optional old 0.005s results may be linked only as descriptive historical context, not substituted for this pair.",
+    "tests_per_backend": 54,
+    "steps_per_backend": 97200,
+    "state_rows_including_initial_per_backend": 97254,
+    "required_backends": ["CPU_MuJoCo", "MuJoCo_Warp"],
+    "full_stage_requires_both_backends": true,
+    "missing_or_unsupported_backend_rule": "Record NOT_RUN/UNSUPPORTED and stage1_qualified=false; do not reinterpret CPU-only stability as parity.",
+    "parameter_grid_repeats_are_not_independent_ego_trajectories": true
+  },
+  "tests": [
+    {"name": "drop", "duration_s": 3.0, "initial_bottom_clearance_m": 0.1, "external_force_world_N": [0.0, 0.0, 0.0], "external_torque_about_COM_world_Nm": [0.0, 0.0, 0.0], "rest_window_s": [2.5, 3.0]},
+    {"name": "table_settling", "duration_s": 3.0, "initial_bottom_clearance_m": 0.0005, "external_force_world_N": [0.0, 0.0, 0.0], "external_torque_about_COM_world_Nm": [0.0, 0.0, 0.0], "rest_window_s": [2.5, 3.0]},
+    {"name": "force_push_release", "duration_s": 3.0, "initial_bottom_clearance_m": 0.0005, "pre_settle_interval_s": [0.0, 1.0], "force_active_half_open_interval_s": [1.0, 1.2], "external_force_world_N": [2.0, 0.0, 0.0], "force_application_point": "instantaneous world COM", "external_torque_about_COM_world_Nm": [0.0, 0.0, 0.0], "expected_external_linear_impulse_world_Ns": [0.4, 0.0, 0.0], "release_interval_s": [1.2, 3.0], "rest_window_s": [2.5, 3.0], "motion_required": false, "no_motion_interpretation": "A valid outcome under a mass/friction prior; never fail merely because the phone does not slide."}
+  ],
+  "execution_binding_required_before_run": {
+    "immutable_pins": ["this_protocol", "asset_manifest", "original_GLB", "baked_visual_mesh", "collision_model_or_MJCF", "geometry_error_report", "runner_source", "backend_versions_and_relevant_source"],
+    "asset_values": ["unrounded_AABB_min_max_center_size_m", "visual_to_body_transform", "visual_to_collision_transform", "COM_body", "mass_and_inertia_per_case"],
+    "solver_options": ["integrator", "solver", "iterations", "line_search_iterations", "tolerance", "line_search_tolerance", "cone", "warmstart", "sleeping", "contact_margin_gap", "solref", "solimp", "geom_priority_solmix", "condim", "friction_coefficients", "capacity_limits", "gravity"],
+    "backend_equality_rule": "Same physical model, effective friction, contact parameters, integration/solver settings and case initial state on both backends, except explicitly recorded unavoidable dtype/backend implementation differences. Unsupported mismatches block parity; no post-result retuning in v1.",
+    "effective_dt_rule": "Record actual backend dt value and dtype; validate step counts, event tick schedule and clock independently. Compare trajectories at shared integer ticks (fine index=2*coarse index), not by rounding an accumulated clock.",
+    "reset_rule": "Fresh deterministic case initialization, no carry-over velocities, warmstarts, forces or solver state; no object pose teleport/teacher forcing during a test.",
+    "failure_rule": "Preserve failed/partial data and reasons. Do not silently relax gates, remove a prior, change a solver or replace results; changes require a new protocol/version."
+  },
+  "geometry_error_report": {
+    "required": true,
+    "same_frame_same_meter_units": true,
+    "statistics": ["all original scanned vertices to collision-box surface signed-distance min/max/MAE/RMS/p95", "maximum original scanned vertex outside collision box", "deterministic <=2mm-spaced collision-box face samples to scanned triangles min/max/RMS/p95 and sample counts", "full size and center offsets", "coverage and mesh defects/unknowns"],
+    "sign_convention": "negative inside collision box; positive outside",
+    "predeclared_engineering_limits_m": {"maximum_scanned_vertex_outside_box": 0.0005, "sampled_box_to_scan_p95": 0.002, "sampled_box_to_scan_max": 0.004},
+    "interpretation": "A sampled approximation report, not certified bidirectional Hausdorff distance, physical surface truth or grasp-contact qualification. Missing/unsupported triangle-distance evidence is UNKNOWN, not zero. Bench runs may still be described, but geometry_qualified=false.",
+    "known_preexecution_evidence": {"report_path": "D:/workspace/ego-data-pilot-2026-11-07/asset_stage1/geometry_report.json", "report_sha256": "614d7f60ddda8e4249fa75516137874b36b771b927323b85940fbd5362a0bba2", "existing_eight_corner_distance_range_m": [0.004590922863427025, 0.006008345008695478], "full_face_sampling_p95": "UNKNOWN_NOT_YET_PRODUCED", "current_geometry_limit_result": "FAIL: existing corner distances already exceed the 0.004m sampled-box-to-scan max; do not relax the preposed limit after this read.", "scope": "This geometry JSON was read before any new physical run. The distance limits were drafted before this author's read; they are engineering choices, not calibrated tolerances. A stable box bench can still be reported separately, but this asset cannot receive full stage1 qualification under v1."}
+  },
+  "measurements": {
+    "state_rows": "N+1 states including t=0; retain step/tick, accumulated and tick-derived time, root qpos/qvel, world COM pose/linear and angular velocity, mass/inertia and external-force schedule.",
+    "per_step_contact": "Retain generated phone-plane contact count, geom identities, all distances (or lossless long table), minimum distance null when no generated contact, contact positions and source-native forces when exported. Do not equate empty generated candidates with global clearance. No independent pyramid decode claim.",
+    "penetration_m": "max(0,-minimum generated contact distance) per step, with observed-candidate depth=0 for a valid empty contact set and a separate empty-set flag.",
+    "energy": "Record kinetic T and gravitational U=m*9.81*COM_world_z (plane z=0), E=T+U, applied work and reference convention. When available record engine energy separately; soft-contact stored energy is not silently equated with T+U.",
+    "applied_work_J": "For the COM force, sum F_world dot (COM_position_after-COM_position_before) on the declared force ticks; no applied torque work in these tests. Retain operands.",
+    "rest_statistics": "On every state in [2.5,3.0]s, compute RMS vector speed sqrt(mean(v dot v)), RMS angular speed sqrt(mean(omega dot omega)), and their maxima; report final state and net travel separately.",
+    "orientation_comparison_rad": "2*acos(min(1,abs(dot(normalized(q1),normalized(q2))))); normalize only for this descriptive comparison, preserve raw quaternions and norms.",
+    "force_validity": "Known applied 2N force and its 0.4Ns impulse are an input, not a human-force estimate; generated-contact count and any native decoded forces remain distinct evidence.",
+    "force_impulse_roundoff_limit_Ns": "16*epsilon(actual dt/force arithmetic dtype)*max(1,abs(0.4)); save actual dtype/operands and compare requested and effective-dt impulses separately."
+  },
+  "engineering_gates_predeclared_not_measured": {
+    "G1_identity_and_coverage": "All 9 priors x 3 tests x 2 dt on both backends, all required pins/options and step/force schedules valid, no hand/actuator/hidden external input. Nominal-only/partial execution cannot pass the full stage.",
+    "G2_finite_and_solver": "All saved state/energy/input values finite, nonzero quaternion norms, nonnegative kinetic energy within floating roundoff, no simulator instability/capacity-overflow/truncation warning. Record every warning, not just terminal code.",
+    "G3_penetration": {"max_observed_candidate_penetration_all_times_m": 0.002, "max_observed_candidate_penetration_rest_window_m": 0.0005},
+    "G4_rest_motion": {"RMS_COM_speed_m_s": 0.01, "max_COM_speed_m_s": 0.02, "RMS_angular_speed_rad_s": 0.1, "max_angular_speed_rad_s": 0.2},
+    "G5_energy": {"passive_window_positive_energy_gain_limit": "max(0.0005 J, 0.10*max(abs(E_window_start),0.005 J))", "windows": "drop/table_settling [0,3]; push [0,1] and [1.2,3] separately", "rule": "max_t(E(t)-E(window_start)) <= limit for each passive window. During push report E(t)-E(start)-applied_work(t); no conservation equality is imposed across unrecorded contact energy. Failure is an engineering result, not evidence identifying mass/friction."},
+    "G6_contacts_and_input": "Each case has generated phone-plane contact during the rest window; push input active tick count and summed impulse match the schedule within floating roundoff. No required displacement, exact ncon or exact contact-force waveform.",
+    "G7_timestep_pair": {"final_COM_position_difference_m": 0.002, "final_orientation_difference_deg": 2.0, "final_COM_velocity_vector_difference_m_s": 0.02, "final_angular_velocity_vector_difference_rad_s": 0.2, "shared_tick_COM_trajectory_RMS_difference_m": 0.003, "first_contact_time_difference_s": 0.005, "rule": "Each backend separately compares both dt for every identical mass/friction/test; preserve signed/component differences and all failed cases."},
+    "G8_CPU_Warp_parity": {"final_COM_position_difference_m": 0.002, "final_orientation_difference_deg": 2.0, "final_COM_velocity_vector_difference_m_s": 0.02, "final_angular_velocity_vector_difference_rad_s": 0.2, "same_tick_COM_trajectory_RMS_difference_m": 0.003, "first_contact_time_difference_s": 0.005, "rule": "Compare all 54 matching cases at the same dt using complete trajectories and native contact/energy summaries. This is bounded software/model parity, not bit identity or a native-contact Jacobian certificate."}
+  },
+  "report_interface": {
+    "schema": "phone_physics_stage1_result:1",
+    "required_top_level": ["protocol_pin", "execution_manifest_pin", "asset_pins", "geometry_error_report_pin", "case_results", "timestep_comparisons", "backend_parity_comparisons", "checks", "completed_counts", "geometry_qualified", "CPU_bench_qualified", "Warp_bench_qualified", "backend_parity_qualified", "stage1_qualified", "real_parameter_calibrated", "ego_retargeting_qualified", "hand_task_qualified"],
+    "case_identity_fields": ["backend", "mass_kg", "sliding_friction", "test_name", "dt_requested_s", "dt_effective_s", "steps_requested", "steps_returned", "completed", "trajectory_pin", "contact_table_pin", "metrics", "checks", "warnings"],
+    "qualification_rule": "stage1_qualified requires complete G1..G8 and geometry_qualified; each bool separately preserves incomplete/unknown evidence. All numeric priors/results retained. real_parameter_calibrated=false, ego_retargeting_qualified=false and hand_task_qualified=false regardless of stage1 outcome.",
+    "scientific_limit": "Passing proves a reproducible, bounded no-hand phone-box bench under declared assumptions. It does not calibrate a real phone, validate cup/marker geometry, authorize old policies, or establish contact dynamics of the HOT3D human demonstration."
+  }
+}

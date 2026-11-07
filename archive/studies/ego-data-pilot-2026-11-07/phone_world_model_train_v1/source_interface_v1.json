@@ -1,0 +1,146 @@
+{
+  "schema": "phone_WM_training_source_interface:1",
+  "status": "SOURCE_DRAFT_NOT_EXECUTED_OR_FROZEN_FOR_TRAINING",
+  "source_pins": {
+    "train_phone_wm.py": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\train_phone_wm.py",
+      "bytes": 25553,
+      "sha256": "cd70677a76c40b6d123c40b918856ff01c7b8b9dbfbfd6c0e6eff46a54b01f22"
+    },
+    "train_phone_wm_cpu.py": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\train_phone_wm_cpu.py",
+      "bytes": 1064,
+      "sha256": "0066bf4ee33785d34cb29af288b920d022d455646aa51cad39f355e99ea47efb"
+    },
+    "README.md": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_train_v1\\README.md",
+      "bytes": 4388,
+      "sha256": "f8d823e7de933346f05cd9034222d84fcd101d8e8e199ed2c2dcaf643a1a747c"
+    }
+  },
+  "frozen_decoder": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+    "bytes": 8738,
+    "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+  },
+  "acquisition_design_contract": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\design_contract_v1.json",
+    "bytes": 21374,
+    "sha256": "d3f4d8e0a4c44844fc8d51fb261be32f893ced20aa97a8e6404d1b08f7c229c4"
+  },
+  "recipe": {
+    "seed": 1729,
+    "cpu_threads": 4,
+    "dtype": "float32",
+    "device": "cpu",
+    "hidden": [
+      128,
+      128
+    ],
+    "activation": "SiLU",
+    "updates": 5000,
+    "checkpoint_updates": [
+      250,
+      1000,
+      5000
+    ],
+    "batch": "all_complete_TRAIN_rows",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "adam_epsilon": 1e-08,
+    "foreach": false,
+    "clip_grad_norm": 1.0,
+    "input_std_floor": 1e-06,
+    "physical_delta_std_floor": 1e-06,
+    "logforce_std_floor": 0.001,
+    "head_initialization": "zero_last_weights_delta_mean_coverage_mean_logforce_mean",
+    "coverage_initial_probability_clip": 0.001,
+    "lambda_delta": 1.0,
+    "lambda_coverage": 1.0,
+    "lambda_logforce": 1.0,
+    "background_continue_to_final": true
+  },
+  "input_schema": "phone_COM_world58_absolute_u20_h_s_nsubsteps80:1",
+  "output_schema": "phone_normalized_world_delta52_pad_coverage2_logforce5:1",
+  "protocol_schema": "phone_world_model_training_protocol:1",
+  "dataset_wrapper_schema": "phone_H20ms_family_training_dataset:1",
+  "artifact_schema": "phone_physical_world_model_checkpoint:1",
+  "field_map": {
+    "state58": "x58_F64",
+    "action20": "u20_F64",
+    "next_state58": "y58_F64",
+    "physical_world_delta52": "target_delta52_F64",
+    "native_h_s": "native_dt_s_F64",
+    "substep_count": "n_substeps_i64",
+    "family_id": "family_id_i64",
+    "interval_index": "interval_index_i64"
+  },
+  "protocol_required_fields": [
+    "schema",
+    "role",
+    "CPU_run_authorized",
+    "GPU_run_authorized",
+    "recipe",
+    "input_schema",
+    "output_schema",
+    "output",
+    "inputs",
+    "source_pins",
+    "dataset_audit_schema",
+    "dataset_audit_status"
+  ],
+  "protocol_input_aliases": [
+    "dataset_report",
+    "dataset_saved_review",
+    "acquisition_protocol"
+  ],
+  "dataset_wrapper_required_fields": [
+    "schema",
+    "state_schema",
+    "physical_delta_schema",
+    "array_schema",
+    "training_mask_audited_exact",
+    "partial_rows_retained",
+    "field_map",
+    "acquisition_protocol",
+    "family_split",
+    "family_split_frozen_before_acquisition",
+    "cross_partition_receipt_control_aliases",
+    "paired_timesteps_same_family",
+    "partition_arrays",
+    "sample_identities",
+    "contact_summary_contract"
+  ],
+  "contact_summary_contract": {
+    "coverage_relation": "pad_normal_N > threshold_N",
+    "coverage_threshold_N": 0.1,
+    "force_phase": "all_substep_solver_PRE",
+    "endpoint_phase": "last_solver_PRE_H_minus_h",
+    "state_target_phase": "POST_H20ms"
+  },
+  "source_pin_aliases_required": [
+    "trainer",
+    "adapter"
+  ],
+  "planned_budget": {
+    "training_FW": 5000,
+    "backward": 5000,
+    "optimizer_steps": 5000,
+    "validation_FW": 3,
+    "checkpoint_readback_FW": 3,
+    "own_checkpoint_CPU_loads": 3,
+    "model_constructors": 1,
+    "TRAIN_VALIDATION_NPZ_opens": 2,
+    "TEST_NPZ_opens": 0,
+    "Env_native_physics_oldweights_GPU": 0
+  },
+  "first_health_iteration": 250,
+  "Root_must_handoff_then_pause_goal_at_first_healthy_and_ETA": true,
+  "background_process_can_continue_fixed_budget": true,
+  "actual_Torch_load_NN_training_or_physics": 0
+}

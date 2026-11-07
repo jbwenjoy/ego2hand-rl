@@ -1,0 +1,35 @@
+--- audit_current104_WM_consumption_saved_cpu.py
++++ audit_current104_WM_consumption_saved_cpu_v2.py
+@@ -5,7 +5,7 @@
+ import numpy as np
+ ROOT=Path(__file__).resolve().parents[1]
+ RUN=ROOT/'outputs/current104_physical_v2_WM_CPU_v1'
+-OUT=ROOT/'outputs/current104_physical_v2_WM_CPU_saved_independent_v1'
++OUT=ROOT/'outputs/current104_physical_v2_WM_CPU_saved_independent_v2'
+ METHODS=('A1L','P_ONLY','A2');PATHS=('A0','A1L','P_ONLY','A2');PHASES=(0,4,8,12);EPS=(.002,.001)
+ 
+ 
+@@ -30,8 +30,13 @@
+     if isinstance(a,dict) or isinstance(b,dict):return isinstance(a,dict) and isinstance(b,dict) and set(a)==set(b) and all(same(a[k],b[k]) for k in a)
+     if isinstance(a,(list,tuple)) or isinstance(b,(list,tuple)):return isinstance(a,(list,tuple)) and isinstance(b,(list,tuple)) and len(a)==len(b) and all(same(x,y) for x,y in zip(a,b))
+     return bool(np.isclose(a,b,atol=1e-12,rtol=1e-10))
++def json_scalar(value):
++    if isinstance(value,np.generic):return value.item()
++    raise TypeError('Unsupported metadata scalar '+type(value).__name__)
++
++
+ def write(name,value):
+-    with (OUT/name).open('x',encoding='utf8') as f:json.dump(value,f,indent=2,allow_nan=False);f.write('\n')
++    with (OUT/name).open('x',encoding='utf8') as f:json.dump(value,f,indent=2,allow_nan=False,default=json_scalar);f.write('\n')
+ def reward(terms):return np.add(terms[:,0],terms[:,1],dtype=np.float32).astype(np.float64)
+ 
+ 
+@@ -121,7 +126,7 @@
+     allrows=[z for z in groups if z['path']=='ALL_DEPENDENT_PATHS' and z['k'] is None]
+     result={'schema':'current104_WM_physical_secants_saved_independent_audit:1','status':'PASS_SAVED_ARITHMETIC_AND_PROVENANCE' if all(checks.values()) else 'AUDIT_DISCREPANCY','checks':checks,'passed':sum(checks.values()),'total':len(checks),'auditor':pin(__file__),'consumer_report':pin(RUN/'report.json'),'authorized_runplan':report['runplan'],'physical_manifest':plan['physical_manifest'],'checked_pin_occurrences':len(allpins),'pin_mismatches':current_bad,'counts':{'physical_snapshots':16,'physical_branches':560,'physical_central_pairs':256,'directions':128,'stable':93,'unstable':30,'flat':5,'WM_batched_forwards_recorded':3,'saved_nominal_predictions':48,'saved_gradient_batches':6,'comparison_rows':768,'physical_delta_rows_labeled3times':1680,'unique_physical_delta_rows':560},'all_paths_per_epsilon_summary':allrows,'negative_only_self15':calibrations,'runtime_state_evidence_scope':'Only saved loader/state_dict-digest flags and pinned implementation assertions support in-memory parameter/normalizer/input/RNG preservation. No raw before/after RNG or in-memory WM state was saved for this auditor to recompare. Wrapperstate digest includes physical_xi/prefixed names and is not compared to loader rawWM-weight digest or wholecheckpoint-file SHA. Original checkpoint bytes are independently hashed only.','no_repeat':{'WM_loads':0,'WM_forwards':0,'Env_created':False,'physics_steps':0,'GPU_used':False},'scientific_limits':['One seen source/trainingseed0 with16 dependent states and8 directions per state, not N128/256/768/1680 independent observations.','93 stable directions are a predeclared numerical subset;30unstable and5flat retained and not counted correct.','Interiorcoordinate subspace only, face-normal/one-sided directions and full action Jacobian not tested.','Self15 truth is allnegative; calibration describes negative confidence only, not positive-event sensitivity or hand-object/contact-force competence.','Local one-step current-refk objective directional evidence, not multi-step imagination/Actor improvement/full151/shared/ego/hardware qualification.'],'created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat()}
+     write('report.json',result)
+-    print(json.dumps({'status':result['status'],'passed':result['passed'],'total':result['total'],'failed':[k for k,v in checks.items() if not v],'summary':allrows,'report':pin(OUT/'report.json')},indent=2))
++    print(json.dumps({'status':result['status'],'passed':result['passed'],'total':result['total'],'failed':[k for k,v in checks.items() if not v],'summary':allrows,'report':pin(OUT/'report.json')},indent=2,default=json_scalar))
+     if result['status']!='PASS_SAVED_ARITHMETIC_AND_PROVENANCE':raise SystemExit(1)
+ 
+ 

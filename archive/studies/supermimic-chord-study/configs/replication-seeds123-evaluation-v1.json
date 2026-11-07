@@ -1,0 +1,112 @@
+{
+  "schema": "supermimic_replication_evaluation_plan:1",
+  "frozen_utc": "2026-11-02T11:58:37.336885+00:00",
+  "python": "D:\\workspace\\dex-supermimic-research\\.venv\\Scripts\\python.exe",
+  "evaluation_seed": 0,
+  "evaluation_seed_scope": "Common deterministic evaluation seed0 for every model; training seeds1/2/3 vary. No DR/noise/disturbance, one frozen initial condition.",
+  "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_seeds123_evaluation_v1",
+  "jobs": [
+    {
+      "method": "A1L",
+      "training_seed": 1,
+      "budget": "primary_equal_updates_2000",
+      "training_run": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed1",
+      "checkpoint": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed1\\compiled\\train\\model_final.pt",
+      "checkpoint_sha256": "e3a8b307b1fcdfca362197bd49ed377811df2966e417679f7f017c8586dad8cd",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_a1l_seed1_primary",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_a1l_seed1_primary"
+    },
+    {
+      "method": "A2",
+      "training_seed": 1,
+      "budget": "primary_equal_updates_2000",
+      "training_run": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed1",
+      "checkpoint": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed1\\compiled\\train\\model_final.pt",
+      "checkpoint_sha256": "bd478c5fb7020ffa4ee6a84f5ef7454557dfe728f6acf0585d3b1f3f463ef289",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_a2_seed1_primary",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_a2_seed1_primary"
+    },
+    {
+      "method": "A1L",
+      "training_seed": 2,
+      "budget": "primary_equal_updates_2000",
+      "training_run": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed2",
+      "checkpoint": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed2\\compiled\\train\\model_final.pt",
+      "checkpoint_sha256": "f3d7b2e600f8388dbe0f9e91f3eb308112c5107d8b7da292323f2f5c870c0e37",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_a1l_seed2_primary",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_a1l_seed2_primary"
+    },
+    {
+      "method": "A2",
+      "training_seed": 2,
+      "budget": "primary_equal_updates_2000",
+      "training_run": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed2",
+      "checkpoint": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed2\\compiled\\train\\model_final.pt",
+      "checkpoint_sha256": "8f202788813544e0b2e9657089ff9173ac2845b05f7af64f575c979c518ea0ee",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_a2_seed2_primary",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_a2_seed2_primary"
+    },
+    {
+      "method": "A2",
+      "training_seed": 3,
+      "budget": "primary_equal_updates_2000",
+      "training_run": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed3",
+      "checkpoint": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed3\\compiled\\train\\model_final.pt",
+      "checkpoint_sha256": "fef6dbf1c7d617f50b0fdc61375311de1b398be21c86db3ef4ec5d496283a3da",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_a2_seed3_primary",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_a2_seed3_primary"
+    },
+    {
+      "method": "A1L",
+      "training_seed": 3,
+      "budget": "primary_equal_updates_2000",
+      "training_run": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed3",
+      "checkpoint": "D:\\workspace\\supermimic-chord-study\\outputs\\a1l_paired_v2_clip007_2000iter_seed3\\compiled\\train\\model_final.pt",
+      "checkpoint_sha256": "103eaf29a101da42cebbda17577004ef1df6a3d083573a3653ed5066bf2ccd75",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_a1l_seed3_primary",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_a1l_seed3_primary"
+    },
+    {
+      "method": "A2",
+      "training_seed": 1,
+      "budget": "pre1200_availability_with_2000_cap",
+      "training_run": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed1",
+      "checkpoint": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed1\\compiled\\train\\model_1700.pt",
+      "checkpoint_sha256": "19125d4cbb57f1d375aedcd58c5e9fee7d68a0111395351fbf5219a8e2fdb85e",
+      "selected_by": "OS creation +1200s, latest completed checkpoint, no quality",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_a2_seed1_secondary1200",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_a2_seed1_secondary1200"
+    },
+    {
+      "method": "A2",
+      "training_seed": 2,
+      "budget": "pre1200_availability_with_2000_cap",
+      "training_run": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed2",
+      "checkpoint": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed2\\compiled\\train\\model_1700.pt",
+      "checkpoint_sha256": "28144a2abe6b1e22cce0beda958634347df892111213c5b089794b0061aebed0",
+      "selected_by": "OS creation +1200s, latest completed checkpoint, no quality",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_a2_seed2_secondary1200",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_a2_seed2_secondary1200"
+    },
+    {
+      "method": "A2",
+      "training_seed": 3,
+      "budget": "pre1200_availability_with_2000_cap",
+      "training_run": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed3",
+      "checkpoint": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed3\\compiled\\train\\model_1700.pt",
+      "checkpoint_sha256": "399bed4b2797bb9271493ad118f86b2df98b6eba93d177ab6557b200355fac62",
+      "selected_by": "OS creation +1200s, latest completed checkpoint, no quality",
+      "output": "D:\\workspace\\supermimic-chord-study\\outputs\\replication_eval_a2_seed3_secondary1200",
+      "cost_output": "D:\\workspace\\supermimic-chord-study\\outputs\\cost_replication_eval_a2_seed3_secondary1200"
+    }
+  ],
+  "reference": "D:\\workspace\\supermimic-chord-study\\outputs\\pilot_rotating_reference_v2\\reference.npz",
+  "reference_sha256": "bb61dbbfe97cdca5ed7453eeea372b6d11007999f463476eaab5cfcd07040f53",
+  "evaluator": "D:\\workspace\\supermimic-chord-study\\scripts\\evaluate_pen_checkpoint.py",
+  "evaluator_sha256": "efa80b51e24881438136b924be15b90fa286b3d129b397a06851d66bd73193e3",
+  "cost_runner": "D:\\workspace\\supermimic-chord-study\\scripts\\run_recorded.py",
+  "cost_runner_sha256": "4b36f404d4d862a48886d8ece8bf5ce7eb7254f5327b974fdb135617e099f59e",
+  "source_inventory": "D:\\workspace\\supermimic-chord-study\\outputs\\a2_paired_v2_clip007_2000iter_seed0\\source\\inventory.json",
+  "source_inventory_sha256": "a92cb6549bd7c72811ffeecd4d8e3d37b534b7398b0b7264dffd8f5e02c51452",
+  "runner_sha256": "69838bc22f75651fb08a2319c12242d74497c3f4c9aafae4f9dae3ba998508a4"
+}

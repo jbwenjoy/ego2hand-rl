@@ -1,0 +1,177 @@
+{
+  "schema": "phone_tripod_online_matched_learning_protocol:1",
+  "recipe": {
+    "updates_per_cycle": 100,
+    "collection_cycles": 3,
+    "fixture_only": true
+  },
+  "recipe_pin": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\source_contract_v3_fixture\\online_recipe.json",
+    "bytes": 172,
+    "sha256": "ec59a57d419909f1d9f0ad655814246116707d089a17916e641f4b140ec96499"
+  },
+  "sources": {
+    "WM_trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_momentum_wm_v1\\train_geometry_momentum_wm.py",
+      "bytes": 37229,
+      "sha256": "224a0c9f47e196c626e862aa52d46402a454a6d16f0b497d3720ae74e25ca539"
+    },
+    "structured_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+      "bytes": 4100,
+      "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+    },
+    "momentum": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_momentum_contract_v1\\momentum_contract.py",
+      "bytes": 4023,
+      "sha256": "983e182d7b8980d44a23db0f143d4a1c48ed483d37522fdba33dca3d5344b0ca"
+    },
+    "rotation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_world_model_v2\\phone_adapter.py",
+      "bytes": 8738,
+      "sha256": "a257739157b631c7dc997c869125ba64550e514c0cf3b986b59f5ce7d09ada88"
+    },
+    "scalar_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "state_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_state_time_contract_v1\\state_contract.py",
+      "bytes": 6910,
+      "sha256": "e3ef9e7da780ca86e98fc42784d1ea6bbd729f1da24705e2f8f1e49f3fc036eb"
+    },
+    "FK": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\geometry_provider.py",
+      "bytes": 11690,
+      "sha256": "f00da9a2c5deb19261a3ff4e168d79f8aea9784736e0fdd0897ffe9599a3b07b"
+    },
+    "directional": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\directional_gap_provider.py",
+      "bytes": 9556,
+      "sha256": "09a9db921afc130ee220056c70a798d6179c40e45f83feddf585ca0e81e70a78"
+    },
+    "geometry_constants": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_constants.json",
+      "bytes": 91553,
+      "sha256": "330243d3b85abb1e996c2658b9216fe89df9ede53b0c4e035af63deb651f8fd9"
+    },
+    "geometry_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_features_v1\\completed_v1\\compiled_geometry_arrays.npz",
+      "bytes": 514604,
+      "sha256": "4bafa2e40788f1106dcb497e575304d9bfabc7476fdb910147179325db97570f"
+    },
+    "direction_arrays": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_directional_gap_features_v1\\direction_arrays_v1.npz",
+      "bytes": 24503,
+      "sha256": "08dbbe3bfc8c0cbd19dad14510fd48c48351d8102cbeb99ca3d8f735cd1ca053"
+    },
+    "task": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_task_v2.py",
+      "bytes": 15259,
+      "sha256": "1d069f19760cee674abd94e76166cff4aee89b4eab2a3f42b54ce43308d7acaf"
+    },
+    "imagination": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\phone_actor_imagination_v2.py",
+      "bytes": 5601,
+      "sha256": "23bf5342dda374fe682c52dea878c7cf95b044780df74a1f738a710ba1eba96b"
+    },
+    "reader_replay": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\reader_replay_adapter_v2.py",
+      "bytes": 9110,
+      "sha256": "266c4b0609193601e1ec8fbdecf43b04ac8dfc37a817fea6a1bdc6a80462c6cd"
+    },
+    "reference": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_ego_reference_v1\\reference.py",
+      "bytes": 4463,
+      "sha256": "88c85fe21db72ab29f5c8da5a799345205be45ed7ec830e804b2370ccf70bbb0"
+    },
+    "Actor_Critic": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "bytes": 5331,
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    "Actor_common": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\common.py",
+      "bytes": 3261,
+      "sha256": "6d6ff994d592c8fec1d46401d7051d0511310281a3d28450db8bd9be8c327f8b"
+    },
+    "replay": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\buffer.py",
+      "bytes": 3651,
+      "sha256": "3048a42d13aa5142a4c42a29b5f7c77df02c5c628f6276bf9d5256a644494d5f"
+    },
+    "chord_contacts": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\contacts.py",
+      "bytes": 5132,
+      "sha256": "79b53c63dd5573c9908d052f29c678f1724ff5be3ffa5b7c077421cbf4788212"
+    },
+    "weighted_support": {
+      "path": "D:\\workspace\\supermimic-chord-study\\src\\chord_study\\contact_geometry.py",
+      "bytes": 25350,
+      "sha256": "a9e0e19cc826cefe4e6a97a5c7b33f02f04c23585065cb0a273436eb07846d7a"
+    },
+    "paired_trainer": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_supermimic_v1\\train_shared_WM_A1_A2.py",
+      "bytes": 36961,
+      "sha256": "a1bcf9f820e00d7da4ac515dd81d45d39a2c59abd07c85319d1346db384b2439"
+    },
+    "native_reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    },
+    "raw_collector": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_task_acquisition_v1\\collect_tripod_task_v1.py",
+      "bytes": 24841,
+      "sha256": "7c9f9bcfedc56d197ecf8d637ca51ef242ca22751e872b7b8bf290bcddf5b597"
+    },
+    "label_adapter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\dataset_adapter_v1.py",
+      "bytes": 15120,
+      "sha256": "fefba9dd7ff3f7f660a4d126ffc8bcf046388a40b7be10e58dd5515bdc554389"
+    },
+    "dataset_exporter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\export_dataset_v1.py",
+      "bytes": 16314,
+      "sha256": "586eea709f274c966b0d537d02fc072e9b032310a78323ed920844c04f486eed"
+    },
+    "collector": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\collect_online_v3.py",
+      "bytes": 29289,
+      "sha256": "1ac42da98b030a55431cdc9471ef467bc70a1422a30a04a0fd25642b4c7879c6"
+    },
+    "preparation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\prepare_protocol_v3.py",
+      "bytes": 4431,
+      "sha256": "83ae00fe4f465f5f95b5b1ebb73ee5821040b5270f238833a6689479ac588bb7"
+    },
+    "actor_lineage": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\actor_lineage_v3.py",
+      "bytes": 9000,
+      "sha256": "21aa0f2ffad8182deb1b6758d1d9e2b484d641fbac975085753750f6cccad59f"
+    }
+  },
+  "inputs": {
+    "root_training_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\source_contract_v3_fixture\\root_protocol.json",
+      "bytes": 10979,
+      "sha256": "932701956482288ea3acdeefb7b39040d5700aaf76cfa8f5368ba4bb9f2e182b"
+    },
+    "root_result": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\source_contract_v3_fixture\\root_result.json",
+      "bytes": 593,
+      "sha256": "8de2fd541706e581c0984d7334149d4ebdbfea9d1aeddf8620b71060faf428cd"
+    },
+    "root_health": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\source_contract_v3_fixture\\root_health.json",
+      "bytes": 437,
+      "sha256": "a3273d9953ceaf1dd7a113e1ae4dbcf6b9968b51c051ec5c93903cfb8b717cf8"
+    },
+    "root_terminal": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_online_collection_v1\\source_contract_v3_fixture\\root_terminal.json",
+      "bytes": 524,
+      "sha256": "e8a70fa8ad7023018a816456418a61457ffabd358753d048a5a9cbadd430acf6"
+    }
+  }
+}

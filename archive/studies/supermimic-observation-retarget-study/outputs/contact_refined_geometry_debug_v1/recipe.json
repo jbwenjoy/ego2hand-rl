@@ -1,0 +1,18 @@
+{
+  "schema": "fixed_object_penetration_IK:1",
+  "max_nfev_per_frame": 80,
+  "bone_direction_weight": 1.0,
+  "penetration_weight": 1.0,
+  "temporal_weight": 0.03,
+  "nominal_weight": 0.001,
+  "penetration_allowance_m": 0.0005,
+  "penetration_normalization_m": 0.001,
+  "ftol_xtol_gtol": 1e-08,
+  "soft_wall_seconds": 120,
+  "initial_guess": "baseline geometric q atframe0, previousrefinedq thereafter",
+  "object_pose_optimized": false,
+  "contact_attraction": false,
+  "known_contact_labels_inferred": false,
+  "physical_reference_qualified": false,
+  "scope": "Exploratory geometry-only regularization after observed5-15mm pairpenetration; fixedweights, no dose/hyperparameter search or physicalacceptance claims"
+}

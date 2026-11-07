@@ -1,0 +1,443 @@
+{
+  "schema": "C2_020_prospective_balanced_schedule_draft:1",
+  "status": "FROZEN_LOGICAL_ORDER_DRAFT_NO_EXECUTION_AUTHORIZATION",
+  "fresh_training_seed_N_per_method": 3,
+  "training_jobs": [
+    {
+      "job_id": "confirmatory_seed4_A1L",
+      "model_id": "A1L_trainseed4",
+      "trained_method": "A1L",
+      "training_seed": 4,
+      "block_id": 1,
+      "position": 1,
+      "from_scratch": true,
+      "final_iteration": 2000
+    },
+    {
+      "job_id": "confirmatory_seed4_P_ONLY",
+      "model_id": "P_ONLY_trainseed4",
+      "trained_method": "P_ONLY",
+      "training_seed": 4,
+      "block_id": 1,
+      "position": 2,
+      "from_scratch": true,
+      "final_iteration": 2000
+    },
+    {
+      "job_id": "confirmatory_seed4_A2",
+      "model_id": "A2_trainseed4",
+      "trained_method": "A2",
+      "training_seed": 4,
+      "block_id": 1,
+      "position": 3,
+      "from_scratch": true,
+      "final_iteration": 2000
+    },
+    {
+      "job_id": "confirmatory_seed5_P_ONLY",
+      "model_id": "P_ONLY_trainseed5",
+      "trained_method": "P_ONLY",
+      "training_seed": 5,
+      "block_id": 2,
+      "position": 1,
+      "from_scratch": true,
+      "final_iteration": 2000
+    },
+    {
+      "job_id": "confirmatory_seed5_A2",
+      "model_id": "A2_trainseed5",
+      "trained_method": "A2",
+      "training_seed": 5,
+      "block_id": 2,
+      "position": 2,
+      "from_scratch": true,
+      "final_iteration": 2000
+    },
+    {
+      "job_id": "confirmatory_seed5_A1L",
+      "model_id": "A1L_trainseed5",
+      "trained_method": "A1L",
+      "training_seed": 5,
+      "block_id": 2,
+      "position": 3,
+      "from_scratch": true,
+      "final_iteration": 2000
+    },
+    {
+      "job_id": "confirmatory_seed6_A2",
+      "model_id": "A2_trainseed6",
+      "trained_method": "A2",
+      "training_seed": 6,
+      "block_id": 3,
+      "position": 1,
+      "from_scratch": true,
+      "final_iteration": 2000
+    },
+    {
+      "job_id": "confirmatory_seed6_A1L",
+      "model_id": "A1L_trainseed6",
+      "trained_method": "A1L",
+      "training_seed": 6,
+      "block_id": 3,
+      "position": 2,
+      "from_scratch": true,
+      "final_iteration": 2000
+    },
+    {
+      "job_id": "confirmatory_seed6_P_ONLY",
+      "model_id": "P_ONLY_trainseed6",
+      "trained_method": "P_ONLY",
+      "training_seed": 6,
+      "block_id": 3,
+      "position": 3,
+      "from_scratch": true,
+      "final_iteration": 2000
+    }
+  ],
+  "evaluation_jobs": [
+    {
+      "job_id": "repeat1_trainseed4_A1L",
+      "model_id": "A1L_trainseed4",
+      "trained_method": "A1L",
+      "training_seed": 4,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 1,
+      "block_id": 1,
+      "position": 1,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat1_trainseed4_P_ONLY",
+      "model_id": "P_ONLY_trainseed4",
+      "trained_method": "P_ONLY",
+      "training_seed": 4,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 1,
+      "block_id": 1,
+      "position": 2,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat1_trainseed4_A2",
+      "model_id": "A2_trainseed4",
+      "trained_method": "A2",
+      "training_seed": 4,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 1,
+      "block_id": 1,
+      "position": 3,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat1_trainseed5_P_ONLY",
+      "model_id": "P_ONLY_trainseed5",
+      "trained_method": "P_ONLY",
+      "training_seed": 5,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 1,
+      "block_id": 2,
+      "position": 1,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat1_trainseed5_A2",
+      "model_id": "A2_trainseed5",
+      "trained_method": "A2",
+      "training_seed": 5,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 1,
+      "block_id": 2,
+      "position": 2,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat1_trainseed5_A1L",
+      "model_id": "A1L_trainseed5",
+      "trained_method": "A1L",
+      "training_seed": 5,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 1,
+      "block_id": 2,
+      "position": 3,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat1_trainseed6_A2",
+      "model_id": "A2_trainseed6",
+      "trained_method": "A2",
+      "training_seed": 6,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 1,
+      "block_id": 3,
+      "position": 1,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat1_trainseed6_P_ONLY",
+      "model_id": "P_ONLY_trainseed6",
+      "trained_method": "P_ONLY",
+      "training_seed": 6,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 1,
+      "block_id": 3,
+      "position": 2,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat1_trainseed6_A1L",
+      "model_id": "A1L_trainseed6",
+      "trained_method": "A1L",
+      "training_seed": 6,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 1,
+      "block_id": 3,
+      "position": 3,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat2_trainseed5_A2",
+      "model_id": "A2_trainseed5",
+      "trained_method": "A2",
+      "training_seed": 5,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 2,
+      "block_id": 4,
+      "position": 1,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat2_trainseed5_A1L",
+      "model_id": "A1L_trainseed5",
+      "trained_method": "A1L",
+      "training_seed": 5,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 2,
+      "block_id": 4,
+      "position": 2,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat2_trainseed5_P_ONLY",
+      "model_id": "P_ONLY_trainseed5",
+      "trained_method": "P_ONLY",
+      "training_seed": 5,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 2,
+      "block_id": 4,
+      "position": 3,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat2_trainseed6_P_ONLY",
+      "model_id": "P_ONLY_trainseed6",
+      "trained_method": "P_ONLY",
+      "training_seed": 6,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 2,
+      "block_id": 5,
+      "position": 1,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat2_trainseed6_A1L",
+      "model_id": "A1L_trainseed6",
+      "trained_method": "A1L",
+      "training_seed": 6,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 2,
+      "block_id": 5,
+      "position": 2,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat2_trainseed6_A2",
+      "model_id": "A2_trainseed6",
+      "trained_method": "A2",
+      "training_seed": 6,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 2,
+      "block_id": 5,
+      "position": 3,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat2_trainseed4_P_ONLY",
+      "model_id": "P_ONLY_trainseed4",
+      "trained_method": "P_ONLY",
+      "training_seed": 4,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 2,
+      "block_id": 6,
+      "position": 1,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat2_trainseed4_A2",
+      "model_id": "A2_trainseed4",
+      "trained_method": "A2",
+      "training_seed": 4,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 2,
+      "block_id": 6,
+      "position": 2,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat2_trainseed4_A1L",
+      "model_id": "A1L_trainseed4",
+      "trained_method": "A1L",
+      "training_seed": 4,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 2,
+      "block_id": 6,
+      "position": 3,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat3_trainseed6_A1L",
+      "model_id": "A1L_trainseed6",
+      "trained_method": "A1L",
+      "training_seed": 6,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 3,
+      "block_id": 7,
+      "position": 1,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat3_trainseed6_A2",
+      "model_id": "A2_trainseed6",
+      "trained_method": "A2",
+      "training_seed": 6,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 3,
+      "block_id": 7,
+      "position": 2,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat3_trainseed6_P_ONLY",
+      "model_id": "P_ONLY_trainseed6",
+      "trained_method": "P_ONLY",
+      "training_seed": 6,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 3,
+      "block_id": 7,
+      "position": 3,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat3_trainseed4_A2",
+      "model_id": "A2_trainseed4",
+      "trained_method": "A2",
+      "training_seed": 4,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 3,
+      "block_id": 8,
+      "position": 1,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat3_trainseed4_A1L",
+      "model_id": "A1L_trainseed4",
+      "trained_method": "A1L",
+      "training_seed": 4,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 3,
+      "block_id": 8,
+      "position": 2,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat3_trainseed4_P_ONLY",
+      "model_id": "P_ONLY_trainseed4",
+      "trained_method": "P_ONLY",
+      "training_seed": 4,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 3,
+      "block_id": 8,
+      "position": 3,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat3_trainseed5_A1L",
+      "model_id": "A1L_trainseed5",
+      "trained_method": "A1L",
+      "training_seed": 5,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 3,
+      "block_id": 9,
+      "position": 1,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat3_trainseed5_P_ONLY",
+      "model_id": "P_ONLY_trainseed5",
+      "trained_method": "P_ONLY",
+      "training_seed": 5,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 3,
+      "block_id": 9,
+      "position": 2,
+      "checkpoint_selection": "new_run_final2000_only"
+    },
+    {
+      "job_id": "repeat3_trainseed5_A2",
+      "model_id": "A2_trainseed5",
+      "trained_method": "A2",
+      "training_seed": 5,
+      "evaluation_seed": 0,
+      "evaluation_repeat": 3,
+      "block_id": 9,
+      "position": 3,
+      "checkpoint_selection": "new_run_final2000_only"
+    }
+  ],
+  "train_position_counts": {
+    "A1L": [
+      1,
+      1,
+      1
+    ],
+    "P_ONLY": [
+      1,
+      1,
+      1
+    ],
+    "A2": [
+      1,
+      1,
+      1
+    ]
+  },
+  "train_pair_before_counts_out_of3": {
+    "A1L_before_P_ONLY": 2,
+    "A1L_before_A2": 1,
+    "P_ONLY_before_A2": 2
+  },
+  "evaluation_position_counts": {
+    "A1L": [
+      3,
+      3,
+      3
+    ],
+    "P_ONLY": [
+      3,
+      3,
+      3
+    ],
+    "A2": [
+      3,
+      3,
+      3
+    ]
+  },
+  "evaluation_pair_before_counts_out_of9": {
+    "A1L_before_P_ONLY": 5,
+    "A1L_before_A2": 4,
+    "P_ONLY_before_A2": 5
+  },
+  "evaluation_within_seed_position_balance": "Each arm occupies positions1,2,3 once in each training seed across its3process repeats; seed block positions rotate across evaluation repeats.",
+  "pair_balance_limit": "Training pairs2:1/1:2 and evaluation pairs5:4/4:5, not exact pair symmetry.",
+  "output_paths": "To be bound one-to-one to new9effective configs and new27evaluations only before Root authorizes formal execution; no historical checkpoint paths."
+}

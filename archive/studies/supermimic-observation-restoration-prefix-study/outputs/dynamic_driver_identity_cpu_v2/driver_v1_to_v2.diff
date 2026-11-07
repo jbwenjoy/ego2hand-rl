@@ -1,0 +1,93 @@
+--- run_track_prefix.py
++++ run_track_prefix_v2.py
+@@ -4,6 +4,7 @@
+ """
+ from __future__ import annotations
+ import argparse,hashlib,importlib.util,json,os,shutil,subprocess,sys
++from datetime import datetime
+ from pathlib import Path
+ ROOT=Path(__file__).resolve().parents[1]
+ sys.path.insert(0,str(ROOT/'vendor'))
+@@ -46,6 +47,55 @@
+     if result.stdout.strip():raise ValueError('Another project GPU worker exists: '+result.stdout)
+ 
+ 
++def terminal_processes(pids):
++    """Exact known PID query only, after the retained Popen tree is terminal."""
++    clean=sorted(set(int(pid) for pid in pids if pid is not None))
++    if not clean:raise ValueError('Missing owned PIDs; cannot claim no remaining worker')
++    query=('$ids=@('+','.join(map(str,clean))+'); @('
++        "Get-CimInstance Win32_Process | Where-Object { $_.ProcessId -in $ids } | "
++        "ForEach-Object { [PSCustomObject]@{pid=[int]$_.ProcessId;parent_pid=[int]$_.ParentProcessId;"
++        "creation_utc=$_.CreationDate.ToUniversalTime().ToString('o');command_line=$_.CommandLine} }"
++        ') | ConvertTo-Json -Compress')
++    result=subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-Command',query],capture_output=True,text=True,timeout=5,check=True,creationflags=HIDDEN)
++    value=json.loads(result.stdout) if result.stdout.strip() else []
++    rows=value if isinstance(value,list) else [value]
++    return {'status':'NO_OWNED_PID_REMAINING' if not rows else 'PID_PRESENT_REQUIRES_IDENTITY_REVIEW','queried_pids':clean,'actual_CIM_rows':rows,'scope':'Retained launcher/runtime actual PIDs only; not a machine-wide GPU idleness certificate'}
++
++
++def qualify_terminal_identity(result,runtime,post,*,plan,output,command,plan_sha,worker_sha):
++    """Pure fail-closed identity gate; exit0 alone never qualifies a run."""
++    checks={}
++    def need(name,value):checks[name]=bool(value)
++    def positive_pid(value):return type(value) is int and value>0
++    def norm(value):return str(value).replace('/','\\').lower()
++    try:
++        observed=result.get('actual_process_OS_observation',{});pid=result.get('actual_pid');launcher=result.get('launcher_pid');supervisor=result.get('supervisor_pid')
++        need('watchdog_completed_exit0_no_timeout',result.get('status')=='completed' and result.get('exit_code')==0 and result.get('timeout') is False)
++        need('exact_OS_identity_observed',observed.get('status')=='exact_OS_identity_observed')
++        need('owned_PID_fields_present',all(positive_pid(k) for k in (pid,launcher,supervisor)))
++        expected_parent=supervisor if pid==launcher else launcher
++        need('runtime_actual_PID_parent_match',positive_pid(pid) and runtime.get('pid')==pid and observed.get('pid')==pid and runtime.get('parent_pid')==expected_parent and observed.get('parent_pid')==expected_parent)
++        need('watch_command_equals_launched_command',result.get('command')==list(map(str,command)) and norm(result.get('worker_output'))==norm(output))
++        line=norm(observed.get('command_line',''));exe=norm(observed.get('executable_path',''))
++        need('OS_command_worker_plan_output_bound',bool(exe) and exe in line and all(norm(Path(path).resolve()) in line for path in (WORKER,plan,output)) and '--run' in line)
++        need('runtime_source_plan_bound',runtime.get('plan_sha256')==plan_sha and runtime.get('source_sha256')==worker_sha)
++        captured=result.get('runtime_metadata',{})
++        need('watched_runtime_matches_terminal_identity',all(captured.get(k)==runtime.get(k) for k in ('pid','parent_pid','started_utc','plan_sha256','source_sha256')) and captured.get('pid')==pid)
++        def stamp(value):
++            date=datetime.fromisoformat(value.replace('Z','+00:00'))
++            if date.utcoffset() is None:raise ValueError('Naive timestamp is not exact OS UTC')
++            return date
++        creation=stamp(observed['creation_date_utc']);prelaunch=stamp(result['Popen_prelaunch_utc']);started=stamp(runtime['started_utc']);seen=stamp(observed['observed_utc'])
++        need('exact_creation_time_order_bound',prelaunch<=creation<=started<=seen)
++        expected_pids=sorted(set(k for k in (pid,launcher) if positive_pid(k)))
++        need('postterminal_CIM_exact_owned_PIDs_absent',post.get('status')=='NO_OWNED_PID_REMAINING' and post.get('actual_CIM_rows')==[] and post.get('queried_pids')==expected_pids and len(expected_pids)>0)
++    except Exception as exc:
++        checks['identity_parse_error']=False;error=repr(exc)
++    else:error=None
++    qualified=bool(checks) and all(checks.values())
++    return {'status':'ENGINEERING_OS_IDENTITY_QUALIFIED' if qualified else 'ENGINEERING_OS_IDENTITY_UNQUALIFIED_UNKNOWN','engineering_identity_qualified':qualified,'checks':checks,'parse_error':error,'actual_pid':result.get('actual_pid'),'launcher_pid':result.get('launcher_pid'),'physical_outcome_qualified_by_supervisor':False,'next_condition_permitted_by_identity':qualified,'scope':'Process identity/exit gate only. Separate raw/full-horizon/capacity/controller/quality audit is still required; no automatic next condition or physics retry.'}
++
++
+ def main():
+     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--plan',type=Path,required=True);parser.add_argument('--python',type=Path,default=Path('D:/workspace/dex-supermimic-research/.venv/Scripts/python.exe'));parser.add_argument('--run',action='store_true');args=parser.parse_args()
+     plan=args.plan.resolve(strict=True);proof=preflight(plan,args.python)
+@@ -60,8 +110,22 @@
+         if sha(plan)!=proof['plan_sha256']:raise ValueError('Plan changed after preflight')
+         command=[str(args.python),'-u',str(WORKER),'--plan',str(plan),'--output',str(output),'--run']
+         observer=lambda pid,parent:life.observe_actual_pid(pid,parent,WORKER,plan,output)
+-        result=life.watch(command,output,logs,hard_seconds=45,observer=observer)
+-        if result['status'].endswith('cleanup_unverified'):
+-            result['shared_lock_release_scope']='Bounded cleanup attempted; descendants/GPU idleness unconfirmed. No retry.';life.write(logs/'state.json',result)
+-    print(json.dumps(result,indent=2));raise SystemExit(result['status']!='completed')
++        watch_error=None
++        try:result=life.watch(command,output,logs,hard_seconds=45,observer=observer)
++        except BaseException as exc:
++            watch_error=exc;result=read(logs/'state.json') if (logs/'state.json').is_file() else {'status':'missing_terminal_metadata'}
++        if result.get('status','').endswith('cleanup_unverified'):
++            result['shared_lock_release_scope']='Bounded cleanup attempted; descendants/GPU idleness unconfirmed. No retry or next condition.';life.write(logs/'state.json',result)
++        post={'status':'UNVERIFIED','queried_pids':[],'actual_CIM_rows':None}
++        try:post=terminal_processes([result.get('launcher_pid'),result.get('actual_pid')])
++        except Exception as exc:post['error']=repr(exc)
++        life.write(logs/'post_terminal_CIM.json',post)
++        try:terminal_runtime=read(output/'runtime.json')
++        except Exception as exc:terminal_runtime={'read_error':repr(exc)}
++        identity=qualify_terminal_identity(result,terminal_runtime,post,plan=plan,output=output,command=command,plan_sha=proof['plan_sha256'],worker_sha=proof['worker_sha256'])
++        identity.update(supervisor_sha256=sha(__file__),plan_sha256=proof['plan_sha256'],worker_sha256=proof['worker_sha256'])
++        life.write(logs/'engineering_identity.json',identity)
++    print(json.dumps({'watchdog_status':result.get('status'),**identity},indent=2))
++    if watch_error is not None:raise watch_error
++    raise SystemExit(0 if identity['engineering_identity_qualified'] else 1)
+ if __name__=='__main__':main()

@@ -1,0 +1,92 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dex-supermimic"
+version = "0.1.0"
+description = "Dex SuperMimic training and playback for Wuji Hand 1 and Hand 2 cube reorientation and pen tracking."
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "tyro>=1.0.1",
+  "numpy>=1.24,<2.5",
+  "torch>=2.7.0",
+  "cloudpickle>=3.0",
+  "wandb>=0.22.3",
+  "tensorboard>=2.20.0",
+  "onnx>=1.16",
+  "warp-lang>=1.14.0",
+  "mujoco-warp~=3.11.0",
+  "mujoco~=3.11.0",
+  "mjlab==1.6.0",
+  "wuji-description",
+  "triton-windows==3.8.0.post29; sys_platform == 'win32'",
+]
+
+[project.scripts]
+dex-supermimic-train = "dex_supermimic.rl.dex_supermimic.cli:train"
+dex-supermimic-play = "dex_supermimic.rl.dex_supermimic.cli:play"
+
+[tool.uv]
+environments = [
+  "sys_platform == 'darwin' and platform_machine == 'arm64'",
+  "sys_platform == 'linux' and platform_machine == 'x86_64'",
+  "sys_platform == 'win32' and platform_machine == 'AMD64'",
+]
+required-environments = [
+  "sys_platform == 'darwin' and platform_machine == 'arm64'",
+  "sys_platform == 'linux' and platform_machine == 'x86_64'",
+  "sys_platform == 'win32' and platform_machine == 'AMD64'",
+]
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple/"
+default = true
+
+[[tool.uv.index]]
+name = "nvidia"
+url = "https://pypi.nvidia.com/"
+explicit = true
+
+[tool.uv.sources]
+wuji-description = { path = "packages/wuji-description", editable = true }
+mjlab = { git = "https://github.com/mujocolab/mjlab.git", tag = "v1.6.0" }
+warp-lang = { index = "nvidia", marker = "sys_platform != 'darwin'" }
+torch = [{ path = ".cache/downloads/torch-2.14.1+cu130-cp312-cp312-win_amd64.whl", marker = "sys_platform == 'win32'" }]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+dex_supermimic = [
+  "assets/resources/inhand_cube/**/*",
+  "assets/resources/wuji_hand2/*.STL",
+  "tasks/dex_reorient/LICENSE",
+  "tasks/dex_reorient/NOTICE",
+  "assets/resources/aruco_pen250/**/*",
+  "tasks/pen_spin/data/recipe/*.json",
+  "tasks/pen_spin/LICENSE",
+  "tasks/pen_spin/NOTICE",
+]
+
+[tool.black]
+line-length = 120
+target-version = ["py310"]
+preview = true
+
+[tool.isort]
+atomic = true
+profile = "black"
+line_length = 120
+py_version = 310
+skip_glob = ["docs/*", "logs/*", "outputs/*", "videos/*"]
+group_by_package = true
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+known_firstparty = ["dex_supermimic"]
+known_thirdparty = ["mjlab", "mujoco"]

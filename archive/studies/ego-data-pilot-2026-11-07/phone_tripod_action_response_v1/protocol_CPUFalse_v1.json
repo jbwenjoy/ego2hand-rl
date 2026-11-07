@@ -1,0 +1,164 @@
+{
+  "schema": "phone_tripod_heldout_action_response_CPU_protocol:1",
+  "CPU_run_authorized": false,
+  "NN_training_GPU_authorized": false,
+  "rules": {
+    "family_ids": [
+      12,
+      15
+    ],
+    "native_dt_s": [
+      0.0003125,
+      0.00015625
+    ],
+    "step_k": [
+      0,
+      3
+    ],
+    "contexts": 8,
+    "action_axes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "signs": [
+      -1,
+      1
+    ],
+    "nominal_du_rad": 0.01,
+    "minimum_available_actual_du_rad": 1e-06,
+    "boundary_rule": "one-sided min(nominal,remaining true actuator ctrlroom); no halfroom, clip, rescue or symmetric shrink",
+    "planned_branches": 328,
+    "baseline_branches": 8,
+    "maximum_new_sides": 320,
+    "maximum_native_steps": 31488,
+    "all8_baselines_before_any_new_side": true,
+    "maximum_H_s": 0.02,
+    "restore_forward": 0,
+    "NN_calls": 0,
+    "training_updates": 0,
+    "permanent_data_role": "ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE",
+    "automatic_retry": false
+  },
+  "inputs": {
+    "selection": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_action_response_v1\\selection_v1.json",
+      "bytes": 774096,
+      "sha256": "7e213fcd84b2c5dbe1d25a3fdd859426a1374f7fad3a5b37a87127bd77d3a019"
+    },
+    "operands": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_action_response_v1\\operands_v1.npz",
+      "bytes": 41030,
+      "sha256": "15081c8a6114651e9cd8e1c20165ae1a3722e24e0ff0a95fe5a64a0b2f0f4353"
+    },
+    "acquisition_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_task_acquisition_v1\\acquired_v1\\report.json",
+      "bytes": 6529,
+      "sha256": "2ab629f4803a097ac05be0fce0523fabe9b80d5aec55dc2e5cdd1039015753bb"
+    },
+    "source_identities": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_task_acquisition_v1\\acquired_v1\\sample_identities.json",
+      "bytes": 807393,
+      "sha256": "b570c40ade0dbf825206de4d06c5050839eb649ecfebf94bb748e52620015202"
+    },
+    "source_episodes": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_task_acquisition_v1\\acquired_v1\\episodes.json",
+      "bytes": 46275,
+      "sha256": "c8adb8f36f79a5ba464d81d95c840adc9687edb8dd4ff695c8fcbe799aa18efc"
+    },
+    "task_bundle": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+      "bytes": 19375,
+      "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+    },
+    "model_mjb": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+      "bytes": 18200660,
+      "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+    },
+    "physical_parameters": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_object_wrench_labels_v1\\completed_v1\\physical_parameters.json",
+      "bytes": 1447,
+      "sha256": "fc2fb4194ef30d60b4fdd625b63105bd84ce9cf26c4a93378ff416a768a75de7"
+    },
+    "source_integrity_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_task_acquisition_v1\\saved_review_v1\\report.json",
+      "bytes": 6111,
+      "sha256": "c98b7f481ddaa6e4401d9713f3c630c60727c64c33d72c43e8f3fc46018a1e97"
+    },
+    "source_label_review": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\saved_review_v1\\report.json",
+      "bytes": 8873,
+      "sha256": "f19f7f4aa5a27ba36447480c69b338a27fe67dd3758bb6362e453908297560cd"
+    }
+  },
+  "sources": {
+    "runner": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_action_response_v1\\run_native_v1.py",
+      "bytes": 15420,
+      "sha256": "0bea5138a80fbf2eef2e7d90e751b5da4f51c8626f42c2ee27e13d8bff34a8c8"
+    },
+    "common": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_action_response_v1\\common_v1.py",
+      "bytes": 6058,
+      "sha256": "33f91e3d4c6994f1193128054529c691eb0f4d13ebec561833d5c28a3d893075"
+    },
+    "preparation": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_action_response_v1\\prepare_plan_v1.py",
+      "bytes": 9016,
+      "sha256": "893fd281edf7ecfcc256d0784ce7ef28400d1d95ccee396d7b4c7c519e245a44"
+    },
+    "probe": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_action_gradient_v2\\native_action_probe.py",
+      "bytes": 5971,
+      "sha256": "b10bd019326f51c48c5d471c64defd6026df255754fb14549860b6899e8b7d31"
+    },
+    "native_reader": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_episode_acquisition_v1\\native_phone_reader.py",
+      "bytes": 14417,
+      "sha256": "877aa4c5d51bff09e0a6824804eef3f2b335a8dbda26dcc3d0235bb3af57b841"
+    },
+    "label_adapter": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_replay_dataset_v1\\dataset_adapter_v1.py",
+      "bytes": 15120,
+      "sha256": "fefba9dd7ff3f7f660a4d126ffc8bcf046388a40b7be10e58dd5515bdc554389"
+    },
+    "frozen_decode": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_causal_impulse_labels_v1\\export_saved_labels_v2.py",
+      "bytes": 9995,
+      "sha256": "df5b5fccd90bf37eba5cecc4151bfbe0742bd5837614c45db4810a510408c062"
+    },
+    "scalar_codec": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_transition_dataset_v1\\transition_codec_v1.py",
+      "bytes": 3472,
+      "sha256": "1bf33a7fd27ae51d38a71c1f7e095dbe3047c4828ee6e65c199117bf536f4cac"
+    },
+    "structured_encoder": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_structured_transition_v1\\structured_codec.py",
+      "bytes": 4100,
+      "sha256": "057abf6e653f2dbd25b3812dc8de007539d17968389c57c2633dbf0ed6811a6a"
+    }
+  },
+  "output": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_action_response_v1\\native_completed_v1",
+  "permanent_data_role": "ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE",
+  "baseline_barrier": "All8 baselines complete/trace/300/labels bits pass before any finite-action side",
+  "automatic_retry": false,
+  "scope": "Finite actions are hypothetical absolute-control native interventions. True actuator-range legality need not imply current Actor residual+EMA reachability. Reachability is descriptive only, not a clipping/filter gate. No mj_forward restoration, safety recentering, fullMjData/Markov/trueJacobian/holding certificate."
+}

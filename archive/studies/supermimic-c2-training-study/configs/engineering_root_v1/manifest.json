@@ -1,0 +1,32 @@
+{
+  "schema": "c2_engineering_configs:1",
+  "status": "CPU_CONFIG_ONLY_NOT_EXECUTION_AUTHORIZATION",
+  "source_template": "D:/workspace/supermimic-chord-penalty-only-study/configs/training/penalty_only_10iter_smoke_seed1.json",
+  "expected_each": {
+    "real_transitions": 11392,
+    "wm": 20,
+    "fail_head": 20,
+    "actor": 8,
+    "critic": 32
+  },
+  "configs": [
+    {
+      "method": "A1L",
+      "file": "D:\\workspace\\supermimic-c2-training-study\\configs\\engineering_root_v1\\a1l.json",
+      "sha256": "ae2d6b67d6804931d884dc0334a2400ed297f319792c9bdb008a3e409dd11022",
+      "output": "outputs/c2_a1l_10iter_seed0_engineering_v1"
+    },
+    {
+      "method": "P_ONLY",
+      "file": "D:\\workspace\\supermimic-c2-training-study\\configs\\engineering_root_v1\\p_only.json",
+      "sha256": "502723e476a09c3681565261df86690669f8527b7ff7388380953d89e1d9d337",
+      "output": "outputs/c2_p_only_10iter_seed0_engineering_v1"
+    },
+    {
+      "method": "A2",
+      "file": "D:\\workspace\\supermimic-c2-training-study\\configs\\engineering_root_v1\\a2.json",
+      "sha256": "71a62b8b8578e74cbcecbba3ecaf1cf14a0aef7446d35720dc36d0706cd42473",
+      "output": "outputs/c2_a2_10iter_seed0_engineering_v1"
+    }
+  ]
+}

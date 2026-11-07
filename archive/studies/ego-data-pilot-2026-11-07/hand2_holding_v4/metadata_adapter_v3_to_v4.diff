@@ -1,0 +1,316 @@
+--- D:\workspace\ego-data-pilot-2026-11-07\hand2_holding_v3\run_cpu_support_holding_v3.py
++++ D:\workspace\ego-data-pilot-2026-11-07\hand2_holding_v4\run_cpu_native_equilibrium_holding_v4.py
+@@ -1,4 +1,4 @@
+-"""Bounded joint-support-pose candidate CPU holding diagnostic; no training or object aid.
++"""Bounded native-equilibrium candidate CPU holding diagnostic; no training or object aid.
+ 
+ All native forces/geometry/energy belong to PRE-step state; qpos/qvel and the
+ derived object COM belong to POST-step state. No extra forward inside rollout.
+@@ -47,7 +47,7 @@
+         json.dump(x, f, indent=2, allow_nan=False)
+ 
+ 
+-SCHEMA = 'hand2_phone_support_CPU_holding_protocol:3'
++SCHEMA = 'hand2_phone_native_equilibrium_CPU_holding_protocol:4'
+ PAIR_GATES = {
+     'final_COM_difference_m': .002,
+     'final_orientation_difference_rad': .03490658503988659,
+@@ -60,106 +60,137 @@
+             and all(type(v) in (int, float) and math.isfinite(v) for v in x))
+ 
+ 
++NATIVE_GATE_KEYS = {
++    'COM_acceleration_infinity_m_s2','angular_acceleration_infinity_rad_s2',
++    'joint_acceleration_infinity_rad_s2','native_other_penetration_m',
++    'native_other_normal_force_N','native_finite_no_warnings',
++    'native_two_pads_loaded','native_pad_budget','native_pad_compression',
++    'requested_ctrl_unclamped',
++}
++REPEAT_KEYS = {'qpos27','ctrl20','qacc26','qfrc_actuator26','qfrc_constraint26',
++               'a_COM_world_m_s2','alpha_world_rad_s2','contact_rows24'}
++
++
++def all_true_exact(value, keys):
++    return isinstance(value,dict) and set(value)==keys and all(v is True for v in value.values())
++
++
+ def metadata_preflight(protocol_path):
+-    protocol = read(protocol_path)
+-    if protocol['schema'] != SCHEMA:
+-        raise ValueError('New joint-support-pose diagnostic protocol schema')
+-    if protocol['gates'] != GATES or protocol['dt_s'] != DTS or protocol['duration_s'] != DURATION:
++    protocol=read(protocol_path)
++    if protocol['schema']!=SCHEMA:
++        raise ValueError('New native-equilibrium holding protocol namespace')
++    if protocol['gates']!=GATES or protocol['dt_s']!=DTS or protocol['duration_s']!=DURATION:
+         raise ValueError('Unchanged original physical budget/gates')
+-    if protocol['dt_pair_gates'] != PAIR_GATES:
+-        raise ValueError('Predeclared saved endpoint dt comparison')
+-    if type(protocol['CPU_run_authorized']) is not bool or protocol['training_or_GPU_authorized'] is not False:
+-        raise ValueError('Explicit CPU-only authorization boundary')
+-    if set(protocol['inputs']) != {'support_pose_protocol', 'support_pose_report', 'model_binding', 'model_mjb'}:
+-        raise ValueError('Exact four semantic inputs')
+-    for rec in [*protocol['inputs'].values(), *protocol['source_pins'].values()]:
++    if protocol['dt_pair_gates']!=PAIR_GATES:
++        raise ValueError('Unchanged2mm/2degree saved endpoint dt comparison')
++    if (type(protocol['CPU_run_authorized']) is not bool
++            or protocol['training_or_GPU_authorized'] is not False):
++        raise ValueError('Explicit CPU-only boundary')
++    if set(protocol['inputs'])!={'equilibrium_protocol','equilibrium_report','model_binding','model_mjb'}:
++        raise ValueError('Exact four native-equilibrium semantic inputs')
++    for rec in [*protocol['inputs'].values(),*protocol['source_pins'].values()]:
+         checked(rec)
+-    if protocol['source_pins']['runner'] != pin(__file__):
++    if protocol['source_pins']['runner']!=pin(__file__):
+         raise ValueError('Current runner')
+-    old_runner = ROOT.parent/'hand2_holding_v1/run_cpu_holding_v1.py'
+-    if protocol['source_pins']['old_holding_runner'] != pin(old_runner):
+-        raise ValueError('Unchanged original physics loop authority')
+-    output = Path(protocol['output'])
+-    if not output.is_absolute() or output.exists() or output.parent.resolve() != ROOT.resolve():
+-        raise ValueError('Absolute fresh output inside holding_v3')
+-    pose = read(checked(protocol['inputs']['support_pose_report']))
+-    cp = read(checked(protocol['inputs']['support_pose_protocol']))
+-    if (pose.get('schema') != 'fixed_wrist_gravity_contact_pose_result:3'
+-            or pose.get('status') != 'COMPLETED_BOUNDED_STATIC_SUPPORT_POSE_EXPLORATION'
+-            or pose.get('protocol') != protocol['inputs']['support_pose_protocol']
+-            or pose.get('counts', {}).get('integration_training_GPU') != 0
+-            or cp.get('schema') != 'fixed_wrist_gravity_contact_pose_protocol:3'
+-            or cp.get('training_GPU_physics_authorized') is not False):
+-        raise ValueError('Completed matching joint-support-pose static result')
+-    for rec in [*cp['inputs'].values(), *cp['source_pins'].values()]:
++    if protocol['source_pins']['old_holding_runner']!=pin(ROOT.parent/'hand2_holding_v1/run_cpu_holding_v1.py'):
++        raise ValueError('Original physics loop authority')
++    output=Path(protocol['output'])
++    if not output.is_absolute() or output.exists() or output.parent.resolve()!=ROOT.resolve():
++        raise ValueError('Absolute fresh holding_v4 output')
++    pose=read(checked(protocol['inputs']['equilibrium_report']))
++    cp=read(checked(protocol['inputs']['equilibrium_protocol']))
++    if (pose.get('schema')!='native_soft_contact_equilibrium_result:6'
++            or pose.get('status')!='COMPLETED_BOUNDED_NATIVE_STATIC_SEARCH'
++            or pose.get('protocol')!=protocol['inputs']['equilibrium_protocol']
++            or pose.get('integration_training_GPU')!=0
++            or cp.get('schema')!='native_soft_contact_equilibrium_protocol:6'
++            or cp.get('training_GPU_integration_authorized') is not False):
++        raise ValueError('Completed matching native-equilibrium static search only')
++    # The actual producer spelling is model_audit, not globalmodel_audit.
++    audit=pose.get('model_audit',{})
++    if audit.get('passed') is not True or not isinstance(audit.get('model_digest'),str):
++        raise ValueError('Global endpoint model audit must pass')
++    for rec in [*cp['inputs'].values(),*cp['source_pins'].values()]:
+         checked(rec)
+-    binding = read(checked(protocol['inputs']['model_binding']))
+-    if (binding['model'] != protocol['inputs']['model_mjb']
+-            or binding['source'] != protocol['source_pins']['scene']
+-            or cp['inputs']['compiled_binding'] != protocol['inputs']['model_binding']
+-            or cp['inputs']['compiled_model'] != protocol['inputs']['model_mjb']):
+-        raise ValueError('Exact same original explicit-pair compiled model and static input authority')
+-    results = pose['seed_results']
+-    if len(results) != 2 or sorted(v['seed'] for v in results) != [0, 1]:
+-        raise ValueError('Both original support-pose seeds retained exactly once')
+-    variants, screening = [], []
+-    for seed in results:
+-        reasons = []
+-        for key in ('physical_geometry_pass', 'proposed_ctrl_reachable_without_clamping'):
+-            if seed.get(key) is not True:
+-                reasons.append(key+' not True')
+-        if seed.get('unknown') != []:
+-            reasons.append('unknown evidence not empty')
+-        lp = seed.get('support_LP', {})
+-        if (lp.get('status') != 'OPTIMAL_PRIMARY_MOMENT_RESIDUAL'
+-                or lp.get('feasible_force_balance') is not True
+-                or lp.get('solver_status') != 0):
+-            reasons.append('primary force-hard LP not valid/optimal')
+-        if lp.get('normal_cap_N') != [3., 3.]:
+-            reasons.append('original two 3N normal caps required')
+-        if lp.get('mu_actual') != [binding['mu_phone_hand'], binding['mu_phone_hand']]:
+-            reasons.append('same actual hand sliding material required')
+-        if (not finite_vector(lp.get('force_balance_residual_world_N'), 3)
+-                or max(map(abs, lp.get('force_balance_residual_world_N', [math.inf]))) > 1e-8):
+-            reasons.append('force equality residual missing/outside original LP bound')
+-        if (not finite_vector(lp.get('normal_cap_slack_N'), 2)
+-                or min(lp.get('normal_cap_slack_N', [-math.inf])) < -1e-9):
+-            reasons.append('normal cap hard bound not verified')
+-        for name in ('torque_slack_lower_Nm', 'torque_slack_upper_Nm'):
+-            if not finite_vector(lp.get(name), 20) or min(lp.get(name, [-math.inf])) < -1e-9:
+-                reasons.append(name+' original hard bound not verified')
+-        if not finite_vector(seed.get('proposed_ctrl20'), 20):
+-            reasons.append('finite proposed ctrl20 missing')
+-        below = seed.get('selected_evaluation', {}).get('actual_below_line_dot_m2_s2')
+-        if type(below) not in (int, float) or not math.isfinite(below) or below < 0:
+-            reasons.append('actual selected contact line COM-below evidence missing')
+-        state = seed.get('verification_state', {})
+-        if not finite_vector(state.get('qpos27'), 27):
+-            reasons.append('complete verified qpos27 missing')
+-        selected = seed.get('selected_state')
+-        if not isinstance(selected, dict):
+-            reasons.append('selected state pin missing')
+-        else:
+-            checked(selected)
+-            if Path(selected['path']).parent.resolve() != Path(protocol['inputs']['support_pose_report']['path']).parent.resolve():
+-                raise ValueError('Selected state outside matching support-pose run')
+-        # The original static producer candidate flag includes the strict moment
+-        # gate. It is descriptive here and MUST NOT control dynamic enrollment.
+-        original_strict = seed.get('candidate_qualified_for_bounded_holding_diagnostic')
+-        screen = {'seed': seed['seed'], 'enrolled': not reasons, 'reasons': reasons,
+-                  'original_strict_moment_candidate_flag': original_strict,
+-                  'moment_infinity_Nm': lp.get('moment_infinity_Nm'),
+-                  'actual_selected_COM_below_dot_m2_s2': below, 'selected_state': selected}
+-        screening.append(screen)
+-        if not reasons:
+-            variants.append({'name': 'support_pose_seed'+str(seed['seed']), 'seed': seed['seed'],
+-                'reachable': True, 'ctrl20': seed['proposed_ctrl20'],
+-                'candidate_state': selected, 'verified_qpos27': state['qpos27'],
+-                'moment_infinity_Nm': lp.get('moment_infinity_Nm'),
+-                'strict_support_proposal_pass': original_strict})
+-    if pose.get('qualified_support_proposal_count') != sum(v.get('candidate_qualified_for_bounded_holding_diagnostic') is True for v in results):
+-        raise ValueError('Consistent descriptive original strict-moment count')
+-    return protocol, output, binding, variants, screening
++    binding=read(checked(protocol['inputs']['model_binding']))
++    if (binding['model']!=protocol['inputs']['model_mjb']
++            or binding['source']!=protocol['source_pins']['scene']
++            or protocol['inputs']['model_binding'] not in cp['inputs'].values()
++            or protocol['inputs']['model_mjb'] not in cp['inputs'].values()):
++        raise ValueError('Same original explicit-pair compiled model, directly bound by native protocol')
++    if cp.get('pad_compression_limit_m')!=.0001:
++        raise ValueError('New designated-pad initial compression assumption exactly0.1mm')
++    seeds=pose['seed_results']
++    if len(seeds)!=2 or sorted(v['seed'] for v in seeds)!=[0,1]:
++        raise ValueError('Both predefined native search seeds retained')
++    variants,screening=[],[]
++    total_qualified=0
++    for seed in seeds:
++        shortlist=seed['shortlist']
++        ranks=[c['rank'] for c in shortlist]
++        if any(type(v) is not int or v<0 for v in ranks) or len(ranks)!=len(set(ranks)):
++            raise ValueError('Distinct nonnegative frozen shortlist ranks')
++        candidates=[];selected_rank=None
++        for candidate in sorted(shortlist,key=lambda c:c['rank']):
++            reasons=[]
++            if candidate.get('candidate_pass') is not True:reasons.append('candidate_pass not True')
++            if candidate.get('unknown')!=[]:reasons.append('candidate unknown not empty')
++            if not all_true_exact(candidate.get('fresh_repeat_bit_equal'),REPEAT_KEYS):
++                reasons.append('complete eight-field fresh repeat not bit-equal')
++            if not all_true_exact(candidate.get('native_entry_gates'),NATIVE_GATE_KEYS):
++                reasons.append('complete primary native entry gates not allTrue')
++            if not all_true_exact(candidate.get('fresh_repeat_entry_gates'),NATIVE_GATE_KEYS):
++                reasons.append('complete fresh-repeat native entry gates not allTrue')
++            native=candidate.get('native',{});raw=native.get('raw',{})
++            repeat=candidate.get('fresh_repeat_native',{})
++            if native.get('unknown')!=[] or repeat.get('unknown')!=[]:
++                reasons.append('native or repeated evidence unknown')
++            if native.get('model_parameter_digest')!=audit['model_digest'] or repeat.get('model_parameter_digest')!=audit['model_digest']:
++                reasons.append('native/endpoint model digest identity mismatch')
++            geometry=candidate.get('geometry',{});state=geometry.get('state',{})
++            if (geometry.get('geometry_gate_pass') is not True
++                    or geometry.get('complete22_189') is not True
++                    or geometry.get('new_pad_gap_hypothesis_m')!=[-.0001,.0002]
++                    or geometry.get('constraints',{}).get('all_satisfied') is not True
++                    or state.get('unknown')!=[]
++                    or len(state.get('phone_geometry_rows',[]))!=22
++                    or len(state.get('self_geometry_rows',[]))!=189):
++                reasons.append('complete independent22/189/new-compression geometry not qualified')
++            x=candidate.get('x46')
++            if not finite_vector(x,46):reasons.append('finite x46 missing')
++            if not finite_vector(raw.get('qpos27'),27):reasons.append('finite native qpos27 missing')
++            if not finite_vector(raw.get('ctrl20'),20):reasons.append('finite native ctrl20 missing')
++            if not finite_vector(raw.get('qvel26'),26) or any(raw.get('qvel26',[1])):
++                reasons.append('native velocity must be zero26')
++            if finite_vector(x,46) and raw.get('ctrl20')!=x[26:]:
++                reasons.append('x46 ctrl versus native raw ctrl mismatch')
++            selected=candidate.get('state')
++            if not isinstance(selected,dict):reasons.append('candidate state pin missing')
++            else:
++                checked(selected)
++                if Path(selected['path']).parent.resolve()!=Path(protocol['inputs']['equilibrium_report']['path']).parent.resolve():
++                    raise ValueError('Candidate state outside matching native search output')
++            qualified=not reasons
++            if candidate.get('candidate_pass') is True:total_qualified+=1
++            chosen=qualified and selected_rank is None
++            if chosen:selected_rank=candidate['rank']
++            candidates.append({'rank':candidate['rank'],'qualified_for_dynamic_diagnostic':qualified,
++                'selected':chosen,'reasons':reasons,
++                'selection_status':'FIRST_PASSING_RANK_SELECTED' if chosen else 'QUALIFIED_LATER_RANK_NOT_SELECTED_PREDECLARED_RULE' if qualified else 'REJECTED_EVIDENCE',
++                'state':selected})
++            if chosen:
++                variants.append({'name':f"native_seed{seed['seed']}_rank{candidate['rank']}",
++                    'seed':seed['seed'],'rank':candidate['rank'],'reachable':True,'ctrl20':x[26:],
++                    'candidate_state':selected,'verified_qpos27':raw['qpos27'],
++                    'verified_qvel26':raw['qvel26'],'verified_ctrl20':raw['ctrl20'],'verified_x46':x,
++                    'moment_infinity_Nm':None,'strict_support_proposal_pass':None})
++        screening.append({'seed':seed['seed'],'selected_rank':selected_rank,'enrolled':selected_rank is not None,
++            'shortlist_screening':candidates,'empty_shortlist':not shortlist})
++        if seed.get('qualified_candidate_count')!=sum(c.get('candidate_pass') is True for c in shortlist):
++            raise ValueError('Full per-seed producer qualification count consistent')
++    if pose.get('qualified_candidate_count')!=total_qualified:
++        raise ValueError('Full global producer qualification count consistent')
++    return protocol,output,binding,variants,screening
+ 
+ 
+ def dt_pair_summary(variants, cases, endpoints, np):
+@@ -211,8 +242,8 @@
+     counts = {'MJB_reads': 0, 'MjData': 0, 'initial_forward': 0, 'integration_steps': 0,
+               'contact_force_reads': 0, 'neural_training_GPU': 0}
+     if not variants:
+-        write(output/'report.json', {'schema': 'hand2_phone_support_CPU_holding_result:3',
+-            'status': 'BLOCKED_NO_SUPPORT_POSE_SEED_ELIGIBLE_NO_MODEL_OR_STEPS', 'protocol': pin(args.protocol),
++        write(output/'report.json', {'schema': 'hand2_phone_native_equilibrium_CPU_holding_result:4',
++            'status': 'BLOCKED_NO_NATIVE_EQUILIBRIUM_CANDIDATE_NO_MODEL_OR_STEPS', 'protocol': pin(args.protocol),
+             'screening': screening, 'counts': counts, 'cases': [], 'dt_pair_consistency': [],
+             'all_original_cases_and_dt_pairs_pass': False, 'holding_or_ego_policy_qualified': False})
+         return
+@@ -259,10 +290,21 @@
+             with np.load(checked(variant['candidate_state']), allow_pickle=False) as z:
+                 q0 = z['qpos27'].copy()
+                 qv0 = z['qvel26'].copy()
++                state_ctrl = z['ctrl20'].copy()
++                state_x46 = z['x46'].copy()
++            expected={'qpos27':variant['verified_qpos27'],'qvel26':variant['verified_qvel26'],
++                      'ctrl20':variant['verified_ctrl20'],'x46':variant['verified_x46']}
++            actual={'qpos27':q0,'qvel26':qv0,'ctrl20':state_ctrl,'x46':state_x46}
++            for key,raw in actual.items():
++                ref=np.asarray(expected[key],dtype=np.float64)
++                if raw.dtype!=np.dtype('float64') or raw.shape!=ref.shape or raw.tobytes()!=ref.tobytes():
++                    raise ValueError('NPZ/native/x46 exact raw binding: '+key)
++            if not np.array_equal(state_x46[:20],q0[:20]) or not np.array_equal(state_x46[26:],state_ctrl):
++                raise ValueError('NPZ x46 q/control ordering')
+             if (q0.shape != (27,) or qv0.shape != (26,)
+                     or not np.isfinite(q0).all() or not np.isfinite(qv0).all()
+                     or np.any(qv0) or not np.array_equal(q0, np.asarray(variant['verified_qpos27'], dtype=float))):
+-                raise ValueError('Exact finite support-pose verified pose and static zero speed')
++                raise ValueError('Exact finite native-equilibrium verified pose and static zero speed')
+             if (np.any(q0[:20] < qlimits[:,0]) or np.any(q0[:20] > qlimits[:,1])
+                     or abs(float(q0[23:27]@q0[23:27])-1.) > 1e-12):
+                 raise ValueError('Original real joint ranges and valid native quaternion')
+@@ -392,9 +434,8 @@
+                     'no_external_forces_equality_mocap_or_pose_reset':True,'training_GPU':False}
+                 summary.update(seed=variant['seed'], source_candidate_state=variant['candidate_state'],
+                     initial_COM_world_m=COM0.tolist(), initial_phone_quaternion_wxyz=q0[23:27].tolist(),
+-                    predecessor_moment_infinity_Nm=variant['moment_infinity_Nm'],
+-                    predecessor_strict_support_proposal_pass=variant['strict_support_proposal_pass'],
+-                    enrollment='Force-hard LP/caps/reachable controller and geometry; moment residual explicitly allowed')
++                    native_equilibrium_rank=variant['rank'],
++                    enrollment='Native equilibrium entry/repeat/global-model-audit and independent22/189 new initial pad window [-0.1,+0.2]mm; no old point LP gate')
+                 endpoints[variant['name']].append({'dt_s':dt, 'final_COM_world_m':r['post_COM'][-1].tolist(),
+                     'final_quaternion_wxyz':r['post_qpos'][-1,23:27].tolist(),
+                     'actual_final_time_s':float(data.time), 'termination':terminate,
+@@ -403,15 +444,15 @@
+                 cases.append(summary)
+                 print(json.dumps({'case':case_name,'termination':terminate,'steps':completed,'metrics':metrics,'pass':summary['nominal_holding_dynamics_pass']}),flush=True)
+         pairs = dt_pair_summary(variants, cases, endpoints, np)
+-        report = {'schema':'hand2_phone_support_CPU_holding_result:3',
+-            'status':'COMPLETED_ALL_ENROLLED_SUPPORT_POSE_SEEDS_BOTH_DT_UNASSISTED_DIAGNOSTIC',
++        report = {'schema':'hand2_phone_native_equilibrium_CPU_holding_result:4',
++            'status':'COMPLETED_ALL_SELECTED_NATIVE_EQUILIBRIUM_SEEDS_BOTH_DT_UNASSISTED_DIAGNOSTIC',
+             'protocol':pin(args.protocol),'counts':counts,'screening':screening,
+             'cases':cases,'dt_pair_consistency':pairs,'elapsed_seconds':time.perf_counter()-started,
+             'all_original_cases_and_dt_pairs_pass':bool(cases and all(v['nominal_holding_dynamics_pass'] for v in cases)
+                 and all(v['dt_pair_consistency_pass'] for v in pairs)),
+             'mass_or_friction_calibrated':False,'ego_trajectory_or_policy_qualified':False,
+-            'scope':'All joint-support-pose force-hard/geometry-eligible seeds, both fixed dt, unchanged original2s case gates. '
+-                'Point-support moment residual is permitted only for this finite-mesh free-object diagnostic. '
++            'scope':'Each native-search seed first passing shortlist rank only, both fixed dt, unchanged original2s case gates. '
++                'New designated-pad initial compression up to0.1mm is a hypothesis, not measured compliance; no old point LP or positive-gap condition. '
+                 'No object aid, pose reset, materials/gains/solver tuning, sample selection or retries. '
+                 'Dt endpoint consistency is an additional saved comparison and never replaces individual case gates.'}
+         write(output/'report.json',report)

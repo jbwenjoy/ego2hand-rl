@@ -1,0 +1,27 @@
+--- D:\workspace\supermimic-full151-observation-study\scripts\run_contact_coupled_scp_cpu_v1.py
++++ D:\workspace\supermimic-full151-observation-study\scripts\run_contact_coupled_scp_cpu_v2.py
+@@ -118,9 +118,14 @@
+             new_phi=direct_fit+1e4*trial_summary['planning_max_violation_m']
+             predicted_gain=current_phi-predicted_phi;actual_gain=current_phi-new_phi
+             ratio=None if predicted_gain<=0 else actual_gain/predicted_gain
+-            accept=bool(predicted_gain>0 and actual_gain>0 and ratio is not None and ratio>=.1)
++            merit_finite=bool(np.isfinite([current_phi,predicted_phi,new_phi,predicted_gain,actual_gain]).all() and (ratio is None or np.isfinite(ratio)))
++            np.savez_compressed(path/'merit_raw.npz',old_phi=current_phi,predicted_phi=predicted_phi,new_phi=new_phi,predicted_gain=predicted_gain,actual_gain=actual_gain,ratio=np.nan if ratio is None else ratio)
++            accept=bool(merit_finite and predicted_gain>0 and actual_gain>0 and ratio is not None and ratio>=.1)
++            def finite_number(value):return float(value) if value is not None and np.isfinite(value) else None
+             row.update(eta_m=eta,eta_final_gate_pass=linear['eta_gate_pass'],geometry_summary=trial_summary,direct_fit_cost=direct_fit,
+-              predicted_phi=predicted_phi,new_actual_phi=new_phi,predicted_gain=predicted_gain,actual_gain=actual_gain,acceptance_ratio=ratio,accepted=accept)
++              predicted_phi=finite_number(predicted_phi),new_actual_phi=finite_number(new_phi),predicted_gain=finite_number(predicted_gain),actual_gain=finite_number(actual_gain),acceptance_ratio=finite_number(ratio),merit_finite=merit_finite,accepted=accept)
++            if not merit_finite:
++                stop='NONFINITE_MERIT_STOP';report['majors'].append(row);write(path/'receipt.json',row);break
+             if accept:
+                 P=trial;grid=trial_grid;gsummary=trial_summary;current_phi=new_phi;accepted_major=major;accepted_eta=eta;last_linear=linear
+             else:radius*=.5
+@@ -132,6 +137,7 @@
+         # This is the optimizer's last accepted state, never a best-history pick.
+         final_grid,final_summary=audit_grid(P,out/'final_geometry')
+         post=c.audit_post_C2(P,params,tau,u0,qlo,qhi,old)
++        checks['execution_without_fatal_numerical_stop']=stop not in {'LP_TERMINAL_FAILURE_NO_RETRY','RAW_LINEAR_CERTIFICATE_FAIL_NO_REPAIR','FP32_REFERENCE_CONTROL_GATE_FAIL','NONFINITE_MERIT_STOP'}
+         checks['at_least_one_accepted_certified_step']=accepted_major is not None
+         checks['last_accepted_linear_certificate']=last_linear is not None and last_linear['raw_primal_pass']
+         checks['last_accepted_eta_final_gate']=accepted_eta is not None and 0<=accepted_eta<=1e-9

@@ -1,0 +1,14 @@
+--- D:\workspace\supermimic-full151-observation-study\outputs\full151105_calibration_response_worker_source_draft_v2\worker_before_samefile_source.py
++++ D:\workspace\supermimic-full151-observation-study\src\full151_gradient\serial_probe105_calibration_v1.py
+@@ -43,9 +43,9 @@
+     if type(config.get('soft_worker_seconds')) not in (int,float) or not 0<config['soft_worker_seconds']<=180 or config.get('hard_process_seconds')!=240:raise ValueError('Fixed bounded physical-probe budget required')
+     proposal=read(checked(config['proposal']));checked(config['protocol']);checked(config['input_bundle'])
+     method=proposal.get('method_proposal');parent=proposal.get('parent_worker')
+-    if method is None or checked(method).resolve()!=METHOD_PROPOSAL.resolve() or method['sha256']!=METHOD_PROPOSAL_SHA256:
++    if method is None or not checked(method).samefile(METHOD_PROPOSAL) or method['sha256']!=METHOD_PROPOSAL_SHA256:
+         raise ValueError('Exact common-pre calibration method source pin required')
+-    if parent is None or checked(parent).resolve()!=PARENT_WORKER.resolve() or parent['sha256']!=PARENT_WORKER_SHA256:
++    if parent is None or not checked(parent).samefile(PARENT_WORKER) or parent['sha256']!=PARENT_WORKER_SHA256:
+         raise ValueError('Frozen original serial worker provenance required; it is not fresh-phase qualification')
+     for field,value in {'schema':'full151105_fresh_calibration_response_physical_proposal:1','role':'fresh_response_calibration','primary_scalar_kind':'matched_post20_gpu_score','scalar_contract':SCALAR_CONTRACT,'snapshot_phases':PHASES,'direction_joint_indices':JOINTS,'eps_rad':list(EPS),'baseline_repeats':3,'planned_branches':152,'planned_total_episode_substeps':1808,'physical_reference_qualified':False}.items():
+         if proposal.get(field)!=value:raise ValueError('Frozen proposal field differs: '+field)

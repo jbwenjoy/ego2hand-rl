@@ -1,0 +1,63 @@
+{
+  "schema": "current104_physical_consumer_ABI:1",
+  "proposal": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\proposals\\current104_samewarp_physical_fd_v2\\protocol.json",
+    "sha256": "ce9a9575b6aa7dc9b5b535bfe1cf7ff5be4db6065dc122ba4860561d40096e09"
+  },
+  "manifest": {
+    "schema": "current104_physical_probe_result:1",
+    "exact_keys": [
+      "schema",
+      "proposal",
+      "physical_report",
+      "physical_arrays",
+      "branch_index",
+      "source_pins",
+      "capacity_ledgers",
+      "lifecycle_evidence",
+      "postterminal_identity_qualified"
+    ],
+    "all_file_values": "absolute {path,sha256}; source_pins mapping. postterminal bool from external Root finalizer, not worker PID self-claim."
+  },
+  "physical_report_required": {
+    "status": [
+      "COMPLETED_PHYSICAL_PROBE",
+      "FAILED_ENGINEERING_PARTIAL"
+    ],
+    "bool_fields": [
+      "engineering_qualified",
+      "baseline_all_passed",
+      "capacity_finalized",
+      "capacity_qualified"
+    ],
+    "source_lineage_N": 1,
+    "independent_ego_N": 0
+  },
+  "arrays": "Exact fields/shapes/dtypes in frozen math.ARRAYS;20 fields incl four FP32 2term arrays. incomplete float rows allNaN, masks bool, self15 float32binary0/1. All goals palm-frame.",
+  "branch_index": "list560 exact slot keys in math.slots + actualu/r_k/r_kplus1/restorequalified/status/reason; baseline3->epsilon(.002,.001)->j0..7->sign(-1,+1),35/snapshot; snapshots pathA0,A1L,P_ONLY,A2 by phase0,4,8,12.",
+  "reward": "Native savedFP32 2terms.sum(dtype=float32) exact JSONreward; FD promote eachsum tofloat64 before subtraction/2eps. Independent F64term geomcheck8eps32*max(1,abs(term)) signed diagnostics only.",
+  "consumer_plan": {
+    "schema": "current104_physical_probe_CPU_consumer_plan:1",
+    "exact_keys": [
+      "schema",
+      "proposal",
+      "physical_manifest",
+      "output",
+      "source_pins",
+      "CPU_run_authorized",
+      "soft_worker_seconds",
+      "automatic_retry"
+    ],
+    "source_pins_exact_keys": [
+      "consumer",
+      "math",
+      "WM_loader",
+      "Actor_loader",
+      "bundle_loader",
+      "io"
+    ],
+    "soft_worker_seconds": 180,
+    "automatic_retry": false
+  },
+  "execution": "Default metadata only,noTorch; --run separately authorized, newoutput; physicalfinal gates+independent48baseline complete pass before anyTorch/WM. This turn onlysynthetic contracts,noactualWMloads/forward."
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "shared_controlled_task_acceptance_DRAFT:1",
+  "status": "DRAFT_NOT_APPLIED_TO_NEW_REFERENCES",
+  "source_pilot_reference": {
+    "path": "D:\\workspace\\supermimic-chord-study\\outputs\\pilot_rotating_reference_v2\\reference.json",
+    "sha256": "11a79a3074ca1065bdecf43ec9671605cfc06ad46f6b521632bb02a92650bdb9"
+  },
+  "candidate_common_thresholds": {
+    "position_max_m": 0.02,
+    "shaft_angle_max_deg": 20.0,
+    "penetration_max_m": 0.003,
+    "progress_abs_error_max_deg": 30.0,
+    "progress_endpoint_error_max_deg": 20.0,
+    "angular_step_max_deg": 90.0,
+    "drop_center_below_wrist_m": 0.15,
+    "allow_object_environment_contacts": false,
+    "actuator_load_ratio_max": 1.01,
+    "load_charge_max": 0.8,
+    "charge_decay_time_s": 2.0,
+    "target_speed_abs_max_rad_s": 15.0,
+    "joint_limit_margin_rad": 0.001
+  },
+  "trajectory_specific_required": {
+    "reference_npz_sha256": null,
+    "task_classification": null,
+    "progress_frame_fit": null,
+    "orientation_metric": "directed_axis_x",
+    "new_init_physics_registry_SHA256": null,
+    "control_context_SHA256": null
+  },
+  "sampling": {
+    "policy_hz": 50,
+    "physics_hz": 200,
+    "evaluation_duration_s": 3.0,
+    "states": 151,
+    "intervals": 150,
+    "continuous_safety_qualified": false
+  },
+  "engineering_qualification": [
+    "source/103ornewformat/reference/controller identity and actualu/EMA/t0 join",
+    "no auto_reset/RSI/noise/DR/exogenous support",
+    "stickyoverflow0 terminalsingle read/no resets",
+    "fullfinite151states; failures latch and fullhorizon continues",
+    "all actualtarget/actualjoint/torque/load/penetration fields independently recomputed"
+  ],
+  "initialization_gate": {
+    "status": "DRAFT_REQUIRES_PHYSICAL_MEASUREMENT",
+    "short_hold_s": 0.3,
+    "samples_every_physics_step": true,
+    "zero_vs_candidateFD_velocity": "Separate explicitlydesigned conditions; never call finite_difference velocity a video measurement",
+    "failure_does_not_disprove_entire_motion": true
+  },
+  "task_scope": "Do not copy pilot007 progressaxis/targetprogress into otherclips. Fit/freeze beforemodelcomparison; insufficientrotation gets explicitineligible rotatingtask status, not replacement by an easier static task.",
+  "primary_hierarchy": {
+    "trainingseed_N": 3,
+    "process_repeats_per_checkpoint_trajectory": 3,
+    "checkpoint_trajectory_pass": "all3pass",
+    "no_best_repeat": true,
+    "initially_unqualified_trajectory": "reportcoverage/PENDING, do not turn into taskFAIL/drop silently"
+  },
+  "GPU_authorized": false
+}

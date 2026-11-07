@@ -1,0 +1,67 @@
+--- D:\workspace\supermimic-target-inset-study\scripts\run_target_inset_queue.py
++++ D:\workspace\supermimic-target-inset-study\scripts\run_target_inset_capacity_queue_v2.py
+@@ -1,4 +1,4 @@
+-"""Fixed nine-job Latin-square zero-shot inset diagnostic; CPU preflight default."""
++"""C2 capacity-audit v2 nine-job queue; CPU preflight default, no retry."""
+ from __future__ import annotations
+ import argparse
+ from datetime import datetime,timezone
+@@ -11,7 +11,7 @@
+ STARTED=time.monotonic()
+ ROOT=Path(__file__).resolve().parents[1]
+ STUDY=Path("D:/workspace/supermimic-chord-study")
+-DEFAULT_PLAN=ROOT/"configs/target-inset-v1.json"
++DEFAULT_PLAN=ROOT/"configs/target-inset-capacity-v2.json"
+ 
+ 
+ def import_path(path,name):
+@@ -20,7 +20,7 @@
+ 
+ 
+ def preflight(plan_path):
+-    worker=import_path(ROOT/"scripts/evaluate_target_inset.py","inset_worker_contract")
++    worker=import_path(ROOT/"scripts/evaluate_target_inset_capacity_v2.py","inset_worker_contract_v2")
+     plan=worker.validate(plan_path)
+     worker.require(Path(plan["source_pins"]["queue"]["path"]).resolve()==Path(__file__).resolve(),"Wrong queue")
+     for index,job in enumerate(plan["jobs"]):
+@@ -32,6 +32,15 @@
+     lifecycle=import_path(plan["source_pins"]["lifecycle"]["path"],"reviewed_inset_lifecycle")
+     lifecycle.ROOT=STUDY
+     return plan,worker,lifecycle
++
++
++def validate_capacity(plan,job,worker,meta,capacity):
++    worker.require(capacity["status"]=="OK" and capacity["overflow_bitmask"]==0,"Sticky capacity not qualified")
++    worker.require(meta["resets_during_rollout"]==capacity["resets_during_rollout"]==0,"Reset invalidates sticky scope")
++    worker.require(capacity["read_count"]==1 and capacity["read_at_control_intervals"]==150,"Wrong observation timing/count")
++    worker.require(capacity["actual_world_count"]==1 and capacity["flags_by_world"]==[0],"Wrong world flags")
++    worker.require(capacity["job_id"]==job["job_id"] and capacity["plan_sha256"]==plan["plan_sha256_runtime"],"Capacity identity mismatch")
++    worker.require(capacity["worker_sha256"]==plan["source_pins"]["worker"]["sha256"],"Capacity worker mismatch")
+ 
+ 
+ def health(plan,job,worker):
+@@ -47,8 +56,15 @@
+     worker.require(condition["job_id"]==job["job_id"] and condition["margin_rad"]==job["margin_rad"] and condition["method"]=="C2_TARGET_INSET","Condition mismatch")
+     worker.require(condition["control_npz_sha256"]==worker.sha(output/"control_targets_50hz.npz"),"Control log hash mismatch")
+     worker.require(runtime["status"]=="completed" and runtime["control_intervals"]==150,"Wrapper incomplete")
++    capacity_path=output/"capacity_audit.json"
++    worker.require(capacity_path.is_file(),"Capacity audit missing")
++    capacity=worker.read(capacity_path)
++    validate_capacity(plan,job,worker,meta,capacity)
++    worker.require(capacity["control_npz_sha256"]==worker.sha(output/"control_targets_50hz.npz") and capacity["rollout_npz_sha256"]==worker.sha(output/"rollout.npz"),"Capacity artifact linkage mismatch")
++    worker.require(condition["capacity_audit_sha256"]==worker.sha(capacity_path) and runtime["capacity_audit"]==capacity,"Capacity record mismatch")
+     return {"engineering_passed":True,"task_success":worker.read(output/"evaluation.json").get("task_success"),
+-            "quality_used_for_control":False,"artifact_sha256":{n:worker.sha(output/n) for n in required}}
++            "quality_used_for_control":False,"artifact_sha256":{n:worker.sha(output/n) for n in required},
++            "capacity_audit_sha256":worker.sha(capacity_path),"capacity_audit":capacity}
+ 
+ 
+ def run(plan_path,plan,worker,lifecycle):
+@@ -59,6 +75,7 @@
+            "jobs":[{**j,"status":"NOT_RUN"} for j in plan["jobs"]]}
+     write=lambda:lifecycle.write(root/"state.json",state)
+     write();shutil.copyfile(plan_path,root/"frozen_plan.json");shutil.copyfile(__file__,root/"queue_source.py")
++    plan["plan_sha256_runtime"]=state["plan_sha256"]
+     try:
+         with lifecycle.gpu_lock():
+             lifecycle.reject_project_gpu_workers()

@@ -1,0 +1,176 @@
+{
+  "schema": "phone_convex_fixedgrid_protocol:4",
+  "status": "PREREGISTERED_FRESH_FIXED_GRID_ENGINEERING_VALIDATION_AFTER_KNOWN_V3_FAILURE",
+  "created_UTC": "2026-11-06T19:10:52.975560+00:00",
+  "scope": "Direct full-grid no-hand convex-phone CPU validation, then matched Warp only if CPU passes. This author performs no physics.",
+  "source_pins": {
+    "v3_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\protocols\\phone_convex_timestep_v3.json",
+      "bytes": 10688,
+      "sha256": "177cc53fb989bee15f923920487856ef07c7778da2c1ac105d6898c7357edac3"
+    },
+    "v2_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\protocols\\phone_convex_contact_v2.json",
+      "bytes": 22520,
+      "sha256": "6745a6e58ce4507c56ca6fe053a4d16fc2e4e2195cfdae6c74ea1797e6bd5ace"
+    },
+    "v1_numeric_gate_protocol": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\protocols\\phone_physics_stage1_v1.json",
+      "bytes": 14384,
+      "sha256": "8981e89aec0993887aad65db1722f80d27470d6553a7bd25760a6ba7556d0505"
+    },
+    "known_v3_full_grid_failure": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\simulation_timestep_v3\\cpu_confirm_assessment_v3\\report.json",
+      "bytes": 287665,
+      "sha256": "de15fd6082a6c2fc2c772b3b2ba19201bfb17135865ff166c39b6f6d142d915e"
+    },
+    "common": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\simulation_convex_v2\\phone_convex_common_v2.py",
+      "bytes": 5490,
+      "sha256": "4460ccba501e46a033e304460796103afb7b2ef4ef822e6d8653f1a496228ae9"
+    },
+    "CPU_run_case_source": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\simulation_convex_v2\\run_cpu_v2.py",
+      "bytes": 10876,
+      "sha256": "1b6889af2d5d8f1d4366532eab745ddd55aa9d0246aa1a410a5566d89e172965"
+    },
+    "convex_asset": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage2_convex\\completed_v2\\phone_asset.xml",
+      "bytes": 1362,
+      "sha256": "144465c4a10ee29682701dc9fb11e417f241818d76fc8e7d66186b5781f63841"
+    },
+    "finite_sample_geometry_report": {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\asset_stage2_convex\\completed_v2\\report.json",
+      "bytes": 18069,
+      "sha256": "8e966fb86aea71696959f0476df394b707f12f8abda2054e600ec378b3f3c283"
+    }
+  },
+  "history_and_selection_scope": {
+    "all_v1_v2_v3_sources_results_and_failures_immutable": true,
+    "v3_failure": "V3selected pair[.000625,.0003125] passed nominal screening but failed its fresh full grid: .1kg/mu.3 push final orientation differed2.809482299851326deg across dt, above unchanged2deg. All54G1-G6 and the other26G7 pairs passed.",
+    "interpretation": "This is a separately frozen sequential engineering condition motivated by a known failure, not a fallback success inside v3, independent blind scientific confirmation, parameter identification or ego-trajectory generalization.",
+    "no_new_nominal_screen": true,
+    "no_case_or_parameter_selection_after_v4_values": true
+  },
+  "frozen_references": {
+    "object_hull_COM_inertia_initial_support": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/object"
+    },
+    "solver_and_material": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/shared_physics"
+    },
+    "tests_and_input_schedule": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/tests"
+    },
+    "G2_supported_diagnostics_and_all_G3_to_G8_bounds": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/engineering_gates"
+    },
+    "raw_phase_and_diagnostic_coverage": {
+      "protocol": "v2_protocol",
+      "json_pointer": "/diagnostic_coverage"
+    },
+    "rule": "Resolve only the exact pinned source documents. No changes to geometry, COM, uniformbbox inertia, solver tolerance1e-6/ls_tolerance.01, condim3/pyramidal, solimp, refsafe, damping1, force schedule or numerical/physical acceptance thresholds."
+  },
+  "fixed_grid": {
+    "cartesian_grid": {
+      "mass_kg": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "sliding_friction": [
+        0.3,
+        0.6,
+        0.9
+      ]
+    },
+    "timeconst_s": 0.0025,
+    "timesteps_s": [
+      0.0003125,
+      0.00015625
+    ],
+    "test_names": [
+      "drop",
+      "table_settling",
+      "force_push_release"
+    ],
+    "duration_s_each": 3.0,
+    "case_count": 54,
+    "integration_steps": 777600,
+    "state_rows_including_initial": 777654,
+    "timestep_comparison_count": 27,
+    "timeconst_over_dt": [
+      8.0,
+      16.0
+    ],
+    "order": "nominal(.2,.6)first,remaining mass/mu lexicographic,then dt as listed,then tests as listed",
+    "all54_fresh_CPU_required": true,
+    "reuse_any_prior_trajectory_as_fresh_forbidden": true
+  },
+  "test_summary": {
+    "drop_initial_hull_bottom_clearance_m": 0.1,
+    "settle_and_push_initial_hull_bottom_clearance_m": 0.0005,
+    "initial_hull_support": "Unchanged compiled-hull support function plus Rx90 and COM-offset compensation; retain raw support inputs/results.",
+    "push_force_world_N": [
+      2.0,
+      0.0,
+      0.0
+    ],
+    "push_application_point": "instantaneous COM",
+    "push_half_open_interval_s": [
+      1.0,
+      1.2
+    ],
+    "rest_window_s": [
+      2.5,
+      3.0
+    ],
+    "no_sliding_is_legal": true
+  },
+  "decision_rule": {
+    "CPU_pass": "All54 G1-G6, all27 unchanged G7 timestep comparisons, valid pinned sampled geometry and complete source/input/raw arithmetic audit must pass. Integrity/completeness is distinct from physical gates.",
+    "if_CPU_pass": "Only then execute the exact same54 grid on Warp with the same fixed tau/dt pair and supported diagnostics, then assess unchanged G8.",
+    "if_CPU_fail": "Keep full54 raw results, exact failed metrics and all original gates; do not authorize v4GPU confirmation. Further diagnosis may be saved-only; further physics or parameter changes require a new declared condition.",
+    "no_fallback_no_threshold_relaxation": true
+  },
+  "output_ABI": {
+    "CPU_result_schema": "phone_convex_fixedgrid_CPU:4",
+    "CPU_assessment_schema": "phone_convex_fixedgrid_CPU_assessment:4",
+    "case_id_template": "Unchanged v2 {test}_mass{mass:g}_mu{mu:g}_tau{timeconst:g}_dt{dt:g}",
+    "raw_case_ABI": "Unchanged pinned run_case1b688 arrays,24-column original contact table including native frame/force, raw qacc, POST phase, warning changes and source-backed compiled options. New driver retains all54 original raw pins.",
+    "assessment_required": [
+      "assessment_complete",
+      "audit_integrity_qualified",
+      "CPU_case_count",
+      "CPU_bench_qualified",
+      "producer_result_pin",
+      "protocol_pin",
+      "timeconst_s",
+      "timesteps_s",
+      "trajectory_pins",
+      "case_results",
+      "timestep_comparisons"
+    ],
+    "trajectory_pins": "Canonical map of all54 exact case IDs to original raw pins.",
+    "assessment_complete_not_equivalent_to_pass": true,
+    "Warp_guard": "Check exact protocol and positive complete CPUassessment plus map54 before actual GPU; default metadata may not pretend to have validated device runtime options.",
+    "always_false": [
+      "real_parameter_calibrated",
+      "hand_task_qualified",
+      "ego_retargeting_qualified",
+      "human_force_truth_qualified"
+    ]
+  },
+  "execution_binding": {
+    "before_first_integration": "Archive new fixed-grid driver, common4460, capture1b688, this protocol and all referenced input pins; retain source reviews, model/hull/visual/models_info, actual compiled options and raw support initial state. Bind complete process stdout/stderr.",
+    "actual_options": "Keep CPUtol1e-6 and ls_tol.01; before GPU integration validate the actual device FP32 representations and all capacities. Keep supported9bit sticky overflow/finite/log evidence; a CPU-style GPUwarning table is NOT_AVAILABLE, not a fabricated zero vector.",
+    "physical_count": "54cases/777600steps per backend; native nonintegrating captures separately counted, not mislabeled physical steps.",
+    "no_old_edits": true
+  },
+  "scope_limits": "Even if all numerical gates pass, this is a sampled convex-geometry/no-hand engineering bench under unmeasured mass/COM/inertia/friction assumptions. It does not calibrate a real phone, validate grasp/control or human forces, qualify cup/old policy, or perform ego retargeting.",
+  "author_executed_physics_training_install": false
+}

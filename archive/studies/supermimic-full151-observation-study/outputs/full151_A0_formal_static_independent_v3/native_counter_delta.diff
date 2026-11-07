@@ -1,0 +1,11 @@
+--- old_native
++++ current_native
+@@ -178,7 +178,7 @@
+               'physical_reference_qualified': False, 'source_lineage_N': 1, 'independent_ego_N': 0,
+               'Actor_instances': 0, 'Runner_instances': 0, 'optimizer_objects_created': 0,
+               'training_updates': 0, 'old_checkpoint_migration': False,
+-              'counter_scope': 'Probe episode only; constructor, actual8 setup and reset work are separate.'}
++              'counter_scope': 'Probe episode only; constructor, actual8 setup and reset API work is UNKNOWN_NOT_WHOLEPROCESS_OBSERVED.'}
+     write(output / 'effective_probe_config.json', jsonable({**result, 'num_envs': 1,
+           'control_hz': 50, 'physics_dt_s': .005, 'control_intervals': 150,
+           'raw_state_count': 601, 'solver_steps': 600, 'native_postinterval_forwards': 150}))

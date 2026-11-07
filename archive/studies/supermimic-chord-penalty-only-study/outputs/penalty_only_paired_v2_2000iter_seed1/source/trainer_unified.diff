@@ -1,0 +1,80 @@
+--- original8237/train_controlled_pen.py
++++ P_ONLY/train_controlled_pen.py
+@@ -1,4 +1,4 @@
+-"""Bounded, recorded A1 training with the existing Dex SuperMimic implementation.
++"""Independent P_ONLY follow-up entry; unchanged native Dex SuperMimic training body.
+ 
+ Example: isolated-dex-python scripts/train_controlled_pen.py --config probe.json
+ Input is JSON; each run freezes its config, single-clip derivative, source,
+@@ -216,6 +216,18 @@
+             raise ValueError(f"A2 constructed metadata disagrees with frozen {key}")
+     if module.metadata.get("dt_applied_inside_module") is not False or module.metadata.get("target_defined_from_policy_contacts") is not False:
+         raise ValueError("A2 target independence or dt contract changed")
++    return module
++
++
++def build_penalty_only_objective(spec, device):
++    """Keep the frozen A2 base factory/RNG, replacing only its support coefficient."""
++    wrapper = STUDY_ROOT / "src/penalty_study/penalty_only_objective.py"
++    if digest(wrapper) != spec["penalty_wrapper_sha256"]:
++        raise ValueError("P_ONLY wrapper changed after freezing")
++    base = build_contact_objective(spec, device)
++    from penalty_study.penalty_only_objective import PenaltyOnlyPrior
++    module = PenaltyOnlyPrior(base).eval().requires_grad_(False)
++    module.metadata["penalty_wrapper_sha256"] = digest(wrapper)
+     return module
+ 
+ 
+@@ -519,7 +531,7 @@
+     env = None; runner = None
+     result = {
+         "status": "running", "condition": input_config.get("method", "A1"),
+-        "method": "A2 CHORD-inspired geometric intent shaping; unqualified geometric prior" if objective_spec else "A1 upstream SuperMimic; no CHORD objective",
++        "method": "P_ONLY exact shared A2 penetration prior; support coefficient0; unqualified geometric prior",
+         "control_contract": "absolute joint hard / actuator ctrlrange intersection; EMA residual unchanged",
+         "compiled_requested": compiled, "seed": seed, "training_budget_iterations": cfg.max_iterations,
+         "contact_head": "15-dimensional finger self-collision; not hand-object wrench/contact",
+@@ -542,7 +554,7 @@
+         result["runner_init_seconds"] = time.perf_counter() - runner_started
+         if objective_spec is not None:
+             setup_started = time.perf_counter()
+-            runner.contact_objective = build_contact_objective(objective_spec, cfg.device)
++            runner.contact_objective = build_penalty_only_objective(objective_spec, cfg.device)
+             if runner.contact_objective.frame_count != len(runner.mdp.motion._frames["joint_pos"]):
+                 raise ValueError("A2 fixed contact timeline does not match the single training reference")
+             if runner.contact_objective.metadata["joint_names"] != list(runner.reader.robot.joint_names):
+@@ -615,14 +627,14 @@
+     args = parser.parse_args()
+     config_path = args.config.resolve(strict=True)
+     config = json.loads(config_path.read_text(encoding="utf-8-sig"))
+-    allowed = {"schema", "label", "method", "seed", "output_dir", "dex_root", "reference", "training", "compile_fallback", "max_attempt_seconds", "initial_grasp_status", "contact_objective", "paired_protocol_file", "run_role"}
++    allowed = {"schema", "label", "method", "seed", "output_dir", "dex_root", "reference", "training", "compile_fallback", "max_attempt_seconds", "initial_grasp_status", "contact_objective", "paired_protocol_file", "run_role", "followup_protocol_file", "followup_protocol_sha256"}
+     if set(config) - allowed or config.get("schema") != "supermimic_chord_train:1":
+         raise ValueError("Invalid configuration schema/keys")
+     method = config.get("method", "A1")
+-    if method not in {"A1", "A1L", "A2"}:
+-        raise ValueError("method must be A1/A1L native baseline or explicitly shaped A2")
+-    if (method == "A2") != bool(config.get("contact_objective")):
+-        raise ValueError("Only A2 may construct the frozen geometric-contact prior; A1/A1L must omit it")
++    if method != "P_ONLY":
++        raise ValueError("This independent entry accepts only the distinct P_ONLY method")
++    if not config.get("contact_objective"):
++        raise ValueError("P_ONLY requires the frozen A2 base geometry/penalty inputs")
+     dex_root = resolve(config.get("dex_root", "D:/workspace/dex-supermimic-research"))
+     output = resolve(config["output_dir"])
+     if output.exists() and any(output.iterdir()):
+@@ -635,7 +647,13 @@
+     source = freeze_source(dex_root, output)
+     recipe, clips, provenance = prepare_reference(config["reference"], output)
+     freeze_paired_protocol(config, output, provenance, source)
+-    objective_spec = freeze_contact_inputs(config["contact_objective"], output) if method == "A2" else None
++    sys.path.insert(0, str(STUDY_ROOT / "src"))
++    from penalty_study.followup import freeze as freeze_followup
++    followup = freeze_followup(config, STUDY_ROOT, output, source)
++    objective_spec = freeze_contact_inputs(config["contact_objective"], output)
++    objective_spec["penalty_wrapper_sha256"] = followup["wrapper_sha256"]
++    objective_spec["followup_protocol_sha256"] = followup["protocol_sha256"]
++    write_json(output / "source/contact_objective/frozen_inputs.json", objective_spec)
+     if objective_spec is not None:
+         frozen_evaluation = provenance.get("frozen_evaluation_reference")
+         if not frozen_evaluation or frozen_evaluation["npz_sha256"] != objective_spec["expected_hashes"]["reference_npz_sha256"] or frozen_evaluation["json_sha256"] != objective_spec["expected_hashes"]["reference_json_sha256"]:

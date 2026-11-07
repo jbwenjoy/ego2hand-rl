@@ -1,0 +1,159 @@
+{
+  "schema": "rough_prefix_learning_protocol:1",
+  "status": "RESET_OBSERVATION_API_CORRECTION_NATIVE_A0_ONLY",
+  "input_bundle": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\input_bundle_v1\\bundle.json",
+    "sha256": "225b34e9ec26ae7d66c805c7312d5f1db76d39a8c6b1627682cda217b5261242"
+  },
+  "retarget_variant_id": "H123_cubic_minimax_restoration_filtered_prefix16_v1",
+  "source_window_half_open": [
+    200,
+    216
+  ],
+  "source_lineage_N": 1,
+  "independent_ego_N": 0,
+  "physical_reference_qualified": false,
+  "shared10_enrollment": false,
+  "reference_states": 16,
+  "control_intervals": 15,
+  "duration_s": 0.3,
+  "control_dt_s": 0.02,
+  "physics_dt_s": 0.005,
+  "allowed_roles": [
+    "native_a0"
+  ],
+  "allowed_seeds": [
+    0
+  ],
+  "scientific_scope": "New rough observation-derived reference pilot. Historical directWarpH0/T0 and old151training/evaluation cohorts remain separate. No CHORD/ego/full3s benefit inferred from engineering checks.",
+  "controller": {
+    "baseline": "same frozen absoluteu15 + native EMAresidual then originalhard/controlbounds then singleC2_020",
+    "memory": "residual c1/c2/a1/a2 unchanged; init0, baseline not hidden in history",
+    "checkpoint_format": 104,
+    "fromscratch_only": true,
+    "goal_velocity": "analytic Bspline qd16 and quintic worldv/omega; readerFD retained diagnostic",
+    "physics_labels": "Measured simulator x/x1/qd/actualu only, no analytic teacherforcing",
+    "reference_reward_phase": "native currentpreactionk commonallarms",
+    "physical_eval_phase": "poststatekplus1 vs referencekplus1"
+  },
+  "runtime": {
+    "phase0_only_reset": true,
+    "actual8_fixed_allworlds": true,
+    "worldangular_Entity_API_and_nativebody_readback": true,
+    "startup_bodyomega_arithmetic_atol_rad_s": 1e-06,
+    "actual_q_qd_pose_u0_mocap_FP32_exact": true,
+    "natural_end": "phase14 producesobs15/done+timeout, no u15/futurebootstrap",
+    "replay": "retainterminalrow/masknextresetepisode",
+    "imagined_H8": "finiteinactiveinputs,survival0,deadrows excludedfromcriticnormloss and activegradient",
+    "no_source_robot_labels": true,
+    "no_exogenous_or_postreset_object_assist": true
+  },
+  "native_A0": {
+    "attempts": 1,
+    "worlds": 1,
+    "steps": 60,
+    "postinterval_forward_calls": 15,
+    "train_runner_or_optimizer": false,
+    "quality_failure_does_not_truncate": true,
+    "only_unstable_harderrors_partial": true,
+    "sticky_overflow": "readonceafter60neverresetduringprobe",
+    "initialization": "same frozen nonzeroanalytic initialstate/baselineu0; no oldzero-rest substitution",
+    "history": "nativeManager cadence distinctfromdirectWarpT0;new baselinecommonforfuturearms",
+    "soft_worker_seconds": 110,
+    "hard_Popen_import_setup_worker_seconds": 120,
+    "unknown_or_engineering_failure_stops_smokes": true
+  },
+  "engineering_smoke_training": {
+    "num_envs": 128,
+    "max_iterations": 10,
+    "buffer_steps": 256,
+    "warmup_steps": 16,
+    "wm_only_iters": 2,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "save_interval": 10,
+    "log_interval": 1,
+    "amp": true,
+    "compile": false,
+    "compile_policy": false,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1,
+    "utd": 0.4
+  },
+  "smoke_order": [
+    "A1L",
+    "P_ONLY",
+    "A2"
+  ],
+  "smoke_prerequisites": "NewA0fullcoverage/capacity/exactOSidentity pass independentofquality;CPUcontracts/input/sourcehashes;separatehash-boundGPUauthorization",
+  "prior": {
+    "A1L": "native reward only",
+    "P_ONLY": "-.1P exact shared penetration",
+    "A2": "frozen16declaredH123geometricintent support-.1P",
+    "human_contact_observation_known": false,
+    "policy_contact_defined_target": false,
+    "missing_contact_gap": "UNKNOWN, not knownabsence",
+    "dt": ".02 appliedonce onlyinpolicy imagination",
+    "proxy_qualification": "local proxy failed exploratory; noforceorgradientqualificationupgrade"
+  },
+  "bounds": {
+    "automatic_retry": false,
+    "compile_fallback": false,
+    "overwrite": false,
+    "engineer_error": "partial/UNKNOWN preserve sourcesandlogs no retry",
+    "quality_error": "retain full finitehorizon outcome",
+    "formal_longtraining": "Not authorized. Native A0 qualification, capacity integration, checkpoint104 evaluation and separate three-arm smoke protocol remain prerequisites.",
+    "user_pause_condition": "Onnewlongtraining firsthealthycheckpoint+ETA pauseGoal withauthorized queuecontinuing; no pausefromCPUengineeringprogress",
+    "smoke": "Not authorized by revision2; capacity observer and newnativeA0qualification must be integrated/reviewed before a laterprotocol."
+  },
+  "protocol_revision": 2,
+  "parent_protocol": {
+    "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\protocols\\rough-prefix-v1.json",
+    "sha256": "8f82847fd242dadd154b1e1d6b9379266a267595ede591c05b12f1c98d4fa676"
+  },
+  "engineering_correction": {
+    "prior_config": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\configs\\a0-native_a0-v1.json",
+      "sha256": "df66d6ff2721bb07c06f6ab6108d970174df178962b1ac19404867c3e45d8360"
+    },
+    "prior_failure": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v1\\failure.json",
+      "sha256": "e3cbb8219a5cbd0e7a87d0f6ea37b8b753936db2f1032ff02472ef7763de3986"
+    },
+    "prior_runtime": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v1\\runtime.json",
+      "sha256": "62209deda1a800773662f7fd921621572ff7272a1c3bce0e04f211b7eb9c4639"
+    },
+    "prior_result": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v1\\result.json",
+      "sha256": "2d6db281e73bf1aa7a7c85dede43f6901bed2af42c4c617e23cd701f20d643b8"
+    },
+    "prior_watchdog": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v1_watchdog\\state.json",
+      "sha256": "9d7d347d223391ddb6dde15105f6720cb8ae3b83056a9513c073839f4df03bf2"
+    },
+    "prior_postCIM": {
+      "path": "D:\\workspace\\supermimic-rough-prefix-learning-study\\outputs\\native_a0_v1_watchdog\\post_terminal_CIM.json",
+      "sha256": "d0598fcd2d6041c3d71bd0ff6ca78efc4947cc43335103918c2790375a9d1bbc"
+    },
+    "prior_evaluation": "NOT_ASSESSED_0_PROBE_STEPS",
+    "prior_optimizer_updates": 0,
+    "cause": "Runtime called ObservationManager.compute(update_history=False,env_ids=ids), illegal installedAPI; CPUEnvstub too permissive.",
+    "repair": "Newruntime_v2 selectedrows compute(update_history=True,env_ids=ids),backfill/peek on initialized history and delay; no additionalmanagerreset/globaltimeline/RNGadvance.",
+    "new_native_source": "native_v2/CLI_v2, oldsourcesandfailedoutputsremainunchanged",
+    "new_attempts": 1,
+    "selection": "No priorqualitydata available; samebaseline/init/numericgates. Allsetupcosts/failedattempt retained."
+  }
+}

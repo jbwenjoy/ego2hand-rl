@@ -1,0 +1,32 @@
+--- run_functional_tripod_dynamics_v1.py
++++ run_functional_tripod_dynamics_v2.py
+@@ -89,15 +89,20 @@
+         if any(candidate['qvel26_F64']):raise ValueError('Initial zero velocity only, no zero-qacc gate')
+         if (g.get('passed') is not True or g.get('phone_pair_count')!=22 or g.get('self_pair_count')!=189
+             or g.get('table_complete') is not True or g.get('unknown')!=[]):reasons.append('Incomplete/failed tripod full geometry')
+-        pads=candidate['pad_bindings']
+-        if not isinstance(pads,list) or [v['hand_geom_id'] for v in pads]!=DESIGNATED:raise ValueError('Exact three pad bindings')
+-        for p in pads:
+-            n=p['force_on_object_unit_normal_world']
+-            if (type(p['hand_body_id']) is not int or not finite_vector(p['hand_anchor_world_m'],3)
+-                or not finite_vector(p['geom_local_hand_anchor_m'],3) or not finite_vector(p['geom_local_force_on_object_normal'],3)
+-                or not finite_vector(n,3) or abs(sum(x*x for x in n)-1)>1e-10
+-                or abs(sum(x*x for x in p['geom_local_force_on_object_normal'])-1)>1e-10):raise ValueError('Finite physical hand point/unit force normal')
+-        screen.append(dict(candidate_id=cid,eligible_geometry=not reasons,reasons=reasons,candidate=entry['candidate']))
++        # Failed/incomplete geometry is a retained rejection, not a request for
++        # fabricated anchor bindings and not a global fatal error.
++        if not reasons:
++            pads=candidate['pad_bindings']
++            if not isinstance(pads,list) or [v['hand_geom_id'] for v in pads]!=DESIGNATED:raise ValueError('Exact three pad bindings')
++            for p in pads:
++                n=p['force_on_object_unit_normal_world']
++                if (type(p['hand_body_id']) is not int or not finite_vector(p['hand_anchor_world_m'],3)
++                    or not finite_vector(p['geom_local_hand_anchor_m'],3) or not finite_vector(p['geom_local_force_on_object_normal'],3)
++                    or not finite_vector(n,3) or abs(sum(x*x for x in n)-1)>1e-10
++                    or abs(sum(x*x for x in p['geom_local_force_on_object_normal'])-1)>1e-10):raise ValueError('Finite physical hand point/unit force normal')
++        screen.append(dict(candidate_id=cid,eligible_geometry=not reasons,reasons=reasons,
++            source_geometry=entry['candidate'],source_state_npz=entry['state_npz'],
++            geometry_unknown=g.get('unknown'),pad_bindings_count=len(candidate.get('pad_bindings',[]))))
+         if not reasons:selected.append(dict(candidate=candidate,**entry))
+     if len(set(ids))!=len(ids):raise ValueError('Unique candidate IDs')
+     if c['budget']!=dict(max_candidates=4,control_routes=3,dt_cases=2,maximum_cases=24,maximum_integration_steps=230400):raise ValueError('Fixed finite budget')

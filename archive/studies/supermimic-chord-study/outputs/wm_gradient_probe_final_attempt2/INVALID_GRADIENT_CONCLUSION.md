@@ -1,0 +1,5 @@
+本attempt的gradient_conclusions_valid=false。
+
+跨world批量分支在phase60的baseline复现未通过预先规定的状态/奖励误差门槛；保存状态本身读回误差为0，但不足以保证跨world接触/solver分支一致。不得引用此目录72.7%的表面sign或小步收益作为研究结论。
+
+后续同world串行、每起点3次baseline的有效结果见同级wm_gradient_probe_serial。原统计与原始数据完整保留。

@@ -1,0 +1,62 @@
+{
+  "schema": "frame42_contact_first_source_design:2",
+  "status": "SOURCE_AND_SYNTHETIC_ONLY_NO_CANDIDATE_QUALIFICATION",
+  "immutable_v1_results_preserved": true,
+  "new_model_or_FK_or_optimization_or_physics_runs": 0,
+  "variables": {"robot_joints": 20, "phone_pose": "proper_SE3", "wrist_fixed": true, "scale": 1, "reflection_allowed": false, "digit_permutation_allowed": false},
+  "active_candidate_digits": ["thumb", "index"],
+  "inactive_contact_candidate_digits": ["middle", "ring", "pinky"],
+  "human_evidence": {
+    "meaning": "Unsigned distal-skin distance to original scan; neither force nor confirmed contact",
+    "distal_skin_scan_gap_m": {"thumb": 0.00003175480299647514, "index": 0.00042518410306255957},
+    "tip_landmark_scan_gap_m": {"thumb": 0.007607207437591595, "index": 0.009174710460816745}
+  },
+  "active_robot_colliders": ["right_finger1_tip_sensor_col", "right_finger2_tip_sensor_col"],
+  "pad_patch_requirement": "Freeze a declared sensor-surface subset and normals; entire chassis or tip site is not automatically a compliant pad",
+  "prospective_active_patch_signed_gap_window_m": [0, 0.0002],
+  "gap_window_scope": "New design hypothesis; positive gaps cannot carry force until controlled closure",
+  "human_neighborhood_soft_scale_m": 0.005,
+  "hard_constraints": [
+    "Source joint bounds and fixed wrist/scale/proper phone SE3",
+    "Phone versus all declared nonpad physical hand proxies and table: nonnegative gap",
+    "Eligible nonadjacent self-pair nonpenetration under frozen metadata semantics",
+    "All unknown or inconsistent distance queries explicitly block feasibility",
+    "Named active patches within declared gap window; record normals and witnesses"
+  ],
+  "objective_order": ["hard_feasibility", "thumb_index_contact_neighborhood", "posture_and_other_three_digit_description"],
+  "v1_seed1_invalid_pairs_m": {"right_finger2_link3_col": -0.0003511323969158037, "right_finger2_tip_sensor_col": -0.000004060317727913341},
+  "geometry_scope": {
+    "independent_capsule_convex_gap": "Fixed-orientation translational signed MTD of declared convex proxies, not scan SDF",
+    "native_zero_not_accepted_without_consistency": true,
+    "source_disabled_proxies_not_silently_omitted": true,
+    "automatic_self_pairs": "same-weld excluded; weld-parent filter only when both weld IDs nonzero; masks/exclude signatures retained",
+    "explicit_pair_route_separate": true
+  },
+  "conditional_support": {
+    "mass_kg": 0.2,
+    "sliding_mu": 0.7,
+    "parameters_are_assumed_not_calibrated": true,
+    "gravity_world_m_s2": [0, 0, -9.81],
+    "default_cone_mode": "native_pyramidal4",
+    "default_encoding": "four rays n+/-mu*t1, n+/-mu*t2; native equivalence requires matched tangent frame",
+    "optional_cone_mode": "ideal_inscribed8",
+    "force_on_object_normal_from_hand_gap_normal": "negate",
+    "equations": ["sum(f)+m*g=0", "sum((p-COM) cross f)=0", "tau_act=bias+sum(J_robot^T*f_object)"],
+    "bias_and_J_source": "Actual caller evidence; module does not synthesize",
+    "torque_bounds": "Actual PD command-reachable interval plus actuator/joint clamps and gear",
+    "frictionloss_assistance": false,
+    "direct_torsion_and_rolling": false,
+    "remote_or_unknown_contact_enrollment": false,
+    "point_infeasible_implies_real_patch_infeasible": false,
+    "holding_qualified": false
+  },
+  "prospective_explicit_pair_settings": {
+    "status": "Root must freeze actual new execution protocol",
+    "condim": 3, "cone": "pyramidal", "friction5": [0.7, 0.7, 0, 0, 0],
+    "solref": [0.0025, 1], "solimp": [0.9, 0.95, 0.001, 0.5, 2], "margin": 0, "gap": 0,
+    "reason": "Hand priority1 otherwise overrides phone priority0; verify compiled explicit-pair parameters"
+  },
+  "synthetic_result": {"report": "preparation_v1/report.json", "passed": 4, "total": 4, "LP_calls": 5, "actual_Hand2_J_or_bias_used": false},
+  "next_required_evidence": ["Frozen candidate patch/geometry eligibility", "Hard-feasible candidate and actual actuator/bias/J support check", "Controlled closure and unforced gravity/perturbation holding test"],
+  "grip_or_real_parameter_or_ego_task_qualified": false
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "supermimic_chord_train:1",
+  "label": "P_ONLY10iter engineering smoke, not task comparison",
+  "method": "P_ONLY",
+  "seed": 1,
+  "dex_root": "D:/workspace/dex-supermimic-research",
+  "output_dir": "outputs/penalty_only_10iter_smoke_seed1",
+  "reference": {
+    "clips_root": "D:/workspace/dex-supermimic-research/src/dex_supermimic/tasks/pen_spin/data/rawdata/clips",
+    "source_clip_id": "01_single_axis/clip_007",
+    "start_frame": 200,
+    "duration_s": 3.0,
+    "frozen_evaluation_reference": "D:/workspace/supermimic-chord-study/outputs/pilot_rotating_reference_v2/reference.npz"
+  },
+  "initial_grasp_status": "qualified only for 0.3s hold by prespecified native substeps and Warp 5ms checks; original A0 fails subsequent 3s tracking; single-seed pilot",
+  "compile_fallback": false,
+  "max_attempt_seconds": 600,
+  "training": {
+    "num_envs": 128,
+    "max_iterations": 10,
+    "buffer_steps": 1000,
+    "warmup_steps": 64,
+    "wm_only_iters": 2,
+    "wm_window": 8,
+    "wm_batches": 2,
+    "wm_batch": 256,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "pi_batch": 128,
+    "horizon": 8,
+    "max_horizon": 8,
+    "critic_epochs": 2,
+    "critic_minibatches": 2,
+    "holdout_fraction": 0.1,
+    "save_interval": 2,
+    "log_interval": 1,
+    "amp": true,
+    "compile": true,
+    "compile_policy": true,
+    "compile_policy_dynamic": false,
+    "action_noise": 0.1
+  },
+  "paired_protocol_file": "configs/paired-contact-pilot-v2.json",
+  "run_role": "engineering_smoke",
+  "contact_objective": {
+    "kind": "CHORD-inspired geometric intent shaping",
+    "bundle_dir": "D:\\workspace\\supermimic-chord-study\\outputs\\reference_contact_targets_v1",
+    "reference_file": "D:\\workspace\\supermimic-chord-study\\outputs\\pilot_rotating_reference_v2\\reference.npz",
+    "model_file": "D:\\workspace\\supermimic-chord-study\\outputs\\rotating_reference_warp_a0\\model.mjb",
+    "expected_hashes": {
+      "manifest_sha256": "6309f8de98ec60f2a196fb886505d90d3122fdd3ab22c2ab9fdb9200330edb1a",
+      "target_npz_sha256": "4f1078706e36dc3db890c41cddb4693a0d3512e9be8e43514181ab1637da9cbc",
+      "reference_npz_sha256": "bb61dbbfe97cdca5ed7453eeea372b6d11007999f463476eaab5cfcd07040f53",
+      "reference_json_sha256": "11a79a3074ca1065bdecf43ec9671605cfc06ad46f6b521632bb02a92650bdb9",
+      "model_sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd",
+      "rules_sha256": "838c107a5aee5ade0d4ebe0664126bfe42717efdb68ef5c61ba999ed763a784c",
+      "raw_geometry_sha256": "a79e3a5a197a95d5b06b8203584d49e2a7f2f7b5a22e5fbd77115f70d90a01b2",
+      "time_windows_sha256": "a897dd6fb7a142747346259ad3528deb2bfccdb45de70a436635f897e33c6246",
+      "objective_module_sha256": "54d9507d824d08baab3639e29d028b325109f51ca3e3fdd3118be341729502ea",
+      "geometry_module_sha256": "a9e0e19cc826cefe4e6a97a5c7b33f02f04c23585065cb0a273436eb07846d7a"
+    },
+    "hyperparameters": {
+      "bandwidth_m": 0.001,
+      "tolerance": 0.1,
+      "var": 0.1
+    },
+    "per_control_step_scale": 0.02,
+    "qualification_status": "local_proxy_qualification_failed_exploratory_ablation"
+  },
+  "followup_protocol_file": "configs/penalty-only-followup-v1.json",
+  "followup_protocol_sha256": "6c017ee91ba355e34011be0ed22b128ea32a4d977d71c2863f57080d571b31f1"
+}

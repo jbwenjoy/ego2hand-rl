@@ -1,0 +1,77 @@
+{
+  "schema": "full151105_boundary_impulse_matched_training_recipe:1",
+  "status": "FROZEN_NUMERICAL_RECIPE_BEFORE_ACTUAL_BOUNDARY_TRAINING",
+  "recipe": {
+    "iterations": 1000,
+    "checkpoint_iterations": [
+      100,
+      1000
+    ],
+    "fullbatch_rows": 152,
+    "cpu_threads": 4,
+    "device": "cpu",
+    "dtype": "float32",
+    "amp": false,
+    "optimizer": "AdamW",
+    "lr": 0.0001,
+    "weight_decay": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "optimizer_eps": 1e-08,
+    "optimizer_foreach": false,
+    "clip_norm": 1.0,
+    "lambda_state": 1.0,
+    "lambda_mode": 1.0,
+    "lambda_imp": 1.0,
+    "lambda_cons_by_arm": {
+      "shared_public_losses": 0.0,
+      "shared_public_plus_cross_target_consistency": 1.0
+    },
+    "native_log_chart_margin_rad": 0.01,
+    "normalizers_frozen": true,
+    "physical_context_frozen": true,
+    "fixed_fullbatch_order": true,
+    "compute_consistency_both_arms": true,
+    "initial_parity_from_first_training_forward": true,
+    "save_pre_post_clip_named_gradients": true,
+    "log_every_iteration": true,
+    "resume_supported": false
+  },
+  "source_proposal": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\full151_boundary_impulse_matched_training_recipe_proposal_v1.md",
+    "sha256": "3b7cd97fb9602625bb5386200ed7a169e44dc276d28f81b5ac6fe78a6fe4e60c"
+  },
+  "source_loss_draft": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\docs\\full151_boundary_impulse_matched_loss_recipe_draft_v1.md",
+    "sha256": "5926e869f69e1ab6a5ea7aac7d5dee4f0b9adc4b2d2686dfc6b6a6a488f785b2"
+  },
+  "fixed_component": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\src\\full151_gradient\\boundary_impulse_component105_v1.py",
+    "sha256": "003aac369bcac69dff9312c79837a8faf5a583473898fdb64515aa7608b60317"
+  },
+  "source_targets": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_saved_boundary_impulse_targets_CPU_v1\\all152_boundary_impulse_targets.npz",
+    "sha256": "bc22e2b0d6a6ff333f8431eee689134814df1ea7059e8346f27e74f7b0392f80"
+  },
+  "initial_function_parity": {
+    "path": "D:\\workspace\\supermimic-full151-observation-study\\outputs\\full151105_boundary_component_initial_parity_CPU_v1\\report.json",
+    "sha256": "e4276c03528274b53bad8b60be262def5d1eb51a1b209dbce949d884ec4ad9ef"
+  },
+  "cadence_note": "Only paired100 and1000 persisted, reducing IO vs proposal every100; all1000 updates logged. Numerical loss/optimizer/data budget unchanged.",
+  "data_scope": "Only original152 restored/608 substeps, no donor/fresh enrollment or hyperparameter selection. Allcached/freshresultsalreadyseen so exploratory only.",
+  "loss_semantics": "Same public native52 pointFP32+modeBCEFP32 subtotal thenF64 impulse; bothcomputeF64cross-target withr_saved butcontrolcoefficient0/method1. No modegate/oracle input, no zero-defect physics or inference correction.",
+  "checkpoint_contract": {
+    "schema": "full151105_boundary_impulse_WM_component:1",
+    "pair_schema": "full151105_boundary_impulse_matched_pair:1",
+    "initial_schema": "full151105_boundary_impulse_matched_initial:1",
+    "checkpoint_tag": "AFTER_OPTIMIZER_I",
+    "gradient_snapshot_tag": "PRE_OPTIMIZER_I",
+    "ordered_parameters": "wm.named_parameters() in native order then aux_head.weight/aux_head.bias; actual16,contextbuffers not optimized",
+    "rawRNG": "THIS RUN initialpair/cpu Python-NumPy-Torchraw values/bytes, not historical process or pickle reserialization hash"
+  },
+  "first_checkpoint_pause": "After BOTH checkpoint100 saved and independent raw savedhealth positive and ETAreceipt, pauseGoal peruser; do notclaimfullobjective achieved. Any background continuation mustbeexplicitly authorized in thisjob protocol.",
+  "eligibility_before_training": "Require independent saved initial-parity review+actualdataset8 and codeREADY; initialparity report alone not training authorization.",
+  "scientific_limits": "No Actor/realphysics/GPU/hardware/ego benefit claims; no fullwrench/contactforcecapacity/physicalJac qualification. Existing self15 unsupervised, hidden-trunk fit can change it; evaluate beforeActor."
+}
