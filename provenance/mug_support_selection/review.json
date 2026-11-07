@@ -1,0 +1,262 @@
+{
+  "schema": "mug_support_selection_saved_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_support_selection.py",
+    "bytes": 11130,
+    "sha256": "e2f12731d96cbeb5bbbafac7c99046e419ecc484d68a08c1d1bd6c0a4a8efb88"
+  },
+  "trace_helper": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_support_trials.py",
+    "bytes": 6969,
+    "sha256": "bea9c34e5bbb93c2ecd625411d338af41b55d93bd29db8f5f7f44d26c7bfbccd"
+  },
+  "inputs": {
+    "envelopes": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_envelopes_v1\\report.json",
+      "bytes": 107511,
+      "sha256": "1ed7e553c396db8ca9df99a71866071976e2d3b8d06290a46425a5e37f03458e"
+    },
+    "selection": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_triplets_v1\\report.json",
+      "bytes": 8079,
+      "sha256": "beed5780398e85a7f00ac06db5364b7991ab266fe15d52c2f32607ccca85d68a"
+    },
+    "fit": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\report.json",
+      "bytes": 43145,
+      "sha256": "ce44df31d754e2299fa614f8d3ef4100db933eb12a7bdb1b3a1bca2c79f5c3cd"
+    }
+  },
+  "checks": {
+    "gravity_and_envelope_primals": true,
+    "triplet_primals": true,
+    "six_distinct_geometry_reruns": true,
+    "actual_native_EFC_and_primals": true,
+    "failed_trace_readback": true,
+    "actual_reset_differs_from_LP": true
+  },
+  "passed": 6,
+  "total": 6,
+  "envelope_primals": 27,
+  "checked_separators": 6,
+  "triplet_primals": 710,
+  "triplet_counts": [
+    130,
+    147,
+    134,
+    155,
+    28,
+    41,
+    30,
+    45
+  ],
+  "geometry": [
+    {
+      "index": 0,
+      "kind": "fitted_geometry",
+      "passed": true,
+      "geometry_pass": true
+    },
+    {
+      "index": 0,
+      "kind": "geometry",
+      "passed": true,
+      "geometry_pass": true
+    },
+    {
+      "index": 1,
+      "kind": "fitted_geometry",
+      "passed": true,
+      "geometry_pass": false
+    },
+    {
+      "index": 2,
+      "kind": "fitted_geometry",
+      "passed": true,
+      "geometry_pass": true
+    },
+    {
+      "index": 2,
+      "kind": "geometry",
+      "passed": true,
+      "geometry_pass": true
+    },
+    {
+      "index": 3,
+      "kind": "fitted_geometry",
+      "passed": true,
+      "geometry_pass": false
+    }
+  ],
+  "native_EFC_columns": 52,
+  "native_primals": 2,
+  "traces": [
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\constant_q\\0.0003125\\trace.npz",
+        "bytes": 448580,
+        "sha256": "9599be5362f10a480d574b319d9c0b7f03a9e1f139e2a69f8fc2dfaa922c422c"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 1.7763568394002505e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 5.329070518200751e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\constant_q\\0.00015625\\trace.npz",
+        "bytes": 878085,
+        "sha256": "a50c558bc7ead802db86091672e2e210c20fd5df9f9efcf9c7b450cd165bc835"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 2.4424906541753444e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 8.881784197001252e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\inverse_PD_strict_LP\\0.0003125\\trace.npz",
+        "bytes": 1461745,
+        "sha256": "938df050a5eb74938253cd78f4339ae59c5eda24d099e30630dfa8aa5bd84ca5"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 7.993605777301127e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 2.6645352591003757e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\inverse_PD_strict_LP\\0.00015625\\trace.npz",
+        "bytes": 2898536,
+        "sha256": "fdb51228c3b24d10b4aa5449b036d3f62034d04abb471af48efa54d87a4375e5"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 3.1086244689504383e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 7.105427357601002e-15
+      }
+    }
+  ],
+  "trace_checks": [
+    52,
+    52
+  ],
+  "reset_diagnostics": [
+    {
+      "control": "constant_q",
+      "actual_group_Fn_N": [
+        1.2564933406030188,
+        2.2157777642685224,
+        0.9973891224077834
+      ],
+      "net_world_force_N": [
+        -0.823675662727988,
+        -0.1257401305157069,
+        -0.4632507620554236
+      ],
+      "actual_COM_torque_world_Nm": [
+        0.023490054896259546,
+        -0.033155384922161676,
+        0.011554723627430706
+      ],
+      "max_joint_acceleration_rad_s2": 254.2286127143174,
+      "max_target_change_rad": 0.0,
+      "initial_trace_Fn_max_error": 0.0
+    },
+    {
+      "control": "inverse_PD_strict_LP",
+      "actual_group_Fn_N": [
+        6.699733941470787,
+        5.481187631684451,
+        4.33113438881768
+      ],
+      "net_world_force_N": [
+        -1.0514880444416055,
+        -0.6299980381649215,
+        0.8533340715868647
+      ],
+      "actual_COM_torque_world_Nm": [
+        0.03305794279516325,
+        0.006029618134678366,
+        -0.006597647037119472
+      ],
+      "max_joint_acceleration_rad_s2": 287.8160896431672,
+      "max_target_change_rad": 0.2614721138339451,
+      "initial_trace_Fn_max_error": 0.0
+    }
+  ],
+  "integration_steps": 0,
+  "neural_updates": 0,
+  "scope": "Saved primal/separating inequality and native EFC/failed-trace readback; geometry reruns reuse shared convex implementation. No independent global optimality/infeasibility, source force/gravity truth, calibrated dynamics or dynamic success proof."
+}

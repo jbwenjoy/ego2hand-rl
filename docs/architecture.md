@@ -86,6 +86,13 @@ engagement proposals inside unchanged hard limits, with full audit afterward.
 frozen6D ray cone with explicit moment scale. No source-contact truth, global
 infeasibility, native dynamic success or physics gradient follows from them.
 
+`contact_envelopes.py` builds unit-normal BODY candidate rays and rotates their
+COM wrenches without changing tangent phase. These are not the CHORD unit-force
+fingerprints or observed native contact manifolds. `contact_selection.py` adds
+explicit three-group minimum coefficients to hypothetical triplet balance.
+Selection, robot fit, actual native support and dynamic hold remain separate
+gates; an actuator-box witness is never applied as a simulator contact force.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not

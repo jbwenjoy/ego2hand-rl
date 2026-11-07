@@ -1,0 +1,1126 @@
+{
+  "schema": "mug_support_selected_native_fit:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\fit_mug_support_triplets.py",
+      "bytes": 13629,
+      "sha256": "bd4f9501863789ebec90e131820332084ac47eb647247c51f25f9f54f71fdd90"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\surface_patch_ik.py",
+      "bytes": 5758,
+      "sha256": "508def09219d4a4378cb18364b57dc4b02db9785ad67d9f6635b55f6c040ad5c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\collision_patch_ik.py",
+      "bytes": 3556,
+      "sha256": "515fc97e2857086fee7be26bf70088d3320f3eda25dcb8db694783b8b12d61de"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_ik.py",
+      "bytes": 7752,
+      "sha256": "45d6922d2a7b9a14e895daa750f0c09073db414401aa8d6e82afab2388edb174"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\component_preload.py",
+      "bytes": 2494,
+      "sha256": "2cb4d6f0cca3f9bf1c54da33b6013f9d21acebf1c89392f2e0a09224b3873f4c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_contacts.py",
+      "bytes": 3098,
+      "sha256": "573b9f5367782b91422598b6b09f3188c0d4d369c3090f702ee0536c2e5cf241"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_modes.py",
+      "bytes": 5574,
+      "sha256": "7f42099c121383082859b016b1a48c2103e6f7a558519318d7dda7f608b7a3eb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\patch_intent.py",
+      "bytes": 2592,
+      "sha256": "dfacc257ab76e2daaa1fec7e7a69cd261bff9873d3514a852a97207a9125d9a5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+      "bytes": 3857,
+      "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v2\\report.json",
+      "bytes": 15369,
+      "sha256": "bb1f2e3218adeaa6fd446e9cdc2d9c018d9bd835334e7b612807332512acf375"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_triplets_v1\\report.json",
+      "bytes": 8079,
+      "sha256": "beed5780398e85a7f00ac06db5364b7991ab266fe15d52c2f32607ccca85d68a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_engagement_v1\\preload01\\candidate.npz",
+      "bytes": 791,
+      "sha256": "6c6f60de35efb49dfc903c957194c1a2144403e56f87222877ad174ded0e15bb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_proposals_v1\\anchors.json",
+      "bytes": 5037,
+      "sha256": "0dbd68b4553257b84959e105830a0c8c944cdd71df28da23efd27626655252f1"
+    }
+  ],
+  "results": [
+    {
+      "index": 0,
+      "selection": {
+        "hypothesis": "all30",
+        "criterion": "minimum_normal",
+        "index": 83,
+        "source_candidate_ids": [
+          0,
+          13,
+          29
+        ],
+        "ideal_normal_coefficients_N": 13.041895763408045,
+        "ideal_group_normal_N": [
+          5.387359079805205,
+          3.302036229176284,
+          4.352500454426556
+        ],
+        "ideal_ray_coefficients_N": [
+          0.0,
+          0.27371367311637773,
+          0.2961316327392452,
+          4.817513773949583,
+          0.0,
+          0.0,
+          3.302036229176284,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.906988368163253,
+          1.4455120862633035,
+          0.0,
+          0.0
+        ],
+        "geometric_anchor_change_score": 85.71179309641434,
+        "eight_edge_also_feasible": true,
+        "conditional_source_also_feasible": false,
+        "archive": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_triplets_v1\\all30.npz",
+          "bytes": 65929,
+          "sha256": "8c35b5f4364bd991a5f830d7dc4da5ca61d2e2d2147a58b467a0543b7d0f0e03"
+        }
+      },
+      "material_metrics": [
+        {
+          "source_id": 0,
+          "source_distance_m": 0.0003526271439013505,
+          "normal_dot": 0.9916511041683701
+        },
+        {
+          "source_id": 13,
+          "source_distance_m": 0.0009748825542286487,
+          "normal_dot": 0.7377751672277353
+        },
+        {
+          "source_id": 29,
+          "source_distance_m": 0.0006956323638261771,
+          "normal_dot": 0.8765503741511653
+        }
+      ],
+      "material_gate": true,
+      "coupled_geometry_pass": true,
+      "geometry_pass": true,
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\final_geometry.json",
+        "bytes": 895833,
+        "sha256": "88536eb56d975db793fbf6b2a8c4586930b753deeaa059fc92472310b8f9f829"
+      },
+      "fitted_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\fitted_geometry.json",
+        "bytes": 895805,
+        "sha256": "88fdd1ef00eda8366f3de6d6d4debdf7073bdb249a8803e748da7d1a2910fe66"
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\candidate.npz",
+        "bytes": 792,
+        "sha256": "cb16e792b3fb31f70ef9bdf831d52c9159e332d1ca319da93862bbd2ba5732a6"
+      },
+      "fitted": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\fitted.npz",
+        "bytes": 790,
+        "sha256": "2e57116120c3cc61d8bb9943ab2012fb8017d9b80ddd6c6ff5f2a57e651f8a4f"
+      },
+      "solver": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\solver.json",
+        "bytes": 2813,
+        "sha256": "658c748c74a67e87c05aff072545790574c270d534bf83034c2743d949b91824"
+      },
+      "reach": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\reach.json",
+        "bytes": 25696,
+        "sha256": "86c87bca087bc256893c01e6ac1a536784aae6a428f406929de597adf1fc2333"
+      },
+      "coupled_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\coupled_proposals.jsonl",
+        "bytes": 40296,
+        "sha256": "039b9143cd50b2a2259d6d371597461a3fd85764161cf857a07be5a45092a5c8"
+      },
+      "actual_source_patch_matches": {
+        "groups": [
+          {
+            "group": 1,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.0003868669342199566,
+            "best_normal_dot": 0.9969059696284815,
+            "pairs": [
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "group": 2,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 2,
+            "minimum_candidate_distance_m": 0.0014926528099838408,
+            "best_normal_dot": 0.7958760728662765,
+            "pairs": [
+              [
+                1,
+                13
+              ]
+            ]
+          },
+          {
+            "group": 3,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.0006564832175061596,
+            "best_normal_dot": 0.9290066070120451,
+            "pairs": [
+              [
+                3,
+                29
+              ]
+            ]
+          }
+        ],
+        "all_source_geometry_known": true,
+        "all_groups_matched": true,
+        "source_contact_truth_known": false,
+        "physical_success_certified": false
+      },
+      "native_finger_normal_N": [
+        1.2564933406030188,
+        2.2157777642685224,
+        0.9973891224077834
+      ],
+      "static": {
+        "cone6D": {
+          "success": true,
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "witness": {
+            "ray_coefficients_N": [
+              0.0,
+              3.0697708131283576,
+              0.0,
+              2.7273000923355033,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              2.177279907448102,
+              0.0,
+              1.273056925485408,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.46230003713954543,
+              0.0,
+              4.1912734908882765,
+              0.0
+            ],
+            "total_normal_coefficients_N": 13.900981266425193,
+            "force_residual_N": [
+              3.3306690738754696e-15,
+              -6.661338147750939e-16,
+              4.440892098500626e-16
+            ],
+            "moment_residual_Nm": [
+              -1.734723475976807e-16,
+              -1.614760427636981e-16,
+              -1.4180943015954856e-16
+            ],
+            "required_torque20_Nm": null,
+            "minimum_torque_margin_Nm": null
+          }
+        },
+        "strict_full_command": {
+          "success": true,
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "witness": {
+            "ray_coefficients_N": [
+              0.0,
+              3.0697708131283403,
+              0.0,
+              2.727300092335502,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              2.1772799074480917,
+              0.0,
+              1.273056925485415,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.46230003713955,
+              0.0,
+              4.19127349088826,
+              0.0
+            ],
+            "total_normal_coefficients_N": 13.900981266425159,
+            "force_residual_N": [
+              0.0,
+              -6.661338147750939e-16,
+              2.220446049250313e-15
+            ],
+            "moment_residual_Nm": [
+              -6.938893903907228e-18,
+              -2.992932217418531e-16,
+              -5.325959702520182e-17
+            ],
+            "required_torque20_Nm": [
+              0.4105231427603184,
+              0.3169522809604953,
+              0.33226461689419345,
+              0.13315634745151095,
+              0.027048537171269427,
+              -0.0857472956732806,
+              -0.083528711573056,
+              -0.0007367057329072009,
+              0.30102881417938115,
+              -0.10020635680654558,
+              0.03554177210140417,
+              -0.002257541559738608,
+              0.01924039281223555,
+              0.0013404321805678809,
+              -0.003936268125467157,
+              -0.0006794847303858514,
+              0.005100020263105461,
+              0.009607250979919157,
+              -0.0031223297770350995,
+              -0.0005694291365872143
+            ],
+            "minimum_torque_margin_Nm": 0.00013538310580651913
+          }
+        },
+        "EFC_wrench_error": 2.220446049250313e-16,
+        "EFC_load_error": 1.3877787807814457e-17,
+        "EFC_columns": 28
+      },
+      "native_eligible": true,
+      "native_cases": [
+        {
+          "control": "constant_q",
+          "dt_s": 0.0003125,
+          "summary": {
+            "schema": "compound_mug_noaid_static_hold_case:1",
+            "dt_s": 0.0003125,
+            "completed_steps": 455,
+            "actual_duration_s": 0.1421875,
+            "termination": "ORIENTATION_OVER_45DEG",
+            "metrics": {
+              "final_COM_drift_m": 0.04090119638766187,
+              "final_angle_rad": 0.7883563904137247,
+              "tail_linear_velocity_RMS_m_s": null,
+              "tail_angular_velocity_RMS_rad_s": null,
+              "tail_triple_pad_force_coverage": null,
+              "max_native_penetration_m": 6.525303638765377e-05,
+              "max_self_penetration_m": 0.0,
+              "max_phone_nonpad_normal_force_N": 0.0,
+              "max_table_normal_force_N": 0.0,
+              "max_joint_limit_excursion_rad": 0.0011626911507885973,
+              "warning_count": 0
+            },
+            "gates": {
+              "final_COM_drift_m": false,
+              "final_angle_rad": false,
+              "tail_linear_velocity_RMS_m_s": false,
+              "tail_angular_velocity_RMS_rad_s": false,
+              "tail_triple_pad_force_coverage": false,
+              "max_native_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_phone_nonpad_normal_force_N": true,
+              "max_table_normal_force_N": true,
+              "max_joint_limit_excursion_rad": false,
+              "warning_count": true,
+              "duration_complete": false
+            },
+            "native_holding_gates_pass": false,
+            "counts": {
+              "step1": 455,
+              "step2": 455,
+              "contact_force_reads": 896,
+              "rne_postconstraint": 15,
+              "integration_steps": 455
+            },
+            "max_sampled_native_external_wrench_error": 2.220446049250313e-16,
+            "raw_contact_sampling_interval_s": 0.01,
+            "initial_qpos_is_static_geometry_qualified": true,
+            "controller": "constant legal absolute PD target; not an Actor or frozen phone residual controller",
+            "source_trajectory_replayed": false,
+            "source_gravity_preserved": false,
+            "scope": "New mug mechanical static-hold diagnostic using unchanged numeric phone thresholds but explicitly expanded distal contact regions. Native penetration and force gates every integration step; complete raw contacts and native external-wrench crosscheck at10ms samples. No all-state independent convex audit, calibrated dynamics, policy/ego benefit claim."
+          },
+          "case": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\constant_q\\0.0003125\\report.json",
+            "bytes": 2090,
+            "sha256": "83f63fe2fe914839ee75fa60a720c68a397354240f566a04ad19f437127aa83e"
+          },
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\constant_q\\0.0003125\\trace.npz",
+            "bytes": 448580,
+            "sha256": "9599be5362f10a480d574b319d9c0b7f03a9e1f139e2a69f8fc2dfaa922c422c"
+          }
+        },
+        {
+          "control": "constant_q",
+          "dt_s": 0.00015625,
+          "summary": {
+            "schema": "compound_mug_noaid_static_hold_case:1",
+            "dt_s": 0.00015625,
+            "completed_steps": 910,
+            "actual_duration_s": 0.1421875,
+            "termination": "ORIENTATION_OVER_45DEG",
+            "metrics": {
+              "final_COM_drift_m": 0.04083877894471292,
+              "final_angle_rad": 0.7862547794445185,
+              "tail_linear_velocity_RMS_m_s": null,
+              "tail_angular_velocity_RMS_rad_s": null,
+              "tail_triple_pad_force_coverage": null,
+              "max_native_penetration_m": 5.956675423067862e-05,
+              "max_self_penetration_m": 0.0,
+              "max_phone_nonpad_normal_force_N": 0.0,
+              "max_table_normal_force_N": 0.0,
+              "max_joint_limit_excursion_rad": 0.0011612937199602102,
+              "warning_count": 0
+            },
+            "gates": {
+              "final_COM_drift_m": false,
+              "final_angle_rad": false,
+              "tail_linear_velocity_RMS_m_s": false,
+              "tail_angular_velocity_RMS_rad_s": false,
+              "tail_triple_pad_force_coverage": false,
+              "max_native_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_phone_nonpad_normal_force_N": true,
+              "max_table_normal_force_N": true,
+              "max_joint_limit_excursion_rad": false,
+              "warning_count": true,
+              "duration_complete": false
+            },
+            "native_holding_gates_pass": false,
+            "counts": {
+              "step1": 910,
+              "step2": 910,
+              "contact_force_reads": 1802,
+              "rne_postconstraint": 15,
+              "integration_steps": 910
+            },
+            "max_sampled_native_external_wrench_error": 2.220446049250313e-16,
+            "raw_contact_sampling_interval_s": 0.01,
+            "initial_qpos_is_static_geometry_qualified": true,
+            "controller": "constant legal absolute PD target; not an Actor or frozen phone residual controller",
+            "source_trajectory_replayed": false,
+            "source_gravity_preserved": false,
+            "scope": "New mug mechanical static-hold diagnostic using unchanged numeric phone thresholds but explicitly expanded distal contact regions. Native penetration and force gates every integration step; complete raw contacts and native external-wrench crosscheck at10ms samples. No all-state independent convex audit, calibrated dynamics, policy/ego benefit claim."
+          },
+          "case": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\constant_q\\0.00015625\\report.json",
+            "bytes": 2092,
+            "sha256": "d282b7a6586dd340e3012aca71695a312d0b1a62d2b5f3938f10d741023359ce"
+          },
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\constant_q\\0.00015625\\trace.npz",
+            "bytes": 878085,
+            "sha256": "a50c558bc7ead802db86091672e2e210c20fd5df9f9efcf9c7b450cd165bc835"
+          }
+        },
+        {
+          "control": "inverse_PD_strict_LP",
+          "dt_s": 0.0003125,
+          "summary": {
+            "schema": "compound_mug_noaid_static_hold_case:1",
+            "dt_s": 0.0003125,
+            "completed_steps": 1661,
+            "actual_duration_s": 0.5190625,
+            "termination": "ORIENTATION_OVER_45DEG",
+            "metrics": {
+              "final_COM_drift_m": 0.04153084867247063,
+              "final_angle_rad": 0.7862168034540437,
+              "tail_linear_velocity_RMS_m_s": null,
+              "tail_angular_velocity_RMS_rad_s": null,
+              "tail_triple_pad_force_coverage": null,
+              "max_native_penetration_m": 4.9986806347643935e-05,
+              "max_self_penetration_m": 0.0,
+              "max_phone_nonpad_normal_force_N": 0.0,
+              "max_table_normal_force_N": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "warning_count": 0
+            },
+            "gates": {
+              "final_COM_drift_m": false,
+              "final_angle_rad": false,
+              "tail_linear_velocity_RMS_m_s": false,
+              "tail_angular_velocity_RMS_rad_s": false,
+              "tail_triple_pad_force_coverage": false,
+              "max_native_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_phone_nonpad_normal_force_N": true,
+              "max_table_normal_force_N": true,
+              "max_joint_limit_excursion_rad": true,
+              "warning_count": true,
+              "duration_complete": false
+            },
+            "native_holding_gates_pass": false,
+            "counts": {
+              "step1": 1661,
+              "step2": 1661,
+              "contact_force_reads": 8487,
+              "rne_postconstraint": 52,
+              "integration_steps": 1661
+            },
+            "max_sampled_native_external_wrench_error": 1.3322676295501878e-15,
+            "raw_contact_sampling_interval_s": 0.01,
+            "initial_qpos_is_static_geometry_qualified": true,
+            "controller": "constant legal absolute PD target; not an Actor or frozen phone residual controller",
+            "source_trajectory_replayed": false,
+            "source_gravity_preserved": false,
+            "scope": "New mug mechanical static-hold diagnostic using unchanged numeric phone thresholds but explicitly expanded distal contact regions. Native penetration and force gates every integration step; complete raw contacts and native external-wrench crosscheck at10ms samples. No all-state independent convex audit, calibrated dynamics, policy/ego benefit claim."
+          },
+          "case": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\inverse_PD_strict_LP\\0.0003125\\report.json",
+            "bytes": 2078,
+            "sha256": "727cb4e257ee68c71bba2bd6e13f096c2c1c28d49cb0ded14b932938e56380b4"
+          },
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\inverse_PD_strict_LP\\0.0003125\\trace.npz",
+            "bytes": 1461745,
+            "sha256": "938df050a5eb74938253cd78f4339ae59c5eda24d099e30630dfa8aa5bd84ca5"
+          }
+        },
+        {
+          "control": "inverse_PD_strict_LP",
+          "dt_s": 0.00015625,
+          "summary": {
+            "schema": "compound_mug_noaid_static_hold_case:1",
+            "dt_s": 0.00015625,
+            "completed_steps": 3374,
+            "actual_duration_s": 0.5271875,
+            "termination": "ORIENTATION_OVER_45DEG",
+            "metrics": {
+              "final_COM_drift_m": 0.04144024698556802,
+              "final_angle_rad": 0.7857041010104125,
+              "tail_linear_velocity_RMS_m_s": null,
+              "tail_angular_velocity_RMS_rad_s": null,
+              "tail_triple_pad_force_coverage": null,
+              "max_native_penetration_m": 4.9986806347643935e-05,
+              "max_self_penetration_m": 0.0,
+              "max_phone_nonpad_normal_force_N": 0.0,
+              "max_table_normal_force_N": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "warning_count": 0
+            },
+            "gates": {
+              "final_COM_drift_m": false,
+              "final_angle_rad": false,
+              "tail_linear_velocity_RMS_m_s": false,
+              "tail_angular_velocity_RMS_rad_s": false,
+              "tail_triple_pad_force_coverage": false,
+              "max_native_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_phone_nonpad_normal_force_N": true,
+              "max_table_normal_force_N": true,
+              "max_joint_limit_excursion_rad": true,
+              "warning_count": true,
+              "duration_complete": false
+            },
+            "native_holding_gates_pass": false,
+            "counts": {
+              "step1": 3374,
+              "step2": 3374,
+              "contact_force_reads": 18842,
+              "rne_postconstraint": 53,
+              "integration_steps": 3374
+            },
+            "max_sampled_native_external_wrench_error": 1.7763568394002505e-15,
+            "raw_contact_sampling_interval_s": 0.01,
+            "initial_qpos_is_static_geometry_qualified": true,
+            "controller": "constant legal absolute PD target; not an Actor or frozen phone residual controller",
+            "source_trajectory_replayed": false,
+            "source_gravity_preserved": false,
+            "scope": "New mug mechanical static-hold diagnostic using unchanged numeric phone thresholds but explicitly expanded distal contact regions. Native penetration and force gates every integration step; complete raw contacts and native external-wrench crosscheck at10ms samples. No all-state independent convex audit, calibrated dynamics, policy/ego benefit claim."
+          },
+          "case": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\inverse_PD_strict_LP\\0.00015625\\report.json",
+            "bytes": 2080,
+            "sha256": "3154c2352934bfd3344074eaf33cae96593d8828d3ffb284e7622017c05f4a3b"
+          },
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\inverse_PD_strict_LP\\0.00015625\\trace.npz",
+            "bytes": 2898536,
+            "sha256": "fdb51228c3b24d10b4aa5449b036d3f62034d04abb471af48efa54d87a4375e5"
+          }
+        }
+      ],
+      "command_unavailable": null,
+      "geometry_failure_counts": {
+        "object": 0,
+        "self": 0,
+        "hand_table": 0
+      },
+      "preload": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\preload.json",
+        "bytes": 2651,
+        "sha256": "e0d458d90f8903877d24cc088c2ed4b2019e64ca2b04b15507f9e835dea16be7"
+      },
+      "basis": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\basis.npz",
+        "bytes": 3650,
+        "sha256": "8ad0505a525681cd3663447d0c29f9bf367072b6439157ae5a4b96fb5e5ae31c"
+      }
+    },
+    {
+      "index": 1,
+      "selection": {
+        "hypothesis": "all30",
+        "criterion": "least_anchor_change",
+        "index": 572,
+        "source_candidate_ids": [
+          5,
+          8,
+          28
+        ],
+        "ideal_normal_coefficients_N": 24.420655429759275,
+        "ideal_group_normal_N": [
+          11.955488101590817,
+          11.12220221900758,
+          1.342965109160878
+        ],
+        "ideal_ray_coefficients_N": [
+          0.0,
+          4.10289889001534,
+          0.0,
+          5.968619730193042,
+          1.8839694813824337,
+          0.0,
+          8.25342601243862,
+          0.0,
+          0.0,
+          2.8687762065689597,
+          0.0,
+          0.0,
+          1.342965109160878,
+          0.0,
+          0.0
+        ],
+        "geometric_anchor_change_score": 19.58283959619901,
+        "eight_edge_also_feasible": true,
+        "conditional_source_also_feasible": true,
+        "archive": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_triplets_v1\\all30.npz",
+          "bytes": 65929,
+          "sha256": "8c35b5f4364bd991a5f830d7dc4da5ca61d2e2d2147a58b467a0543b7d0f0e03"
+        }
+      },
+      "material_metrics": [
+        {
+          "source_id": 5,
+          "source_distance_m": 0.013011024840807359,
+          "normal_dot": 0.3331792441962485
+        },
+        {
+          "source_id": 8,
+          "source_distance_m": 0.0003723358452464709,
+          "normal_dot": 0.9868296360215184
+        },
+        {
+          "source_id": 28,
+          "source_distance_m": 0.0003713419850408998,
+          "normal_dot": 0.9996706911897715
+        }
+      ],
+      "material_gate": false,
+      "coupled_geometry_pass": false,
+      "geometry_pass": false,
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate01\\final_geometry.json",
+        "bytes": 895195,
+        "sha256": "6a8638974a0e623985d222095ac0f3bbcc8e545854956349f6fb8de91e630b05"
+      },
+      "fitted_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate01\\fitted_geometry.json",
+        "bytes": 895195,
+        "sha256": "6a8638974a0e623985d222095ac0f3bbcc8e545854956349f6fb8de91e630b05"
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate01\\candidate.npz",
+        "bytes": 792,
+        "sha256": "297f00406f8cb3e3f1d462e47b28c3cdcc9f8fd516f18061581ce41c0ec616ff"
+      },
+      "fitted": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate01\\fitted.npz",
+        "bytes": 792,
+        "sha256": "297f00406f8cb3e3f1d462e47b28c3cdcc9f8fd516f18061581ce41c0ec616ff"
+      },
+      "solver": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate01\\solver.json",
+        "bytes": 2814,
+        "sha256": "b5f034e0957ae4eb998b96267871b9c21d138d7c996ac009aa06a33239295e7b"
+      },
+      "reach": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate01\\reach.json",
+        "bytes": 25714,
+        "sha256": "aa5c8290ae98479d38e0165a05b581afdad1f0daef44918c024c8d0476dedcea"
+      },
+      "coupled_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate01\\coupled_proposals.jsonl",
+        "bytes": 147936,
+        "sha256": "f28437fac2c54e14f12ef2014650603dc0b231ced627cdd5b0005cd80073414c"
+      },
+      "actual_source_patch_matches": {
+        "groups": [
+          {
+            "group": 1,
+            "source_geometry_known": true,
+            "matched": false,
+            "native_contacts": 2,
+            "minimum_candidate_distance_m": 0.008993930203766464,
+            "best_normal_dot": 0.10399668578441976,
+            "pairs": []
+          },
+          {
+            "group": 2,
+            "source_geometry_known": true,
+            "matched": false,
+            "pairs": [],
+            "native_contacts": 0
+          },
+          {
+            "group": 3,
+            "source_geometry_known": true,
+            "matched": false,
+            "pairs": [],
+            "native_contacts": 0
+          }
+        ],
+        "all_source_geometry_known": true,
+        "all_groups_matched": false,
+        "source_contact_truth_known": false,
+        "physical_success_certified": false
+      },
+      "native_finger_normal_N": [
+        2.301263907782328,
+        0.0,
+        0.0
+      ],
+      "static": null,
+      "native_eligible": false,
+      "native_cases": [],
+      "command_unavailable": null,
+      "geometry_failure_counts": {
+        "object": 2,
+        "self": 0,
+        "hand_table": 0
+      }
+    },
+    {
+      "index": 2,
+      "selection": {
+        "hypothesis": "nonnegative21",
+        "criterion": "minimum_normal",
+        "index": 11,
+        "source_candidate_ids": [
+          0,
+          8,
+          29
+        ],
+        "ideal_normal_coefficients_N": 13.26490504569246,
+        "ideal_group_normal_N": [
+          5.23899969600564,
+          3.847551704730912,
+          4.178353644955905
+        ],
+        "ideal_ray_coefficients_N": [
+          0.0,
+          0.0,
+          0.0,
+          5.23899969600564,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.500217111466674,
+          2.3473345932642378,
+          0.0,
+          3.416895102794583,
+          0.24116214224282234,
+          0.5202963999184997,
+          0.0
+        ],
+        "geometric_anchor_change_score": 81.7179946054138,
+        "eight_edge_also_feasible": true,
+        "conditional_source_also_feasible": false,
+        "archive": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_triplets_v1\\nonnegative21.npz",
+          "bytes": 20510,
+          "sha256": "8b9c0e73f4ef93bd16a9872001ab7845c7a2c4def6efca1036c3f01441a6a9d8"
+        }
+      },
+      "material_metrics": [
+        {
+          "source_id": 0,
+          "source_distance_m": 0.0003521360871745976,
+          "normal_dot": 0.9916492893858521
+        },
+        {
+          "source_id": 8,
+          "source_distance_m": 0.00037233585021448557,
+          "normal_dot": 0.9868296360807373
+        },
+        {
+          "source_id": 29,
+          "source_distance_m": 0.0006956374860322193,
+          "normal_dot": 0.8765504861010149
+        }
+      ],
+      "material_gate": true,
+      "coupled_geometry_pass": true,
+      "geometry_pass": true,
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate02\\final_geometry.json",
+        "bytes": 895744,
+        "sha256": "4ae9a535342e5032d179a90c4ed91902dd730f9b21dadc333acbe6d83f75363f"
+      },
+      "fitted_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate02\\fitted_geometry.json",
+        "bytes": 895744,
+        "sha256": "ff3c4ce1aac1065ae76b3f08bf650515494c0bee90e9bd9c027dc696bbc4dbee"
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate02\\candidate.npz",
+        "bytes": 791,
+        "sha256": "9b7030114248dad236cd64fb93b18d1702b8767709d4b80e8ed9f9e5c4fc4d2e"
+      },
+      "fitted": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate02\\fitted.npz",
+        "bytes": 790,
+        "sha256": "7f3f4c9babebc71ba8dca6ab223e1e7b3f2e19a59385615c4c72bb173cf07100"
+      },
+      "solver": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate02\\solver.json",
+        "bytes": 2810,
+        "sha256": "4dcea8955b06d0caf8cf1bb7b759627057f8fbcdf0ca5fca0e44cd497c193cd9"
+      },
+      "reach": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate02\\reach.json",
+        "bytes": 25720,
+        "sha256": "46729ea807ebc53344a7978048351e46e6bd4a3e8b8c9420e45b907b0c95b90e"
+      },
+      "coupled_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate02\\coupled_proposals.jsonl",
+        "bytes": 10467,
+        "sha256": "3045869f775ae0c3c57899597656f30e6919ae6c29b29e7a645f658a4872fac3"
+      },
+      "actual_source_patch_matches": {
+        "groups": [
+          {
+            "group": 1,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.0003891238063743328,
+            "best_normal_dot": 0.9969207188117785,
+            "pairs": [
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "group": 2,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.00044983076519796984,
+            "best_normal_dot": 0.9868363358108384,
+            "pairs": [
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "group": 3,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.0006565083915023665,
+            "best_normal_dot": 0.9290082209923968,
+            "pairs": [
+              [
+                2,
+                29
+              ]
+            ]
+          }
+        ],
+        "all_source_geometry_known": true,
+        "all_groups_matched": true,
+        "source_contact_truth_known": false,
+        "physical_success_certified": false
+      },
+      "native_finger_normal_N": [
+        1.2165465994531581,
+        1.701551644576576,
+        1.0623107802093696
+      ],
+      "static": {
+        "cone6D": {
+          "success": false,
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is Infeasible)",
+          "witness": null
+        },
+        "strict_full_command": {
+          "success": false,
+          "status": 2,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+          "witness": null
+        },
+        "EFC_wrench_error": 2.220446049250313e-16,
+        "EFC_load_error": 2.7755575615628914e-17,
+        "EFC_columns": 24
+      },
+      "native_eligible": false,
+      "native_cases": [],
+      "command_unavailable": null,
+      "geometry_failure_counts": {
+        "object": 0,
+        "self": 0,
+        "hand_table": 0
+      },
+      "preload": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate02\\preload.json",
+        "bytes": 2659,
+        "sha256": "99978650599d2ee2e51bc1f628820fc742c3b6182461017215fcbc3f9b6536d8"
+      },
+      "basis": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate02\\basis.npz",
+        "bytes": 3391,
+        "sha256": "e995b1e3412788b61bc947408b2c777bcd01adc304aab3f1ab04cdfa215f3ef2"
+      }
+    },
+    {
+      "index": 3,
+      "selection": {
+        "hypothesis": "nonnegative21",
+        "criterion": "least_anchor_change",
+        "index": 153,
+        "source_candidate_ids": [
+          6,
+          8,
+          26
+        ],
+        "ideal_normal_coefficients_N": 29.210155557878853,
+        "ideal_group_normal_N": [
+          13.36174457387429,
+          11.394356073862324,
+          4.454054910142239
+        ],
+        "ideal_ray_coefficients_N": [
+          0.0,
+          6.719443430230389,
+          0.0,
+          0.0,
+          6.642301143643902,
+          0.0,
+          3.6882153107255755,
+          0.0,
+          0.0,
+          7.706140763136749,
+          0.0,
+          0.18011070614127309,
+          4.273944204000966,
+          0.0,
+          0.0
+        ],
+        "geometric_anchor_change_score": 28.976488102372617,
+        "eight_edge_also_feasible": true,
+        "conditional_source_also_feasible": true,
+        "archive": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_triplets_v1\\nonnegative21.npz",
+          "bytes": 20510,
+          "sha256": "8b9c0e73f4ef93bd16a9872001ab7845c7a2c4def6efca1036c3f01441a6a9d8"
+        }
+      },
+      "material_metrics": [
+        {
+          "source_id": 6,
+          "source_distance_m": 0.01056454475271934,
+          "normal_dot": 0.8072262826879807
+        },
+        {
+          "source_id": 8,
+          "source_distance_m": 0.0003561634117016045,
+          "normal_dot": 0.9868270449519222
+        },
+        {
+          "source_id": 26,
+          "source_distance_m": 0.0015518932173509913,
+          "normal_dot": 0.976771419955437
+        }
+      ],
+      "material_gate": false,
+      "coupled_geometry_pass": false,
+      "geometry_pass": false,
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate03\\final_geometry.json",
+        "bytes": 895373,
+        "sha256": "6f3ba1f4678cad62ac097f1cd60aee567f8d2314a8f659f1d9c4811821bcba23"
+      },
+      "fitted_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate03\\fitted_geometry.json",
+        "bytes": 895373,
+        "sha256": "6f3ba1f4678cad62ac097f1cd60aee567f8d2314a8f659f1d9c4811821bcba23"
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate03\\candidate.npz",
+        "bytes": 790,
+        "sha256": "0513b913fc75af5725d9a098d5fc5ecce3e47312ae4c660f8fbc3f224f8a2050"
+      },
+      "fitted": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate03\\fitted.npz",
+        "bytes": 790,
+        "sha256": "0513b913fc75af5725d9a098d5fc5ecce3e47312ae4c660f8fbc3f224f8a2050"
+      },
+      "solver": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate03\\solver.json",
+        "bytes": 2809,
+        "sha256": "030dd890fe08eb71eb4a50ed0d97413cd5e2d60492188ed37cc64ce753744647"
+      },
+      "reach": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate03\\reach.json",
+        "bytes": 25747,
+        "sha256": "c2bac790de65501f7fbd31d103d18fe052e94ded237118b695c61a679587a7dd"
+      },
+      "coupled_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate03\\coupled_proposals.jsonl",
+        "bytes": 46222,
+        "sha256": "1252e51a1724b1b4faccd962a7deb6c9f2554fcf0506104f88b1b72d44462580"
+      },
+      "actual_source_patch_matches": {
+        "groups": [
+          {
+            "group": 1,
+            "source_geometry_known": true,
+            "matched": false,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.008098621514561255,
+            "best_normal_dot": -0.9856042229992109,
+            "pairs": []
+          },
+          {
+            "group": 2,
+            "source_geometry_known": true,
+            "matched": false,
+            "pairs": [],
+            "native_contacts": 0
+          },
+          {
+            "group": 3,
+            "source_geometry_known": true,
+            "matched": false,
+            "pairs": [],
+            "native_contacts": 0
+          }
+        ],
+        "all_source_geometry_known": true,
+        "all_groups_matched": false,
+        "source_contact_truth_known": false,
+        "physical_success_certified": false
+      },
+      "native_finger_normal_N": [
+        4.628762884614153,
+        0.0,
+        0.0
+      ],
+      "static": null,
+      "native_eligible": false,
+      "native_cases": [],
+      "command_unavailable": null,
+      "geometry_failure_counts": {
+        "object": 1,
+        "self": 0,
+        "hand_table": 0
+      }
+    }
+  ],
+  "reach_solves": 72,
+  "coupled_seeds": 4,
+  "geometry_pass_count": 2,
+  "native_eligible_count": 1,
+  "native_cases": 4,
+  "integration_steps": 6400,
+  "neural_updates": 0,
+  "wall_s": 26.969925800105557,
+  "scope": "Support-selected uncertain source triplets followed by bounded material-point, collision and engagement proposals; qualify actual native manifolds before hold integration. No label truth, calibrated dynamics/source gravity, global search, neural/gradient benefit or full trajectory claim."
+}

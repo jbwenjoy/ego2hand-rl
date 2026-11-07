@@ -1,0 +1,83 @@
+{
+  "schema": "mug_gravity_envelope_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\compare_mug_gravity_envelopes.py",
+      "bytes": 7167,
+      "sha256": "45dbc83b0ed863b16618ee7ec1e648c78110186d96a0296bc0a02072a09a7ab7"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_envelopes.py",
+      "bytes": 1807,
+      "sha256": "dbd36518a3a9c8f1f2e456b1b50e46f065bd31d23d9c2948fdbcbb669e721023"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\wrench_separation.py",
+      "bytes": 1950,
+      "sha256": "ca51d08dddbd58ffe1dec5c65e25b189eae2e7b80729cd6d6bec9cc73bbe5782"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_modes.py",
+      "bytes": 5574,
+      "sha256": "7f42099c121383082859b016b1a48c2103e6f7a558519318d7dda7f608b7a3eb"
+    }
+  ],
+  "binding": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+    "bytes": 3857,
+    "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "reference": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\reference61.npz",
+    "bytes": 2189390,
+    "sha256": "6809a1a29ec241e0b4776d9842d4022ffc54beba89e2521b58a0a5757a4aa1fd"
+  },
+  "patches": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v2\\report.json",
+    "bytes": 15369,
+    "sha256": "bb1f2e3218adeaa6fd446e9cdc2d9c018d9bd835334e7b612807332512acf375"
+  },
+  "engagement": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_engagement_v1\\report.json",
+    "bytes": 21628,
+    "sha256": "b64c5ec1bbc5ea1583e244496bc7c8607c12dca60b82ce9585783a81ae09a12c"
+  },
+  "gravity_robot_world": [
+    0.0,
+    0.0,
+    -9.81
+  ],
+  "gravity_conditional_source_Z_up_in_robot_world": [
+    4.1470461053194665,
+    -6.322907353520303,
+    6.249716089483871
+  ],
+  "source_gravity_is_assumed_not_measured": true,
+  "simulator_gravity_unchanged": true,
+  "source_envelopes": [
+    "all30",
+    "nonnegative21"
+  ],
+  "source_edges": [
+    0,
+    4,
+    8
+  ],
+  "source_mu_prior": 0.7,
+  "phase": "BODY Frisvad, rotate complete wrench columns to world",
+  "native_envelopes": "Three fixed engaged native condim3 manifolds; no geometry or phase change between gravity targets",
+  "maximum_feasibility_LP_attempts": 36,
+  "maximum_separation_LP_attempts": 18,
+  "integration_steps": 0,
+  "neural_updates": 0
+}

@@ -1,0 +1,274 @@
+{
+  "schema": "mug_source_support_triplet_selection:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\select_mug_support_triplets.py",
+      "bytes": 7594,
+      "sha256": "134f72098b40defd4adbc4b71149103051907753c5b8cffb87443e51a2b5cbf2"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_envelopes.py",
+      "bytes": 1807,
+      "sha256": "dbd36518a3a9c8f1f2e456b1b50e46f065bd31d23d9c2948fdbcbb669e721023"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_selection.py",
+      "bytes": 1477,
+      "sha256": "8e8f37c2e41849f801892dc658b35d20653dc87ca32256b137b1d4cb51c11def"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_envelopes_v1\\report.json",
+      "bytes": 107511,
+      "sha256": "1ed7e553c396db8ca9df99a71866071976e2d3b8d06290a46425a5e37f03458e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v2\\report.json",
+      "bytes": 15369,
+      "sha256": "bb1f2e3218adeaa6fd446e9cdc2d9c018d9bd835334e7b612807332512acf375"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_engagement_v1\\preload01\\candidate.npz",
+      "bytes": 791,
+      "sha256": "6c6f60de35efb49dfc903c957194c1a2144403e56f87222877ad174ded0e15bb"
+    }
+  ],
+  "summaries": [
+    {
+      "hypothesis": "all30",
+      "edges": 4,
+      "target": "robot_gravity",
+      "triples": 896,
+      "feasible_count": 130,
+      "minimum_normal_coefficients_N": 13.041895763408045
+    },
+    {
+      "hypothesis": "all30",
+      "edges": 4,
+      "target": "conditional_source_Z_up",
+      "triples": 896,
+      "feasible_count": 147,
+      "minimum_normal_coefficients_N": 6.511291057749631
+    },
+    {
+      "hypothesis": "all30",
+      "edges": 8,
+      "target": "robot_gravity",
+      "triples": 896,
+      "feasible_count": 134,
+      "minimum_normal_coefficients_N": 12.541324813071238
+    },
+    {
+      "hypothesis": "all30",
+      "edges": 8,
+      "target": "conditional_source_Z_up",
+      "triples": 896,
+      "feasible_count": 155,
+      "minimum_normal_coefficients_N": 6.413459900339766
+    },
+    {
+      "hypothesis": "nonnegative21",
+      "edges": 4,
+      "target": "robot_gravity",
+      "triples": 216,
+      "feasible_count": 28,
+      "minimum_normal_coefficients_N": 13.26490504569246
+    },
+    {
+      "hypothesis": "nonnegative21",
+      "edges": 4,
+      "target": "conditional_source_Z_up",
+      "triples": 216,
+      "feasible_count": 41,
+      "minimum_normal_coefficients_N": 6.631032646496106
+    },
+    {
+      "hypothesis": "nonnegative21",
+      "edges": 8,
+      "target": "robot_gravity",
+      "triples": 216,
+      "feasible_count": 30,
+      "minimum_normal_coefficients_N": 12.961996882909864
+    },
+    {
+      "hypothesis": "nonnegative21",
+      "edges": 8,
+      "target": "conditional_source_Z_up",
+      "triples": 216,
+      "feasible_count": 45,
+      "minimum_normal_coefficients_N": 6.523790460692077
+    }
+  ],
+  "selected": [
+    {
+      "hypothesis": "all30",
+      "criterion": "minimum_normal",
+      "index": 83,
+      "source_candidate_ids": [
+        0,
+        13,
+        29
+      ],
+      "ideal_normal_coefficients_N": 13.041895763408045,
+      "ideal_group_normal_N": [
+        5.387359079805205,
+        3.302036229176284,
+        4.352500454426556
+      ],
+      "ideal_ray_coefficients_N": [
+        0.0,
+        0.27371367311637773,
+        0.2961316327392452,
+        4.817513773949583,
+        0.0,
+        0.0,
+        3.302036229176284,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.906988368163253,
+        1.4455120862633035,
+        0.0,
+        0.0
+      ],
+      "geometric_anchor_change_score": 85.71179309641434,
+      "eight_edge_also_feasible": true,
+      "conditional_source_also_feasible": false,
+      "archive": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_triplets_v1\\all30.npz",
+        "bytes": 65929,
+        "sha256": "8c35b5f4364bd991a5f830d7dc4da5ca61d2e2d2147a58b467a0543b7d0f0e03"
+      }
+    },
+    {
+      "hypothesis": "all30",
+      "criterion": "least_anchor_change",
+      "index": 572,
+      "source_candidate_ids": [
+        5,
+        8,
+        28
+      ],
+      "ideal_normal_coefficients_N": 24.420655429759275,
+      "ideal_group_normal_N": [
+        11.955488101590817,
+        11.12220221900758,
+        1.342965109160878
+      ],
+      "ideal_ray_coefficients_N": [
+        0.0,
+        4.10289889001534,
+        0.0,
+        5.968619730193042,
+        1.8839694813824337,
+        0.0,
+        8.25342601243862,
+        0.0,
+        0.0,
+        2.8687762065689597,
+        0.0,
+        0.0,
+        1.342965109160878,
+        0.0,
+        0.0
+      ],
+      "geometric_anchor_change_score": 19.58283959619901,
+      "eight_edge_also_feasible": true,
+      "conditional_source_also_feasible": true,
+      "archive": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_triplets_v1\\all30.npz",
+        "bytes": 65929,
+        "sha256": "8c35b5f4364bd991a5f830d7dc4da5ca61d2e2d2147a58b467a0543b7d0f0e03"
+      }
+    },
+    {
+      "hypothesis": "nonnegative21",
+      "criterion": "minimum_normal",
+      "index": 11,
+      "source_candidate_ids": [
+        0,
+        8,
+        29
+      ],
+      "ideal_normal_coefficients_N": 13.26490504569246,
+      "ideal_group_normal_N": [
+        5.23899969600564,
+        3.847551704730912,
+        4.178353644955905
+      ],
+      "ideal_ray_coefficients_N": [
+        0.0,
+        0.0,
+        0.0,
+        5.23899969600564,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.500217111466674,
+        2.3473345932642378,
+        0.0,
+        3.416895102794583,
+        0.24116214224282234,
+        0.5202963999184997,
+        0.0
+      ],
+      "geometric_anchor_change_score": 81.7179946054138,
+      "eight_edge_also_feasible": true,
+      "conditional_source_also_feasible": false,
+      "archive": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_triplets_v1\\nonnegative21.npz",
+        "bytes": 20510,
+        "sha256": "8b9c0e73f4ef93bd16a9872001ab7845c7a2c4def6efca1036c3f01441a6a9d8"
+      }
+    },
+    {
+      "hypothesis": "nonnegative21",
+      "criterion": "least_anchor_change",
+      "index": 153,
+      "source_candidate_ids": [
+        6,
+        8,
+        26
+      ],
+      "ideal_normal_coefficients_N": 29.210155557878853,
+      "ideal_group_normal_N": [
+        13.36174457387429,
+        11.394356073862324,
+        4.454054910142239
+      ],
+      "ideal_ray_coefficients_N": [
+        0.0,
+        6.719443430230389,
+        0.0,
+        0.0,
+        6.642301143643902,
+        0.0,
+        3.6882153107255755,
+        0.0,
+        0.0,
+        7.706140763136749,
+        0.0,
+        0.18011070614127309,
+        4.273944204000966,
+        0.0,
+        0.0
+      ],
+      "geometric_anchor_change_score": 28.976488102372617,
+      "eight_edge_also_feasible": true,
+      "conditional_source_also_feasible": true,
+      "archive": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_triplets_v1\\nonnegative21.npz",
+        "bytes": 20510,
+        "sha256": "8b9c0e73f4ef93bd16a9872001ab7845c7a2c4def6efca1036c3f01441a6a9d8"
+      }
+    }
+  ],
+  "LP_calls": 4448,
+  "wall_s": 4.112972099799663,
+  "integration_steps": 0,
+  "neural_updates": 0,
+  "scope": "Enumerated only1112 fixed estimated-source point triples, explicit3-group minimum and4/8-edge cone priors. No hand reachability, actual native manifold, actuator capacity, measured source force/gravity or trajectory success. Lower geometric-change scores are proposal heuristics, not policy reward."
+}

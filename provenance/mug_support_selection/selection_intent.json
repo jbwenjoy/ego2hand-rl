@@ -1,0 +1,67 @@
+{
+  "schema": "mug_source_triplet_selection_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\select_mug_support_triplets.py",
+      "bytes": 7594,
+      "sha256": "134f72098b40defd4adbc4b71149103051907753c5b8cffb87443e51a2b5cbf2"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_envelopes.py",
+      "bytes": 1807,
+      "sha256": "dbd36518a3a9c8f1f2e456b1b50e46f065bd31d23d9c2948fdbcbb669e721023"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_selection.py",
+      "bytes": 1477,
+      "sha256": "8e8f37c2e41849f801892dc658b35d20653dc87ca32256b137b1d4cb51c11def"
+    }
+  ],
+  "prior": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_envelopes_v1\\report.json",
+    "bytes": 107511,
+    "sha256": "1ed7e553c396db8ca9df99a71866071976e2d3b8d06290a46425a5e37f03458e"
+  },
+  "patches": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v2\\report.json",
+    "bytes": 15369,
+    "sha256": "bb1f2e3218adeaa6fd446e9cdc2d9c018d9bd835334e7b612807332512acf375"
+  },
+  "reference": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\reference61.npz",
+    "bytes": 2189390,
+    "sha256": "6809a1a29ec241e0b4776d9842d4022ffc54beba89e2521b58a0a5757a4aa1fd"
+  },
+  "seed": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_engagement_v1\\preload01\\candidate.npz",
+    "bytes": 791,
+    "sha256": "6c6f60de35efb49dfc903c957194c1a2144403e56f87222877ad174ded0e15bb"
+  },
+  "primary_edges": 4,
+  "sensitivity_edges": 8,
+  "mu": 0.7,
+  "minimum_normal_coefficient_per_finger_N": 0.1,
+  "enumerated_group_counts": {
+    "all30": [
+      8,
+      8,
+      14
+    ],
+    "nonnegative21": [
+      3,
+      6,
+      12
+    ]
+  },
+  "maximum_triplet_feasibility_calls": 4448,
+  "targets": [
+    "robot_gravity",
+    "conditional_source_Z_up"
+  ],
+  "maximum_selected": 4,
+  "selection": "Per source mask: minimum normal coefficient and least geometric anchor change among robot-gravity4-edge feasible triplets; distinct within mask, deterministic tie by enumeration.",
+  "geometry_score": "sum((material_point-source_point)^2/(3mm)^2 + (material_normal-source_inward)^2/.5^2)",
+  "source_contact_truth_known": false,
+  "neural_updates": 0,
+  "integration_steps": 0
+}
