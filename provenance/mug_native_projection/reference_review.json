@@ -1,0 +1,35 @@
+{
+  "schema": "mug_closed_loop_reference_saved_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_closed_loop_reference.py",
+    "bytes": 5145,
+    "sha256": "a8334588fa71b9bb6dc75ce4051179a65a2abb559b7ef9821d3afcc37fb1b08a"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_closed_loop_reference_v1\\report.json",
+    "bytes": 3928,
+    "sha256": "b23724764f8b63dbc7bf51c8b4a4653d6e67b8de14adc14a99586239bd696172"
+  },
+  "checks": {
+    "exact_101_integer_clock": true,
+    "source_clock_not_stretched": true,
+    "independent_rigid_interpolation": true,
+    "actual_COM_velocity_and_angular_derivative": true,
+    "source_relative_motion_preserved": true,
+    "constant_grasp_and_distinct_feedforward": true,
+    "no_training_or_contact_truth_claim": true
+  },
+  "passed": 7,
+  "total": 7,
+  "max_pose_error": 8.326672684688674e-16,
+  "max_native_quaternion_error": 8.326672684688674e-16,
+  "max_COM_velocity_error_m_s": 1.6023862133007771e-09,
+  "max_angular_velocity_error_rad_s": 5.18713683117511e-11,
+  "max_adjacent_relative_pose_error": 3.5431726996826285e-16,
+  "derivative_queries": 202,
+  "derivative_step_ns": 1000,
+  "first_sample_one_sided": true,
+  "integration_steps": 0,
+  "neural_updates": 0,
+  "scope": "Independent small-arc Rodrigues/native-quaternion and finite-difference clock/COM reference readback. Not native trajectory execution, hand retargeting, source gravity calibration, measured contact labels, a completed controller or learning validation."
+}

@@ -1,0 +1,135 @@
+"""Bounded native inverse/forward projections, with no applied object forces.
+
+Inverse-required contact forces are counterfactual zero-acceleration values.
+Only fresh legal-command forward readback and full physical tests qualify them.
+"""
+import time
+import numpy as np
+from scipy.optimize import least_squares
+from .compound_contacts import CompoundContacts
+
+
+def joint_bounds(model,q,scale):
+    low=np.maximum(model.jnt_range[:20,0],model.actuator_ctrlrange[:,0])
+    high=np.minimum(model.jnt_range[:20,1],model.actuator_ctrlrange[:,1])
+    lo=np.maximum(-1.,(low-q[:20])/scale);hi=np.minimum(1.,(high-q[:20])/scale)
+    if np.any(lo>0) or np.any(hi<0) or np.any(lo>=hi):raise ValueError('Legal seed with nonempty raw hard bounds')
+    return lo,hi
+
+
+def signature(data):
+    return tuple(sorted((int(c.geom[0]),int(c.geom[1]),int(c.dim),c.efc_address>=0) for c in data.contact))
+
+
+def common_penalties(s,z):
+    return np.r_[np.maximum(.2-s['normal_by_finger_N'][:3],0)/.1,s['other_normal_N']/.01,s['table_normal_N']/.01,
+        max(s['max_native_penetration_m']-.000075,0)/.00002,s['max_self_penetration_m']/.00002,.003*np.asarray(z)]
+
+
+class InversePoseProjection:
+    def __init__(self,model,qpos,binding,groups,*,q_radius=.02):
+        import mujoco
+        self.mj,self.model,self.binding=mujoco,model,binding;self.data=mujoco.MjData(model);self.q0=np.array(qpos,float);self.scale=q_radius
+        if self.q0.shape!=(27,) or model.nu!=20 or model.nv!=26 or binding['mug_free_qpos']!=20 or binding['mug_free_dof']!=20:raise ValueError('Declared20 hinge plus free object layout')
+        if not np.array_equal(model.actuator_trnid[:,0],np.arange(20)) or not np.array_equal(model.actuator_gear[:,0],np.ones(20)) or np.any(model.actuator_gear[:,1:]) or np.any(model.actuator_gainprm[:,0]<=0):raise ValueError('Unit direct-joint affine PD transmission')
+        self.lo,self.hi=joint_bounds(model,self.q0,q_radius);self.reader=CompoundContacts(model,binding['mug_part_geom_ids'],binding['mug_body_id'],groups,model.geom('mug_task_table').id)
+        self.counts=dict(native_inverse=0,integration_steps=0)
+
+    def state(self,z):
+        z=np.asarray(z,float)
+        if z.shape!=(20,) or not np.isfinite(z).all() or np.any(z<self.lo-1e-13) or np.any(z>self.hi+1e-13):raise ValueError('Raw bounded inverse-pose proposal')
+        m,d=self.model,self.data;q=self.q0.copy();q[:20]+=self.scale*z
+        self.mj.mj_resetData(m,d);d.qpos[:]=q;d.qvel[:]=0;d.qacc[:]=0;self.mj.mj_inverse(m,d);self.counts['native_inverse']+=1
+        if np.any(d.warning.number) or np.any(d.qfrc_applied) or np.any(d.xfrc_applied):raise ValueError('Inverse warning or aid')
+        required=d.qfrc_inverse.copy();bias=m.actuator_biasprm[:,0]+m.actuator_biasprm[:,1]*d.actuator_length
+        u=(required[:20]-bias)/m.actuator_gainprm[:,0];s=self.reader.read(d,raw=True)
+        s.update(qpos27=q,ctrl20=u,inverse_required26=required,root_residual6=required[20:].copy(),contact_signature=signature(d),
+            raw_command_legal=bool(np.all(u>=m.actuator_ctrlrange[:,0]) and np.all(u<=m.actuator_ctrlrange[:,1])))
+        return s
+
+    def residual(self,z,s):
+        m=self.model;required=s['inverse_required26'];u=s['ctrl20']
+        caplo=np.maximum(m.actuator_forcerange[:,0],m.jnt_actfrcrange[:20,0]);caphi=np.minimum(m.actuator_forcerange[:,1],m.jnt_actfrcrange[:20,1])
+        return np.r_[required[20:23]/.05,required[23:26]/.003,
+            np.maximum(m.actuator_ctrlrange[:,0]-u,0)/.02,np.maximum(u-m.actuator_ctrlrange[:,1],0)/.02,
+            np.maximum(caplo-required[:20],0)/.01,np.maximum(required[:20]-caphi,0)/.01,common_penalties(s,z)]
+
+
+class ForwardForceProjection:
+    """Actual native solve with an explicitly retained finite-solver balance gap."""
+    def __init__(self,model,qpos,ctrl,binding,groups,*,q_radius=.02,u_radius=.3):
+        import mujoco
+        self.mj,self.model,self.binding=mujoco,model,binding;self.data=mujoco.MjData(model);self.q0=np.array(qpos,float);self.u0=np.array(ctrl,float)
+        self.oid=binding['mug_body_id'];self.qadr=binding['mug_free_qpos'];self.dadr=binding['mug_free_dof']
+        if self.q0.shape!=(27,) or self.u0.shape!=(20,) or np.any(self.u0<model.actuator_ctrlrange[:,0]) or np.any(self.u0>model.actuator_ctrlrange[:,1]):raise ValueError('Raw legal forward seed')
+        self.q_radius,self.u_radius=q_radius,u_radius;lo,hi=joint_bounds(model,self.q0,q_radius)
+        self.lo=np.r_[lo,np.maximum(-1.,(model.actuator_ctrlrange[:,0]-self.u0)/u_radius)]
+        self.hi=np.r_[hi,np.minimum(1.,(model.actuator_ctrlrange[:,1]-self.u0)/u_radius)]
+        self.reader=CompoundContacts(model,binding['mug_part_geom_ids'],self.oid,groups,model.geom('mug_task_table').id)
+        self.counts=dict(native_forward=0,integration_steps=0)
+
+    def decode(self,z):
+        z=np.asarray(z,float)
+        if z.shape!=(40,) or not np.isfinite(z).all() or np.any(z<self.lo-1e-13) or np.any(z>self.hi+1e-13):raise ValueError('Raw bounded forward-force proposal')
+        q=self.q0.copy();q[:20]+=self.q_radius*z[:20];return q,self.u0+self.u_radius*z[20:]
+
+    def residual(self,z,s):
+        net=s['net_generalized26']
+        return np.r_[net[:20]/.01,net[20:23]/.05,net[23:26]/.003,common_penalties(s,z)]
+
+    def state(self,z):
+        m,d,mj=self.model,self.data,self.mj;q,u=self.decode(z)
+        mj.mj_resetData(m,d);d.qpos[:]=q;d.qvel[:]=0;d.ctrl[:]=u;d.qacc_warmstart[:]=0;mj.mj_forward(m,d);self.counts['native_forward']+=1
+        if np.any(d.warning.number) or np.any(d.qfrc_applied) or np.any(d.xfrc_applied):raise ValueError('Native forward warning or aid')
+        s=self.reader.read(d,raw=True);net=d.qfrc_actuator+d.qfrc_passive+d.qfrc_constraint-d.qfrc_bias
+        inertia=np.empty(m.nv);mj.mj_mulM(m,d,inertia,d.qacc);gap=inertia-net
+        if not np.isfinite(np.r_[gap,net,d.qacc]).all():raise ValueError('Nonfinite native forward solve')
+        s.update(qpos27=q,ctrl20=u,net_generalized26=net.copy(),qacc26=d.qacc.copy(),mass_balance_gap26=gap.copy(),
+            solver_niter=d.solver_niter.copy(),contact_signature=signature(d),
+            net_object_COM_wrench_world=np.r_[s['force_world_N']+m.body_mass[self.oid]*m.opt.gravity,s['torque_about_COM_world_Nm']])
+        return s
+
+
+def search_projection(engine,log,*,maximum_calls=2400,maximum_seconds=35.,secant_step=.0001):
+    """Count all native probes, including bounded central/one-sided secants."""
+    import json
+    tick=time.perf_counter();calls=0;best=None;last=None;changed_columns=0;columns=0
+    class Limit(RuntimeError):pass
+    def fun(z):
+        nonlocal calls,best,last
+        if calls>=maximum_calls or time.perf_counter()-tick>=maximum_seconds:raise Limit('Declared native projection budget')
+        state=engine.state(z);residual=engine.residual(z,state);cost=float(residual@residual);calls+=1
+        record=dict(call=calls,z=np.asarray(z).tolist(),squared_cost=cost,finger_normal_N=state['normal_by_finger_N'][:3].tolist(),
+            penetration_m=state['max_native_penetration_m'],self_penetration_m=state['max_self_penetration_m'],
+            root_generalized6=state.get('root_residual6',state.get('net_generalized26',np.zeros(26))[20:]).tolist(),
+            contact_signature=state.get('contact_signature',signature(engine.data)))
+        log.write(json.dumps(record,allow_nan=False)+'\n');log.flush()
+        if best is None or cost<best['squared_cost']:best=record
+        last=(np.asarray(z).copy(),residual.copy(),signature(engine.data));return residual
+    def jac(z):
+        nonlocal changed_columns,columns
+        if last is None or not np.array_equal(z,last[0]):fun(z)
+        base=last
+        result=np.empty((len(base[1]),len(z)))
+        for j in range(len(z)):
+            step=min(secant_step,(engine.hi[j]-z[j])/2,(z[j]-engine.lo[j])/2)
+            if step>=secant_step*.01:
+                plus=z.copy();minus=z.copy();plus[j]+=step;minus[j]-=step
+                rp=fun(plus);sp=last[2];rm=fun(minus);sm=last[2];result[:,j]=(rp-rm)/(2*step)
+                changed_columns+=sp!=base[2] or sm!=base[2]
+            else:
+                room_hi=engine.hi[j]-z[j];room_lo=z[j]-engine.lo[j]
+                step=min(secant_step,room_hi/2) if room_hi>=room_lo else -min(secant_step,room_lo/2)
+                if abs(step)<1e-12:raise ValueError('No bounded secant room')
+                shifted=z.copy();shifted[j]+=step;rp=fun(shifted);result[:,j]=(rp-base[1])/step;changed_columns+=last[2]!=base[2]
+            columns+=1
+        return result
+    try:
+        result=least_squares(fun,np.zeros(len(engine.lo)),jac=jac,bounds=(engine.lo,engine.hi),max_nfev=100,ftol=1e-10,xtol=1e-10,gtol=1e-8)
+        stop=dict(kind='optimizer',status=int(result.status),message=str(result.message),nfev=int(result.nfev))
+    except Limit as error:stop=dict(kind='budget',message=str(error))
+    if best is None:raise ValueError('No completed native projection')
+    final_z=np.array(best['z']);final=engine.state(final_z);fresh=engine.residual(final_z,final)
+    return dict(best=best,stop=stop,calls=calls,counts=engine.counts.copy(),secant_columns=columns,changed_contact_signature_columns=int(changed_columns),
+        fresh_cost=float(fresh@fresh),wall_s=time.perf_counter()-tick,final=final,
+        scope='Best evaluated proposal, including finite-difference probes; nonsmooth native mode changes are counted, not certified derivatives. Fixed object and root. Optimizer return is not force equilibrium or physical success.')

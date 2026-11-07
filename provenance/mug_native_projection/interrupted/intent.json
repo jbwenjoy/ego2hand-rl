@@ -1,0 +1,153 @@
+{
+  "schema": "mug_native_force_projection_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\project_mug_native_forces.py",
+      "bytes": 11866,
+      "sha256": "da7622bbddf6b02437d152c2600974fd12aec80befe59124e83bf2e55fbbbbfd"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\native_projection.py",
+      "bytes": 8550,
+      "sha256": "750eb3385b37b0abca20315d5f0d78e4f227a4303e4eee99b587e2d514932812"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\force_initialization.py",
+      "bytes": 7578,
+      "sha256": "4c09a33b077a32511bce8958f0fdc31832935f7165e0473845b3cce2b6eb7983"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\component_preload.py",
+      "bytes": 2494,
+      "sha256": "2cb4d6f0cca3f9bf1c54da33b6013f9d21acebf1c89392f2e0a09224b3873f4c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_contacts.py",
+      "bytes": 3098,
+      "sha256": "573b9f5367782b91422598b6b09f3188c0d4d369c3090f702ee0536c2e5cf241"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\collision.py",
+      "bytes": 5761,
+      "sha256": "34f57072296f596098249a00b41812144ae72d66e87b0469852be9ca85b0e67e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\convex.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\patch_intent.py",
+      "bytes": 2592,
+      "sha256": "dfacc257ab76e2daaa1fec7e7a69cd261bff9873d3514a852a97207a9125d9a5"
+    }
+  ],
+  "binding": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+    "bytes": 3857,
+    "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "parent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\report.json",
+    "bytes": 43145,
+    "sha256": "ce44df31d754e2299fa614f8d3ef4100db933eb12a7bdb1b3a1bca2c79f5c3cd"
+  },
+  "initial": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\candidate.npz",
+    "bytes": 792,
+    "sha256": "cb16e792b3fb31f70ef9bdf831d52c9159e332d1ca319da93862bbd2ba5732a6"
+  },
+  "PD_seed_trace": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\inverse_PD_strict_LP\\0.0003125\\trace.npz",
+    "bytes": 1461745,
+    "sha256": "938df050a5eb74938253cd78f4339ae59c5eda24d099e30630dfa8aa5bd84ca5"
+  },
+  "patches": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v2\\report.json",
+    "bytes": 15369,
+    "sha256": "bb1f2e3218adeaa6fd446e9cdc2d9c018d9bd835334e7b612807332512acf375"
+  },
+  "source_candidate_ids": [
+    0,
+    13,
+    29
+  ],
+  "object_and_robot_root_fixed": true,
+  "gravity_and_material_unchanged": true,
+  "inverse_seeds": [
+    "parent50um",
+    "opened20um"
+  ],
+  "inverse_scaled_secants": [
+    0.0001,
+    0.0003
+  ],
+  "forward_seeds": [
+    "parent_with_LP_PD",
+    "best_legal_inverse_by_actual_generalized_residual"
+  ],
+  "maximum_projections": 4,
+  "q_axis_radius_rad": 0.02,
+  "u_axis_radius_rad": 0.3,
+  "fit_dt_s": 0.0003125,
+  "maximum_calls_per_projection": 2400,
+  "maximum_seconds_per_projection": 35.0,
+  "maximum_optimizer_nfev": 100,
+  "joint_and_control_hard_bounds": "Actual ranges; no artificial interior margin or target projection",
+  "residual_scales": {
+    "joint_Nm": 0.01,
+    "root_force_N": 0.05,
+    "root_BODY_torque_Nm": 0.003,
+    "inverse_control_violation_rad": 0.02,
+    "inverse_torque_violation_Nm": 0.01
+  },
+  "minimum_finger_force_N": 0.2,
+  "penetration_soft_target_m": 7.5e-05,
+  "penetration_scale_m": 2e-05,
+  "physical_eligibility": "Fresh actual forward, raw legal command, full3025 geometry,chosen candidate-region/normal match and3Fn>0.1N; inverse force itself never applied",
+  "static_balance_diagnostic": {
+    "net_COM_force_max_N": 0.01,
+    "net_COM_torque_max_Nm": 0.0001,
+    "max_joint_acceleration_rad_s2": 0.01
+  },
+  "native_gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483,
+    "tail_triple_pad_force_coverage": 0.95
+  },
+  "dts": [
+    0.0003125,
+    0.00015625
+  ],
+  "maximum_native_cases": 8,
+  "maximum_integrations": 76800,
+  "neural_updates": 0
+}

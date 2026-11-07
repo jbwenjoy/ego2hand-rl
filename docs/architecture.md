@@ -93,6 +93,16 @@ explicit three-group minimum coefficients to hypothetical triplet balance.
 Selection, robot fit, actual native support and dynamic hold remain separate
 gates; an actuator-box witness is never applied as a simulator contact force.
 
+`native_projection.py` separates inverse-required unactuated force from actual
+legal-command forward response. The forward oracle retains finite Newton mass
+balance gaps rather than silently treating them as exact identities. Old
+executed source is snapshotted when this contract changes. `acceleration_projection.py`
+adds a zero-velocity COM/angular-response objective using the same oracle.
+`ego/trajectory_clock.py` samples rigid BODY poses on an integer-nanosecond grid
+with analytic COM lever-arm velocity; it never stretches time or creates contact
+labels. The anchored reference is an input contract, not completed hand retargeting,
+native trajectory execution or phone-checkpoint compatibility.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not

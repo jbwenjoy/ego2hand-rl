@@ -1,0 +1,573 @@
+{
+  "schema": "mug_native_projection_saved_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_native_projection.py",
+    "bytes": 9330,
+    "sha256": "152ea1ebf09432c06c0690d61557c10e8bc230f040d95a5c91111ff46a073549"
+  },
+  "inputs": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v2\\report.json",
+      "bytes": 45313,
+      "sha256": "4687bd3b8ecaf01041efc8bab5379ee93e819b1257e55ad3d15c8c9f9d835a97"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\report.json",
+      "bytes": 21668,
+      "sha256": "5a078207c0f492d6bdb0ef2a54f0bdb2c8de3172d7e0c00d848f7e42cbc3ef08"
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v1\\source_snapshot\\project_mug_native_forces.py",
+      "bytes": 11866,
+      "sha256": "da7622bbddf6b02437d152c2600974fd12aec80befe59124e83bf2e55fbbbbfd"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v1\\source_snapshot\\native_projection.py",
+      "bytes": 8550,
+      "sha256": "750eb3385b37b0abca20315d5f0d78e4f227a4303e4eee99b587e2d514932812"
+    }
+  ],
+  "checks": {
+    "executed_inverse_sources_preserved": true,
+    "nominal_finite_solver_gap": true,
+    "six_native_state_and_geometry_reruns": true,
+    "all_probes_bounded": true,
+    "twelve_failed_case_readback": true,
+    "no_reused_steps_double_counted": true
+  },
+  "passed": 6,
+  "total": 6,
+  "rows": [
+    {
+      "name": "inverse_parent",
+      "actual_readback_error": 0.0,
+      "geometry_pass": true,
+      "joint_acceleration_max": 7.198018736640381,
+      "COM_acceleration": [
+        -1.500305095409509,
+        -1.8557353206925098,
+        -2.3207449428366087
+      ],
+      "angular_acceleration": [
+        40.60080648265609,
+        -48.46616458780085,
+        3.2578855294572673
+      ],
+      "actual_Ma_net_gap": 8.881784197001252e-16,
+      "max_q20_change_from_original_rad": 0.0015284063659939395,
+      "max_ctrl_change_from_original_rad": 0.16956551227926986
+    },
+    {
+      "name": "inverse_opened",
+      "actual_readback_error": 0.0,
+      "geometry_pass": true,
+      "joint_acceleration_max": 7.253838904550491,
+      "COM_acceleration": [
+        -1.508440237961003,
+        -1.8526638961531932,
+        -2.3314001997302425
+      ],
+      "angular_acceleration": [
+        40.884315285640085,
+        -48.62742777387281,
+        2.8830157133821777
+      ],
+      "actual_Ma_net_gap": 9.43689570931383e-16,
+      "max_q20_change_from_original_rad": 0.0011624977384394608,
+      "max_ctrl_change_from_original_rad": 0.16975564578399538
+    },
+    {
+      "name": "forward_parent",
+      "actual_readback_error": 0.0,
+      "geometry_pass": true,
+      "joint_acceleration_max": 274.1882539192188,
+      "COM_acceleration": [
+        -1.385943379579547,
+        -1.5094470266166673,
+        1.2407337917573926
+      ],
+      "angular_acceleration": [
+        10.56626037803055,
+        -28.93422418290565,
+        -0.2799930383327769
+      ],
+      "actual_Ma_net_gap": 1.3322676295501878e-15,
+      "max_q20_change_from_original_rad": 0.0007319038872407035,
+      "max_ctrl_change_from_original_rad": 0.002798775917674412
+    },
+    {
+      "name": "forward_warm",
+      "actual_readback_error": 0.0,
+      "geometry_pass": true,
+      "joint_acceleration_max": 75.82552504598341,
+      "COM_acceleration": [
+        -1.64082133506237,
+        -1.3792138809579224,
+        -0.04619335967643168
+      ],
+      "angular_acceleration": [
+        15.922019526446118,
+        -58.163127252249346,
+        28.774848912210004
+      ],
+      "actual_Ma_net_gap": 6.459589807494837e-14,
+      "max_q20_change_from_original_rad": 0.001745287628812875,
+      "max_ctrl_change_from_original_rad": 0.1263168330257125
+    },
+    {
+      "name": "response0",
+      "actual_readback_error": 0.0,
+      "geometry_pass": true,
+      "joint_acceleration_max": 86.29915680003027,
+      "COM_acceleration": [
+        -0.7602909682954,
+        -1.6243546606781094,
+        -0.7358102608112838
+      ],
+      "angular_acceleration": [
+        2.9308154479310704,
+        -13.56528651807373,
+        13.315065667368652
+      ],
+      "actual_Ma_net_gap": 5.92824400680314e-14,
+      "max_q20_change_from_original_rad": 0.0017303848559073742,
+      "max_ctrl_change_from_original_rad": 0.07142322259068085
+    },
+    {
+      "name": "response1",
+      "actual_readback_error": 0.0,
+      "geometry_pass": true,
+      "joint_acceleration_max": 273.4630964543404,
+      "COM_acceleration": [
+        -1.38685156655217,
+        -1.5124236312008632,
+        1.231508222842598
+      ],
+      "angular_acceleration": [
+        10.841143667356839,
+        -28.779995203613282,
+        -0.5279369122942204
+      ],
+      "actual_Ma_net_gap": 1.4432899320127035e-15,
+      "max_q20_change_from_original_rad": 0.0007324150055253442,
+      "max_ctrl_change_from_original_rad": 0.0027995387799000238
+    }
+  ],
+  "baseline_solver_tolerance_probe": {
+    "allowed_model_differences": [
+      "option.tolerance"
+    ],
+    "nominal_gap": 6.0653488800688216e-05,
+    "tight_gap": 1.1102230246251565e-15,
+    "max_qacc_difference": 0.028454974478364647,
+    "nominal_iterations": [
+      4,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "tight_iterations": [
+      5,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "no_integration": true
+  },
+  "traces": [
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v1\\inverse_parent\\0.0003125\\trace.npz",
+        "bytes": 519520,
+        "sha256": "b64678653b9a6617b9a74d9bd8a3612561e45b80bad65bf55f9b2d3e5fcbfadd"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 3.552713678800501e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 3.552713678800501e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v1\\inverse_parent\\0.00015625\\trace.npz",
+        "bytes": 1014004,
+        "sha256": "f5489e9fc0dcec5fc4eeaf54cf54caab7754f7d3c77db760082d23c13fd338bc"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 4.440892098500626e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 8.881784197001252e-16
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v1\\inverse_opened\\0.0003125\\trace.npz",
+        "bytes": 516355,
+        "sha256": "577a774411f69a9fa7bed3b9c064b3cd3e850ad648f670b31775a301b1e76b8f"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 5.773159728050814e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 3.552713678800501e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v1\\inverse_opened\\0.00015625\\trace.npz",
+        "bytes": 1008997,
+        "sha256": "73dce7f5bed11a376340a1e63a41fb662c7b57be8e35b59afda39f14f2a54bb6"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 3.552713678800501e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 1.7763568394002505e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v2\\forward_parent\\0.0003125\\trace.npz",
+        "bytes": 1481055,
+        "sha256": "f4384fad9abe45190c349a1ac60443b1f7e6f97f57e252883c57e18f243fa941"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.2212453270876722e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 3.1086244689504383e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 2.6645352591003757e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v2\\forward_parent\\0.00015625\\trace.npz",
+        "bytes": 2901457,
+        "sha256": "b76a0111deb30bd0ed1048300d029ed5bd8dd50db529d4c43e0fedab1a5abc8e"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 1.1546319456101628e-14,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 6.217248937900877e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v2\\forward_warm\\0.0003125\\trace.npz",
+        "bytes": 561565,
+        "sha256": "88f9ea773f9430fc6d40195b174b17601c5a8b1184a6a9d1c0375228f1c35d89"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 9.992007221626409e-16,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 5.773159728050814e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 1.4210854715202004e-14
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v2\\forward_warm\\0.00015625\\trace.npz",
+        "bytes": 1094248,
+        "sha256": "1f8e481b26fb798bfa357f7e93f26f10b5792ed12645183a71a310f9156148bb"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 5.329070518200751e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 5.329070518200751e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed00\\0.0003125\\trace.npz",
+        "bytes": 781936,
+        "sha256": "9c4032a023c3c369aef5716c7e2c7a346ce7fefa4918661282a54874f6e03956"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 6.217248937900877e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 2.6645352591003757e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed00\\0.00015625\\trace.npz",
+        "bytes": 1507378,
+        "sha256": "5d45f5bb04823cbca74caee7fa80a87135125c2cb2d07cf6052b5eba475b04ff"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 6.217248937900877e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 3.552713678800501e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed01\\0.0003125\\trace.npz",
+        "bytes": 1480365,
+        "sha256": "e7595376e2e1c7ccba5a996c5224abdabbb1f72c499b3cb2024d2ed8add951e7"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 3.552713678800501e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 3.552713678800501e-15
+      }
+    },
+    {
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed01\\0.00015625\\trace.npz",
+        "bytes": 2903906,
+        "sha256": "f9db2bc4501835ab5c1ae8036eef044180440b61659a63024f5479d0c38bf592"
+      },
+      "checks": {
+        "initial_qpos_exact": true,
+        "constant_command_exact": true,
+        "state_POST_to_PRE_exact": true,
+        "velocity_POST_to_PRE_exact": true,
+        "full_saved_arrays_finite": true,
+        "native_clock": true,
+        "every_PRE_POST_COM_reconstructed": true,
+        "sampled_contact_wrench_reconstructed": true,
+        "sampled_three_group_normal_reconstructed": true,
+        "endpoint_velocity_native_check": true,
+        "limits_recomputed": true,
+        "final_pose_metrics_recomputed": true,
+        "partials_are_failed": true
+      },
+      "errors": {
+        "raw_quaternion_unit": 1.1102230246251565e-15,
+        "all_COM_m": 1.1102230246251565e-16,
+        "sampled_BODY_wrench": 4.440892098500626e-15,
+        "sampled_group_normal_N": 0.0,
+        "endpoint_native_velocity": 1.1546319456101628e-14
+      }
+    }
+  ],
+  "trace_checks": [
+    156,
+    156
+  ],
+  "proposal_probes_checked": 7105,
+  "changed_signature_columns": 127,
+  "total_unique_native_integrations": 17950,
+  "native_static_readbacks": 6,
+  "native_geometry_reruns": 6,
+  "integration_steps": 0,
+  "neural_updates": 0,
+  "scope": "Source snapshots, all bounded evaluated parameters, nominal forward/zero-acc inverse/COM-response and saved failed trace readback. Shared geometry reuse; no exact predicates, global infeasibility, calibrated material, source truth, smooth derivative certificate or dynamic success."
+}

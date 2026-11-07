@@ -1,0 +1,109 @@
+{
+  "schema": "mug_acceleration_projection_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\project_mug_acceleration.py",
+      "bytes": 7322,
+      "sha256": "05fb0a6c1d0e61da2dda038605c1fcba8b37d0716ad98e5d5b5cec46a94ea52d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\acceleration_projection.py",
+      "bytes": 796,
+      "sha256": "57a0b5fbb26b3a037b8dfd874eafa0537c5acbf18b56483a8f8c91aa4e434bc9"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\native_projection.py",
+      "bytes": 9477,
+      "sha256": "cae88c6a009ee4b20269894b4d1a0c4822fdb0c20f3c92c1f2fcb642ce039eea"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\patch_intent.py",
+      "bytes": 2592,
+      "sha256": "dfacc257ab76e2daaa1fec7e7a69cd261bff9873d3514a852a97207a9125d9a5"
+    }
+  ],
+  "parent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v2\\report.json",
+    "bytes": 45313,
+    "sha256": "4687bd3b8ecaf01041efc8bab5379ee93e819b1257e55ad3d15c8c9f9d835a97"
+  },
+  "binding": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+    "bytes": 3857,
+    "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "patches": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v2\\report.json",
+    "bytes": 15369,
+    "sha256": "bb1f2e3218adeaa6fd446e9cdc2d9c018d9bd835334e7b612807332512acf375"
+  },
+  "seeds": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v1\\inverse_parent\\actual_forward.npz",
+      "bytes": 3621,
+      "sha256": "daf548a410b639f03e36aa704bbe01e126b2831728b005c17d1db4a1d26832d1"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v2\\forward_parent\\actual_forward.npz",
+      "bytes": 4245,
+      "sha256": "5082c2ee61649a2ab14a86eeea9a4959599b2085725e9cdddd57250e4ebf52ca"
+    }
+  ],
+  "q_axis_radius_rad": 0.02,
+  "u_axis_radius_rad": 0.3,
+  "object_and_robot_root_fixed": true,
+  "residual_scales": {
+    "hand_rad_s2": 0.5,
+    "COM_m_s2": 0.005,
+    "angular_world_rad_s2": 0.1
+  },
+  "shared_geometry_force_penalties_unchanged": true,
+  "maximum_calls_per_seed": 2400,
+  "maximum_seconds_per_seed": 35.0,
+  "scaled_secant": 0.0001,
+  "exact_source_candidate_ids": [
+    0,
+    13,
+    29
+  ],
+  "maximum_new_native_cases": 4,
+  "maximum_new_integration_steps": 38400,
+  "gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483,
+    "tail_triple_pad_force_coverage": 0.95
+  },
+  "dts": [
+    0.0003125,
+    0.00015625
+  ],
+  "neural_updates": 0
+}

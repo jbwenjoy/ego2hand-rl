@@ -1,0 +1,496 @@
+{
+  "schema": "mug_acceleration_projection:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\project_mug_acceleration.py",
+      "bytes": 7322,
+      "sha256": "05fb0a6c1d0e61da2dda038605c1fcba8b37d0716ad98e5d5b5cec46a94ea52d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\acceleration_projection.py",
+      "bytes": 796,
+      "sha256": "57a0b5fbb26b3a037b8dfd874eafa0537c5acbf18b56483a8f8c91aa4e434bc9"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\native_projection.py",
+      "bytes": 9477,
+      "sha256": "cae88c6a009ee4b20269894b4d1a0c4822fdb0c20f3c92c1f2fcb642ce039eea"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\patch_intent.py",
+      "bytes": 2592,
+      "sha256": "dfacc257ab76e2daaa1fec7e7a69cd261bff9873d3514a852a97207a9125d9a5"
+    }
+  ],
+  "results": [
+    {
+      "seed": 0,
+      "parent_name": "inverse_parent",
+      "parent_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v1\\inverse_parent\\actual_forward.npz",
+        "bytes": 3621,
+        "sha256": "daf548a410b639f03e36aa704bbe01e126b2831728b005c17d1db4a1d26832d1"
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed00\\actual_state.npz",
+        "bytes": 5149,
+        "sha256": "b7f95b125842b2e96be437f4b985b682b03091b480cae83621ea25afcc9790c7"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed00\\geometry.json",
+        "bytes": 895878,
+        "sha256": "2ea3623258f649ec768843d89206328c0919df1470076123334e250885190236"
+      },
+      "solver": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed00\\solver.json",
+        "bytes": 2553,
+        "sha256": "7aee6f30cbaacda1d72a6382ff96f0cd4e87c518507c79786e7eb148ad01fde3"
+      },
+      "proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed00\\proposals.jsonl",
+        "bytes": 3164191,
+        "sha256": "c86dcae0e1088a1520d0260a4b03990d1b4bf6c5af0ea31e8cbfb95a118ba8cd"
+      },
+      "geometry_pass": true,
+      "matched_source_candidate_regions": {
+        "groups": [
+          {
+            "group": 1,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.0004067637517258298,
+            "best_normal_dot": 0.9968871004835985,
+            "pairs": [
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "group": 2,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.001501881456357584,
+            "best_normal_dot": 0.794846231060638,
+            "pairs": [
+              [
+                1,
+                13
+              ]
+            ]
+          },
+          {
+            "group": 3,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.0006542745162015536,
+            "best_normal_dot": 0.9290219954938506,
+            "pairs": [
+              [
+                2,
+                29
+              ]
+            ]
+          }
+        ],
+        "all_source_geometry_known": true,
+        "all_groups_matched": true,
+        "source_contact_truth_known": false,
+        "physical_success_certified": false
+      },
+      "COM_acceleration_world": [
+        -0.7602909682954,
+        -1.6243546606781094,
+        -0.7358102608112838
+      ],
+      "angular_acceleration_world": [
+        2.9308154479310704,
+        -13.56528651807373,
+        13.315065667368652
+      ],
+      "joint_acceleration_max": 86.29915680003027,
+      "net_COM_wrench": [
+        -0.1900727420738495,
+        -0.4060886651695268,
+        -0.18395256520282066,
+        0.0014108241343455778,
+        -0.0052652497747129046,
+        0.005015182340140534
+      ],
+      "native_cases": [
+        {
+          "dt_s": 0.0003125,
+          "summary": {
+            "schema": "compound_mug_noaid_static_hold_case:1",
+            "dt_s": 0.0003125,
+            "completed_steps": 838,
+            "actual_duration_s": 0.261875,
+            "termination": "ORIENTATION_OVER_45DEG",
+            "metrics": {
+              "final_COM_drift_m": 0.04019976627864784,
+              "final_angle_rad": 0.786604686789883,
+              "tail_linear_velocity_RMS_m_s": null,
+              "tail_angular_velocity_RMS_rad_s": null,
+              "tail_triple_pad_force_coverage": null,
+              "max_native_penetration_m": 4.4239833921045595e-05,
+              "max_self_penetration_m": 0.0,
+              "max_phone_nonpad_normal_force_N": 0.0,
+              "max_table_normal_force_N": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "warning_count": 0
+            },
+            "gates": {
+              "final_COM_drift_m": false,
+              "final_angle_rad": false,
+              "tail_linear_velocity_RMS_m_s": false,
+              "tail_angular_velocity_RMS_rad_s": false,
+              "tail_triple_pad_force_coverage": false,
+              "max_native_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_phone_nonpad_normal_force_N": true,
+              "max_table_normal_force_N": true,
+              "max_joint_limit_excursion_rad": true,
+              "warning_count": true,
+              "duration_complete": false
+            },
+            "native_holding_gates_pass": false,
+            "counts": {
+              "step1": 838,
+              "step2": 838,
+              "contact_force_reads": 3851,
+              "rne_postconstraint": 27,
+              "integration_steps": 838
+            },
+            "max_sampled_native_external_wrench_error": 8.881784197001252e-16,
+            "raw_contact_sampling_interval_s": 0.01,
+            "initial_qpos_is_static_geometry_qualified": true,
+            "controller": "constant legal absolute PD target; not an Actor or frozen phone residual controller",
+            "source_trajectory_replayed": false,
+            "source_gravity_preserved": false,
+            "scope": "New mug mechanical static-hold diagnostic using unchanged numeric phone thresholds but explicitly expanded distal contact regions. Native penetration and force gates every integration step; complete raw contacts and native external-wrench crosscheck at10ms samples. No all-state independent convex audit, calibrated dynamics, policy/ego benefit claim."
+          },
+          "case": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed00\\0.0003125\\report.json",
+            "bytes": 2071,
+            "sha256": "f40993d28b297ee2f5f0330c18f664f3061ecd3f799f11fdfc7f2a008b1766a0"
+          },
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed00\\0.0003125\\trace.npz",
+            "bytes": 781936,
+            "sha256": "9c4032a023c3c369aef5716c7e2c7a346ce7fefa4918661282a54874f6e03956"
+          }
+        },
+        {
+          "dt_s": 0.00015625,
+          "summary": {
+            "schema": "compound_mug_noaid_static_hold_case:1",
+            "dt_s": 0.00015625,
+            "completed_steps": 1682,
+            "actual_duration_s": 0.2628125,
+            "termination": "ORIENTATION_OVER_45DEG",
+            "metrics": {
+              "final_COM_drift_m": 0.04009110668979133,
+              "final_angle_rad": 0.7856753368958218,
+              "tail_linear_velocity_RMS_m_s": null,
+              "tail_angular_velocity_RMS_rad_s": null,
+              "tail_triple_pad_force_coverage": null,
+              "max_native_penetration_m": 4.4239833921045595e-05,
+              "max_self_penetration_m": 0.0,
+              "max_phone_nonpad_normal_force_N": 0.0,
+              "max_table_normal_force_N": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "warning_count": 0
+            },
+            "gates": {
+              "final_COM_drift_m": false,
+              "final_angle_rad": false,
+              "tail_linear_velocity_RMS_m_s": false,
+              "tail_angular_velocity_RMS_rad_s": false,
+              "tail_triple_pad_force_coverage": false,
+              "max_native_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_phone_nonpad_normal_force_N": true,
+              "max_table_normal_force_N": true,
+              "max_joint_limit_excursion_rad": true,
+              "warning_count": true,
+              "duration_complete": false
+            },
+            "native_holding_gates_pass": false,
+            "counts": {
+              "step1": 1682,
+              "step2": 1682,
+              "contact_force_reads": 7682,
+              "rne_postconstraint": 27,
+              "integration_steps": 1682
+            },
+            "max_sampled_native_external_wrench_error": 8.881784197001252e-16,
+            "raw_contact_sampling_interval_s": 0.01,
+            "initial_qpos_is_static_geometry_qualified": true,
+            "controller": "constant legal absolute PD target; not an Actor or frozen phone residual controller",
+            "source_trajectory_replayed": false,
+            "source_gravity_preserved": false,
+            "scope": "New mug mechanical static-hold diagnostic using unchanged numeric phone thresholds but explicitly expanded distal contact regions. Native penetration and force gates every integration step; complete raw contacts and native external-wrench crosscheck at10ms samples. No all-state independent convex audit, calibrated dynamics, policy/ego benefit claim."
+          },
+          "case": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed00\\0.00015625\\report.json",
+            "bytes": 2078,
+            "sha256": "7aa5996ed1c1c886868b51089b9f08849618c0ace298446d1f90757c7df94ebb"
+          },
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed00\\0.00015625\\trace.npz",
+            "bytes": 1507378,
+            "sha256": "5d45f5bb04823cbca74caee7fa80a87135125c2cb2d07cf6052b5eba475b04ff"
+          }
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "parent_name": "forward_parent",
+      "parent_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v2\\forward_parent\\actual_forward.npz",
+        "bytes": 4245,
+        "sha256": "5082c2ee61649a2ab14a86eeea9a4959599b2085725e9cdddd57250e4ebf52ca"
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed01\\actual_state.npz",
+        "bytes": 5263,
+        "sha256": "67081a6a39719b732bdc6beec97908bc2510b929bab85f4e82b1130ff6ce3b72"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed01\\geometry.json",
+        "bytes": 895820,
+        "sha256": "fdcb55eb79957d6cd989a4b750f7ffcb845d159552776aae32ef30aae0c09f45"
+      },
+      "solver": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed01\\solver.json",
+        "bytes": 2659,
+        "sha256": "ea21197cd85e3bd835704c63874aedac58696ab1a12ea786f4709f7f080e49f0"
+      },
+      "proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed01\\proposals.jsonl",
+        "bytes": 651355,
+        "sha256": "55a84596ccbddfd9c4bb61fef5a80d99b4632e39c5773d5eafe3866e55406d77"
+      },
+      "geometry_pass": true,
+      "matched_source_candidate_regions": {
+        "groups": [
+          {
+            "group": 1,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.0004109429793540211,
+            "best_normal_dot": 0.9969065158690494,
+            "pairs": [
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          {
+            "group": 2,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 2,
+            "minimum_candidate_distance_m": 0.0014996723065049042,
+            "best_normal_dot": 0.7956064490376857,
+            "pairs": [
+              [
+                1,
+                13
+              ]
+            ]
+          },
+          {
+            "group": 3,
+            "source_geometry_known": true,
+            "matched": true,
+            "native_contacts": 1,
+            "minimum_candidate_distance_m": 0.0006523173006863147,
+            "best_normal_dot": 0.9289975741734905,
+            "pairs": [
+              [
+                3,
+                29
+              ]
+            ]
+          }
+        ],
+        "all_source_geometry_known": true,
+        "all_groups_matched": true,
+        "source_contact_truth_known": false,
+        "physical_success_certified": false
+      },
+      "COM_acceleration_world": [
+        -1.38685156655217,
+        -1.5124236312008632,
+        1.231508222842598
+      ],
+      "angular_acceleration_world": [
+        10.841143667356839,
+        -28.779995203613282,
+        -0.5279369122942204
+      ],
+      "joint_acceleration_max": 273.4630964543404,
+      "net_COM_wrench": [
+        -0.34671289163804153,
+        -0.3781059078002156,
+        0.3078770557106476,
+        0.004178493083561441,
+        -0.011446632918587496,
+        -0.00025100415252088393
+      ],
+      "native_cases": [
+        {
+          "dt_s": 0.0003125,
+          "summary": {
+            "schema": "compound_mug_noaid_static_hold_case:1",
+            "dt_s": 0.0003125,
+            "completed_steps": 1667,
+            "actual_duration_s": 0.5209375,
+            "termination": "ORIENTATION_OVER_45DEG",
+            "metrics": {
+              "final_COM_drift_m": 0.041420739420643476,
+              "final_angle_rad": 0.7854651119680699,
+              "tail_linear_velocity_RMS_m_s": null,
+              "tail_angular_velocity_RMS_rad_s": null,
+              "tail_triple_pad_force_coverage": null,
+              "max_native_penetration_m": 6.130207755936541e-05,
+              "max_self_penetration_m": 0.0,
+              "max_phone_nonpad_normal_force_N": 0.0,
+              "max_table_normal_force_N": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "warning_count": 0
+            },
+            "gates": {
+              "final_COM_drift_m": false,
+              "final_angle_rad": false,
+              "tail_linear_velocity_RMS_m_s": false,
+              "tail_angular_velocity_RMS_rad_s": false,
+              "tail_triple_pad_force_coverage": false,
+              "max_native_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_phone_nonpad_normal_force_N": true,
+              "max_table_normal_force_N": true,
+              "max_joint_limit_excursion_rad": true,
+              "warning_count": true,
+              "duration_complete": false
+            },
+            "native_holding_gates_pass": false,
+            "counts": {
+              "step1": 1667,
+              "step2": 1667,
+              "contact_force_reads": 9328,
+              "rne_postconstraint": 53,
+              "integration_steps": 1667
+            },
+            "max_sampled_native_external_wrench_error": 1.3322676295501878e-15,
+            "raw_contact_sampling_interval_s": 0.01,
+            "initial_qpos_is_static_geometry_qualified": true,
+            "controller": "constant legal absolute PD target; not an Actor or frozen phone residual controller",
+            "source_trajectory_replayed": false,
+            "source_gravity_preserved": false,
+            "scope": "New mug mechanical static-hold diagnostic using unchanged numeric phone thresholds but explicitly expanded distal contact regions. Native penetration and force gates every integration step; complete raw contacts and native external-wrench crosscheck at10ms samples. No all-state independent convex audit, calibrated dynamics, policy/ego benefit claim."
+          },
+          "case": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed01\\0.0003125\\report.json",
+            "bytes": 2078,
+            "sha256": "e3251bc5e7eb3b66e8f7794ff654e814c940e1b9451f2c52b99a5f41aee8b6db"
+          },
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed01\\0.0003125\\trace.npz",
+            "bytes": 1480365,
+            "sha256": "e7595376e2e1c7ccba5a996c5224abdabbb1f72c499b3cb2024d2ed8add951e7"
+          }
+        },
+        {
+          "dt_s": 0.00015625,
+          "summary": {
+            "schema": "compound_mug_noaid_static_hold_case:1",
+            "dt_s": 0.00015625,
+            "completed_steps": 3381,
+            "actual_duration_s": 0.52828125,
+            "termination": "ORIENTATION_OVER_45DEG",
+            "metrics": {
+              "final_COM_drift_m": 0.04148765495407319,
+              "final_angle_rad": 0.7866321818380574,
+              "tail_linear_velocity_RMS_m_s": null,
+              "tail_angular_velocity_RMS_rad_s": null,
+              "tail_triple_pad_force_coverage": null,
+              "max_native_penetration_m": 6.130207755936541e-05,
+              "max_self_penetration_m": 0.0,
+              "max_phone_nonpad_normal_force_N": 0.0,
+              "max_table_normal_force_N": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "warning_count": 0
+            },
+            "gates": {
+              "final_COM_drift_m": false,
+              "final_angle_rad": false,
+              "tail_linear_velocity_RMS_m_s": false,
+              "tail_angular_velocity_RMS_rad_s": false,
+              "tail_triple_pad_force_coverage": false,
+              "max_native_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_phone_nonpad_normal_force_N": true,
+              "max_table_normal_force_N": true,
+              "max_joint_limit_excursion_rad": true,
+              "warning_count": true,
+              "duration_complete": false
+            },
+            "native_holding_gates_pass": false,
+            "counts": {
+              "step1": 3381,
+              "step2": 3381,
+              "contact_force_reads": 18743,
+              "rne_postconstraint": 53,
+              "integration_steps": 3381
+            },
+            "max_sampled_native_external_wrench_error": 1.7763568394002505e-15,
+            "raw_contact_sampling_interval_s": 0.01,
+            "initial_qpos_is_static_geometry_qualified": true,
+            "controller": "constant legal absolute PD target; not an Actor or frozen phone residual controller",
+            "source_trajectory_replayed": false,
+            "source_gravity_preserved": false,
+            "scope": "New mug mechanical static-hold diagnostic using unchanged numeric phone thresholds but explicitly expanded distal contact regions. Native penetration and force gates every integration step; complete raw contacts and native external-wrench crosscheck at10ms samples. No all-state independent convex audit, calibrated dynamics, policy/ego benefit claim."
+          },
+          "case": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed01\\0.00015625\\report.json",
+            "bytes": 2080,
+            "sha256": "c0b176a162332534e31a0c5f09ea9c973b0d50e61ab6f48aa3589c637347f14c"
+          },
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\mug_acceleration_projection_v1\\seed01\\0.00015625\\trace.npz",
+            "bytes": 2903906,
+            "sha256": "f9db2bc4501835ab5c1ae8036eef044180440b61659a63024f5479d0c38bf592"
+          }
+        }
+      ]
+    }
+  ],
+  "parent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_projection_v2\\report.json",
+    "bytes": 45313,
+    "sha256": "4687bd3b8ecaf01041efc8bab5379ee93e819b1257e55ad3d15c8c9f9d835a97"
+  },
+  "native_cases": 4,
+  "integration_steps": 7568,
+  "neural_updates": 0,
+  "scope": "Declared acceleration-scaled local projection sensitivity. Centers differ from original support pose, so total stage displacement must be reported. Same original model/gravity/controls, no external object force, no optimizer-return or state-response success claim."
+}

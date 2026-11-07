@@ -1,0 +1,49 @@
+{
+  "schema": "compound_mug_noaid_static_hold_case:1",
+  "dt_s": 0.0003125,
+  "completed_steps": 576,
+  "actual_duration_s": 0.18,
+  "termination": "ORIENTATION_OVER_45DEG",
+  "metrics": {
+    "final_COM_drift_m": 0.03948326988890422,
+    "final_angle_rad": 0.7874313900833655,
+    "tail_linear_velocity_RMS_m_s": null,
+    "tail_angular_velocity_RMS_rad_s": null,
+    "tail_triple_pad_force_coverage": null,
+    "max_native_penetration_m": 3.947064795913027e-05,
+    "max_self_penetration_m": 0.0,
+    "max_phone_nonpad_normal_force_N": 0.0,
+    "max_table_normal_force_N": 0.0,
+    "max_joint_limit_excursion_rad": 0.0,
+    "warning_count": 0
+  },
+  "gates": {
+    "final_COM_drift_m": false,
+    "final_angle_rad": false,
+    "tail_linear_velocity_RMS_m_s": false,
+    "tail_angular_velocity_RMS_rad_s": false,
+    "tail_triple_pad_force_coverage": false,
+    "max_native_penetration_m": true,
+    "max_self_penetration_m": true,
+    "max_phone_nonpad_normal_force_N": true,
+    "max_table_normal_force_N": true,
+    "max_joint_limit_excursion_rad": true,
+    "warning_count": true,
+    "duration_complete": false
+  },
+  "native_holding_gates_pass": false,
+  "counts": {
+    "step1": 576,
+    "step2": 576,
+    "contact_force_reads": 2248,
+    "rne_postconstraint": 18,
+    "integration_steps": 576
+  },
+  "max_sampled_native_external_wrench_error": 8.881784197001252e-16,
+  "raw_contact_sampling_interval_s": 0.01,
+  "initial_qpos_is_static_geometry_qualified": true,
+  "controller": "constant legal absolute PD target; not an Actor or frozen phone residual controller",
+  "source_trajectory_replayed": false,
+  "source_gravity_preserved": false,
+  "scope": "New mug mechanical static-hold diagnostic using unchanged numeric phone thresholds but explicitly expanded distal contact regions. Native penetration and force gates every integration step; complete raw contacts and native external-wrench crosscheck at10ms samples. No all-state independent convex audit, calibrated dynamics, policy/ego benefit claim."
+}

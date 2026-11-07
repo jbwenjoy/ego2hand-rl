@@ -1,0 +1,87 @@
+{
+  "schema": "mug_anchored_closed_loop_reference:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\build_mug_closed_loop_reference.py",
+      "bytes": 5990,
+      "sha256": "97fa8838d2f57f9d97a7ec49a5aa6f5efa8d216dc45b64499b296b9cc7070a13"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\ego\\trajectory_clock.py",
+      "bytes": 3041,
+      "sha256": "82a641096e4692425f2602c7294cd711bf84e4f7c3f3d77904de39787688271c"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+      "bytes": 3857,
+      "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\reference61.npz",
+      "bytes": 2189390,
+      "sha256": "6809a1a29ec241e0b4776d9842d4022ffc54beba89e2521b58a0a5757a4aa1fd"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\report.json",
+      "bytes": 43145,
+      "sha256": "ce44df31d754e2299fa614f8d3ef4100db933eb12a7bdb1b3a1bca2c79f5c3cd"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\candidate.npz",
+      "bytes": 792,
+      "sha256": "cb16e792b3fb31f70ef9bdf831d52c9159e332d1ca319da93862bbd2ba5732a6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_support_fit_v1\\candidate00\\inverse_PD_strict_LP\\0.0003125\\trace.npz",
+      "bytes": 1461745,
+      "sha256": "938df050a5eb74938253cd78f4339ae59c5eda24d099e30630dfa8aa5bd84ca5"
+    }
+  ],
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "output": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_closed_loop_reference_v1\\reference101.npz",
+    "bytes": 39485,
+    "sha256": "d4e08877fc7c4d604ced4cdc1fc6a3f4ce844651614ae812196ea85635baaf8d"
+  },
+  "controller_contract": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_closed_loop_reference_v1\\controller_contract.json",
+    "bytes": 1221,
+    "sha256": "823467bc3995622391df1f4670fcaeb6fab9b29e4d5431083a72a188354e688f"
+  },
+  "time": {
+    "source_span_ns": 2000004434,
+    "period_ns": 20000000,
+    "excluded_tail_ns": 4434,
+    "extrapolated": false,
+    "time_stretched": false,
+    "source_rotation_orthogonality_error": 1.4432899320127035e-15,
+    "rotation_conversion_roundtrip_error": 6.661338147750939e-16,
+    "interpolation": "Piecewise linear BODY-origin translation and shortest-arc SLERP; exact integer clock before float offsets",
+    "velocity": "Analytic within source interval; right interval at internal knots, left at final source endpoint; COM lever arm included"
+  },
+  "samples": 101,
+  "control_intervals": 100,
+  "source_frames": 61,
+  "relative_object_pose_preservation_error": 2.3288662664988635e-16,
+  "initial_pose_anchor_error": 1.1102230246251565e-16,
+  "initial_source_mapping_translation_change_m": [
+    0.21987245312767678,
+    0.014267232344979616,
+    0.10596017826560111
+  ],
+  "alignment_rotation_trace": 2.802772862630036,
+  "root_reference_displacement_m": 0.0011373595833987858,
+  "raw_PD_target_legal": true,
+  "native_observation_and_controller_integration_complete": false,
+  "full_source_trajectory_executed": false,
+  "independent_RGB_reconstruction": false,
+  "integration_steps": 0,
+  "neural_updates": 0,
+  "scope": "Exact source-clock input preparation only. A declared rigid start alignment preserves object-relative pose changes, not world gravity/source wrist alignment or human joint retargeting. No dynamic trajectory execution, training, observed contacts or ego/generalization benefit."
+}

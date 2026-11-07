@@ -1,0 +1,19 @@
+{
+  "schema": "mug_closed_loop_input_contract_DRAFT:1",
+  "learning_enabled": false,
+  "new_task_not_phone_resume": true,
+  "object_reference": "Anchored source-relative object motion; original fixed-palm mapping and new support initial pose remain explicit",
+  "hand_reference": "Constant mechanically chosen grasp posture, not retargeted human joint trajectory",
+  "feedforward": "Constant legal strict-LP PD target; distinct from observed grasp q",
+  "control_period_ns": 20000000,
+  "control_intervals": 100,
+  "proposed_residual_limit_rad": 0.05,
+  "proposed_EMA_memory": "20 physical joint residual radians; initial zero; update factor0.5",
+  "executable_controller_and_native_observation_adapter_validated": false,
+  "contact_ground_truth": "UNKNOWN; no zero force/contact supervision generated",
+  "dataset_role": "INPUT_CONTRACT_ONLY_NOT_TRAIN",
+  "frozen_checkpoint_compatible": false,
+  "source_gravity_measured": false,
+  "simulator_gravity_changed": false,
+  "next_required": "Explicit bounded control/EMA implementation, state/COM/frame/units adapter, actual response interventions and role-separated new data; analytic static hold is not a required success prerequisite for learning."
+}
