@@ -30,6 +30,33 @@ The preliminary v1 profiler's whole-process GPU median included its lengthy
 CPU trace aggregation. Do not use that value as steady training utilization;
 the table uses corrected v2 interval sampling. Profiler timings are excluded.
 
+## Batched hinge rotations
+
+The next source variant batches the twenty hinge rotvecs through the same
+public guarded Rodrigues function. Each FK calls that function once rather
+than twenty times, retaining finite-vector and squared-magnitude overflow
+checks for every hinge. The body-tree composition formulas are unchanged.
+
+| Final variant | Mean seconds/paired update | Peak allocated GiB | GPU median / samples |
+|---|---:|---:|---:|
+| Batched hinges, micro2, quiet CPU | 2.4110 | 1.298 | 45% / 22 |
+| Batched hinges, micro8, quiet CPU | 0.6443 | 4.866 | 57% / 5 |
+
+These are 2.68x and 10.05x faster than the original mean for this fixed short
+workload. FK/descriptor counts remain 24/24 and 6/6. The five-sample micro8
+utilization estimate is coarse; the measured wall time is the main evidence.
+An earlier batched micro2 measurement overlapped CPU validation work and
+averaged 2.8225s; it is retained, but the quiet repeat is used in this table.
+The quiet repeat was scheduled because of that known interference.
+
+The final micro2 fixture remains byte-identical to the baseline; final micro8
+is byte-identical to the preceding micro8 fixture. Both pass the unchanged
+fixed comparison envelope. CPU full legacy/runtime parity is 6/6 with maximum
+error zero. Dedicated F32/F64 scalar, batch2 and extra-leading-dimension tests
+also cover input AD and invalid width/dtype/nonfinite/SO3/overflow rejection.
+An A1 tracking task can still omit its own geometry provider when an explicit
+same-state context is passed; this compatibility case has its own CPU test.
+
 ## Numerical scope
 
 The micro2 comparison is raw-exact for all 30 recorded loss scalars and all
@@ -75,9 +102,18 @@ Use `tools/benchmark_gpu_v2.py` for the corrected benchmark and
 `--deferred-metrics` for the optimized update core, and explicitly declare
 `--allow-microbatch-change` only for the planned micro2-to-micro8 comparison.
 Keep baseline/candidate source versions fixed; use a fresh output directory.
-The tools never authorize the production trainer.
+The tools never authorize the production trainer. `configs/phone_offline.toml`
+retains micro2; `configs/phone_offline_gpu.toml` is an explicit CUDA/micro8
+example, also disabled by default and retaining the first-healthy-checkpoint
+stop. A new-source run is a separate experiment, not a resume of the old
+frozen source-bound protocol. Checkpoints from another implementation continue
+to fail the own-schema source-binding check.
 
-Next separate variant: batch the twenty guarded hinge Rodrigues evaluations.
-Direction-chunk changes, guard aggregation, compilation or precision changes
+Direction-chunk changes, remaining guard aggregation, compilation or precision changes
 require their own comparisons. Continue to report wall time, memory and
 numerical differences alongside utilization; filling VRAM is not a target.
+
+Small reports are retained in `provenance/performance/phase1` and `phase2`.
+Raw fixtures, samples and traces stay under ignored `runs/performance`.
+The batched-FK test reads its scalar-loop reference from Git commit `1e55b54`;
+it skips with an explicit reason if a shallow checkout lacks that reference.

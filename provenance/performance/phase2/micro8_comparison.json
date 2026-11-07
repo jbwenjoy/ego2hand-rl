@@ -1,0 +1,186 @@
+{
+  "schema": "supermimic_saved_GPU_benchmark_comparison:1",
+  "baseline": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\performance\\baseline_timing_v2\\report.json",
+    "bytes": 15512,
+    "sha256": "b3605db4cd22c7b4f1c87d3a995ba38f3dc35118cdd40572bd323e07a9342274"
+  },
+  "candidate": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\performance\\candidate_batched_micro8_v1\\report.json",
+    "bytes": 14680,
+    "sha256": "f0e284d0625c9af7ea59c810852838d56e6010064bfea67f69b4d42c0f2034a5"
+  },
+  "tool": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\compare_gpu_benchmarks.py",
+    "bytes": 13950,
+    "sha256": "ea005706efd3cb31347e6eb9a223da550593c0446b874242a4f3fe684bf4c32c"
+  },
+  "tolerance_preset": "fixed_v1",
+  "tolerances": {
+    "loss": {
+      "atol": 1e-09,
+      "rtol": 1e-06
+    },
+    "gradient": {
+      "atol": 1e-07,
+      "rtol": 1e-05,
+      "relative_L2_max": 1e-05
+    },
+    "state": {
+      "atol": 1e-07,
+      "rtol": 1e-06,
+      "relative_L2_max": 1e-06
+    },
+    "normalizer_or_discrete": {
+      "typed_raw_bytes_equal": true
+    }
+  },
+  "allow_microbatch_change": true,
+  "scope": "Pure NumPy saved comparison. Declared five-Adam budgets checked; moment arrays/RNG/WM row IDs were not exported and cannot be independently compared here. No native/policy or long-training equivalence claim.",
+  "protocol_checks": {
+    "same_schema": true,
+    "same_status": true,
+    "same_device": true,
+    "same_B": true,
+    "same_H": true,
+    "same_NN_dtype": true,
+    "same_physical_dtype": true,
+    "same_AMP": true,
+    "same_TF32": true,
+    "same_WM_sources": true,
+    "same_private_paired_updates": true,
+    "same_private_Adam_steps": true,
+    "same_real_bank_resident": true,
+    "same_real_bank_scope": true,
+    "same_semantic_configuration": true,
+    "same_parent_checkpoint": true,
+    "same_benchmark_tool": true,
+    "microbatch_permission": true,
+    "same_indices_phases_row_IDs": true
+  },
+  "fixture_pins": {
+    "baseline": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\performance\\baseline_timing_v2\\numerical_fixture.npz",
+      "bytes": 22896565,
+      "sha256": "250e9e611df5bd50de9d828be5e9ec36d1beef23065c31e01d821c21a5860368"
+    },
+    "candidate": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\performance\\candidate_batched_micro8_v1\\numerical_fixture.npz",
+      "bytes": 22895055,
+      "sha256": "682d126118cb14436b2bd2e87760326fded920183bf05b1577c092d3367384b2"
+    }
+  },
+  "source_changes": {
+    "added": [
+      "runtime/geometry_context.py"
+    ],
+    "removed": [],
+    "changed": [
+      "learning/imagination.py",
+      "learning/runner.py",
+      "learning/update_step.py",
+      "learning/world_model.py",
+      "runtime/directional.py",
+      "runtime/geometry.py",
+      "runtime/phone_task.py"
+    ]
+  },
+  "fixture_keys": {
+    "same": true,
+    "baseline_only": [],
+    "candidate_only": []
+  },
+  "passed": true,
+  "compared_arrays": 170,
+  "compared_loss_scalars": 30,
+  "failed_names": [],
+  "raw_equal_arrays": 123,
+  "status": "PASS_FIXED_ENGINEERING_ENVELOPE",
+  "worst_max_abs": [
+    {
+      "name": "loss/5/A2_engineered_material_proxy/imagined_Actor_loss",
+      "max_abs": 3.2090473334189795e-08,
+      "relative_L2": 1.8850472809643414e-07,
+      "pass": true
+    },
+    {
+      "name": "loss/1/A1_tracking/imagined_Actor_loss",
+      "max_abs": 1.2141191968462195e-08,
+      "relative_L2": 5.817909004037746e-08,
+      "pass": true
+    },
+    {
+      "name": "loss/2/A1_tracking/imagined_Actor_loss",
+      "max_abs": 1.0064111932717168e-08,
+      "relative_L2": 6.593079100608873e-08,
+      "pass": true
+    },
+    {
+      "name": "A1_tracking_ACTOR/post_clip/net.6.weight",
+      "max_abs": 9.778887033462524e-09,
+      "relative_L2": 4.773044131912408e-07,
+      "pass": true
+    },
+    {
+      "name": "A1_tracking_ACTOR/pre_clip/net.6.weight",
+      "max_abs": 9.778887033462524e-09,
+      "relative_L2": 4.773044131912408e-07,
+      "pass": true
+    },
+    {
+      "name": "A2_engineered_material_proxy_ACTOR/post_clip/net.6.weight",
+      "max_abs": 9.19681042432785e-09,
+      "relative_L2": 5.937861635338368e-07,
+      "pass": true
+    },
+    {
+      "name": "A2_engineered_material_proxy_ACTOR/pre_clip/net.6.weight",
+      "max_abs": 9.19681042432785e-09,
+      "relative_L2": 5.937861635338368e-07,
+      "pass": true
+    },
+    {
+      "name": "A1_tracking_actor/state/net.0.weight",
+      "max_abs": 7.450580596923828e-09,
+      "relative_L2": 6.256434430006872e-09,
+      "pass": true
+    },
+    {
+      "name": "A1_tracking_actor/state/net.2.weight",
+      "max_abs": 7.450580596923828e-09,
+      "relative_L2": 7.257364095322047e-09,
+      "pass": true
+    },
+    {
+      "name": "A1_tracking_actor/state/net.4.weight",
+      "max_abs": 7.450580596923828e-09,
+      "relative_L2": 5.415656944223996e-09,
+      "pass": true
+    },
+    {
+      "name": "A2_engineered_material_proxy_actor/state/net.0.weight",
+      "max_abs": 7.450580596923828e-09,
+      "relative_L2": 5.211025226856669e-09,
+      "pass": true
+    },
+    {
+      "name": "A2_engineered_material_proxy_actor/state/net.4.weight",
+      "max_abs": 7.450580596923828e-09,
+      "relative_L2": 6.48295157197858e-09,
+      "pass": true
+    }
+  ],
+  "timing": {
+    "baseline_steady_median_s": 6.450967800104991,
+    "candidate_steady_median_s": 0.6403216000180691,
+    "baseline_over_candidate_median_ratio": 10.074574713586035,
+    "baseline_peak_allocated_bytes": 2032233984,
+    "candidate_peak_allocated_bytes": 5224334848,
+    "scope": "Short same-parent benchmark only; numerical status reported separately, no universal speed claim"
+  },
+  "details": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\performance\\compare_batched_micro8_v1\\report.details.json",
+    "bytes": 129296,
+    "sha256": "e52c00dfc2b1d72df9bb283a2d8cd27de6876f1185f11ec43add917e629c5960"
+  }
+}

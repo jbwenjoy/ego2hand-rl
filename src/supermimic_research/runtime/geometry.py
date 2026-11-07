@@ -63,6 +63,12 @@ class PhoneGeometryProvider:
         vertex_keys = {b['vertices_key'] for b in self.geometry_by_id.values() if b['kind'] == 'mesh'}
         self._array_cache = ImmutableTensorCache({k: self.geometry_arrays[k] for k in vertex_keys})
         self.counts = {'pure_Torch_FK_calls': 0}
+        self._hinge_body_ids = tuple(b for b in range(1,len(self.parents))
+            if b != self.phone_body_id and self.body_joint_qindex[b] >= 0)
+        self._hinge_q_indices = tuple(self.body_joint_qindex[b] for b in self._hinge_body_ids)
+        if len(self._hinge_body_ids) != 20 or set(self._hinge_q_indices) != set(range(20)):
+            raise ValueError('Compiled phone FK requires exactly the twenty distinct q20 hinges')
+        self._hinge_slot_by_body = {b: i for i, b in enumerate(self._hinge_body_ids)}
 
     def bundle(self, state58, *, retain_all_directions=False):
         return CurrentGeometry(self, state58, retain_all_directions=retain_all_directions)
@@ -84,6 +90,13 @@ class PhoneGeometryProvider:
         off, localR = constants['body_pos'], constants['body_R']
         axes, anchors = constants['body_joint_axis'], constants['body_joint_anchor']
         q0 = constants['joint_qpos0']
+        # Exactly the original hinge rotvec and public guarded Rodrigues math,
+        # batched over all20 hinges. Finite-vector/t2-overflow checks cover every
+        # hinge once instead of synchronizing twice per individual joint.
+        hinge_body_ids = list(self._hinge_body_ids)
+        hinge_q_indices = list(self._hinge_q_indices)
+        hinge_rotvecs = (x[...,hinge_q_indices]-q0[hinge_q_indices])[...,None]*axes[hinge_body_ids]
+        hinge_rotations = _exp_module.so3_exp_torch(hinge_rotvecs)
         p, R = [zero], [I]
         for b in range(1,len(self.parents)):
             if b == self.phone_body_id:
@@ -95,7 +108,7 @@ class PhoneGeometryProvider:
                     raise ValueError('Native parent-before-child ordering')
                 qi = self.body_joint_qindex[b]
                 if qi >= 0:
-                    rr = _exp_module.so3_exp_torch((x[...,qi]-q0[qi])[...,None]*axes[b])
+                    rr = hinge_rotations[...,self._hinge_slot_by_body[b],:,:]
                     Rb = R[parent] @ localR[b] @ rr
                     local_p = off[b] + (localR[b] @ (anchors[b] - (rr @ anchors[b][...,None])[...,0])[...,None])[...,0]
                 else:

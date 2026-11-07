@@ -1,0 +1,182 @@
+{
+  "schema": "phone_batched_hinge_CPU_validation:1",
+  "passed": 9,
+  "total": 9,
+  "successful": true,
+  "batch_measurements": [
+    {
+      "dtype": "torch.float64",
+      "shape": [
+        58
+      ],
+      "public_Rodrigues_calls_phase1": 20,
+      "public_Rodrigues_calls_batch": 1,
+      "output_max_abs_error": 0.0,
+      "input_AD_max_abs_error": 0.0,
+      "input_AD_calls": 2
+    },
+    {
+      "dtype": "torch.float64",
+      "shape": [
+        2,
+        58
+      ],
+      "public_Rodrigues_calls_phase1": 20,
+      "public_Rodrigues_calls_batch": 1,
+      "output_max_abs_error": 0.0,
+      "input_AD_max_abs_error": 0.0,
+      "input_AD_calls": 2
+    },
+    {
+      "dtype": "torch.float64",
+      "shape": [
+        2,
+        1,
+        58
+      ],
+      "public_Rodrigues_calls_phase1": 20,
+      "public_Rodrigues_calls_batch": 1,
+      "output_max_abs_error": 0.0,
+      "input_AD_max_abs_error": 0.0,
+      "input_AD_calls": 2
+    },
+    {
+      "dtype": "torch.float32",
+      "shape": [
+        58
+      ],
+      "public_Rodrigues_calls_phase1": 20,
+      "public_Rodrigues_calls_batch": 1,
+      "output_max_abs_error": 0.0,
+      "input_AD_max_abs_error": 0.0,
+      "input_AD_calls": 2
+    },
+    {
+      "dtype": "torch.float32",
+      "shape": [
+        2,
+        58
+      ],
+      "public_Rodrigues_calls_phase1": 20,
+      "public_Rodrigues_calls_batch": 1,
+      "output_max_abs_error": 0.0,
+      "input_AD_max_abs_error": 0.0,
+      "input_AD_calls": 2
+    },
+    {
+      "dtype": "torch.float32",
+      "shape": [
+        2,
+        1,
+        58
+      ],
+      "public_Rodrigues_calls_phase1": 20,
+      "public_Rodrigues_calls_batch": 1,
+      "output_max_abs_error": 0.0,
+      "input_AD_max_abs_error": 0.0,
+      "input_AD_calls": 2
+    }
+  ],
+  "inference_measurements": [
+    {
+      "dtype": "torch.float32",
+      "contexts": 2,
+      "cached_normal_buffers": 126,
+      "cached_tensor_ids_unchanged": true,
+      "inference_FK_calls": 1,
+      "grad_FK_calls": 1,
+      "input_AD_calls": 1,
+      "q_gradient_max_abs": 0.6577428579330444,
+      "direction_count": 1406,
+      "all22_known": true,
+      "no_cached_inference_tensor": true,
+      "finite_state_and_control_input_AD": true
+    },
+    {
+      "dtype": "torch.float64",
+      "contexts": 2,
+      "cached_normal_buffers": 126,
+      "cached_tensor_ids_unchanged": true,
+      "inference_FK_calls": 1,
+      "grad_FK_calls": 1,
+      "input_AD_calls": 1,
+      "q_gradient_max_abs": 0.6577431042490907,
+      "direction_count": 1406,
+      "all22_known": true,
+      "no_cached_inference_tensor": true,
+      "finite_state_and_control_input_AD": true
+    }
+  ],
+  "scope": {
+    "actual_saved_baseline_contexts": [
+      0,
+      3
+    ],
+    "dtypes": [
+      "float64",
+      "float32"
+    ],
+    "shapes": [
+      [
+        58
+      ],
+      [
+        2,
+        58
+      ],
+      [
+        2,
+        1,
+        58
+      ]
+    ],
+    "pure_Tensor_FK_successful_calls": 16,
+    "public_Rodrigues_failed_overflow_calls": 1,
+    "input_AD_calls": 15,
+    "NN_constructors": 0,
+    "NN_forward": 0,
+    "optimizer_steps": 0,
+    "native_model_loads": 0,
+    "native_forward_steps": 0,
+    "CUDA_calls": 0,
+    "actual_geometry_input_AD_calls": 14,
+    "synthetic_context_input_AD_calls": 1,
+    "prior_inference_report_AD_counter_scope_note": "The prior inference-first report counted two actual geometry AD calls; its shared-graph synthetic context test additionally used one AD call. This report separates both scopes explicitly."
+  },
+  "source_pins": {
+    "current_geometry": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\geometry.py",
+      "bytes": 13075,
+      "sha256": "544b8af8c3ff51d08bf37546479f629691094490a1e50f21dce20673029251af"
+    },
+    "phase1_geometry": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\performance\\phase1_source\\src\\supermimic_research\\runtime\\geometry.py",
+      "bytes": 12044,
+      "sha256": "301480d3cd06ede47029b69e1ee0612487107387e8dcb383ff6bf5fc3066a95e"
+    },
+    "guarded_rotation": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\rotation.py",
+      "bytes": 8316,
+      "sha256": "7b909204908645836f196c41c5f8a695397ae6f7515c3253200b1d39bd7fd3da"
+    }
+  },
+  "test_pins": {
+    "test_geometry_batch.py": {
+      "path": "D:\\workspace\\supermimic-research\\tests\\test_geometry_batch.py",
+      "bytes": 4331,
+      "sha256": "6997d7844f1bbf6747804d41aca150360c20dd9878f372a23b11e8bcbfe1a560"
+    },
+    "test_geometry_inference.py": {
+      "path": "D:\\workspace\\supermimic-research\\tests\\test_geometry_inference.py",
+      "bytes": 8078,
+      "sha256": "da42afece4796e59dd580132480d19f23cc375650276b545042e844d25dfaac2"
+    },
+    "test_geometry_context.py": {
+      "path": "D:\\workspace\\supermimic-research\\tests\\test_geometry_context.py",
+      "bytes": 3378,
+      "sha256": "5ad272cab39b50a46d3f72e5c0773fabc6d9aab10b679c8d34bae3c324be2df6"
+    }
+  },
+  "failures": [],
+  "errors": []
+}

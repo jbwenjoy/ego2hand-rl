@@ -185,7 +185,10 @@ class PhoneTask:
 
     def rewards(self,x1,memory,action,*,context=None):
         import torch
-        if context is not None:context.require(self.geometry,x1)
+        if context is not None:
+            # Tracking-only tasks may omit a geometry provider. The context
+            # still has to match this exact state and autograd lifecycle.
+            context.require(self.geometry if self.geometry is not None else context.owner,x1)
         ref=self.reference(memory,1);R=x1[...,43:52].reshape(x1.shape[:-1]+(3,3))
         epos=(x1[...,40:43]-ref['COM_world_m']).square().sum(-1)
         # Smooth full-orientation chordal penalty; not the pen's two-axis score.
