@@ -103,6 +103,15 @@ with analytic COM lever-arm velocity; it never stretches time or creates contact
 labels. The anchored reference is an input contract, not completed hand retargeting,
 native trajectory execution or phone-checkpoint compatibility.
 
+`mechanics/residual_control.py` owns shared pure-array bounded residual/EMA algebra;
+`compound_transition.py` executes50Hz controls with POST state55 and solver-PRE
+movingCOM labels. It records full solver state/warmstart for numerical replay;
+observer calls never refresh simulation. Physics hashes run at episode boundaries,
+not each substep/update. `learning/compound_response.py` is an explicitly imported
+new102/87 one-step response baseline with TRAIN-only frozen scales and resident
+GPU tensors. It is not the frozen phone366/222 model, an Actor or an automatically
+loaded replacement. Original phone files/imports/config bytes remain unchanged.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not

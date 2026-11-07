@@ -1,0 +1,18 @@
+schema = 1
+packed_report = "../runs/mug_H20_packed_v1/report.json"
+device = "cuda:0"
+seed = 20261108
+width = 512
+batch_size = 256
+learning_rate = 0.001
+weight_decay = 0.0001
+gradient_clip_norm = 10.0
+planned_updates = 1000
+first_checkpoint_update = 10
+stop_at_first_healthy_checkpoint = true
+allow_cpu_fallback = false
+fit_role = "TRAIN"
+check_roles = ["CHECK", "RESPONSE"]
+input_schema = "compound_state55_warm26_actualU20_nativeDt1:1"
+target_schema = "world_left_delta52_nextwarm26_meanwrench_source_BODY6_Fn3:1"
+# Fresh one-step response baseline only. No Actor, A1/A2 or physical benefit claim.

@@ -1,0 +1,559 @@
+{
+  "schema": "mug_H20_WM_packed_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_pack_mug_transitions.py",
+    "bytes": 8727,
+    "sha256": "8ff19ecf734cc187156dd8df830dd6e4f66abe3423023b0ecb838483dd882722"
+  },
+  "collection": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_H20_collection_v1\\report.json",
+    "bytes": 68426,
+    "sha256": "f108a9ef66cc47bf0b0272b42f9f85ecfadbbeed084b9f7a3cd56b36887dfcd7"
+  },
+  "outputs": {
+    "TRAIN": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_H20_packed_v1\\TRAIN.npz",
+      "bytes": 1033519,
+      "sha256": "9252563c8ce3b60de53e639cbd98ad924e38093e07b614b1341c9061e04a96b1"
+    },
+    "CHECK": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_H20_packed_v1\\CHECK.npz",
+      "bytes": 528533,
+      "sha256": "72aa76d30f8d4caf880d0b5a8b3122dc3cc7df9cc976af13663853e26ae35f99"
+    },
+    "RESPONSE": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_H20_packed_v1\\RESPONSE.npz",
+      "bytes": 53306,
+      "sha256": "7b480ace30476758c631f206bbe05c633be37f6d5caa74b26af8def6dcfc8de8"
+    }
+  },
+  "checks": {
+    "physical_baseline_barriers": true,
+    "full_restore_barriers": true,
+    "causal_controller_and_raw_control": true,
+    "raw_simulated_contact_labels": true,
+    "actual_COM_observation": true,
+    "role_disjoint_inputs": true,
+    "explicit_role_counts": true
+  },
+  "passed": 7,
+  "total": 7,
+  "controller_max_error": 0.0,
+  "raw_moving_COM_wrench_error": 4.440892098500626e-15,
+  "raw_group_Fn_error": 0.0,
+  "native_COM_velocity_error": 1.5987211554602254e-14,
+  "excluded_partial_intervals": 24,
+  "roles": [
+    {
+      "role": "TRAIN",
+      "seed": 0,
+      "dt_s": 0.0003125,
+      "rows": 22,
+      "episode": 0
+    },
+    {
+      "role": "TRAIN",
+      "seed": 1,
+      "dt_s": 0.0003125,
+      "rows": 24,
+      "episode": 1
+    },
+    {
+      "role": "TRAIN",
+      "seed": 2,
+      "dt_s": 0.0003125,
+      "rows": 20,
+      "episode": 2
+    },
+    {
+      "role": "TRAIN",
+      "seed": 3,
+      "dt_s": 0.0003125,
+      "rows": 26,
+      "episode": 3
+    },
+    {
+      "role": "TRAIN",
+      "seed": 4,
+      "dt_s": 0.0003125,
+      "rows": 20,
+      "episode": 4
+    },
+    {
+      "role": "TRAIN",
+      "seed": 5,
+      "dt_s": 0.0003125,
+      "rows": 24,
+      "episode": 5
+    },
+    {
+      "role": "TRAIN",
+      "seed": 6,
+      "dt_s": 0.0003125,
+      "rows": 29,
+      "episode": 6
+    },
+    {
+      "role": "TRAIN",
+      "seed": 7,
+      "dt_s": 0.0003125,
+      "rows": 25,
+      "episode": 7
+    },
+    {
+      "role": "TRAIN",
+      "seed": 8,
+      "dt_s": 0.0003125,
+      "rows": 20,
+      "episode": 8
+    },
+    {
+      "role": "TRAIN",
+      "seed": 9,
+      "dt_s": 0.0003125,
+      "rows": 25,
+      "episode": 9
+    },
+    {
+      "role": "TRAIN",
+      "seed": 10,
+      "dt_s": 0.0003125,
+      "rows": 25,
+      "episode": 10
+    },
+    {
+      "role": "TRAIN",
+      "seed": 11,
+      "dt_s": 0.0003125,
+      "rows": 26,
+      "episode": 11
+    },
+    {
+      "role": "TRAIN",
+      "seed": 12,
+      "dt_s": 0.0003125,
+      "rows": 21,
+      "episode": 12
+    },
+    {
+      "role": "TRAIN",
+      "seed": 13,
+      "dt_s": 0.0003125,
+      "rows": 24,
+      "episode": 13
+    },
+    {
+      "role": "TRAIN",
+      "seed": 14,
+      "dt_s": 0.0003125,
+      "rows": 24,
+      "episode": 14
+    },
+    {
+      "role": "TRAIN",
+      "seed": 15,
+      "dt_s": 0.0003125,
+      "rows": 23,
+      "episode": 15
+    },
+    {
+      "role": "CHECK",
+      "seed": 1000,
+      "dt_s": 0.0003125,
+      "rows": 25,
+      "episode": 16
+    },
+    {
+      "role": "CHECK",
+      "seed": 1000,
+      "dt_s": 0.00015625,
+      "rows": 25,
+      "episode": 17
+    },
+    {
+      "role": "CHECK",
+      "seed": 1001,
+      "dt_s": 0.0003125,
+      "rows": 24,
+      "episode": 18
+    },
+    {
+      "role": "CHECK",
+      "seed": 1001,
+      "dt_s": 0.00015625,
+      "rows": 24,
+      "episode": 19
+    },
+    {
+      "role": "CHECK",
+      "seed": 1002,
+      "dt_s": 0.0003125,
+      "rows": 27,
+      "episode": 20
+    },
+    {
+      "role": "CHECK",
+      "seed": 1002,
+      "dt_s": 0.00015625,
+      "rows": 28,
+      "episode": 21
+    },
+    {
+      "role": "CHECK",
+      "seed": 1003,
+      "dt_s": 0.0003125,
+      "rows": 20,
+      "episode": 22
+    },
+    {
+      "role": "CHECK",
+      "seed": 1003,
+      "dt_s": 0.00015625,
+      "rows": 20,
+      "episode": 23
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 24
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 25
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 26
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 27
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 28
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 29
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 30
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 31
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 32
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 33
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 34
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 35
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 36
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 37
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 38
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 39
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 40
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 41
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 42
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 43
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 44
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 45
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 46
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.0003125,
+      "rows": 1,
+      "episode": 47
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 48
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 49
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 50
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 51
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 52
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 53
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 54
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 55
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 56
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 57
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 58
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 59
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 60
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 61
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 62
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 63
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 64
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 65
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 66
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 67
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 68
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 69
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 70
+    },
+    {
+      "role": "RESPONSE",
+      "seed": null,
+      "dt_s": 0.00015625,
+      "rows": 1,
+      "episode": 71
+    }
+  ],
+  "exact_input_overlap": 0,
+  "input_schema": "compound_state55_warm26_actualU20_nativeDt1:1",
+  "target_schema": "world_left_delta52_nextwarm26_meanwrench_source_BODY6_Fn3:1",
+  "source_human_contact_truth_known": false,
+  "neural_updates": 0,
+  "integration_steps": 0,
+  "scope": "Actual raw simulation/control/time/endpoint readback and explicit new fitting roles. Same reset/task; independent action seeds and numerical dt checks are not heldout trajectories, independent RGB or generalization. Source object reference errors evaluated at full-H endpoints; partials never relabeled at future H."
+}

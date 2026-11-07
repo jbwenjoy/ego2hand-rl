@@ -98,6 +98,12 @@ micro2保存的损失、梯度与网络状态精确一致；micro8通过事前�
 契约。下一步进入闭环数据与响应验证，静态解析持握不作为学习成功前置门。
 见[投影与参考结果](docs/mug-native-projection-2026-11-08.md)和
 [方案v0.49](docs/research-plan-v0.49.md)。没有新增神经检查点。
+50Hz有界残差/EMA及state55原生适配现已接入：双dt零动作基线逐数组字节一致，
+完整状态恢复6/6、输入/标签复核7/7、119测试通过。378条TRAIN、193条CHECK、
+48条独立成对响应已分开；24个部分H未混入拟合，尚无整段持握。
+新CUDA一步响应模型配方仅执行到首10健康保存/读回并估计ETA，然后按用户要求
+暂停。执行结果以独立`health_0010.json`为准；[数据与配方](docs/mug-H20-data-and-first-checkpoint-2026-11-08.md)
+及[方案v0.50](docs/research-plan-v0.50.md)记录完整范围，不构成Actor或CHORD收益声明。
 见[迁移与数据结果](docs/patch-migration-2026-11-08.md)、
 [方案v0.41](docs/research-plan-v0.41.md)和[此前初态搜索](docs/initialization-search-2026-11-08.md)。
 

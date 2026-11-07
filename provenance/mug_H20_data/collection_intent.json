@@ -1,0 +1,133 @@
+{
+  "schema": "mug_H20_reference_collection_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\collect_mug_reference_transitions.py",
+      "bytes": 9792,
+      "sha256": "0bc3d3f168df14814b42b5212aa2725f90ab3234510fffbc9112f0f0de65e6fb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_transition.py",
+      "bytes": 8479,
+      "sha256": "e0a5bc7569531b9fe52f024dbea3fea6b0ae05686027e6be6b0a81e486494b78"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\residual_control.py",
+      "bytes": 2757,
+      "sha256": "c62e2c120b73f668200029c28fe1ad4d988c140da83aacf14532dae051940163"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_contacts.py",
+      "bytes": 3098,
+      "sha256": "573b9f5367782b91422598b6b09f3188c0d4d369c3090f702ee0536c2e5cf241"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    }
+  ],
+  "binding": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+    "bytes": 3857,
+    "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+  },
+  "reference": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_closed_loop_reference_v1\\report.json",
+    "bytes": 3928,
+    "sha256": "b23724764f8b63dbc7bf51c8b4a4653d6e67b8de14adc14a99586239bd696172"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "controller": {
+    "limit_rad": 0.05,
+    "EMA_beta": 0.5,
+    "memory_units": "radian residual",
+    "control_H_s": 0.02,
+    "asymmetric_room": true,
+    "no_action_or_control_clamp": true
+  },
+  "state55": {
+    "q20": [
+      0,
+      20
+    ],
+    "dq20": [
+      20,
+      40
+    ],
+    "COM_world3": [
+      40,
+      43
+    ],
+    "BODY_R_world_first_two_columns6": [
+      43,
+      49
+    ],
+    "COM_velocity_world3": [
+      49,
+      52
+    ],
+    "omega_world3": [
+      52,
+      55
+    ]
+  },
+  "solver_memory": "Full native integration state for replay;warmstart26 input/output retained; state55 alone is not asserted exact numerical Markov",
+  "native_contact_labels": "Actual interval mean simulated forces/moving-COM wrench; source human contacts UNKNOWN",
+  "TRAIN_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "CHECK_seeds": [
+    1000,
+    1001,
+    1002,
+    1003
+  ],
+  "TRAIN_dt": [
+    0.0003125
+  ],
+  "CHECK_dt": [
+    0.0003125,
+    0.00015625
+  ],
+  "action_rule": "a=.75*(.6 multisine)+.25*tanh((q_grasp-q)/.05-.02*dq); fixed seeded phases/frequencies. Genuine joint-feedback, not learned object controller.",
+  "barrier": "Two zero-action baseline full traces must match historical constant LP targets byte for byte before TRAIN/CHECK collection",
+  "response_branch_role": "CHECK_RESPONSE_ONLY_NEVER_FIT",
+  "branch_prefix_k": [
+    0,
+    3,
+    6
+  ],
+  "branch_joint_directions": [
+    0,
+    4,
+    8,
+    9
+  ],
+  "branch_action_amplitude": 0.5,
+  "max_intervals_per_episode": 100,
+  "max_episodes": 24,
+  "max_native_integration_steps": 600000,
+  "partial_H_fitting": false,
+  "reference_role": "New anchored source-informed object goal; not source gravity preservation, human joint retargeting or independent RGB",
+  "neural_updates": 0
+}
