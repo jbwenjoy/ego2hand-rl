@@ -1,0 +1,2413 @@
+{
+  "schema": "supermimic_research.online300_native_evaluation:1",
+  "status": "ALL_FOUR_CASES_RECORDED_PHYSICAL_GATES_NOT_ASSUMED",
+  "intent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\intent.json",
+    "bytes": 12953,
+    "sha256": "7ff0313ea79fffd740352b247fd749e0ccdf3fd80f4bb192b56ec8aaa03dfe53"
+  },
+  "checkpoint": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+    "bytes": 39226569,
+    "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+  },
+  "checks": {
+    "all_four_cases": true,
+    "exact_Actor_calls": true,
+    "bounded_native": true,
+    "read_only_weights_norm": true,
+    "read_only_RNG": true,
+    "no_learning_or_observer": true,
+    "model_unchanged_except_dt": true,
+    "CPU_only": true,
+    "source_unchanged": true
+  },
+  "passed": 9,
+  "total": 9,
+  "cases": [
+    {
+      "mode": "A1_tracking",
+      "dt_s": 0.0003125,
+      "native_summary": {
+        "name": "A1_tracking__online300",
+        "candidate_id": "A1_tracking__online300",
+        "route": "injected_callback",
+        "dt_s": 0.0003125,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "integration_steps": 386,
+        "finite_steps_saved": 386,
+        "actual_final_time_s": 0.1206249999999988,
+        "metrics": {
+          "final_COM_drift_m": 0.05014234033977025,
+          "final_angle_rad": 0.6784536202817336,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "tail_triple_pad_force_coverage": null,
+          "max_native_penetration_m": 9.844354567501748e-05,
+          "max_self_penetration_m": 9.844354567501748e-05,
+          "max_phone_nonpad_normal_force_N": 0.0,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0
+        },
+        "gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "tail_triple_pad_force_coverage": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": true,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true
+        },
+        "nominal_holding_dynamics_pass": false,
+        "old_two_pad_metrics": {
+          "final_COM_drift_m": 0.05014234033977025,
+          "final_angle_rad": 0.6784536202817336,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "max_native_penetration_m": 9.844354567501748e-05,
+          "max_self_penetration_m": 9.844354567501748e-05,
+          "max_phone_nonpad_normal_force_N": 2.4285698430673666,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0,
+          "tail_dual_pad_force_coverage": null
+        },
+        "old_two_pad_gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": false,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true,
+          "tail_dual_pad_force_coverage": false
+        },
+        "old_two_pad_pass": false,
+        "trace": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A1_tracking_dt_0.0003125\\trace.npz",
+          "bytes": 762543,
+          "sha256": "f1b4835880cddd6f116ae8299807288e576e6d8d3d0d27f34eabeb8cf1752f06"
+        },
+        "warnings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "initial_native": {
+          "phase": "RESET_FORWARD",
+          "pad_normal_N3": [
+            1.4852859405565542,
+            1.0809508495304838,
+            1.434625044351917
+          ],
+          "phone_nonpad_normal_N": 0.0,
+          "old_two_pad_phone_nonpad_normal_N": 1.434625044351917,
+          "table_normal_N": 0.0,
+          "contact_rows24": [
+            [
+              -1.0,
+              15.0,
+              71.0,
+              3.0,
+              20.0,
+              -7.472899946864002e-05,
+              -0.13942085514733216,
+              0.03481881357030944,
+              0.5114221248951408,
+              -0.3604187731135925,
+              -0.274080182850194,
+              -0.8916155905748268,
+              -0.10271700141966887,
+              0.9617068437776682,
+              -0.25410463248541443,
+              0.9271178596093621,
+              0.0,
+              -0.37476989526021903,
+              1.4852859405565542,
+              -0.7548269046850717,
+              -0.28487325370451605,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              28.0,
+              71.0,
+              3.0,
+              24.0,
+              -7.486874527687192e-05,
+              -0.1695697236927411,
+              0.019885284467939645,
+              0.4502128443029243,
+              -0.5036985822241008,
+              0.1460637359228219,
+              0.85144179091333,
+              0.07436969820190281,
+              0.9892751816599202,
+              -0.1257130181846325,
+              -0.8606723454688135,
+              0.0,
+              -0.5091592223904142,
+              1.0809508495304838,
+              0.3692528235613957,
+              -0.3874127711099429,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              41.0,
+              71.0,
+              3.0,
+              28.0,
+              -7.512712870421113e-05,
+              -0.1694823296366852,
+              0.0038322147130412975,
+              0.45329726367531553,
+              -0.04514687345110974,
+              0.4883197888915586,
+              0.8714961523692996,
+              0.025262979229871255,
+              0.872664760246971,
+              -0.4876658672734103,
+              -0.9986608742200831,
+              -3.469446951953614e-18,
+              -0.051734498180415575,
+              1.434625044351917,
+              0.05137890019168809,
+              -0.9219791934366154,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "qacc26_descriptor": [
+            12.225935371645416,
+            -217.04045180795327,
+            8.529064425743712,
+            52.835633522722766,
+            -132.78666755971508,
+            7.080027579288456,
+            35.19230105516564,
+            147.71013882491687,
+            -79.17846186481341,
+            148.1481795078779,
+            -0.6311097000181745,
+            79.325219075165,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.22222814888246178,
+            0.7357370170259525,
+            -3.199344532630879,
+            -88.04340928679729,
+            67.87775632875231,
+            -84.19536900233544
+          ],
+          "actuator_force20": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975
+          ],
+          "qfrc_actuator26": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "source_candidate": {
+          "task_bundle": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "qualified_zero_report": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+            "bytes": 68156,
+            "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+          },
+          "checkpoint": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+            "bytes": 39226569,
+            "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+          }
+        },
+        "source_state_npz": {
+          "task_bundle": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "qualified_zero_report": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+            "bytes": 68156,
+            "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+          },
+          "checkpoint": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+            "bytes": 39226569,
+            "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+          }
+        },
+        "command": {
+          "name": "A1_tracking__online300",
+          "candidate_id": "A1_tracking__online300",
+          "route": "injected_callback",
+          "qpos27": [
+            0.9003363722093097,
+            0.04038687586451288,
+            0.029990434218657262,
+            0.8692773991503583,
+            -0.8630142896540195,
+            0.4723261063043457,
+            1.1251006155772207,
+            0.40869516803025907,
+            -0.7823472396439576,
+            0.17034875490121784,
+            1.124359533260123,
+            0.7696150545328048,
+            -0.10932789375512818,
+            -0.14035572275499802,
+            0.0025119008953089074,
+            0.17803092412247978,
+            0.319688554955577,
+            -0.23895150303179627,
+            -0.12949049779670038,
+            -0.006433781443888266,
+            -0.16432721864782343,
+            0.08061976277936019,
+            0.46608009257879446,
+            0.6631518610716088,
+            0.5578056431815778,
+            -0.2527668780534653,
+            0.43033867935749465
+          ],
+          "ctrl20": [
+            0.9540725596015607,
+            0.024327446938353262,
+            0.09342495791598021,
+            0.9212036286683376,
+            -0.8521691841269621,
+            0.47862446621760996,
+            1.2096555156408788,
+            0.4616205692273283,
+            -0.770797690018839,
+            0.19486041263694848,
+            1.209931801108178,
+            0.8227152985979983,
+            -0.09596820153323679,
+            -0.13923949853232023,
+            0.009471863848499424,
+            0.17881636057296924,
+            0.33055058281933053,
+            -0.23282617752485685,
+            -0.12003729352915586,
+            -0.005261076275423867
+          ],
+          "ctrl_margin20x2": [
+            [
+              2.141072559601561,
+              0.33692744039843925
+            ],
+            [
+              1.5083274469383532,
+              0.6736725530616466
+            ],
+            [
+              1.1404249579159802,
+              1.4765750420840198
+            ],
+            [
+              1.9682036286683375,
+              0.6487963713316625
+            ],
+            [
+              0.19483081587303785,
+              2.422169184126962
+            ],
+            [
+              1.17662446621761,
+              0.21937553378239
+            ],
+            [
+              2.2566555156408787,
+              0.884344484359121
+            ],
+            [
+              1.5086205692273282,
+              1.1083794307726718
+            ],
+            [
+              0.2762023099811609,
+              2.340797690018839
+            ],
+            [
+              0.8928604126369484,
+              0.5031395873630515
+            ],
+            [
+              2.256931801108178,
+              0.8840681988918218
+            ],
+            [
+              1.8697152985979981,
+              0.7472847014020018
+            ],
+            [
+              0.9510317984667631,
+              1.6659682015332369
+            ],
+            [
+              0.5587605014676797,
+              0.8372394985323202
+            ],
+            [
+              1.0564718638484993,
+              2.0845281361515005
+            ],
+            [
+              1.2258163605729693,
+              1.3911836394270307
+            ],
+            [
+              1.3775505828193304,
+              1.2394494171806696
+            ],
+            [
+              0.4651738224751431,
+              0.9308261775248567
+            ],
+            [
+              0.9269627064708441,
+              2.214037293529156
+            ],
+            [
+              1.041738923724576,
+              1.575261076275424
+            ]
+          ],
+          "candidate": {
+            "task_bundle": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "qualified_zero_report": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+              "bytes": 68156,
+              "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+            },
+            "checkpoint": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+              "bytes": 39226569,
+              "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+            }
+          },
+          "state_npz": {
+            "task_bundle": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "qualified_zero_report": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+              "bytes": 68156,
+              "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+            },
+            "checkpoint": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+              "bytes": 39226569,
+              "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+            }
+          },
+          "initial_provenance_scope": "Generic prescribed initial-state artifact, not a GN/static/oldcheckpoint qualification"
+        },
+        "energy_force_geometry_phase": "PRE(tick*dt); qpos/qvel/COM POST((tick+1)*dt)",
+        "velocity_metric_semantics": "Preserved root translational freejoint qvel RMS; angular body qvel norm is frame invariant, not a new COM-velocity gate.",
+        "contact_row_columns": [
+          "pre_tick",
+          "geom1",
+          "geom2",
+          "dim",
+          "efc_address",
+          "distance_m",
+          "position3",
+          "frame9",
+          "local_wrench6"
+        ],
+        "nonpad_metric_definition": "Maximum across PRE ticks of the SUM of positive Fn over every phone contact with non-designated hand geoms; same aggregation as original two-pad gate. old_two_pad also includes all positive Fn on geom41.",
+        "no_external_forces_equality_mocap_or_pose_reset": true,
+        "static_zero_acceleration_entry_required": false,
+        "control_schedule": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A1_tracking_dt_0.0003125\\control_schedule.json",
+          "bytes": 4464,
+          "sha256": "0eede8ba08db41b531c1f2774fec006b585d3feb4412d4daafdff8663ab138f4"
+        },
+        "control_scope": "Planned50Hz controller only; trace pre_executed_ctrl20 is actual perPRE-tick command. Legacy trace ctrl20 is last command and ctrl_margin20x2 describes initial source only. Raw integration receipts protect callback state; no full-MjData certificate.",
+        "native_loop_and_physical_success_gates_from": "frozen functional_tripod_dynamics_v3, unchanged after insertion of explicit control hook and schedule fields"
+      },
+      "endpoint": {
+        "dt_s": 0.0003125,
+        "final_COM_world_m": [
+          -0.15998931610848868,
+          0.08490352101765204,
+          0.4159662904391976
+        ],
+        "final_quaternion_wxyz": [
+          0.8539240953914421,
+          0.4159394537096761,
+          -0.045834417152461705,
+          0.3093658293378543
+        ],
+        "actual_final_time_s": 0.1206249999999988,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "finite_steps_saved": 386,
+        "original_case_pass": false
+      },
+      "tracking": {
+        "available_POST_command_frames": 6,
+        "missing_POST_command_frames": 94,
+        "COM_error_m": {
+          "count": 6,
+          "RMS": 0.027229024094540758,
+          "mean": 0.021156715711100792,
+          "max": 0.05053757913738488,
+          "final_available": 0.05053757913738488
+        },
+        "SO3_geodesic_error_rad": {
+          "count": 6,
+          "RMS": 0.3885829045857746,
+          "mean": 0.31044201654203785,
+          "max": 0.698604633439999,
+          "final_available": 0.698604633439999
+        },
+        "fixed_object_on_same_available_POST_frames": {
+          "COM_error_m": {
+            "count": 6,
+            "RMS": 0.0026045598733979458,
+            "mean": 0.002413149836931121,
+            "max": 0.003700211431961088,
+            "final_available": 0.002955530730817292
+          },
+          "SO3_geodesic_error_rad": {
+            "count": 6,
+            "RMS": 0.058751084594763046,
+            "mean": 0.05404576167860143,
+            "max": 0.08204738286209963,
+            "final_available": 0.07148764363218468
+          }
+        },
+        "fixed_object_full101_command_descriptor": {
+          "COM_error_m": {
+            "count": 101,
+            "RMS": 0.0031947870535900913,
+            "mean": 0.0029093893631159705,
+            "max": 0.004843918778045295,
+            "final_available": 0.0034501413015680625
+          },
+          "SO3_geodesic_error_rad": {
+            "count": 101,
+            "RMS": 0.05609437408766574,
+            "mean": 0.05191842022210633,
+            "max": 0.08275968083567732,
+            "final_available": 0.06962913146463125
+          }
+        },
+        "tracking_success_gate": null,
+        "scope": "Full SO3 angle and COM tracking descriptors, not holding5mm success; no missing-tail fill, temporal stretch or accumulated-clock tick index"
+      },
+      "controller_records": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A1_tracking_dt_0.0003125\\controller_records.json",
+        "bytes": 74254,
+        "sha256": "427cb23c3a4898b88c02ecb7999fd412f743efd41105c9683cd9e1fa51c7d897"
+      },
+      "tracking_arrays": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A1_tracking_dt_0.0003125\\tracking101.npz",
+        "bytes": 17181,
+        "sha256": "cfd4f4fa96e5dc90424b020c97976346d4deccf6b28cad278257e36f2444f9bf"
+      }
+    },
+    {
+      "mode": "A1_tracking",
+      "dt_s": 0.00015625,
+      "native_summary": {
+        "name": "A1_tracking__online300",
+        "candidate_id": "A1_tracking__online300",
+        "route": "injected_callback",
+        "dt_s": 0.00015625,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "integration_steps": 773,
+        "finite_steps_saved": 773,
+        "actual_final_time_s": 0.12078124999999812,
+        "metrics": {
+          "final_COM_drift_m": 0.05000338291460012,
+          "final_angle_rad": 0.6710991512662942,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "tail_triple_pad_force_coverage": null,
+          "max_native_penetration_m": 0.00011098530556034242,
+          "max_self_penetration_m": 0.00011098530556034242,
+          "max_phone_nonpad_normal_force_N": 0.0,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0
+        },
+        "gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "tail_triple_pad_force_coverage": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": true,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true
+        },
+        "nominal_holding_dynamics_pass": false,
+        "old_two_pad_metrics": {
+          "final_COM_drift_m": 0.05000338291460012,
+          "final_angle_rad": 0.6710991512662942,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "max_native_penetration_m": 0.00011098530556034242,
+          "max_self_penetration_m": 0.00011098530556034242,
+          "max_phone_nonpad_normal_force_N": 2.5809552364569748,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0,
+          "tail_dual_pad_force_coverage": null
+        },
+        "old_two_pad_gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": false,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true,
+          "tail_dual_pad_force_coverage": false
+        },
+        "old_two_pad_pass": false,
+        "trace": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A1_tracking_dt_0.00015625\\trace.npz",
+          "bytes": 1449174,
+          "sha256": "f443b946f68f134e315da44cedb21ca1d5b366d179cacbd73b1396fb4ebffd9f"
+        },
+        "warnings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "initial_native": {
+          "phase": "RESET_FORWARD",
+          "pad_normal_N3": [
+            1.4852859405565542,
+            1.0809508495304838,
+            1.434625044351917
+          ],
+          "phone_nonpad_normal_N": 0.0,
+          "old_two_pad_phone_nonpad_normal_N": 1.434625044351917,
+          "table_normal_N": 0.0,
+          "contact_rows24": [
+            [
+              -1.0,
+              15.0,
+              71.0,
+              3.0,
+              20.0,
+              -7.472899946864002e-05,
+              -0.13942085514733216,
+              0.03481881357030944,
+              0.5114221248951408,
+              -0.3604187731135925,
+              -0.274080182850194,
+              -0.8916155905748268,
+              -0.10271700141966887,
+              0.9617068437776682,
+              -0.25410463248541443,
+              0.9271178596093621,
+              0.0,
+              -0.37476989526021903,
+              1.4852859405565542,
+              -0.7548269046850717,
+              -0.28487325370451605,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              28.0,
+              71.0,
+              3.0,
+              24.0,
+              -7.486874527687192e-05,
+              -0.1695697236927411,
+              0.019885284467939645,
+              0.4502128443029243,
+              -0.5036985822241008,
+              0.1460637359228219,
+              0.85144179091333,
+              0.07436969820190281,
+              0.9892751816599202,
+              -0.1257130181846325,
+              -0.8606723454688135,
+              0.0,
+              -0.5091592223904142,
+              1.0809508495304838,
+              0.3692528235613957,
+              -0.3874127711099429,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              41.0,
+              71.0,
+              3.0,
+              28.0,
+              -7.512712870421113e-05,
+              -0.1694823296366852,
+              0.0038322147130412975,
+              0.45329726367531553,
+              -0.04514687345110974,
+              0.4883197888915586,
+              0.8714961523692996,
+              0.025262979229871255,
+              0.872664760246971,
+              -0.4876658672734103,
+              -0.9986608742200831,
+              -3.469446951953614e-18,
+              -0.051734498180415575,
+              1.434625044351917,
+              0.05137890019168809,
+              -0.9219791934366154,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "qacc26_descriptor": [
+            12.225935371645416,
+            -217.04045180795327,
+            8.529064425743712,
+            52.835633522722766,
+            -132.78666755971508,
+            7.080027579288456,
+            35.19230105516564,
+            147.71013882491687,
+            -79.17846186481341,
+            148.1481795078779,
+            -0.6311097000181745,
+            79.325219075165,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.22222814888246178,
+            0.7357370170259525,
+            -3.199344532630879,
+            -88.04340928679729,
+            67.87775632875231,
+            -84.19536900233544
+          ],
+          "actuator_force20": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975
+          ],
+          "qfrc_actuator26": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "source_candidate": {
+          "task_bundle": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "qualified_zero_report": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+            "bytes": 68156,
+            "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+          },
+          "checkpoint": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+            "bytes": 39226569,
+            "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+          }
+        },
+        "source_state_npz": {
+          "task_bundle": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "qualified_zero_report": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+            "bytes": 68156,
+            "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+          },
+          "checkpoint": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+            "bytes": 39226569,
+            "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+          }
+        },
+        "command": {
+          "name": "A1_tracking__online300",
+          "candidate_id": "A1_tracking__online300",
+          "route": "injected_callback",
+          "qpos27": [
+            0.9003363722093097,
+            0.04038687586451288,
+            0.029990434218657262,
+            0.8692773991503583,
+            -0.8630142896540195,
+            0.4723261063043457,
+            1.1251006155772207,
+            0.40869516803025907,
+            -0.7823472396439576,
+            0.17034875490121784,
+            1.124359533260123,
+            0.7696150545328048,
+            -0.10932789375512818,
+            -0.14035572275499802,
+            0.0025119008953089074,
+            0.17803092412247978,
+            0.319688554955577,
+            -0.23895150303179627,
+            -0.12949049779670038,
+            -0.006433781443888266,
+            -0.16432721864782343,
+            0.08061976277936019,
+            0.46608009257879446,
+            0.6631518610716088,
+            0.5578056431815778,
+            -0.2527668780534653,
+            0.43033867935749465
+          ],
+          "ctrl20": [
+            0.9540725596015607,
+            0.024327446938353262,
+            0.09342495791598021,
+            0.9212036286683376,
+            -0.8521691841269621,
+            0.47862446621760996,
+            1.2096555156408788,
+            0.4616205692273283,
+            -0.770797690018839,
+            0.19486041263694848,
+            1.209931801108178,
+            0.8227152985979983,
+            -0.09596820153323679,
+            -0.13923949853232023,
+            0.009471863848499424,
+            0.17881636057296924,
+            0.33055058281933053,
+            -0.23282617752485685,
+            -0.12003729352915586,
+            -0.005261076275423867
+          ],
+          "ctrl_margin20x2": [
+            [
+              2.141072559601561,
+              0.33692744039843925
+            ],
+            [
+              1.5083274469383532,
+              0.6736725530616466
+            ],
+            [
+              1.1404249579159802,
+              1.4765750420840198
+            ],
+            [
+              1.9682036286683375,
+              0.6487963713316625
+            ],
+            [
+              0.19483081587303785,
+              2.422169184126962
+            ],
+            [
+              1.17662446621761,
+              0.21937553378239
+            ],
+            [
+              2.2566555156408787,
+              0.884344484359121
+            ],
+            [
+              1.5086205692273282,
+              1.1083794307726718
+            ],
+            [
+              0.2762023099811609,
+              2.340797690018839
+            ],
+            [
+              0.8928604126369484,
+              0.5031395873630515
+            ],
+            [
+              2.256931801108178,
+              0.8840681988918218
+            ],
+            [
+              1.8697152985979981,
+              0.7472847014020018
+            ],
+            [
+              0.9510317984667631,
+              1.6659682015332369
+            ],
+            [
+              0.5587605014676797,
+              0.8372394985323202
+            ],
+            [
+              1.0564718638484993,
+              2.0845281361515005
+            ],
+            [
+              1.2258163605729693,
+              1.3911836394270307
+            ],
+            [
+              1.3775505828193304,
+              1.2394494171806696
+            ],
+            [
+              0.4651738224751431,
+              0.9308261775248567
+            ],
+            [
+              0.9269627064708441,
+              2.214037293529156
+            ],
+            [
+              1.041738923724576,
+              1.575261076275424
+            ]
+          ],
+          "candidate": {
+            "task_bundle": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "qualified_zero_report": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+              "bytes": 68156,
+              "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+            },
+            "checkpoint": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+              "bytes": 39226569,
+              "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+            }
+          },
+          "state_npz": {
+            "task_bundle": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "qualified_zero_report": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+              "bytes": 68156,
+              "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+            },
+            "checkpoint": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+              "bytes": 39226569,
+              "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+            }
+          },
+          "initial_provenance_scope": "Generic prescribed initial-state artifact, not a GN/static/oldcheckpoint qualification"
+        },
+        "energy_force_geometry_phase": "PRE(tick*dt); qpos/qvel/COM POST((tick+1)*dt)",
+        "velocity_metric_semantics": "Preserved root translational freejoint qvel RMS; angular body qvel norm is frame invariant, not a new COM-velocity gate.",
+        "contact_row_columns": [
+          "pre_tick",
+          "geom1",
+          "geom2",
+          "dim",
+          "efc_address",
+          "distance_m",
+          "position3",
+          "frame9",
+          "local_wrench6"
+        ],
+        "nonpad_metric_definition": "Maximum across PRE ticks of the SUM of positive Fn over every phone contact with non-designated hand geoms; same aggregation as original two-pad gate. old_two_pad also includes all positive Fn on geom41.",
+        "no_external_forces_equality_mocap_or_pose_reset": true,
+        "static_zero_acceleration_entry_required": false,
+        "control_schedule": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A1_tracking_dt_0.00015625\\control_schedule.json",
+          "bytes": 4471,
+          "sha256": "45454f9874df1451fc85fe398b35980d1577a6d78ac191535fdbc86745785579"
+        },
+        "control_scope": "Planned50Hz controller only; trace pre_executed_ctrl20 is actual perPRE-tick command. Legacy trace ctrl20 is last command and ctrl_margin20x2 describes initial source only. Raw integration receipts protect callback state; no full-MjData certificate.",
+        "native_loop_and_physical_success_gates_from": "frozen functional_tripod_dynamics_v3, unchanged after insertion of explicit control hook and schedule fields"
+      },
+      "endpoint": {
+        "dt_s": 0.00015625,
+        "final_COM_world_m": [
+          -0.15987673873513158,
+          0.08528443808928445,
+          0.4161498110929498
+        ],
+        "final_quaternion_wxyz": [
+          0.8522607579897498,
+          0.4112461444895672,
+          -0.04764343689172788,
+          0.3197785357936738
+        ],
+        "actual_final_time_s": 0.12078124999999812,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "finite_steps_saved": 773,
+        "original_case_pass": false
+      },
+      "tracking": {
+        "available_POST_command_frames": 6,
+        "missing_POST_command_frames": 94,
+        "COM_error_m": {
+          "count": 6,
+          "RMS": 0.027047603553603455,
+          "mean": 0.021006184448761737,
+          "max": 0.05026494238948212,
+          "final_available": 0.05026494238948212
+        },
+        "SO3_geodesic_error_rad": {
+          "count": 6,
+          "RMS": 0.3845305383548243,
+          "mean": 0.30751349474842976,
+          "max": 0.6889426521179108,
+          "final_available": 0.6889426521179108
+        },
+        "fixed_object_on_same_available_POST_frames": {
+          "COM_error_m": {
+            "count": 6,
+            "RMS": 0.0026045598733979458,
+            "mean": 0.002413149836931121,
+            "max": 0.003700211431961088,
+            "final_available": 0.002955530730817292
+          },
+          "SO3_geodesic_error_rad": {
+            "count": 6,
+            "RMS": 0.058751084594763046,
+            "mean": 0.05404576167860143,
+            "max": 0.08204738286209963,
+            "final_available": 0.07148764363218468
+          }
+        },
+        "fixed_object_full101_command_descriptor": {
+          "COM_error_m": {
+            "count": 101,
+            "RMS": 0.0031947870535900913,
+            "mean": 0.0029093893631159705,
+            "max": 0.004843918778045295,
+            "final_available": 0.0034501413015680625
+          },
+          "SO3_geodesic_error_rad": {
+            "count": 101,
+            "RMS": 0.05609437408766574,
+            "mean": 0.05191842022210633,
+            "max": 0.08275968083567732,
+            "final_available": 0.06962913146463125
+          }
+        },
+        "tracking_success_gate": null,
+        "scope": "Full SO3 angle and COM tracking descriptors, not holding5mm success; no missing-tail fill, temporal stretch or accumulated-clock tick index"
+      },
+      "controller_records": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A1_tracking_dt_0.00015625\\controller_records.json",
+        "bytes": 74370,
+        "sha256": "0ad7e59f00d054f22ed82573e981492a45cc97e1ad6225b16261c6b252d18a37"
+      },
+      "tracking_arrays": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A1_tracking_dt_0.00015625\\tracking101.npz",
+        "bytes": 17196,
+        "sha256": "290168682299fe903badce9b452e3c56698e6ddebe0cb8f29c707827bf464675"
+      }
+    },
+    {
+      "mode": "A2_engineered_material_proxy",
+      "dt_s": 0.0003125,
+      "native_summary": {
+        "name": "A2_engineered_material_proxy__online300",
+        "candidate_id": "A2_engineered_material_proxy__online300",
+        "route": "injected_callback",
+        "dt_s": 0.0003125,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "integration_steps": 386,
+        "finite_steps_saved": 386,
+        "actual_final_time_s": 0.1206249999999988,
+        "metrics": {
+          "final_COM_drift_m": 0.050056389769942554,
+          "final_angle_rad": 0.6616932144785188,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "tail_triple_pad_force_coverage": null,
+          "max_native_penetration_m": 0.00014946591562483536,
+          "max_self_penetration_m": 0.00014946591562483536,
+          "max_phone_nonpad_normal_force_N": 0.0,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0
+        },
+        "gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "tail_triple_pad_force_coverage": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": true,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true
+        },
+        "nominal_holding_dynamics_pass": false,
+        "old_two_pad_metrics": {
+          "final_COM_drift_m": 0.050056389769942554,
+          "final_angle_rad": 0.6616932144785188,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "max_native_penetration_m": 0.00014946591562483536,
+          "max_self_penetration_m": 0.00014946591562483536,
+          "max_phone_nonpad_normal_force_N": 2.7275568204179566,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0,
+          "tail_dual_pad_force_coverage": null
+        },
+        "old_two_pad_gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": false,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true,
+          "tail_dual_pad_force_coverage": false
+        },
+        "old_two_pad_pass": false,
+        "trace": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A2_engineered_material_proxy_dt_0.0003125\\trace.npz",
+          "bytes": 763866,
+          "sha256": "565a21f3317926cb51262115feb6f9617dd6865d5801e998dc4216e666c40535"
+        },
+        "warnings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "initial_native": {
+          "phase": "RESET_FORWARD",
+          "pad_normal_N3": [
+            1.4852859405565542,
+            1.0809508495304838,
+            1.434625044351917
+          ],
+          "phone_nonpad_normal_N": 0.0,
+          "old_two_pad_phone_nonpad_normal_N": 1.434625044351917,
+          "table_normal_N": 0.0,
+          "contact_rows24": [
+            [
+              -1.0,
+              15.0,
+              71.0,
+              3.0,
+              20.0,
+              -7.472899946864002e-05,
+              -0.13942085514733216,
+              0.03481881357030944,
+              0.5114221248951408,
+              -0.3604187731135925,
+              -0.274080182850194,
+              -0.8916155905748268,
+              -0.10271700141966887,
+              0.9617068437776682,
+              -0.25410463248541443,
+              0.9271178596093621,
+              0.0,
+              -0.37476989526021903,
+              1.4852859405565542,
+              -0.7548269046850717,
+              -0.28487325370451605,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              28.0,
+              71.0,
+              3.0,
+              24.0,
+              -7.486874527687192e-05,
+              -0.1695697236927411,
+              0.019885284467939645,
+              0.4502128443029243,
+              -0.5036985822241008,
+              0.1460637359228219,
+              0.85144179091333,
+              0.07436969820190281,
+              0.9892751816599202,
+              -0.1257130181846325,
+              -0.8606723454688135,
+              0.0,
+              -0.5091592223904142,
+              1.0809508495304838,
+              0.3692528235613957,
+              -0.3874127711099429,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              41.0,
+              71.0,
+              3.0,
+              28.0,
+              -7.512712870421113e-05,
+              -0.1694823296366852,
+              0.0038322147130412975,
+              0.45329726367531553,
+              -0.04514687345110974,
+              0.4883197888915586,
+              0.8714961523692996,
+              0.025262979229871255,
+              0.872664760246971,
+              -0.4876658672734103,
+              -0.9986608742200831,
+              -3.469446951953614e-18,
+              -0.051734498180415575,
+              1.434625044351917,
+              0.05137890019168809,
+              -0.9219791934366154,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "qacc26_descriptor": [
+            12.225935371645416,
+            -217.04045180795327,
+            8.529064425743712,
+            52.835633522722766,
+            -132.78666755971508,
+            7.080027579288456,
+            35.19230105516564,
+            147.71013882491687,
+            -79.17846186481341,
+            148.1481795078779,
+            -0.6311097000181745,
+            79.325219075165,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.22222814888246178,
+            0.7357370170259525,
+            -3.199344532630879,
+            -88.04340928679729,
+            67.87775632875231,
+            -84.19536900233544
+          ],
+          "actuator_force20": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975
+          ],
+          "qfrc_actuator26": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "source_candidate": {
+          "task_bundle": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "qualified_zero_report": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+            "bytes": 68156,
+            "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+          },
+          "checkpoint": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+            "bytes": 39226569,
+            "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+          }
+        },
+        "source_state_npz": {
+          "task_bundle": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "qualified_zero_report": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+            "bytes": 68156,
+            "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+          },
+          "checkpoint": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+            "bytes": 39226569,
+            "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+          }
+        },
+        "command": {
+          "name": "A2_engineered_material_proxy__online300",
+          "candidate_id": "A2_engineered_material_proxy__online300",
+          "route": "injected_callback",
+          "qpos27": [
+            0.9003363722093097,
+            0.04038687586451288,
+            0.029990434218657262,
+            0.8692773991503583,
+            -0.8630142896540195,
+            0.4723261063043457,
+            1.1251006155772207,
+            0.40869516803025907,
+            -0.7823472396439576,
+            0.17034875490121784,
+            1.124359533260123,
+            0.7696150545328048,
+            -0.10932789375512818,
+            -0.14035572275499802,
+            0.0025119008953089074,
+            0.17803092412247978,
+            0.319688554955577,
+            -0.23895150303179627,
+            -0.12949049779670038,
+            -0.006433781443888266,
+            -0.16432721864782343,
+            0.08061976277936019,
+            0.46608009257879446,
+            0.6631518610716088,
+            0.5578056431815778,
+            -0.2527668780534653,
+            0.43033867935749465
+          ],
+          "ctrl20": [
+            0.9540725596015607,
+            0.024327446938353262,
+            0.09342495791598021,
+            0.9212036286683376,
+            -0.8521691841269621,
+            0.47862446621760996,
+            1.2096555156408788,
+            0.4616205692273283,
+            -0.770797690018839,
+            0.19486041263694848,
+            1.209931801108178,
+            0.8227152985979983,
+            -0.09596820153323679,
+            -0.13923949853232023,
+            0.009471863848499424,
+            0.17881636057296924,
+            0.33055058281933053,
+            -0.23282617752485685,
+            -0.12003729352915586,
+            -0.005261076275423867
+          ],
+          "ctrl_margin20x2": [
+            [
+              2.141072559601561,
+              0.33692744039843925
+            ],
+            [
+              1.5083274469383532,
+              0.6736725530616466
+            ],
+            [
+              1.1404249579159802,
+              1.4765750420840198
+            ],
+            [
+              1.9682036286683375,
+              0.6487963713316625
+            ],
+            [
+              0.19483081587303785,
+              2.422169184126962
+            ],
+            [
+              1.17662446621761,
+              0.21937553378239
+            ],
+            [
+              2.2566555156408787,
+              0.884344484359121
+            ],
+            [
+              1.5086205692273282,
+              1.1083794307726718
+            ],
+            [
+              0.2762023099811609,
+              2.340797690018839
+            ],
+            [
+              0.8928604126369484,
+              0.5031395873630515
+            ],
+            [
+              2.256931801108178,
+              0.8840681988918218
+            ],
+            [
+              1.8697152985979981,
+              0.7472847014020018
+            ],
+            [
+              0.9510317984667631,
+              1.6659682015332369
+            ],
+            [
+              0.5587605014676797,
+              0.8372394985323202
+            ],
+            [
+              1.0564718638484993,
+              2.0845281361515005
+            ],
+            [
+              1.2258163605729693,
+              1.3911836394270307
+            ],
+            [
+              1.3775505828193304,
+              1.2394494171806696
+            ],
+            [
+              0.4651738224751431,
+              0.9308261775248567
+            ],
+            [
+              0.9269627064708441,
+              2.214037293529156
+            ],
+            [
+              1.041738923724576,
+              1.575261076275424
+            ]
+          ],
+          "candidate": {
+            "task_bundle": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "qualified_zero_report": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+              "bytes": 68156,
+              "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+            },
+            "checkpoint": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+              "bytes": 39226569,
+              "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+            }
+          },
+          "state_npz": {
+            "task_bundle": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "qualified_zero_report": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+              "bytes": 68156,
+              "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+            },
+            "checkpoint": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+              "bytes": 39226569,
+              "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+            }
+          },
+          "initial_provenance_scope": "Generic prescribed initial-state artifact, not a GN/static/oldcheckpoint qualification"
+        },
+        "energy_force_geometry_phase": "PRE(tick*dt); qpos/qvel/COM POST((tick+1)*dt)",
+        "velocity_metric_semantics": "Preserved root translational freejoint qvel RMS; angular body qvel norm is frame invariant, not a new COM-velocity gate.",
+        "contact_row_columns": [
+          "pre_tick",
+          "geom1",
+          "geom2",
+          "dim",
+          "efc_address",
+          "distance_m",
+          "position3",
+          "frame9",
+          "local_wrench6"
+        ],
+        "nonpad_metric_definition": "Maximum across PRE ticks of the SUM of positive Fn over every phone contact with non-designated hand geoms; same aggregation as original two-pad gate. old_two_pad also includes all positive Fn on geom41.",
+        "no_external_forces_equality_mocap_or_pose_reset": true,
+        "static_zero_acceleration_entry_required": false,
+        "control_schedule": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A2_engineered_material_proxy_dt_0.0003125\\control_schedule.json",
+          "bytes": 4468,
+          "sha256": "30c1286e4f9dcb2c5965ed26f11af52d5eb5a1a4400485d91596a67f822bacde"
+        },
+        "control_scope": "Planned50Hz controller only; trace pre_executed_ctrl20 is actual perPRE-tick command. Legacy trace ctrl20 is last command and ctrl_margin20x2 describes initial source only. Raw integration receipts protect callback state; no full-MjData certificate.",
+        "native_loop_and_physical_success_gates_from": "frozen functional_tripod_dynamics_v3, unchanged after insertion of explicit control hook and schedule fields"
+      },
+      "endpoint": {
+        "dt_s": 0.0003125,
+        "final_COM_world_m": [
+          -0.1601625466048399,
+          0.085358529590296,
+          0.41608087386202147
+        ],
+        "final_quaternion_wxyz": [
+          0.8509964974731988,
+          0.41110101604569127,
+          -0.05268168664015415,
+          0.32252993006432257
+        ],
+        "actual_final_time_s": 0.1206249999999988,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "finite_steps_saved": 386,
+        "original_case_pass": false
+      },
+      "tracking": {
+        "available_POST_command_frames": 6,
+        "missing_POST_command_frames": 94,
+        "COM_error_m": {
+          "count": 6,
+          "RMS": 0.027125707303127616,
+          "mean": 0.021048463340252694,
+          "max": 0.05043881147723898,
+          "final_available": 0.05043881147723898
+        },
+        "SO3_geodesic_error_rad": {
+          "count": 6,
+          "RMS": 0.38102820800828224,
+          "mean": 0.30541993031572545,
+          "max": 0.6816460526042397,
+          "final_available": 0.6816460526042397
+        },
+        "fixed_object_on_same_available_POST_frames": {
+          "COM_error_m": {
+            "count": 6,
+            "RMS": 0.0026045598733979458,
+            "mean": 0.002413149836931121,
+            "max": 0.003700211431961088,
+            "final_available": 0.002955530730817292
+          },
+          "SO3_geodesic_error_rad": {
+            "count": 6,
+            "RMS": 0.058751084594763046,
+            "mean": 0.05404576167860143,
+            "max": 0.08204738286209963,
+            "final_available": 0.07148764363218468
+          }
+        },
+        "fixed_object_full101_command_descriptor": {
+          "COM_error_m": {
+            "count": 101,
+            "RMS": 0.0031947870535900913,
+            "mean": 0.0029093893631159705,
+            "max": 0.004843918778045295,
+            "final_available": 0.0034501413015680625
+          },
+          "SO3_geodesic_error_rad": {
+            "count": 101,
+            "RMS": 0.05609437408766574,
+            "mean": 0.05191842022210633,
+            "max": 0.08275968083567732,
+            "final_available": 0.06962913146463125
+          }
+        },
+        "tracking_success_gate": null,
+        "scope": "Full SO3 angle and COM tracking descriptors, not holding5mm success; no missing-tail fill, temporal stretch or accumulated-clock tick index"
+      },
+      "controller_records": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A2_engineered_material_proxy_dt_0.0003125\\controller_records.json",
+        "bytes": 74324,
+        "sha256": "4208bed2143ce0675fcd9d808b2a4f14f19d503762b05cbb0069581ef84c6e6e"
+      },
+      "tracking_arrays": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A2_engineered_material_proxy_dt_0.0003125\\tracking101.npz",
+        "bytes": 17181,
+        "sha256": "5e72f54ff37f1f1619d4fc4ca1738fd053c5822ab98de6275a5c00e46aaeed88"
+      }
+    },
+    {
+      "mode": "A2_engineered_material_proxy",
+      "dt_s": 0.00015625,
+      "native_summary": {
+        "name": "A2_engineered_material_proxy__online300",
+        "candidate_id": "A2_engineered_material_proxy__online300",
+        "route": "injected_callback",
+        "dt_s": 0.00015625,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "integration_steps": 773,
+        "finite_steps_saved": 773,
+        "actual_final_time_s": 0.12078124999999812,
+        "metrics": {
+          "final_COM_drift_m": 0.05007768262528359,
+          "final_angle_rad": 0.6767153343469824,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "tail_triple_pad_force_coverage": null,
+          "max_native_penetration_m": 0.00034957723784055606,
+          "max_self_penetration_m": 0.0001326238058630901,
+          "max_phone_nonpad_normal_force_N": 0.0,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0
+        },
+        "gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "tail_triple_pad_force_coverage": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": true,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true
+        },
+        "nominal_holding_dynamics_pass": false,
+        "old_two_pad_metrics": {
+          "final_COM_drift_m": 0.05007768262528359,
+          "final_angle_rad": 0.6767153343469824,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "max_native_penetration_m": 0.00034957723784055606,
+          "max_self_penetration_m": 0.0001326238058630901,
+          "max_phone_nonpad_normal_force_N": 2.557589020327155,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0,
+          "tail_dual_pad_force_coverage": null
+        },
+        "old_two_pad_gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": false,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true,
+          "tail_dual_pad_force_coverage": false
+        },
+        "old_two_pad_pass": false,
+        "trace": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A2_engineered_material_proxy_dt_0.00015625\\trace.npz",
+          "bytes": 1462801,
+          "sha256": "a944707ec46cf29f3d80b0c5ca62cfc644ded6acf3da53f0b08cca8b7413001f"
+        },
+        "warnings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "initial_native": {
+          "phase": "RESET_FORWARD",
+          "pad_normal_N3": [
+            1.4852859405565542,
+            1.0809508495304838,
+            1.434625044351917
+          ],
+          "phone_nonpad_normal_N": 0.0,
+          "old_two_pad_phone_nonpad_normal_N": 1.434625044351917,
+          "table_normal_N": 0.0,
+          "contact_rows24": [
+            [
+              -1.0,
+              15.0,
+              71.0,
+              3.0,
+              20.0,
+              -7.472899946864002e-05,
+              -0.13942085514733216,
+              0.03481881357030944,
+              0.5114221248951408,
+              -0.3604187731135925,
+              -0.274080182850194,
+              -0.8916155905748268,
+              -0.10271700141966887,
+              0.9617068437776682,
+              -0.25410463248541443,
+              0.9271178596093621,
+              0.0,
+              -0.37476989526021903,
+              1.4852859405565542,
+              -0.7548269046850717,
+              -0.28487325370451605,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              28.0,
+              71.0,
+              3.0,
+              24.0,
+              -7.486874527687192e-05,
+              -0.1695697236927411,
+              0.019885284467939645,
+              0.4502128443029243,
+              -0.5036985822241008,
+              0.1460637359228219,
+              0.85144179091333,
+              0.07436969820190281,
+              0.9892751816599202,
+              -0.1257130181846325,
+              -0.8606723454688135,
+              0.0,
+              -0.5091592223904142,
+              1.0809508495304838,
+              0.3692528235613957,
+              -0.3874127711099429,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              41.0,
+              71.0,
+              3.0,
+              28.0,
+              -7.512712870421113e-05,
+              -0.1694823296366852,
+              0.0038322147130412975,
+              0.45329726367531553,
+              -0.04514687345110974,
+              0.4883197888915586,
+              0.8714961523692996,
+              0.025262979229871255,
+              0.872664760246971,
+              -0.4876658672734103,
+              -0.9986608742200831,
+              -3.469446951953614e-18,
+              -0.051734498180415575,
+              1.434625044351917,
+              0.05137890019168809,
+              -0.9219791934366154,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "qacc26_descriptor": [
+            12.225935371645416,
+            -217.04045180795327,
+            8.529064425743712,
+            52.835633522722766,
+            -132.78666755971508,
+            7.080027579288456,
+            35.19230105516564,
+            147.71013882491687,
+            -79.17846186481341,
+            148.1481795078779,
+            -0.6311097000181745,
+            79.325219075165,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.22222814888246178,
+            0.7357370170259525,
+            -3.199344532630879,
+            -88.04340928679729,
+            67.87775632875231,
+            -84.19536900233544
+          ],
+          "actuator_force20": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975
+          ],
+          "qfrc_actuator26": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "source_candidate": {
+          "task_bundle": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "qualified_zero_report": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+            "bytes": 68156,
+            "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+          },
+          "checkpoint": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+            "bytes": 39226569,
+            "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+          }
+        },
+        "source_state_npz": {
+          "task_bundle": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "qualified_zero_report": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+            "bytes": 68156,
+            "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+          },
+          "checkpoint": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+            "bytes": 39226569,
+            "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+          }
+        },
+        "command": {
+          "name": "A2_engineered_material_proxy__online300",
+          "candidate_id": "A2_engineered_material_proxy__online300",
+          "route": "injected_callback",
+          "qpos27": [
+            0.9003363722093097,
+            0.04038687586451288,
+            0.029990434218657262,
+            0.8692773991503583,
+            -0.8630142896540195,
+            0.4723261063043457,
+            1.1251006155772207,
+            0.40869516803025907,
+            -0.7823472396439576,
+            0.17034875490121784,
+            1.124359533260123,
+            0.7696150545328048,
+            -0.10932789375512818,
+            -0.14035572275499802,
+            0.0025119008953089074,
+            0.17803092412247978,
+            0.319688554955577,
+            -0.23895150303179627,
+            -0.12949049779670038,
+            -0.006433781443888266,
+            -0.16432721864782343,
+            0.08061976277936019,
+            0.46608009257879446,
+            0.6631518610716088,
+            0.5578056431815778,
+            -0.2527668780534653,
+            0.43033867935749465
+          ],
+          "ctrl20": [
+            0.9540725596015607,
+            0.024327446938353262,
+            0.09342495791598021,
+            0.9212036286683376,
+            -0.8521691841269621,
+            0.47862446621760996,
+            1.2096555156408788,
+            0.4616205692273283,
+            -0.770797690018839,
+            0.19486041263694848,
+            1.209931801108178,
+            0.8227152985979983,
+            -0.09596820153323679,
+            -0.13923949853232023,
+            0.009471863848499424,
+            0.17881636057296924,
+            0.33055058281933053,
+            -0.23282617752485685,
+            -0.12003729352915586,
+            -0.005261076275423867
+          ],
+          "ctrl_margin20x2": [
+            [
+              2.141072559601561,
+              0.33692744039843925
+            ],
+            [
+              1.5083274469383532,
+              0.6736725530616466
+            ],
+            [
+              1.1404249579159802,
+              1.4765750420840198
+            ],
+            [
+              1.9682036286683375,
+              0.6487963713316625
+            ],
+            [
+              0.19483081587303785,
+              2.422169184126962
+            ],
+            [
+              1.17662446621761,
+              0.21937553378239
+            ],
+            [
+              2.2566555156408787,
+              0.884344484359121
+            ],
+            [
+              1.5086205692273282,
+              1.1083794307726718
+            ],
+            [
+              0.2762023099811609,
+              2.340797690018839
+            ],
+            [
+              0.8928604126369484,
+              0.5031395873630515
+            ],
+            [
+              2.256931801108178,
+              0.8840681988918218
+            ],
+            [
+              1.8697152985979981,
+              0.7472847014020018
+            ],
+            [
+              0.9510317984667631,
+              1.6659682015332369
+            ],
+            [
+              0.5587605014676797,
+              0.8372394985323202
+            ],
+            [
+              1.0564718638484993,
+              2.0845281361515005
+            ],
+            [
+              1.2258163605729693,
+              1.3911836394270307
+            ],
+            [
+              1.3775505828193304,
+              1.2394494171806696
+            ],
+            [
+              0.4651738224751431,
+              0.9308261775248567
+            ],
+            [
+              0.9269627064708441,
+              2.214037293529156
+            ],
+            [
+              1.041738923724576,
+              1.575261076275424
+            ]
+          ],
+          "candidate": {
+            "task_bundle": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "qualified_zero_report": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+              "bytes": 68156,
+              "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+            },
+            "checkpoint": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+              "bytes": 39226569,
+              "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+            }
+          },
+          "state_npz": {
+            "task_bundle": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "qualified_zero_report": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_policy_evaluation_v1\\zero_qualified_run2\\report.json",
+              "bytes": 68156,
+              "sha256": "4559016b55e1d5a46b899cab98ed88fdfae375793f202352e561e0a942b6ff36"
+            },
+            "checkpoint": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_resume1\\checkpoint_0300.pt",
+              "bytes": 39226569,
+              "sha256": "439c77a0cc78aee7cf396b8477bcba61b23351349550dbded650942930efe621"
+            }
+          },
+          "initial_provenance_scope": "Generic prescribed initial-state artifact, not a GN/static/oldcheckpoint qualification"
+        },
+        "energy_force_geometry_phase": "PRE(tick*dt); qpos/qvel/COM POST((tick+1)*dt)",
+        "velocity_metric_semantics": "Preserved root translational freejoint qvel RMS; angular body qvel norm is frame invariant, not a new COM-velocity gate.",
+        "contact_row_columns": [
+          "pre_tick",
+          "geom1",
+          "geom2",
+          "dim",
+          "efc_address",
+          "distance_m",
+          "position3",
+          "frame9",
+          "local_wrench6"
+        ],
+        "nonpad_metric_definition": "Maximum across PRE ticks of the SUM of positive Fn over every phone contact with non-designated hand geoms; same aggregation as original two-pad gate. old_two_pad also includes all positive Fn on geom41.",
+        "no_external_forces_equality_mocap_or_pose_reset": true,
+        "static_zero_acceleration_entry_required": false,
+        "control_schedule": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A2_engineered_material_proxy_dt_0.00015625\\control_schedule.json",
+          "bytes": 4465,
+          "sha256": "8b098bfd223239e75dc8c7508ba41f2a156df182f7f39e4f5ccfa88bfccdcbc1"
+        },
+        "control_scope": "Planned50Hz controller only; trace pre_executed_ctrl20 is actual perPRE-tick command. Legacy trace ctrl20 is last command and ctrl_margin20x2 describes initial source only. Raw integration receipts protect callback state; no full-MjData certificate.",
+        "native_loop_and_physical_success_gates_from": "frozen functional_tripod_dynamics_v3, unchanged after insertion of explicit control hook and schedule fields"
+      },
+      "endpoint": {
+        "dt_s": 0.00015625,
+        "final_COM_world_m": [
+          -0.15994772909998806,
+          0.0851837307957147,
+          0.4160597797807083
+        ],
+        "final_quaternion_wxyz": [
+          0.8533142513479167,
+          0.4109951124396115,
+          -0.04546755962223041,
+          0.3176011760357553
+        ],
+        "actual_final_time_s": 0.12078124999999812,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "finite_steps_saved": 773,
+        "original_case_pass": false
+      },
+      "tracking": {
+        "available_POST_command_frames": 6,
+        "missing_POST_command_frames": 94,
+        "COM_error_m": {
+          "count": 6,
+          "RMS": 0.02711272521804416,
+          "mean": 0.02104751891523865,
+          "max": 0.05035779500719372,
+          "final_available": 0.05035779500719372
+        },
+        "SO3_geodesic_error_rad": {
+          "count": 6,
+          "RMS": 0.3878670214422454,
+          "mean": 0.31092604811059577,
+          "max": 0.6937560076120296,
+          "final_available": 0.6937560076120296
+        },
+        "fixed_object_on_same_available_POST_frames": {
+          "COM_error_m": {
+            "count": 6,
+            "RMS": 0.0026045598733979458,
+            "mean": 0.002413149836931121,
+            "max": 0.003700211431961088,
+            "final_available": 0.002955530730817292
+          },
+          "SO3_geodesic_error_rad": {
+            "count": 6,
+            "RMS": 0.058751084594763046,
+            "mean": 0.05404576167860143,
+            "max": 0.08204738286209963,
+            "final_available": 0.07148764363218468
+          }
+        },
+        "fixed_object_full101_command_descriptor": {
+          "COM_error_m": {
+            "count": 101,
+            "RMS": 0.0031947870535900913,
+            "mean": 0.0029093893631159705,
+            "max": 0.004843918778045295,
+            "final_available": 0.0034501413015680625
+          },
+          "SO3_geodesic_error_rad": {
+            "count": 101,
+            "RMS": 0.05609437408766574,
+            "mean": 0.05191842022210633,
+            "max": 0.08275968083567732,
+            "final_available": 0.06962913146463125
+          }
+        },
+        "tracking_success_gate": null,
+        "scope": "Full SO3 angle and COM tracking descriptors, not holding5mm success; no missing-tail fill, temporal stretch or accumulated-clock tick index"
+      },
+      "controller_records": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A2_engineered_material_proxy_dt_0.00015625\\controller_records.json",
+        "bytes": 74353,
+        "sha256": "bf9a2af33b3c130168506e9bb25b87b9dc6646f7eee0162a4c494728a413e80d"
+      },
+      "tracking_arrays": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_eval300_v1\\A2_engineered_material_proxy_dt_0.00015625\\tracking101.npz",
+        "bytes": 17198,
+        "sha256": "86b65f720e39a9d123ec1613fb41cc4786223a53f043c8f9d4381069350fe7b0"
+      }
+    }
+  ],
+  "dt_pairs": [
+    {
+      "name": "A1_tracking__online300",
+      "comparison_status": "INCOMPLETE_DURATION_NOT_2S_CONSISTENCY",
+      "final_COM_difference_m": 0.00043755149503415895,
+      "final_orientation_difference_rad": 0.023365992673695022,
+      "endpoints": [
+        {
+          "dt_s": 0.0003125,
+          "final_COM_world_m": [
+            -0.15998931610848868,
+            0.08490352101765204,
+            0.4159662904391976
+          ],
+          "final_quaternion_wxyz": [
+            0.8539240953914421,
+            0.4159394537096761,
+            -0.045834417152461705,
+            0.3093658293378543
+          ],
+          "actual_final_time_s": 0.1206249999999988,
+          "termination": "ABORT_LOSS_OF_HOLD",
+          "finite_steps_saved": 386,
+          "original_case_pass": false
+        },
+        {
+          "dt_s": 0.00015625,
+          "final_COM_world_m": [
+            -0.15987673873513158,
+            0.08528443808928445,
+            0.4161498110929498
+          ],
+          "final_quaternion_wxyz": [
+            0.8522607579897498,
+            0.4112461444895672,
+            -0.04764343689172788,
+            0.3197785357936738
+          ],
+          "actual_final_time_s": 0.12078124999999812,
+          "termination": "ABORT_LOSS_OF_HOLD",
+          "finite_steps_saved": 773,
+          "original_case_pass": false
+        }
+      ],
+      "gates": {
+        "both_duration_complete": false,
+        "final_COM_difference_m": true,
+        "final_orientation_difference_rad": true
+      },
+      "dt_pair_consistency_pass": false,
+      "both_tripod_cases_pass": false,
+      "both_old_two_pad_cases_pass": false,
+      "orientation_observer": "F64 endpoint normalization for pair comparison only; no state repair"
+    },
+    {
+      "name": "A2_engineered_material_proxy__online300",
+      "comparison_status": "INCOMPLETE_DURATION_NOT_2S_CONSISTENCY",
+      "final_COM_difference_m": 0.0002777519383267873,
+      "final_orientation_difference_rad": 0.01807982300955763,
+      "endpoints": [
+        {
+          "dt_s": 0.0003125,
+          "final_COM_world_m": [
+            -0.1601625466048399,
+            0.085358529590296,
+            0.41608087386202147
+          ],
+          "final_quaternion_wxyz": [
+            0.8509964974731988,
+            0.41110101604569127,
+            -0.05268168664015415,
+            0.32252993006432257
+          ],
+          "actual_final_time_s": 0.1206249999999988,
+          "termination": "ABORT_LOSS_OF_HOLD",
+          "finite_steps_saved": 386,
+          "original_case_pass": false
+        },
+        {
+          "dt_s": 0.00015625,
+          "final_COM_world_m": [
+            -0.15994772909998806,
+            0.0851837307957147,
+            0.4160597797807083
+          ],
+          "final_quaternion_wxyz": [
+            0.8533142513479167,
+            0.4109951124396115,
+            -0.04546755962223041,
+            0.3176011760357553
+          ],
+          "actual_final_time_s": 0.12078124999999812,
+          "termination": "ABORT_LOSS_OF_HOLD",
+          "finite_steps_saved": 773,
+          "original_case_pass": false
+        }
+      ],
+      "gates": {
+        "both_duration_complete": false,
+        "final_COM_difference_m": true,
+        "final_orientation_difference_rad": true
+      },
+      "dt_pair_consistency_pass": false,
+      "both_tripod_cases_pass": false,
+      "both_old_two_pad_cases_pass": false,
+      "orientation_observer": "F64 endpoint normalization for pair comparison only; no state repair"
+    }
+  ],
+  "counts": {
+    "MJB_reads": 1,
+    "MjData": 4,
+    "initial_forward": 4,
+    "integration_steps": 2318,
+    "contact_force_reads": 3547,
+    "controller_calls": 28,
+    "controller_receipt_reads": 56,
+    "Actor_FW": 28,
+    "WM_FW": 0,
+    "Critic_FW": 0,
+    "observer_forward": 0,
+    "optimizer_steps": 0,
+    "backward_calls": 0,
+    "GPU_calls": 0
+  },
+  "own_CPU_checkpoint_reads": 1,
+  "Actor_constructors": 2,
+  "unused_Critic_constructors": 2,
+  "WM_constructors": 0,
+  "tripod_cases_passing": 0,
+  "physical_pair_passes": 0,
+  "elapsed_s": 1.2165592999663204,
+  "scope": "All final300 cases; no training, auxiliary forces, source-state selection or physical gate change"
+}

@@ -1,0 +1,203 @@
+{
+  "schema": "supermimic_research.fixed_root_saved_response_parity:1",
+  "comparisons": [
+    {
+      "reference": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_action_response_evaluation_v1\\completed_v1\\offline1000_WM1100_all328_predictions.npz",
+        "bytes": 636039,
+        "sha256": "08dd7689530529a23b2e405ab82f5df45508009cb7105440ef312456bf9c080c"
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_response300_v1\\offline1000_predictions.npz",
+        "bytes": 407614,
+        "sha256": "116be4de2d7f40ce4aa179e4b2bb3e4ddc69572ee0050a811a16f3b05e35abee"
+      },
+      "leaves": [
+        {
+          "field": "y",
+          "reference_field": "prediction58",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "head",
+          "reference_field": "head178",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "Fn",
+          "reference_field": "meanFn22",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "cov",
+          "reference_field": "coverage22",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "encoded",
+          "reference_field": "normalized366_FP32",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "reference": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_action_response_evaluation_v1\\completed_v1\\offline1000_WM1100_all320_native_responses.npz",
+        "bytes": 1378062,
+        "sha256": "1dda9fbe3dc8536ad058fbc1e848cb010d25336d9ac197ab45c4af14a699b2ea"
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_response300_v1\\offline1000_responses.npz",
+        "bytes": 354221,
+        "sha256": "c69652c69073614a3be38cdd8907a726cf6b60ca47d59f46cc829ca07479dfaf"
+      },
+      "leaves": [
+        {
+          "field": "native52",
+          "reference_field": "native52",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "model52",
+          "reference_field": "model52",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "side_row",
+          "reference_field": "side_row",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "baseline_row",
+          "reference_field": "baseline_row",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "axis",
+          "reference_field": "axis",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "known",
+          "reference_field": "known",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "actual_du",
+          "reference_field": "actual_du_F64",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "encoded_du",
+          "reference_field": "encoded_du_physical_F64",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "native_J",
+          "reference_field": "native_J22_response",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "model_J",
+          "reference_field": "model_J22_response",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "native_cov",
+          "reference_field": "native_coverage22_response",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "model_cov",
+          "reference_field": "model_coverage22_response",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "native_meanFn",
+          "reference_field": "native_meanFn22_response",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "model_meanFn",
+          "reference_field": "model_meanFn22_response",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "native_triple",
+          "reference_field": "native_triple_coverage_response",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "reference": {
+        "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_tripod_action_response_evaluation_v1\\completed_v1\\offline1000_WM1100_model_only_AD_FD.npz",
+        "bytes": 279169,
+        "sha256": "98be87772e4357711226e1066173b28a082e4b6b5620c7102e0d1766288f2894"
+      },
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\phone_online_response300_v1\\offline1000_AD_FD.npz",
+        "bytes": 278437,
+        "sha256": "601d033aed39add4e53126c6f329dbf546a6c32588795913ae806f46c07c1048"
+      },
+      "leaves": [
+        {
+          "field": "AD274_per_u20",
+          "reference_field": "AD274_per_u20",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "FD274_per_u20",
+          "reference_field": "FD274_per_actual_du",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "bound_available",
+          "reference_field": "FD_bound_defined",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "AD_finite",
+          "reference_field": "AD_axis_finite",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "field": "encoded_du_physical",
+          "reference_field": "FD_encoded_du_physical_F64",
+          "typed_raw_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    }
+  ],
+  "passed": 25,
+  "total": 25,
+  "all_raw_equal": true,
+  "model_reexecution": false,
+  "NN_native_AD_optimizer_GPU_calls": 0,
+  "scope": "NumPy saved-array comparison against historical fixed offline1000 reference. Supports diagnostic port equivalence only; not policy or native-gradient qualification."
+}
