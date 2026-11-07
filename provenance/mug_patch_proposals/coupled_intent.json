@@ -1,0 +1,95 @@
+{
+  "schema": "mug_coupled_patch_repair_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\refine_mug_source_patches.py",
+      "bytes": 8232,
+      "sha256": "fcab2af7d776e77a63f60d360451b8f3e020c294080590f2cf0396d06f361385"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\collision_patch_ik.py",
+      "bytes": 3556,
+      "sha256": "515fc97e2857086fee7be26bf70088d3320f3eda25dcb8db694783b8b12d61de"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\surface_patch_ik.py",
+      "bytes": 5758,
+      "sha256": "508def09219d4a4378cb18364b57dc4b02db9785ad67d9f6635b55f6c040ad5c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_ik.py",
+      "bytes": 7752,
+      "sha256": "45d6922d2a7b9a14e895daa750f0c09073db414401aa8d6e82afab2388edb174"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\retargeting.py",
+      "bytes": 3375,
+      "sha256": "65eb41d332a06e021c0818cb35faa296377ef4c8387a67f98d62b6910f6f505a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\patch_intent.py",
+      "bytes": 2592,
+      "sha256": "dfacc257ab76e2daaa1fec7e7a69cd261bff9873d3514a852a97207a9125d9a5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_modes.py",
+      "bytes": 5574,
+      "sha256": "7f42099c121383082859b016b1a48c2103e6f7a558519318d7dda7f608b7a3eb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    }
+  ],
+  "binding": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+    "bytes": 3857,
+    "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "parent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_proposals_v1\\report.json",
+    "bytes": 24931,
+    "sha256": "3382e30a62447ab2c4e11e3d333299e4a60a9b8f944645b8ad7dfacce0227420"
+  },
+  "patches": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v2\\report.json",
+    "bytes": 15369,
+    "sha256": "bb1f2e3218adeaa6fd446e9cdc2d9c018d9bd835334e7b612807332512acf375"
+  },
+  "selection": "Lowest total failed exact pairs per source mask, tie by index alternative",
+  "selected": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_proposals_v1\\candidate01\\candidate.npz",
+      "bytes": 1376,
+      "sha256": "fa916241e9abd8d9145f03e94ce0d8abd6587b3844c529a05c58711a89034795"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_proposals_v1\\candidate05\\candidate.npz",
+      "bytes": 1378,
+      "sha256": "9365eb450e687c73abca8c6ce29b3d0a0f18926ed364345ff31ecf5e97e63c70"
+    }
+  ],
+  "maximum_seeds": 2,
+  "maximum_seconds_per_seed": 30.0,
+  "maximum_nfev_per_seed": 160,
+  "full20q_legal_bounds": true,
+  "collision_penalties": "Unchanged shared ContactAwareIK object/self/table/intent rows; no tip-fit rows",
+  "material_anchor_position_scale_m": 0.003,
+  "normal_scale": 0.5,
+  "stand_off_m": 5e-05,
+  "maximum_full_audits": 2,
+  "integration_steps": 0,
+  "neural_updates": 0,
+  "source_contact_truth_available": false
+}

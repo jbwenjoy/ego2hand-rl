@@ -77,6 +77,15 @@ source geometry explicit. Source skin/scan candidate envelopes are not observed
 contact labels; whole-hand or per-finger unit-force similarity is diagnostic,
 not dynamic task success or a validated reward.
 
+`surface_patch_ik.py` tracks fixed collision-surface material points/normals with
+native point/angular Jacobians; `collision_patch_ik.py` composes these terms with
+the existing collision penalties rather than another copied solver. Candidate
+source masks are hypotheses. `component_preload.py` makes small selected-pair
+engagement proposals inside unchanged hard limits, with full audit afterward.
+`wrench_separation.py` checks numerical separating inequalities of a declared
+frozen6D ray cone with explicit moment scale. No source-contact truth, global
+infeasibility, native dynamic success or physics gradient follows from them.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not

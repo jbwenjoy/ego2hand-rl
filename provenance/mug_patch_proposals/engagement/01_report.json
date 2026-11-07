@@ -1,0 +1,205 @@
+{
+  "target_depth_m": -5e-05,
+  "candidate": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_engagement_v1\\preload01\\candidate.npz",
+    "bytes": 791,
+    "sha256": "6c6f60de35efb49dfc903c957194c1a2144403e56f87222877ad174ded0e15bb"
+  },
+  "geometry": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_engagement_v1\\preload01\\geometry.json",
+    "bytes": 895446,
+    "sha256": "33ee2d583ab64275241a37b9bc5e46803cbb35b0c2fce1646a0c91349af74e6e"
+  },
+  "proposals": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_engagement_v1\\preload01\\proposals.json",
+    "bytes": 2657,
+    "sha256": "6b2759549a650db68cc7ab8d47fceb674dbd47b9b04bd10e53cfeaf7d58d7688"
+  },
+  "geometry_pass": true,
+  "unknown": 0,
+  "native_finger_normal_N": [
+    1.3295918724056213,
+    1.792233289531579,
+    0.5344511314667149
+  ],
+  "native_source_patch_matches": {
+    "groups": [
+      {
+        "group": 1,
+        "source_geometry_known": true,
+        "matched": true,
+        "native_contacts": 1,
+        "minimum_candidate_distance_m": 0.0024898952128558434,
+        "best_normal_dot": 0.9848258973096045,
+        "pairs": [
+          [
+            0,
+            4
+          ]
+        ]
+      },
+      {
+        "group": 2,
+        "source_geometry_known": true,
+        "matched": true,
+        "native_contacts": 1,
+        "minimum_candidate_distance_m": 0.0004499433722330486,
+        "best_normal_dot": 0.9868158943913429,
+        "pairs": [
+          [
+            1,
+            8
+          ],
+          [
+            1,
+            13
+          ]
+        ]
+      },
+      {
+        "group": 3,
+        "source_geometry_known": true,
+        "matched": true,
+        "native_contacts": 1,
+        "minimum_candidate_distance_m": 0.0002979099592659819,
+        "best_normal_dot": 0.9999983498212737,
+        "pairs": [
+          [
+            2,
+            26
+          ],
+          [
+            2,
+            28
+          ]
+        ]
+      }
+    ],
+    "all_source_geometry_known": true,
+    "all_groups_matched": true,
+    "source_contact_truth_known": false,
+    "physical_success_certified": false
+  },
+  "static": {
+    "cone6D": {
+      "success": false,
+      "status": 2,
+      "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is Infeasible)",
+      "witness": null
+    },
+    "force_only": {
+      "success": true,
+      "status": 0,
+      "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "witness": {
+        "ray_coefficients_N": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.18382056266850635,
+          0.0,
+          0.0,
+          1.6363386605304244,
+          0.0,
+          0.3416332308446145,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "total_normal_coefficients_N": 2.161792454043545,
+        "force_residual_N": [
+          0.0,
+          5.551115123125783e-17,
+          4.440892098500626e-16
+        ],
+        "moment_residual_Nm": [
+          0.04914171613689266,
+          -0.10517852018012083,
+          -0.00011200212640451815
+        ],
+        "required_torque20_Nm": null,
+        "minimum_torque_margin_Nm": null
+      }
+    },
+    "full_command": {
+      "success": false,
+      "status": 2,
+      "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+      "witness": null
+    },
+    "maximum_support": {
+      "success": true,
+      "status": 0,
+      "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "support_weight_N": -0.0,
+      "witness": {
+        "ray_coefficients_N": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.0,
+          0.0,
+          -0.0,
+          -0.0,
+          -0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "required_torque20_Nm": [
+          0.005605425032171003,
+          -0.022711887995716117,
+          -0.005160513677290106,
+          -0.00033861203059498826,
+          0.023489297447852494,
+          -0.002199239287905019,
+          -0.0025224762232832244,
+          -0.0006066334942679301,
+          0.009605965252354716,
+          -0.0010678146823844136,
+          -0.002672469439816928,
+          0.000413405427134173,
+          0.019240392812235548,
+          0.0013404321805678822,
+          -0.003936268125467161,
+          -0.0006794847303858514,
+          0.005100020263105461,
+          0.009607250979919154,
+          -0.003122329777035099,
+          -0.0005694291365872143
+        ],
+        "force_residual_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "moment_residual_Nm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "minimum_torque_margin_Nm": 0.03606319339927248
+      }
+    },
+    "EFC_columns": 16,
+    "EFC_wrench_error": 2.220446049250313e-16,
+    "EFC_hand_load_error": 1.3877787807814457e-17
+  },
+  "native_eligible": false,
+  "native_cases": [],
+  "max_q_change_rad": 0.0023724165010732268,
+  "basis": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_engagement_v1\\preload01\\basis.npz",
+    "bytes": 3227,
+    "sha256": "0b97a5db371675a8e337e9781bd9c43c71857e3c2b11c2081927ac383315eead"
+  }
+}

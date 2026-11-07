@@ -1,0 +1,110 @@
+{
+  "schema": "mug_source_material_anchor_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\propose_mug_source_patches.py",
+      "bytes": 12324,
+      "sha256": "465ceb870ae7c99d66ab0703567f299753f8fa3e5058fb482189e232e3bee6e5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\surface_patch_ik.py",
+      "bytes": 5758,
+      "sha256": "508def09219d4a4378cb18364b57dc4b02db9785ad67d9f6635b55f6c040ad5c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_contacts.py",
+      "bytes": 3098,
+      "sha256": "573b9f5367782b91422598b6b09f3188c0d4d369c3090f702ee0536c2e5cf241"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_modes.py",
+      "bytes": 5574,
+      "sha256": "7f42099c121383082859b016b1a48c2103e6f7a558519318d7dda7f608b7a3eb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\patch_intent.py",
+      "bytes": 2592,
+      "sha256": "dfacc257ab76e2daaa1fec7e7a69cd261bff9873d3514a852a97207a9125d9a5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    }
+  ],
+  "binding": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+    "bytes": 3857,
+    "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "parent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_equilibrium_v1\\seed00\\final_state.npz",
+    "bytes": 4286,
+    "sha256": "bcaaa6e074d701032f3c887960b1d0ffa05c5131770ba7dde02da3bf74fd2105"
+  },
+  "patches": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v2\\report.json",
+    "bytes": 15369,
+    "sha256": "bb1f2e3218adeaa6fd446e9cdc2d9c018d9bd835334e7b612807332512acf375"
+  },
+  "source_masks": [
+    "all_oriented_candidates",
+    "nonnegative_local_face_offset"
+  ],
+  "source_labels_are_unknown": true,
+  "object_pose_robot_root_material_and_mass_unchanged": true,
+  "anchor_rule": "Nearest native component-distance endpoint on each of9 declared distal geoms; recover full convex hand surface normal. Fix that material point/normal during each local solve.",
+  "fixed_standoff_m": 5e-05,
+  "position_scale_m": 0.003,
+  "normal_scale": 0.5,
+  "regularization": 0.005,
+  "maximum_reach_solves": 36,
+  "starts": [
+    "original4q",
+    "15percent_toward_legal_interval_midpoint"
+  ],
+  "max_nfev_per_solve": 120,
+  "composition_rule": "Best-cost thumb and middle anchor; each of3 index-anchor alternatives, separately for each source mask",
+  "maximum_full_geometry_audits": 6,
+  "qualification": "all3026 pair band plus material and actual native patch matches,3 actual groupFn>0.1N and cone6D before integration",
+  "maximum_native_cases": 12,
+  "maximum_integrations": 115200,
+  "native_gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483,
+    "tail_triple_pad_force_coverage": 0.95
+  },
+  "dts": [
+    0.0003125,
+    0.00015625
+  ],
+  "neural_updates": 0
+}

@@ -1,0 +1,121 @@
+{
+  "schema": "mug_source_patch_engagement_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\engage_mug_source_patches.py",
+      "bytes": 9051,
+      "sha256": "74590e3c3d1c1b310ee233c9d58399b74cffc348cce2426cbe88727876692bf5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\component_preload.py",
+      "bytes": 2494,
+      "sha256": "2cb4d6f0cca3f9bf1c54da33b6013f9d21acebf1c89392f2e0a09224b3873f4c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_contacts.py",
+      "bytes": 3098,
+      "sha256": "573b9f5367782b91422598b6b09f3188c0d4d369c3090f702ee0536c2e5cf241"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_modes.py",
+      "bytes": 5574,
+      "sha256": "7f42099c121383082859b016b1a48c2103e6f7a558519318d7dda7f608b7a3eb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\patch_intent.py",
+      "bytes": 2592,
+      "sha256": "dfacc257ab76e2daaa1fec7e7a69cd261bff9873d3514a852a97207a9125d9a5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    }
+  ],
+  "parent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_coupled_v1\\report.json",
+    "bytes": 9362,
+    "sha256": "28b221b0e914f6f67d30afa5590d01318899cfbce59222572b0cbe29b698f864"
+  },
+  "seed": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_coupled_v1\\seed00\\candidate.npz",
+    "bytes": 794,
+    "sha256": "5e7fefd52363fdc007da0953fde8650525414bcd494cdfde1dce69ad2a5b8b17"
+  },
+  "binding": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+    "bytes": 3857,
+    "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "patches": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v2\\report.json",
+    "bytes": 15369,
+    "sha256": "bb1f2e3218adeaa6fd446e9cdc2d9c018d9bd835334e7b612807332512acf375"
+  },
+  "target_depths_m": [
+    -2e-05,
+    -5e-05,
+    -7.5e-05
+  ],
+  "maximum_iterations_per_group": 8,
+  "maximum_step_Linf_rad": 0.02,
+  "exact_pair_central_step_rad": 1e-05,
+  "final_pair_tolerance_m": 5e-06,
+  "pairs": [
+    [
+      185,
+      15
+    ],
+    [
+      100,
+      26
+    ],
+    [
+      88,
+      39
+    ]
+  ],
+  "material_and_gravity_unchanged": true,
+  "native_eligibility": "full geometry and actual source-region/normal match, all groupFn>0.1N and cone6D success",
+  "maximum_LP_attempts": 12,
+  "maximum_native_cases": 6,
+  "maximum_integrations": 57600,
+  "gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483,
+    "tail_triple_pad_force_coverage": 0.95
+  },
+  "dts": [
+    0.0003125,
+    0.00015625
+  ],
+  "neural_updates": 0
+}

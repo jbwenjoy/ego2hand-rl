@@ -1,0 +1,134 @@
+{
+  "schema": "mug_patch_proposals_saved_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_patch_proposals.py",
+    "bytes": 8780,
+    "sha256": "595a5fe31736db0d44e4db5d1db4731de0f58379fa318c146357e16eea96cd06"
+  },
+  "inputs": {
+    "proposal": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_proposals_v1\\report.json",
+      "bytes": 24931,
+      "sha256": "3382e30a62447ab2c4e11e3d333299e4a60a9b8f944645b8ad7dfacce0227420"
+    },
+    "coupled": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_coupled_v1\\report.json",
+      "bytes": 9362,
+      "sha256": "28b221b0e914f6f67d30afa5590d01318899cfbce59222572b0cbe29b698f864"
+    },
+    "engagement": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_engagement_v1\\report.json",
+      "bytes": 21628,
+      "sha256": "b64c5ec1bbc5ea1583e244496bc7c8607c12dca60b82ce9585783a81ae09a12c"
+    },
+    "support": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_patch_support_v1\\report.json",
+      "bytes": 6292,
+      "sha256": "21d6a3549a4e26309dd04214d15a679d403fe5b945b9c62e1bf9ba9e7d4de74d"
+    }
+  },
+  "checks": {
+    "material_metrics_36": true,
+    "full_geometry_11": true,
+    "native_EFC_and_separations": true,
+    "no_unqualified_integration": true,
+    "known_result_scope": true
+  },
+  "passed": 5,
+  "total": 5,
+  "geometry": [
+    {
+      "stage": "proposal",
+      "index": 0,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": false
+    },
+    {
+      "stage": "proposal",
+      "index": 1,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": false
+    },
+    {
+      "stage": "proposal",
+      "index": 2,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": false
+    },
+    {
+      "stage": "proposal",
+      "index": 3,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": false
+    },
+    {
+      "stage": "proposal",
+      "index": 4,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": false
+    },
+    {
+      "stage": "proposal",
+      "index": 5,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": false
+    },
+    {
+      "stage": "coupled",
+      "index": 0,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": true
+    },
+    {
+      "stage": "coupled",
+      "index": 1,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": false
+    },
+    {
+      "stage": "engagement",
+      "index": 0,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": true
+    },
+    {
+      "stage": "engagement",
+      "index": 1,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": true
+    },
+    {
+      "stage": "engagement",
+      "index": 2,
+      "passed": true,
+      "max_margin_error_m": 0.0,
+      "geometry_pass": true
+    }
+  ],
+  "full_pair_queries": 33275,
+  "pairs_per_full_audit": 3025,
+  "object_pairs": 2816,
+  "self_pairs": 189,
+  "hand_table_pairs": 20,
+  "material_metric_max_error": 1.1102230246251565e-16,
+  "native_EFC_columns": 44,
+  "feasible_primals": 6,
+  "separations": [
+    true,
+    true,
+    true
+  ],
+  "integration_steps": 0,
+  "neural_updates": 0,
+  "scope": "Fresh full ideal-convex reruns reuse the maintained geometry implementation; material metrics and EFC/separating inequalities are reconstructed independently. Does not certify global collision predicates, source contact truth, real forces, gravity, global infeasibility or dynamic holding."
+}
