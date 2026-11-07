@@ -1,0 +1,897 @@
+{
+  "schema": "supermimic_research.control_authority_saved_review:1",
+  "checks": {
+    "all130_actual_controls_memory_and_no_hidden_clamp": true,
+    "all130_metrics_original_gates_and_missing_tails": true,
+    "all130_cases_and_actual_native_budget": true,
+    "both_zero_baselines_all_trace_bytes": true,
+    "0.0003125_other_constraint_within_dry_friction": true,
+    "0.00015625_other_constraint_within_dry_friction": true,
+    "all_six_kinematic_point_Jacobians_match_native": true,
+    "metadata_model_unchanged": true,
+    "no_CUDA_or_neural_execution": true
+  },
+  "passed": 9,
+  "total": 9,
+  "counts": {
+    "MJB_reads": 1,
+    "MjData": 0,
+    "initial_forward": 0,
+    "integration_steps": 0,
+    "geometry_input_AD": 6,
+    "LP_calls": 60,
+    "native_pyramid_decode_calls": 24,
+    "NN_constructors": 0,
+    "NN_FW": 0,
+    "learning_updates": 0,
+    "GPU_calls": 0
+  },
+  "details": {
+    "jacobian_checks": [
+      {
+        "dt_s": 0.0003125,
+        "geom_id": 15,
+        "max_abs_m_per_rad": 1.249000902703301e-16,
+        "passed": true
+      },
+      {
+        "dt_s": 0.0003125,
+        "geom_id": 28,
+        "max_abs_m_per_rad": 4.85722573273506e-17,
+        "passed": true
+      },
+      {
+        "dt_s": 0.0003125,
+        "geom_id": 41,
+        "max_abs_m_per_rad": 4.163336342344337e-17,
+        "passed": true
+      },
+      {
+        "dt_s": 0.00015625,
+        "geom_id": 15,
+        "max_abs_m_per_rad": 1.249000902703301e-16,
+        "passed": true
+      },
+      {
+        "dt_s": 0.00015625,
+        "geom_id": 28,
+        "max_abs_m_per_rad": 4.85722573273506e-17,
+        "passed": true
+      },
+      {
+        "dt_s": 0.00015625,
+        "geom_id": 41,
+        "max_abs_m_per_rad": 4.163336342344337e-17,
+        "passed": true
+      }
+    ],
+    "dof_dry_friction_limits_Nm": [
+      0.036735543,
+      0.0342266392,
+      0.0187921182,
+      0.0122545518,
+      0.0377084683,
+      0.0177932607,
+      0.0297927367,
+      0.0161822467,
+      0.035564484,
+      0.0240616629,
+      0.0127755677,
+      0.01091698,
+      0.0528257763,
+      0.0266927477,
+      0.0148677454,
+      0.0215947297,
+      0.0338251954,
+      0.0261331247,
+      0.0142008972,
+      0.0129471168
+    ],
+    "native_pyramid_generators": [
+      {
+        "dt_s": 0.0003125,
+        "geom_id": 15,
+        "mu": [
+          0.7,
+          0.7
+        ],
+        "local_normal_tangent3_rays": [
+          [
+            1.0,
+            0.7,
+            0.0
+          ],
+          [
+            1.0,
+            -0.7,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.7
+          ],
+          [
+            1.0,
+            0.0,
+            -0.7
+          ]
+        ]
+      },
+      {
+        "dt_s": 0.0003125,
+        "geom_id": 28,
+        "mu": [
+          0.7,
+          0.7
+        ],
+        "local_normal_tangent3_rays": [
+          [
+            1.0,
+            0.7,
+            0.0
+          ],
+          [
+            1.0,
+            -0.7,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.7
+          ],
+          [
+            1.0,
+            0.0,
+            -0.7
+          ]
+        ]
+      },
+      {
+        "dt_s": 0.0003125,
+        "geom_id": 41,
+        "mu": [
+          0.7,
+          0.7
+        ],
+        "local_normal_tangent3_rays": [
+          [
+            1.0,
+            0.7,
+            0.0
+          ],
+          [
+            1.0,
+            -0.7,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.7
+          ],
+          [
+            1.0,
+            0.0,
+            -0.7
+          ]
+        ]
+      },
+      {
+        "dt_s": 0.00015625,
+        "geom_id": 15,
+        "mu": [
+          0.7,
+          0.7
+        ],
+        "local_normal_tangent3_rays": [
+          [
+            1.0,
+            0.7,
+            0.0
+          ],
+          [
+            1.0,
+            -0.7,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.7
+          ],
+          [
+            1.0,
+            0.0,
+            -0.7
+          ]
+        ]
+      },
+      {
+        "dt_s": 0.00015625,
+        "geom_id": 28,
+        "mu": [
+          0.7,
+          0.7
+        ],
+        "local_normal_tangent3_rays": [
+          [
+            1.0,
+            0.7,
+            0.0
+          ],
+          [
+            1.0,
+            -0.7,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.7
+          ],
+          [
+            1.0,
+            0.0,
+            -0.7
+          ]
+        ]
+      },
+      {
+        "dt_s": 0.00015625,
+        "geom_id": 41,
+        "mu": [
+          0.7,
+          0.7
+        ],
+        "local_normal_tangent3_rays": [
+          [
+            1.0,
+            0.7,
+            0.0
+          ],
+          [
+            1.0,
+            -0.7,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.7
+          ],
+          [
+            1.0,
+            0.0,
+            -0.7
+          ]
+        ]
+      }
+    ],
+    "native_pyramid_binding_scope": "MuJoCo3.11.0 Python dim binding reviewed against official functions.cc and engine_util_misc.c; padded public buffers call C dim3 without changing the installed library.",
+    "native_pyramid_binding_source": "https://github.com/google-deepmind/mujoco/blob/3.11.0/python/mujoco/functions.cc#L1463",
+    "native_pyramid_math_source": "https://github.com/google-deepmind/mujoco/blob/3.11.0/src/engine/engine_util_misc.c",
+    "support_weight_sensitivity": [
+      {
+        "dt_s": 0.0003125,
+        "rays": 4,
+        "cone": "native_mju_decodePyramid_condim3",
+        "domain": "first_H_EMA_half_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          },
+          "maximum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 4,
+        "cone": "native_mju_decodePyramid_condim3",
+        "domain": "steady_residual_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.16781047280218364,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 4,
+        "cone": "native_mju_decodePyramid_condim3",
+        "domain": "full_actuator_target_range_analytical_only",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.4929919941383698,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 4,
+        "cone": "inscribed",
+        "domain": "first_H_EMA_half_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          },
+          "maximum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 4,
+        "cone": "inscribed",
+        "domain": "steady_residual_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.16781047280218359,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 4,
+        "cone": "inscribed",
+        "domain": "full_actuator_target_range_analytical_only",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.49299199413837014,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 4,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "first_H_EMA_half_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.12815340846686227,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.1748264236998708,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 4,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "steady_residual_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.43689250915189115,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 4,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "full_actuator_target_range_analytical_only",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 1.108527739705446,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 16,
+        "cone": "inscribed",
+        "domain": "first_H_EMA_half_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          },
+          "maximum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 16,
+        "cone": "inscribed",
+        "domain": "steady_residual_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.18440305314221325,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 16,
+        "cone": "inscribed",
+        "domain": "full_actuator_target_range_analytical_only",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.5294899697859823,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 16,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "first_H_EMA_half_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          },
+          "maximum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 16,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "steady_residual_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.19902686641008127,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.0003125,
+        "rays": 16,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "full_actuator_target_range_analytical_only",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.5657755961493801,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 4,
+        "cone": "native_mju_decodePyramid_condim3",
+        "domain": "first_H_EMA_half_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          },
+          "maximum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 4,
+        "cone": "native_mju_decodePyramid_condim3",
+        "domain": "steady_residual_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.16781047280218364,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 4,
+        "cone": "native_mju_decodePyramid_condim3",
+        "domain": "full_actuator_target_range_analytical_only",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.4929919941383698,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 4,
+        "cone": "inscribed",
+        "domain": "first_H_EMA_half_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          },
+          "maximum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 4,
+        "cone": "inscribed",
+        "domain": "steady_residual_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.16781047280218359,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 4,
+        "cone": "inscribed",
+        "domain": "full_actuator_target_range_analytical_only",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.49299199413837014,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 4,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "first_H_EMA_half_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.12815340846686227,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.1748264236998708,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 4,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "steady_residual_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.43689250915189115,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 4,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "full_actuator_target_range_analytical_only",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 1.108527739705446,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 16,
+        "cone": "inscribed",
+        "domain": "first_H_EMA_half_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          },
+          "maximum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 16,
+        "cone": "inscribed",
+        "domain": "steady_residual_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.18440305314221325,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 16,
+        "cone": "inscribed",
+        "domain": "full_actuator_target_range_analytical_only",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.5294899697859823,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 16,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "first_H_EMA_half_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          },
+          "maximum": {
+            "success": false,
+            "status": 2,
+            "support_weight_N": null,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 16,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "steady_residual_scale",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.19902686641008127,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      },
+      {
+        "dt_s": 0.00015625,
+        "rays": 16,
+        "cone": "circumscribed_ideal_circle",
+        "domain": "full_actuator_target_range_analytical_only",
+        "support_weight_interval": {
+          "minimum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          },
+          "maximum": {
+            "success": true,
+            "status": 0,
+            "support_weight_N": 0.5657755961493801,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+          }
+        }
+      }
+    ],
+    "total_cases": 130,
+    "actual_native_steps_from_saved": 75011
+  },
+  "authority_report": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\control_authority_v1\\report.json",
+    "bytes": 2298820,
+    "sha256": "a47f03d2c4de58aea5a425617bf374f6eac7022374ce06fa0b5677940438590d"
+  },
+  "torque_report": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\contact_torque_box_v1\\report.json",
+    "bytes": 9065,
+    "sha256": "d8d906acc604e4939735c9ba3b6f77298dd9cd3d49622589bf3f74aff7bf9ec1"
+  },
+  "auditor": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_control_authority.py",
+    "bytes": 14016,
+    "sha256": "1c1df9ef2f902cd07a540babb8c3592cce062364374cc26f92d2da6e14a06b9a"
+  },
+  "elapsed_s": 1.8800750998780131,
+  "scope": "Saved control/gate audit plus isolated reset-metadata read, six FK input ADs and native-pyramid/ideal-cone LP bounds with dry-friction load freely varied. Frozen reset points/normals/Jacobians; no integration, neural inference, fitting or force application. Numerical LP results are not formal dynamic impossibility certificates."
+}

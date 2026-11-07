@@ -1,0 +1,694 @@
+{
+  "schema": "supermimic_research.control_authority_milestone:1",
+  "frozen_runtime_commit": "9b38f97",
+  "authority_integrity": [
+    8,
+    8
+  ],
+  "torque_box_integrity": [
+    9,
+    9
+  ],
+  "saved_review_v3_integrity": [
+    9,
+    9
+  ],
+  "unit_tests": 58,
+  "cases": 130,
+  "passing_cases": 0,
+  "paired_schedules_passing": 0,
+  "exit_time_s_range": [
+    0.10875,
+    0.12546875
+  ],
+  "native_dynamic_counts": {
+    "MJB_reads": 1,
+    "MjData": 130,
+    "initial_forward": 130,
+    "integration_steps": 75011,
+    "contact_force_reads": 83502,
+    "controller_calls": 874,
+    "controller_receipt_reads": 1748,
+    "NN_FW": 0,
+    "observer_forward": 0,
+    "learning_optimizer_steps": 0,
+    "GPU_calls": 0,
+    "static_LP_calls": 4
+  },
+  "static_torque_counts": {
+    "MJB_reads": 1,
+    "MjData": 2,
+    "initial_forward": 2,
+    "integration_steps": 0,
+    "contact_force_reads": 6,
+    "jacobian_point_reads": 6,
+    "integration_receipt_reads": 4,
+    "LP_calls": 12,
+    "NN_FW": 0,
+    "learning_updates": 0,
+    "GPU_calls": 0
+  },
+  "saved_review_counts": {
+    "MJB_reads": 1,
+    "MjData": 0,
+    "initial_forward": 0,
+    "integration_steps": 0,
+    "geometry_input_AD": 6,
+    "LP_calls": 60,
+    "native_pyramid_decode_calls": 24,
+    "NN_constructors": 0,
+    "NN_FW": 0,
+    "learning_updates": 0,
+    "GPU_calls": 0
+  },
+  "native_pyramid_frozen_reset_support": [
+    {
+      "dt_s": 0.0003125,
+      "rays": 4,
+      "cone": "native_mju_decodePyramid_condim3",
+      "domain": "first_H_EMA_half_scale",
+      "support_weight_interval": {
+        "minimum": {
+          "success": false,
+          "status": 2,
+          "support_weight_N": null,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+          "witness": null
+        },
+        "maximum": {
+          "success": false,
+          "status": 2,
+          "support_weight_N": null,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+          "witness": null
+        }
+      }
+    },
+    {
+      "dt_s": 0.0003125,
+      "rays": 4,
+      "cone": "native_mju_decodePyramid_condim3",
+      "domain": "steady_residual_scale",
+      "support_weight_interval": {
+        "minimum": {
+          "success": true,
+          "status": 0,
+          "support_weight_N": 0.0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "witness": {
+            "nonnegative_ray_coefficients_N": [
+              0.09958755582986606,
+              0.17444063325006587,
+              0.0,
+              0.03815285699210541,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.03612598951529189,
+              0.0395429377542644,
+              0.0,
+              0.20701598195176413
+            ],
+            "required_torque_without_dry_friction_Nm": [
+              0.014559175548511863,
+              -0.007663894034684832,
+              0.0077691602438157165,
+              0.0030047401233647512,
+              0.01793046115034245,
+              0.005564429889951473,
+              0.006647725543802677,
+              0.0006978262576726813,
+              0.03550200359620158,
+              -0.0019469655801473053,
+              0.021351302148530416,
+              0.006777626907269572,
+              0.03168589251034406,
+              0.001070868996371396,
+              0.006677160727246471,
+              0.0007535220311125201,
+              0.027786388093159115,
+              0.003916453742249142,
+              0.006044256291021026,
+              0.0007498124859460975
+            ],
+            "force_residual_world_N": [
+              -2.7755575615628914e-17,
+              2.498001805406602e-16,
+              0.0
+            ],
+            "moment_residual_world_Nm": [
+              0.0,
+              -2.915555038190004e-19,
+              -9.336549362356534e-19
+            ],
+            "minimum_relaxed_torque_margin_Nm": 0.0
+          }
+        },
+        "maximum": {
+          "success": true,
+          "status": 0,
+          "support_weight_N": 0.16781047280218364,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "witness": {
+            "nonnegative_ray_coefficients_N": [
+              0.4657280728694989,
+              1.0990561351383945,
+              0.0,
+              0.2540524629440567,
+              0.1769432895129708,
+              0.0,
+              0.14211768705149835,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.5476028110906255
+            ],
+            "required_torque_without_dry_friction_Nm": [
+              0.08438486385013845,
+              0.10322270795944016,
+              0.07517795667095278,
+              0.02252392199937583,
+              0.038484992298011056,
+              -0.0005560720813550472,
+              0.01581479613880324,
+              0.0030476014024893522,
+              0.09736582242778893,
+              -0.02284250094298189,
+              0.0941559773312895,
+              0.04027460792543378,
+              0.03168589251034406,
+              0.001070868996371396,
+              0.006677160727246471,
+              0.0007535220311125201,
+              0.027786388093159115,
+              0.003916453742249142,
+              0.006044256291021026,
+              0.0007498124859460975
+            ],
+            "force_residual_world_N": [
+              0.0,
+              0.0,
+              2.220446049250313e-16
+            ],
+            "moment_residual_world_Nm": [
+              -1.3877787807814457e-17,
+              -2.777688601965242e-18,
+              3.8566660639682825e-18
+            ],
+            "minimum_relaxed_torque_margin_Nm": 0.0
+          }
+        }
+      }
+    },
+    {
+      "dt_s": 0.0003125,
+      "rays": 4,
+      "cone": "native_mju_decodePyramid_condim3",
+      "domain": "full_actuator_target_range_analytical_only",
+      "support_weight_interval": {
+        "minimum": {
+          "success": true,
+          "status": 0,
+          "support_weight_N": 0.0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "witness": {
+            "nonnegative_ray_coefficients_N": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "required_torque_without_dry_friction_Nm": [
+              0.0017648392669195288,
+              -0.031112862342310706,
+              -0.005018786204575465,
+              -0.0005657971277940506,
+              0.01793046115034245,
+              0.005564429889951473,
+              0.006647725543802677,
+              0.0006978262576726813,
+              0.02043299137989852,
+              0.0027096660450202613,
+              0.006649304087001644,
+              0.0005463747839704724,
+              0.03168589251034406,
+              0.001070868996371396,
+              0.006677160727246471,
+              0.0007535220311125201,
+              0.027786388093159115,
+              0.003916453742249142,
+              0.006044256291021026,
+              0.0007498124859460975
+            ],
+            "force_residual_world_N": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "moment_residual_world_Nm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "minimum_relaxed_torque_margin_Nm": 0.17540664090897898
+          }
+        },
+        "maximum": {
+          "success": true,
+          "status": 0,
+          "support_weight_N": 0.4929919941383698,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "witness": {
+            "nonnegative_ray_coefficients_N": [
+              0.0,
+              1.8605850942913775,
+              1.3682114562707182,
+              2.1145643401589314,
+              0.5198222952939991,
+              0.0,
+              0.4175119750984869,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              4.5465326641030925
+            ],
+            "required_torque_without_dry_friction_Nm": [
+              0.24448515340998342,
+              0.3635368849642431,
+              0.23058243422827804,
+              0.06726695780411494,
+              0.0783153652022694,
+              -0.01241632197598903,
+              0.03357865743125354,
+              0.007600973093958058,
+              0.2464455230156244,
+              -0.07235724454536477,
+              0.2637255677,
+              0.11725959627099758,
+              0.03168589251034406,
+              0.001070868996371396,
+              0.006677160727246471,
+              0.0007535220311125201,
+              0.027786388093159115,
+              0.003916453742249142,
+              0.006044256291021026,
+              0.0007498124859460975
+            ],
+            "force_residual_world_N": [
+              0.0,
+              0.0,
+              -8.881784197001252e-16
+            ],
+            "moment_residual_world_Nm": [
+              -5.551115123125783e-17,
+              1.1585605726615401e-17,
+              -2.642110924257044e-17
+            ],
+            "minimum_relaxed_torque_margin_Nm": 0.0
+          }
+        }
+      }
+    },
+    {
+      "dt_s": 0.00015625,
+      "rays": 4,
+      "cone": "native_mju_decodePyramid_condim3",
+      "domain": "first_H_EMA_half_scale",
+      "support_weight_interval": {
+        "minimum": {
+          "success": false,
+          "status": 2,
+          "support_weight_N": null,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+          "witness": null
+        },
+        "maximum": {
+          "success": false,
+          "status": 2,
+          "support_weight_N": null,
+          "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+          "witness": null
+        }
+      }
+    },
+    {
+      "dt_s": 0.00015625,
+      "rays": 4,
+      "cone": "native_mju_decodePyramid_condim3",
+      "domain": "steady_residual_scale",
+      "support_weight_interval": {
+        "minimum": {
+          "success": true,
+          "status": 0,
+          "support_weight_N": 0.0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "witness": {
+            "nonnegative_ray_coefficients_N": [
+              0.09958755582986606,
+              0.17444063325006587,
+              0.0,
+              0.03815285699210541,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.03612598951529189,
+              0.0395429377542644,
+              0.0,
+              0.20701598195176413
+            ],
+            "required_torque_without_dry_friction_Nm": [
+              0.014559175548511863,
+              -0.007663894034684832,
+              0.0077691602438157165,
+              0.0030047401233647512,
+              0.01793046115034245,
+              0.005564429889951473,
+              0.006647725543802677,
+              0.0006978262576726813,
+              0.03550200359620158,
+              -0.0019469655801473053,
+              0.021351302148530416,
+              0.006777626907269572,
+              0.03168589251034406,
+              0.001070868996371396,
+              0.006677160727246471,
+              0.0007535220311125201,
+              0.027786388093159115,
+              0.003916453742249142,
+              0.006044256291021026,
+              0.0007498124859460975
+            ],
+            "force_residual_world_N": [
+              -2.7755575615628914e-17,
+              2.498001805406602e-16,
+              0.0
+            ],
+            "moment_residual_world_Nm": [
+              0.0,
+              -2.915555038190004e-19,
+              -9.336549362356534e-19
+            ],
+            "minimum_relaxed_torque_margin_Nm": 0.0
+          }
+        },
+        "maximum": {
+          "success": true,
+          "status": 0,
+          "support_weight_N": 0.16781047280218364,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "witness": {
+            "nonnegative_ray_coefficients_N": [
+              0.4657280728694989,
+              1.0990561351383945,
+              0.0,
+              0.2540524629440567,
+              0.1769432895129708,
+              0.0,
+              0.14211768705149835,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.5476028110906255
+            ],
+            "required_torque_without_dry_friction_Nm": [
+              0.08438486385013845,
+              0.10322270795944016,
+              0.07517795667095278,
+              0.02252392199937583,
+              0.038484992298011056,
+              -0.0005560720813550472,
+              0.01581479613880324,
+              0.0030476014024893522,
+              0.09736582242778893,
+              -0.02284250094298189,
+              0.0941559773312895,
+              0.04027460792543378,
+              0.03168589251034406,
+              0.001070868996371396,
+              0.006677160727246471,
+              0.0007535220311125201,
+              0.027786388093159115,
+              0.003916453742249142,
+              0.006044256291021026,
+              0.0007498124859460975
+            ],
+            "force_residual_world_N": [
+              0.0,
+              0.0,
+              2.220446049250313e-16
+            ],
+            "moment_residual_world_Nm": [
+              -1.3877787807814457e-17,
+              -2.777688601965242e-18,
+              3.8566660639682825e-18
+            ],
+            "minimum_relaxed_torque_margin_Nm": 0.0
+          }
+        }
+      }
+    },
+    {
+      "dt_s": 0.00015625,
+      "rays": 4,
+      "cone": "native_mju_decodePyramid_condim3",
+      "domain": "full_actuator_target_range_analytical_only",
+      "support_weight_interval": {
+        "minimum": {
+          "success": true,
+          "status": 0,
+          "support_weight_N": 0.0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "witness": {
+            "nonnegative_ray_coefficients_N": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "required_torque_without_dry_friction_Nm": [
+              0.0017648392669195288,
+              -0.031112862342310706,
+              -0.005018786204575465,
+              -0.0005657971277940506,
+              0.01793046115034245,
+              0.005564429889951473,
+              0.006647725543802677,
+              0.0006978262576726813,
+              0.02043299137989852,
+              0.0027096660450202613,
+              0.006649304087001644,
+              0.0005463747839704724,
+              0.03168589251034406,
+              0.001070868996371396,
+              0.006677160727246471,
+              0.0007535220311125201,
+              0.027786388093159115,
+              0.003916453742249142,
+              0.006044256291021026,
+              0.0007498124859460975
+            ],
+            "force_residual_world_N": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "moment_residual_world_Nm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "minimum_relaxed_torque_margin_Nm": 0.17540664090897898
+          }
+        },
+        "maximum": {
+          "success": true,
+          "status": 0,
+          "support_weight_N": 0.4929919941383698,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "witness": {
+            "nonnegative_ray_coefficients_N": [
+              0.0,
+              1.8605850942913775,
+              1.3682114562707182,
+              2.1145643401589314,
+              0.5198222952939991,
+              0.0,
+              0.4175119750984869,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              4.5465326641030925
+            ],
+            "required_torque_without_dry_friction_Nm": [
+              0.24448515340998342,
+              0.3635368849642431,
+              0.23058243422827804,
+              0.06726695780411494,
+              0.0783153652022694,
+              -0.01241632197598903,
+              0.03357865743125354,
+              0.007600973093958058,
+              0.2464455230156244,
+              -0.07235724454536477,
+              0.2637255677,
+              0.11725959627099758,
+              0.03168589251034406,
+              0.001070868996371396,
+              0.006677160727246471,
+              0.0007535220311125201,
+              0.027786388093159115,
+              0.003916453742249142,
+              0.006044256291021026,
+              0.0007498124859460975
+            ],
+            "force_residual_world_N": [
+              0.0,
+              0.0,
+              -8.881784197001252e-16
+            ],
+            "moment_residual_world_Nm": [
+              -5.551115123125783e-17,
+              1.1585605726615401e-17,
+              -2.642110924257044e-17
+            ],
+            "minimum_relaxed_torque_margin_Nm": 0.0
+          }
+        }
+      }
+    }
+  ],
+  "actual_phone_weight_N": 1.962,
+  "new_learning_stage_started": false,
+  "new_checkpoint": false,
+  "goal_complete": false,
+  "goal_status": "active",
+  "fitting_role": "NO_FITTING_CONTROL_AUTHORITY_DIAGNOSTIC",
+  "policy_benefit_qualified": false,
+  "conclusion": "Finite legal-action cases all failed. Native-pyramid fixed-reset numerical static capacity is below gravity even with a freely varied dry-friction envelope; no global dynamic impossibility claim.",
+  "next_plan": "docs/research-plan-v0.39.md",
+  "retained": [
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\control_authority_v1\\report.json",
+      "retained_path": "provenance/control_authority/authority_report.json",
+      "bytes": 2298820,
+      "sha256": "a47f03d2c4de58aea5a425617bf374f6eac7022374ce06fa0b5677940438590d"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\control_authority_v1\\intent.json",
+      "retained_path": "provenance/control_authority/authority_intent.json",
+      "bytes": 23571,
+      "sha256": "3c8519393e66948fbe2de4cbdd1a5662725af789183a6264e4f240387307637d"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\control_authority_v1\\terminal.json",
+      "retained_path": "provenance/control_authority/authority_terminal.json",
+      "bytes": 837,
+      "sha256": "c081af0c310c346af59da7089e35e98c2e4b5d37da3a135adbcfb15f97311336"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\control_authority_v1\\zero_barrier.json",
+      "retained_path": "provenance/control_authority/zero_barrier.json",
+      "bytes": 3581,
+      "sha256": "5b77e6e80adab11f61db89eb156f7eac718bd8e658664d9a4e9192e094e7cf90"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\control_authority_v1\\initial_contact_force_balance.json",
+      "retained_path": "provenance/control_authority/ideal_force_balance.json",
+      "bytes": 12959,
+      "sha256": "78ed973c1c186b230f2a78207edd8ead8a34c788975acc8fe8033198811b7838"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\contact_torque_box_v1\\intent.json",
+      "retained_path": "provenance/control_authority/torque_box_intent.json",
+      "bytes": 11307,
+      "sha256": "9f1cfe1b54e157a3e53b831908574ca148ede585c79e4411500eba19d18ef62e"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\contact_torque_box_v1\\report.json",
+      "retained_path": "provenance/control_authority/torque_box_report.json",
+      "bytes": 9065,
+      "sha256": "d8d906acc604e4939735c9ba3b6f77298dd9cd3d49622589bf3f74aff7bf9ec1"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\control_authority_review_v1\\report.json",
+      "retained_path": "provenance/control_authority/saved_review_v1_historical.json",
+      "bytes": 19695,
+      "sha256": "d93e85b3f05bfa5f944052bd61282fb1f6ab3ae20ca70a126d0d4ee898dc7e10"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\control_authority_review_v1\\auditor_source.py",
+      "retained_path": "provenance/control_authority/saved_review_v1_historical_source.py",
+      "bytes": 10996,
+      "sha256": "6ba483f41a3f24b12ac0fc5d87a271e213cb97df0deeadc504ebe44d7bde9465"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\control_authority_review_v2\\report.json",
+      "retained_path": "provenance/control_authority/saved_review_v2_historical.json",
+      "bytes": 27484,
+      "sha256": "cf9856bcefd145f1cddd58c8b704f0cf6d42a753edcff0e19a0852f99fe435f9"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\control_authority_review_v3\\report.json",
+      "retained_path": "provenance/control_authority/saved_review_v3.json",
+      "bytes": 114900,
+      "sha256": "087828f6a9b481b384000396b1c1a0235939856103cbf61c1e6312cc6b2c5665"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\control_authority_full_tests_v2.log",
+      "retained_path": "provenance/control_authority/unit_tests.log",
+      "bytes": 9234,
+      "sha256": "af859c96bf45ef6044f35d53311dadc7a716f916b8b35a9fba8461bb807658b6"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\freeze_control_authority.py",
+      "retained_path": "provenance/control_authority/freeze_milestone.py",
+      "bytes": 5649,
+      "sha256": "9dd0bc6be82150124bdb9c74781d92886528228bd7c4aba8da555aecfa90d871"
+    }
+  ],
+  "external_binary_rule": "Raw traces/actions/reset arrays remain under runs, pinned by retained reports. They are not fitting data.",
+  "prior_geometry_preload_sources_reviewed": [
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_support_v1\\completed_v1\\report.json",
+      "bytes": 4966,
+      "sha256": "75c89d096dd8097ded80ed689fbf2b368e732c00828afc8d18edd30626011bff"
+    },
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_entry_v1\\solve_compression_geometry_v2.py",
+      "bytes": 17158,
+      "sha256": "909800aa42bf0cca6d551c1c09c93aa2f997f39c52dbe75c6346442b46b3ee9b"
+    },
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_dynamics_v1\\completed_run1\\report.json",
+      "bytes": 645496,
+      "sha256": "3a883b2136ceddfdfc1dda4a70a2a159ac25c9d45ee89b90aac373e6a9a72705"
+    },
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\functional_tripod_loaded_dynamics_v1\\saved_review_v1\\report.json",
+      "bytes": 52205,
+      "sha256": "50c498569077278dbc5545e6ac85866f838d417a54ac905c377336bdae2e5509"
+    }
+  ]
+}

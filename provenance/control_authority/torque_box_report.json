@@ -1,0 +1,236 @@
+{
+  "schema": "supermimic_research.reset_contact_torque_box:1",
+  "checks": {
+    "0.0003125_reset_contact_bytes": true,
+    "0.0003125_jacobian_reads_preserve300": true,
+    "0.0003125_PD_base_matches_actual": true,
+    "0.00015625_reset_contact_bytes": true,
+    "0.00015625_jacobian_reads_preserve300": true,
+    "0.00015625_PD_base_matches_actual": true,
+    "same_model_except_dt": true,
+    "declared_native_and_LP_budget": true,
+    "no_Torch_or_neural_import": true
+  },
+  "passed": 9,
+  "total": 9,
+  "records": [
+    {
+      "dt_s": 0.0003125,
+      "raw": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\contact_torque_box_v1\\reset_0.0003125.npz",
+        "bytes": 11194,
+        "sha256": "82cb4e4f305f7bee4de93df26216597aedaf143e73e7035cd1c649ba4429dd2f"
+      },
+      "other_constraint_torque_max_abs_Nm": 0.037708468300000006,
+      "LPs": [
+        {
+          "domain": "first_H_EMA_half_scale",
+          "rays_per_contact": 4,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        },
+        {
+          "domain": "steady_residual_scale",
+          "rays_per_contact": 4,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        },
+        {
+          "domain": "full_actuator_target_range_analytical_only",
+          "rays_per_contact": 4,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        },
+        {
+          "domain": "first_H_EMA_half_scale",
+          "rays_per_contact": 16,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        },
+        {
+          "domain": "steady_residual_scale",
+          "rays_per_contact": 16,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        },
+        {
+          "domain": "full_actuator_target_range_analytical_only",
+          "rays_per_contact": 16,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        }
+      ]
+    },
+    {
+      "dt_s": 0.00015625,
+      "raw": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\contact_torque_box_v1\\reset_0.00015625.npz",
+        "bytes": 11194,
+        "sha256": "82cb4e4f305f7bee4de93df26216597aedaf143e73e7035cd1c649ba4429dd2f"
+      },
+      "other_constraint_torque_max_abs_Nm": 0.037708468300000006,
+      "LPs": [
+        {
+          "domain": "first_H_EMA_half_scale",
+          "rays_per_contact": 4,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        },
+        {
+          "domain": "steady_residual_scale",
+          "rays_per_contact": 4,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        },
+        {
+          "domain": "full_actuator_target_range_analytical_only",
+          "rays_per_contact": 4,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        },
+        {
+          "domain": "first_H_EMA_half_scale",
+          "rays_per_contact": 16,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        },
+        {
+          "domain": "steady_residual_scale",
+          "rays_per_contact": 16,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        },
+        {
+          "domain": "full_actuator_target_range_analytical_only",
+          "rays_per_contact": 16,
+          "answer": {
+            "success": false,
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "normal_coefficients": null,
+            "required_joint_torque_Nm": null,
+            "minimum_sum_normal_N": null,
+            "force_residual_N": null,
+            "moment_residual_Nm": null,
+            "minimum_torque_box_margin_Nm": null
+          }
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "MJB_reads": 1,
+    "MjData": 2,
+    "initial_forward": 2,
+    "integration_steps": 0,
+    "contact_force_reads": 6,
+    "jacobian_point_reads": 6,
+    "integration_receipt_reads": 4,
+    "LP_calls": 12,
+    "NN_FW": 0,
+    "learning_updates": 0,
+    "GPU_calls": 0
+  },
+  "elapsed_s": 0.4349756999872625,
+  "own_checkpoint_loads": 0,
+  "scope": "Frozen reset, material points and normals. Ideal sampled Coulomb point forces, observed non-phone constraint load held fixed, affine unit-gear PD and actual force saturations. No native compliance, evolving contact geometry or dynamic reachability certificate. Full actuator target interval is analytical only and was never executed."
+}
