@@ -1,0 +1,133 @@
+{
+  "schema": "supermimic_research.known_mesh_ego_inventory:1",
+  "revision": "30fe9674782f32e1e5edba98476b6ff4300132c5",
+  "input_pins": [
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\train_aria\\clip-001852.tar",
+      "bytes": 69744640,
+      "sha256": "3d0253c0e77836a211e4de046befb862712624190195a978d03443ebb5c0405e"
+    },
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\train_aria\\clip-001856.tar",
+      "bytes": 89088000,
+      "sha256": "2356d8cf22c75485d62d5b51519aca4a3795d41b936fefb3af097d6487e30b67"
+    },
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\train_aria\\clip-001884.tar",
+      "bytes": 78817280,
+      "sha256": "caff82da79af5fc769a6fcfd15d06fc46e54f327b6429a0e3f0403c996a3ab9c"
+    },
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\object_models\\models_info.json",
+      "bytes": 29485,
+      "sha256": "351e1b25a250606fa4b7500f5aeb800b55050bf1c638d05ceb464f8ddfb32e2b"
+    },
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\object_models\\obj_000009.glb",
+      "bytes": 12213696,
+      "sha256": "26b2884fa61a9b9870ae089de04ea9bccdf8eb8e1467bdd185e7d514ae259195"
+    },
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\object_models\\obj_000024.glb",
+      "bytes": 126936,
+      "sha256": "f5548e475296967ad9797bc51fa23738648c2def23082dce6fd300c271439b69"
+    },
+    {
+      "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\object_models\\obj_000032.glb",
+      "bytes": 3754072,
+      "sha256": "6fccaab7762c735141a443e16c7b332e3fd6d5e494987a07258e38bbf2571387"
+    }
+  ],
+  "sources": {
+    "tool": {
+      "path": "D:\\workspace\\supermimic-research\\tools\\inventory_ego.py",
+      "bytes": 2629,
+      "sha256": "02b24df7faee2ac4715e60e195b154aec687ad3576e43b6c2189c8ed61b3f4b1"
+    },
+    "reader": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\ego\\clip_inventory.py",
+      "bytes": 5136,
+      "sha256": "d9ac80103834313faffcc974d34f0e50428f5bc8fe02396d3147818021e9ea77"
+    }
+  },
+  "heuristic": {
+    "window_frames": 61,
+    "min_RGB_co_visible_frames": 31,
+    "min_object_world_translation_m": 0.01,
+    "max_median_origin_wrist_distance_m": 0.3
+  },
+  "reports": [
+    {
+      "clip": "clip-001852",
+      "report": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\ego_known_mesh_inventory_v1\\clip-001852.json",
+        "bytes": 229905,
+        "sha256": "c7f507a5ffa4321914b888cd6fd990d8848f587a93bce787d4eee14a26c7b9ca"
+      },
+      "best_per_object": [],
+      "candidate_windows": 0
+    },
+    {
+      "clip": "clip-001856",
+      "report": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\ego_known_mesh_inventory_v1\\clip-001856.json",
+        "bytes": 343379,
+        "sha256": "9a24842035b473eae9a6ea26573e5ace8ec6d917442c7f4599f74d448d9cd978"
+      },
+      "best_per_object": [
+        {
+          "object_id": 24,
+          "object_uid": "5462893327580",
+          "object_name": "cellphone",
+          "hand": "left",
+          "start_frame": 75,
+          "end_frame": 135,
+          "frames": 61,
+          "elapsed_s": 2.000003608,
+          "object_world_max_translation_m": 0.3590371853321857,
+          "origin_to_wrist_median_m": 0.15994095449307985,
+          "relative_position_RMS_m": 0.0023126195133155378,
+          "relative_rotation_max_deg": 5.719613709451746,
+          "RGB_co_visible_frames": 61,
+          "object_visibility_known_frames": 61,
+          "hand_visibility_known_frames": 61,
+          "intake_eligible": true
+        }
+      ],
+      "candidate_windows": 180
+    },
+    {
+      "clip": "clip-001884",
+      "report": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\ego_known_mesh_inventory_v1\\clip-001884.json",
+        "bytes": 452413,
+        "sha256": "bcfa67c20f2673a9e732a480d040a5481040301752d0d8237b8051426bd9f16f"
+      },
+      "best_per_object": [
+        {
+          "object_id": 9,
+          "object_uid": "223371871635142",
+          "object_name": "mug_white",
+          "hand": "right",
+          "start_frame": 47,
+          "end_frame": 107,
+          "frames": 61,
+          "elapsed_s": 2.000004434,
+          "object_world_max_translation_m": 0.06476451147878315,
+          "origin_to_wrist_median_m": 0.16841651237209757,
+          "relative_position_RMS_m": 0.0046468250654141,
+          "relative_rotation_max_deg": 3.5683968358492826,
+          "RGB_co_visible_frames": 61,
+          "object_visibility_known_frames": 61,
+          "hand_visibility_known_frames": 61,
+          "intake_eligible": true
+        }
+      ],
+      "candidate_windows": 172
+    }
+  ],
+  "role": "INTAKE_ONLY_NO_FITTING_NO_CONTACT_QUALIFICATION",
+  "simulation_steps": 0,
+  "learning_updates": 0,
+  "scope": "Existing three raw ego clips and local meshes only; no new download, images, FK, contact classification or physical feasibility claim."
+}

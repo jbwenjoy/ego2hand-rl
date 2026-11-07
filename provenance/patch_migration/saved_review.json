@@ -1,0 +1,152 @@
+{
+  "schema": "supermimic_research.patch_migration_saved_review:1",
+  "auditor": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_patch_migration.py",
+    "bytes": 9118,
+    "sha256": "425c805a0e0e8f22cbb7d5ceb38d76e5bfbfd46d4bb0570881331dc8993d9f18"
+  },
+  "checks": {
+    "patch_migration_v1_compiled_axes": true,
+    "patch_migration_v1_all_eight_selections_and_geometry": true,
+    "patch_migration_v1_original_zero_raw": true,
+    "patch_migration_v1_actual_controls_counts_and_gates": true,
+    "patch_migration_v2_compiled_axes": true,
+    "patch_migration_v2_all_eight_selections_and_geometry": true,
+    "patch_migration_v2_original_zero_raw": true,
+    "patch_migration_v2_actual_controls_counts_and_gates": true,
+    "patch_migration_v2_pair_cache_accounting": true,
+    "fixed_model": true,
+    "no_neural_execution": true
+  },
+  "passed": 11,
+  "total": 11,
+  "counts": {
+    "model_reads": 1,
+    "restoration_kinematics": 16,
+    "selected_force_forwards": 2,
+    "integration_steps": 0,
+    "NN_FW": 0,
+    "GPU_calls": 0
+  },
+  "details": [
+    {
+      "report": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v1\\report.json",
+        "bytes": 53058,
+        "sha256": "2bab6412ccb476bc05075a7754afc2500a40cb13993f9ca1f481e01192dae432"
+      },
+      "selected_seeds": [
+        {
+          "index": 0,
+          "proposal_rows": 25,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 1,
+          "proposal_rows": 22,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 2,
+          "proposal_rows": 18,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 3,
+          "proposal_rows": 18,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 4,
+          "proposal_rows": 14,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 5,
+          "proposal_rows": 13,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 6,
+          "proposal_rows": 13,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 7,
+          "proposal_rows": 13,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        }
+      ],
+      "native_steps": 1171,
+      "native_cases": 2
+    },
+    {
+      "report": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\report.json",
+        "bytes": 95970,
+        "sha256": "beffd07a8d684faf6f28f8048e723811cb70a6d50669239e484e12d4cb546b03"
+      },
+      "selected_seeds": [
+        {
+          "index": 0,
+          "proposal_rows": 171,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 1,
+          "proposal_rows": 128,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 2,
+          "proposal_rows": 88,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 3,
+          "proposal_rows": 116,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 4,
+          "proposal_rows": 109,
+          "geometry_pass": true,
+          "status": "FORCE_CANDIDATE_EVALUATED"
+        },
+        {
+          "index": 5,
+          "proposal_rows": 75,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 6,
+          "proposal_rows": 74,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        },
+        {
+          "index": 7,
+          "proposal_rows": 79,
+          "geometry_pass": false,
+          "status": "RESTORED_GEOMETRY_FAILED"
+        }
+      ],
+      "native_steps": 2238,
+      "native_cases": 4
+    }
+  ],
+  "scope": "Archived/current executed source bytes verified without importing archives; selected restored/full final geometry recomputed with current checker, one candidate native reset replayed, saved controls/final COM-angle/physical gates and missing tails checked. No optimization or integration; not an independent native solver."
+}

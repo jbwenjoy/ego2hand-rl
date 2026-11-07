@@ -4,7 +4,6 @@ import argparse,json,os,sys
 import numpy as np
 from evaluate_online import preflight
 from control_authority import compare_trace
-from search_initialization import sources
 
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 from supermimic_research.artifacts import file_pin
@@ -15,7 +14,9 @@ from supermimic_research.runtime import native_evaluation as E
 def review(args):
     path,c,registry,root,final,health,zero,binding,out=preflight(args)
     report=C.read(args.report);intent=C.read(registry.resolve_pin(report['intent']))
-    C.need(C.positive(report) and intent['sources']==sources(),'Unchanged completed mechanical experiment')
+    # Validate the declared dependency closure. Unused new mechanics modules
+    # do not change the bytes executed by the completed experiment.
+    C.need(C.positive(report) and all(C.content(pin)==C.content(file_pin(ROOT/name.replace('\\','/'))) for name,pin in intent['sources'].items()),'Unchanged declared mechanical dependencies')
     C.need(report['data_role']=='NO_FITTING_INITIALIZATION_DEVELOPMENT' and report['NN_training_updates']==0 and report['new_task_bundles']==0,'No fitting/task promotion')
     checks={};steps=calls=0;all_controls=all_gates=True
     b=C.read(registry.resolve(c['artifacts']['task']));q0=np.array(b['initial']['qpos27_F64']);u0=np.array(b['initial']['ctrl20_F64']);qr=np.array(b['joint_range20x2'])

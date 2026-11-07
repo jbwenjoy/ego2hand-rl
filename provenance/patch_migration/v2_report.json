@@ -1,0 +1,2787 @@
+{
+  "schema": "supermimic_research.patch_migration_result:1",
+  "intent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\intent.json",
+    "bytes": 16955,
+    "sha256": "2df747bcf197fe97ec6f0088c3bf1a412935cd7693e88847fd3d98b96adddeaa"
+  },
+  "checks": {
+    "all_eight_seed_attempts": true,
+    "zero_barrier": true,
+    "fixed_model": true,
+    "fixed_runtime": true,
+    "fixed_proposal_sources": true,
+    "native_budget": true,
+    "restoration_budget": true,
+    "force_budget": true,
+    "screen_budget": true,
+    "no_Torch_NN_or_learning": true
+  },
+  "passed": 10,
+  "total": 10,
+  "records": [
+    {
+      "index": 0,
+      "offset_m": -0.08,
+      "shift_world_m": [
+        -0.011232585943933898,
+        0.07679645872085815,
+        -0.019394147079665015
+      ],
+      "restoration_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed00\\restore_proposals.jsonl",
+        "bytes": 72983,
+        "sha256": "7a0e60dfbcbf4ef1bc412a0a17bf5efa62308ec2ff620ae2d2e6db63f572f387"
+      },
+      "restoration": {
+        "best": {
+          "call": 171,
+          "z_joint": [
+            -0.9931619977310773,
+            0.9313592448546724,
+            -0.981019898056075,
+            -0.9686811784654683,
+            0.4721916936430298,
+            -0.9999620290017235,
+            -0.4597160218037553,
+            -0.6560427941494645,
+            0.5770985511416136,
+            -0.9999961053733264,
+            -0.9686985281792831,
+            -0.9504187922385267,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "score": 15861.99103776486,
+          "geometry_pass": false,
+          "pad_gaps_m": [
+            0.022461065623875953,
+            0.032436405174353464,
+            0.048921245064624315
+          ]
+        },
+        "stop": {
+          "kind": "SearchBudget",
+          "message": "Declared restoration budget"
+        },
+        "elapsed_s": 20.283722500083968,
+        "counts": {
+          "MjData": 1,
+          "kinematics": 172,
+          "geometry_audits": 172,
+          "proposal_calls": 171,
+          "secant_columns": 160,
+          "forward": 0,
+          "integration_steps": 0
+        },
+        "qualified": false
+      },
+      "status": "RESTORED_GEOMETRY_FAILED",
+      "native_cases": 0,
+      "qualified": false,
+      "restored_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed00\\restored_geometry.json",
+        "bytes": 59869,
+        "sha256": "a2421cd6a21b800b3ec490aaf1eba128a69ac702a63ee74e17e07ccdaeb66950"
+      },
+      "restored_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed00\\restored_state.npz",
+        "bytes": 726,
+        "sha256": "023e25c4fee916adaf9520cb706abb28c18b8e83a379acf88e9ab5ecdd6f14cb"
+      },
+      "qualification": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed00\\qualification.json",
+        "bytes": 89,
+        "sha256": "1fd6f95296f01edbbe46898be7f1efeebaf5e2e6c7a2d021f0090c4e1f1753c3"
+      }
+    },
+    {
+      "index": 1,
+      "offset_m": -0.06,
+      "shift_world_m": [
+        -0.008424439457950423,
+        0.0575973440406436,
+        -0.01454561030974876
+      ],
+      "restoration_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed01\\restore_proposals.jsonl",
+        "bytes": 53720,
+        "sha256": "4ff86892789279d961b949a2a632740959fa73b5c4ad816b9fe1714c16f290b8"
+      },
+      "restoration": {
+        "best": {
+          "call": 128,
+          "z_joint": [
+            -0.8885413676685817,
+            0.8980363107132657,
+            -0.7898488871398807,
+            -0.8078419818792507,
+            0.18312749488522792,
+            -0.9706725882494766,
+            -0.17573071482190072,
+            -0.3719537015993342,
+            0.7339700638853032,
+            -0.9995881334828965,
+            -0.9403273814935045,
+            -0.8794232164923887,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "score": 4790.177711408924,
+          "geometry_pass": false,
+          "pad_gaps_m": [
+            0.009145939984206397,
+            0.014586762243606194,
+            0.029884162444216503
+          ]
+        },
+        "stop": {
+          "kind": "SearchBudget",
+          "message": "Declared restoration budget"
+        },
+        "elapsed_s": 20.069301400100812,
+        "counts": {
+          "MjData": 1,
+          "kinematics": 129,
+          "geometry_audits": 129,
+          "proposal_calls": 128,
+          "secant_columns": 120,
+          "forward": 0,
+          "integration_steps": 0
+        },
+        "qualified": false
+      },
+      "status": "RESTORED_GEOMETRY_FAILED",
+      "native_cases": 0,
+      "qualified": false,
+      "restored_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed01\\restored_geometry.json",
+        "bytes": 59943,
+        "sha256": "ab862ea8830eab134a6f9368535ac7301342f373f05c4845c3a80c7d1acd15c6"
+      },
+      "restored_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed01\\restored_state.npz",
+        "bytes": 730,
+        "sha256": "3759272caf02b2744dc9330c0cf951cb069e657550323ab821ad638c1f9477a7"
+      },
+      "qualification": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed01\\qualification.json",
+        "bytes": 89,
+        "sha256": "1fd6f95296f01edbbe46898be7f1efeebaf5e2e6c7a2d021f0090c4e1f1753c3"
+      }
+    },
+    {
+      "index": 2,
+      "offset_m": -0.04,
+      "shift_world_m": [
+        -0.005616292971966949,
+        0.038398229360429074,
+        -0.009697073539832507
+      ],
+      "restoration_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed02\\restore_proposals.jsonl",
+        "bytes": 35815,
+        "sha256": "8f521a57efecec47e5b79d5171e0d1fca54a1e0c404178d40318a7dca49e7414"
+      },
+      "restoration": {
+        "best": {
+          "call": 85,
+          "z_joint": [
+            -0.4883083667503764,
+            0.6016873707333101,
+            -0.45717706268763203,
+            -0.5279366717022114,
+            -0.056357723922855485,
+            -0.7739321748468303,
+            0.5257750384671372,
+            -0.30792671251318227,
+            0.8161766975799599,
+            -0.997447305327304,
+            -0.8251113649341922,
+            -0.9594521338818702,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "score": 504.96229530418907,
+          "geometry_pass": false,
+          "pad_gaps_m": [
+            0.0006707293818664363,
+            0.0014729207280187852,
+            0.010960926694085401
+          ]
+        },
+        "stop": {
+          "kind": "SearchBudget",
+          "message": "Declared restoration budget"
+        },
+        "elapsed_s": 20.098679299931973,
+        "counts": {
+          "MjData": 1,
+          "kinematics": 89,
+          "geometry_audits": 89,
+          "proposal_calls": 88,
+          "secant_columns": 83,
+          "forward": 0,
+          "integration_steps": 0
+        },
+        "qualified": false
+      },
+      "status": "RESTORED_GEOMETRY_FAILED",
+      "native_cases": 0,
+      "qualified": false,
+      "restored_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed02\\restored_geometry.json",
+        "bytes": 60103,
+        "sha256": "4d8753d63b700f18cb82b33facb95f9ff1499062052a2615781aadc68f35945a"
+      },
+      "restored_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed02\\restored_state.npz",
+        "bytes": 729,
+        "sha256": "0d20d8832fcf2d70d8f29424a456c08b274b264ae7f90901bad3c99ad0011ae8"
+      },
+      "qualification": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed02\\qualification.json",
+        "bytes": 89,
+        "sha256": "1fd6f95296f01edbbe46898be7f1efeebaf5e2e6c7a2d021f0090c4e1f1753c3"
+      }
+    },
+    {
+      "index": 3,
+      "offset_m": -0.02,
+      "shift_world_m": [
+        -0.0028081464859834745,
+        0.019199114680214537,
+        -0.004848536769916254
+      ],
+      "restoration_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed03\\restore_proposals.jsonl",
+        "bytes": 49436,
+        "sha256": "31562be823dc0bfb5239b74f6099eb602e9e0f1de5954ca6342ff8b867915123"
+      },
+      "restoration": {
+        "best": {
+          "call": 116,
+          "z_joint": [
+            -0.09497652069158705,
+            0.15724984679465998,
+            -0.10193224288625283,
+            -0.11103769137245548,
+            -0.10984096842526243,
+            -0.3393997355335747,
+            0.20991424263726358,
+            0.2840446475387018,
+            0.6807702582891113,
+            -0.5830878780261997,
+            0.022992112816718868,
+            -0.5341091611969642,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "score": 5.487018094789667,
+          "geometry_pass": false,
+          "pad_gaps_m": [
+            -7.544298410968093e-05,
+            3.501606932808124e-05,
+            0.0009258144705067684
+          ]
+        },
+        "stop": {
+          "kind": "SearchBudget",
+          "message": "Declared restoration budget"
+        },
+        "elapsed_s": 20.117518400074914,
+        "counts": {
+          "MjData": 1,
+          "kinematics": 117,
+          "geometry_audits": 117,
+          "proposal_calls": 116,
+          "secant_columns": 110,
+          "forward": 0,
+          "integration_steps": 0
+        },
+        "qualified": false
+      },
+      "status": "RESTORED_GEOMETRY_FAILED",
+      "native_cases": 0,
+      "qualified": false,
+      "restored_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed03\\restored_geometry.json",
+        "bytes": 60129,
+        "sha256": "4bd792cb0cfeae68875eac9b565599e0fd52702af810dd18230313a20a1354d5"
+      },
+      "restored_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed03\\restored_state.npz",
+        "bytes": 728,
+        "sha256": "395a7a00e4f56fff40ba04aba1d968287bbef94545f72270bced6b5bacde8ee3"
+      },
+      "qualification": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed03\\qualification.json",
+        "bytes": 89,
+        "sha256": "1fd6f95296f01edbbe46898be7f1efeebaf5e2e6c7a2d021f0090c4e1f1753c3"
+      }
+    },
+    {
+      "index": 4,
+      "offset_m": 0.02,
+      "shift_world_m": [
+        0.0028081464859834745,
+        -0.019199114680214537,
+        0.004848536769916254
+      ],
+      "restoration_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\restore_proposals.jsonl",
+        "bytes": 53999,
+        "sha256": "41f35823e9cab127f9aa36f8b10630a81d1c51459718a1d5f7277344f2d8811b"
+      },
+      "restoration": {
+        "best": {
+          "call": 78,
+          "z_joint": [
+            0.001272404185086492,
+            0.002827406554291872,
+            0.0014142026960356673,
+            0.0004251941637109615,
+            -0.0021874038265793355,
+            -0.0002834505099762862,
+            -0.002211838414110477,
+            -0.0009282974401262013,
+            -0.019107913246411083,
+            0.025136127800549298,
+            -0.025712364050595883,
+            -0.025529235469242212,
+            -0.12640967602494194,
+            0.1342492932127224,
+            -0.11176425986138486,
+            0.04542206563743034,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "score": 2.058912989520521e-07,
+          "geometry_pass": true,
+          "pad_gaps_m": [
+            -7.500119506917251e-05,
+            -7.502408317344375e-05,
+            -7.500157693115119e-05
+          ]
+        },
+        "stop": {
+          "kind": "SearchBudget",
+          "message": "Declared restoration budget"
+        },
+        "elapsed_s": 20.784136299975216,
+        "counts": {
+          "MjData": 1,
+          "kinematics": 110,
+          "geometry_audits": 110,
+          "proposal_calls": 109,
+          "secant_columns": 100,
+          "forward": 0,
+          "integration_steps": 0
+        },
+        "qualified": true
+      },
+      "status": "FORCE_CANDIDATE_EVALUATED",
+      "native_cases": 2,
+      "qualified": false,
+      "restored_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\restored_geometry.json",
+        "bytes": 60303,
+        "sha256": "4d1aabe54397cbfc67685ac1d79afa8d4be4f9189c6f6d35cf8866fbd0ce2905"
+      },
+      "restored_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\restored_state.npz",
+        "bytes": 762,
+        "sha256": "6d642ca8e955079c1ca3c801198a92a6041d311f8bac4e24bc2d1830cafb4e75"
+      },
+      "native_screen": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\screen.json",
+        "bytes": 3158,
+        "sha256": "76219307b52caec0f600c85898d57b824294df8bdd18a21ac1c2b89ebf441b82"
+      },
+      "force_search": {
+        "best": {
+          "z": [
+            -0.0009950991804651853,
+            -0.003368301855473426,
+            -0.001300667055922057,
+            -0.00039315092661872656,
+            -0.00020104289850543847,
+            -6.240548114419973e-06,
+            -2.039072277747744e-05,
+            0.00010411052843496249,
+            -0.0024074408096309836,
+            0.00012467962965598966,
+            -0.0013071543308149822,
+            -0.0002554103634598133,
+            -0.0011870421246051733,
+            -0.00023524781085483389,
+            -5.160727107831622e-05,
+            -0.0008970635935471459,
+            0.0005451402366612096,
+            -0.0009640478255328035,
+            -0.00024684298770210776,
+            0.0013734893573243607,
+            1.3805249643939638e-05,
+            5.160559638057851e-05,
+            0.00025608255312041826,
+            -1.4308884751312697e-05,
+            -1.7196330719531194e-05,
+            -0.0001608615028122073,
+            0.00020988679160998828,
+            8.367255626343685e-06,
+            -1.888855716567033e-05,
+            -0.00017519544822072102,
+            -1.0785000929843093e-07,
+            1.2920350604500094e-08,
+            -4.729225813618806e-08,
+            -6.615027717386105e-09,
+            -8.024818535446077e-19,
+            -2.7882233473811136e-19,
+            -3.6544635267100163e-19,
+            4.489033310851329e-19
+          ],
+          "cost": 134.1294611126985,
+          "call": 614
+        },
+        "stop": {
+          "kind": "optimizer_returned",
+          "status": 3,
+          "message": "`xtol` termination condition is satisfied.",
+          "nfev": 24
+        },
+        "calls": 632,
+        "elapsed_s": 0.18618159997276962,
+        "fresh_final_cost": 134.1294611126985
+      },
+      "force_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\force_proposals.jsonl",
+        "bytes": 1089495,
+        "sha256": "f3dd06b24f09dfeae5f5a2ac1ebc2906ccde494457a8d290189cab8a29ff723d"
+      },
+      "final_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\final_state.npz",
+        "bytes": 5114,
+        "sha256": "5e6a70d5758247fc5dd8e6a2d8a5325067b80002fcaebd708b80570831560560"
+      },
+      "final_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\final_geometry.json",
+        "bytes": 60315,
+        "sha256": "8adcc635603e1d3ff61b18b984b751b396ebd2f6ad8cdf98cdf143acdcdd6470"
+      },
+      "final_geometry_pass": true,
+      "reference_deviation": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\reference_deviation.json",
+        "bytes": 1613,
+        "sha256": "28473bc0eb5a9823cf721096551dafe69ef53fdb4286b8d2fe379b941db6a446"
+      },
+      "variant_name": "seed04_slide_+0.020m",
+      "qualification": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\qualification.json",
+        "bytes": 90,
+        "sha256": "1f624ed1d98cdf04617634ba44c8dd3cb59f700b4aafcb2ef53c05c37305d623"
+      }
+    },
+    {
+      "index": 5,
+      "offset_m": 0.04,
+      "shift_world_m": [
+        0.005616292971966949,
+        -0.038398229360429074,
+        0.009697073539832507
+      ],
+      "restoration_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed05\\restore_proposals.jsonl",
+        "bytes": 38317,
+        "sha256": "acbc053e7cef1b462cc0186174094743d595d35c079bd861ed475447e1ef58d9"
+      },
+      "restoration": {
+        "best": {
+          "call": 64,
+          "z_joint": [
+            0.0042306941341551125,
+            0.00624122288665116,
+            0.004491577717801709,
+            0.0019521250989075487,
+            -0.0034317800799462104,
+            -0.0016114206286474463,
+            -0.005523014386437059,
+            -0.0036804022891679714,
+            -0.021941122663334697,
+            0.029618304379523126,
+            -0.029609458934591163,
+            -0.02963071549660161,
+            -0.1477450749598723,
+            0.04645247114546268,
+            -0.13493713954498338,
+            0.2675608749189152,
+            0.3488278610626411,
+            0.4692770175112609,
+            0.3297048601259387,
+            0.031155625591788555
+          ],
+          "score": 0.09021395318729195,
+          "geometry_pass": false,
+          "pad_gaps_m": [
+            -7.500096207541455e-05,
+            -7.50319824301144e-05,
+            -7.500008045063442e-05
+          ]
+        },
+        "stop": {
+          "kind": "SearchBudget",
+          "message": "Declared restoration budget"
+        },
+        "elapsed_s": 20.219426200026646,
+        "counts": {
+          "MjData": 1,
+          "kinematics": 76,
+          "geometry_audits": 76,
+          "proposal_calls": 75,
+          "secant_columns": 71,
+          "forward": 0,
+          "integration_steps": 0
+        },
+        "qualified": false
+      },
+      "status": "RESTORED_GEOMETRY_FAILED",
+      "native_cases": 0,
+      "qualified": false,
+      "restored_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed05\\restored_geometry.json",
+        "bytes": 60529,
+        "sha256": "2cb6c3d426dbbafcee9c3b95051288d2dd1ba6b3a9116908168060686a331b0c"
+      },
+      "restored_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed05\\restored_state.npz",
+        "bytes": 794,
+        "sha256": "19340daf575256ee12bcae09b9b36c5d5adf2ffc17d3695e810ed1c4559501ed"
+      },
+      "qualification": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed05\\qualification.json",
+        "bytes": 89,
+        "sha256": "1fd6f95296f01edbbe46898be7f1efeebaf5e2e6c7a2d021f0090c4e1f1753c3"
+      }
+    },
+    {
+      "index": 6,
+      "offset_m": 0.06,
+      "shift_world_m": [
+        0.008424439457950423,
+        -0.0575973440406436,
+        0.01454561030974876
+      ],
+      "restoration_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed06\\restore_proposals.jsonl",
+        "bytes": 37874,
+        "sha256": "fee24c47979c70d690bc4a88c43657c5f2eb9be2c53a4890ed367981c9422a47"
+      },
+      "restoration": {
+        "best": {
+          "call": 65,
+          "z_joint": [
+            0.006171015625335733,
+            0.010636096183178487,
+            0.00667658412983791,
+            0.0025621703534345172,
+            -0.006099330602954381,
+            -0.001059870546632416,
+            -0.007097896641858708,
+            -0.0028524285050335395,
+            -0.02972225780946035,
+            0.00959103204959908,
+            -0.033123538246653164,
+            -0.01694934172968925,
+            -0.20467449909044624,
+            0.056571341908359725,
+            -0.110553980955099,
+            -0.40340490152476305,
+            -0.614819639583758,
+            -0.3350711780939907,
+            -0.4654047537687505,
+            0.6762470835910441
+          ],
+          "score": 4761.407845305141,
+          "geometry_pass": false,
+          "pad_gaps_m": [
+            -7.499832186880738e-05,
+            -7.500308220497777e-05,
+            -7.50457517338203e-05
+          ]
+        },
+        "stop": {
+          "kind": "SearchBudget",
+          "message": "Declared restoration budget"
+        },
+        "elapsed_s": 20.207869400037453,
+        "counts": {
+          "MjData": 1,
+          "kinematics": 75,
+          "geometry_audits": 75,
+          "proposal_calls": 74,
+          "secant_columns": 69,
+          "forward": 0,
+          "integration_steps": 0
+        },
+        "qualified": false
+      },
+      "status": "RESTORED_GEOMETRY_FAILED",
+      "native_cases": 0,
+      "qualified": false,
+      "restored_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed06\\restored_geometry.json",
+        "bytes": 60770,
+        "sha256": "2ab9c8c5cdc0efe658cf89c5504180f9f85ebb974e42401777dc80db5d22b01b"
+      },
+      "restored_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed06\\restored_state.npz",
+        "bytes": 794,
+        "sha256": "42d17a8fe4786f9be232cf55b243f9b8dd7c3f2a7dc1c2733331cddf1c8c3918"
+      },
+      "qualification": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed06\\qualification.json",
+        "bytes": 89,
+        "sha256": "1fd6f95296f01edbbe46898be7f1efeebaf5e2e6c7a2d021f0090c4e1f1753c3"
+      }
+    },
+    {
+      "index": 7,
+      "offset_m": 0.08,
+      "shift_world_m": [
+        0.011232585943933898,
+        -0.07679645872085815,
+        0.019394147079665015
+      ],
+      "restoration_proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed07\\restore_proposals.jsonl",
+        "bytes": 40708,
+        "sha256": "c7649d01f964775997d1302548ae61d7d8aa5ca3b7803e261d8e265d87016c21"
+      },
+      "restoration": {
+        "best": {
+          "call": 65,
+          "z_joint": [
+            0.009111680337908962,
+            0.01446916132527408,
+            0.009760930643251483,
+            0.0040902408223195165,
+            -0.00791335096787059,
+            -0.0015575987793602609,
+            -0.009682840812897454,
+            -0.004094500975202518,
+            -0.032775578951377296,
+            0.011544289894322185,
+            -0.037169705123455306,
+            -0.019969976848283857,
+            -0.21669762049388255,
+            0.14433245219368734,
+            -0.08230709062563323,
+            -0.3686896006265917,
+            -0.6435893864347473,
+            -0.3131216775728096,
+            -0.454397408696206,
+            0.6737789200580411
+          ],
+          "score": 4652.43211480365,
+          "geometry_pass": false,
+          "pad_gaps_m": [
+            -7.499652866293518e-05,
+            -7.500464146222192e-05,
+            -7.506771219491053e-05
+          ]
+        },
+        "stop": {
+          "kind": "SearchBudget",
+          "message": "Declared restoration budget"
+        },
+        "elapsed_s": 20.137090999865904,
+        "counts": {
+          "MjData": 1,
+          "kinematics": 80,
+          "geometry_audits": 80,
+          "proposal_calls": 79,
+          "secant_columns": 74,
+          "forward": 0,
+          "integration_steps": 0
+        },
+        "qualified": false
+      },
+      "status": "RESTORED_GEOMETRY_FAILED",
+      "native_cases": 0,
+      "qualified": false,
+      "restored_geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed07\\restored_geometry.json",
+        "bytes": 60690,
+        "sha256": "94648d6e67268eec24a483b51f05840d6be6b29e75526dfae829e70b7ee7b714"
+      },
+      "restored_state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed07\\restored_state.npz",
+        "bytes": 792,
+        "sha256": "1358607f84d3df1d5ced718f241e4a7d2b8382d89947c771e2b0d082a77221c4"
+      },
+      "qualification": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed07\\qualification.json",
+        "bytes": 89,
+        "sha256": "1fd6f95296f01edbbe46898be7f1efeebaf5e2e6c7a2d021f0090c4e1f1753c3"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "role": "original_zero",
+      "native_summary": {
+        "name": "original_zero",
+        "candidate_id": "original_zero",
+        "route": "injected_callback",
+        "dt_s": 0.0003125,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "integration_steps": 389,
+        "finite_steps_saved": 389,
+        "actual_final_time_s": 0.12156249999999878,
+        "metrics": {
+          "final_COM_drift_m": 0.05002053233678157,
+          "final_angle_rad": 0.7650514050389342,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "tail_triple_pad_force_coverage": null,
+          "max_native_penetration_m": 9.435094489694773e-05,
+          "max_self_penetration_m": 1.6635643446416705e-05,
+          "max_phone_nonpad_normal_force_N": 0.0,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0
+        },
+        "gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "tail_triple_pad_force_coverage": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": true,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true
+        },
+        "nominal_holding_dynamics_pass": false,
+        "old_two_pad_metrics": {
+          "final_COM_drift_m": 0.05002053233678157,
+          "final_angle_rad": 0.7650514050389342,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "max_native_penetration_m": 9.435094489694773e-05,
+          "max_self_penetration_m": 1.6635643446416705e-05,
+          "max_phone_nonpad_normal_force_N": 2.652734852651186,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0,
+          "tail_dual_pad_force_coverage": null
+        },
+        "old_two_pad_gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": false,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true,
+          "tail_dual_pad_force_coverage": false
+        },
+        "old_two_pad_pass": false,
+        "trace": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\zero_0.0003125\\trace.npz",
+          "bytes": 678759,
+          "sha256": "c555be20593d4277cb12e52130c98a282bd92e29526ecada13631ef027c0c673"
+        },
+        "warnings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "initial_native": {
+          "phase": "RESET_FORWARD",
+          "pad_normal_N3": [
+            1.4852859405565542,
+            1.0809508495304838,
+            1.434625044351917
+          ],
+          "phone_nonpad_normal_N": 0.0,
+          "old_two_pad_phone_nonpad_normal_N": 1.434625044351917,
+          "table_normal_N": 0.0,
+          "contact_rows24": [
+            [
+              -1.0,
+              15.0,
+              71.0,
+              3.0,
+              20.0,
+              -7.472899946864002e-05,
+              -0.13942085514733216,
+              0.03481881357030944,
+              0.5114221248951408,
+              -0.3604187731135925,
+              -0.274080182850194,
+              -0.8916155905748268,
+              -0.10271700141966887,
+              0.9617068437776682,
+              -0.25410463248541443,
+              0.9271178596093621,
+              0.0,
+              -0.37476989526021903,
+              1.4852859405565542,
+              -0.7548269046850717,
+              -0.28487325370451605,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              28.0,
+              71.0,
+              3.0,
+              24.0,
+              -7.486874527687192e-05,
+              -0.1695697236927411,
+              0.019885284467939645,
+              0.4502128443029243,
+              -0.5036985822241008,
+              0.1460637359228219,
+              0.85144179091333,
+              0.07436969820190281,
+              0.9892751816599202,
+              -0.1257130181846325,
+              -0.8606723454688135,
+              0.0,
+              -0.5091592223904142,
+              1.0809508495304838,
+              0.3692528235613957,
+              -0.3874127711099429,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              41.0,
+              71.0,
+              3.0,
+              28.0,
+              -7.512712870421113e-05,
+              -0.1694823296366852,
+              0.0038322147130412975,
+              0.45329726367531553,
+              -0.04514687345110974,
+              0.4883197888915586,
+              0.8714961523692996,
+              0.025262979229871255,
+              0.872664760246971,
+              -0.4876658672734103,
+              -0.9986608742200831,
+              -3.469446951953614e-18,
+              -0.051734498180415575,
+              1.434625044351917,
+              0.05137890019168809,
+              -0.9219791934366154,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "qacc26_descriptor": [
+            12.225935371645416,
+            -217.04045180795327,
+            8.529064425743712,
+            52.835633522722766,
+            -132.78666755971508,
+            7.080027579288456,
+            35.19230105516564,
+            147.71013882491687,
+            -79.17846186481341,
+            148.1481795078779,
+            -0.6311097000181745,
+            79.325219075165,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.22222814888246178,
+            0.7357370170259525,
+            -3.199344532630879,
+            -88.04340928679729,
+            67.87775632875231,
+            -84.19536900233544
+          ],
+          "actuator_force20": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975
+          ],
+          "qfrc_actuator26": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "source_candidate": {
+          "parent": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          }
+        },
+        "source_state_npz": {
+          "parent": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          }
+        },
+        "command": {
+          "name": "original_zero",
+          "candidate_id": "original_zero",
+          "route": "injected_callback",
+          "qpos27": [
+            0.9003363722093097,
+            0.04038687586451288,
+            0.029990434218657262,
+            0.8692773991503583,
+            -0.8630142896540195,
+            0.4723261063043457,
+            1.1251006155772207,
+            0.40869516803025907,
+            -0.7823472396439576,
+            0.17034875490121784,
+            1.124359533260123,
+            0.7696150545328048,
+            -0.10932789375512818,
+            -0.14035572275499802,
+            0.0025119008953089074,
+            0.17803092412247978,
+            0.319688554955577,
+            -0.23895150303179627,
+            -0.12949049779670038,
+            -0.006433781443888266,
+            -0.16432721864782343,
+            0.08061976277936019,
+            0.46608009257879446,
+            0.6631518610716088,
+            0.5578056431815778,
+            -0.2527668780534653,
+            0.43033867935749465
+          ],
+          "ctrl20": [
+            0.9540725596015607,
+            0.024327446938353262,
+            0.09342495791598021,
+            0.9212036286683376,
+            -0.8521691841269621,
+            0.47862446621760996,
+            1.2096555156408788,
+            0.4616205692273283,
+            -0.770797690018839,
+            0.19486041263694848,
+            1.209931801108178,
+            0.8227152985979983,
+            -0.09596820153323679,
+            -0.13923949853232023,
+            0.009471863848499424,
+            0.17881636057296924,
+            0.33055058281933053,
+            -0.23282617752485685,
+            -0.12003729352915586,
+            -0.005261076275423867
+          ],
+          "ctrl_margin20x2": [
+            [
+              2.141072559601561,
+              0.33692744039843925
+            ],
+            [
+              1.5083274469383532,
+              0.6736725530616466
+            ],
+            [
+              1.1404249579159802,
+              1.4765750420840198
+            ],
+            [
+              1.9682036286683375,
+              0.6487963713316625
+            ],
+            [
+              0.19483081587303785,
+              2.422169184126962
+            ],
+            [
+              1.17662446621761,
+              0.21937553378239
+            ],
+            [
+              2.2566555156408787,
+              0.884344484359121
+            ],
+            [
+              1.5086205692273282,
+              1.1083794307726718
+            ],
+            [
+              0.2762023099811609,
+              2.340797690018839
+            ],
+            [
+              0.8928604126369484,
+              0.5031395873630515
+            ],
+            [
+              2.256931801108178,
+              0.8840681988918218
+            ],
+            [
+              1.8697152985979981,
+              0.7472847014020018
+            ],
+            [
+              0.9510317984667631,
+              1.6659682015332369
+            ],
+            [
+              0.5587605014676797,
+              0.8372394985323202
+            ],
+            [
+              1.0564718638484993,
+              2.0845281361515005
+            ],
+            [
+              1.2258163605729693,
+              1.3911836394270307
+            ],
+            [
+              1.3775505828193304,
+              1.2394494171806696
+            ],
+            [
+              0.4651738224751431,
+              0.9308261775248567
+            ],
+            [
+              0.9269627064708441,
+              2.214037293529156
+            ],
+            [
+              1.041738923724576,
+              1.575261076275424
+            ]
+          ],
+          "candidate": {
+            "parent": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            }
+          },
+          "state_npz": {
+            "parent": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            }
+          },
+          "initial_provenance_scope": "Generic prescribed initial-state artifact, not a GN/static/oldcheckpoint qualification"
+        },
+        "energy_force_geometry_phase": "PRE(tick*dt); qpos/qvel/COM POST((tick+1)*dt)",
+        "velocity_metric_semantics": "Preserved root translational freejoint qvel RMS; angular body qvel norm is frame invariant, not a new COM-velocity gate.",
+        "contact_row_columns": [
+          "pre_tick",
+          "geom1",
+          "geom2",
+          "dim",
+          "efc_address",
+          "distance_m",
+          "position3",
+          "frame9",
+          "local_wrench6"
+        ],
+        "nonpad_metric_definition": "Maximum across PRE ticks of the SUM of positive Fn over every phone contact with non-designated hand geoms; same aggregation as original two-pad gate. old_two_pad also includes all positive Fn on geom41.",
+        "no_external_forces_equality_mocap_or_pose_reset": true,
+        "static_zero_acceleration_entry_required": false,
+        "control_schedule": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\zero_0.0003125\\control_schedule.json",
+          "bytes": 4485,
+          "sha256": "d1545e783b77f958543dfedf83a8385d54efa4adcd8a8730aa5565d91d645aeb"
+        },
+        "control_scope": "Planned50Hz controller only; trace pre_executed_ctrl20 is actual perPRE-tick command. Legacy trace ctrl20 is last command and ctrl_margin20x2 describes initial source only. Raw integration receipts protect callback state; no full-MjData certificate.",
+        "native_loop_and_physical_success_gates_from": "frozen functional_tripod_dynamics_v3, unchanged after insertion of explicit control hook and schedule fields"
+      }
+    },
+    {
+      "role": "original_zero",
+      "native_summary": {
+        "name": "original_zero",
+        "candidate_id": "original_zero",
+        "route": "injected_callback",
+        "dt_s": 0.00015625,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "integration_steps": 782,
+        "finite_steps_saved": 782,
+        "actual_final_time_s": 0.12218749999999809,
+        "metrics": {
+          "final_COM_drift_m": 0.050055186919140404,
+          "final_angle_rad": 0.7821749073308316,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "tail_triple_pad_force_coverage": null,
+          "max_native_penetration_m": 0.00023091077949722588,
+          "max_self_penetration_m": 1.583233143820682e-05,
+          "max_phone_nonpad_normal_force_N": 0.0,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0
+        },
+        "gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "tail_triple_pad_force_coverage": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": true,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true
+        },
+        "nominal_holding_dynamics_pass": false,
+        "old_two_pad_metrics": {
+          "final_COM_drift_m": 0.050055186919140404,
+          "final_angle_rad": 0.7821749073308316,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "max_native_penetration_m": 0.00023091077949722588,
+          "max_self_penetration_m": 1.583233143820682e-05,
+          "max_phone_nonpad_normal_force_N": 2.412517275774141,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0,
+          "tail_dual_pad_force_coverage": null
+        },
+        "old_two_pad_gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": false,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true,
+          "tail_dual_pad_force_coverage": false
+        },
+        "old_two_pad_pass": false,
+        "trace": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\zero_0.00015625\\trace.npz",
+          "bytes": 1299722,
+          "sha256": "26bf5f00b7a35f60355d7efeea54fffa6e7ce03f07f3cbdb9e7b4f7c193e51c0"
+        },
+        "warnings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "initial_native": {
+          "phase": "RESET_FORWARD",
+          "pad_normal_N3": [
+            1.4852859405565542,
+            1.0809508495304838,
+            1.434625044351917
+          ],
+          "phone_nonpad_normal_N": 0.0,
+          "old_two_pad_phone_nonpad_normal_N": 1.434625044351917,
+          "table_normal_N": 0.0,
+          "contact_rows24": [
+            [
+              -1.0,
+              15.0,
+              71.0,
+              3.0,
+              20.0,
+              -7.472899946864002e-05,
+              -0.13942085514733216,
+              0.03481881357030944,
+              0.5114221248951408,
+              -0.3604187731135925,
+              -0.274080182850194,
+              -0.8916155905748268,
+              -0.10271700141966887,
+              0.9617068437776682,
+              -0.25410463248541443,
+              0.9271178596093621,
+              0.0,
+              -0.37476989526021903,
+              1.4852859405565542,
+              -0.7548269046850717,
+              -0.28487325370451605,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              28.0,
+              71.0,
+              3.0,
+              24.0,
+              -7.486874527687192e-05,
+              -0.1695697236927411,
+              0.019885284467939645,
+              0.4502128443029243,
+              -0.5036985822241008,
+              0.1460637359228219,
+              0.85144179091333,
+              0.07436969820190281,
+              0.9892751816599202,
+              -0.1257130181846325,
+              -0.8606723454688135,
+              0.0,
+              -0.5091592223904142,
+              1.0809508495304838,
+              0.3692528235613957,
+              -0.3874127711099429,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              41.0,
+              71.0,
+              3.0,
+              28.0,
+              -7.512712870421113e-05,
+              -0.1694823296366852,
+              0.0038322147130412975,
+              0.45329726367531553,
+              -0.04514687345110974,
+              0.4883197888915586,
+              0.8714961523692996,
+              0.025262979229871255,
+              0.872664760246971,
+              -0.4876658672734103,
+              -0.9986608742200831,
+              -3.469446951953614e-18,
+              -0.051734498180415575,
+              1.434625044351917,
+              0.05137890019168809,
+              -0.9219791934366154,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "qacc26_descriptor": [
+            12.225935371645416,
+            -217.04045180795327,
+            8.529064425743712,
+            52.835633522722766,
+            -132.78666755971508,
+            7.080027579288456,
+            35.19230105516564,
+            147.71013882491687,
+            -79.17846186481341,
+            148.1481795078779,
+            -0.6311097000181745,
+            79.325219075165,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.22222814888246178,
+            0.7357370170259525,
+            -3.199344532630879,
+            -88.04340928679729,
+            67.87775632875231,
+            -84.19536900233544
+          ],
+          "actuator_force20": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975
+          ],
+          "qfrc_actuator26": [
+            0.1274489733256381,
+            -0.03264640008608073,
+            0.0806091609736333,
+            0.03957316000381328,
+            0.025721913520626583,
+            0.006042440418398132,
+            0.08111920448405474,
+            0.05077489818891001,
+            0.02739268105029602,
+            0.02351568241001925,
+            0.08209523384812312,
+            0.05094263671572841,
+            0.031685892510344066,
+            0.0010708689963714046,
+            0.006677160727246471,
+            0.0007535220311125079,
+            0.027786388093159142,
+            0.0039164537422491374,
+            0.006044256291021025,
+            0.0007498124859460975,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "source_candidate": {
+          "parent": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          }
+        },
+        "source_state_npz": {
+          "parent": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          }
+        },
+        "command": {
+          "name": "original_zero",
+          "candidate_id": "original_zero",
+          "route": "injected_callback",
+          "qpos27": [
+            0.9003363722093097,
+            0.04038687586451288,
+            0.029990434218657262,
+            0.8692773991503583,
+            -0.8630142896540195,
+            0.4723261063043457,
+            1.1251006155772207,
+            0.40869516803025907,
+            -0.7823472396439576,
+            0.17034875490121784,
+            1.124359533260123,
+            0.7696150545328048,
+            -0.10932789375512818,
+            -0.14035572275499802,
+            0.0025119008953089074,
+            0.17803092412247978,
+            0.319688554955577,
+            -0.23895150303179627,
+            -0.12949049779670038,
+            -0.006433781443888266,
+            -0.16432721864782343,
+            0.08061976277936019,
+            0.46608009257879446,
+            0.6631518610716088,
+            0.5578056431815778,
+            -0.2527668780534653,
+            0.43033867935749465
+          ],
+          "ctrl20": [
+            0.9540725596015607,
+            0.024327446938353262,
+            0.09342495791598021,
+            0.9212036286683376,
+            -0.8521691841269621,
+            0.47862446621760996,
+            1.2096555156408788,
+            0.4616205692273283,
+            -0.770797690018839,
+            0.19486041263694848,
+            1.209931801108178,
+            0.8227152985979983,
+            -0.09596820153323679,
+            -0.13923949853232023,
+            0.009471863848499424,
+            0.17881636057296924,
+            0.33055058281933053,
+            -0.23282617752485685,
+            -0.12003729352915586,
+            -0.005261076275423867
+          ],
+          "ctrl_margin20x2": [
+            [
+              2.141072559601561,
+              0.33692744039843925
+            ],
+            [
+              1.5083274469383532,
+              0.6736725530616466
+            ],
+            [
+              1.1404249579159802,
+              1.4765750420840198
+            ],
+            [
+              1.9682036286683375,
+              0.6487963713316625
+            ],
+            [
+              0.19483081587303785,
+              2.422169184126962
+            ],
+            [
+              1.17662446621761,
+              0.21937553378239
+            ],
+            [
+              2.2566555156408787,
+              0.884344484359121
+            ],
+            [
+              1.5086205692273282,
+              1.1083794307726718
+            ],
+            [
+              0.2762023099811609,
+              2.340797690018839
+            ],
+            [
+              0.8928604126369484,
+              0.5031395873630515
+            ],
+            [
+              2.256931801108178,
+              0.8840681988918218
+            ],
+            [
+              1.8697152985979981,
+              0.7472847014020018
+            ],
+            [
+              0.9510317984667631,
+              1.6659682015332369
+            ],
+            [
+              0.5587605014676797,
+              0.8372394985323202
+            ],
+            [
+              1.0564718638484993,
+              2.0845281361515005
+            ],
+            [
+              1.2258163605729693,
+              1.3911836394270307
+            ],
+            [
+              1.3775505828193304,
+              1.2394494171806696
+            ],
+            [
+              0.4651738224751431,
+              0.9308261775248567
+            ],
+            [
+              0.9269627064708441,
+              2.214037293529156
+            ],
+            [
+              1.041738923724576,
+              1.575261076275424
+            ]
+          ],
+          "candidate": {
+            "parent": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            }
+          },
+          "state_npz": {
+            "parent": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            }
+          },
+          "initial_provenance_scope": "Generic prescribed initial-state artifact, not a GN/static/oldcheckpoint qualification"
+        },
+        "energy_force_geometry_phase": "PRE(tick*dt); qpos/qvel/COM POST((tick+1)*dt)",
+        "velocity_metric_semantics": "Preserved root translational freejoint qvel RMS; angular body qvel norm is frame invariant, not a new COM-velocity gate.",
+        "contact_row_columns": [
+          "pre_tick",
+          "geom1",
+          "geom2",
+          "dim",
+          "efc_address",
+          "distance_m",
+          "position3",
+          "frame9",
+          "local_wrench6"
+        ],
+        "nonpad_metric_definition": "Maximum across PRE ticks of the SUM of positive Fn over every phone contact with non-designated hand geoms; same aggregation as original two-pad gate. old_two_pad also includes all positive Fn on geom41.",
+        "no_external_forces_equality_mocap_or_pose_reset": true,
+        "static_zero_acceleration_entry_required": false,
+        "control_schedule": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\zero_0.00015625\\control_schedule.json",
+          "bytes": 4486,
+          "sha256": "a0531b834a8b9b0e7eb7733fc0c38322fd6aa3d05467c4310ffa2f70ac15bb74"
+        },
+        "control_scope": "Planned50Hz controller only; trace pre_executed_ctrl20 is actual perPRE-tick command. Legacy trace ctrl20 is last command and ctrl_margin20x2 describes initial source only. Raw integration receipts protect callback state; no full-MjData certificate.",
+        "native_loop_and_physical_success_gates_from": "frozen functional_tripod_dynamics_v3, unchanged after insertion of explicit control hook and schedule fields"
+      }
+    },
+    {
+      "role": "patch_migration",
+      "seed": 4,
+      "native_summary": {
+        "name": "seed04_slide_+0.020m",
+        "candidate_id": "seed04_slide_+0.020m",
+        "route": "injected_callback",
+        "dt_s": 0.0003125,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "integration_steps": 355,
+        "finite_steps_saved": 355,
+        "actual_final_time_s": 0.11093749999999901,
+        "metrics": {
+          "final_COM_drift_m": 0.03702476271885222,
+          "final_angle_rad": 0.787393849445232,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "tail_triple_pad_force_coverage": null,
+          "max_native_penetration_m": 0.00015377367912496027,
+          "max_self_penetration_m": 0.0,
+          "max_phone_nonpad_normal_force_N": 0.0,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0
+        },
+        "gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "tail_triple_pad_force_coverage": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": true,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true
+        },
+        "nominal_holding_dynamics_pass": false,
+        "old_two_pad_metrics": {
+          "final_COM_drift_m": 0.03702476271885222,
+          "final_angle_rad": 0.787393849445232,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "max_native_penetration_m": 0.00015377367912496027,
+          "max_self_penetration_m": 0.0,
+          "max_phone_nonpad_normal_force_N": 2.1507694596728797,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0,
+          "tail_dual_pad_force_coverage": null
+        },
+        "old_two_pad_gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": false,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true,
+          "tail_dual_pad_force_coverage": false
+        },
+        "old_two_pad_pass": false,
+        "trace": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\dt0.0003125\\trace.npz",
+          "bytes": 601974,
+          "sha256": "9056fdefb4b94f9a387592120ad24a46ea082b2c117a30ba511a2436467b4e42"
+        },
+        "warnings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "initial_native": {
+          "phase": "RESET_FORWARD",
+          "pad_normal_N3": [
+            0.9984784075261466,
+            0.9878747064791659,
+            1.0633620658556535
+          ],
+          "phone_nonpad_normal_N": 0.0,
+          "old_two_pad_phone_nonpad_normal_N": 1.0633620658556535,
+          "table_normal_N": 0.0,
+          "contact_rows24": [
+            [
+              -1.0,
+              15.0,
+              71.0,
+              3.0,
+              20.0,
+              -4.7601184726210616e-07,
+              -0.13930514059689586,
+              0.034830248934746524,
+              0.5112835866845334,
+              -0.35427035616034674,
+              -0.2857141598043593,
+              -0.8904268266586032,
+              -0.10562296248776995,
+              0.9583148850389882,
+              -0.2654738610636048,
+              0.9291589231887775,
+              -1.3877787807814457e-17,
+              -0.36968053161976466,
+              0.9984784075261466,
+              -0.5987989917732439,
+              -0.10013589349505866,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              28.0,
+              71.0,
+              3.0,
+              24.0,
+              -4.860120967374719e-05,
+              -0.16961296300243367,
+              0.019807719907434775,
+              0.45010555922924755,
+              -0.5324339831961742,
+              0.1377554163051709,
+              0.8351871040769518,
+              0.07405165297967649,
+              0.9904662766993074,
+              -0.11615897473888324,
+              -0.8432261892451122,
+              0.0,
+              -0.5375589212087977,
+              0.9878747064791659,
+              0.3236458262095529,
+              -0.36786646832586317,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              41.0,
+              71.0,
+              3.0,
+              28.0,
+              -1.5334722192203933e-05,
+              -0.16957254233268765,
+              0.001225467649067273,
+              0.45330347147120365,
+              -0.07771210798289455,
+              0.24100465889826733,
+              0.9674076610520432,
+              0.019297802912544904,
+              0.9705239586889804,
+              -0.2402308065453279,
+              -0.9967890564585888,
+              0.0,
+              -0.08007232308604821,
+              1.0633620658556535,
+              0.012593967993077534,
+              -0.7317594781058799,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "qacc26_descriptor": [
+            68.32357234735142,
+            -119.25378003428827,
+            44.73273138250647,
+            89.9128326247483,
+            -112.11098719353767,
+            5.839233542717132,
+            42.25402250492945,
+            172.20758735447203,
+            -52.362322945948655,
+            11.999053387814904,
+            18.694238741077395,
+            199.87774226235567,
+            0.13932083998174608,
+            -0.137198412452862,
+            0.2694891090312395,
+            0.01966359600071274,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.40820967976137523,
+            -0.6167636473759093,
+            -2.8707394237545856,
+            -50.533699198623545,
+            64.17641724966839,
+            -176.73624703208182
+          ],
+          "actuator_force20": [
+            0.12774536406245485,
+            -0.030439320925182686,
+            0.08094498732894227,
+            0.03964488298266833,
+            0.02599948773030114,
+            0.006039519571179097,
+            0.08111816764339586,
+            0.050708624563290894,
+            0.02868399202907823,
+            0.023494167879965916,
+            0.08234060574798652,
+            0.05094122015067537,
+            0.03168581577226326,
+            0.001070872714979909,
+            0.00667714711605296,
+            0.0007535201272402259,
+            0.02778638809315903,
+            0.00391645374224911,
+            0.0060442562910210385,
+            0.000749812485946097
+          ],
+          "qfrc_actuator26": [
+            0.12774536406245485,
+            -0.030439320925182686,
+            0.08094498732894227,
+            0.03964488298266833,
+            0.02599948773030114,
+            0.006039519571179097,
+            0.08111816764339586,
+            0.050708624563290894,
+            0.02868399202907823,
+            0.023494167879965916,
+            0.08234060574798652,
+            0.05094122015067537,
+            0.03168581577226326,
+            0.001070872714979909,
+            0.00667714711605296,
+            0.0007535201272402259,
+            0.02778638809315903,
+            0.00391645374224911,
+            0.0060442562910210385,
+            0.000749812485946097,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "source_candidate": {
+          "new_initialization": true,
+          "parent": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "raw": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\final_state.npz",
+            "bytes": 5114,
+            "sha256": "5e6a70d5758247fc5dd8e6a2d8a5325067b80002fcaebd708b80570831560560"
+          },
+          "deviation": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\reference_deviation.json",
+            "bytes": 1613,
+            "sha256": "28473bc0eb5a9823cf721096551dafe69ef53fdb4286b8d2fe379b941db6a446"
+          }
+        },
+        "source_state_npz": {
+          "new_initialization": true,
+          "parent": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "raw": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\final_state.npz",
+            "bytes": 5114,
+            "sha256": "5e6a70d5758247fc5dd8e6a2d8a5325067b80002fcaebd708b80570831560560"
+          },
+          "deviation": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\reference_deviation.json",
+            "bytes": 1613,
+            "sha256": "28473bc0eb5a9823cf721096551dafe69ef53fdb4286b8d2fe379b941db6a446"
+          }
+        },
+        "command": {
+          "name": "seed04_slide_+0.020m",
+          "candidate_id": "seed04_slide_+0.020m",
+          "route": "injected_callback",
+          "qpos27": [
+            0.9005826938379969,
+            0.04070280778742035,
+            0.030225271751085334,
+            0.8693475869223334,
+            -0.8638200895730234,
+            0.4722256505162311,
+            1.1243223939877267,
+            0.4083910860319019,
+            -0.7895164974421276,
+            0.1791713355573413,
+            1.1150987749762515,
+            0.760628740045878,
+            -0.15357128036385786,
+            -0.0933684701305452,
+            -0.03660559005617579,
+            0.19392864709558041,
+            0.319688554955577,
+            -0.23895150303179627,
+            -0.12949049779670038,
+            -0.006433781443888266,
+            -0.161536877793709,
+            0.06141711938198282,
+            0.47092785523964453,
+            0.663283481496881,
+            0.5577301376022595,
+            -0.25274064896642673,
+            0.4302490919729764
+          ],
+          "ctrl20": [
+            0.9544438481700301,
+            0.02572908603955272,
+            0.09392407043448588,
+            0.9213679283045505,
+            -0.8528579507003288,
+            0.4785209658736929,
+            1.2088762132967241,
+            0.46124740667244046,
+            -0.7774224936176,
+            0.20366056754382864,
+            1.20092680712332,
+            0.8137275075492972,
+            -0.14021162049696928,
+            -0.09225224203176222,
+            -0.02964564129066271,
+            0.19471408156156159,
+            0.3305505828193305,
+            -0.23282617752485688,
+            -0.12003729352915585,
+            -0.005261076275423868
+          ],
+          "ctrl_margin20x2": [
+            [
+              2.14144384817003,
+              0.3365561518299698
+            ],
+            [
+              1.5097290860395527,
+              0.6722709139604472
+            ],
+            [
+              1.1409240704344858,
+              1.4760759295655141
+            ],
+            [
+              1.9683679283045503,
+              0.6486320716954496
+            ],
+            [
+              0.19414204929967116,
+              2.4228579507003287
+            ],
+            [
+              1.1765209658736928,
+              0.21947903412630704
+            ],
+            [
+              2.255876213296724,
+              0.8851237867032757
+            ],
+            [
+              1.5082474066724405,
+              1.1087525933275595
+            ],
+            [
+              0.26957750638239997,
+              2.3474224936176
+            ],
+            [
+              0.9016605675438286,
+              0.4943394324561713
+            ],
+            [
+              2.24792680712332,
+              0.89307319287668
+            ],
+            [
+              1.860727507549297,
+              0.7562724924507028
+            ],
+            [
+              0.9067883795030307,
+              1.7102116204969693
+            ],
+            [
+              0.6057477579682378,
+              0.7902522420317621
+            ],
+            [
+              1.0173543587093372,
+              2.1236456412906626
+            ],
+            [
+              1.2417140815615615,
+              1.3752859184384385
+            ],
+            [
+              1.3775505828193304,
+              1.2394494171806696
+            ],
+            [
+              0.46517382247514305,
+              0.9308261775248569
+            ],
+            [
+              0.9269627064708441,
+              2.214037293529156
+            ],
+            [
+              1.041738923724576,
+              1.575261076275424
+            ]
+          ],
+          "candidate": {
+            "new_initialization": true,
+            "parent": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "raw": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\final_state.npz",
+              "bytes": 5114,
+              "sha256": "5e6a70d5758247fc5dd8e6a2d8a5325067b80002fcaebd708b80570831560560"
+            },
+            "deviation": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\reference_deviation.json",
+              "bytes": 1613,
+              "sha256": "28473bc0eb5a9823cf721096551dafe69ef53fdb4286b8d2fe379b941db6a446"
+            }
+          },
+          "state_npz": {
+            "new_initialization": true,
+            "parent": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "raw": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\final_state.npz",
+              "bytes": 5114,
+              "sha256": "5e6a70d5758247fc5dd8e6a2d8a5325067b80002fcaebd708b80570831560560"
+            },
+            "deviation": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\reference_deviation.json",
+              "bytes": 1613,
+              "sha256": "28473bc0eb5a9823cf721096551dafe69ef53fdb4286b8d2fe379b941db6a446"
+            }
+          },
+          "initial_provenance_scope": "Generic prescribed initial-state artifact, not a GN/static/oldcheckpoint qualification"
+        },
+        "energy_force_geometry_phase": "PRE(tick*dt); qpos/qvel/COM POST((tick+1)*dt)",
+        "velocity_metric_semantics": "Preserved root translational freejoint qvel RMS; angular body qvel norm is frame invariant, not a new COM-velocity gate.",
+        "contact_row_columns": [
+          "pre_tick",
+          "geom1",
+          "geom2",
+          "dim",
+          "efc_address",
+          "distance_m",
+          "position3",
+          "frame9",
+          "local_wrench6"
+        ],
+        "nonpad_metric_definition": "Maximum across PRE ticks of the SUM of positive Fn over every phone contact with non-designated hand geoms; same aggregation as original two-pad gate. old_two_pad also includes all positive Fn on geom41.",
+        "no_external_forces_equality_mocap_or_pose_reset": true,
+        "static_zero_acceleration_entry_required": false,
+        "control_schedule": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\dt0.0003125\\control_schedule.json",
+          "bytes": 3814,
+          "sha256": "38348db51c37d63d5d0fb9b8a7d201f9e947930aee1c1decfa63e3e5c504a05f"
+        },
+        "control_scope": "Planned50Hz controller only; trace pre_executed_ctrl20 is actual perPRE-tick command. Legacy trace ctrl20 is last command and ctrl_margin20x2 describes initial source only. Raw integration receipts protect callback state; no full-MjData certificate.",
+        "native_loop_and_physical_success_gates_from": "frozen functional_tripod_dynamics_v3, unchanged after insertion of explicit control hook and schedule fields"
+      }
+    },
+    {
+      "role": "patch_migration",
+      "seed": 4,
+      "native_summary": {
+        "name": "seed04_slide_+0.020m",
+        "candidate_id": "seed04_slide_+0.020m",
+        "route": "injected_callback",
+        "dt_s": 0.00015625,
+        "termination": "ABORT_LOSS_OF_HOLD",
+        "integration_steps": 712,
+        "finite_steps_saved": 712,
+        "actual_final_time_s": 0.11124999999999832,
+        "metrics": {
+          "final_COM_drift_m": 0.037318304378290174,
+          "final_angle_rad": 0.7865126411823367,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "tail_triple_pad_force_coverage": null,
+          "max_native_penetration_m": 9.157286396016815e-05,
+          "max_self_penetration_m": 0.0,
+          "max_phone_nonpad_normal_force_N": 0.0,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0
+        },
+        "gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "tail_triple_pad_force_coverage": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": true,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true
+        },
+        "nominal_holding_dynamics_pass": false,
+        "old_two_pad_metrics": {
+          "final_COM_drift_m": 0.037318304378290174,
+          "final_angle_rad": 0.7865126411823367,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "max_native_penetration_m": 9.157286396016815e-05,
+          "max_self_penetration_m": 0.0,
+          "max_phone_nonpad_normal_force_N": 2.2007436796396806,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0,
+          "tail_dual_pad_force_coverage": null
+        },
+        "old_two_pad_gates": {
+          "duration_complete": false,
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false,
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_phone_nonpad_normal_force_N": false,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true,
+          "tail_dual_pad_force_coverage": false
+        },
+        "old_two_pad_pass": false,
+        "trace": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\dt0.00015625\\trace.npz",
+          "bytes": 1138570,
+          "sha256": "cd4f05e720ae849ef933fb3b1f57db69530b5f37eca44e7b190f5069d22de16f"
+        },
+        "warnings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "initial_native": {
+          "phase": "RESET_FORWARD",
+          "pad_normal_N3": [
+            0.9984784075261466,
+            0.9878747064791659,
+            1.0633620658556535
+          ],
+          "phone_nonpad_normal_N": 0.0,
+          "old_two_pad_phone_nonpad_normal_N": 1.0633620658556535,
+          "table_normal_N": 0.0,
+          "contact_rows24": [
+            [
+              -1.0,
+              15.0,
+              71.0,
+              3.0,
+              20.0,
+              -4.7601184726210616e-07,
+              -0.13930514059689586,
+              0.034830248934746524,
+              0.5112835866845334,
+              -0.35427035616034674,
+              -0.2857141598043593,
+              -0.8904268266586032,
+              -0.10562296248776995,
+              0.9583148850389882,
+              -0.2654738610636048,
+              0.9291589231887775,
+              -1.3877787807814457e-17,
+              -0.36968053161976466,
+              0.9984784075261466,
+              -0.5987989917732439,
+              -0.10013589349505866,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              28.0,
+              71.0,
+              3.0,
+              24.0,
+              -4.860120967374719e-05,
+              -0.16961296300243367,
+              0.019807719907434775,
+              0.45010555922924755,
+              -0.5324339831961742,
+              0.1377554163051709,
+              0.8351871040769518,
+              0.07405165297967649,
+              0.9904662766993074,
+              -0.11615897473888324,
+              -0.8432261892451122,
+              0.0,
+              -0.5375589212087977,
+              0.9878747064791659,
+              0.3236458262095529,
+              -0.36786646832586317,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -1.0,
+              41.0,
+              71.0,
+              3.0,
+              28.0,
+              -1.5334722192203933e-05,
+              -0.16957254233268765,
+              0.001225467649067273,
+              0.45330347147120365,
+              -0.07771210798289455,
+              0.24100465889826733,
+              0.9674076610520432,
+              0.019297802912544904,
+              0.9705239586889804,
+              -0.2402308065453279,
+              -0.9967890564585888,
+              0.0,
+              -0.08007232308604821,
+              1.0633620658556535,
+              0.012593967993077534,
+              -0.7317594781058799,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "qacc26_descriptor": [
+            68.32357234735142,
+            -119.25378003428827,
+            44.73273138250647,
+            89.9128326247483,
+            -112.11098719353767,
+            5.839233542717132,
+            42.25402250492945,
+            172.20758735447203,
+            -52.362322945948655,
+            11.999053387814904,
+            18.694238741077395,
+            199.87774226235567,
+            0.13932083998174608,
+            -0.137198412452862,
+            0.2694891090312395,
+            0.01966359600071274,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.40820967976137523,
+            -0.6167636473759093,
+            -2.8707394237545856,
+            -50.533699198623545,
+            64.17641724966839,
+            -176.73624703208182
+          ],
+          "actuator_force20": [
+            0.12774536406245485,
+            -0.030439320925182686,
+            0.08094498732894227,
+            0.03964488298266833,
+            0.02599948773030114,
+            0.006039519571179097,
+            0.08111816764339586,
+            0.050708624563290894,
+            0.02868399202907823,
+            0.023494167879965916,
+            0.08234060574798652,
+            0.05094122015067537,
+            0.03168581577226326,
+            0.001070872714979909,
+            0.00667714711605296,
+            0.0007535201272402259,
+            0.02778638809315903,
+            0.00391645374224911,
+            0.0060442562910210385,
+            0.000749812485946097
+          ],
+          "qfrc_actuator26": [
+            0.12774536406245485,
+            -0.030439320925182686,
+            0.08094498732894227,
+            0.03964488298266833,
+            0.02599948773030114,
+            0.006039519571179097,
+            0.08111816764339586,
+            0.050708624563290894,
+            0.02868399202907823,
+            0.023494167879965916,
+            0.08234060574798652,
+            0.05094122015067537,
+            0.03168581577226326,
+            0.001070872714979909,
+            0.00667714711605296,
+            0.0007535201272402259,
+            0.02778638809315903,
+            0.00391645374224911,
+            0.0060442562910210385,
+            0.000749812485946097,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "source_candidate": {
+          "new_initialization": true,
+          "parent": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "raw": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\final_state.npz",
+            "bytes": 5114,
+            "sha256": "5e6a70d5758247fc5dd8e6a2d8a5325067b80002fcaebd708b80570831560560"
+          },
+          "deviation": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\reference_deviation.json",
+            "bytes": 1613,
+            "sha256": "28473bc0eb5a9823cf721096551dafe69ef53fdb4286b8d2fe379b941db6a446"
+          }
+        },
+        "source_state_npz": {
+          "new_initialization": true,
+          "parent": {
+            "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+            "bytes": 19375,
+            "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+          },
+          "raw": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\final_state.npz",
+            "bytes": 5114,
+            "sha256": "5e6a70d5758247fc5dd8e6a2d8a5325067b80002fcaebd708b80570831560560"
+          },
+          "deviation": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\reference_deviation.json",
+            "bytes": 1613,
+            "sha256": "28473bc0eb5a9823cf721096551dafe69ef53fdb4286b8d2fe379b941db6a446"
+          }
+        },
+        "command": {
+          "name": "seed04_slide_+0.020m",
+          "candidate_id": "seed04_slide_+0.020m",
+          "route": "injected_callback",
+          "qpos27": [
+            0.9005826938379969,
+            0.04070280778742035,
+            0.030225271751085334,
+            0.8693475869223334,
+            -0.8638200895730234,
+            0.4722256505162311,
+            1.1243223939877267,
+            0.4083910860319019,
+            -0.7895164974421276,
+            0.1791713355573413,
+            1.1150987749762515,
+            0.760628740045878,
+            -0.15357128036385786,
+            -0.0933684701305452,
+            -0.03660559005617579,
+            0.19392864709558041,
+            0.319688554955577,
+            -0.23895150303179627,
+            -0.12949049779670038,
+            -0.006433781443888266,
+            -0.161536877793709,
+            0.06141711938198282,
+            0.47092785523964453,
+            0.663283481496881,
+            0.5577301376022595,
+            -0.25274064896642673,
+            0.4302490919729764
+          ],
+          "ctrl20": [
+            0.9544438481700301,
+            0.02572908603955272,
+            0.09392407043448588,
+            0.9213679283045505,
+            -0.8528579507003288,
+            0.4785209658736929,
+            1.2088762132967241,
+            0.46124740667244046,
+            -0.7774224936176,
+            0.20366056754382864,
+            1.20092680712332,
+            0.8137275075492972,
+            -0.14021162049696928,
+            -0.09225224203176222,
+            -0.02964564129066271,
+            0.19471408156156159,
+            0.3305505828193305,
+            -0.23282617752485688,
+            -0.12003729352915585,
+            -0.005261076275423868
+          ],
+          "ctrl_margin20x2": [
+            [
+              2.14144384817003,
+              0.3365561518299698
+            ],
+            [
+              1.5097290860395527,
+              0.6722709139604472
+            ],
+            [
+              1.1409240704344858,
+              1.4760759295655141
+            ],
+            [
+              1.9683679283045503,
+              0.6486320716954496
+            ],
+            [
+              0.19414204929967116,
+              2.4228579507003287
+            ],
+            [
+              1.1765209658736928,
+              0.21947903412630704
+            ],
+            [
+              2.255876213296724,
+              0.8851237867032757
+            ],
+            [
+              1.5082474066724405,
+              1.1087525933275595
+            ],
+            [
+              0.26957750638239997,
+              2.3474224936176
+            ],
+            [
+              0.9016605675438286,
+              0.4943394324561713
+            ],
+            [
+              2.24792680712332,
+              0.89307319287668
+            ],
+            [
+              1.860727507549297,
+              0.7562724924507028
+            ],
+            [
+              0.9067883795030307,
+              1.7102116204969693
+            ],
+            [
+              0.6057477579682378,
+              0.7902522420317621
+            ],
+            [
+              1.0173543587093372,
+              2.1236456412906626
+            ],
+            [
+              1.2417140815615615,
+              1.3752859184384385
+            ],
+            [
+              1.3775505828193304,
+              1.2394494171806696
+            ],
+            [
+              0.46517382247514305,
+              0.9308261775248569
+            ],
+            [
+              0.9269627064708441,
+              2.214037293529156
+            ],
+            [
+              1.041738923724576,
+              1.575261076275424
+            ]
+          ],
+          "candidate": {
+            "new_initialization": true,
+            "parent": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "raw": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\final_state.npz",
+              "bytes": 5114,
+              "sha256": "5e6a70d5758247fc5dd8e6a2d8a5325067b80002fcaebd708b80570831560560"
+            },
+            "deviation": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\reference_deviation.json",
+              "bytes": 1613,
+              "sha256": "28473bc0eb5a9823cf721096551dafe69ef53fdb4286b8d2fe379b941db6a446"
+            }
+          },
+          "state_npz": {
+            "new_initialization": true,
+            "parent": {
+              "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\phone_geometry_actor_integration_v1\\task_bundle_v2.json",
+              "bytes": 19375,
+              "sha256": "b61c4e1f6488a016516199a30dea7ebbf70cc0b7321dfdc86cf4e6c876f166a5"
+            },
+            "raw": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\final_state.npz",
+              "bytes": 5114,
+              "sha256": "5e6a70d5758247fc5dd8e6a2d8a5325067b80002fcaebd708b80570831560560"
+            },
+            "deviation": {
+              "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\reference_deviation.json",
+              "bytes": 1613,
+              "sha256": "28473bc0eb5a9823cf721096551dafe69ef53fdb4286b8d2fe379b941db6a446"
+            }
+          },
+          "initial_provenance_scope": "Generic prescribed initial-state artifact, not a GN/static/oldcheckpoint qualification"
+        },
+        "energy_force_geometry_phase": "PRE(tick*dt); qpos/qvel/COM POST((tick+1)*dt)",
+        "velocity_metric_semantics": "Preserved root translational freejoint qvel RMS; angular body qvel norm is frame invariant, not a new COM-velocity gate.",
+        "contact_row_columns": [
+          "pre_tick",
+          "geom1",
+          "geom2",
+          "dim",
+          "efc_address",
+          "distance_m",
+          "position3",
+          "frame9",
+          "local_wrench6"
+        ],
+        "nonpad_metric_definition": "Maximum across PRE ticks of the SUM of positive Fn over every phone contact with non-designated hand geoms; same aggregation as original two-pad gate. old_two_pad also includes all positive Fn on geom41.",
+        "no_external_forces_equality_mocap_or_pose_reset": true,
+        "static_zero_acceleration_entry_required": false,
+        "control_schedule": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\patch_migration_v2\\seed04\\dt0.00015625\\control_schedule.json",
+          "bytes": 3815,
+          "sha256": "b0c4fa6cd03ca015ff62212b408c621fc6711261532c7d420b51cd2a86813c04"
+        },
+        "control_scope": "Planned50Hz controller only; trace pre_executed_ctrl20 is actual perPRE-tick command. Legacy trace ctrl20 is last command and ctrl_margin20x2 describes initial source only. Raw integration receipts protect callback state; no full-MjData certificate.",
+        "native_loop_and_physical_success_gates_from": "frozen functional_tripod_dynamics_v3, unchanged after insertion of explicit control hook and schedule fields"
+      }
+    }
+  ],
+  "dt_pairs": [
+    {
+      "name": "seed04_slide_+0.020m",
+      "comparison_status": "INCOMPLETE_DURATION_NOT_2S_CONSISTENCY",
+      "final_COM_difference_m": 0.00045687946009135514,
+      "final_orientation_difference_rad": 0.0038474208449848844,
+      "endpoints": [
+        {
+          "dt_s": 0.0003125,
+          "final_COM_world_m": [
+            -0.15816812112388637,
+            0.0620569465064469,
+            0.4337159993176138
+          ],
+          "final_quaternion_wxyz": [
+            0.8689312207827862,
+            0.4356836947702736,
+            -0.01298159464790824,
+            0.23445624295517917
+          ],
+          "actual_final_time_s": 0.11093749999999901,
+          "termination": "ABORT_LOSS_OF_HOLD",
+          "finite_steps_saved": 355,
+          "original_case_pass": false
+        },
+        {
+          "dt_s": 0.00015625,
+          "final_COM_world_m": [
+            -0.15838414793251013,
+            0.06231896680273329,
+            0.4334103579864048
+          ],
+          "final_quaternion_wxyz": [
+            0.8693292471858207,
+            0.43507051996808815,
+            -0.014705969769543708,
+            0.23401717265014949
+          ],
+          "actual_final_time_s": 0.11124999999999832,
+          "termination": "ABORT_LOSS_OF_HOLD",
+          "finite_steps_saved": 712,
+          "original_case_pass": false
+        }
+      ],
+      "gates": {
+        "both_duration_complete": false,
+        "final_COM_difference_m": true,
+        "final_orientation_difference_rad": true
+      },
+      "dt_pair_consistency_pass": false,
+      "both_tripod_cases_pass": false,
+      "both_old_two_pad_cases_pass": false,
+      "orientation_observer": "F64 endpoint normalization for pair comparison only; no state repair"
+    }
+  ],
+  "qualified": [],
+  "counts": {
+    "MJB_reads": 1,
+    "MjData": 4,
+    "initial_forward": 4,
+    "integration_steps": 2238,
+    "contact_force_reads": 1909,
+    "controller_calls": 26,
+    "controller_receipt_reads": 52,
+    "NN_FW": 0,
+    "learning_updates": 0,
+    "GPU_calls": 0
+  },
+  "axis_counts": {
+    "MjData": 1,
+    "kinematics": 1
+  },
+  "screen_counts": {
+    "forward": 1,
+    "contact_force_reads": 3
+  },
+  "restoration_counts": [
+    {
+      "MjData": 1,
+      "kinematics": 172,
+      "geometry_audits": 172,
+      "proposal_calls": 171,
+      "secant_columns": 160,
+      "forward": 0,
+      "integration_steps": 0
+    },
+    {
+      "MjData": 1,
+      "kinematics": 129,
+      "geometry_audits": 129,
+      "proposal_calls": 128,
+      "secant_columns": 120,
+      "forward": 0,
+      "integration_steps": 0
+    },
+    {
+      "MjData": 1,
+      "kinematics": 89,
+      "geometry_audits": 89,
+      "proposal_calls": 88,
+      "secant_columns": 83,
+      "forward": 0,
+      "integration_steps": 0
+    },
+    {
+      "MjData": 1,
+      "kinematics": 117,
+      "geometry_audits": 117,
+      "proposal_calls": 116,
+      "secant_columns": 110,
+      "forward": 0,
+      "integration_steps": 0
+    },
+    {
+      "MjData": 1,
+      "kinematics": 110,
+      "geometry_audits": 110,
+      "proposal_calls": 109,
+      "secant_columns": 100,
+      "forward": 0,
+      "integration_steps": 0
+    },
+    {
+      "MjData": 1,
+      "kinematics": 76,
+      "geometry_audits": 76,
+      "proposal_calls": 75,
+      "secant_columns": 71,
+      "forward": 0,
+      "integration_steps": 0
+    },
+    {
+      "MjData": 1,
+      "kinematics": 75,
+      "geometry_audits": 75,
+      "proposal_calls": 74,
+      "secant_columns": 69,
+      "forward": 0,
+      "integration_steps": 0
+    },
+    {
+      "MjData": 1,
+      "kinematics": 80,
+      "geometry_audits": 80,
+      "proposal_calls": 79,
+      "secant_columns": 74,
+      "forward": 0,
+      "integration_steps": 0
+    }
+  ],
+  "force_counts": [
+    {
+      "MjData": 1,
+      "static_forward": 634,
+      "resetData": 634,
+      "contact_force_reads": 1871,
+      "finite_difference_columns": 608,
+      "integration_steps": 0,
+      "NN_FW": 0,
+      "GPU_calls": 0
+    }
+  ],
+  "geometry_query_cache": {
+    "calls": 179139,
+    "hits": 124998,
+    "misses": 54141,
+    "evictions": 52093
+  },
+  "role": "NO_FITTING_PATCH_MIGRATION_DEVELOPMENT",
+  "new_task_bundles": 0,
+  "learning_updates": 0,
+  "elapsed_s": 163.61098060011864,
+  "scope": "New broader initialization development experiment. Same MJB/fixed wrist/materials/gravity/actuator limits/no-aid/holding gates. All seed failures retained. No task bundle or old-policy compatibility claim; source pose deviations are algorithmic, not measured ego uncertainty."
+}
