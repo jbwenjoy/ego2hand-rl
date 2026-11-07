@@ -25,25 +25,79 @@ def make_optimizer(module,*,learning_rate,weight_decay=0.,betas=(.9,.999),epsilo
     import torch
     return torch.optim.AdamW(module.parameters(),lr=learning_rate,weight_decay=weight_decay,betas=betas,eps=epsilon,foreach=False,capturable=False)
 
+def _require_all_finite(values,message):
+    """One host decision for a module; every original tensor is still checked."""
+    import torch
+    checks=[torch.isfinite(value).all() for value in values]
+    if checks and not torch.stack(checks).all():raise ValueError(message)
+
+@dataclass(frozen=True)
+class _SequentialMeanMetric:
+    # Logging only: the original per-microbatch loss/backward is unchanged.
+    # CPU reconstruction repeats `total += float(loss) / microbatches` rather
+    # than changing it to an FP32 or tree-reduced device mean.
+    values:tuple
+    denominator:int
+
+def materialize_metrics_tree(value):
+    """Transfer detached scalar logs together, then preserve Python-F64 order.
+
+    This is deliberately separate from validation. Finite/known checks and
+    gradient guards still execute before the associated optimizer step.
+    Non-scalar tensors (predictions, gradients, states) are never accepted.
+    """
+    import torch
+    tensors=[]
+    def describe(v):
+        if isinstance(v,_SequentialMeanMetric):
+            return ('mean',[describe(x) for x in v.values],v.denominator)
+        if isinstance(v,torch.Tensor):
+            if v.numel()!=1 or not v.is_floating_point():raise ValueError('Real scalar loss metrics only')
+            tensors.append(v.detach().reshape(()));return ('tensor',len(tensors)-1)
+        if isinstance(v,dict):return ('dict',[(k,describe(x)) for k,x in v.items()])
+        if isinstance(v,list):return ('list',[describe(x) for x in v])
+        if isinstance(v,tuple):return ('tuple',[describe(x) for x in v])
+        return ('value',v)
+    description=describe(value)
+    if tensors:
+        if any(v.device!=tensors[0].device for v in tensors):raise ValueError('One-device metric payload')
+        numbers=torch.stack([v.to(dtype=torch.float64) for v in tensors]).cpu().tolist()
+    else:numbers=[]
+    def restore(v):
+        kind=v[0]
+        if kind=='tensor':return numbers[v[1]]
+        if kind=='value':return v[1]
+        if kind=='dict':return {k:restore(x) for k,x in v[1]}
+        if kind=='list':return [restore(x) for x in v[1]]
+        if kind=='tuple':return tuple(restore(x) for x in v[1])
+        total=0.
+        for x in v[1]:total+=restore(x)/v[2]
+        return total
+    return restore(description)
+
 def finish_optimizer_step(module,optimizer,*,phase,clip_norm=1.):
     import torch
-    if not all(p.grad is not None and torch.isfinite(p.grad).all() for p in module.parameters()):raise ValueError('All named parameter gradients finite before step')
+    parameters=tuple(module.parameters())
+    if any(p.grad is None for p in parameters):raise ValueError('All named parameter gradients finite before step')
+    _require_all_finite((p.grad for p in parameters),'All named parameter gradients finite before step')
     pre={name:p.grad.detach().clone() for name,p in module.named_parameters()}
     returned=torch.nn.utils.clip_grad_norm_(module.parameters(),clip_norm,error_if_nonfinite=True,foreach=False)
     post={name:p.grad.detach().clone() for name,p in module.named_parameters()};optimizer.step()
-    if not all(torch.isfinite(p).all() for p in module.parameters()):raise ValueError('Updated parameters finite')
+    _require_all_finite(parameters,'Updated parameters finite')
     return dict(tag=phase,pre_clip=pre,post_clip=post,clip_returned_norm=returned.detach())
 
-def supervised_WM_step(model,optimizer,batch,norms,scales,physical,*,loss_config=WM.LossConfig(),codec=None,phase='PRE_WM_UPDATE',clip_norm=1.):
+def supervised_WM_step(model,optimizer,batch,norms,scales,physical,*,loss_config=WM.LossConfig(),codec=None,phase='PRE_WM_UPDATE',clip_norm=1.,materialize_metrics=True):
     """One real supervision forward/backward/Adam step, no implicit sampling."""
     import torch
     model.train();model.requires_grad_(True);optimizer.zero_grad(set_to_none=True)
     loss,terms,prediction=WM.absolute_loss(model,batch,norms,scales,physical,config=loss_config,codec=codec)
     if not torch.isfinite(loss):raise ValueError('Finite WM loss, no retry/row filtering')
     loss.backward();gradient=finish_optimizer_step(model,optimizer,phase=phase,clip_norm=clip_norm)
-    return dict(loss=float(loss.detach()),terms={k:float(v.detach()) for k,v in terms.items()},gradient_snapshot=gradient,prediction=prediction,counts=dict(WM_FW=1,WM_backward=1,WM_optimizer_steps=1))
+    metrics=dict(loss=loss.detach(),terms={k:v.detach() for k,v in terms.items()})
+    if materialize_metrics:metrics=materialize_metrics_tree(metrics)
+    return dict(**metrics,gradient_snapshot=gradient,prediction=prediction,counts=dict(WM_FW=1,WM_backward=1,WM_optimizer_steps=1))
 
-def matched_actor_critic_step(*,world_model,arms,optimizers,real_batch,mode_rewards,tasks,geometry,codec,norms,physical,wm_step,config=UpdateConfig(),phase='PRE_MATCHED_ROUND'):
+def matched_actor_critic_step(*,world_model,arms,optimizers,real_batch,mode_rewards,tasks,geometry,codec,norms,physical,wm_step,config=UpdateConfig(),phase='PRE_MATCHED_ROUND',materialize_metrics=True):
     """Update every arm from exactly the supplied common real batch.
 
     ``real_batch`` keys are x/m/obs/obs1/terminated/reference_timeout. Rewards
@@ -69,14 +123,16 @@ def matched_actor_critic_step(*,world_model,arms,optimizers,real_batch,mode_rewa
         closs.backward();critic_gradient=finish_optimizer_step(critic,optc,phase=phase+'_'+mode+'_CRITIC',clip_norm=config.clip_norm)
         with torch.no_grad():
             for parameter,slow in zip(critic.parameters(),target_critic.parameters()):slow.lerp_(parameter,config.target_critic_tau)
-        opta.zero_grad(set_to_none=True);actor_loss=0.;microbatches=B//config.microbatch
+        opta.zero_grad(set_to_none=True);actor_losses=[];microbatches=B//config.microbatch
         for start in range(0,B,config.microbatch):
             stop=start+config.microbatch;memory=task.unflatten_memory(real_batch['m'][start:stop])
             objective=imagined_actor_objective(actor=actor,critic=critic,world_model=world_model,task=task,geometry=geometry,codec=codec,norms=norms,physical=physical,initial_state58=real_batch['x'][start:stop],memory=memory,horizon=config.imagination_horizon,gamma=config.gamma,wm_step=wm_step)
             if not torch.isfinite(objective['actor_loss']):raise ValueError('Finite imagined Actor loss required')
-            (objective['actor_loss']/microbatches).backward();actor_loss+=float(objective['actor_loss'].detach())/microbatches
+            (objective['actor_loss']/microbatches).backward();actor_losses.append(objective['actor_loss'].detach())
         actor_gradient=finish_optimizer_step(actor,opta,phase=phase+'_'+mode+'_ACTOR',clip_norm=config.clip_norm)
-        results[mode]=dict(real_TD_loss=float(closs.detach()),imagined_Actor_loss=actor_loss,gradient_snapshots=dict(actor=actor_gradient,critic=critic_gradient),counts=dict(Critic_real_FW=2,Critic_backward=1,Critic_optimizer_steps=1,Actor_FW=microbatches*config.imagination_horizon,WM_imagination_FW=microbatches*config.imagination_horizon,Critic_imagination_FW=microbatches,Actor_backward_microbatches=microbatches,Actor_optimizer_steps=1))
+        metrics=dict(real_TD_loss=closs.detach(),imagined_Actor_loss=_SequentialMeanMetric(tuple(actor_losses),microbatches))
+        if materialize_metrics:metrics=materialize_metrics_tree(metrics)
+        results[mode]=dict(**metrics,gradient_snapshots=dict(actor=actor_gradient,critic=critic_gradient),counts=dict(Critic_real_FW=2,Critic_backward=1,Critic_optimizer_steps=1,Actor_FW=microbatches*config.imagination_horizon,WM_imagination_FW=microbatches*config.imagination_horizon,Critic_imagination_FW=microbatches,Actor_backward_microbatches=microbatches,Actor_optimizer_steps=1))
     return results
 
 def arm_states(arms):

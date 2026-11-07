@@ -16,6 +16,7 @@ STATE_SCHEMA = 'phone_COM_world_state58:1'
 MODEL_SHA256 = 'ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826'
 from . import rotation as _exp_module
 from ._artifacts import checked_data_pin
+from .geometry_context import CurrentGeometry, ImmutableTensorCache
 
 
 def _check_file(pin, override=None):
@@ -58,9 +59,16 @@ class PhoneGeometryProvider:
         self.geometry_by_id = {r['geom_id']: r for r in self.meta['geometry_bindings']}
         if any(t.requires_grad for t in self._constants.values()) or any(t.requires_grad for t in self.geometry_arrays.values()):
             raise ValueError('Geometry constants cannot be trainable')
+        self._constant_cache = ImmutableTensorCache(self._constants)
+        vertex_keys = {b['vertices_key'] for b in self.geometry_by_id.values() if b['kind'] == 'mesh'}
+        self._array_cache = ImmutableTensorCache({k: self.geometry_arrays[k] for k in vertex_keys})
+        self.counts = {'pure_Torch_FK_calls': 0}
+
+    def bundle(self, state58, *, retain_all_directions=False):
+        return CurrentGeometry(self, state58, retain_all_directions=retain_all_directions)
 
     def _c(self, key, x):
-        return self._constants[key].to(device=x.device, dtype=x.dtype)
+        return self._constant_cache.get(x)[key]
 
     def poses(self, state58):
         x = state58
@@ -68,17 +76,19 @@ class PhoneGeometryProvider:
             raise ValueError('Finite floating Torch state58, any leading batch shape')
         Rp = x[...,43:52].reshape(x.shape[:-1]+(3,3))
         _proper_rotation(Rp, 'BODY orientation')
+        self.counts['pure_Torch_FK_calls'] += 1
+        constants = self._constant_cache.get(x)
         shape = x.shape[:-1]
         I = torch.eye(3, dtype=x.dtype, device=x.device).expand(shape+(3,3))
         zero = torch.zeros(shape+(3,), dtype=x.dtype, device=x.device)
-        off, localR = self._c('body_pos',x), self._c('body_R',x)
-        axes, anchors = self._c('body_joint_axis',x), self._c('body_joint_anchor',x)
-        q0 = self._c('joint_qpos0',x)
+        off, localR = constants['body_pos'], constants['body_R']
+        axes, anchors = constants['body_joint_axis'], constants['body_joint_anchor']
+        q0 = constants['joint_qpos0']
         p, R = [zero], [I]
         for b in range(1,len(self.parents)):
             if b == self.phone_body_id:
                 Rb = Rp
-                pb = x[...,40:43] - (Rb @ self._c('phone_body_ipos',x)[...,None])[...,0]
+                pb = x[...,40:43] - (Rb @ constants['phone_body_ipos'][...,None])[...,0]
             else:
                 parent = self.parents[b]
                 if not 0 <= parent < b:
@@ -94,7 +104,7 @@ class PhoneGeometryProvider:
                 pb = p[parent] + (R[parent] @ local_p[...,None])[...,0]
             p.append(pb); R.append(Rb)
         bp, bR = torch.stack(p,-2), torch.stack(R,-3)
-        gp0, gR0 = self._c('geom_pos',x), self._c('geom_R',x)
+        gp0, gR0 = constants['geom_pos'], constants['geom_R']
         gR = bR[...,self.geom_bodyid,:,:] @ gR0
         gp = bp[...,self.geom_bodyid,:] + (bR[...,self.geom_bodyid,:,:] @ gp0[...,None])[...,0]
         Rt = Rp.transpose(-2,-1)
@@ -106,7 +116,7 @@ class PhoneGeometryProvider:
                     pair_relative_translation_BODY_COM_m=relp,
                     pair_relative_rotation_BODY9=relR.flatten(-2))
 
-    def features(self, state58, absolute_u20, native_h_s, n_substeps):
+    def features(self, state58, absolute_u20, native_h_s, n_substeps, *, context=None):
         """Current-observable features only; unknown distance is NaN, never0."""
         x = state58; lead = x.shape[:-1]
         if absolute_u20.shape != lead+(20,) or absolute_u20.device != x.device or absolute_u20.dtype != x.dtype or not torch.isfinite(absolute_u20).all():
@@ -117,7 +127,10 @@ class PhoneGeometryProvider:
             raise ValueError('Positive finite native h and substeps')
         if torch.any((n_substeps != 64)&(n_substeps != 128)) or torch.any(abs(native_h_s*n_substeps-.02) > 4*torch.finfo(native_h_s.dtype).eps*.02):
             raise ValueError('This phone20ms contract requires64/128 integer ticks')
-        v = self.poses(x)
+        if context is None:
+            v = self.poses(x)
+        else:
+            context.require_provider(self, x); v = context.poses()
         shape = lead+(22,)
         yes = torch.ones(shape,dtype=torch.bool,device=x.device)
         no = torch.zeros_like(yes)
@@ -139,7 +152,7 @@ class PhoneGeometryProvider:
             raise ValueError('This geometry is not a mesh')
         R = poses['geom_rotation_world'][...,geom_id,:,:]
         p = poses['geom_position_world_m'][...,geom_id,:]
-        verts = self.geometry_arrays[binding['vertices_key']].to(dtype=R.dtype,device=R.device)
+        verts = self._array_cache.get(R)[binding['vertices_key']]
         return (R[...,None,:,:] @ verts[...,None])[...,0]+p[...,None,:]
 
     def capsule_centerline_world(self, poses, geom_id):

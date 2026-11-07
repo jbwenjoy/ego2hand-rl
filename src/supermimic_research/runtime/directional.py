@@ -12,6 +12,7 @@ import torch
 SCHEMA='phone_directional_gap_features:1'
 from .geometry import PhoneGeometryProvider
 from ._artifacts import checked_data_pin
+from .geometry_context import CurrentGeometry, ImmutableTensorCache
 
 def checked(p, override=None):
     return checked_data_pin(p, override=override)
@@ -53,46 +54,89 @@ class DirectionalGapProvider:
             raise ValueError('Positive projection chunk size')
         self.chunk=direction_chunk
         self.counts={'descriptor_calls':0,'pure_Torch_FK_calls':0,'native_calls':0,'NN_calls':0}
+        constant_sources={'directions':self.directions}
+        for gid,b in self.provider.geometry_by_id.items():
+            if b['kind']=='box':constant_sources[f'box_size_{gid}']=torch.tensor(b['size_m'],dtype=torch.float64)
+        constant_sources['box_signs']=torch.tensor([[-1,-1,-1],[-1,-1,1],[-1,1,-1],[-1,1,1],[1,-1,-1],[1,-1,1],[1,1,-1],[1,1,1]],dtype=torch.float64)
+        self._constant_cache=ImmutableTensorCache(constant_sources)
+        self._support_cache={}
 
-    def features(self,state58,return_all_directions=False):
+    def bundle(self,state58,*,retain_all_directions=False):
+        """Share one exact current-state graph; caller owns its short lifetime."""
+        return CurrentGeometry(self,state58,retain_all_directions=retain_all_directions)
+
+    def _supports(self,x):
+        """State-independent supports; same direction chunks and reduction order.
+
+        No cached tensor depends on a state or an AD graph. Derived buffers are
+        ordinary no-grad tensors even when first requested in inference mode.
+        """
+        pc=self.provider
+        c=self._constant_cache.get(x);pconst=pc._constant_cache.get(x);arrays=pc._array_cache.get(x)
+        key=(x.device.type,x.device.index,x.dtype)
+        if key not in self._support_cache:
+            with torch.inference_mode(False),torch.no_grad():
+                D=c['directions'];pid=pc.meta['phone_geom_id'];pb=pc.geometry_by_id[pid]
+                rawP=arrays[pb['vertices_key']]
+                # Raw compiled geom vertices -> BODY once -> COM origin.
+                P=rawP@pconst['geom_R'][pid].transpose(-1,-2)+pconst['geom_pos'][pid]-pconst['phone_body_ipos']
+                pieces=[]
+                for start in range(0,len(D),self.chunk):
+                    dc=D[start:start+self.chunk]
+                    pieces.append((dc,torch.amax(P@dc.transpose(-1,-2),dim=-2),torch.linalg.vector_norm(dc,dim=-1)))
+                shapes={}
+                for gid in pc.pair_geom_ids:
+                    b=pc.geometry_by_id[gid]
+                    if b['kind']=='mesh':
+                        V=arrays[b['vertices_key']]
+                        shapes[gid]=(V,torch.amax(torch.linalg.vector_norm(V,dim=-1)))
+                    elif b['kind']=='box':
+                        size=c[f'box_size_{gid}']
+                        shapes[gid]=(c['box_signs']*size,torch.linalg.vector_norm(size))
+                    elif b['kind']=='capsule':
+                        radius,half=b['size_m'][:2]
+                        shapes[gid]=(None,torch.as_tensor(radius+half,dtype=x.dtype,device=x.device))
+                self._support_cache[key]=dict(D=D,P=P,pieces=pieces,shapes=shapes,phone_radius=torch.amax(torch.linalg.vector_norm(P,dim=-1)))
+        return self._support_cache[key]
+
+    def features(self,state58,return_all_directions=False,*,context=None):
+        if context is not None:
+            context.require(self,state58)
+            return context.directional(return_all_directions=return_all_directions)
+        poses=self.provider.poses(state58);self.counts['pure_Torch_FK_calls']+=1
+        return self._features_from_poses(state58,poses,return_all_directions=return_all_directions)
+
+    def _features_from_poses(self,state58,poses,return_all_directions=False):
         if state58.dtype not in (torch.float64,torch.float32):
             raise ValueError('F64 reference or explicitly approximate FP32 descriptor')
         self.counts['descriptor_calls']+=1
-        poses=self.provider.poses(state58);self.counts['pure_Torch_FK_calls']+=1
         x=state58;lead=x.shape[:-1];dtype=x.dtype;device=x.device
-        D=self.directions.to(dtype=dtype,device=device)
-        pc=self.provider;pid=pc.meta['phone_geom_id'];pb=pc.geometry_by_id[pid]
-        rawP=pc.geometry_arrays[pb['vertices_key']].to(dtype=dtype,device=device)
-        # Raw compiled geom vertices -> BODY once -> COM-origin coordinates.
-        P=rawP@pc._c('geom_R',x)[pid].transpose(-1,-2)+pc._c('geom_pos',x)[pid]-pc._c('phone_body_ipos',x)
+        constants=self._supports(x);D=constants['D'];pc=self.provider
         relp=poses['pair_relative_translation_BODY_COM_m']
         relR=poses['pair_relative_rotation_BODY9'].reshape(lead+(22,3,3))
         values=[];argidx=[];guards=[];known=[];all_planes=[]
         for j,gid in enumerate(pc.pair_geom_ids):
             b=pc.geometry_by_id[gid];R=relR[...,j,:,:];p=relp[...,j,:]
             if b['kind']=='mesh':
-                V=pc.geometry_arrays[b['vertices_key']].to(dtype=dtype,device=device)
+                V,radius_bound=constants['shapes'][gid]
                 H=V@R.transpose(-1,-2)+p[...,None,:]
-                radius_bound=torch.amax(torch.linalg.vector_norm(V,dim=-1))
             elif b['kind']=='box':
-                s=torch.tensor(b['size_m'],dtype=dtype,device=device)
-                signs=torch.tensor([[-1,-1,-1],[-1,-1,1],[-1,1,-1],[-1,1,1],[1,-1,-1],[1,-1,1],[1,1,-1],[1,1,1]],dtype=dtype,device=device)
-                V=signs*s;H=V@R.transpose(-1,-2)+p[...,None,:]
-                radius_bound=torch.linalg.vector_norm(s)
+                V,radius_bound=constants['shapes'][gid];H=V@R.transpose(-1,-2)+p[...,None,:]
             elif b['kind']=='capsule':
                 radius,half=b['size_m'][:2]
                 offset=half*R[..., :,2]
                 H=torch.stack((p-offset,p+offset),dim=-2)
-                radius_bound=torch.as_tensor(radius+half,dtype=dtype,device=device)
+                radius_bound=constants['shapes'][gid][1]
             else:
                 nan=torch.full(lead,float('nan'),dtype=dtype,device=device)
                 values.append(nan);argidx.append(torch.full(lead,-1,dtype=torch.int64,device=device));guards.append(nan);known.append(torch.zeros(lead,dtype=torch.bool,device=device))
                 if return_all_directions:all_planes.append(nan[...,None].expand(lead+(len(D),)))
                 continue
             pieces=[]
-            for start in range(0,len(D),self.chunk):
-                dc=D[start:start+self.chunk]
-                pieces.append(capsule_plane_gaps(P,H,radius,dc) if b['kind']=='capsule' else vertex_plane_gaps(P,H,dc))
+            for dc,phone_support,dnorm in constants['pieces']:
+                hand_support=torch.amin(H@dc.transpose(-1,-2),dim=-2)
+                if b['kind']=='capsule':hand_support=hand_support-radius*dnorm
+                pieces.append((hand_support-phone_support)/dnorm)
             planes=torch.cat(pieces,dim=-1)
             val,idx=torch.max(planes,dim=-1)
             valid=torch.isfinite(planes).all(dim=-1)
@@ -100,7 +144,7 @@ class DirectionalGapProvider:
             argidx.append(torch.where(valid,idx,torch.full_like(idx,-1)))
             known.append(valid)
             # Explicit heuristic scale allowance, not interval-certified FK error.
-            scale=1.+torch.linalg.vector_norm(p,dim=-1)+radius_bound+torch.amax(torch.linalg.vector_norm(P,dim=-1))
+            scale=1.+torch.linalg.vector_norm(p,dim=-1)+radius_bound+constants['phone_radius']
             guards.append(256*torch.finfo(dtype).eps*scale)
             if return_all_directions:all_planes.append(planes)
         value=torch.stack(values,-1);km=torch.stack(known,-1);idx=torch.stack(argidx,-1);guard=torch.stack(guards,-1)

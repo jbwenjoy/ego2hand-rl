@@ -58,6 +58,25 @@ def _log_prefix_valid(p):
     return len(b)==p['bytes'] and hashlib.sha256(b).hexdigest()==p['sha256'] and len(rows)==p['records'] and [v['update'] for v in rows]==list(range(p['range'][0],p['range'][1]+1))
 
 def _subset(rows,indices):return {k:v[indices] for k,v in rows.items()}
+
+def _real_bank(rows,*,device,torch):
+    """One setup copy in canonical row order, including original masks/NaNs.
+
+    Do not reuse the compressed WM-eligible cache as an Actor row bank: its
+    row indices can differ. Only the existing eligible sampler selects rows.
+    """
+    fields=[('x','x58',torch.float64),('m','memory83',torch.float64),
+            ('obs','obs222',torch.float32),('obs1','next_obs222',torch.float32),
+            ('terminated','actor_absorbing_done',torch.bool),
+            ('reference_timeout','reference_timeout',torch.bool)]
+    return {key:torch.tensor(rows[source],dtype=dtype,device=device) for key,source,dtype in fields}
+
+def _real_batch(bank,eligible,generator,batch_size,*,device,torch):
+    """Preserve the CPU RNG draw/order; transfer the selected index only."""
+    pick=torch.randint(len(eligible),(batch_size,),generator=generator,device='cpu').numpy()
+    ii=eligible[pick];idx=torch.tensor(ii,device=device)
+    return {key:value.index_select(0,idx) for key,value in bank.items()},ii,idx
+
 def _tripod_rows(dataset):
     d=dataset.canonical;i=dataset.wm_indices()
     return dict(x=d['x58'][i],u=d['u20'][i],y=d['y58'][i],h=d['h'][i],n=d['n'][i],J=d['impulse22x6'][i],Fn=d['meanFn22'][i],cov=d['coverage22'][i])
@@ -184,23 +203,24 @@ def train(config_path):
                     if not reward['objective_known'].all() or not torch.isfinite(reward['total']).all():raise ValueError('Known finite cached real rewards required')
                     rr[torch.tensor(i,device=s['device'])]=reward['total']
                 rewards[mode]=rr
+        real_bank=_real_bank(d,device=s['device'],torch=torch)
         from supermimic_research.runtime import structured,phone_task
         setup_s=time.perf_counter()-started;times=[];provenance=dict(config=file_pin(path),artifacts=file_pin(r.manifest),starting_checkpoint=s['starting_checkpoint'],train_report=r.pin(c['artifacts']['tripod_dataset']),old_report=r.pin(c['artifacts']['old_original']),old_labels=r.pin(c['artifacts']['old_pair_labels']),inputs=current_inputs,sources=current_sources,source_fingerprint={key:value['sha256'] for key,value in current_sources.items()});s['provenance']=provenance
         if resume is not None:s['generator'].set_state(resume['sample_generator']);WM.restore_rng(resume['RNG'],device=s['device'])
         for common in range(0 if resume is not None else c['training']['common_WM_updates']):
-            step=U.supervised_WM_step(model,optimizers['WM'],_sample(s['new'],s['old'],s['generator'],c,torch),norm,scales,physical,loss_config=loss_config,codec=structured,phase='PRE_COMMON_WM_'+str(common+1));gradients['WM']=step['gradient_snapshot'];counts['WM_updates']+=1
+            step=U.supervised_WM_step(model,optimizers['WM'],_sample(s['new'],s['old'],s['generator'],c,torch),norm,scales,physical,loss_config=loss_config,codec=structured,phase='PRE_COMMON_WM_'+str(common+1),materialize_metrics=False);gradients['WM']=step['gradient_snapshot'];counts['WM_updates']+=1
         output('common_WM_counters.json',dict(counts=counts.copy(),no_updated_pt_before_first_paired_checkpoint=True))
         logpath=out/'updates.jsonl'
         with logpath.open('x',encoding='utf8') as log:
             for i in range(start_update,c['training']['updates']+1):
-                phase='update_'+str(i);tick=time.perf_counter();step=U.supervised_WM_step(model,optimizers['WM'],_sample(s['new'],s['old'],s['generator'],c,torch),norm,scales,physical,codec=structured,phase='PRE_WM_'+str(counts['WM_updates']+1));gradients['WM']=step['gradient_snapshot'];counts['WM_updates']+=1
-                pick=torch.randint(len(eligible),(c['sampling']['Actor_batch'],),generator=s['generator'],device='cpu').numpy();ii=eligible[pick];idx=torch.tensor(ii,device=s['device']);real={}
-                for key,source,dtype in [('x','x58',torch.float64),('m','memory83',torch.float64),('obs','obs222',torch.float32),('obs1','next_obs222',torch.float32),('terminated','actor_absorbing_done',torch.bool),('reference_timeout','reference_timeout',torch.bool)]:real[key]=torch.tensor(d[source][ii],dtype=dtype,device=s['device'])
-                ac=U.matched_actor_critic_step(world_model=model,arms=arms,optimizers=arm_opts,real_batch=real,mode_rewards={m:v[idx] for m,v in rewards.items()},tasks=s['tasks'],geometry=s['geometry'],codec=structured,norms=norm,physical=physical,wm_step=phone_task.wm_step_current_only,config=update,phase='PRE_PAIRED_'+str(i))
+                phase='update_'+str(i);tick=time.perf_counter();step=U.supervised_WM_step(model,optimizers['WM'],_sample(s['new'],s['old'],s['generator'],c,torch),norm,scales,physical,codec=structured,phase='PRE_WM_'+str(counts['WM_updates']+1),materialize_metrics=False);gradients['WM']=step['gradient_snapshot'];counts['WM_updates']+=1
+                real,ii,idx=_real_batch(real_bank,eligible,s['generator'],c['sampling']['Actor_batch'],device=s['device'],torch=torch)
+                ac=U.matched_actor_critic_step(world_model=model,arms=arms,optimizers=arm_opts,real_batch=real,mode_rewards={m:v[idx] for m,v in rewards.items()},tasks=s['tasks'],geometry=s['geometry'],codec=structured,norms=norm,physical=physical,wm_step=phone_task.wm_step_current_only,config=update,phase='PRE_PAIRED_'+str(i),materialize_metrics=False)
                 for mode,result in ac.items():gradients[mode+'_Actor']=result['gradient_snapshots']['actor'];gradients[mode+'_Critic']=result['gradient_snapshots']['critic']
                 counts['paired_updates']=i
+                metrics=U.materialize_metrics_tree(dict(WM_loss=step['loss'],modes={m:{k:v for k,v in a.items() if k in ['real_TD_loss','imagined_Actor_loss']} for m,a in ac.items()}))
                 if s['device'].startswith('cuda:'):torch.cuda.synchronize(s['device'])
-                seconds=time.perf_counter()-tick;times.append(seconds);row=dict(update=i,WM_loss=step['loss'],modes={m:{k:v for k,v in a.items() if k in ['real_TD_loss','imagined_Actor_loss']} for m,a in ac.items()},update_seconds=seconds,common_real_row_ids=d['row_id'][ii].tolist());log.write(json.dumps(row)+'\n');log.flush()
+                seconds=time.perf_counter()-tick;times.append(seconds);row=dict(update=i,**metrics,update_seconds=seconds,common_real_row_ids=d['row_id'][ii].tolist());log.write(json.dumps(row)+'\n');log.flush()
                 if i==c['training']['first_checkpoint'] or i==c['training']['updates']:
                     os.fsync(log.fileno());prefix=logpath.read_bytes();checkpoint=out/f'checkpoint_{i:04d}.pt';payload=dict(schema='supermimic_research.offline_checkpoint:1',update=i,counts=counts.copy(),provenance=provenance,configuration=c,shared_WM=model.state_dict(),arms=U.arm_states(arms),normalizers=norm,loss_scales=scales,physical_context=physical,optimizers={k:o.state_dict() for k,o in optimizers.items()},gradient_snapshots=gradients,RNG=WM.capture_rng(device=s['device']),sample_generator=s['generator'].get_state(),parent_log_prefixes=parent_logs,parent_checkpoint=file_pin(r.resolve(c['training']['resume_artifact'])) if resume is not None else None,log_prefix=dict(path=str(logpath),bytes=len(prefix),sha256=hashlib.sha256(prefix).hexdigest(),records=i-start_update+1,range=[start_update,i]))
                     WM.atomic_checkpoint(checkpoint,payload);probeF=WM.normalize_features(s['new']['feature_F64'][:8],norm);probeO=real['obs'];health=_health(checkpoint,s,optimizers,gradients,counts,probeF,probeO);rate=float(np.mean(times[-min(25,len(times)):]));health.update(checkpoint=file_pin(checkpoint),setup_s=setup_s,measured_update_seconds=rate,remaining_updates=c['training']['updates']-i,ETA_learning_only_s=(c['training']['updates']-i)*rate,resume_supported='own_unified_schema_only')

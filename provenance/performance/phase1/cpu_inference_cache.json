@@ -1,0 +1,95 @@
+{
+  "schema": "phone_geometry_inference_cache_CPU_validation:1",
+  "passed": 6,
+  "total": 6,
+  "successful": true,
+  "measurements": [
+    {
+      "dtype": "torch.float32",
+      "contexts": 2,
+      "cached_normal_buffers": 126,
+      "cached_tensor_ids_unchanged": true,
+      "inference_FK_calls": 1,
+      "grad_FK_calls": 1,
+      "input_AD_calls": 1,
+      "q_gradient_max_abs": 0.6577428579330444,
+      "direction_count": 1406,
+      "all22_known": true,
+      "no_cached_inference_tensor": true,
+      "finite_state_and_control_input_AD": true
+    },
+    {
+      "dtype": "torch.float64",
+      "contexts": 2,
+      "cached_normal_buffers": 126,
+      "cached_tensor_ids_unchanged": true,
+      "inference_FK_calls": 1,
+      "grad_FK_calls": 1,
+      "input_AD_calls": 1,
+      "q_gradient_max_abs": 0.6577431042490907,
+      "direction_count": 1406,
+      "all22_known": true,
+      "no_cached_inference_tensor": true,
+      "finite_state_and_control_input_AD": true
+    }
+  ],
+  "scope": {
+    "actual_saved_contexts": [
+      0,
+      3
+    ],
+    "dtypes": [
+      "float64",
+      "float32"
+    ],
+    "real_provider_inference_initializations": 2,
+    "pure_Tensor_FK_calls": 4,
+    "directional_descriptor_calls": 4,
+    "input_AD_calls": 2,
+    "NN_constructors": 0,
+    "NN_forward": 0,
+    "optimizer_steps": 0,
+    "native_model_loads": 0,
+    "native_forward_steps": 0,
+    "CUDA_calls": 0
+  },
+  "existing_test_class": "test_geometry_context.GeometryContextTests",
+  "existing_context_tests_run": 4,
+  "existing_optimizer_and_log_tests_not_run_in_this_zero_NN_check": true,
+  "source_pins": {
+    "geometry_context.py": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\geometry_context.py",
+      "bytes": 5026,
+      "sha256": "f9826d2d5f2928d643d6f4034a09acb8ce2c87accd6cf56842652f35874942cc"
+    },
+    "geometry.py": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\geometry.py",
+      "bytes": 12044,
+      "sha256": "301480d3cd06ede47029b69e1ee0612487107387e8dcb383ff6bf5fc3066a95e"
+    },
+    "directional.py": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\directional.py",
+      "bytes": 11902,
+      "sha256": "dbd8b06ab3d40b57357b075d2e41239c7abdcdce8a0c7d224fb4e8182f613c2a"
+    },
+    "phone_task.py": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\phone_task.py",
+      "bytes": 17016,
+      "sha256": "d0d29497eb96c1dc6767c4ea16e64ba9fc5f980d143b263fdeef85cacc325400"
+    }
+  },
+  "test_pins": {
+    "test_geometry_context.py": {
+      "path": "D:\\workspace\\supermimic-research\\tests\\test_geometry_context.py",
+      "bytes": 3378,
+      "sha256": "5ad272cab39b50a46d3f72e5c0773fabc6d9aab10b679c8d34bae3c324be2df6"
+    },
+    "test_geometry_inference.py": {
+      "path": "D:\\workspace\\supermimic-research\\tests\\test_geometry_inference.py",
+      "bytes": 6762,
+      "sha256": "3148d7fade09ac2272a15e6d11aec7953572e4f605716e012da6b233c44d3ce8"
+    }
+  },
+  "failures": [],
+  "errors": []
+}

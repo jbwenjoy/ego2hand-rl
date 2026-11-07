@@ -47,6 +47,9 @@ def imagined_actor_objective(*,actor,critic,world_model,task,geometry,codec,norm
     replay targets are not arguments. Caller owns optimizer and backward.
     This function does not certify native gradients, actual contact or policy
     benefit. H1 u has no direct geometry path; H2 uses predicted-state geometry.
+    Geometry contexts are local to this objective: each new predicted state
+    gets a fresh context, reused for its reward and subsequent observation/WM.
+    No real-observation substitution, graph detach or cross-update cache.
     """
     import torch
     if initial_state58.ndim!=2 or initial_state58.shape[1]!=58 or initial_state58.shape[0]<1:raise ValueError('Explicit B>=1 state[B,58] and batched memory')
@@ -57,14 +60,15 @@ def imagined_actor_objective(*,actor,critic,world_model,task,geometry,codec,norm
     for p,_ in saved:p.requires_grad_(False)
     x=initial_state58;m=memory;survival=torch.ones(x.shape[:-1],dtype=x.dtype,device=x.device);objective=torch.zeros_like(survival);evidence=[]
     try:
+        context=geometry.bundle(x)
         for k in range(horizon):
-            obs=task.observation(x,m,geometry);action=actor(obs);residual,u=task.control_target(action,m)
-            prediction=wm_step(x,u,m['native_h_s'],m['n_substeps'],model=world_model,norms=norms,physical=physical,codec=codec,geometry=geometry);y=prediction['next_state58'];reward=task.rewards(y,m,action)
+            obs=task.observation(x,m,geometry,context=context);action=actor(obs);residual,u=task.control_target(action,m)
+            prediction=wm_step(x,u,m['native_h_s'],m['n_substeps'],model=world_model,norms=norms,physical=physical,codec=codec,geometry=geometry,context=context);y=prediction['next_state58'];next_context=geometry.bundle(y);reward=task.rewards(y,m,action,context=next_context)
             if not reward['objective_known'].all() or not torch.isfinite(reward['total']).all():raise ValueError('Known finite task objective required, no zero substitute')
             stop=task.termination(y,m);objective=objective+(gamma**k)*survival*reward['total'];continuation=(1-stop['soft_loss_probability'])*(~stop['reference_timeout']).to(x.dtype)
             evidence.append(dict(target_frame=m['step']+1,reward=reward,prediction=prediction,normalized_action20=action,executed_u20=u,survival_before=survival))
-            survival=survival*continuation;m=task.advance_memory(m,action,residual,u);x=y
-        bootstrap=critic(task.observation(x,m,geometry)).to(x.dtype);objective=objective+(gamma**horizon)*survival*bootstrap
+            survival=survival*continuation;m=task.advance_memory(m,action,residual,u);x=y;context=next_context
+        bootstrap=critic(task.observation(x,m,geometry,context=context)).to(x.dtype);objective=objective+(gamma**horizon)*survival*bootstrap
         return dict(actor_loss=-objective.mean(),return_per_start=objective,final_state58=x,final_memory=m,steps=evidence,
             call_counts=dict(Actor_FW=horizon,WM_FW=horizon,Critic_FW=1,native_steps=0,optimizer_updates=0,backward_calls=0),actual_contact_or_physical_gradient_qualified=False)
     finally:

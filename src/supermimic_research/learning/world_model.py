@@ -51,18 +51,21 @@ def physical_floors(*,q_rad=.001,qd_rad_s=.01,COM_residual_m=.0001,world_dR_rad=
     for indices,value in zip(physical_blocks(),values):result[indices]=value
     return result
 
-def current_features(x,u,h,n,geometry):
+def current_features(x,u,h,n,geometry,*,context=None):
     """Differentiable current-only features; no future contact/force argument.
 
     ``x`` is phone COM/world state58 with BODY rotation, ``u`` absolute20,
     ``h`` native timestep and ``n`` integer substeps. Geometry is injected via
     the runtime provider; this API does not load a native model or assets.
+    An explicit context belongs to this exact current tensor and autograd
+    mode. Sharing its FK/descriptor graph does not detach any state input.
     """
     import torch
     if x.shape[-1]!=58 or u.shape!=x.shape[:-1]+(20,) or h.shape!=x.shape[:-1] or n.shape!=h.shape:raise ValueError('state58/action20/h/n with equal batch shape')
     if not h.is_floating_point() or n.dtype not in (torch.int32,torch.int64) or torch.any((n!=64)&(n!=128)) or not torch.isfinite(h).all() or torch.any(h<=0):raise ValueError('Explicit native timestep and64/128 integer ticks')
     if torch.any(abs(h*n-.02)>4*torch.finfo(h.dtype).eps*.02):raise ValueError('Phone control period20ms; no accumulated-clock inference')
-    pose=geometry.provider.poses(x);gap=geometry.features(x)
+    context=geometry.bundle(x) if context is None else context
+    context.require(geometry,x);pose=context.poses();gap=context.directional()
     if not gap['directional_gap_known'].all():raise ValueError('Unknown geometry must not become zero model inputs')
     rel=torch.cat([pose['pair_relative_translation_BODY_COM_m'],pose['pair_relative_rotation_BODY9']],dim=-1).flatten(-2)
     raw=torch.cat([x,u,h[...,None].to(x.dtype),n[...,None].to(x.dtype)],dim=-1)
@@ -96,7 +99,7 @@ def precompute_features(data,geometry,*,chunk_rows=4):
             v=current_features(x,u,torch.full((len(x),),.00015625,dtype=torch.float64),torch.full((len(x),),128,dtype=torch.int64),geometry)
             relgap.append(v[:,80:].cpu().numpy())
     G=np.concatenate(relgap)[ids];raw=np.column_stack([X,U,hs,ns])
-    return np.column_stack([raw,G]),dict(unique_current_states=len(unique),rows=len(X),pure_geometry_FK_calls=2*math.ceil(len(unique)/chunk_rows),geometry_is_current_only=True,caching_does_not_change_training_row_weight=True)
+    return np.column_stack([raw,G]),dict(unique_current_states=len(unique),rows=len(X),pure_geometry_FK_calls=math.ceil(len(unique)/chunk_rows),geometry_is_current_only=True,caching_does_not_change_training_row_weight=True)
 
 def normalize_features(features,norms):
     import torch
@@ -119,7 +122,7 @@ def make_model(config:WorldModelConfig|Mapping|None=None,*,device='cpu',dtype='f
         def forward(self,normalized_features366):
             if normalized_features366.shape[-1]!=366:raise ValueError('Phone current366 required, not raw78/80 or old chart')
             return self.layers(normalized_features366)
-        def forward_from_raw(self,x,u,h,n,norms,geometry):return self(normalize_features(current_features(x,u,h,n,geometry),norms))
+        def forward_from_raw(self,x,u,h,n,norms,geometry,*,context=None):return self(normalize_features(current_features(x,u,h,n,geometry,context=context),norms))
     previous_dtype=torch.get_default_dtype()
     try:
         torch.set_default_dtype(torch.float32)
