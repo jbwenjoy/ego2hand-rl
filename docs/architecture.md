@@ -51,6 +51,16 @@ Its output is a new task layout, not a compatible phone checkpoint resume.
 `assets/proximity.py` caches an unsigned triangle query acceleration structure;
 source-surface proximity remains distinct from contact truth or solid clearance.
 
+`mechanics/compound_collision.py` qualifies declared object components and hand
+sets using the shared convex-query primitives. `retargeting.py` and
+`contact_ik.py` generate bounded kinematic proposals, with native witness
+penalties distinguished from independent clearance. `compound_contacts.py`
+sums each native contact once about the object's moving COM, including force
+signs, local couples and canonical groups. `compound_holding.py` supplies
+no-aid static-hold diagnostics with the frozen numerical gate values and an
+explicit new mug contact-region mapping. It does not turn the mug layout into
+a phone checkpoint resume or imply source-gravity/trajectory preservation.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not

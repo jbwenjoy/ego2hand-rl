@@ -1,0 +1,118 @@
+{
+  "schema": "mug_contact_ik_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\refine_mug_grasp_contacts.py",
+      "bytes": 5862,
+      "sha256": "9a8018eb48d1819100075760b63e79565c43bc83c0fdb9cffc1920725e8302a7"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_ik.py",
+      "bytes": 7752,
+      "sha256": "45d6922d2a7b9a14e895daa750f0c09073db414401aa8d6e82afab2388edb174"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\retargeting.py",
+      "bytes": 3375,
+      "sha256": "65eb41d332a06e021c0818cb35faa296377ef4c8387a67f98d62b6910f6f505a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\collision.py",
+      "bytes": 5761,
+      "sha256": "34f57072296f596098249a00b41812144ae72d66e87b0469852be9ca85b0e67e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\convex.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    }
+  ],
+  "parent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_grasp_ik_v1\\report.json",
+    "bytes": 9856,
+    "sha256": "5eebfbd8801d52744b103afeaf513f74d3cad3b030122daaa737f652757d786b"
+  },
+  "reference": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\report.json",
+    "bytes": 12614,
+    "sha256": "a45d6e5db4aa95d87c700c641e51e77fe00be779434f175f37b3f58bd77bda31"
+  },
+  "starts": [
+    [
+      0.6689689892525281,
+      -0.42177733576208737,
+      0.6571462334596946,
+      0.37234873028073956,
+      0.6647413801448584,
+      0.11522977500580416,
+      0.9281526405555833,
+      0.5061067757349654,
+      1.1014256542202994,
+      0.0576237833563636,
+      0.7428996957105197,
+      0.345591355922282,
+      1.0527059550245326,
+      -0.25338739905805713,
+      1.26916229831949,
+      0.6124240479631763,
+      1.202452477722317,
+      -0.6979989997111495,
+      1.3847024864103503,
+      1.0102813619304065
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "max_nfev_each": 160,
+  "maximum_seconds_each": 45,
+  "tip_weights": [
+    1,
+    1,
+    1,
+    0.25,
+    0.25
+  ],
+  "tip_scale_m": 0.02,
+  "regularization": 0.003,
+  "penalty_scale_m": 0.0005,
+  "object_intent_floor_m": 5e-05,
+  "nonintent_self_table_floor_m": 0.0002,
+  "canonical_contact_attraction_upper_target_m": 0.0001,
+  "attraction_scale_m": 0.002,
+  "independent_qualification_band_m": [
+    -0.0001,
+    0.0002
+  ],
+  "nonintent_self_table_qualification_min_m": 0,
+  "native_distance_limit_object_m": 0.03,
+  "native_distance_limit_self_m": 0.001,
+  "source_gravity_preserved": false,
+  "neural_updates": 0,
+  "integration_steps": 0,
+  "scope": "Native pair distances/witness Jacobians used as proposal heuristics only; final independent convex component audit, unknown never passes. No learned model or force labels."
+}

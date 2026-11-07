@@ -1,0 +1,292 @@
+{
+  "schema": "mug_contact_ik_proposals:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\refine_mug_grasp_contacts.py",
+      "bytes": 5862,
+      "sha256": "9a8018eb48d1819100075760b63e79565c43bc83c0fdb9cffc1920725e8302a7"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_ik.py",
+      "bytes": 7752,
+      "sha256": "45d6922d2a7b9a14e895daa750f0c09073db414401aa8d6e82afab2388edb174"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\retargeting.py",
+      "bytes": 3375,
+      "sha256": "65eb41d332a06e021c0818cb35faa296377ef4c8387a67f98d62b6910f6f505a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\collision.py",
+      "bytes": 5761,
+      "sha256": "34f57072296f596098249a00b41812144ae72d66e87b0469852be9ca85b0e67e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\convex.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    }
+  ],
+  "parent": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_grasp_ik_v1\\report.json",
+    "bytes": 9856,
+    "sha256": "5eebfbd8801d52744b103afeaf513f74d3cad3b030122daaa737f652757d786b"
+  },
+  "results": [
+    {
+      "best": {
+        "q20": [
+          0.6682447822760473,
+          -0.42053097624401203,
+          0.6604176929739854,
+          0.37004202366827754,
+          0.6426181413262088,
+          0.17471794564110396,
+          0.9935237999485768,
+          0.5757850511227843,
+          0.9321735501095653,
+          0.14278557633635727,
+          0.8888487628013778,
+          0.2628300078356792,
+          0.8683106848471799,
+          -0.05264381584069404,
+          1.4608987964322915,
+          0.4294185782735363,
+          1.1988343605926886,
+          -0.6425915373977613,
+          1.3922906676251645,
+          0.9948391394048102
+        ],
+        "squared_cost": 0.5457449399125247,
+        "maximum_native_object_penetration_m": 1.3415978828036104e-05,
+        "maximum_native_self_or_table_penetration_m": 0.0,
+        "canonical_min_native_component_gap_m": [
+          0.00025121265927844933,
+          -9.187676379554755e-06,
+          -1.3415978828036104e-05
+        ],
+        "elapsed_s": 0.41267380001954734
+      },
+      "solver_success": true,
+      "solver_message": "`xtol` termination condition is satisfied.",
+      "nfev": 38,
+      "q20": [
+        0.6682447822760473,
+        -0.42053097624401203,
+        0.6604176929739854,
+        0.37004202366827754,
+        0.6426181413262088,
+        0.17471794564110396,
+        0.9935237999485768,
+        0.5757850511227843,
+        0.9321735501095653,
+        0.14278557633635727,
+        0.8888487628013778,
+        0.2628300078356792,
+        0.8683106848471799,
+        -0.05264381584069404,
+        1.4608987964322915,
+        0.4294185782735363,
+        1.1988343605926886,
+        -0.6425915373977613,
+        1.3922906676251645,
+        0.9948391394048102
+      ],
+      "tip_errors_m": [
+        0.00017126819667733485,
+        0.005002631736753925,
+        0.011817381729523065,
+        0.012333124810209694,
+        0.0012595278161967886
+      ],
+      "native_penalties_are_not_independent_clearance": true,
+      "counts": {
+        "kinematics": 39,
+        "comPos": 39,
+        "jacSite": 190,
+        "residual": 38,
+        "integration_steps": 0,
+        "native_distance": 6689,
+        "jacPoint": 4382,
+        "zero_distance_normal_heuristic": 67
+      },
+      "geometry_pass": false,
+      "geometry_unknown": 0,
+      "canonical_contact_candidates": {
+        "1": [],
+        "2": [
+          [
+            100,
+            26
+          ],
+          [
+            158,
+            26
+          ]
+        ],
+        "3": [
+          [
+            98,
+            39
+          ],
+          [
+            158,
+            39
+          ]
+        ]
+      },
+      "failed_pair_counts": {
+        "object": 0,
+        "self": 0,
+        "hand_table": 0
+      },
+      "minimum_failed_convex_gap_m": null,
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_ik_v1\\seed00\\candidate.npz",
+        "bytes": 1358,
+        "sha256": "f170f91e423d78033c7b7943c22d2c485b92f502b64696bedcf358f67780b2e7"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_ik_v1\\seed00\\geometry.json",
+        "bytes": 896725,
+        "sha256": "d02ddd8b8239fd0a12b7a0bcbc0c9037a8a0dc30e4dcfc18d670de353c84aa96"
+      },
+      "proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_ik_v1\\seed00\\proposals.jsonl",
+        "bytes": 26931,
+        "sha256": "a5bf9525e87329e2742b83c9df10bf94d1a19c9fb0126d1bcf39db4f7430de73"
+      }
+    },
+    {
+      "best": {
+        "q20": [
+          0.552355815516581,
+          -0.36689929917050224,
+          0.6665609764204534,
+          0.65608161369378,
+          0.5418295529530267,
+          0.13034495634043985,
+          1.0179196209656682,
+          0.6428523296529038,
+          0.8180603760101717,
+          0.023967933138988942,
+          0.9176240540326189,
+          0.4766787855344339,
+          0.46419692178500205,
+          -0.10693921366740114,
+          1.0339656940565112,
+          0.9192463648059992,
+          1.0443911177476068,
+          -0.46313249001665097,
+          1.582711116264143,
+          0.7980788934110538
+        ],
+        "squared_cost": 2.5590862798854515,
+        "maximum_native_object_penetration_m": 0.0,
+        "maximum_native_self_or_table_penetration_m": 0.0,
+        "canonical_min_native_component_gap_m": [
+          0.0001411544916356487,
+          6.930705985743243e-05,
+          0.0
+        ],
+        "elapsed_s": 0.29061420005746186
+      },
+      "solver_success": true,
+      "solver_message": "`xtol` termination condition is satisfied.",
+      "nfev": 28,
+      "q20": [
+        0.552355815516581,
+        -0.36689929917050224,
+        0.6665609764204534,
+        0.65608161369378,
+        0.5418295529530267,
+        0.13034495634043985,
+        1.0179196209656682,
+        0.6428523296529038,
+        0.8180603760101717,
+        0.023967933138988942,
+        0.9176240540326189,
+        0.4766787855344339,
+        0.46419692178500205,
+        -0.10693921366740114,
+        1.0339656940565112,
+        0.9192463648059992,
+        1.0443911177476068,
+        -0.46313249001665097,
+        1.582711116264143,
+        0.7980788934110538
+      ],
+      "tip_errors_m": [
+        0.007967845820929253,
+        0.007121492231742349,
+        0.01696301057808058,
+        0.04884578413757555,
+        0.008995609075815716
+      ],
+      "native_penalties_are_not_independent_clearance": true,
+      "counts": {
+        "kinematics": 29,
+        "comPos": 29,
+        "jacSite": 140,
+        "residual": 28,
+        "integration_steps": 0,
+        "native_distance": 4438,
+        "jacPoint": 2862,
+        "zero_distance_normal_heuristic": 40
+      },
+      "geometry_pass": false,
+      "geometry_unknown": 0,
+      "canonical_contact_candidates": {
+        "1": [
+          [
+            100,
+            15
+          ],
+          [
+            185,
+            15
+          ]
+        ],
+        "2": [
+          [
+            87,
+            28
+          ]
+        ],
+        "3": []
+      },
+      "failed_pair_counts": {
+        "object": 0,
+        "self": 0,
+        "hand_table": 0
+      },
+      "minimum_failed_convex_gap_m": null,
+      "candidate": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_ik_v1\\seed01\\candidate.npz",
+        "bytes": 1354,
+        "sha256": "599b5e8ed3cac71ebfd4bdefccf643a8cab55b019cc3264f5d753bdcfa723e9c"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_ik_v1\\seed01\\geometry.json",
+        "bytes": 896042,
+        "sha256": "2a276c9ce9384432a31713ad8a70b6b358dd6e18eaaa80535abf4ad3b2a1924b"
+      },
+      "proposals": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_ik_v1\\seed01\\proposals.jsonl",
+        "bytes": 18749,
+        "sha256": "d0fcb8e95e2b9752bd53b74b315378334b29a04f975f4e45106607f3bd947617"
+      }
+    }
+  ],
+  "geometry_pass_count": 0,
+  "neural_updates": 0,
+  "integration_steps": 0,
+  "physical_holding_qualified": false,
+  "wall_s": 8.135337099898607,
+  "scope": "Two bounded first-frame collision-aware proposals. Native witness gradients are optimization aids, not verified physical gradients, union SDFs or global clearance. All-piece independent qualification and future no-aid dynamics remain necessary."
+}

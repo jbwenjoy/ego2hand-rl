@@ -1,0 +1,128 @@
+{
+  "schema": "mug_kinematic_grasp_proposal_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\propose_mug_grasp_ik.py",
+      "bytes": 5191,
+      "sha256": "3f1e8592a38401ccedf6973a7162115a3804795207af6fbee1b64c6229404479"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\retargeting.py",
+      "bytes": 3375,
+      "sha256": "65eb41d332a06e021c0818cb35faa296377ef4c8387a67f98d62b6910f6f505a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_collision.py",
+      "bytes": 5378,
+      "sha256": "9e7841bcd35b25454662c81bd24fd12b132f0e25b5003d9216661568b3eb8c12"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\collision.py",
+      "bytes": 5761,
+      "sha256": "34f57072296f596098249a00b41812144ae72d66e87b0469852be9ca85b0e67e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\convex.py",
+      "bytes": 6113,
+      "sha256": "64306b1174c4ef914d1a3f1d6e99188fcf2835d483dbeb518617baaf00e49729"
+    }
+  ],
+  "reference": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\report.json",
+    "bytes": 12614,
+    "sha256": "a45d6e5db4aa95d87c700c641e51e77fe00be779434f175f37b3f58bd77bda31"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "frame": 47,
+  "starts": [
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.051999999999999935,
+      -0.39300000000000007,
+      0.26150000000000007,
+      0.26150000000000007,
+      0.26150000000000007,
+      0.0,
+      0.5234999999999999,
+      0.26150000000000007,
+      0.26150000000000007,
+      0.0,
+      0.5234999999999999,
+      0.26150000000000007,
+      0.26150000000000007,
+      0.0,
+      0.5234999999999999,
+      0.26150000000000007,
+      0.26150000000000007,
+      0.0,
+      0.5234999999999999,
+      0.26150000000000007
+    ],
+    [
+      0.42369970000000023,
+      -0.06570030000000004,
+      0.6540497000000001,
+      0.6540497000000001,
+      0.6540497000000001,
+      0.20939969999999997,
+      0.9946497000000001,
+      0.6540497000000001,
+      0.6540497000000001,
+      0.20939969999999997,
+      0.9946497000000001,
+      0.6540497000000001,
+      0.6540497000000001,
+      0.20939969999999997,
+      0.9946497000000001,
+      0.6540497000000001,
+      0.6540497000000001,
+      0.20939969999999997,
+      0.9946497000000001,
+      0.6540497000000001
+    ]
+  ],
+  "max_nfev_each": 300,
+  "weights": [
+    1,
+    1,
+    1,
+    0.25,
+    0.25
+  ],
+  "regularization": 0.003,
+  "positions_scale_m": 0.01,
+  "permitted_intent": "thumb/index/middle link3/link4/tip_sensor; group must have a near component pair",
+  "band_m": [
+    -0.0001,
+    0.0002
+  ],
+  "nonintent_self_and_hand_table_minimum_m": 0,
+  "role": "KINEMATIC_PROPOSALS_NO_TRAINING_NO_HOLDING",
+  "integration_steps": 0,
+  "neural_updates": 0
+}

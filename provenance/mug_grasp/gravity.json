@@ -1,0 +1,60 @@
+{
+  "schema": "mug_gravity_mapping_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_gravity.py",
+    "bytes": 3276,
+    "sha256": "ad0e228b3616eb21d67314323ea997ce900203e89d39d9d6246b6e97bf7d1a2d"
+  },
+  "official_sources": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_sources_v1\\manifest.json",
+    "bytes": 3152,
+    "sha256": "fbc5ec2f88ef64c19aa0014801fa39d87fd5d98e16a8f4255a1b38184222bbbc"
+  },
+  "official_viewer": {
+    "url": "https://raw.githubusercontent.com/facebookresearch/hot3d/146b34afef8c1a32adeef7e981c070109f225c87/hot3d/Hot3DVisualizer.py",
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_sources_v1\\hot3d__Hot3DVisualizer.py",
+    "bytes": 23337,
+    "sha256": "cffda4512c2b5a7613f5d474c999770a4dd0057a74fc4b91f75a75fdaf24fb60",
+    "hits": [
+      {
+        "line": 116,
+        "text": "            rr.log(\"world\", rr.ViewCoordinates.RIGHT_HAND_Z_UP, static=True)"
+      },
+      {
+        "line": 118,
+        "text": "            rr.log(\"world\", rr.ViewCoordinates.RIGHT_HAND_Y_UP, static=True)"
+      }
+    ]
+  },
+  "viewer_revision": "146b34afef8c1a32adeef7e981c070109f225c87",
+  "reference": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\reference61.npz",
+    "bytes": 2189390,
+    "sha256": "6809a1a29ec241e0b4776d9842d4022ffc54beba89e2521b58a0a5757a4aa1fd"
+  },
+  "official_Aria_world_up": "Z_UP",
+  "device": "Aria",
+  "source_gravity_direction_from_viewer_convention": "negative_Z",
+  "source_gravity_measured_for_this_sequence": false,
+  "gravity_magnitude_assumed_m_s2": 9.81,
+  "viewer_convention_is_not_per_sequence_calibration": true,
+  "mapped_first_gravity_m_s2": [
+    5.822780336310741,
+    -6.847683260639382,
+    3.9294481949800772
+  ],
+  "angle_to_simulator_gravity_deg_min_max": [
+    111.90813957740355,
+    117.76775997301597
+  ],
+  "fixed_palm_mapping_preserves_gravity": false,
+  "source_contact_force_labels_transferable": false,
+  "output": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_review_v1\\conditional_gravity61.npz",
+    "bytes": 3534,
+    "sha256": "4c1030d804ab80fa2114cbbd859adcf08b6a1f2efee099a8495dd0f32d940196"
+  },
+  "neural_updates": 0,
+  "integration_steps": 0,
+  "scope": "Official viewer device-up convention plus conditional9.81 magnitude. Not an observed per-sequence gravity vector or proof that clips preserve full-dataset world alignment. Current mapping changes gravity-relative task; retain the old UNKNOWN binding rather than silently rewriting it."
+}
