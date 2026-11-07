@@ -1,0 +1,123 @@
+"""Compose the maintained calibrated Hand2 factory and a checked mug asset.
+
+No historical builder imports, robot rescaling, joint fitting or object aid.
+Compilation alone does not qualify a grasp or an executable reference.
+"""
+import numpy as np
+
+from supermimic_research.ego.hand_frames import palm_frame
+
+
+def fixed_hand():
+    import mujoco
+    from dex_supermimic.tasks.pen_spin.config.wuji_hand2 import hand2_constants as constants
+    cfg = constants.get_pen_spin_hand2_cfg()
+    spec = cfg.spec_fn()
+    for patch in cfg.geoms:
+        patch.edit_spec(spec)
+    palm = spec.body('right_palm_link')
+    palm.pos, palm.quat = cfg.init_state.pos, cfg.init_state.rot
+    if list(palm.joints) or palm.mocap:
+        raise ValueError('Fixed source robot root required')
+    model = spec.compile()
+    if (model.nq, model.nv, model.nu) != (20, 20, 20):
+        raise ValueError('Source20 hinge joints, no floating wrist')
+    data = mujoco.MjData(model)
+    # This factory explicitly declares all-zero initial joints.
+    if cfg.init_state.joint_pos != {'.*': 0.0} or cfg.init_state.joint_vel != {'.*': 0.0}:
+        raise ValueError('Changed source initial state needs explicit reconstruction')
+    mujoco.mj_forward(model, data)
+    pid = model.body('right_palm_link').id
+    root = np.eye(4)
+    root[:3, :3], root[:3, 3] = data.xmat[pid].reshape(3, 3), data.xpos[pid]
+    names = [f'right_finger{f}_joint1' for f in range(2, 6)]
+    bases = np.array([root[:3, :3].T @ (data.xanchor[model.joint(n).id]-root[:3, 3]) for n in names])
+    local_palm = palm_frame(np.zeros(3), bases)
+    return spec, model, data, dict(T_world_from_robot_root=root,
+        T_robot_root_from_robot_palm=local_palm, T_world_from_robot_palm=root @ local_palm,
+        bases_robot_root_m=bases, base_joint_names=names,
+        wrist_anchor='right_palm_link body origin (renamed upstream r_wrist); not palm center',
+        palm_convention='origin mean four nonthumb joint1 anchors; +X distal,+Y radial,+Z=XcrossY at q=0')
+
+
+def compose_mug(spec, hand_model, asset_xml, root_pose, *, contact_time=.002):
+    import mujoco
+    from scipy.spatial.transform import Rotation
+    if not .001 <= contact_time <= .05:
+        raise ValueError('Explicit contact time prior')
+    pose = np.asarray(root_pose, float)
+    if pose.shape != (4, 4) or abs(np.linalg.det(pose[:3, :3])-1) > 1e-6:
+        raise ValueError('Proper mug BODY pose required')
+    mug = mujoco.MjSpec.from_file(str(asset_xml))
+    ob = mug.body('hot3d_mug9')
+    ob.pos = pose[:3, 3]
+    xyzw = Rotation.from_matrix(pose[:3, :3]).as_quat()
+    ob.quat = xyzw[[3, 0, 1, 2]]
+    ob.gravcomp = 0
+    parts = [g.name for g in mug.geoms if g.name.startswith('mug9_collision_')]
+    if len(parts) != 128 or mug.geom('mug9_visual').contype or mug.geom('mug9_visual').conaffinity:
+        raise ValueError('Checked128-piece collider, visual excluded')
+    if any(g.contype or g.conaffinity for g in spec.worldbody.geoms):
+        raise ValueError('No hidden collidable support in robot factory')
+    spec.attach(mug, prefix='', frame=spec.worldbody.add_frame(name='mug_attachment_identity'))
+    spec.worldbody.add_geom(name='mug_task_table', type=mujoco.mjtGeom.mjGEOM_BOX,
+        size=[.35, .35, .025], pos=[0, 0, -.025], friction=[.6, .005, .0001], condim=3)
+    hand_names = [hand_model.geom(g).name for g in range(hand_model.ngeom)
+                  if hand_model.geom_contype[g] or hand_model.geom_conaffinity[g]]
+    for part in parts:
+        for other in hand_names + ['mug_task_table']:
+            mu = .6 if other == 'mug_task_table' else .7
+            spec.add_pair(name=f'{part}_to_{other}', geomname1=part, geomname2=other,
+                condim=3, friction=[mu, mu, .005, .0001, .0001], solref=[contact_time, 1],
+                solreffriction=[0, 0], solimp=[.9, .95, .001, .5, 2], margin=0, gap=0)
+    for key in ('timestep', 'integrator', 'jacobian', 'solver', 'iterations',
+                'ls_iterations', 'tolerance', 'ls_tolerance', 'cone', 'gravity'):
+        setattr(spec.option, key, getattr(mug.option, key))
+    model = spec.compile()
+    if (model.nq, model.nv, model.nu, model.neq, model.nmocap) != (27, 26, 20, 0, 0):
+        raise ValueError('One free mug,20 hinge joints and no wrist/object assistance')
+    # All source joint/actuator fields are compared against a fresh robot compile.
+    fields = ['jnt_type', 'jnt_pos', 'jnt_axis', 'jnt_range', 'jnt_limited',
+        'jnt_actfrcrange', 'jnt_actfrclimited', 'dof_armature', 'dof_damping',
+        'dof_frictionloss', 'actuator_trnid', 'actuator_gear', 'actuator_gainprm',
+        'actuator_biasprm', 'actuator_ctrlrange', 'actuator_ctrllimited',
+        'actuator_forcerange', 'actuator_forcelimited', 'exclude_signature']
+    for name in fields:
+        old, new = getattr(hand_model, name), getattr(model, name)
+        if not np.array_equal(old, new[:len(old)]):
+            raise ValueError('Changed robot field '+name)
+    # A new world geom is compiled ahead of body geoms: compare named identity,
+    # never array prefixes for geometry. Keep physical properties byte exact.
+    for kind, fields_by_kind in [('body', ('body_pos', 'body_quat', 'body_mass', 'body_ipos',
+            'body_iquat', 'body_inertia')), ('geom', ('geom_type', 'geom_size', 'geom_pos',
+            'geom_quat', 'geom_contype', 'geom_conaffinity', 'geom_friction'))]:
+        count = hand_model.nbody if kind == 'body' else hand_model.ngeom
+        lookup = getattr(hand_model, kind)
+        indices = [getattr(model, kind)(lookup(i).name).id for i in range(count)]
+        for name in fields_by_kind:
+            if not np.array_equal(getattr(hand_model, name), getattr(model, name)[indices]):
+                raise ValueError('Changed named robot geometry/inertia/frame '+name)
+    for a in range(model.nu):
+        if model.actuator(a).name != hand_model.actuator(a).name:
+            raise ValueError('Changed actuator name/order')
+    oid = model.body('hot3d_mug9').id
+    part_ids = [model.geom(n).id for n in parts]
+    if any(model.geom_bodyid[g] != oid for g in part_ids):
+        raise ValueError('All compound pieces must share one BODY/COM')
+    pairs = [i for i in range(model.npair)
+             if model.pair_geom1[i] in part_ids or model.pair_geom2[i] in part_ids]
+    if len(pairs) != 128*(len(hand_names)+1):
+        raise ValueError('Incomplete explicit hand/table compound-pair coverage')
+    if (model.opt.timestep != .0003125 or model.opt.tolerance != 1e-6
+            or model.opt.iterations != 100 or model.opt.ls_iterations != 20
+            or model.opt.integrator != mujoco.mjtIntegrator.mjINT_IMPLICITFAST
+            or model.opt.solver != mujoco.mjtSolver.mjSOL_NEWTON
+            or model.opt.cone != mujoco.mjtCone.mjCONE_PYRAMIDAL
+            or not np.array_equal(model.opt.gravity, [0, 0, -9.81])):
+        raise ValueError('Compiled scene solver/gravity prior changed during attach')
+    return model, dict(robot_checked_fields=fields, hand_collision_names=hand_names,
+        mug_part_geom_ids=part_ids, mug_body_id=oid, mug_free_qpos=int(model.jnt_qposadr[model.joint('mug9_free').id]),
+        mug_free_dof=int(model.jnt_dofadr[model.joint('mug9_free').id]),
+        explicit_mug_pairs=len(pairs), total_pairs=model.npair, contact_time_prior_s=contact_time,
+        hand_mu_prior=.7, table_mu_prior=.6, calibrated=False,
+        palm_or_joint_mapping_is_kinematic_only=True, physical_grasp_qualified=False)

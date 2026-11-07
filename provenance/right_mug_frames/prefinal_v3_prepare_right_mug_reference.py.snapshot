@@ -1,0 +1,214 @@
+"""Reconstruct fixed61 annotation frames and compose a new Hand2 mug scene.
+
+This produces a kinematic reference and diagnostic q=0 assembly, not a grasp.
+No policy, optimizer, integration, contact label fitting or RGB reconstruction.
+"""
+from pathlib import Path
+import argparse
+import json
+import sys
+import time
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/'src'))
+from supermimic_research.artifacts import file_pin, verify_file_pin
+from supermimic_research.ego.hand_frames import read_hand_window, reconstruct, numpy_skin, palm_frame, transform_points
+from supermimic_research.assets.hand2_scene import fixed_hand, compose_mug
+
+
+def write(path, data):
+    path.write_text(json.dumps(data, indent=2, allow_nan=False, default=lambda x: x.tolist())+'\n', encoding='utf8')
+
+
+def motion(poses):
+    p, R = poses[:, :3, 3], poses[:, :3, :3]
+    angles = np.arccos(np.clip((np.einsum('ij,nij->n', R[0], R)-1)/2, -1, 1))
+    return dict(max_translation_from_first_m=float(np.linalg.norm(p-p[0], axis=1).max()),
+                position_RMS_about_mean_m=float(np.sqrt(np.mean(np.sum((p-p.mean(0))**2, axis=1)))),
+                max_rotation_from_first_deg=float(np.rad2deg(angles.max())))
+
+
+def main(args):
+    import torch
+    import mujoco
+    from dex_supermimic.assets import wuji_hand2
+    from dex_supermimic.tasks.pen_spin.config.wuji_hand2 import hand2_constants
+    started = time.perf_counter()
+    torch.set_num_threads(4)
+    out, pilot, asset = args.output.resolve(), args.pilot_root.resolve(), args.mug_asset.resolve()
+    if out.exists() or not out.is_relative_to(ROOT/'runs'):
+        raise ValueError('Fresh unified runs output required')
+    manifest = json.loads((pilot/'download_manifest_v1.json').read_text())
+    clip = pilot/'hot3d/train_aria/clip-001884.tar'
+    expected = next(x for x in manifest['clips'] if Path(x['path']).resolve() == clip)
+    verify_file_pin(expected)
+    contract = json.loads((asset/'asset_contract.json').read_text())
+    validation = json.loads(verify_file_pin(contract['validation']).read_text())
+    verify_file_pin(contract['asset_model'])
+    # The standalone XML resolves its own asset paths. Validate every source first.
+    mesh_report = json.loads((ROOT/'runs/mug_mesh_v1/report.json').read_text())
+    decomp = json.loads((ROOT/'runs/mug_decomposition_v3/report.json').read_text())
+    for item in [mesh_report['source'], mesh_report['visual']] + [c['obj'] for c in decomp['components']]:
+        verify_file_pin(item)
+    if contract['collision_parts'] != 128 or validation['passed'] != validation['total']:
+        raise ValueError('Require the previously checked128-part prototype')
+    source_paths = [Path(__file__), ROOT/'src/supermimic_research/ego/hand_frames.py',
+        ROOT/'src/supermimic_research/assets/hand2_scene.py', Path(wuji_hand2.__file__),
+        Path(hand2_constants.__file__), wuji_hand2.wuji_hand2_xml_path(),
+        asset/'mug_asset.xml', asset/'asset_contract.json', asset/'physical_prior.json']
+    vendor = ROOT/'src/supermimic_research/ego/vendor_umetrack'
+    for entry in json.loads((vendor/'source_manifest.json').read_text()):
+        current = file_pin(ROOT/entry['path'])
+        if (current['sha256'], current['bytes']) != (entry['sha256'], entry['bytes']):
+            raise ValueError('Changed unmodified vendor source')
+        source_paths.append(ROOT/entry['path'])
+    sources = [file_pin(p) for p in source_paths]
+    out.mkdir(parents=True)
+    write(out/'intent.json', dict(schema='right_mug_frame_contract_intent:1', clip=file_pin(clip),
+        frame_ids=list(range(47, 108)), hand_side='right', object_bop_id=9, object_uid='223371871635142',
+        source_pins=sources, predeclared_numeric_limits_m=dict(independent_FK=2e-7, equivariance=2e-7),
+        neural_updates=0, integration_steps=0, source_gravity='UNKNOWN',
+        kinematic_mapping='Align fixed rest palm frames with unit scale; retain translation. Not IK or robot feasibility.'))
+    data = read_hand_window(clip, list(range(47, 108)), 'right', 9, '223371871635142')
+    profile = data['profile']; n = len(data['angles22'])
+    write(out/'raw_profile_and_poses.json', dict(umetrack_profile=profile, frames=data['raw']))
+    write(out/'frame_identities.json', data['records'])
+    fk = reconstruct(profile, data['angles22'], data['wrist'], 'right')
+    identities = np.repeat(np.eye(4)[None], n, axis=0)
+    local = reconstruct(profile, data['angles22'], identities, 'right')
+    ref = numpy_skin(profile, data['angles22'], data['wrist'], 'right')
+    raw_ref = numpy_skin(profile, data['angles22'], data['wrist'], 'right', mesh=False)
+    fk_error = float(np.max(np.abs(ref-fk['vertices'])))
+    landmark_error = float(np.max(np.abs(raw_ref-fk['landmarks21'])))
+    equivariance_error = float(max(np.max(np.abs(transform_points(T, v)-w))
+        for T, v, w in zip(data['wrist'], local['vertices'], fk['vertices'])))
+    left = reconstruct(profile, data['angles22'], identities, 'left')
+    reflection_exact = np.array_equal(local['vertices'], left['vertices']*[-1, 1, 1])
+    winding_exact = np.array_equal(local['faces'], left['faces'][..., ::-1])
+    perturbed = data['angles22'].copy(); perturbed[:, 20:] += [1.7, -2.4]
+    unused_exact = np.array_equal(local['vertices'], reconstruct(profile, perturbed, identities, 'right')['vertices'])
+    # Profile landmark8/11/14/17 are exactly joint rest pivots4/8/12/16.
+    # This numeric identity establishes the application base-anchor convention.
+    anchors = np.array(profile['landmark_rest_positions'], float)[[8, 11, 14, 17]]*.001
+    pivots = np.array(profile['joint_rest_positions'], float)[[4, 8, 12, 16]]*.001
+    if not np.array_equal(anchors, pivots):
+        raise ValueError('Changed profile landmark / base-pivot correspondence')
+    human_palm = palm_frame(np.zeros(3), anchors*[-1, 1, 1])
+    world_palm = data['wrist'] @ human_palm
+    wrist_object = np.linalg.inv(data['wrist']) @ data['objects']
+    palm_object = np.linalg.inv(world_palm) @ data['objects']
+    spec, hm, hd, robot = fixed_hand()
+    mapped = robot['T_world_from_robot_palm'][None] @ palm_object
+    prior = json.loads((asset/'physical_prior.json').read_text())
+    com = np.array(prior['COM_model_m'])
+    source_com = np.array([transform_points(T, com) for T in data['objects']])
+    mapped_com = np.array([transform_points(T, com) for T in mapped])
+    # Exact algebraic decomposition at each timestamp, no clock modification.
+    wrist_only_object = world_palm @ np.repeat(palm_object[:1], n, axis=0)
+    removed_component_m = np.linalg.norm(wrist_only_object[:, :3, 3]-wrist_only_object[0, :3, 3], axis=1)
+    relative_reconstruction_error = float(np.max(np.abs(world_palm @ palm_object-data['objects'])))
+    # One scene at the mapped first BODY pose; zero robot joint pose is diagnostic.
+    model, binding = compose_mug(spec, hm, asset/'mug_asset.xml', mapped[0])
+    state = mujoco.MjData(model); mujoco.mj_forward(model, state)
+    oid = binding['mug_body_id']; part_ids = set(binding['mug_part_geom_ids'])
+    contacts = []
+    for c in state.contact:
+        a, b = map(int, c.geom)
+        if a in part_ids or b in part_ids:
+            contacts.append(dict(geom_names=[model.geom(a).name, model.geom(b).name], distance_m=float(c.dist)))
+    mujoco.mj_saveModel(model, str(out/'hand2_mug.mjb'))
+    reloaded = mujoco.MjModel.from_binary_path(str(out/'hand2_mug.mjb'))
+    reload_exact = all(np.array_equal(getattr(model, name), getattr(reloaded, name))
+        for name in ('qpos0', 'body_mass', 'body_ipos', 'body_inertia', 'body_iquat', 'geom_pos',
+                     'geom_quat', 'mesh_vert', 'pair_geom1', 'pair_geom2', 'pair_friction', 'pair_solref',
+                     'actuator_gainprm', 'actuator_biasprm', 'jnt_range'))
+    root_pose_error = float(max(np.max(np.abs(state.xpos[oid]-mapped[0, :3, 3])),
+        np.max(np.abs(state.xmat[oid].reshape(3, 3)-mapped[0, :3, :3]))))
+    native_com_error = float(np.max(np.abs(state.xipos[oid]-mapped_com[0])))
+    object_vertices = np.array([transform_points(np.linalg.inv(T), v)
+        for T, v in zip(data['objects'], fk['vertices'])])
+    object_landmarks = np.array([transform_points(np.linalg.inv(T), v)
+        for T, v in zip(data['objects'], fk['landmarks21'])])
+    np.savez_compressed(out/'reference61.npz', frame_ids=np.arange(47, 108), timestamps_ns=data['timestamps_ns'],
+        elapsed_s=(data['timestamps_ns']-data['timestamps_ns'][0])*1e-9,
+        joint_angles22_source_F64=data['angles22'], T_source_world_from_human_wrist_F64=data['wrist'],
+        T_source_world_from_object_BODY_F64=data['objects'], T_human_wrist_from_rest_palm=human_palm,
+        T_source_world_from_rest_palm=world_palm, T_human_wrist_from_object_BODY=wrist_object,
+        T_human_palm_from_object_BODY=palm_object, T_robot_world_from_object_BODY=mapped,
+        T_robot_root_from_robot_palm=robot['T_robot_root_from_robot_palm'],
+        T_robot_world_from_robot_palm=robot['T_world_from_robot_palm'],
+        hand_vertices_source_world_FP32=fk['vertices'], hand_vertices_object_BODY_F64=object_vertices,
+        hand_landmarks21_source_world_FP32=fk['landmarks21'], hand_landmarks21_object_BODY_F64=object_landmarks,
+        hand_vertices_human_wrist_FP32=local['vertices'], hand_triangles=fk['faces'][0],
+        object_COM_in_BODY_m=com, object_COM_source_world_m=source_com, object_COM_robot_world_m=mapped_com,
+        source_wrist_only_object_BODY=wrist_only_object, initial_qpos=state.qpos, initial_qvel=state.qvel,
+        initial_ctrl=state.ctrl, robot_bases_root_m=robot['bases_robot_root_m'])
+    binding.update(model=file_pin(out/'hand2_mug.mjb'), reference=file_pin(out/'reference61.npz'),
+        body_frame='original BOP9 model frame, no recenter', COM_model_m=com,
+        old_phone_checkpoint_compatible=False, neural_updates=0, integration_steps=0,
+        q0_object_native_contacts=contacts, initial_qpos_is_grasp=False,
+        gravity=dict(source_world=None, source_calibrated=False, simulator_world_m_s2=model.opt.gravity.tolist(),
+                     mapping_preserves_source_gravity=False, no_source_gravity_inference_from_object_orientation=True))
+    write(out/'binding.json', binding)
+    axes = np.array(profile['joint_rotation_axes']); limits = np.array(profile['joint_limits'])
+    joint_lengths = [np.linalg.norm(np.diff(np.array(profile['joint_rest_positions'])[i:i+4], axis=0), axis=1).tolist()
+                     for i in range(0, 20, 4)]
+    checks = dict(independent_numpy_FK_m_le_2e7=fk_error <= 2e-7 and landmark_error <= 2e-7,
+        wrist_equivariance_m_le_2e7=equivariance_error <= 2e-7, right_reflection_exact=reflection_exact,
+        right_triangle_winding_exact=winding_exact, unused_last2_preserved_not_robot_targets=unused_exact,
+        all61_raw_timestamps_preserved=np.array_equal(np.load(out/'reference61.npz')['timestamps_ns'], data['timestamps_ns']),
+        human_palm_proper=abs(np.linalg.det(human_palm[:3, :3])-1) < 1e-12,
+        relative_transform_reconstructs_source=relative_reconstruction_error < 1e-12,
+        fresh_robot_factory_unchanged=True, no_wrist_mocap_equality_or_object_gravcomp=model.neq == model.nmocap == 0 and model.body_gravcomp[oid] == 0,
+        object_BODY_COM_native_consistent=root_pose_error < 1e-12 and native_com_error < 1e-12,
+        full_compound_pair_coverage=binding['explicit_mug_pairs'] == 128*(len(binding['hand_collision_names'])+1),
+        MJB_saved_fields_byte_exact=reload_exact, CUDA_never_initialized=not torch.cuda.is_initialized())
+    report = dict(schema='supermimic_research.right_mug_annotation_frame_contract:1',
+        status='PASS_KINEMATIC_CONTRACT_NOT_GRASP' if all(checks.values()) else 'NUMERIC_CHECK_FAILED',
+        checks=checks, passed=sum(checks.values()), total=len(checks),
+        clip=file_pin(clip), source_revision=manifest['revision'], sources=sources,
+        frame_ids=list(range(47, 108)), frames=n, duration_s=(int(data['timestamps_ns'][-1])-int(data['timestamps_ns'][0]))*1e-9,
+        dt_ns_min_max=[int(np.diff(data['timestamps_ns']).min()), int(np.diff(data['timestamps_ns']).max())],
+        numeric=dict(independent_vertex_error_m=fk_error, independent_landmark_error_m=landmark_error,
+            wrist_equivariance_error_m=equivariance_error, relative_transform_error=relative_reconstruction_error,
+            native_BODY_pose_error=root_pose_error, native_COM_error_m=native_com_error),
+        profile=dict(angles=22, used_by_fixed_FK=20, vertices=fk['vertices'].shape[1], faces=fk['faces'].shape[1],
+            landmarks_raw=21, canonical=20, units='raw profile mm; official from_json x.001 once; angles rad; world m',
+            max_axis_unit_error=float(np.abs(np.linalg.norm(axes, axis=1)-1).max()),
+            within_digit_pivot_distances_mm=joint_lengths,
+            angle_outside_declared_limits_count=int(np.sum((data['angles22'] < limits[:, 0]) | (data['angles22'] > limits[:, 1]))),
+            limits_not_used_for_clamping=True, source_hand_scale=float(profile['hand_scale']),
+            hand_scale_not_applied_again=True),
+        frames_contract=dict(human_wrist_from_rest_palm=human_palm, robot=robot,
+            human_palm_origin_distance_from_wrist_m=float(np.linalg.norm(human_palm[:3, 3])),
+            robot_palm_origin_distance_from_root_m=float(np.linalg.norm(robot['T_robot_root_from_robot_palm'][:3, 3])),
+            human_base_ids=[8, 11, 14, 17], same_as_joint_rest_pivots=[4, 8, 12, 16],
+            rigid_unit_scale=True, wrist_rotation_only_mapping_valid=False,
+            source_gravity_known=False, kinematic_palm_mapping_is_executable_reference=False),
+        motion=dict(object_source_world=motion(data['objects']), human_wrist_source_world=motion(data['wrist']),
+            object_human_wrist=motion(wrist_object), object_human_palm=motion(palm_object),
+            object_robot_world_after_fixed_wrist=motion(mapped),
+            wrist_only_counterfactual_max_origin_motion_m=float(removed_component_m.max())),
+        outputs={k:file_pin(out/k) for k in ['raw_profile_and_poses.json', 'frame_identities.json',
+            'reference61.npz', 'binding.json', 'hand2_mug.mjb']},
+        q0_diagnostic=dict(mug_hand_or_table_contacts=len(contacts), minimum_contact_distance_m=min((c['distance_m'] for c in contacts), default=None),
+            source_hand_targets_have_not_been_fitted=True, no_holding_or_finger_fit_claim=True),
+        wall_s=time.perf_counter()-started, neural_updates=0, integration_steps=0, native_forward_calls=2,
+        scope='Source pose/hand-shape annotation FK and explicitly defined rest-palm alignment only. No RGB reconstruction, contact truth, calibration, IK, robot holding, world-model training, policy benefit or ego generalization.')
+    for pin in sources:
+        verify_file_pin(pin)
+    write(out/'report.json', report)
+    print(json.dumps(dict(report=file_pin(out/'report.json'), status=report['status'], checks=checks,
+        numeric=report['numeric'], motion=report['motion'], q0=report['q0_diagnostic'], wall_s=report['wall_s'])))
+    if not all(checks.values()):
+        raise RuntimeError('Retain failed stage; do not silently repair')
+
+
+if __name__ == '__main__':
+    p = argparse.ArgumentParser()
+    p.add_argument('--pilot-root', type=Path, required=True)
+    p.add_argument('--mug-asset', type=Path, required=True)
+    p.add_argument('--output', type=Path, required=True)
+    main(p.parse_args())

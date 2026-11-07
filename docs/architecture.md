@@ -42,6 +42,15 @@ layout contract, and cannot stand in for a trained Hand2 task. Multiple convex
 pieces must retain component identity and aggregate contacts consistently;
 the visual mesh is never enabled for collision.
 
+`ego/hand_frames.py` reads declared annotation windows and defines translated
+rigid rest-palm frames. Its pinned Apache-2.0 UmeTrack vendor only reconstructs
+human geometry; it does not provide robot joint targets. `assets/hand2_scene.py`
+composes the maintained Hand2 factory and checked compound mug through MjSpec,
+comparing actual named/body-local geometry identities instead of array prefixes.
+Its output is a new task layout, not a compatible phone checkpoint resume.
+`assets/proximity.py` caches an unsigned triangle query acceleration structure;
+source-surface proximity remains distinct from contact truth or solid clearance.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not

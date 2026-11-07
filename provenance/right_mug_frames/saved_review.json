@@ -1,0 +1,48 @@
+{
+  "schema": "right_mug_saved_reference_review:1",
+  "checks": {
+    "all_source_pins_and_saved_outputs_verified": true,
+    "all61_raw_pose_records_and_full22_angles_equal": true,
+    "timestamps_equal_actual_tar_and_not_stretched": true,
+    "fixed_palm_mapping_reconstructed": true,
+    "source_world_object_frame_geometry_roundtrip": true,
+    "robot_gains_limits_collision_shape_match_frozen_phone": true,
+    "exactly27q26v20u_no_aux": true,
+    "no_wrist_freejoint_or_body_gravity_compensation": true,
+    "all128_components_same_rigid_BODY": true,
+    "explicit2816_pair_coverage": true,
+    "all_pair_parameters_exact": true,
+    "visual_excluded": true,
+    "BODY_COM_distinguished": true,
+    "free_quaternion_unit": true,
+    "source_gravity_and_grasp_claim_remain_unknown": true
+  },
+  "passed": 15,
+  "total": 15,
+  "reference_report": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\report.json",
+    "bytes": 12614,
+    "sha256": "a45d6e5db4aa95d87c700c641e51e77fe00be779434f175f37b3f58bd77bda31"
+  },
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_right_mug_frames.py",
+    "bytes": 8936,
+    "sha256": "7dd362357712859872f92462a874a9a2541cf1019cfdf06cfe6e8799391d548b"
+  },
+  "frozen_robot_comparison": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hand2_holding_v1\\compiled_nominal_v2\\model.mjb",
+    "bytes": 18200660,
+    "sha256": "ff88ccc33fd1190328639925d82c6c11550b44dea67eec0f51c0a3cfd4339826"
+  },
+  "numerical": {
+    "map_error": 0.0,
+    "vertex_roundtrip_m": 1.1102230246251565e-16,
+    "COM_error_m": 2.7755575615628914e-17,
+    "root_error_m": 0.0
+  },
+  "native_model_loads": 2,
+  "native_forward_calls": 0,
+  "integration_steps": 0,
+  "neural_updates": 0,
+  "scope": "Independent saved JSON/array/MJB checks, not independent human reconstruction, source-gravity calibration, continuous collision, robot IK, holding, policy benefit or ego generalization."
+}

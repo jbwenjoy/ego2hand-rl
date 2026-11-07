@@ -1,0 +1,431 @@
+{
+  "schema": "supermimic_research.right_mug_annotation_frame_contract:1",
+  "status": "PASS_KINEMATIC_CONTRACT_NOT_GRASP",
+  "checks": {
+    "independent_numpy_FK_m_le_2e7": true,
+    "wrist_equivariance_m_le_2e7": true,
+    "right_reflection_exact": true,
+    "right_triangle_winding_exact": true,
+    "unused_last2_preserved_not_robot_targets": true,
+    "all61_raw_timestamps_preserved": true,
+    "human_palm_proper": true,
+    "relative_transform_reconstructs_source": true,
+    "fresh_robot_factory_unchanged": true,
+    "no_wrist_mocap_equality_or_object_gravcomp": true,
+    "object_BODY_COM_native_consistent": true,
+    "full_compound_pair_coverage": true,
+    "checked_standalone_asset_geometry_inertia_preserved": true,
+    "MJB_saved_fields_byte_exact": true,
+    "CUDA_never_initialized": true
+  },
+  "passed": 15,
+  "total": 15,
+  "clip": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\train_aria\\clip-001884.tar",
+    "bytes": 78817280,
+    "sha256": "caff82da79af5fc769a6fcfd15d06fc46e54f327b6429a0e3f0403c996a3ab9c"
+  },
+  "source_revision": "30fe9674782f32e1e5edba98476b6ff4300132c5",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\prepare_right_mug_reference.py",
+      "bytes": 16708,
+      "sha256": "59f2d257dadf77d9ce4451f408a0c8804776ce58cdc0ef3e26003fbea878c570"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\ego\\hand_frames.py",
+      "bytes": 8179,
+      "sha256": "d78f3cf3f310d633b5a3b225895c5defa06283cf8adab94ef794e1eb045f8cce"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\assets\\hand2_scene.py",
+      "bytes": 8366,
+      "sha256": "1106d035de7836e6648b5e8562199a57446cc09d36b3ba2d86ca4c273dd0da8d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\assets\\wuji_hand2.py",
+      "bytes": 18041,
+      "sha256": "91eed8ea9fc00f5663229359ca6b650552ff8fbd5f21d180648bb15b7ba98916"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\hand2_constants.py",
+      "bytes": 11958,
+      "sha256": "2a1a37a0c97f3bcab631006ac6e0dc47a1a63a92c7717ac4c6c712314ba35986"
+    },
+    {
+      "path": "D:\\workspace\\dex-supermimic-research\\packages\\wuji-description\\src\\wuji_description\\resources\\hand2\\hand2_2\\body\\mjcf\\right.xml",
+      "bytes": 26339,
+      "sha256": "2d3abb4ccdf33ba7e86c09904607971f764691f8e32657894df48a276719c7bc"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\mug_asset.xml",
+      "bytes": 35474,
+      "sha256": "5d6ef136dc56d5aff62f218f928222668572648fbb04fb0cb0f56eac0273ec42"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\asset_contract.json",
+      "bytes": 1222,
+      "sha256": "975a14ce6279669f48bd6c5699c4144ace8e2eb8ac59b1ab3672a1aa6144ccb4"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\physical_prior.json",
+      "bytes": 1621,
+      "sha256": "49c477a68ce517a75cb8580f4e5e0d8043a3b844bd6888c4c9e982d445636767"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\ego\\vendor_umetrack\\hand_models\\umetrack_hand_model.py",
+      "bytes": 4845,
+      "sha256": "960d3d45013842f165b8afac09b21c81bcb59c64f3813a3e46ee270598d139b5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\ego\\vendor_umetrack\\hand_models\\umetrack_skinning.py",
+      "bytes": 7690,
+      "sha256": "9b98423253decda0dd33207eb34cfa77c3f30c9565faf53ac09d07b349b0385b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\ego\\vendor_umetrack\\LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  ],
+  "frame_ids": [
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107
+  ],
+  "frames": 61,
+  "duration_s": 2.000004434,
+  "dt_ns_min_max": [
+    31726227,
+    35026450
+  ],
+  "numeric": {
+    "independent_vertex_error_m": 6.583581588226473e-08,
+    "independent_landmark_error_m": 5.5100009666020355e-08,
+    "wrist_equivariance_error_m": 7.689433872970497e-08,
+    "relative_transform_error": 2.688821387764051e-16,
+    "native_BODY_pose_error": 2.220446049250313e-16,
+    "native_COM_error_m": 0.0
+  },
+  "profile": {
+    "angles": 22,
+    "used_by_fixed_FK": 20,
+    "vertices": 788,
+    "faces": 1544,
+    "landmarks_raw": 21,
+    "canonical": 20,
+    "units": "raw profile mm; official from_json x.001 once; angles rad; world m",
+    "max_axis_unit_error": 2.8999409429353307e-08,
+    "within_digit_pivot_distances_mm": [
+      [
+        29.25676594635544,
+        37.49018784745598,
+        36.48956145702898
+      ],
+      [
+        0.0,
+        39.3278083264141,
+        26.879147209616356
+      ],
+      [
+        0.0,
+        44.8761070505575,
+        30.252083703612126
+      ],
+      [
+        0.0,
+        42.99028405314947,
+        28.362908239196482
+      ],
+      [
+        0.0,
+        34.16573870602893,
+        22.53493890657784
+      ]
+    ],
+    "angle_outside_declared_limits_count": 21,
+    "limits_not_used_for_clamping": true,
+    "source_hand_scale": 1.0,
+    "hand_scale_not_applied_again": true
+  },
+  "frames_contract": {
+    "human_wrist_from_rest_palm": [
+      [
+        -0.9971778133459175,
+        -0.07449113644770018,
+        -0.009353029529765492,
+        -0.08860571479797363
+      ],
+      [
+        -0.018250156631344244,
+        0.11967068029481312,
+        0.9926458885527647,
+        -0.0016216447576880455
+      ],
+      [
+        -0.07282403692178809,
+        0.990015150827757,
+        -0.12069242220581748,
+        -0.006470887899398804
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "robot": {
+      "T_world_from_robot_root": [
+        [
+          -5.551115123125783e-17,
+          -0.1736481776669302,
+          0.9848077530122082,
+          -0.028110361960901435
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.00300004
+        ],
+        [
+          0.0,
+          0.9848077530122082,
+          0.1736481776669302,
+          0.4952974018391883
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_robot_root_from_robot_palm": [
+        [
+          -0.09312230455679024,
+          0.9952336515081668,
+          -0.028951948116719327,
+          -0.006221210337499998
+        ],
+        [
+          -0.06269706501244465,
+          -0.034882089635855415,
+          -0.9974228380488694,
+          -0.004188595104500005
+        ],
+        [
+          -0.9936786776583553,
+          -0.09106711112337405,
+          0.0656465295258276,
+          -0.06638456910000001
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_world_from_robot_palm": [
+        [
+          -0.9676952346763912,
+          -0.08362638578024233,
+          0.2378498694259437,
+          -0.09275905838407505
+        ],
+        [
+          -0.09312230455679024,
+          0.9952336515081668,
+          -0.028951948116719327,
+          -0.003221170337499998
+        ],
+        [
+          -0.23429504727722428,
+          -0.05016579020662294,
+          -0.9708703437196484,
+          0.4796448814566283
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bases_robot_root_m": [
+        [
+          0.024917898700000003,
+          -0.003025547119999978,
+          -0.0692050191
+        ],
+        [
+          0.0033481573500000034,
+          -0.008003044700000022,
+          -0.07384671910000001
+        ],
+        [
+          -0.017612938399999997,
+          -0.005292622230000022,
+          -0.06600701910000002
+        ],
+        [
+          -0.035537959,
+          -0.0004331663679999956,
+          -0.056479519100000014
+        ]
+      ],
+      "base_joint_names": [
+        "right_finger2_joint1",
+        "right_finger3_joint1",
+        "right_finger4_joint1",
+        "right_finger5_joint1"
+      ],
+      "wrist_anchor": "right_palm_link body origin (renamed upstream r_wrist); not palm center",
+      "palm_convention": "origin mean four nonthumb joint1 anchors; +X distal,+Y radial,+Z=XcrossY at q=0"
+    },
+    "human_palm_origin_distance_from_wrist_m": 0.08885648438232613,
+    "robot_palm_origin_distance_from_root_m": 0.0668068769035459,
+    "human_base_ids": [
+      8,
+      11,
+      14,
+      17
+    ],
+    "same_as_joint_rest_pivots": [
+      4,
+      8,
+      12,
+      16
+    ],
+    "rigid_unit_scale": true,
+    "wrist_rotation_only_mapping_valid": false,
+    "source_gravity_known": false,
+    "kinematic_palm_mapping_is_executable_reference": false
+  },
+  "motion": {
+    "object_source_world": {
+      "max_translation_from_first_m": 0.06476451147878315,
+      "position_RMS_about_mean_m": 0.029877888659403034,
+      "max_rotation_from_first_deg": 19.16363805035807
+    },
+    "human_wrist_source_world": {
+      "max_translation_from_first_m": 0.06824149439945115,
+      "position_RMS_about_mean_m": 0.0344904775722476,
+      "max_rotation_from_first_deg": 18.829263732791837
+    },
+    "object_human_wrist": {
+      "max_translation_from_first_m": 0.010550492755075198,
+      "position_RMS_about_mean_m": 0.004646825065414098,
+      "max_rotation_from_first_deg": 3.568396835849691
+    },
+    "object_human_palm": {
+      "max_translation_from_first_m": 0.010550492755075178,
+      "position_RMS_about_mean_m": 0.004646825065414101,
+      "max_rotation_from_first_deg": 3.568396835849487
+    },
+    "object_robot_world_after_fixed_wrist": {
+      "max_translation_from_first_m": 0.010550492755075178,
+      "position_RMS_about_mean_m": 0.004646825065414101,
+      "max_rotation_from_first_deg": 3.568396835849487
+    },
+    "wrist_only_counterfactual_max_origin_motion_m": 0.0659155207629119
+  },
+  "outputs": {
+    "raw_profile_and_poses.json": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\raw_profile_and_poses.json",
+      "bytes": 512945,
+      "sha256": "138ee07e8c58519425b01d3ffcbb9a19803da4de367cbb3d69d0eb47a5a4e314"
+    },
+    "frame_identities.json": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\frame_identities.json",
+      "bytes": 16910,
+      "sha256": "fcf4840a9f439d8d821078c9e91856e4680ea8a3280a71f10aa8c65b121fd6c2"
+    },
+    "reference61.npz": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\reference61.npz",
+      "bytes": 2189390,
+      "sha256": "6809a1a29ec241e0b4776d9842d4022ffc54beba89e2521b58a0a5757a4aa1fd"
+    },
+    "binding.json": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+      "bytes": 3857,
+      "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+    },
+    "hand2_mug.mjb": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+      "bytes": 35965995,
+      "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+    }
+  },
+  "q0_diagnostic": {
+    "mug_hand_or_table_contacts": 0,
+    "minimum_contact_distance_m": null,
+    "source_hand_targets_have_not_been_fitted": true,
+    "no_holding_or_finger_fit_claim": true
+  },
+  "wall_s": 1.5959671000018716,
+  "neural_updates": 0,
+  "integration_steps": 0,
+  "native_forward_calls": 2,
+  "scope": "Source pose/hand-shape annotation FK and explicitly defined rest-palm alignment only. No RGB reconstruction, contact truth, calibration, IK, robot holding, world-model training, policy benefit or ego generalization."
+}

@@ -63,6 +63,10 @@ micro2保存的损失、梯度与网络状态精确一致；micro8通过事前�
 现有ego数据重新筛出右手持杯候选；128块杯子碰撞原型已通过9项数值检查及10项
 保存复核，仍是物体单体资产，未完成Hand2持握、参数标定或ego重定向。
 见[杯子资产与范围](docs/mug-asset-2026-11-08.md)和[方案v0.42](docs/research-plan-v0.42.md)。
+右手61帧的注释FK、含平移的掌部映射和新Hand2杯子场景现已建立，坐标/场景检查
+15/15、独立保存复核15/15、全库81项测试通过。固定腕后参考位移从世界64.8mm变为
+相对10.6mm；三指接近杯柄仅是几何候选，尚无机器人IK、手指适配、持握或策略收益。
+见[坐标与场景结果](docs/right-mug-frames-2026-11-08.md)及[后续方案v0.43](docs/research-plan-v0.43.md)。
 见[迁移与数据结果](docs/patch-migration-2026-11-08.md)、
 [方案v0.41](docs/research-plan-v0.41.md)和[此前初态搜索](docs/initialization-search-2026-11-08.md)。
 
