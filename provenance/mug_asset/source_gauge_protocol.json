@@ -1,0 +1,85 @@
+{
+  "schema": "supermimic_research.mug_gauge_protocol:1",
+  "mesh_report": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_mesh_v1\\report.json",
+    "bytes": 4794,
+    "sha256": "e6e76ae3f492fd59f38e60d4b14d8edc89b50e2c88b4960eee14e5a76b98a752"
+  },
+  "source_only_selection": true,
+  "radii_m": [
+    0.001,
+    0.003,
+    0.005
+  ],
+  "paths": {
+    "handle": {
+      "source_minimum_surface_distance_m": 0.006349424196912212,
+      "maximum_absolute_winding_descriptor": 1.9215851200508747e-16,
+      "source_corridors": {
+        "0.001": {
+          "minimum_numerical_margin_m": 0.0028494241969122093,
+          "clear": true
+        },
+        "0.003": {
+          "minimum_numerical_margin_m": 0.0008494241969122093,
+          "clear": true
+        },
+        "0.005": {
+          "minimum_numerical_margin_m": -0.0011505758030877907,
+          "clear": false
+        }
+      }
+    },
+    "cavity": {
+      "source_minimum_surface_distance_m": 0.012983041175765299,
+      "maximum_absolute_winding_descriptor": 9.442271710594816e-17,
+      "source_corridors": {
+        "0.001": {
+          "minimum_numerical_margin_m": 0.009483041175765297,
+          "clear": true
+        },
+        "0.003": {
+          "minimum_numerical_margin_m": 0.007483041175765299,
+          "clear": true
+        },
+        "0.005": {
+          "minimum_numerical_margin_m": 0.005483041175765297,
+          "clear": true
+        }
+      }
+    }
+  },
+  "raw": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_gauges_v1\\gauges.npz",
+    "bytes": 2737,
+    "sha256": "437c8b7cd5c5501b3263462a96b18219ae8d1c83bdc5005335e9b3c025cb4009"
+  },
+  "required_primary_radius_m": 0.001,
+  "sampled_error_limits_m": {
+    "source_outside_union_max": 0.0015,
+    "exposed_union_surface_to_source_max": 0.003
+  },
+  "counts": {
+    "handle_points": 29,
+    "cavity_points": 22,
+    "source_surface_controls": 3
+  },
+  "sources": {
+    "tools/prepare_mug_gauges.py": {
+      "path": "D:\\workspace\\supermimic-research\\tools\\prepare_mug_gauges.py",
+      "bytes": 2870,
+      "sha256": "91a09d8fb1a88e71b96db50810fa89e910bb22229eb7ebbd4020606283075f74"
+    },
+    "src/supermimic_research/assets/mesh.py": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\assets\\mesh.py",
+      "bytes": 4579,
+      "sha256": "a6986ce2f069e4a18e4187183582f20675d7587bb95f5b3a0854f4f39c6227de"
+    },
+    "src/supermimic_research/assets/validation.py": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\assets\\validation.py",
+      "bytes": 1599,
+      "sha256": "18a8a70603a4e5c35f7306aa957fb323f46c83fb4bc798236001a5656137d524"
+    }
+  },
+  "scope": "Gauges chosen from original BOP sections. Source distance/winding and finite clear tubes are numerical descriptors, not true material/contact or finger-fit guarantees. Future decomposition/native tests must preserve primary1mm corridors and3mm source-surface controls. No fitting or dynamics."
+}

@@ -1,0 +1,382 @@
+{
+  "schema": "supermimic_research.mug_asset_milestone:1",
+  "parent_commit": "f4aaab5",
+  "frozen_learning_runtime_commit": "9b38f97",
+  "source_mesh": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\object_models\\obj_000009.glb",
+    "bytes": 12213696,
+    "sha256": "26b2884fa61a9b9870ae089de04ea9bccdf8eb8e1467bdd185e7d514ae259195"
+  },
+  "source_frame_bake": {
+    "nodes": [
+      {
+        "node": "Cup_White",
+        "geometry": "GLTF",
+        "transform_to_model": [
+          [
+            0.0010000000474974513,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0010000000474974513,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0010000000474974513,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "determinant": 1.0000001424923577e-09,
+        "vertices": 17848,
+        "faces": 31606,
+        "vertex_offset": 0
+      }
+    ],
+    "bounds_model_m": [
+      [
+        -0.06757294785065593,
+        -0.00017795712601003516,
+        -0.04297248662970654
+      ],
+      [
+        0.04856191102849072,
+        0.09137829260927877,
+        0.04783925474416639
+      ]
+    ],
+    "bounds_error_m": 0.0,
+    "policy": "Apply each node transform once; original model origin retained, no extra unit scale."
+  },
+  "source_nonmanifold_edges_after_exact_weld": 7,
+  "decomposition_calls": 3,
+  "completed_decompositions": 2,
+  "timed_out_decompositions": 1,
+  "final_parts": 128,
+  "final_backend_concavity_threshold_not_certified": true,
+  "first_prototype_checks": [
+    7,
+    9
+  ],
+  "final_prototype_checks": [
+    9,
+    9
+  ],
+  "saved_review": [
+    10,
+    10
+  ],
+  "unit_tests": 75,
+  "artifact_registry_verified": 8,
+  "sampled_geometry": {
+    "source_samples": 1024,
+    "source_samples_outside_union": 0,
+    "source_outside_max_m": 0.0,
+    "source_outside_RMS_m": 0.0,
+    "exposed_face_samples": 1024,
+    "exposed_surface_to_source_max_m": 0.0021830572843594374,
+    "exposed_surface_to_source_RMS_m": 0.0004351969002124647,
+    "scope": "Finite deterministic source vertices/face centroids and exposed piece-face centroids, exterior1um classification. Not global Hausdorff/volume error or ground-truth material accuracy."
+  },
+  "physical_prior": {
+    "mass_kg": 0.25,
+    "COM_model_m": [
+      0.0001595010567835079,
+      0.0460088521095544,
+      0.0024517102606233326
+    ],
+    "inertia_model_kg_m2": [
+      [
+        0.0003569985533750749,
+        8.367366747904921e-06,
+        6.743869691938224e-07
+      ],
+      [
+        8.367366747904921e-06,
+        0.0003912868905423879,
+        -6.709374055709407e-07
+      ],
+      [
+        6.743869691938224e-07,
+        -6.709374055709407e-07,
+        0.0004002906086752097
+      ]
+    ],
+    "principal_values_kg_m2": [
+      0.0003550511956145469,
+      0.0003931844437517528,
+      0.0004003404132263725
+    ],
+    "surface_area_m2": 0.05198701344427007,
+    "model": "Uniform triangle-area lamina prior, exact triangle second moments; not measured material density/mass/COM/inertia. Source volume unused."
+  },
+  "contact_time_prior_s": 0.002,
+  "drop_metrics": [
+    {
+      "final_COM_world_m": [
+        0.00016945886589536717,
+        -0.002230993747549642,
+        0.04639525616570541
+      ],
+      "tail_vCOM_RMS_m_s": 7.609217540366656e-08,
+      "tail_omega_RMS_rad_s": 5.772572484985174e-07,
+      "tail_mean_table_normal_N": 2.452499737798852,
+      "maximum_native_penetration_m": 0.0007865756948522516,
+      "warning_count": 0
+    },
+    {
+      "final_COM_world_m": [
+        0.0001818854083229236,
+        -0.002245297874343367,
+        0.04639525616730253
+      ],
+      "tail_vCOM_RMS_m_s": 7.604652047715253e-08,
+      "tail_omega_RMS_rad_s": 5.772701184832846e-07,
+      "tail_mean_table_normal_N": 2.452499737805754,
+      "maximum_native_penetration_m": 0.0008584380278126797,
+      "warning_count": 0
+    }
+  ],
+  "dt_pair": {
+    "final_COM_difference_m": 1.8948007811768053e-05,
+    "final_orientation_difference_rad": 0.0006965970421555091,
+    "quaternion_normalization": "Descriptor only; no state repair"
+  },
+  "native_primary_void_and_surface_controls_pass": true,
+  "total_drop_steps_this_stage": 76800,
+  "final_object_only_native_layout": {
+    "nq": 7,
+    "nv": 6,
+    "nu": 0
+  },
+  "Hand2_loaded": false,
+  "calibrated": false,
+  "robot_holding_qualified": false,
+  "ego_retargeting_qualified": false,
+  "new_neural_training": false,
+  "new_checkpoint": false,
+  "goal_complete": false,
+  "goal_status": "active",
+  "next_plan": "docs/research-plan-v0.42.md",
+  "numerical_review_scope": "Independent saved POST COM/velocity reconstruction, integer clock/unit-quaternion checks, tail load/settle and endpoint consistency; MJB loaded in research interpreter. Does not independently recompute native penetration, contact forces or all geometry distances.",
+  "source_snapshots_scope": "Executed timeout/64-part/20ms source copies retained. Active shared code has explicit recipe/contact parameters, not separate study implementations.",
+  "retained": [
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v1\\intent.json",
+      "retained_path": "provenance/mug_asset/decomposition_v1_intent.json",
+      "bytes": 1840,
+      "sha256": "9985d9f8b124c3ae39d702da2ba621d796ab3fea9733b2aa40459d843ef8d914"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v1\\terminal.json",
+      "retained_path": "provenance/mug_asset/decomposition_v1_terminal.json",
+      "bytes": 178,
+      "sha256": "44009425a56d59332d6bfa44d027c244ef0629611a4d456d5deaad488e2ed376"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v1\\worker.log",
+      "retained_path": "provenance/mug_asset/decomposition_v1_worker.log",
+      "bytes": 4361,
+      "sha256": "e4922484d3c7ac95808529c56d5ed9e4d287464cfa9cb19c4ba72f9e82ad2d1b"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v1\\executed_tool.py",
+      "retained_path": "provenance/mug_asset/decomposition_v1_source.py",
+      "bytes": 5507,
+      "sha256": "97eab58e6be8973e5b67ab6d8acfbd35c1c78830643c1247a73ce3087e5dfa99"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v2\\intent.json",
+      "retained_path": "provenance/mug_asset/decomposition_v2_intent.json",
+      "bytes": 1838,
+      "sha256": "5c51793a3ef19495db64a92f8388aeb602870b8d20c5ecfe3ffe40f5dd11ef8e"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v2\\terminal.json",
+      "retained_path": "provenance/mug_asset/decomposition_v2_terminal.json",
+      "bytes": 180,
+      "sha256": "aed041096dd9bf64a501a44af656edab38178b9a01f1d614c6d80cdc6550adfc"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v2\\worker.log",
+      "retained_path": "provenance/mug_asset/decomposition_v2_worker.log",
+      "bytes": 13641,
+      "sha256": "bcac15ba57e2b331e396039da79fe7e5f6c3e5716163324fddb80250ef19c403"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v2\\report.json",
+      "retained_path": "provenance/mug_asset/decomposition_v2_report.json",
+      "bytes": 24309,
+      "sha256": "b673c8e17cd167a94bd3fe4a13307e30f2dff68f6b70d73e00b77e7495bd8037"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v2\\executed_tool.py",
+      "retained_path": "provenance/mug_asset/decomposition_v2_source.py",
+      "bytes": 5756,
+      "sha256": "06487be73364d92fd13aed850f5363d0a537ede290d47e17f2293bb0b249a970"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v3\\intent.json",
+      "retained_path": "provenance/mug_asset/decomposition_v3_intent.json",
+      "bytes": 1839,
+      "sha256": "90066a2640a3b5d653929e4c98b5b61a66406d4d983fc4391c937d7964dff7e5"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v3\\terminal.json",
+      "retained_path": "provenance/mug_asset/decomposition_v3_terminal.json",
+      "bytes": 179,
+      "sha256": "b7b2914edd9c716e9e252bedd1f2cf5535321e88bd8a54ea10adc7507d242c1b"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v3\\worker.log",
+      "retained_path": "provenance/mug_asset/decomposition_v3_worker.log",
+      "bytes": 13644,
+      "sha256": "ca999f50c926f70d327e30b36a6c6e04a26d883ddcc0b55ab9d77f6929f4ab38"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v3\\report.json",
+      "retained_path": "provenance/mug_asset/decomposition_v3_report.json",
+      "bytes": 47020,
+      "sha256": "bd38c17408d056cf2c39e753534be5049412520fddb78cf143cdf2fd359d8c1c"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v1\\intent.json",
+      "retained_path": "provenance/mug_asset/validation_v1_intent.json",
+      "bytes": 2071,
+      "sha256": "577d959c94a8ead9d84db76d5b6d3efefd4ad507fd29a8af5ddb1fd61a5bdb72"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v1\\report.json",
+      "retained_path": "provenance/mug_asset/validation_v1_report.json",
+      "bytes": 42087,
+      "sha256": "95482b862e5443428c405697ed1d90ef4cd94044478dcce43945534053f01477"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\intent.json",
+      "retained_path": "provenance/mug_asset/validation_v2_intent.json",
+      "bytes": 2105,
+      "sha256": "e5d07805c64dbaccc63b284f95ea8d633daa881a1278291ddd92e42d8e770360"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\report.json",
+      "retained_path": "provenance/mug_asset/validation_v2_report.json",
+      "bytes": 43909,
+      "sha256": "6ad6ef4aa0a77ca1f4a115b1394864f09dccdde79428e1b008f63c33a06e645e"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_mesh_v1\\report.json",
+      "retained_path": "provenance/mug_asset/mesh_report.json",
+      "bytes": 4794,
+      "sha256": "e6e76ae3f492fd59f38e60d4b14d8edc89b50e2c88b4960eee14e5a76b98a752"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_mesh_v1\\source_sections.png",
+      "retained_path": "provenance/mug_asset/source_sections.png",
+      "bytes": 176324,
+      "sha256": "b371a240a8fd03eddc3622de864cf4b274faccbd4b2bc62f54827cf44c809e09"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_mesh_v1\\compound128_sections.png",
+      "retained_path": "provenance/mug_asset/compound128_sections.png",
+      "bytes": 223934,
+      "sha256": "5cd51cd3f6755ab5b143126710455761ee46a9f8310525a1996be5f1d7b8226d"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_gauges_v1\\protocol.json",
+      "retained_path": "provenance/mug_asset/source_gauge_protocol.json",
+      "bytes": 3073,
+      "sha256": "74865405786ac8110e283c1b22146f63b7f58433ee214a82a6b3bfb70a9d0f2e"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_prior_v1\\intent.json",
+      "retained_path": "provenance/mug_asset/contact_prior_intent.json",
+      "bytes": 1506,
+      "sha256": "c6c3fd3f35bb970bec07ffea7c8c56f47e62f3278e07558a4074ed8118a4d785"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_prior_v1\\report.json",
+      "retained_path": "provenance/mug_asset/contact_prior_report.json",
+      "bytes": 6559,
+      "sha256": "d7621f91abf3c27a225c44bcc56a1fa3833bddb1d8b083f83bd13e7806c7d025"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v1\\executed_tool.py",
+      "retained_path": "provenance/mug_asset/validation_v1_source.py",
+      "bytes": 12417,
+      "sha256": "cf039280a101a1bc694000a89c864f270f75e5cb194ab14648fa74aa1b15da64"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v1\\executed_compound.py",
+      "retained_path": "provenance/mug_asset/compound_v1_source.py",
+      "bytes": 2988,
+      "sha256": "9ebc3f6cd4843f071220fea1c4fa1fd094bd29d1a777b2f8869d9d46d62fe849"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\physical_prior.json",
+      "retained_path": "provenance/mug_asset/physical_prior.json",
+      "bytes": 1621,
+      "sha256": "49c477a68ce517a75cb8580f4e5e0d8043a3b844bd6888c4c9e982d445636767"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\asset_contract.json",
+      "retained_path": "provenance/mug_asset/asset_contract.json",
+      "bytes": 1222,
+      "sha256": "975a14ce6279669f48bd6c5699c4144ace8e2eb8ac59b1ab3672a1aa6144ccb4"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\artifacts.toml",
+      "retained_path": "provenance/mug_asset/artifacts.toml",
+      "bytes": 1978,
+      "sha256": "2c2fe46f9b2bb11322198d8b395fd992bcabd68a3423b85701538f795f8e100b"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\mug_asset.xml",
+      "retained_path": "provenance/mug_asset/mug_asset.xml",
+      "bytes": 35474,
+      "sha256": "5d6ef136dc56d5aff62f218f928222668572648fbb04fb0cb0f56eac0273ec42"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\drop_scene.xml",
+      "retained_path": "provenance/mug_asset/drop_scene.xml",
+      "bytes": 54743,
+      "sha256": "8f7b80669c0c19745b468f2a09a1922bc2ccd91f43c86002b35e01f477c708dc"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_saved_review_v1\\report.json",
+      "retained_path": "provenance/mug_asset/saved_review.json",
+      "bytes": 2208,
+      "sha256": "60463adc68b15af3a520c319ca782aa6bdd17e66414cf0f3b7d962557457fdf7"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_requirements.txt",
+      "retained_path": "provenance/mug_asset/asset_environment.txt",
+      "bytes": 359,
+      "sha256": "c7d7430d21916c0851e92c27f169fb55e6c86c4169d04b0449105e705ddc60ea"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_full_tests.log",
+      "retained_path": "provenance/mug_asset/unit_tests.log",
+      "bytes": 11931,
+      "sha256": "0c99440fd7d33cdab16fa9c17b77745add31f11c40114e82092fc4c45f75e0c9"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\freeze_mug_asset.py",
+      "retained_path": "provenance/mug_asset/freeze_milestone.py",
+      "bytes": 7514,
+      "sha256": "bdac0241450b3882ba1d181a8f7a76a41b3764cae77b7dd048da9d34743bff3c"
+    }
+  ],
+  "binary_rule": "Original GLB, OBJ, component/state NPZ and native MJB remain under external pilot/runs and are SHA-pinned. Archived XML/index copies are evidence; runtime index is in runs/mug_asset_validation_v2.",
+  "unmeasured_prior_rule": "Surface geometry does not identify mass/COM/inertia/friction/compliance. No global geometric-error or real hardware accuracy certificate."
+}

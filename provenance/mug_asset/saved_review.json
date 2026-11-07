@@ -1,0 +1,60 @@
+{
+  "schema": "supermimic_research.mug_asset_saved_review:1",
+  "asset_report": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_asset_validation_v2\\report.json",
+    "bytes": 43909,
+    "sha256": "6ad6ef4aa0a77ca1f4a115b1394864f09dccdde79428e1b008f63c33a06e645e"
+  },
+  "mesh_report": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_mesh_v1\\report.json",
+    "bytes": 4794,
+    "sha256": "e6e76ae3f492fd59f38e60d4b14d8edc89b50e2c88b4960eee14e5a76b98a752"
+  },
+  "auditor": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_asset.py",
+    "bytes": 4856,
+    "sha256": "27c245e405efaa78a0a293e01bfc89dbde03e56897a2d69f5f841fe9632a3b69"
+  },
+  "checks": {
+    "0.0003125_COM_velocity_frames": true,
+    "0.0003125_integer_clock_and_raw_quaternion": true,
+    "0.0003125_settle_and_load": true,
+    "0.00015625_COM_velocity_frames": true,
+    "0.00015625_integer_clock_and_raw_quaternion": true,
+    "0.00015625_settle_and_load": true,
+    "drop_dt_endpoint_consistency": true,
+    "research_environment_binary_load": true,
+    "visual_and_aid_excluded": true,
+    "no_neural_execution": true
+  },
+  "passed": 10,
+  "total": 10,
+  "traces": [
+    {
+      "dt_s": 0.0003125,
+      "rows": 6400,
+      "maximum_frame_reconstruction_error": 0.0
+    },
+    {
+      "dt_s": 0.00015625,
+      "rows": 12800,
+      "maximum_frame_reconstruction_error": 0.0
+    }
+  ],
+  "dt_pair": {
+    "final_COM_difference_m": 1.8948007811768053e-05,
+    "final_orientation_difference_rad": 0.0006965970421555091,
+    "quaternion_normalization": "Descriptor only; no state repair"
+  },
+  "interpreter": "D:\\workspace\\dex-supermimic-research\\.venv\\Scripts\\python.exe",
+  "native_version": "3.11.0",
+  "counts": {
+    "binary_model_reads": 1,
+    "MjData": 0,
+    "forward": 0,
+    "integration_steps": 0,
+    "NN_FW": 0,
+    "GPU_calls": 0
+  },
+  "scope": "Independent saved POST COM/velocity reconstruction, integer clock/unit-quaternion checks, tail load/settle and endpoint consistency; MJB loaded in research interpreter. Does not independently recompute native penetration, contact forces or all geometry distances."
+}

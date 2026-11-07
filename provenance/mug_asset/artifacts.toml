@@ -1,0 +1,57 @@
+schema = 1
+
+[roots]
+research = "../.."
+ego = "../../../ego-data-pilot-2026-11-07"
+
+[relocations]
+"D:/workspace/supermimic-research" = "research"
+"D:/workspace/ego-data-pilot-2026-11-07" = "ego"
+
+[artifacts.mug9_model]
+root = "research"
+path = "runs/mug_asset_validation_v2/mug_asset.mjb"
+role = "numerical_object_only_asset_not_robot_task"
+sha256 = "1812bc314c4aeb2702c792c541e58b0c3a98ec1db7c99ed899772a7b4c4b6514"
+
+[artifacts.mug9_contract]
+root = "research"
+path = "runs/mug_asset_validation_v2/asset_contract.json"
+role = "explicit_frame_layout_contract"
+sha256 = "975a14ce6279669f48bd6c5699c4144ace8e2eb8ac59b1ab3672a1aa6144ccb4"
+
+[artifacts.mug9_physical_prior]
+root = "research"
+path = "runs/mug_asset_validation_v2/physical_prior.json"
+role = "unmeasured_nominal_prior_not_calibration"
+sha256 = "49c477a68ce517a75cb8580f4e5e0d8043a3b844bd6888c4c9e982d445636767"
+
+[artifacts.mug9_components]
+root = "research"
+path = "runs/mug_decomposition_v3/components.npz"
+role = "model_frame_convex_union_geometry"
+sha256 = "816dafd45efc708cfec543533eabc67a831f54a79c32b29535b0993dcb7b9c85"
+
+[artifacts.mug9_mesh_report]
+root = "research"
+path = "runs/mug_mesh_v1/report.json"
+role = "source_geometry_and_frames"
+sha256 = "e6e76ae3f492fd59f38e60d4b14d8edc89b50e2c88b4960eee14e5a76b98a752"
+
+[artifacts.mug9_validation]
+root = "research"
+path = "runs/mug_asset_validation_v2/report.json"
+role = "scoped_numerical_asset_checks"
+sha256 = "6ad6ef4aa0a77ca1f4a115b1394864f09dccdde79428e1b008f63c33a06e645e"
+
+[artifacts.mug9_drop_scene]
+root = "research"
+path = "runs/mug_asset_validation_v2/drop_scene.xml"
+role = "isolated_object_table_fixture_not_holding"
+sha256 = "8f7b80669c0c19745b468f2a09a1922bc2ccd91f43c86002b35e01f477c708dc"
+
+[artifacts.mug9_source_glb]
+root = "ego"
+path = "hot3d/object_models/obj_000009.glb"
+role = "original_known_object_mesh"
+sha256 = "26b2884fa61a9b9870ae089de04ea9bccdf8eb8e1467bdd185e7d514ae259195"

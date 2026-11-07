@@ -1,0 +1,162 @@
+{
+  "schema": "supermimic_research.mug_mesh_intake:1",
+  "object_bop_id": 9,
+  "revision": "30fe9674782f32e1e5edba98476b6ff4300132c5",
+  "source": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\object_models\\obj_000009.glb",
+    "bytes": 12213696,
+    "sha256": "26b2884fa61a9b9870ae089de04ea9bccdf8eb8e1467bdd185e7d514ae259195"
+  },
+  "models_info": {
+    "path": "D:\\workspace\\ego-data-pilot-2026-11-07\\hot3d\\object_models\\models_info.json",
+    "bytes": 29485,
+    "sha256": "351e1b25a250606fa4b7500f5aeb800b55050bf1c638d05ceb464f8ddfb32e2b"
+  },
+  "bake": {
+    "nodes": [
+      {
+        "node": "Cup_White",
+        "geometry": "GLTF",
+        "transform_to_model": [
+          [
+            0.0010000000474974513,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0010000000474974513,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0010000000474974513,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "determinant": 1.0000001424923577e-09,
+        "vertices": 17848,
+        "faces": 31606,
+        "vertex_offset": 0
+      }
+    ],
+    "bounds_model_m": [
+      [
+        -0.06757294785065593,
+        -0.00017795712601003516,
+        -0.04297248662970654
+      ],
+      [
+        0.04856191102849072,
+        0.09137829260927877,
+        0.04783925474416639
+      ]
+    ],
+    "bounds_error_m": 0.0,
+    "policy": "Apply each node transform once; original model origin retained, no extra unit scale."
+  },
+  "source_topology": {
+    "vertices": 17848,
+    "faces": 31606,
+    "boundary_edges": 4094,
+    "nonmanifold_edges": 5,
+    "degenerate_triangles": 0,
+    "watertight": false,
+    "winding_consistent": true,
+    "euler": 3,
+    "signed_volume_descriptor_m3": 0.00011436895599271294,
+    "volume_not_used_for_inertia": true
+  },
+  "exact_weld_topology": {
+    "vertices": 15803,
+    "faces": 31606,
+    "boundary_edges": 0,
+    "nonmanifold_edges": 7,
+    "degenerate_triangles": 0,
+    "watertight": false,
+    "winding_consistent": true,
+    "euler": 7,
+    "signed_volume_descriptor_m3": 0.00011436895599271294,
+    "volume_not_used_for_inertia": true
+  },
+  "exact_weld_surface_changed": false,
+  "physical_prior": {
+    "mass_kg": 0.25,
+    "COM_model_m": [
+      0.0001595010567835079,
+      0.0460088521095544,
+      0.0024517102606233326
+    ],
+    "inertia_model_kg_m2": [
+      [
+        0.0003569985533750749,
+        8.367366747904921e-06,
+        6.743869691938224e-07
+      ],
+      [
+        8.367366747904921e-06,
+        0.0003912868905423879,
+        -6.709374055709407e-07
+      ],
+      [
+        6.743869691938224e-07,
+        -6.709374055709407e-07,
+        0.0004002906086752097
+      ]
+    ],
+    "principal_values_kg_m2": [
+      0.0003550511956145469,
+      0.0003931844437517528,
+      0.0004003404132263725
+    ],
+    "surface_area_m2": 0.05198701344427007,
+    "model": "Uniform triangle-area lamina prior, exact triangle second moments; not measured material density/mass/COM/inertia. Source volume unused."
+  },
+  "unmeasured_ranges": {
+    "mass_kg": [
+      0.15,
+      0.5
+    ],
+    "hand_sliding_friction": [
+      0.3,
+      1.0
+    ]
+  },
+  "raw": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_mesh_v1\\source_mesh.npz",
+    "bytes": 938853,
+    "sha256": "1a4415318329951e58cf966df5c7713be9fdfd32fcfe5bac919bb8be35e6e415"
+  },
+  "visual": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_mesh_v1\\visual_model_m.obj",
+    "bytes": 1746950,
+    "sha256": "6293290514fcf7a539a0135695a3a49e26b079586dd35618d25804065994ce8a"
+  },
+  "working": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_mesh_v1\\working_exact_weld_m.obj",
+    "bytes": 1607818,
+    "sha256": "219cd08522cf560aa7ef39dbf881f030acecfb38c328f1e74b242715a495b74d"
+  },
+  "sources": {
+    "tool": {
+      "path": "D:\\workspace\\supermimic-research\\tools\\prepare_mug_mesh.py",
+      "bytes": 3068,
+      "sha256": "a81dd2133ebc304262b018a7dc5ed01fe4a862d36d294af92e17437e252251ae"
+    },
+    "mesh_module": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\assets\\mesh.py",
+      "bytes": 4579,
+      "sha256": "a6986ce2f069e4a18e4187183582f20675d7587bb95f5b3a0854f4f39c6227de"
+    }
+  },
+  "scope": "Source geometry in original BOP model frame; no hole filling/repair/recentering, collider/native solve/NN/learning. Inertial and friction values are declared exploratory assumptions, not data-derived calibration."
+}

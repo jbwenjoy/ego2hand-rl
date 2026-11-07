@@ -34,6 +34,14 @@ joint origin in BODY axes; it must not be confused with the WM's moving-COM
 wrench labels. A mechanically proposed pose is not an Actor-compatible task
 until its reference/observation/memory bundle has explicitly been rebuilt.
 
+`src/supermimic_research/assets` owns explicit source-frame baking, surface
+inertial priors, compound XML and geometry validation primitives. Asset CPU
+dependencies live in `.venv-assets`; the frozen research environment is not
+reinstalled. A checked object-only asset has its own artifact manifest and
+layout contract, and cannot stand in for a trained Hand2 task. Multiple convex
+pieces must retain component identity and aggregate contacts consistently;
+the visual mesh is never enabled for collision.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not

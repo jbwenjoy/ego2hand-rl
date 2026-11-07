@@ -1,0 +1,56 @@
+{
+  "schema": "supermimic_research.object_physical_prior:1",
+  "object_bop_id": 9,
+  "mass_kg": 0.25,
+  "COM_model_m": [
+    0.0001595010567835079,
+    0.0460088521095544,
+    0.0024517102606233326
+  ],
+  "inertia_model_kg_m2": [
+    [
+      0.0003569985533750749,
+      8.367366747904921e-06,
+      6.743869691938224e-07
+    ],
+    [
+      8.367366747904921e-06,
+      0.0003912868905423879,
+      -6.709374055709407e-07
+    ],
+    [
+      6.743869691938224e-07,
+      -6.709374055709407e-07,
+      0.0004002906086752097
+    ]
+  ],
+  "principal_values_kg_m2": [
+    0.0003550511956145469,
+    0.0003931844437517528,
+    0.0004003404132263725
+  ],
+  "surface_area_m2": 0.05198701344427007,
+  "model": "Uniform triangle-area lamina prior, exact triangle second moments; not measured material density/mass/COM/inertia. Source volume unused.",
+  "measured": false,
+  "unmeasured_ranges": {
+    "mass_kg": [
+      0.15,
+      0.5
+    ],
+    "hand_sliding_friction": [
+      0.3,
+      1.0
+    ]
+  },
+  "nominal_object_geom_sliding_mu": 0.7,
+  "nominal_explicit_table_pair_sliding_mu": 0.6,
+  "condim": 3,
+  "contact_time_prior_s": 0.002,
+  "contact_damping_ratio": 1.0,
+  "source_mesh_report": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_mesh_v1\\report.json",
+    "bytes": 4794,
+    "sha256": "e6e76ae3f492fd59f38e60d4b14d8edc89b50e2c88b4960eee14e5a76b98a752"
+  },
+  "scope": "Exploratory surface-lamina inertia/mass/friction/compliance prior, not identified physical parameters. Composed Hand2 pairs must declare their actual mixing/override rules."
+}
