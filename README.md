@@ -12,6 +12,7 @@ micro2保存的损失、梯度与网络状态精确一致；micro8通过事前�
 |---|---|
 |`src/supermimic_research/runtime`|state58、SO(3)、动量、结构化解码、几何、任务、原生读取与评测|
 |`src/supermimic_research/learning`|世界模型、Actor 想象、共享更新逻辑、数据读取和离线入口|
+|`src/supermimic_research/mechanics`|独立CPU初态提议、原生静态受力评分和完整凸体几何检查|
 |`src/chord_study`、`src/dex_supermimic`|唯一维护的 CHORD 与 Dex 源码包，保留原 namespace/NOTICE|
 |`configs`|实验参数、数据角色和外部资产索引|
 |`archive/studies`|24 个旧目录的源码、配置与文档快照；只作档案|
@@ -54,6 +55,11 @@ micro2保存的损失、梯度与网络状态精确一致；micro8通过事前�
 的1.962 N；这是局部静态数值结果，并非动态无解证明。下一步先搜索同时满足
 力/力矩与驱动力约束的新初态。见[诊断结果](docs/control-authority-2026-11-08.md)
 和[方案v0.39](docs/research-plan-v0.39.md)，本轮没有新增学习或检查点。
+
+首轮受力约束初态搜索已执行：两个候选均通过初始22/189几何检查，但四次双步长
+动态案例仍失持。局部优化停滞，尚无可用新初态；进一步诊断指向力矩和接触布局，
+下一步改变接触位置后重新验证。见[搜索结果](docs/initialization-search-2026-11-08.md)
+和[方案v0.40](docs/research-plan-v0.40.md)。新机械工具在公共`mechanics`模块维护。
 
 ## 已验证的迁移范围
 

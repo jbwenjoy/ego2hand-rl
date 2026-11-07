@@ -25,6 +25,15 @@ snapshots. `src/dex_supermimic` preserves the upstream namespace and notices;
 the current phone task uses its Actor/Critic/normalizers, not the old PenMDP
 state chart.
 
+`src/supermimic_research/mechanics` is the maintained CPU initialization and
+collision qualification implementation. It owns explicit model/data inputs,
+uses ordinary imports, and has no dependency on old study Python paths. Its
+new proposal-source closure is recorded separately from the frozen online300
+runtime closure. Native reset generalized rotational force is about the free
+joint origin in BODY axes; it must not be confused with the WM's moving-COM
+wrench labels. A mechanically proposed pose is not an Actor-compatible task
+until its reference/observation/memory bundle has explicitly been rebuilt.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not

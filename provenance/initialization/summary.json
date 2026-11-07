@@ -1,0 +1,372 @@
+{
+  "schema": "supermimic_research.initialization_milestone:1",
+  "frozen_runtime_commit": "9b38f97",
+  "search_integrity": [
+    8,
+    8
+  ],
+  "saved_review": [
+    10,
+    10
+  ],
+  "unit_tests": 62,
+  "native_counts": {
+    "MJB_reads": 1,
+    "MjData": 6,
+    "initial_forward": 6,
+    "integration_steps": 3508,
+    "contact_force_reads": 3375,
+    "controller_calls": 41,
+    "controller_receipt_reads": 82,
+    "NN_FW": 0,
+    "learning_updates": 0,
+    "GPU_calls": 0
+  },
+  "static_counts": {
+    "MjData": 1,
+    "static_forward": 919,
+    "resetData": 919,
+    "contact_force_reads": 2685,
+    "finite_difference_columns": 874,
+    "integration_steps": 0,
+    "NN_FW": 0,
+    "GPU_calls": 0
+  },
+  "review_static_counts": {
+    "MjData": 1,
+    "static_forward": 3,
+    "resetData": 3,
+    "contact_force_reads": 9,
+    "finite_difference_columns": 0,
+    "integration_steps": 0,
+    "NN_FW": 0,
+    "GPU_calls": 0
+  },
+  "original_zero_cases": 2,
+  "candidates": 2,
+  "candidate_native_cases": 4,
+  "qualified_candidates": [],
+  "new_task_bundles": 0,
+  "new_learning_stage_started": false,
+  "new_checkpoint": false,
+  "candidate_summary": [
+    {
+      "name": "seed0_force_aware_initialization",
+      "calls": 518,
+      "stop": {
+        "kind": "optimizer_returned",
+        "status": 3,
+        "message": "`xtol` termination condition is satisfied.",
+        "nfev": 24
+      },
+      "cost": 166.93707841971704,
+      "geometry_pass": true,
+      "initial_vertical_net_force_N": -0.8333750623685829
+    },
+    {
+      "name": "seed1_force_aware_initialization",
+      "calls": 398,
+      "stop": {
+        "kind": "optimizer_returned",
+        "status": 3,
+        "message": "`xtol` termination condition is satisfied.",
+        "nfev": 18
+      },
+      "cost": 122.49352164344741,
+      "geometry_pass": true,
+      "initial_vertical_net_force_N": -0.733541073798196
+    }
+  ],
+  "relocation_and_moment_free_plan": [
+    {
+      "dt_s": 0.0003125,
+      "domain": "steady_residual_scale",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      },
+      "moment_free_force_bound": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "witness": {
+          "maximum_vertical_force_N": 4.608703277332639,
+          "force_world_N": [
+            8.497975380469775e-18,
+            3.8034921793414865e-17,
+            4.608703277332639
+          ],
+          "unconstrained_moment_about_original_COM_Nm": [
+            -0.3130336614933106,
+            0.025484890774975816,
+            -0.0035903618595815854
+          ],
+          "ray_coefficients_N": [
+            0.0,
+            0.050661313566162616,
+            0.0,
+            0.0,
+            0.0,
+            0.05450699169468321,
+            0.0,
+            1.932930862855252,
+            0.0,
+            1.8340221809399928,
+            0.04135513531420663,
+            0.0
+          ],
+          "minimum_relaxed_torque_margin_Nm": 0.0
+        }
+      }
+    },
+    {
+      "dt_s": 0.0003125,
+      "domain": "full_actuator_target_range_analytical_only",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      },
+      "moment_free_force_bound": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "witness": {
+          "maximum_vertical_force_N": 11.879610034795146,
+          "force_world_N": [
+            -4.05799126831651e-16,
+            -1.3615428774079444e-16,
+            11.879610034795144
+          ],
+          "unconstrained_moment_about_original_COM_Nm": [
+            -0.8230001970066912,
+            0.06507831915548216,
+            -0.006373004628267581
+          ],
+          "ray_coefficients_N": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.07872258519444794,
+            0.0,
+            4.428975289119111,
+            0.0,
+            5.26480889823469,
+            0.08453985595155353,
+            0.0
+          ],
+          "minimum_relaxed_torque_margin_Nm": 0.0
+        }
+      }
+    },
+    {
+      "dt_s": 0.00015625,
+      "domain": "steady_residual_scale",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      },
+      "moment_free_force_bound": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "witness": {
+          "maximum_vertical_force_N": 4.608703277332639,
+          "force_world_N": [
+            8.497975380469775e-18,
+            3.8034921793414865e-17,
+            4.608703277332639
+          ],
+          "unconstrained_moment_about_original_COM_Nm": [
+            -0.3130336614933106,
+            0.025484890774975816,
+            -0.0035903618595815854
+          ],
+          "ray_coefficients_N": [
+            0.0,
+            0.050661313566162616,
+            0.0,
+            0.0,
+            0.0,
+            0.05450699169468321,
+            0.0,
+            1.932930862855252,
+            0.0,
+            1.8340221809399928,
+            0.04135513531420663,
+            0.0
+          ],
+          "minimum_relaxed_torque_margin_Nm": 0.0
+        }
+      }
+    },
+    {
+      "dt_s": 0.00015625,
+      "domain": "full_actuator_target_range_analytical_only",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      },
+      "moment_free_force_bound": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "witness": {
+          "maximum_vertical_force_N": 11.879610034795146,
+          "force_world_N": [
+            -4.05799126831651e-16,
+            -1.3615428774079444e-16,
+            11.879610034795144
+          ],
+          "unconstrained_moment_about_original_COM_Nm": [
+            -0.8230001970066912,
+            0.06507831915548216,
+            -0.006373004628267581
+          ],
+          "ray_coefficients_N": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.07872258519444794,
+            0.0,
+            4.428975289119111,
+            0.0,
+            5.26480889823469,
+            0.08453985595155353,
+            0.0
+          ],
+          "minimum_relaxed_torque_margin_Nm": 0.0
+        }
+      }
+    }
+  ],
+  "goal_complete": false,
+  "goal_status": "active",
+  "data_role": "NO_FITTING_INITIALIZATION_DEVELOPMENT",
+  "policy_benefit_qualified": false,
+  "conclusion": "Both initial geometries pass but all four native cases fail. Local score minimization stalls; relaxed fixed-pocket COM relocation fails, while dropping object moment permits sufficient upward force. Next stage must change contact patches/lever arms, not claim global impossibility or train on this failed initializer.",
+  "next_plan": "docs/research-plan-v0.40.md",
+  "retained": [
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\intent.json",
+      "retained_path": "provenance/initialization/search_intent.json",
+      "bytes": 15122,
+      "sha256": "b34617cd53a729a226f46dcb9845df42eda9a8d92002e4dbae597afa0fe17d74"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\report.json",
+      "retained_path": "provenance/initialization/search_report.json",
+      "bytes": 114782,
+      "sha256": "3c04f56e4c0581e00bb4827244a257201e0d49cb0a46d0c1970bc2335fb05803"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\terminal.json",
+      "retained_path": "provenance/initialization/search_terminal.json",
+      "bytes": 364,
+      "sha256": "cbf9973efd3963f570b74d808a0db19c3a359d38ee76ad2f74797bff72753c09"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\zero_barrier.json",
+      "retained_path": "provenance/initialization/zero_barrier.json",
+      "bytes": 2444,
+      "sha256": "512c1c54375a06b15f277930ed63d72f61563a92f4b324589c49a12d04a55b9f"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\search_seeds.json",
+      "retained_path": "provenance/initialization/search_seeds.json",
+      "bytes": 10720,
+      "sha256": "6695a3fcf2124b43a190dcd6c5c3da747e5ad45eb891f19e64822b89a2f7d0e0"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_review_v1\\report.json",
+      "retained_path": "provenance/initialization/saved_review.json",
+      "bytes": 2254,
+      "sha256": "569d38c490e103490f19295fa57055ddce73324c734d706da3aec192631baf03"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\relaxed_COM_relocation_v1\\report.json",
+      "retained_path": "provenance/initialization/relaxed_COM_plan_v1_historical.json",
+      "bytes": 2591,
+      "sha256": "036e0978e5a6c2d7d9ee8f227136d27590dfacce391a3752abeb1c2f5c41246e"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\relaxed_COM_relocation_v1\\planner_source.py",
+      "retained_path": "provenance/initialization/relaxed_COM_planner_v1_historical.py",
+      "bytes": 5218,
+      "sha256": "2289e1f5f840c83da3c5ba2bd7115be69dfd9802a7941953e11be5eb0b7695ee"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\relaxed_COM_relocation_v2\\report.json",
+      "retained_path": "provenance/initialization/relaxed_COM_plan_v2.json",
+      "bytes": 6575,
+      "sha256": "dc1a15110aa7b4c8450977e24ebde7ce9a431e063a88389714f65a68d2d5df03"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_full_tests.log",
+      "retained_path": "provenance/initialization/unit_tests.log",
+      "bytes": 9906,
+      "sha256": "9ea747e381887ac813fe43dcc72bf286be97b0e5227007b1dba9e9e93fb92698"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\protocols\\phone_online_resume1.toml",
+      "retained_path": "provenance/initialization/reproduction_input_configuration.toml",
+      "bytes": 1416,
+      "sha256": "b67598bf50a675e729d830d862fd2d500340c26384983f9803ff2583230e4dc3"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\freeze_initialization.py",
+      "retained_path": "provenance/initialization/freeze_milestone.py",
+      "bytes": 6610,
+      "sha256": "d687b877ba73f7058419aff88c8fc466d6899e8ba6791bc70ee8f0eb1ac8ca89"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\search_seed0\\candidate.json",
+      "retained_path": "provenance/initialization/seed0_candidate.json",
+      "bytes": 3564,
+      "sha256": "a48f94ec08cac4f8a963d62126e3f98590fda3bd678ec823cc9495ebc447fb1c"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\search_seed0\\geometry.json",
+      "retained_path": "provenance/initialization/seed0_geometry.json",
+      "bytes": 60312,
+      "sha256": "848c2dcd8c07e63c0fcc668d1ad8db9086e3c28138f671e95832a9d86bb487b4"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\search_seed0\\reference_deviation.json",
+      "retained_path": "provenance/initialization/seed0_reference_deviation.json",
+      "bytes": 1498,
+      "sha256": "b086c569a95d82bc3616a0d12d53ccf75f82142508737ef0cbea76777b7d12c3"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\search_seed1\\candidate.json",
+      "retained_path": "provenance/initialization/seed1_candidate.json",
+      "bytes": 3541,
+      "sha256": "f8dcb3f95635372722e4e9287b03425125d54e5e84020bee49ffc1841f61be52"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\search_seed1\\geometry.json",
+      "retained_path": "provenance/initialization/seed1_geometry.json",
+      "bytes": 60315,
+      "sha256": "9c21e5c1b6c2a5d61e0d8a2ca53392f08a343200ee61902f98ad4280064c1e12"
+    },
+    {
+      "original_path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\search_seed1\\reference_deviation.json",
+      "retained_path": "provenance/initialization/seed1_reference_deviation.json",
+      "bytes": 1500,
+      "sha256": "a714968e392547245880f3ddf08f8a07da842e1f8a3376b900c0040e5f59ce5d"
+    }
+  ],
+  "external_rule": "Raw NPZ states/traces and all916 proposal rows stay under runs and retain their declared no-fitting role; pins are in retained reports.",
+  "reproduction_configuration_scope": "Post-completion copy of the actual commanded configuration, also pinned through the prior authority intent; not a newly authored contemporaneous search intent."
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "supermimic_research.relaxed_COM_relocation:1",
+  "sources": {
+    "planner": {
+      "path": "D:\\workspace\\supermimic-research\\tools\\plan_com_relocation.py",
+      "bytes": 5218,
+      "sha256": "2289e1f5f840c83da3c5ba2bd7115be69dfd9802a7941953e11be5eb0b7695ee"
+    },
+    "torque": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\contact_torque_box_v1\\report.json",
+      "bytes": 9065,
+      "sha256": "d8d906acc604e4939735c9ba3b6f77298dd9cd3d49622589bf3f74aff7bf9ec1"
+    },
+    "authority_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\control_authority_review_v3\\report.json",
+      "bytes": 114900,
+      "sha256": "087828f6a9b481b384000396b1c1a0235939856103cbf61c1e6312cc6b2c5665"
+    }
+  },
+  "records": [
+    {
+      "dt_s": 0.0003125,
+      "domain": "steady_residual_scale",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      }
+    },
+    {
+      "dt_s": 0.0003125,
+      "domain": "full_actuator_target_range_analytical_only",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      }
+    },
+    {
+      "dt_s": 0.00015625,
+      "domain": "steady_residual_scale",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      }
+    },
+    {
+      "dt_s": 0.00015625,
+      "domain": "full_actuator_target_range_analytical_only",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      }
+    }
+  ],
+  "LP_calls": 4,
+  "native_forward": 0,
+  "integration_steps": 0,
+  "NN_FW": 0,
+  "GPU_calls": 0,
+  "role": "NO_FITTING_RELAXED_COM_RELOCATION_PLAN",
+  "scope": "Frozen original hand/contact points/normals/Jacobians. Native pyramid and actual torque limits with freely varied dry friction; object COM translated independently of its collider. Minimum horizontal Linf within an inscribed16-gon of35mm. Numerical proposal only; no reachable-pose/geometry/native-force/holding certificate and no global lower bound over moving contacts."
+}

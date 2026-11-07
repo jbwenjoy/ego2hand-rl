@@ -13,6 +13,7 @@ dependencies = ["numpy>=2,<2.5"]
 [project.optional-dependencies]
 learning = ["torch>=2.7"]
 native = ["mujoco~=3.11.0"]
+mechanics = ["mujoco~=3.11.0", "scipy>=1.13,<2"]
 
 [project.scripts]
 supermimic-research = "supermimic_research.cli:main"

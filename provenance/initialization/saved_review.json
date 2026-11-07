@@ -1,0 +1,61 @@
+{
+  "schema": "supermimic_research.initialization_saved_review:1",
+  "report": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\initialization_search_v1\\report.json",
+    "bytes": 114782,
+    "sha256": "3c04f56e4c0581e00bb4827244a257201e0d49cb0a46d0c1970bc2335fb05803"
+  },
+  "auditor": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_initialization.py",
+    "bytes": 8000,
+    "sha256": "8cfc852fa9d6f63011cfef6bfb19fcb2425e3ea33f9e7273ac386f707f0006e6"
+  },
+  "checks": {
+    "all_search_rows_and_score_selection": true,
+    "six_constant_legal_native_controls": true,
+    "six_original_metrics_gates_missing_tails": true,
+    "saved_native_step_and_command_counts": true,
+    "both_original_zero_traces_raw": true,
+    "fresh_selected_static_all_arrays_and_scores": true,
+    "fresh_full_geometry_and_reference_deviation": true,
+    "actual_inertia_times_acceleration_matches_net": true,
+    "unchanged_nominal_model": true,
+    "no_dynamic_or_neural_execution": true
+  },
+  "passed": 10,
+  "total": 10,
+  "fresh_static_counts": {
+    "MjData": 1,
+    "static_forward": 3,
+    "resetData": 3,
+    "contact_force_reads": 9,
+    "finite_difference_columns": 0,
+    "integration_steps": 0,
+    "NN_FW": 0,
+    "GPU_calls": 0
+  },
+  "model_reads": 1,
+  "matrix_vector_reads": 2,
+  "replays": [
+    {
+      "name": "seed0_force_aware_initialization",
+      "all_static_arrays_raw_equal": true,
+      "score_matches": true,
+      "full_geometry_matches": true,
+      "inertia_times_acceleration_error": 6.661338147750939e-16,
+      "reference_deviation_matches": true
+    },
+    {
+      "name": "seed1_force_aware_initialization",
+      "all_static_arrays_raw_equal": true,
+      "score_matches": true,
+      "full_geometry_matches": true,
+      "inertia_times_acceleration_error": 5.750608322863116e-16,
+      "reference_deviation_matches": true
+    }
+  ],
+  "NN_FW": 0,
+  "learning_updates": 0,
+  "GPU_calls": 0,
+  "scope": "Saved full proposal-selection/control/gate audit plus three reset forwards, two independent inertia relations and fresh full convex geometry; no integration or fitting. Shared native reset code is replayed, not an independent contact solver."
+}

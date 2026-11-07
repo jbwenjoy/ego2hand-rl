@@ -1,0 +1,201 @@
+{
+  "schema": "supermimic_research.relaxed_COM_relocation:1",
+  "sources": {
+    "planner": {
+      "path": "D:\\workspace\\supermimic-research\\tools\\plan_com_relocation.py",
+      "bytes": 6530,
+      "sha256": "2627654f16c6460f6eba5b49fa6c8b2ab8923fa835c74ec4470fefc4865eb72e"
+    },
+    "torque": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\contact_torque_box_v1\\report.json",
+      "bytes": 9065,
+      "sha256": "d8d906acc604e4939735c9ba3b6f77298dd9cd3d49622589bf3f74aff7bf9ec1"
+    },
+    "authority_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\control_authority_review_v3\\report.json",
+      "bytes": 114900,
+      "sha256": "087828f6a9b481b384000396b1c1a0235939856103cbf61c1e6312cc6b2c5665"
+    }
+  },
+  "records": [
+    {
+      "dt_s": 0.0003125,
+      "domain": "steady_residual_scale",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      },
+      "moment_free_force_bound": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "witness": {
+          "maximum_vertical_force_N": 4.608703277332639,
+          "force_world_N": [
+            8.497975380469775e-18,
+            3.8034921793414865e-17,
+            4.608703277332639
+          ],
+          "unconstrained_moment_about_original_COM_Nm": [
+            -0.3130336614933106,
+            0.025484890774975816,
+            -0.0035903618595815854
+          ],
+          "ray_coefficients_N": [
+            0.0,
+            0.050661313566162616,
+            0.0,
+            0.0,
+            0.0,
+            0.05450699169468321,
+            0.0,
+            1.932930862855252,
+            0.0,
+            1.8340221809399928,
+            0.04135513531420663,
+            0.0
+          ],
+          "minimum_relaxed_torque_margin_Nm": 0.0
+        }
+      }
+    },
+    {
+      "dt_s": 0.0003125,
+      "domain": "full_actuator_target_range_analytical_only",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      },
+      "moment_free_force_bound": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "witness": {
+          "maximum_vertical_force_N": 11.879610034795146,
+          "force_world_N": [
+            -4.05799126831651e-16,
+            -1.3615428774079444e-16,
+            11.879610034795144
+          ],
+          "unconstrained_moment_about_original_COM_Nm": [
+            -0.8230001970066912,
+            0.06507831915548216,
+            -0.006373004628267581
+          ],
+          "ray_coefficients_N": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.07872258519444794,
+            0.0,
+            4.428975289119111,
+            0.0,
+            5.26480889823469,
+            0.08453985595155353,
+            0.0
+          ],
+          "minimum_relaxed_torque_margin_Nm": 0.0
+        }
+      }
+    },
+    {
+      "dt_s": 0.00015625,
+      "domain": "steady_residual_scale",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      },
+      "moment_free_force_bound": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "witness": {
+          "maximum_vertical_force_N": 4.608703277332639,
+          "force_world_N": [
+            8.497975380469775e-18,
+            3.8034921793414865e-17,
+            4.608703277332639
+          ],
+          "unconstrained_moment_about_original_COM_Nm": [
+            -0.3130336614933106,
+            0.025484890774975816,
+            -0.0035903618595815854
+          ],
+          "ray_coefficients_N": [
+            0.0,
+            0.050661313566162616,
+            0.0,
+            0.0,
+            0.0,
+            0.05450699169468321,
+            0.0,
+            1.932930862855252,
+            0.0,
+            1.8340221809399928,
+            0.04135513531420663,
+            0.0
+          ],
+          "minimum_relaxed_torque_margin_Nm": 0.0
+        }
+      }
+    },
+    {
+      "dt_s": 0.00015625,
+      "domain": "full_actuator_target_range_analytical_only",
+      "answer": {
+        "success": false,
+        "status": 2,
+        "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+        "witness": null
+      },
+      "moment_free_force_bound": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "witness": {
+          "maximum_vertical_force_N": 11.879610034795146,
+          "force_world_N": [
+            -4.05799126831651e-16,
+            -1.3615428774079444e-16,
+            11.879610034795144
+          ],
+          "unconstrained_moment_about_original_COM_Nm": [
+            -0.8230001970066912,
+            0.06507831915548216,
+            -0.006373004628267581
+          ],
+          "ray_coefficients_N": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.07872258519444794,
+            0.0,
+            4.428975289119111,
+            0.0,
+            5.26480889823469,
+            0.08453985595155353,
+            0.0
+          ],
+          "minimum_relaxed_torque_margin_Nm": 0.0
+        }
+      }
+    }
+  ],
+  "LP_calls": 8,
+  "native_forward": 0,
+  "integration_steps": 0,
+  "NN_FW": 0,
+  "GPU_calls": 0,
+  "role": "NO_FITTING_RELAXED_COM_RELOCATION_PLAN",
+  "scope": "Frozen original hand/contact points/normals/Jacobians. Native pyramid and actual torque limits with freely varied dry friction; object COM translated independently of its collider. Minimum horizontal Linf within an inscribed16-gon of35mm; additional force bound drops all object moment balance. Numerical proposal only; no reachable-pose/geometry/native-force/holding certificate and no global lower bound over moving contacts."
+}
