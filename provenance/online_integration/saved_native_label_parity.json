@@ -1,0 +1,115 @@
+{
+  "schema": "shared_native_collection_saved_NumPy_parity:1",
+  "passed": 5,
+  "total": 5,
+  "successful": true,
+  "measurements": [
+    {
+      "test": "exclusive_fsync_saved_writer",
+      "partial_NaNs_preserved": true,
+      "no_overwrite": true
+    },
+    {
+      "test": "saved_TRAIN_canonical_row",
+      "sample_id": 0,
+      "dt_s": 0.0003125,
+      "complete": true,
+      "boundary_task_loss": false,
+      "all_fields_exact": true,
+      "fields": 49
+    },
+    {
+      "test": "saved_TRAIN_canonical_row",
+      "sample_id": 6,
+      "dt_s": 0.0003125,
+      "complete": true,
+      "boundary_task_loss": true,
+      "all_fields_exact": true,
+      "fields": 49
+    },
+    {
+      "test": "saved_TRAIN_canonical_row",
+      "sample_id": 7,
+      "dt_s": 0.00015625,
+      "complete": true,
+      "boundary_task_loss": false,
+      "all_fields_exact": true,
+      "fields": 49
+    },
+    {
+      "test": "fixed_plan_and_ABI",
+      "profiles": 4,
+      "axes": 20,
+      "intervals": 20,
+      "planned_episodes": 16,
+      "maximum_native_steps": 30720
+    },
+    {
+      "test": "frozen_math_and_persistence_AST",
+      "equal_functions_or_classes": 20,
+      "names": [
+        "need",
+        "bits",
+        "close",
+        "require_array",
+        "receipt",
+        "observed_window",
+        "canonical_row",
+        "analytic_tripod_semantic_fixture",
+        "decode_window",
+        "need",
+        "pin",
+        "sha",
+        "same",
+        "clean",
+        "write",
+        "save",
+        "tensor_arrays",
+        "receipt_meta",
+        "PersistentRawSink",
+        "stack_rows"
+      ]
+    },
+    {
+      "test": "saved_prefix_only_no_new_H_receipt_claim",
+      "actual_saved_prefix_ticks": 63,
+      "simultaneous_coverage_not_marginal_product": true
+    }
+  ],
+  "source_pins": {
+    "native_collection.py": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\native_collection.py",
+      "bytes": 23259,
+      "sha256": "5898a7cf765a05a9369f8726608cd1d0ed199be4a985be1f65a1721996ed7d4f"
+    },
+    "native_labels.py": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\native_labels.py",
+      "bytes": 17870,
+      "sha256": "6090aecdfe18f3719cad03c995b57a8fd26c9f93e69b0483145754cabf767c27"
+    },
+    "persistence.py": {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\persistence.py",
+      "bytes": 4706,
+      "sha256": "2c0989abb2121b1c548ef8d6c987eaddae325eb60f01a2daea957f7cb93d40db"
+    }
+  },
+  "test_source": {
+    "path": "D:\\workspace\\supermimic-research\\tests\\test_native_collection.py",
+    "bytes": 8971,
+    "sha256": "f6ed3ab6b0f35e042b4db22d0da5780984da066b7db189c38583883cf5f15931"
+  },
+  "scope": {
+    "fixed_old_TRAIN_rows": 3,
+    "saved_prefix_window": 1,
+    "actual_collection_rounds": 0,
+    "checkpoint_loads": 0,
+    "NN_constructors": 0,
+    "NN_forward": 0,
+    "native_model_loads": 0,
+    "native_FK_forward_steps": 0,
+    "Tensor_AD_training_optimizer_GPU_calls": 0,
+    "legacy_spec_load_only_in_validation": true
+  },
+  "failures": [],
+  "errors": []
+}

@@ -25,7 +25,25 @@ def main(argv: list[str] | None = None) -> int:
     train_parser = commands.add_parser("train", help="One shared offline driver; inspect is the default")
     train_parser.add_argument("--config", type=Path, default=root / "configs" / "phone_offline.toml")
     train_parser.add_argument("--mode", choices=["inspect", "smoke", "run"], default="inspect")
+    online_parser = commands.add_parser("online", help="Matched native collection/update experiment")
+    online_parser.add_argument("--config", type=Path, default=root / "configs" / "phone_online_gpu.toml")
+    online_parser.add_argument("--mode", choices=["inspect", "run"], default="inspect")
+    collection_parser = commands.add_parser("collect-online", help="Isolated CPU collection worker")
+    collection_parser.add_argument("--protocol", type=Path, required=True)
+    collection_parser.add_argument("--run", action="store_true")
     args = parser.parse_args(argv)
+    if args.command == "online":
+        if args.mode == "inspect":
+            from .learning.online_contract import inspect
+            result = inspect(args.config)
+        else:
+            from .learning.online_runner import train
+            result = train(args.config)
+        print(json.dumps(result, indent=2)); return 0
+    if args.command == "collect-online":
+        from .learning import collection_worker
+        result = collection_worker.run(args.protocol) if args.run else collection_worker.inspect(args.protocol)
+        print(json.dumps(result, indent=2)); return 0
     if args.command == "train":
         from .learning import runner
         action = {"inspect": runner.inspect, "smoke": runner.smoke, "run": runner.train}[args.mode]

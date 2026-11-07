@@ -36,7 +36,10 @@ def configuration(path):
     if c.get('schema')!=1:raise ValueError('Offline driver config schema1')
     registry=ArtifactRegistry((path.parent/c['artifacts']['manifest']).resolve(),local=(path.parent/c['artifacts']['local']).resolve() if c['artifacts'].get('local') else None)
     if bool(c['training'].get('resume_artifact'))!=bool(c['training'].get('resume_health')):raise ValueError('Own resume requires checkpoint and health registry keys')
-    if c['sampling']['tripod_WM_rows']+c['sampling']['old_WM_rows']!=c['sampling']['WM_batch']:raise ValueError('Explicit WM source mixture')
+    if 'online' in c:
+        mixture=sum(c['online'][key] for key in ['WM_online_rows','WM_old_original_rows','WM_old_tripod_rows'])
+    else:mixture=c['sampling']['tripod_WM_rows']+c['sampling']['old_WM_rows']
+    if mixture!=c['sampling']['WM_batch']:raise ValueError('Explicit WM source mixture')
     for key in ['updates','first_checkpoint','horizon','microbatch','cpu_threads']:
         if type(c['training'][key]) is not int or c['training'][key]<1:raise ValueError('Positive integer training '+key)
     if type(c['training']['common_WM_updates']) is not int or c['training']['common_WM_updates']<0 or c['training']['first_checkpoint']>c['training']['updates']:raise ValueError('Common/first/total update budget')
@@ -93,7 +96,7 @@ def _task(registry,c,mode,geometry):
     path=registry.resolve(c['artifacts']['task']);bundle=json.loads(path.read_text(encoding='utf8'))
     return IM.CanonicalMemoryTask(PhoneTask(path,mode=mode,geometry=geometry,reference_arrays_path=registry.resolve_pin(bundle['reference_arrays']),support_basis_path=registry.resolve_pin(bundle['basis'])))
 
-def _setup(config_path,*,smoke_only):
+def _setup(config_path,*,smoke_only,warm_validator=None):
     path,c,r=configuration(config_path);device='cpu' if smoke_only else c['training']['device']
     if device=='cpu':os.environ['CUDA_VISIBLE_DEVICES']='-1'
     import torch
@@ -106,6 +109,7 @@ def _setup(config_path,*,smoke_only):
     warmname=c['artifacts']['warmstart']
     if 'parity' in r.entries[warmname].role.lower() and not smoke_only:raise ValueError('Parity checkpoint is not a training recipe choice')
     warm_manifest=r.resolve(warmname);record=json.loads(warm_manifest.read_text(encoding='utf8'));ckpath=r.resolve_pin(record['checkpoint']);ck=torch.load(ckpath,map_location='cpu',weights_only=False)
+    if warm_validator is not None:warm_validator(ck)
     if ck['schema']=='phone_geometry_momentum_counterfactual_WM_checkpoint:1':
         if ck['iteration']!=5000:raise ValueError('Warmstart must use declared fixed5000')
         weights=ck['model_state'];norm=ck['normalizers'];physical=ck['physical_context'];policy_states=None
@@ -124,7 +128,7 @@ def _setup(config_path,*,smoke_only):
         ni=torch.randint(len(new['x']),(c['sampling']['tripod_WM_rows'],),generator=generator,device='cpu').numpy();oi=torch.randint(len(old['x']),(c['sampling']['old_WM_rows'],),generator=generator,device='cpu').numpy()
         new=_subset(new,ni);old=_subset(old,oi)
     new_t,newscope=data.prepare_physical_rows(new,geometry,physical,device=device,chunk_rows=cfg.geometry_chunk_rows);old_t,oldscope=data.prepare_physical_rows(old,geometry,physical,device=device,chunk_rows=cfg.geometry_chunk_rows)
-    return dict(path=path,c=c,registry=r,torch=torch,device=device,dataset=dataset,new=new_t,old=old_t,model=model,norm=norm,physical=physical,arms=arms,tasks=tasks,generator=generator,geometry=geometry,starting_checkpoint=file_pin(ckpath),policy_warmstart=policy_states is not None,cache=dict(new=newscope,old=oldscope),old_selection=oldreceipt)
+    return dict(path=path,c=c,registry=r,torch=torch,device=device,dataset=dataset,new=new_t,old=old_t,model=model,norm=norm,physical=physical,arms=arms,tasks=tasks,generator=generator,geometry=geometry,starting_checkpoint=file_pin(ckpath),policy_warmstart=policy_states is not None,warm_loss_scales=WM.move_tensors(ck['WM_loss_scales'],device) if 'WM_loss_scales' in ck else None,cache=dict(new=newscope,old=oldscope),old_selection=oldreceipt)
 
 def smoke(config_path):
     s=_setup(config_path,smoke_only=True);torch=s['torch'];model=s['model'];dataset=s['dataset'];d=dataset.canonical
@@ -147,20 +151,18 @@ def _mixed_scales(new,old):
     return dict(head=scale(new['head'],old['head'],WM.physical_floors()),velocity=scale(new['y'][:,52:58]-new['x'][:,52:58],old['y'][:,52:58]-old['x'][:,52:58],[.01,.01,.01,.1,.1,.1]))
 
 def _health(path,context,optimizers,gradients,counts,probeF,probeO):
-    s=context;torch=s['torch'];rng=WM.capture_rng(device=s['device']);model=s['model'];arms=s['arms']
-    with torch.no_grad():expected={'WM':model(probeF)}|{m+key:a[key](probeO) for m,a in arms.items() for key in ['actor','critic']}
-    ck=torch.load(path,map_location='cpu',weights_only=False)
-    with torch.random.fork_rng(devices=[] if s['device']=='cpu' else [torch.device(s['device']).index]):clone=WM.make_model(WM.WorldModelConfig(hidden=tuple(s['c']['model']['hidden'])),device=s['device'])
-    clone.load_state_dict(ck['shared_WM']);restored={}
-    for mode in MODES:
-        a=IM.make_fresh_actor_critic(seed=s['c']['training']['seed'],device=s['device']);a['actor'].load_state_dict(ck['arms'][mode]['stateactor']);a['critic'].load_state_dict(ck['arms'][mode]['statecritic']);restored[mode]=a
-    with torch.no_grad():actual={'WM':clone(probeF)}|{m+key:a[key](probeO) for m,a in restored.items() for key in ['actor','critic']}
-    checks=dict(restored_predictions=all(WM.raw_tree_equal(expected[k],actual[k]) and torch.isfinite(actual[k]).all() for k in expected),all_networks_and_norms=WM.raw_tree_equal(ck['shared_WM'],model.state_dict()) and WM.raw_tree_equal(ck['arms'],U.arm_states(arms)),all_optimizers=all(WM.raw_tree_equal(ck['optimizers'][k],o.state_dict()) for k,o in optimizers.items()),saved_gradients=WM.raw_tree_equal(ck['gradient_snapshots'],gradients),frozen_normalizers=WM.raw_tree_equal(ck['normalizers'],s['norm']),loss_scales=WM.raw_tree_equal(ck['loss_scales'],s['scales']),physical_context=WM.raw_tree_equal(ck['physical_context'],s['physical']),sample_generator=WM.raw_tree_equal(ck['sample_generator'],s['generator'].get_state()),log_prefix=_log_prefix_valid(ck['log_prefix']) and all(_log_prefix_valid(v) for v in ck['parent_log_prefixes']),saved_RNG=WM.raw_tree_equal(ck['RNG'],rng),raw_RNG_unchanged=WM.raw_tree_equal(rng,WM.capture_rng(device=s['device'])),configuration_and_bindings=ck['configuration']==s['c'] and ck['provenance']==s['provenance'],counters=ck['counts']==counts and _counts_valid(counts,ck['update'],s['c']),all_Adam_steps=all(len(o.state)==(6 if k=='WM' else 8 if k.endswith('Actor') else 10) and all(float(v['step'])==(counts['WM_updates'] if k=='WM' else counts['paired_updates']) and torch.isfinite(v['exp_avg']).all() and torch.isfinite(v['exp_avg_sq']).all() for v in o.state.values()) for k,o in optimizers.items()))
-    if not all(checks.values()):raise ValueError('Checkpoint health failed; preserve files, no retry')
-    return dict(schema='supermimic_research.offline_checkpoint_health:1',checks={k:bool(v) for k,v in checks.items()},passed=sum(bool(v) for v in checks.values()),total=len(checks),counts=counts.copy(),extra_NN_FW=10,extra_NN_constructors=5,own_CPU_checkpoint_reads=1)
+    from .checkpoint import checkpoint_health
+    def stage_checks(ck):
+        return dict(offline_cursor=_counts_valid(counts,ck['update'],context['c']))
+    health,_=checkpoint_health(path,context,optimizers,gradients,counts,probeF,probeO,
+        schema='supermimic_research.offline_checkpoint:1',extra_checks=stage_checks)
+    health['schema']='supermimic_research.offline_checkpoint_health:1'
+    return health
+
 
 def train(config_path):
     path,c,r=configuration(config_path)
+    if 'online' in c:raise ValueError('Use the online command for collection/update recipes')
     if c['training']['authorized'] is not True:raise PermissionError('Training remains explicitly disabled in the consolidation config')
     out=(path.parent/c['training']['output']).resolve()
     if out.exists():raise FileExistsError(out)

@@ -11,6 +11,14 @@ shared WM/Actor/Critic update primitives. Offline and online experiments should
 call these functions with explicit batches, models, normalizers and recipes.
 Do not copy a trainer to change its reward mode or experiment budget.
 
+`learning/online_runner.py` now orchestrates the same update primitives. Its
+CPU `collection_worker` injects explicitly validated Actors into
+`runtime/native_collection`; native labels and raw persistence use ordinary
+package imports. `learning/checkpoint.py` supplies one shared raw readback
+verifier, with stage-specific cursor/lineage checks in thin callers. The
+offline command rejects online recipes. No old study source is imported by
+the new training or collection path.
+
 `src/chord_study` is the one maintained CHORD study package. Exact duplicate
 packages from the C2 and penalty studies are retained only as historical
 snapshots. `src/dex_supermimic` preserves the upstream namespace and notices;

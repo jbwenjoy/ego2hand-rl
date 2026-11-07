@@ -1,0 +1,57 @@
+schema = 1
+description = "New-source matched online stage from fixed offline1000; fresh five Adam states; never a frozen-run resume"
+
+[artifacts]
+manifest = "artifacts.toml"
+task = "phone_task"
+geometry = "geometry_catalog"
+model = "phone_model"
+physical = "physical_parameters"
+tripod_dataset = "tripod_dataset"
+old_original = "old_original_TRAIN"
+old_pair_labels = "old_pair_labels"
+warmstart = "final_training_result"
+root_result = "final_training_result"
+root_protocol = "final_training_protocol"
+root_health = "final_training_health"
+root_terminal = "final_training_terminal"
+
+[model]
+hidden = [128, 128]
+geometry_chunk_rows = 4
+
+[sampling]
+WM_batch = 8
+Actor_batch = 8
+tripod_WM_rows = 2
+old_WM_rows = 2
+
+[optimizer]
+WM_lr = 0.0001
+actor_lr = 0.0001
+critic_lr = 0.0003
+
+[training]
+authorized = false
+device = "cuda:0"
+cpu_threads = 4
+seed = 1734
+common_WM_updates = 0
+updates = 300
+horizon = 2
+microbatch = 8
+first_checkpoint = 10
+stop_after_first_healthy = true
+output = "../runs/phone_online_v1"
+resume_artifact = ""
+resume_health = ""
+
+[online]
+native_authorized = false
+collection_cycles = 3
+updates_per_cycle = 100
+WM_online_rows = 4
+WM_old_original_rows = 2
+WM_old_tripod_rows = 2
+root_paired_updates = 1000
+root_WM_updates = 1100
