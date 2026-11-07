@@ -1,0 +1,56 @@
+{
+  "schema": "mug_source_patch_saved_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_source_patches.py",
+    "bytes": 8329,
+    "sha256": "e1feaae5cece60f7055e20e25acf530fc04f5732891aeac204205c54cad00221"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v2\\report.json",
+    "bytes": 15369,
+    "sha256": "bb1f2e3218adeaa6fd446e9cdc2d9c018d9bd835334e7b612807332512acf375"
+  },
+  "modes": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_modes_v1\\report.json",
+    "bytes": 61093,
+    "sha256": "5091b3ffb87ba229f2c555ad1054ba496a593a7fe541abe2928d609d8845059b"
+  },
+  "binding": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+    "bytes": 3857,
+    "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+  },
+  "checks": {
+    "source_triangles_reconstructed": true,
+    "source_normals_and_offsets": true,
+    "source_point_triangle_group_identity": true,
+    "COM_subtracted_once": true,
+    "no_contact_truth_fabricated": true,
+    "candidate_counts": true,
+    "numpy_descriptor_readback": true,
+    "numpy_scores_and_patch_matches": true,
+    "source_remains_first_frame_only": true
+  },
+  "max_unit_force_descriptor_error": 4.440892098500626e-16,
+  "native_contacts_checked": 7,
+  "records": [
+    {
+      "seed": "local_force_seed0",
+      "native_contact_count": 3,
+      "score_error": 1.1102230246251565e-16,
+      "patch_pairs_reconstructed": true
+    },
+    {
+      "seed": "conditional_Z_up_preload50um",
+      "native_contact_count": 4,
+      "score_error": 1.1102230246251565e-16,
+      "patch_pairs_reconstructed": true
+    }
+  ],
+  "passed": 9,
+  "total": 9,
+  "native_static_forwards": 2,
+  "integration_steps": 0,
+  "neural_updates": 0,
+  "scope": "NumPy unit-force ray/COM/score and saved candidate triangle/identity/normal/patch readback. Reuses saved approximate-union orientation decisions; does not verify contact truth, gravity, source normal global orientation, source physical forces or a valid learning reward."
+}

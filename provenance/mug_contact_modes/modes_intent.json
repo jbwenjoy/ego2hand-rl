@@ -1,0 +1,131 @@
+{
+  "schema": "mug_matched_contact_modes_intent:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\evaluate_mug_contact_modes.py",
+      "bytes": 12282,
+      "sha256": "ac39d40502f91bed117d1d726f8a14a685c597f41b91ecb2de93b26b5056dc76"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\contact_modes.py",
+      "bytes": 5574,
+      "sha256": "7f42099c121383082859b016b1a48c2103e6f7a558519318d7dda7f608b7a3eb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_contacts.py",
+      "bytes": 3098,
+      "sha256": "573b9f5367782b91422598b6b09f3188c0d4d369c3090f702ee0536c2e5cf241"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\native_evaluation.py",
+      "bytes": 18639,
+      "sha256": "48a2d82e53e4040edc0e53d6d3e8def308967c2c8dc635bf89fb84f44f1c543c"
+    }
+  ],
+  "baseline_model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "seeds": [
+    {
+      "name": "local_force_seed0",
+      "pose": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_equilibrium_v1\\seed00\\final_state.npz",
+        "bytes": 4286,
+        "sha256": "bcaaa6e074d701032f3c887960b1d0ffa05c5131770ba7dde02da3bf74fd2105"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_equilibrium_v1\\seed00\\geometry.json",
+        "bytes": 896834,
+        "sha256": "77658ec8884efe4b7b5a3d2296e6f60fdc270b3673d95c4e9c37e1300a8b1bea"
+      },
+      "conditional_Z_up": false
+    },
+    {
+      "name": "conditional_Z_up_preload50um",
+      "pose": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_engagement_v2\\preload01\\operands.npz",
+        "bytes": 3552,
+        "sha256": "5a7e4b3d7fcb20c0a3788c3805a402b766c8880b6d6ddbef5d52d3dfb1a2038e"
+      },
+      "geometry": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_engagement_v2\\preload01\\geometry.json",
+        "bytes": 896678,
+        "sha256": "121363298b9c046c91afb926d3b678bc270d1e92f0f6593d1b699818fd583ac3"
+      },
+      "conditional_Z_up": true
+    }
+  ],
+  "model_specs": [
+    {
+      "name": "point3",
+      "dim": 3,
+      "spin_m": null
+    },
+    {
+      "name": "spin4_1mm",
+      "dim": 4,
+      "spin_m": 0.001
+    },
+    {
+      "name": "spin4_3mm",
+      "dim": 4,
+      "spin_m": 0.003
+    }
+  ],
+  "spin_units": "metres, length-valued torsional friction coefficient; exploratory geometry-scale values, not calibrated patch sizes",
+  "measured": false,
+  "spin_value_selection": "predeclared1mm and3mm; no automatic enabling of unused baseline .005 coefficient",
+  "changed_pairs": "128 mug components x9 designated distal hand geoms; table/other/self contacts unchanged",
+  "allowed_model_differences": [
+    "model.pair_dim",
+    "model.pair_friction"
+  ],
+  "matched_pose_and_constant_controls": true,
+  "no_control_or_pose_optimization": true,
+  "numerical_gates": {
+    "duration_s": 2.0,
+    "final_COM_drift_m": 0.005,
+    "final_angle_rad": 0.08726646259971647,
+    "tail_duration_s": 0.5,
+    "tail_linear_velocity_RMS_m_s": 0.01,
+    "tail_angular_velocity_RMS_rad_s": 0.2,
+    "max_native_penetration_m": 0.002,
+    "tail_each_pad_normal_force_N": 0.1,
+    "max_phone_nonpad_normal_force_N": 0.1,
+    "max_self_penetration_m": 0.0002,
+    "max_joint_limit_excursion_rad": 0.001,
+    "max_table_normal_force_N": 1e-08,
+    "warning_count": 0,
+    "abort_COM_drift_m": 0.05,
+    "abort_angle_rad": 0.7853981633974483,
+    "tail_triple_pad_force_coverage": 0.95
+  },
+  "dt_pair_gates": {
+    "final_COM_difference_m": 0.002,
+    "final_orientation_difference_rad": 0.03490658503988659,
+    "require_both_duration_complete": true
+  },
+  "dts": [
+    0.0003125,
+    0.00015625
+  ],
+  "maximum_cases": 12,
+  "maximum_integrations": 115200,
+  "expected_static_forward": 12,
+  "maximum_LP_attempts": 48,
+  "baseline_A_raw_trace_byte_parity_before_variants": true,
+  "role": "MATERIAL_PRIOR_SENSITIVITY_NOT_POLICY_BENEFIT",
+  "neural_updates": 0
+}

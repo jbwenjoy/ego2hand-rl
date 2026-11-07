@@ -69,6 +69,14 @@ coefficients are never applied as simulator forces. `force_initialization.py`
 searches bounded native initial pose/command proposals; optimizer termination
 alone is not equilibrium or physical task qualification.
 
+`mechanics/contact_modes.py` creates fresh, separately pinned pad/object spin
+variants and checks full force/couple/COM/hand-load columns against native EFC
+unit queries. It does not modify frozen models or calibrate material parameters.
+`patch_intent.py` keeps finger-indexed distance/normal correspondence and unknown
+source geometry explicit. Source skin/scan candidate envelopes are not observed
+contact labels; whole-hand or per-finger unit-force similarity is diagnostic,
+not dynamic task success or a validated reward.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not

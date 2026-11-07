@@ -1,0 +1,268 @@
+{
+  "schema": "mug_source_patch_and_wrench_descriptor:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\inspect_mug_source_patches.py",
+      "bytes": 9315,
+      "sha256": "d388e25a46eb462aa09a0f0f2a4d1615c709e6d34043ef0ae461e855a171bf7b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\chord_study\\contacts.py",
+      "bytes": 5132,
+      "sha256": "79b53c63dd5573c9908d052f29c678f1724ff5be3ffa5b7c077421cbf4788212"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\assets\\mesh.py",
+      "bytes": 4579,
+      "sha256": "a6986ce2f069e4a18e4187183582f20675d7587bb95f5b3a0854f4f39c6227de"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    }
+  ],
+  "inputs": {
+    "reference": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\reference61.npz",
+      "bytes": 2189390,
+      "sha256": "6809a1a29ec241e0b4776d9842d4022ffc54beba89e2521b58a0a5757a4aa1fd"
+    },
+    "proximity": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_proximity_v1\\source_proximity61.npz",
+      "bytes": 1045203,
+      "sha256": "48ca8aca0bbaf3b79e5f8a5af13dfb88e20593a84ee4584f9502f6e1b0f1091d"
+    },
+    "source_mesh": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_mesh_v1\\source_mesh.npz",
+      "bytes": 938853,
+      "sha256": "1a4415318329951e58cf966df5c7713be9fdfd32fcfe5bac919bb8be35e6e415"
+    },
+    "components": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_decomposition_v3\\components.npz",
+      "bytes": 1904533,
+      "sha256": "816dafd45efc708cfec543533eabc67a831f54a79c32b29535b0993dcb7b9c85"
+    }
+  },
+  "output": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_source_patches_v1\\source_patch_candidates.npz",
+    "bytes": 44546,
+    "sha256": "fd5e0035914fea84b8212aca4201f10f1d9770e5866340644aeaaf52fddb7136"
+  },
+  "raw_candidates": 30,
+  "orientation_confirmed": 30,
+  "negative_local_face_offset_count": 9,
+  "candidate_local_offset_range_m": [
+    -0.0017508191864929312,
+    0.002966062116235394
+  ],
+  "source": {
+    "all_oriented_candidates": {
+      "candidate_count": 30,
+      "group_counts": {
+        "1": 8,
+        "2": 8,
+        "3": 14
+      },
+      "global_fingerprint_known": true,
+      "unbounded_normal_ray_LP": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "witness": {
+          "ray_coefficients_N": [
+            0.8081127413105124,
+            0.0,
+            0.0,
+            6.721475686070672,
+            1.2116037647051463,
+            0.0,
+            0.0,
+            0.0,
+            2.1333713887496226,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            3.500068994201186,
+            2.9562628569504477,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "total_normal_coefficients_N": 17.33089543198759,
+          "force_residual_N": [
+            -3.608224830031759e-16,
+            0.0,
+            2.7755575615628914e-17
+          ],
+          "moment_residual_Nm": [
+            -6.938893903907228e-18,
+            -2.713013344070844e-18,
+            2.8653113257795885e-17
+          ],
+          "required_torque20_Nm": null,
+          "minimum_torque_margin_Nm": null
+        }
+      },
+      "force_is_estimated": false,
+      "contact_truth_available": false
+    },
+    "nonnegative_local_face_offset": {
+      "candidate_count": 21,
+      "group_counts": {
+        "1": 3,
+        "2": 6,
+        "3": 12
+      },
+      "global_fingerprint_known": true,
+      "unbounded_normal_ray_LP": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "witness": {
+          "ray_coefficients_N": [
+            6.3094544928726375,
+            0.0,
+            0.795517171326937,
+            4.437321247595636,
+            0.0,
+            0.0,
+            0.0,
+            7.193285946091549,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            6.886401103257819,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            3.3021847356193765
+          ],
+          "total_normal_coefficients_N": 28.92416469676396,
+          "force_residual_N": [
+            3.0808688933348094e-15,
+            -7.549516567451064e-15,
+            3.3306690738754696e-16
+          ],
+          "moment_residual_Nm": [
+            3.469446951953614e-17,
+            2.904197455280354e-17,
+            1.7781861375732322e-16
+          ],
+          "required_torque20_Nm": null,
+          "minimum_torque_margin_Nm": null
+        }
+      },
+      "force_is_estimated": false,
+      "contact_truth_available": false
+    }
+  },
+  "robot": [
+    {
+      "seed": "local_force_seed0",
+      "case": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_modes_v1\\point3\\local_force_seed0\\0.0003125\\report.json",
+        "bytes": 2102,
+        "sha256": "fd55c74e8526665b0705bd4481af56de0649d27c271680f814ef39da7ff6160b"
+      },
+      "native_contact_count": 3,
+      "contact_comparisons": [
+        {
+          "group": 1,
+          "known": true,
+          "nearest_source_patch_distance_m": 0.004539219838441194,
+          "normal_dot_with_source_inward": 0.7041491002802946,
+          "source_vertex_id": 648
+        },
+        {
+          "group": 2,
+          "known": true,
+          "nearest_source_patch_distance_m": 0.022067855486614416,
+          "normal_dot_with_source_inward": -0.9576652321618007,
+          "source_vertex_id": 584
+        },
+        {
+          "group": 3,
+          "known": true,
+          "nearest_source_patch_distance_m": 0.0007918147418200964,
+          "normal_dot_with_source_inward": 0.8745919564043281,
+          "source_vertex_id": 518
+        }
+      ],
+      "geometric_similarity_only": {
+        "all_oriented_candidates": 0.9368343246712203,
+        "nonnegative_local_face_offset": 0.9460766345529203
+      },
+      "physical_holding_pass": false,
+      "not_a_validated_reward_or_force_supervision": true
+    },
+    {
+      "seed": "conditional_Z_up_preload50um",
+      "case": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_contact_modes_v1\\point3\\conditional_Z_up_preload50um\\0.0003125\\report.json",
+        "bytes": 2122,
+        "sha256": "40369e1c3ca5e6e6b3713fee53e7fe5cf5ec136c6753ba87a2a75ad5b04eaf7d"
+      },
+      "native_contact_count": 4,
+      "contact_comparisons": [
+        {
+          "group": 1,
+          "known": true,
+          "nearest_source_patch_distance_m": 0.0014398636370743685,
+          "normal_dot_with_source_inward": 0.7955729561139288,
+          "source_vertex_id": 648
+        },
+        {
+          "group": 2,
+          "known": true,
+          "nearest_source_patch_distance_m": 0.037235188027464484,
+          "normal_dot_with_source_inward": 0.1498732235729828,
+          "source_vertex_id": 583
+        },
+        {
+          "group": 3,
+          "known": true,
+          "nearest_source_patch_distance_m": 0.010241997451411385,
+          "normal_dot_with_source_inward": 0.9889509490370383,
+          "source_vertex_id": 509
+        },
+        {
+          "group": 3,
+          "known": true,
+          "nearest_source_patch_distance_m": 0.01859440468393058,
+          "normal_dot_with_source_inward": 0.8472873947622339,
+          "source_vertex_id": 509
+        }
+      ],
+      "geometric_similarity_only": {
+        "all_oriented_candidates": 0.8296627675812778,
+        "nonnegative_local_face_offset": 0.8376429132762601
+      },
+      "physical_holding_pass": false,
+      "not_a_validated_reward_or_force_supervision": true
+    }
+  ],
+  "contact_ground_truth_or_real_force_available": false,
+  "neural_updates": 0,
+  "integration_steps": 0,
+  "CUDA_initialized": false,
+  "scope": "First-frame annotation skin/scan proximity and oriented source triangles, crosschecked only against approximate collider probes. Normal-only LP and existing CHORD unit-force fingerprint are hypothetical candidate envelopes, not measured human force, simultaneous contacts, native actuator capacity or a validated reward. Negative face offsets are not a global source SDF. Candidate support can overestimate contact ability; no training labels or unknown-as-zero observation was created."
+}

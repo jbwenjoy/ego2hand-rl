@@ -1,0 +1,105 @@
+"""Source skin/scan candidate patches and BODY-COM wrench descriptors.
+
+Candidate regions are not observed contacts or force labels. This diagnostic
+reuses the maintained CHORD unit-force kernel without fitting a policy/model.
+"""
+from pathlib import Path
+import argparse,json,sys
+import numpy as np
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
+from supermimic_research.artifacts import file_pin,verify_file_pin
+from supermimic_research.assets.mesh import union_membership
+from supermimic_research.mechanics.support import static_feasibility
+
+
+def write(path,value):
+    path.write_text(json.dumps(value,indent=2,allow_nan=False,default=lambda x:x.tolist())+'\n',encoding='utf8')
+
+
+def main(args):
+    import torch,mujoco
+    from chord_study.contacts import sample_basis,wrench_support,support_reward
+    reference,modes,out=args.reference.resolve(),args.modes.resolve(),args.output.resolve()
+    if out.exists() or not out.is_relative_to(ROOT/'runs'):raise ValueError('Fresh unified output')
+    prior=json.loads((modes/'report.json').read_text());bind=json.loads((reference/'binding.json').read_text())
+    inputs={name:file_pin(ROOT/path) for name,path in dict(
+        reference='runs/right_mug_frames_v4/reference61.npz',proximity='runs/right_mug_proximity_v1/source_proximity61.npz',
+        source_mesh='runs/mug_mesh_v1/source_mesh.npz',components='runs/mug_decomposition_v3/components.npz').items()}
+    z=np.load(inputs['reference']['path']);proximity=np.load(inputs['proximity']['path']);mesh=np.load(inputs['source_mesh']['path']);components=np.load(inputs['components']['path'])
+    sources=[file_pin(p) for p in [Path(__file__),ROOT/'src/chord_study/contacts.py',ROOT/'src/supermimic_research/assets/mesh.py',ROOT/'src/supermimic_research/mechanics/support.py']]
+    out.mkdir(parents=True);write(out/'intent.json',dict(schema='mug_source_patch_intent:1',sources=sources,inputs=inputs,
+        frame=47,source_unsigned_gap_max_m=.003,source_handle_side_BODY_x_lt_m=-.045,
+        normal_orientation_probe_m=.003,basis_count=512,basis_seed=20261108,unit_force_mu_prior=.7,cone_edges=8,
+        moment_radius_m=.1,source_masks_are_candidate_geometry_not_observed_contacts=True,
+        source_local_face_offset_negative_is_not_global_penetration_proof=True,neural_updates=0,integration_steps=0))
+    torch.set_num_threads(4);basis=sample_basis(512,seed=20261108,dtype=torch.float64,device='cpu')
+    triangles=mesh['vertices_model_m'][mesh['faces']];normal=np.cross(triangles[:,1]-triangles[:,0],triangles[:,2]-triangles[:,0]);length=np.linalg.norm(normal,axis=1)
+    finite=length>1e-12;normal[finite]/=length[finite,None]
+    halfspaces=[components[f'part{i:03d}_halfspaces'] for i in range(128)];COM=z['object_COM_in_BODY_m']
+    points=[];normals=[];groups=[];offsets=[];confirmed=[];vertex_ids=[];triangle_ids=[]
+    for group in [1,2,3]:
+        mask=(proximity['dominant_skinning_group']==group)&(proximity['distances_m'][0]<=.003)&(proximity['closest_source_points_BODY_m'][0,:,0]<-.045)
+        ids=np.flatnonzero(mask);p=proximity['closest_source_points_BODY_m'][0,ids];t=proximity['source_triangle_ids'][0,ids];n=normal[t]
+        orientation=(~union_membership(p+.003*n,halfspaces))&union_membership(p-.003*n,halfspaces)&finite[t]
+        local=np.sum((z['hand_vertices_object_BODY_F64'][0,ids]-p)*n,axis=1)
+        points.extend(p);normals.extend(n);groups.extend([group]*len(p));offsets.extend(local);confirmed.extend(orientation);vertex_ids.extend(ids);triangle_ids.extend(t)
+    p,n=np.array(points),np.array(normals);g=np.array(groups);offset=np.array(offsets);valid=np.array(confirmed)
+    if len(p)==0:raise ValueError('No finite candidate patch geometry')
+    inward=-n;source_support={};source_summary={}
+    def fingerprint(point,force_normal,mask):
+        return wrench_support(torch.tensor(point-COM,dtype=torch.float64),torch.tensor(force_normal,dtype=torch.float64),
+            torch.tensor(mask,dtype=torch.float64),basis,.1,mu=.7,edges=8).numpy()
+    for name,mask in [('all_oriented_candidates',valid),('nonnegative_local_face_offset',valid&(offset>=0))]:
+        source_support[name]=fingerprint(p,inward,mask)
+        W=np.r_[inward[mask].T,np.cross(p[mask]-COM,inward[mask]).T]
+        sourceR=z['T_source_world_from_object_BODY_F64'][0,:3,:3];target=np.r_[sourceR.T@np.array([0,0,.25*9.81]),np.zeros(3)]
+        source_summary[name]=dict(candidate_count=int(mask.sum()),group_counts={str(i):int(np.sum(mask&(g==i))) for i in [1,2,3]},
+            global_fingerprint_known=bool(mask.any()),unbounded_normal_ray_LP=static_feasibility(W,target),
+            force_is_estimated=False,contact_truth_available=False)
+    robot_records=[];model=mujoco.MjModel.from_binary_path(str(verify_file_pin(bind['model'])))
+    pad_to_group={model.geom(f'right_finger{i}_{s}').id:i for i in [1,2,3] for s in ['link3_col','link4_col','tip_sensor_col']};parts=set(bind['mug_part_geom_ids'])
+    native_supports=[]
+    for case in [c for c in prior['cases'] if c['mode']=='point3' and c['dt_s']==.0003125]:
+        trace=np.load(verify_file_pin(case['trace']));data=mujoco.MjData(model);data.qpos[:]=trace['initial_qpos'];data.ctrl[:]=trace['ctrl20'];mujoco.mj_forward(model,data)
+        R=data.xmat[bind['mug_body_id']].reshape(3,3);origin=data.xpos[bind['mug_body_id']];rp=[];rn=[];rg=[]
+        for ci in range(data.ncon):
+            con=data.contact[ci];a,b=map(int,con.geom);oa,ob=a in parts,b in parts
+            if oa==ob or con.efc_address<0:continue
+            other=a if ob else b
+            if other not in pad_to_group:continue
+            force=np.zeros(6);mujoco.mj_contactForce(model,data,ci,force)
+            if force[0]<=1e-8:continue
+            rp.append(R.T@(con.pos-origin));rn.append(R.T@((1 if ob else -1)*con.frame.reshape(3,3)[0]));rg.append(pad_to_group[other])
+        rp,rn,rg=np.array(rp),np.array(rn),np.array(rg);support=fingerprint(rp,rn,np.ones(len(rp)));native_supports.append(support)
+        errors=[]
+        for point,force_normal,group in zip(rp,rn,rg):
+            eligible=np.flatnonzero(valid&(g==group))
+            if not len(eligible):errors.append(dict(group=int(group),known=False));continue
+            chosen=eligible[np.linalg.norm(p[eligible]-point,axis=1).argmin()]
+            errors.append(dict(group=int(group),known=True,nearest_source_patch_distance_m=float(np.linalg.norm(p[chosen]-point)),
+                normal_dot_with_source_inward=float(force_normal@inward[chosen]),source_vertex_id=int(vertex_ids[chosen])))
+        similarity={}
+        for name,target_support in source_support.items():
+            score=support_reward(torch.tensor(support)[None,None],torch.tensor(target_support)[None,None],tolerance=.1,var=.1)
+            similarity[name]=float(score)
+        robot_records.append(dict(seed=case['seed'],case=case['case'],native_contact_count=len(rp),contact_comparisons=errors,
+            geometric_similarity_only=similarity,physical_holding_pass=case['summary']['native_holding_gates_pass'],
+            not_a_validated_reward_or_force_supervision=True))
+    np.savez_compressed(out/'source_patch_candidates.npz',source_points_BODY_m=p,outward_source_normals_BODY=n,groups=g,
+        source_vertex_ids=np.array(vertex_ids),source_triangle_ids=np.array(triangle_ids),local_face_normal_offset_m=offset,
+        orientation_confirmed_by_approx_union=valid,source_points_COM_relative_m=p-COM,basis512=basis.numpy(),
+        support_all_oriented=source_support['all_oriented_candidates'],support_nonnegative_local=source_support['nonnegative_local_face_offset'],
+        robot_point_supports=np.array(native_supports),contact_ground_truth_known=np.zeros(len(p),dtype=bool))
+    result=dict(schema='mug_source_patch_and_wrench_descriptor:1',sources=sources,inputs=inputs,output=file_pin(out/'source_patch_candidates.npz'),
+        raw_candidates=len(p),orientation_confirmed=int(valid.sum()),negative_local_face_offset_count=int(np.sum(offset<0)),
+        candidate_local_offset_range_m=[float(offset.min()),float(offset.max())],source=source_summary,robot=robot_records,
+        contact_ground_truth_or_real_force_available=False,neural_updates=0,integration_steps=0,CUDA_initialized=torch.cuda.is_initialized(),
+        scope='First-frame annotation skin/scan proximity and oriented source triangles, crosschecked only against approximate collider probes. Normal-only LP and existing CHORD unit-force fingerprint are hypothetical candidate envelopes, not measured human force, simultaneous contacts, native actuator capacity or a validated reward. Negative face offsets are not a global source SDF. Candidate support can overestimate contact ability; no training labels or unknown-as-zero observation was created.')
+    for pin in sources:verify_file_pin(pin)
+    write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),candidates=len(p),negative_offsets=int(np.sum(offset<0)),
+        source_counts={k:v['group_counts'] for k,v in source_summary.items()},robot=robot_records),default=lambda x:x.tolist()))
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--reference',type=Path,required=True);p.add_argument('--modes',type=Path,required=True)
+    p.add_argument('--output',type=Path,required=True);main(p.parse_args())
