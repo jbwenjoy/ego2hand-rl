@@ -104,6 +104,10 @@ micro2保存的损失、梯度与网络状态精确一致；micro8通过事前�
 新CUDA一步响应模型配方仅执行到首10健康保存/读回并估计ETA，然后按用户要求
 暂停。执行结果以独立`health_0010.json`为准；[数据与配方](docs/mug-H20-data-and-first-checkpoint-2026-11-08.md)
 及[方案v0.50](docs/research-plan-v0.50.md)记录完整范围，不构成Actor或CHORD收益声明。
+首10检查点现已实际落盘，保存健康12/12后曾按要求暂停。用户恢复后新增144个
+只读原生动作探针，6次完整状态重放通过，123测试通过；首10模型的动作导数仍
+不足。相同1000步配方的续训与检查边界见[方案v0.51](docs/research-plan-v0.51.md)。
+实际续训结果以新运行目录独立健康报告为准，不能从配方文档推断策略或持握收益。
 见[迁移与数据结果](docs/patch-migration-2026-11-08.md)、
 [方案v0.41](docs/research-plan-v0.41.md)和[此前初态搜索](docs/initialization-search-2026-11-08.md)。
 

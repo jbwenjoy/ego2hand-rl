@@ -1,0 +1,10 @@
+schema = 1
+parent_health = "../runs/mug_response_wm_v1/health_0010.json"
+native_probe_report = "../runs/mug_action_probes_v1/report.json"
+end_update = 1000
+checkpoint_update = 1000
+stop_at_first_stage_checkpoint = true
+fit_role = "TRAIN"
+allow_cpu_fallback = false
+# Exact first10 model/Adam/scales/RNG/CUDA sampler continuation, not a new model.
+# CHECK/RESPONSE/native probes remain diagnostic only; no model selection.

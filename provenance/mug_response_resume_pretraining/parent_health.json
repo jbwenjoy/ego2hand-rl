@@ -1,0 +1,106 @@
+{
+  "schema": "compound_response_first_checkpoint_health:1",
+  "checkpoint": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_response_wm_v1\\checkpoint_0010.pt",
+    "bytes": 12492731,
+    "sha256": "dab3e367246ead29fecaac53900e239ca12bfe012edff78cc2d0c6a73cb00aa2"
+  },
+  "checks": {
+    "schema_and_cursor": true,
+    "complete_model_raw_equal": true,
+    "complete_optimizer_raw_equal": true,
+    "all_Adam_steps10": true,
+    "model_optimizer_and_gradients_finite": true,
+    "all_losses_finite": true,
+    "parameters_changed": true,
+    "RNG_raw_restore": true,
+    "next_sampler_batch_exact": true,
+    "next_CHECK_prediction_raw_exact": true,
+    "finite_nonnegative_native_Fn": true,
+    "no_CHECK_fitting": true
+  },
+  "passed": 12,
+  "total": 12,
+  "update": 10,
+  "training_running": false,
+  "stopped_at_first_checkpoint": true,
+  "pause_goal_requested": true,
+  "model_only_no_Actor": true,
+  "losses": [
+    4.800630569458008,
+    4.674785614013672,
+    4.79275369644165,
+    4.686442852020264,
+    4.633576393127441,
+    4.5726189613342285,
+    4.345819473266602,
+    4.286709785461426,
+    4.340263366699219,
+    4.277238368988037
+  ],
+  "check_metrics": {
+    "delta52_NMSE": 0.5423129200935364,
+    "next_warm26_NMSE": 0.675442099571228,
+    "wrench6_NMSE": 0.34570276737213135,
+    "Fn3_NMSE": 35.155948638916016
+  },
+  "response_metrics": {
+    "delta52_response_vs_zero_NMSE": 1.0019315481185913,
+    "contact9_response_vs_zero_NMSE": 0.9782561659812927
+  },
+  "response_pairs": 24,
+  "response_zero_prior_NMSE": 1.0,
+  "training_wall_s": 2.3141113000456244,
+  "update_CUDA_ms": [
+    2286.648681640625,
+    4.125279903411865,
+    2.7551679611206055,
+    2.443648099899292,
+    2.4593920707702637,
+    2.8342719078063965,
+    2.5772480964660645,
+    2.8080320358276367,
+    2.5055038928985596,
+    2.9468801021575928
+  ],
+  "remaining_updates": 990,
+  "remaining_compute_estimate_s": 2.7799517154693603,
+  "estimate_scope": "Conditional on resuming same1000-update recipe; last5 of only10 updates, excludes startup/checkpoint/native collection/validation. No job continues in background.",
+  "device_name": "NVIDIA GeForce RTX 5090",
+  "torch_peak_allocated_bytes": 92093952,
+  "torch_peak_reserved_bytes": 94371840,
+  "nvidia_after": "NVIDIA GeForce RTX 5090, 0, 3232, 32607",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\train_mug_response_first10.py",
+      "bytes": 11468,
+      "sha256": "584a064a48593af67f1d8110f33fa38f5cb8d9c26ae50c57bfeb4cbebe122e7d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\compound_response.py",
+      "bytes": 2139,
+      "sha256": "e316bd7d3efda4a8ca286c3855905c3be64db95ecab7d6d1f1ece573b9c28f63"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\world_model.py",
+      "bytes": 13810,
+      "sha256": "3eb05f8a449d4f5141b0787136b3eac56ab6912ae4731e4c23dc789bec846158"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\checkpoint.py",
+      "bytes": 10943,
+      "sha256": "4b18284fe81657f4f1246137806a5f29aaf210dbf878fc2b67f9ec45d4ff34bd"
+    }
+  ],
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\mug_response_first10.toml",
+    "bytes": 599,
+    "sha256": "1fdcfde3f4468f8c9402cf55e422236195274ce80d6ee3015053de5840886103"
+  },
+  "packed": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_H20_packed_v1\\report.json",
+    "bytes": 11481,
+    "sha256": "049dae1a61bba8d51607082611c15118a39cec8957adb432f6f2352549593cb9"
+  },
+  "scope": "Healthy structural saved-state/RNG/sampler/forward readback only. First response WM warmup on378 new TRAIN transitions,193 heldout-seed/dt CHECK and48 paired response cases. Not a policy, validated contact gradient/reward, full trajectory, independent RGB or generalization/acceleration result."
+}
