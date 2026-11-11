@@ -1,0 +1,12 @@
+schema = 1
+collection = "../runs/mug_H20_collection_v1/report.json"
+TRAIN_seeds = [200,201,202,203,204,205,206,207,208,209,210,211]
+CHECK_seeds = [8200,8201,8202,8203]
+TRAIN_dt = [0.0003125]
+CHECK_dt = [0.0003125,0.00015625]
+prefix_k = [2,7,12]
+amplitudes = [0.04,0.2]
+joints = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+max_native_steps = 500000
+# Same reset/physics; seeded prefix actions differ from all earlier TRAIN/CHECK.
+# Complete H only. Never promote any old CHECK probe into fitting data.

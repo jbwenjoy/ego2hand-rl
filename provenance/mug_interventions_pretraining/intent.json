@@ -1,0 +1,62 @@
+{
+  "schema": "mug_new_native_interventions:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\mug_interventions_v1.toml",
+    "bytes": 509,
+    "sha256": "a3c0aaa2a4862afda64e3095cdc3cd033b2adec1e2bd27e38148bfb70a6130f9"
+  },
+  "collection": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_H20_collection_v1\\report.json",
+    "bytes": 68426,
+    "sha256": "f108a9ef66cc47bf0b0272b42f9f85ecfadbbeed084b9f7a3cd56b36887dfcd7"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\collect_mug_interventions.py",
+      "bytes": 7044,
+      "sha256": "19e5d2e9ba2c529c6e1157ed3c809c155751ceae9007aa3ebea3ee2fa4ff5727"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\transition_store.py",
+      "bytes": 1875,
+      "sha256": "3bf4dcb143795830428bb44c59027ed7caf60060f9c855a1fe0171b341025830"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\transition_records.py",
+      "bytes": 715,
+      "sha256": "e60481f925a0e62ef9a1c82ebfaa2f737c5ff083b9773d7ba0ef1f151645bab6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_transition.py",
+      "bytes": 8479,
+      "sha256": "e0a5bc7569531b9fe52f024dbea3fea6b0ae05686027e6be6b0a81e486494b78"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\residual_control.py",
+      "bytes": 2757,
+      "sha256": "c62e2c120b73f668200029c28fe1ad4d988c140da83aacf14532dae051940163"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_contacts.py",
+      "bytes": 3098,
+      "sha256": "573b9f5367782b91422598b6b09f3188c0d4d369c3090f702ee0536c2e5cf241"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\native_evaluation.py",
+      "bytes": 18639,
+      "sha256": "48a2d82e53e4040edc0e53d6d3e8def308967c2c8dc635bf89fb84f44f1c543c"
+    }
+  ],
+  "TRAIN_expected": 2880,
+  "CHECK_expected": 1920,
+  "role_boundary": "Only fresh TRAIN branches fit. Prefix/center replay evidence not fit; CHECK and all old diagnostics never fit.",
+  "intervention": "Actual profile center action plus/minus .04/.2 in one of20 joints. Actual control difference is the derivative denominator, including asymmetric EMA room.",
+  "max_native_steps": 500000,
+  "neural_updates": 0,
+  "physics_changes": false
+}

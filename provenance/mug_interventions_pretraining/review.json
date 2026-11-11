@@ -1,0 +1,61 @@
+{
+  "schema": "mug_paired_interventions_review:1",
+  "collection": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_interventions_v1\\report.json",
+    "bytes": 67227,
+    "sha256": "26d094290225fe117026ef163560d61e655594b9c3d10d6b1e7b069c8f626e4e"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_interventions.py",
+      "bytes": 7855,
+      "sha256": "570247620a05de8115ab176d31174db4c09eb773d4b397e240596a58e973f425"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\intervention_pairs.py",
+      "bytes": 1183,
+      "sha256": "41e99ddba55c372a3d8aab1de1c5dbcc61be23150f85ce1b6bff18149ace987d"
+    }
+  ],
+  "checks": {
+    "full_replay_barriers": true,
+    "complete_H_counts": true,
+    "raw_control_reconstruction": true,
+    "raw_wrench_and_group_Fn": true,
+    "actual_observer_and_target_chart": true,
+    "TRAIN_CHECK_source_disjoint": true,
+    "old_diagnostic_sources_excluded": true,
+    "declared_seed_roles": true
+  },
+  "passed": 8,
+  "total": 8,
+  "max_errors": {
+    "controller": 0.0,
+    "world_wrench": 7.105427357601002e-15,
+    "BODY_wrench": 5.551115123125783e-15,
+    "Fn": 8.881784197001252e-15,
+    "observer": 0.0,
+    "target_chart": 0.0
+  },
+  "raw_contacts_reviewed": 2123225,
+  "source_states": {
+    "TRAIN": 36,
+    "CHECK": 24
+  },
+  "TRAIN_CHECK_source_overlap": 0,
+  "old_diagnostic_source_overlap": 0,
+  "outputs": {
+    "TRAIN": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_interventions_packed_v1\\TRAIN.npz",
+      "bytes": 1388770,
+      "sha256": "57a0e33bc384e43e00fac5d4926ce44dcf516a2f50ad1e76348f8bbb788b1851"
+    },
+    "CHECK": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_interventions_packed_v1\\CHECK.npz",
+      "bytes": 908092,
+      "sha256": "39a17fde61b03162d8cf66b668a2502ae58bcba9f582b78e62e1312b7e2913ae"
+    }
+  },
+  "neural_updates": 0,
+  "scope": "Independent raw force/couple/COM/sign, actual control and endpoint chart reconstruction; all20 joint pairs share complete native states within pairs. Same task/prefix distribution, not new trajectories, source contact truth or analytic native gradients."
+}

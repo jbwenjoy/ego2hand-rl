@@ -1,0 +1,19 @@
+schema = 1
+parent_health = "../runs/mug_response_resume1000_v1/health_1000.json"
+intervention_review = "../runs/mug_interventions_packed_v1/report.json"
+old_packed = "../runs/mug_H20_packed_v1/report.json"
+old_probes = "../runs/mug_action_probes_v1/report.json"
+device = "cuda:0"
+sampler_seed = 20261111
+batch_size = 256
+pair_batch_size = 64
+gradient_clip_norm = 10.0
+response_reference_rad = 0.025
+planned_stage_updates = 2000
+first_checkpoint_update = 100
+stop_at_first_healthy_checkpoint = true
+coefficient_ABS = 0.0
+coefficient_CF = 1.0
+# Both models warm-start identical model+Adam1000; frozen original TRAIN scales.
+# Same3258 absolute TRAIN rows and1440 pairs, same sampling/forward/update budget.
+# No CHECK fitting/model selection, no Actor; first paired checkpoint then pause.
