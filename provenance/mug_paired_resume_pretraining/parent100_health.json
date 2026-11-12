@@ -1,0 +1,2562 @@
+{
+  "schema": "compound_paired_response_health:1",
+  "checkpoint": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_paired_response_v1\\paired_checkpoint_0100.pt",
+    "bytes": 20001091,
+    "sha256": "a78242eb32519850b9042a388d79fccb9fd96c53286619e7a5fd992d7319efbd"
+  },
+  "checks": {
+    "ABS_model_exact": true,
+    "ABS_Adam_exact": true,
+    "ABS_Adam1100": true,
+    "ABS_finite_model_optimizer_gradients": true,
+    "ABS_finite_losses": true,
+    "ABS_parameters_changed": true,
+    "ABS_RNG_exact": true,
+    "ABS_next_sampler_batch_exact": true,
+    "ABS_CHECK_prediction_exact": true,
+    "ABS_frozen_scales_exact": true,
+    "ABS_dataset_lineage_exact": true,
+    "ABS_finite_CHECK_predictions": true,
+    "CF_model_exact": true,
+    "CF_Adam_exact": true,
+    "CF_Adam1100": true,
+    "CF_finite_model_optimizer_gradients": true,
+    "CF_finite_losses": true,
+    "CF_parameters_changed": true,
+    "CF_RNG_exact": true,
+    "CF_next_sampler_batch_exact": true,
+    "CF_CHECK_prediction_exact": true,
+    "CF_frozen_scales_exact": true,
+    "CF_dataset_lineage_exact": true,
+    "CF_finite_CHECK_predictions": true,
+    "identical_arm_sampler_cursor": true,
+    "fixed_stage_boundary": true
+  },
+  "passed": 26,
+  "total": 26,
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\train_mug_paired_response.py",
+      "bytes": 12900,
+      "sha256": "8d19d181d86ff5e9743dc5a2f3c836b67972e5cbfccb0f097730d2a78e32109b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\paired_response.py",
+      "bytes": 4161,
+      "sha256": "2913f71eea4a6997bffa1b063ce07eb65cb11096d7ab7d0b9ecff9188a303e7a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\gpu_monitor.py",
+      "bytes": 1072,
+      "sha256": "b0bfa3b24a5c5057eaab234b91563326dddda1b474219a0fe39b2e68a75bc5d5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\response_training.py",
+      "bytes": 2098,
+      "sha256": "986fdeaea46458cd4384c168267058861cfb38f43b40efdac28e166eccf7945d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\response_diagnostics.py",
+      "bytes": 4580,
+      "sha256": "49ec998f16c31d14be1b8fc596e0170bfde424a0feb16089126ec7cdbd7ade20"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\compound_response.py",
+      "bytes": 2139,
+      "sha256": "e316bd7d3efda4a8ca286c3855905c3be64db95ecab7d6d1f1ece573b9c28f63"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\world_model.py",
+      "bytes": 13810,
+      "sha256": "3eb05f8a449d4f5141b0787136b3eac56ab6912ae4731e4c23dc789bec846158"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\checkpoint.py",
+      "bytes": 10943,
+      "sha256": "4b18284fe81657f4f1246137806a5f29aaf210dbf878fc2b67f9ec45d4ff34bd"
+    }
+  ],
+  "stage": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\mug_paired_response_first100.toml",
+    "bytes": 787,
+    "sha256": "3860d65a6fe94ffec54446698506ed00a6e2451b51f6e8f5abfe2b17b6f4013e"
+  },
+  "evidence": {
+    "parent_health": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_response_resume1000_v1\\health_1000.json",
+      "bytes": 70277,
+      "sha256": "78493f3bfc4fc7088c7dedc6f7d526e478dd9353c348b2d26c0d4c60621e27cd"
+    },
+    "intervention_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_interventions_packed_v1\\report.json",
+      "bytes": 2275,
+      "sha256": "4275a1156e66017a142be23a5c0c24eaef802940542c1d3ecbcb803b1901052d"
+    },
+    "old_packed": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_H20_packed_v1\\report.json",
+      "bytes": 11481,
+      "sha256": "049dae1a61bba8d51607082611c15118a39cec8957adb432f6f2352549593cb9"
+    },
+    "old_probes": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_action_probes_v1\\report.json",
+      "bytes": 3171,
+      "sha256": "c7ec36ca0f1259001ba350c066e209188cd3f7f4e1d1009e71c76bea9b73dc8e"
+    }
+  },
+  "errors": {
+    "ABS": {
+      "old_TRAIN": {
+        "delta52": 0.023414907976984978,
+        "warm26": 0.061453789472579956,
+        "wrench6": 0.011192035861313343,
+        "Fn3": 0.025970017537474632,
+        "contact9": 0.01611802913248539,
+        "object12": 0.006705226842314005
+      },
+      "new_TRAIN": {
+        "delta52": 0.006137642543762922,
+        "warm26": 0.07587406784296036,
+        "wrench6": 0.0017589351627975702,
+        "Fn3": 0.0021541034802794456,
+        "contact9": 0.0018906580517068505,
+        "object12": 0.0009707254357635975
+      },
+      "old_CHECK": {
+        "delta52": 0.2888602614402771,
+        "warm26": 0.9020203948020935,
+        "wrench6": 0.1629723310470581,
+        "Fn3": 0.4256789982318878,
+        "contact9": 0.25054123997688293,
+        "object12": 0.09868409484624863
+      },
+      "new_CHECK": {
+        "delta52": 0.15077030658721924,
+        "warm26": 0.18093684315681458,
+        "wrench6": 0.09733704477548599,
+        "Fn3": 0.284392386674881,
+        "contact9": 0.159688800573349,
+        "object12": 0.04597271978855133
+      }
+    },
+    "CF": {
+      "old_TRAIN": {
+        "delta52": 0.09720143675804138,
+        "warm26": 0.4807555377483368,
+        "wrench6": 0.05104146897792816,
+        "Fn3": 0.10577774047851562,
+        "contact9": 0.06928689032793045,
+        "object12": 0.033096104860305786
+      },
+      "new_TRAIN": {
+        "delta52": 0.021274155005812645,
+        "warm26": 0.2607928514480591,
+        "wrench6": 0.013280239887535572,
+        "Fn3": 0.03646337613463402,
+        "contact9": 0.021007953211665154,
+        "object12": 0.008926027454435825
+      },
+      "old_CHECK": {
+        "delta52": 0.37535083293914795,
+        "warm26": 1.5710285902023315,
+        "wrench6": 0.18764148652553558,
+        "Fn3": 0.47794222831726074,
+        "contact9": 0.2844083905220032,
+        "object12": 0.11370275169610977
+      },
+      "new_CHECK": {
+        "delta52": 0.22373123466968536,
+        "warm26": 1.120415210723877,
+        "wrench6": 0.0780956894159317,
+        "Fn3": 0.10642039030790329,
+        "contact9": 0.0875372514128685,
+        "object12": 0.05486513301730156
+      }
+    }
+  },
+  "response_metrics": {
+    "ABS": {
+      "new_CHECK": {
+        "pairs": 960,
+        "by_amplitude": {
+          "0.04": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.834416705042582,
+                "cosine": 0.44802167175864377,
+                "predicted_RMS": 0.13776057723009655,
+                "native_RMS": 0.5287001167419387
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.8344129688115424,
+                "cosine": 0.44803379572264557,
+                "predicted_RMS": 0.13775693652985954,
+                "native_RMS": 0.5287001167419387
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 1.0014704873138043,
+                "cosine": -0.010930121862207294,
+                "predicted_RMS": 0.11226428592407371,
+                "native_RMS": 3.8786565233782992
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0014702603610326,
+                "cosine": -0.01092996238444809,
+                "predicted_RMS": 0.11225369641993098,
+                "native_RMS": 3.8786565233782992
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.9293832097947865,
+                "cosine": 0.26794703170757384,
+                "predicted_RMS": 0.07639384035509754,
+                "native_RMS": 0.2527245826119574
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.9293777345474378,
+                "cosine": 0.26795474377915895,
+                "predicted_RMS": 0.07639084766798152,
+                "native_RMS": 0.2527245826119574
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 1.1530836430248967,
+                "cosine": 0.18583843863626173,
+                "predicted_RMS": 0.14155706392355671,
+                "native_RMS": 0.22869069049785923
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.1530647693286846,
+                "cosine": 0.18583984041057672,
+                "predicted_RMS": 0.141552539541755,
+                "native_RMS": 0.22869069049785923
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.9943658779706741,
+                "cosine": 0.2165522771852222,
+                "predicted_RMS": 0.10281121864053905,
+                "native_RMS": 0.2449754145713156
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.9943565106121481,
+                "cosine": 0.216556406149416,
+                "predicted_RMS": 0.10280765967829704,
+                "native_RMS": 0.2449754145713156
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.9827343981164788,
+                "cosine": 0.1641853644621799,
+                "predicted_RMS": 0.050521557046311456,
+                "native_RMS": 0.19236823161633598
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.9827292675798938,
+                "cosine": 0.1641905855182573,
+                "predicted_RMS": 0.050519223471371964,
+                "native_RMS": 0.19236823161633598
+              }
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.7810368608398072,
+                "cosine": 0.5199840551731394,
+                "predicted_RMS": 0.13775620688483756,
+                "native_RMS": 0.4697990898799679
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.7809200676775606,
+                "cosine": 0.5203288538054966,
+                "predicted_RMS": 0.1376678989478519,
+                "native_RMS": 0.4697990898799679
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 1.0228198099087695,
+                "cosine": -0.01348489162754218,
+                "predicted_RMS": 0.1122633084010352,
+                "native_RMS": 0.8124539082391496
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0227189571856536,
+                "cosine": -0.013468710946452814,
+                "predicted_RMS": 0.11200485445945554,
+                "native_RMS": 0.8124539082391496
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.8642984836668223,
+                "cosine": 0.3712199509183345,
+                "predicted_RMS": 0.07639212668200197,
+                "native_RMS": 0.18316136575746098
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.8640446530711826,
+                "cosine": 0.3714787772870563,
+                "predicted_RMS": 0.07631559336178159,
+                "native_RMS": 0.18316136575746098
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 1.4613994891149709,
+                "cosine": 0.3227847682988847,
+                "predicted_RMS": 0.14155053291113043,
+                "native_RMS": 0.1316943179027997
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.4600451608358411,
+                "cosine": 0.3229248156197669,
+                "predicted_RMS": 0.14145825245115018,
+                "native_RMS": 0.1316943179027997
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.9869395417508022,
+                "cosine": 0.31705170469311095,
+                "predicted_RMS": 0.10280737231253262,
+                "native_RMS": 0.1677692514339864
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.9864596753603966,
+                "cosine": 0.31721267145355087,
+                "predicted_RMS": 0.1027271089940965,
+                "native_RMS": 0.1677692514339864
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.9600979894846552,
+                "cosine": 0.2523922301418859,
+                "predicted_RMS": 0.05051812478847898,
+                "native_RMS": 0.12422566375102603
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.9597612872957844,
+                "cosine": 0.25262701790573183,
+                "predicted_RMS": 0.05045926604341813,
+                "native_RMS": 0.12422566375102603
+              }
+            }
+          }
+        },
+        "derivative": "dy/du times.025rad; model AD at midpoint of ACTUAL executed controls. Includes asymmetric action-to-control room correctly; not da derivative at a kink.",
+        "scope": "Finite contact/solver secants at distinct prefix states; not smooth native Jacobian, deployment or multi-step validity."
+      },
+      "old_RESPONSE": {
+        "delta52": {
+          "versus_zero_NMSE": 0.8499137578684742,
+          "cosine": 0.45856677420454184,
+          "predicted_RMS": 0.16768984592974143,
+          "native_RMS": 0.23822353752493164
+        },
+        "warm26": {
+          "versus_zero_NMSE": 1.6216543630500022,
+          "cosine": -0.15377579324524265,
+          "predicted_RMS": 0.09179221814737214,
+          "native_RMS": 0.14132082597555376
+        },
+        "wrench6": {
+          "versus_zero_NMSE": 0.7581526056283865,
+          "cosine": 0.5254051901524243,
+          "predicted_RMS": 0.06332595406830314,
+          "native_RMS": 0.1859989362309175
+        },
+        "Fn3": {
+          "versus_zero_NMSE": 0.33667355053815173,
+          "cosine": 0.8358437767831948,
+          "predicted_RMS": 0.11952731368523446,
+          "native_RMS": 0.1844732212075182
+        },
+        "contact9": {
+          "versus_zero_NMSE": 0.6191982493142865,
+          "cosine": 0.6420116745856501,
+          "predicted_RMS": 0.08623056618572117,
+          "native_RMS": 0.1854917589371055
+        },
+        "object12": {
+          "versus_zero_NMSE": 0.70393653314317,
+          "cosine": 0.5499423865246845,
+          "predicted_RMS": 0.057145184319743254,
+          "native_RMS": 0.12155697081255874
+        }
+      },
+      "old_probes": {
+        "pairs": 72,
+        "by_amplitude": {
+          "0.01": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.8892110286045619,
+                "cosine": 0.471706452003879,
+                "predicted_RMS": 0.1694063182760711,
+                "native_RMS": 0.21019486591841913
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.8892203734771542,
+                "cosine": 0.47170600494061815,
+                "predicted_RMS": 0.16940902998464039,
+                "native_RMS": 0.21019486591841913
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 22.905448174528107,
+                "cosine": -0.07669313965386947,
+                "predicted_RMS": 0.09356956774888789,
+                "native_RMS": 0.02032238644171649
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 22.905305366796238,
+                "cosine": -0.07670891354197132,
+                "predicted_RMS": 0.0935689424377595,
+                "native_RMS": 0.02032238644171649
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.6684742051918714,
+                "cosine": 0.6161885179467641,
+                "predicted_RMS": 0.06397589438946669,
+                "native_RMS": 0.16125844048643775
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6684713856925946,
+                "cosine": 0.6161813852090392,
+                "predicted_RMS": 0.06397900981376167,
+                "native_RMS": 0.16125844048643775
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.2883438215873024,
+                "cosine": 0.8757532981792817,
+                "predicted_RMS": 0.12031866918349846,
+                "native_RMS": 0.18781596947717533
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.28830374225152605,
+                "cosine": 0.8757743750129539,
+                "predicted_RMS": 0.1203238908840944,
+                "native_RMS": 0.18781596947717533
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.5148477805307846,
+                "cosine": 0.7308342716447087,
+                "predicted_RMS": 0.08691454093907902,
+                "native_RMS": 0.17057100930588726
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.5148299027890949,
+                "cosine": 0.7308417875490206,
+                "predicted_RMS": 0.08691847926071548,
+                "native_RMS": 0.17057100930588726
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.6226670137147745,
+                "cosine": 0.6380016640869829,
+                "predicted_RMS": 0.057685093386882234,
+                "native_RMS": 0.12388700340129863
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6226548834991564,
+                "cosine": 0.6380095491779847,
+                "predicted_RMS": 0.0576868136724101,
+                "native_RMS": 0.12388700340129863
+              }
+            }
+          },
+          "0.05": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.8807294428480777,
+                "cosine": 0.47286146376371485,
+                "predicted_RMS": 0.1694063182760711,
+                "native_RMS": 0.21285971361891012
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.8806751450221902,
+                "cosine": 0.4728604134707672,
+                "predicted_RMS": 0.1693878735040759,
+                "native_RMS": 0.21285971361891012
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 22.43299767519406,
+                "cosine": -0.06451031962066676,
+                "predicted_RMS": 0.09356956774888789,
+                "native_RMS": 0.02049484294074405
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 22.42465858187389,
+                "cosine": -0.06456975330596558,
+                "predicted_RMS": 0.09354990833239674,
+                "native_RMS": 0.02049484294074405
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.6670092933444752,
+                "cosine": 0.6169933350642551,
+                "predicted_RMS": 0.06397589438946669,
+                "native_RMS": 0.1604963471936355
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6669945333167163,
+                "cosine": 0.6170359193147321,
+                "predicted_RMS": 0.0639688450200588,
+                "native_RMS": 0.1604963471936355
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.27641834054701936,
+                "cosine": 0.8811150875234933,
+                "predicted_RMS": 0.12031866918349846,
+                "native_RMS": 0.1847159079384839
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.2764286319688824,
+                "cosine": 0.8811247269424658,
+                "predicted_RMS": 0.12030948512109357,
+                "native_RMS": 0.1847159079384839
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.5113899262087641,
+                "cosine": 0.7321227361042228,
+                "predicted_RMS": 0.08691454093907902,
+                "native_RMS": 0.16895573539691636
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.5113851471872422,
+                "cosine": 0.7321466649322467,
+                "predicted_RMS": 0.08690684375909499,
+                "native_RMS": 0.16895573539691636
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.620886855875615,
+                "cosine": 0.6395947106307782,
+                "predicted_RMS": 0.057685093386882234,
+                "native_RMS": 0.12366003148414147
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6208947139660914,
+                "cosine": 0.6396046203883279,
+                "predicted_RMS": 0.05767898583085905,
+                "native_RMS": 0.12366003148414147
+              }
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.857697050731687,
+                "cosine": 0.46995786965301667,
+                "predicted_RMS": 0.1694063182760711,
+                "native_RMS": 0.22580316841701142
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.8569690015743036,
+                "cosine": 0.4699763406246973,
+                "predicted_RMS": 0.16912356255004193,
+                "native_RMS": 0.22580316841701142
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 8.274265319490338,
+                "cosine": -0.0035394089180546743,
+                "predicted_RMS": 0.09356956774888789,
+                "native_RMS": 0.03473841371270825
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 8.232832213232443,
+                "cosine": -0.004747340355380641,
+                "predicted_RMS": 0.09326046103631058,
+                "native_RMS": 0.03473841371270825
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.7637601408414725,
+                "cosine": 0.5181611949570958,
+                "predicted_RMS": 0.06397589438946669,
+                "native_RMS": 0.18895628775011983
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.7634434244003201,
+                "cosine": 0.5189347407527468,
+                "predicted_RMS": 0.06386758600091902,
+                "native_RMS": 0.18895628775011983
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.37543555651780264,
+                "cosine": 0.8031839244293298,
+                "predicted_RMS": 0.12031866918349846,
+                "native_RMS": 0.18233798153715802
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.3754356896718637,
+                "cosine": 0.8033357903088765,
+                "predicted_RMS": 0.12019153342026452,
+                "native_RMS": 0.18233798153715802
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.640397221561095,
+                "cosine": 0.6190569874963214,
+                "predicted_RMS": 0.08691454093907902,
+                "native_RMS": 0.1867762448061469
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6401811618710634,
+                "cosine": 0.6194878273080896,
+                "predicted_RMS": 0.08680272996683176,
+                "native_RMS": 0.1867762448061469
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.7191768783129213,
+                "cosine": 0.5366461942359788,
+                "predicted_RMS": 0.057685093386882234,
+                "native_RMS": 0.12762361901947514
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.7189247766473498,
+                "cosine": 0.537057905856333,
+                "predicted_RMS": 0.05759538414081622,
+                "native_RMS": 0.12762361901947514
+              }
+            }
+          }
+        },
+        "native_coarse_vs_fine_dt": {
+          "0.01": {
+            "delta52": {
+              "versus_zero_NMSE": 0.000520511567531703,
+              "cosine": 0.9997449310508846,
+              "predicted_RMS": 0.21050692137482357,
+              "native_RMS": 0.20988234649493095
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.006605123662110618,
+              "cosine": 0.9966919849788839,
+              "predicted_RMS": 0.020286736074768677,
+              "native_RMS": 0.020357974378744162
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.0005394873782861079,
+              "cosine": 0.9997390384794703,
+              "predicted_RMS": 0.16157503348598007,
+              "native_RMS": 0.16094122470715944
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.0024618419369317286,
+              "cosine": 0.9990465355854818,
+              "predicted_RMS": 0.189904756120661,
+              "native_RMS": 0.18570368974270487
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.0013077576137977068,
+              "cosine": 0.9994182936343042,
+              "predicted_RMS": 0.17153891617670794,
+              "native_RMS": 0.16959757860352406
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.0003466607867843511,
+              "cosine": 0.9998266822749623,
+              "predicted_RMS": 0.12386168315871138,
+              "native_RMS": 0.1239123184699477
+            }
+          },
+          "0.05": {
+            "delta52": {
+              "versus_zero_NMSE": 0.0011101565540702417,
+              "cosine": 0.9994607904977095,
+              "predicted_RMS": 0.21219692484191555,
+              "native_RMS": 0.2135204450432869
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.005586618084241516,
+              "cosine": 0.9972377794020565,
+              "predicted_RMS": 0.020379964471839124,
+              "native_RMS": 0.020609081067774652
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.0010081618048662162,
+              "cosine": 0.9995225602062041,
+              "predicted_RMS": 0.1610422497913983,
+              "native_RMS": 0.15994858144767915
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.004190029176278663,
+              "cosine": 0.9983358159695777,
+              "predicted_RMS": 0.18722508562846651,
+              "native_RMS": 0.18217217296417768
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.002259980718709813,
+              "cosine": 0.9989993065215957,
+              "predicted_RMS": 0.17021794375088356,
+              "native_RMS": 0.16768402628827425
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.0005337232975116377,
+              "cosine": 0.9997399725124486,
+              "predicted_RMS": 0.12387255875983473,
+              "native_RMS": 0.12344713832085784
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "versus_zero_NMSE": 0.009270913889427707,
+              "cosine": 0.9954178096896974,
+              "predicted_RMS": 0.2239893349175474,
+              "native_RMS": 0.227602547388023
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.0568107125377387,
+              "cosine": 0.9812760652749712,
+              "predicted_RMS": 0.03161765194396876,
+              "native_RMS": 0.037601048656927136
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.059117233019643806,
+              "cosine": 0.9752582014759186,
+              "predicted_RMS": 0.17585879427672618,
+              "native_RMS": 0.20120298664818143
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.01565602640687757,
+              "cosine": 0.9921462287430611,
+              "predicted_RMS": 0.1813228986973537,
+              "native_RMS": 0.1833474445692636
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.046366453482622264,
+              "cosine": 0.9790309551089394,
+              "predicted_RMS": 0.17769883196102573,
+              "native_RMS": 0.19543248544563557
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.040795456469816326,
+              "cosine": 0.9803998403961661,
+              "predicted_RMS": 0.1233309937286091,
+              "native_RMS": 0.131776485949391
+            }
+          }
+        },
+        "source": "Full identical native state, central \u00b1amplitude after actual EMA; AD evaluated at action0. Same finite-width probes never fit.",
+        "limitation": "Central native secants include contact switches/finite solver effects; dt mismatch is not a pure discretization error bound. No assertion of smooth native gradient or imagined reward validity."
+      }
+    },
+    "CF": {
+      "new_CHECK": {
+        "pairs": 960,
+        "by_amplitude": {
+          "0.04": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.6240312307413587,
+                "cosine": 0.620991742148465,
+                "predicted_RMS": 0.2763496469748438,
+                "native_RMS": 0.5287001167419387
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.6240295773614273,
+                "cosine": 0.6209969500326644,
+                "predicted_RMS": 0.2763394534652724,
+                "native_RMS": 0.5287001167419387
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 1.0214047813075569,
+                "cosine": -0.051303464620418675,
+                "predicted_RMS": 0.4023511995653631,
+                "native_RMS": 3.8786565233782992
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.02140431369399,
+                "cosine": -0.051299918849585804,
+                "predicted_RMS": 0.40235455228463796,
+                "native_RMS": 3.8786565233782992
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.8963016889300971,
+                "cosine": 0.3368638752721702,
+                "predicted_RMS": 0.11012536778109258,
+                "native_RMS": 0.2527245826119574
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.8962984068657099,
+                "cosine": 0.33686264464091925,
+                "predicted_RMS": 0.11011980286058445,
+                "native_RMS": 0.2527245826119574
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 1.4323939645294546,
+                "cosine": 0.11069831050402096,
+                "predicted_RMS": 0.17781105664700805,
+                "native_RMS": 0.22869069049785923
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.432301200495431,
+                "cosine": 0.11069455030710718,
+                "predicted_RMS": 0.17779414606803123,
+                "native_RMS": 0.22869069049785923
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 1.0520309647026416,
+                "cosine": 0.23183748823304115,
+                "predicted_RMS": 0.1364697342804957,
+                "native_RMS": 0.2449754145713156
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0520016890491646,
+                "cosine": 0.23183912794945735,
+                "predicted_RMS": 0.1364593960856347,
+                "native_RMS": 0.2449754145713156
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 1.03748509104051,
+                "cosine": 0.16576348398259158,
+                "predicted_RMS": 0.08091799380378314,
+                "native_RMS": 0.19236823161633598
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0374851320070069,
+                "cosine": 0.1657530063648989,
+                "predicted_RMS": 0.08091468287701985,
+                "native_RMS": 0.19236823161633598
+              }
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.4749343937779662,
+                "cosine": 0.7404255852720475,
+                "predicted_RMS": 0.2763484602489959,
+                "native_RMS": 0.4697990898799679
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.47486056628861706,
+                "cosine": 0.740627845962173,
+                "predicted_RMS": 0.27609593872470517,
+                "native_RMS": 0.4697990898799679
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 1.2723998264051748,
+                "cosine": -0.02740510415979946,
+                "predicted_RMS": 0.40235420258845317,
+                "native_RMS": 0.8124539082391496
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.272888831175266,
+                "cosine": -0.027822546387217973,
+                "predicted_RMS": 0.40241286777292806,
+                "native_RMS": 0.8124539082391496
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.7563784606908963,
+                "cosine": 0.5032215564697176,
+                "predicted_RMS": 0.11012653706622022,
+                "native_RMS": 0.18316136575746098
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.7561124296252718,
+                "cosine": 0.5033252962380226,
+                "predicted_RMS": 0.10999392232390967,
+                "native_RMS": 0.18316136575746098
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 2.2830518034954586,
+                "cosine": 0.19993425791654745,
+                "predicted_RMS": 0.17780875823904238,
+                "native_RMS": 0.1316943179027997
+              },
+              "secant": {
+                "versus_zero_NMSE": 2.276676770759951,
+                "cosine": 0.20006601273546823,
+                "predicted_RMS": 0.17746374153415503,
+                "native_RMS": 0.1316943179027997
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 1.0699482460400815,
+                "cosine": 0.36372185102109106,
+                "predicted_RMS": 0.13646936510795546,
+                "native_RMS": 0.1677692514339864
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0684274617220002,
+                "cosine": 0.3639291901167346,
+                "predicted_RMS": 0.1362481870897101,
+                "native_RMS": 0.1677692514339864
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 1.0116572844272662,
+                "cosine": 0.31674245944143004,
+                "predicted_RMS": 0.08091825883592574,
+                "native_RMS": 0.12422566375102603
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.011468244982155,
+                "cosine": 0.31653575884285984,
+                "predicted_RMS": 0.08083315455208757,
+                "native_RMS": 0.12422566375102603
+              }
+            }
+          }
+        },
+        "derivative": "dy/du times.025rad; model AD at midpoint of ACTUAL executed controls. Includes asymmetric action-to-control room correctly; not da derivative at a kink.",
+        "scope": "Finite contact/solver secants at distinct prefix states; not smooth native Jacobian, deployment or multi-step validity."
+      },
+      "old_RESPONSE": {
+        "delta52": {
+          "versus_zero_NMSE": 1.0071445361619835,
+          "cosine": 0.5065182129142427,
+          "predicted_RMS": 0.24299767879125964,
+          "native_RMS": 0.23822353752493164
+        },
+        "warm26": {
+          "versus_zero_NMSE": 27.086504638373764,
+          "cosine": -0.2023067416568733,
+          "predicted_RMS": 0.693771251756432,
+          "native_RMS": 0.14132082597555376
+        },
+        "wrench6": {
+          "versus_zero_NMSE": 0.6958136730005844,
+          "cosine": 0.6284100477204965,
+          "predicted_RMS": 0.17290383106735802,
+          "native_RMS": 0.1859989362309175
+        },
+        "Fn3": {
+          "versus_zero_NMSE": 0.5495706799569131,
+          "cosine": 0.6788404539281375,
+          "predicted_RMS": 0.14403605135708444,
+          "native_RMS": 0.1844732212075182
+        },
+        "contact9": {
+          "versus_zero_NMSE": 0.6475998870047885,
+          "cosine": 0.6411329412504174,
+          "predicted_RMS": 0.163847341231688,
+          "native_RMS": 0.1854917589371055
+        },
+        "object12": {
+          "versus_zero_NMSE": 0.7440450410278655,
+          "cosine": 0.6205651963080291,
+          "predicted_RMS": 0.11911785376395757,
+          "native_RMS": 0.12155697081255874
+        }
+      },
+      "old_probes": {
+        "pairs": 72,
+        "by_amplitude": {
+          "0.01": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 1.3214462306183068,
+                "cosine": 0.45145171020866987,
+                "predicted_RMS": 0.24723044631562893,
+                "native_RMS": 0.21019486591841913
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 1.321402829168283,
+                "cosine": 0.4514668963701511,
+                "predicted_RMS": 0.24722933293134025,
+                "native_RMS": 0.21019486591841913
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 1156.4309769646325,
+                "cosine": 0.05985592209493288,
+                "predicted_RMS": 0.6920085468173304,
+                "native_RMS": 0.02032238644171649
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 1156.3991356483698,
+                "cosine": 0.05987552017168052,
+                "predicted_RMS": 0.6919994273527555,
+                "native_RMS": 0.02032238644171649
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.8386836576727709,
+                "cosine": 0.6156636805147789,
+                "predicted_RMS": 0.17452585801398512,
+                "native_RMS": 0.16125844048643775
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.8386424695811534,
+                "cosine": 0.6156934808684652,
+                "predicted_RMS": 0.17452988715184917,
+                "native_RMS": 0.16125844048643775
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.4437646376582009,
+                "cosine": 0.7466479471922948,
+                "predicted_RMS": 0.14686684522925095,
+                "native_RMS": 0.18781596947717533
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.44380571701035715,
+                "cosine": 0.746619044229913,
+                "predicted_RMS": 0.14685588358064353,
+                "native_RMS": 0.18781596947717533
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.679080532818088,
+                "cosine": 0.6511296122415479,
+                "predicted_RMS": 0.16581960123241174,
+                "native_RMS": 0.17057100930588726
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6790725924062091,
+                "cosine": 0.6511329044719429,
+                "predicted_RMS": 0.16581919225542616,
+                "native_RMS": 0.17057100930588726
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.6098682620545095,
+                "cosine": 0.6839258389822361,
+                "predicted_RMS": 0.11924552138700349,
+                "native_RMS": 0.12388700340129863
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.609849363440631,
+                "cosine": 0.6839375209933589,
+                "predicted_RMS": 0.11924631959584861,
+                "native_RMS": 0.12388700340129863
+              }
+            }
+          },
+          "0.05": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 1.2947115607157442,
+                "cosine": 0.453865716204414,
+                "predicted_RMS": 0.24723044631562893,
+                "native_RMS": 0.21285971361891012
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 1.2943042346869997,
+                "cosine": 0.4539130452657908,
+                "predicted_RMS": 0.24718570771254755,
+                "native_RMS": 0.21285971361891012
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 1136.6911375923553,
+                "cosine": 0.06492910805105823,
+                "predicted_RMS": 0.6920085468173304,
+                "native_RMS": 0.02049484294074405
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 1136.8256871371168,
+                "cosine": 0.06489739797350225,
+                "predicted_RMS": 0.6920488078923814,
+                "native_RMS": 0.02049484294074405
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.8430535144641331,
+                "cosine": 0.615871694763627,
+                "predicted_RMS": 0.17452585801398512,
+                "native_RMS": 0.1604963471936355
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.842879384490596,
+                "cosine": 0.6159090494338599,
+                "predicted_RMS": 0.17451004684002155,
+                "native_RMS": 0.1604963471936355
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.439154588140104,
+                "cosine": 0.7502383639285553,
+                "predicted_RMS": 0.14686684522925095,
+                "native_RMS": 0.1847159079384839
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.4391032075077912,
+                "cosine": 0.7502613337420054,
+                "predicted_RMS": 0.1468361891378507,
+                "native_RMS": 0.1847159079384839
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.682131980436866,
+                "cosine": 0.6526589829369757,
+                "predicted_RMS": 0.16581960123241174,
+                "native_RMS": 0.16895573539691636
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6820067562934837,
+                "cosine": 0.6526828473383356,
+                "predicted_RMS": 0.165799456509704,
+                "native_RMS": 0.16895573539691636
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.6074265774670738,
+                "cosine": 0.6857039313744265,
+                "predicted_RMS": 0.11924552138700349,
+                "native_RMS": 0.12366003148414147
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6075935188225275,
+                "cosine": 0.6856205949180245,
+                "predicted_RMS": 0.11924690102981535,
+                "native_RMS": 0.12366003148414147
+              }
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 1.1631484433058548,
+                "cosine": 0.4729425603522024,
+                "predicted_RMS": 0.24723044631562893,
+                "native_RMS": 0.22580316841701142
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 1.1574162005474562,
+                "cosine": 0.47375619246213246,
+                "predicted_RMS": 0.24651052136991625,
+                "native_RMS": 0.22580316841701142
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 394.5775393423128,
+                "cosine": 0.08160032108129173,
+                "predicted_RMS": 0.6920085468173304,
+                "native_RMS": 0.03473841371270825
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 395.14633804558997,
+                "cosine": 0.08120018857176409,
+                "predicted_RMS": 0.6924923990765683,
+                "native_RMS": 0.03473841371270825
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.7734592379286652,
+                "cosine": 0.5844514147492063,
+                "predicted_RMS": 0.17452585801398512,
+                "native_RMS": 0.18895628775011983
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.7716156453168833,
+                "cosine": 0.5849556896647097,
+                "predicted_RMS": 0.1742709170322334,
+                "native_RMS": 0.18895628775011983
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.6113273087732906,
+                "cosine": 0.6440047222545364,
+                "predicted_RMS": 0.14686684522925095,
+                "native_RMS": 0.18233798153715802
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6098892901641855,
+                "cosine": 0.6443793421824083,
+                "predicted_RMS": 0.14639066830799027,
+                "native_RMS": 0.18233798153715802
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.7219531811488674,
+                "cosine": 0.6004925576976744,
+                "predicted_RMS": 0.16581960123241174,
+                "native_RMS": 0.1867762448061469
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.7202384312500484,
+                "cosine": 0.6009073009140955,
+                "predicted_RMS": 0.16550018410278905,
+                "native_RMS": 0.1867762448061469
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.751633117975598,
+                "cosine": 0.60008501255074,
+                "predicted_RMS": 0.11924552138700349,
+                "native_RMS": 0.12762361901947514
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.7538650471035706,
+                "cosine": 0.5989054646813434,
+                "predicted_RMS": 0.1192507905462331,
+                "native_RMS": 0.12762361901947514
+              }
+            }
+          }
+        },
+        "native_coarse_vs_fine_dt": {
+          "0.01": {
+            "delta52": {
+              "versus_zero_NMSE": 0.000520511567531703,
+              "cosine": 0.9997449310508846,
+              "predicted_RMS": 0.21050692137482357,
+              "native_RMS": 0.20988234649493095
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.006605123662110618,
+              "cosine": 0.9966919849788839,
+              "predicted_RMS": 0.020286736074768677,
+              "native_RMS": 0.020357974378744162
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.0005394873782861079,
+              "cosine": 0.9997390384794703,
+              "predicted_RMS": 0.16157503348598007,
+              "native_RMS": 0.16094122470715944
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.0024618419369317286,
+              "cosine": 0.9990465355854818,
+              "predicted_RMS": 0.189904756120661,
+              "native_RMS": 0.18570368974270487
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.0013077576137977068,
+              "cosine": 0.9994182936343042,
+              "predicted_RMS": 0.17153891617670794,
+              "native_RMS": 0.16959757860352406
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.0003466607867843511,
+              "cosine": 0.9998266822749623,
+              "predicted_RMS": 0.12386168315871138,
+              "native_RMS": 0.1239123184699477
+            }
+          },
+          "0.05": {
+            "delta52": {
+              "versus_zero_NMSE": 0.0011101565540702417,
+              "cosine": 0.9994607904977095,
+              "predicted_RMS": 0.21219692484191555,
+              "native_RMS": 0.2135204450432869
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.005586618084241516,
+              "cosine": 0.9972377794020565,
+              "predicted_RMS": 0.020379964471839124,
+              "native_RMS": 0.020609081067774652
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.0010081618048662162,
+              "cosine": 0.9995225602062041,
+              "predicted_RMS": 0.1610422497913983,
+              "native_RMS": 0.15994858144767915
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.004190029176278663,
+              "cosine": 0.9983358159695777,
+              "predicted_RMS": 0.18722508562846651,
+              "native_RMS": 0.18217217296417768
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.002259980718709813,
+              "cosine": 0.9989993065215957,
+              "predicted_RMS": 0.17021794375088356,
+              "native_RMS": 0.16768402628827425
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.0005337232975116377,
+              "cosine": 0.9997399725124486,
+              "predicted_RMS": 0.12387255875983473,
+              "native_RMS": 0.12344713832085784
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "versus_zero_NMSE": 0.009270913889427707,
+              "cosine": 0.9954178096896974,
+              "predicted_RMS": 0.2239893349175474,
+              "native_RMS": 0.227602547388023
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.0568107125377387,
+              "cosine": 0.9812760652749712,
+              "predicted_RMS": 0.03161765194396876,
+              "native_RMS": 0.037601048656927136
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.059117233019643806,
+              "cosine": 0.9752582014759186,
+              "predicted_RMS": 0.17585879427672618,
+              "native_RMS": 0.20120298664818143
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.01565602640687757,
+              "cosine": 0.9921462287430611,
+              "predicted_RMS": 0.1813228986973537,
+              "native_RMS": 0.1833474445692636
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.046366453482622264,
+              "cosine": 0.9790309551089394,
+              "predicted_RMS": 0.17769883196102573,
+              "native_RMS": 0.19543248544563557
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.040795456469816326,
+              "cosine": 0.9803998403961661,
+              "predicted_RMS": 0.1233309937286091,
+              "native_RMS": 0.131776485949391
+            }
+          }
+        },
+        "source": "Full identical native state, central \u00b1amplitude after actual EMA; AD evaluated at action0. Same finite-width probes never fit.",
+        "limitation": "Central native secants include contact switches/finite solver effects; dt mismatch is not a pure discretization error bound. No assertion of smooth native gradient or imagined reward validity."
+      }
+    }
+  },
+  "logs": {
+    "ABS": [
+      [
+        0.35587507486343384,
+        0.35587507486343384,
+        0.2714918255805969
+      ],
+      [
+        0.247152179479599,
+        0.247152179479599,
+        3.370485782623291
+      ],
+      [
+        0.2016812115907669,
+        0.2016812115907669,
+        1.0707710981369019
+      ],
+      [
+        0.17737023532390594,
+        0.17737023532390594,
+        2.2641677856445312
+      ],
+      [
+        0.14584699273109436,
+        0.14584699273109436,
+        1.5725255012512207
+      ],
+      [
+        0.1477738320827484,
+        0.1477738320827484,
+        0.4104316234588623
+      ],
+      [
+        0.1282426118850708,
+        0.1282426118850708,
+        0.2601203918457031
+      ],
+      [
+        0.12023568153381348,
+        0.12023568153381348,
+        1.0599256753921509
+      ],
+      [
+        0.11195863783359528,
+        0.11195863783359528,
+        3.9416441917419434
+      ],
+      [
+        0.10357942432165146,
+        0.10357942432165146,
+        1.4366176128387451
+      ],
+      [
+        0.09362885355949402,
+        0.09362885355949402,
+        1.375653624534607
+      ],
+      [
+        0.08447076380252838,
+        0.08447076380252838,
+        0.26464778184890747
+      ],
+      [
+        0.0822448804974556,
+        0.0822448804974556,
+        1.5562916994094849
+      ],
+      [
+        0.07318384200334549,
+        0.07318384200334549,
+        0.2964720129966736
+      ],
+      [
+        0.07340875267982483,
+        0.07340875267982483,
+        1.543276309967041
+      ],
+      [
+        0.06924522668123245,
+        0.06924522668123245,
+        1.723899006843567
+      ],
+      [
+        0.06640741974115372,
+        0.06640741974115372,
+        1.5485225915908813
+      ],
+      [
+        0.05642390623688698,
+        0.05642390623688698,
+        0.2482127696275711
+      ],
+      [
+        0.06161759793758392,
+        0.06161759793758392,
+        0.312627375125885
+      ],
+      [
+        0.049124181270599365,
+        0.049124181270599365,
+        2.141484022140503
+      ],
+      [
+        0.047735795378685,
+        0.047735795378685,
+        1.2881938219070435
+      ],
+      [
+        0.045917581766843796,
+        0.045917581766843796,
+        0.2601507008075714
+      ],
+      [
+        0.044924259185791016,
+        0.044924259185791016,
+        4.502425193786621
+      ],
+      [
+        0.03929290920495987,
+        0.03929290920495987,
+        2.171593189239502
+      ],
+      [
+        0.04863932728767395,
+        0.04863932728767395,
+        1.5861455202102661
+      ],
+      [
+        0.04095376655459404,
+        0.04095376655459404,
+        3.091141700744629
+      ],
+      [
+        0.04232214391231537,
+        0.04232214391231537,
+        3.1220147609710693
+      ],
+      [
+        0.034000176936388016,
+        0.034000176936388016,
+        0.40940192341804504
+      ],
+      [
+        0.038519881665706635,
+        0.038519881665706635,
+        0.2141963392496109
+      ],
+      [
+        0.03268715366721153,
+        0.03268715366721153,
+        1.6197911500930786
+      ],
+      [
+        0.029393862932920456,
+        0.029393862932920456,
+        0.3225077986717224
+      ],
+      [
+        0.030960531905293465,
+        0.030960531905293465,
+        0.38980352878570557
+      ],
+      [
+        0.02824636548757553,
+        0.02824636548757553,
+        1.5780673027038574
+      ],
+      [
+        0.029004955664277077,
+        0.029004955664277077,
+        0.28093576431274414
+      ],
+      [
+        0.02527322806417942,
+        0.02527322806417942,
+        0.36337512731552124
+      ],
+      [
+        0.025317080318927765,
+        0.025317080318927765,
+        3.261556625366211
+      ],
+      [
+        0.024966878816485405,
+        0.024966878816485405,
+        1.6337716579437256
+      ],
+      [
+        0.021327169612050056,
+        0.021327169612050056,
+        2.793755054473877
+      ],
+      [
+        0.030113525688648224,
+        0.030113525688648224,
+        3.1428937911987305
+      ],
+      [
+        0.02815953642129898,
+        0.02815953642129898,
+        1.0586825609207153
+      ],
+      [
+        0.025603361427783966,
+        0.025603361427783966,
+        4.05531644821167
+      ],
+      [
+        0.025182900950312614,
+        0.025182900950312614,
+        2.3458540439605713
+      ],
+      [
+        0.030215110629796982,
+        0.030215110629796982,
+        3.4354729652404785
+      ],
+      [
+        0.026353484019637108,
+        0.026353484019637108,
+        0.4003121256828308
+      ],
+      [
+        0.03180478885769844,
+        0.03180478885769844,
+        1.2773617506027222
+      ],
+      [
+        0.02252986468374729,
+        0.02252986468374729,
+        0.46116501092910767
+      ],
+      [
+        0.018685944378376007,
+        0.018685944378376007,
+        0.971217155456543
+      ],
+      [
+        0.02517740987241268,
+        0.02517740987241268,
+        1.0653430223464966
+      ],
+      [
+        0.019894849509000778,
+        0.019894849509000778,
+        0.9725406765937805
+      ],
+      [
+        0.021564295515418053,
+        0.021564295515418053,
+        1.0591301918029785
+      ],
+      [
+        0.02565077692270279,
+        0.02565077692270279,
+        0.33774349093437195
+      ],
+      [
+        0.019653409719467163,
+        0.019653409719467163,
+        0.2756257951259613
+      ],
+      [
+        0.02426118031144142,
+        0.02426118031144142,
+        0.2335016429424286
+      ],
+      [
+        0.021923599764704704,
+        0.021923599764704704,
+        2.2752537727355957
+      ],
+      [
+        0.017800677567720413,
+        0.017800677567720413,
+        2.4762749671936035
+      ],
+      [
+        0.021235203370451927,
+        0.021235203370451927,
+        0.17508633434772491
+      ],
+      [
+        0.013936742208898067,
+        0.013936742208898067,
+        1.7275469303131104
+      ],
+      [
+        0.016282377764582634,
+        0.016282377764582634,
+        0.39334607124328613
+      ],
+      [
+        0.031014876440167427,
+        0.031014876440167427,
+        3.2048122882843018
+      ],
+      [
+        0.021121621131896973,
+        0.021121621131896973,
+        3.396184206008911
+      ],
+      [
+        0.021696511656045914,
+        0.021696511656045914,
+        2.0718159675598145
+      ],
+      [
+        0.025536103174090385,
+        0.025536103174090385,
+        1.1108746528625488
+      ],
+      [
+        0.01827436126768589,
+        0.01827436126768589,
+        2.101757764816284
+      ],
+      [
+        0.021249769255518913,
+        0.021249769255518913,
+        0.32437896728515625
+      ],
+      [
+        0.020000973716378212,
+        0.020000973716378212,
+        2.7904865741729736
+      ],
+      [
+        0.01602957583963871,
+        0.01602957583963871,
+        1.6449027061462402
+      ],
+      [
+        0.014209724962711334,
+        0.014209724962711334,
+        1.2990325689315796
+      ],
+      [
+        0.017344491556286812,
+        0.017344491556286812,
+        1.014890432357788
+      ],
+      [
+        0.02173134684562683,
+        0.02173134684562683,
+        4.042274475097656
+      ],
+      [
+        0.021214304491877556,
+        0.021214304491877556,
+        1.9824087619781494
+      ],
+      [
+        0.0201291274279356,
+        0.0201291274279356,
+        0.39325353503227234
+      ],
+      [
+        0.020379384979605675,
+        0.020379384979605675,
+        4.422084808349609
+      ],
+      [
+        0.01397605612874031,
+        0.01397605612874031,
+        0.3723853528499603
+      ],
+      [
+        0.020776648074388504,
+        0.020776648074388504,
+        1.3925542831420898
+      ],
+      [
+        0.017417754977941513,
+        0.017417754977941513,
+        2.6420505046844482
+      ],
+      [
+        0.014300745911896229,
+        0.014300745911896229,
+        3.5557844638824463
+      ],
+      [
+        0.01792447455227375,
+        0.01792447455227375,
+        0.9755754470825195
+      ],
+      [
+        0.013554729521274567,
+        0.013554729521274567,
+        0.2676558196544647
+      ],
+      [
+        0.01944786310195923,
+        0.01944786310195923,
+        0.18606506288051605
+      ],
+      [
+        0.016047095879912376,
+        0.016047095879912376,
+        3.3669347763061523
+      ],
+      [
+        0.020160291343927383,
+        0.020160291343927383,
+        2.7265028953552246
+      ],
+      [
+        0.014045145362615585,
+        0.014045145362615585,
+        1.5227246284484863
+      ],
+      [
+        0.013545071706175804,
+        0.013545071706175804,
+        2.0495433807373047
+      ],
+      [
+        0.016751935705542564,
+        0.016751935705542564,
+        0.36219674348831177
+      ],
+      [
+        0.020638564601540565,
+        0.020638564601540565,
+        2.2750227451324463
+      ],
+      [
+        0.014334789477288723,
+        0.014334789477288723,
+        0.2412123829126358
+      ],
+      [
+        0.02121509052813053,
+        0.02121509052813053,
+        1.030599594116211
+      ],
+      [
+        0.017880141735076904,
+        0.017880141735076904,
+        0.9677132964134216
+      ],
+      [
+        0.01828497089445591,
+        0.01828497089445591,
+        1.8465369939804077
+      ],
+      [
+        0.022451166063547134,
+        0.022451166063547134,
+        2.485135555267334
+      ],
+      [
+        0.013882451690733433,
+        0.013882451690733433,
+        1.4511163234710693
+      ],
+      [
+        0.017780223861336708,
+        0.017780223861336708,
+        4.210092544555664
+      ],
+      [
+        0.016469033434987068,
+        0.016469033434987068,
+        0.9957739114761353
+      ],
+      [
+        0.017878305166959763,
+        0.017878305166959763,
+        1.6651266813278198
+      ],
+      [
+        0.018313314765691757,
+        0.018313314765691757,
+        3.3099589347839355
+      ],
+      [
+        0.019824489951133728,
+        0.019824489951133728,
+        1.5909922122955322
+      ],
+      [
+        0.01640874706208706,
+        0.01640874706208706,
+        0.25016188621520996
+      ],
+      [
+        0.018292533233761787,
+        0.018292533233761787,
+        3.374797821044922
+      ],
+      [
+        0.013706968165934086,
+        0.013706968165934086,
+        2.2870731353759766
+      ],
+      [
+        0.012927459552884102,
+        0.012927459552884102,
+        2.2702622413635254
+      ]
+    ],
+    "CF": [
+      [
+        0.6273669004440308,
+        0.35587507486343384,
+        0.2714918255805969
+      ],
+      [
+        3.6160173416137695,
+        0.24692459404468536,
+        3.3690927028656006
+      ],
+      [
+        1.2701376676559448,
+        0.20096321403980255,
+        1.0691744089126587
+      ],
+      [
+        2.4385433197021484,
+        0.1748112291097641,
+        2.2637321949005127
+      ],
+      [
+        1.710102915763855,
+        0.14462199807167053,
+        1.5654809474945068
+      ],
+      [
+        0.5517807602882385,
+        0.14744047820568085,
+        0.4043402671813965
+      ],
+      [
+        0.38293737173080444,
+        0.127304807305336,
+        0.25563257932662964
+      ],
+      [
+        1.1507399082183838,
+        0.12006780505180359,
+        1.0306720733642578
+      ],
+      [
+        4.020905017852783,
+        0.11220218241214752,
+        3.9087026119232178
+      ],
+      [
+        1.5360153913497925,
+        0.10758702456951141,
+        1.4284284114837646
+      ],
+      [
+        1.4753444194793701,
+        0.10057030618190765,
+        1.3747740983963013
+      ],
+      [
+        0.34631335735321045,
+        0.09007754176855087,
+        0.256235808134079
+      ],
+      [
+        1.6430201530456543,
+        0.088009774684906,
+        1.555010437965393
+      ],
+      [
+        0.3614787757396698,
+        0.07646819949150085,
+        0.28501057624816895
+      ],
+      [
+        1.5889084339141846,
+        0.0754275768995285,
+        1.5134809017181396
+      ],
+      [
+        1.7689495086669922,
+        0.07233905047178268,
+        1.696610450744629
+      ],
+      [
+        1.5873427391052246,
+        0.07037323713302612,
+        1.5169694423675537
+      ],
+      [
+        0.28770819306373596,
+        0.05953884497284889,
+        0.22816933691501617
+      ],
+      [
+        0.36265838146209717,
+        0.06726895272731781,
+        0.29538944363594055
+      ],
+      [
+        2.152675151824951,
+        0.05296660587191582,
+        2.0997085571289062
+      ],
+      [
+        1.3150441646575928,
+        0.05199239403009415,
+        1.2630517482757568
+      ],
+      [
+        0.29545992612838745,
+        0.055422499775886536,
+        0.2400374412536621
+      ],
+      [
+        4.380354404449463,
+        0.05185855180025101,
+        4.328495979309082
+      ],
+      [
+        2.2122724056243896,
+        0.05010887607932091,
+        2.162163496017456
+      ],
+      [
+        1.6562806367874146,
+        0.0588461197912693,
+        1.5974345207214355
+      ],
+      [
+        3.1293599605560303,
+        0.053669512271881104,
+        3.075690507888794
+      ],
+      [
+        3.074404001235962,
+        0.05539560317993164,
+        3.0190083980560303
+      ],
+      [
+        0.43888646364212036,
+        0.048878803849220276,
+        0.3900076746940613
+      ],
+      [
+        0.2393195480108261,
+        0.052122920751571655,
+        0.18719662725925446
+      ],
+      [
+        1.6315498352050781,
+        0.04771075397729874,
+        1.5838390588760376
+      ],
+      [
+        0.33556777238845825,
+        0.04289061203598976,
+        0.2926771640777588
+      ],
+      [
+        0.4083743691444397,
+        0.04509565979242325,
+        0.36327871680259705
+      ],
+      [
+        1.4808841943740845,
+        0.0387750044465065,
+        1.442109227180481
+      ],
+      [
+        0.293777734041214,
+        0.04652135446667671,
+        0.24725636839866638
+      ],
+      [
+        0.3677801787853241,
+        0.03959539160132408,
+        0.3281847834587097
+      ],
+      [
+        3.1095337867736816,
+        0.042152415961027145,
+        3.0673813819885254
+      ],
+      [
+        1.541590690612793,
+        0.04032433405518532,
+        1.501266360282898
+      ],
+      [
+        2.5692737102508545,
+        0.033526498824357986,
+        2.5357472896575928
+      ],
+      [
+        2.9734387397766113,
+        0.04379604756832123,
+        2.929642677307129
+      ],
+      [
+        0.9912426471710205,
+        0.05040322244167328,
+        0.940839409828186
+      ],
+      [
+        3.8661391735076904,
+        0.05543044954538345,
+        3.81070876121521
+      ],
+      [
+        2.044100046157837,
+        0.06463632732629776,
+        1.9794636964797974
+      ],
+      [
+        3.114387273788452,
+        0.07826095074415207,
+        3.0361263751983643
+      ],
+      [
+        0.45507389307022095,
+        0.06424073129892349,
+        0.39083316922187805
+      ],
+      [
+        1.2989681959152222,
+        0.07515383511781693,
+        1.2238143682479858
+      ],
+      [
+        0.4789934456348419,
+        0.06434007734060287,
+        0.41465336084365845
+      ],
+      [
+        0.9530773758888245,
+        0.07231906801462173,
+        0.8807582855224609
+      ],
+      [
+        1.0894653797149658,
+        0.069109708070755,
+        1.0203557014465332
+      ],
+      [
+        0.8847757577896118,
+        0.06075975298881531,
+        0.8240159749984741
+      ],
+      [
+        1.009589433670044,
+        0.05165828391909599,
+        0.9579311609268188
+      ],
+      [
+        0.4230162501335144,
+        0.07100512087345123,
+        0.352011114358902
+      ],
+      [
+        0.29889675974845886,
+        0.05423012003302574,
+        0.24466665089130402
+      ],
+      [
+        0.2642604112625122,
+        0.06122780218720436,
+        0.20303259789943695
+      ],
+      [
+        2.1667141914367676,
+        0.05531266704201698,
+        2.1114015579223633
+      ],
+      [
+        2.407546281814575,
+        0.05935828387737274,
+        2.3481879234313965
+      ],
+      [
+        0.18372933566570282,
+        0.05014001205563545,
+        0.13358932733535767
+      ],
+      [
+        1.5908128023147583,
+        0.04646718502044678,
+        1.5443456172943115
+      ],
+      [
+        0.4503980875015259,
+        0.06430988013744354,
+        0.38608819246292114
+      ],
+      [
+        2.993079423904419,
+        0.07814078778028488,
+        2.9149386882781982
+      ],
+      [
+        2.9605414867401123,
+        0.04589879885315895,
+        2.914642572402954
+      ],
+      [
+        1.7589404582977295,
+        0.05047881603240967,
+        1.7084616422653198
+      ],
+      [
+        0.939553439617157,
+        0.10648404806852341,
+        0.833069384098053
+      ],
+      [
+        1.9434032440185547,
+        0.06439575552940369,
+        1.8790074586868286
+      ],
+      [
+        0.45009276270866394,
+        0.09483369439840317,
+        0.3552590608596802
+      ],
+      [
+        2.0930044651031494,
+        0.09011372178792953,
+        2.0028908252716064
+      ],
+      [
+        1.4858481884002686,
+        0.3754158616065979,
+        1.1104322671890259
+      ],
+      [
+        1.433029294013977,
+        0.17862924933433533,
+        1.2544000148773193
+      ],
+      [
+        0.9482030868530273,
+        0.18834790587425232,
+        0.7598551511764526
+      ],
+      [
+        3.4985647201538086,
+        0.14549584686756134,
+        3.3530688285827637
+      ],
+      [
+        1.805953025817871,
+        0.2514649033546448,
+        1.5544880628585815
+      ],
+      [
+        1.6678515672683716,
+        1.1932395696640015,
+        0.47461196780204773
+      ],
+      [
+        3.7913830280303955,
+        0.20092298090457916,
+        3.5904600620269775
+      ],
+      [
+        0.6021502614021301,
+        0.26000696420669556,
+        0.34214329719543457
+      ],
+      [
+        1.6806365251541138,
+        0.30582496523857117,
+        1.3748115301132202
+      ],
+      [
+        2.4964563846588135,
+        0.23808009922504425,
+        2.258376359939575
+      ],
+      [
+        3.761514663696289,
+        0.3448089361190796,
+        3.41670560836792
+      ],
+      [
+        1.2716673612594604,
+        0.2701440751552582,
+        1.0015232563018799
+      ],
+      [
+        0.447776734828949,
+        0.21315324306488037,
+        0.2346234768629074
+      ],
+      [
+        0.29729342460632324,
+        0.1565776914358139,
+        0.14071573317050934
+      ],
+      [
+        2.8465306758880615,
+        0.1047309935092926,
+        2.7417995929718018
+      ],
+      [
+        2.6419098377227783,
+        0.10389584302902222,
+        2.5380139350891113
+      ],
+      [
+        1.420472264289856,
+        0.12805411219596863,
+        1.292418122291565
+      ],
+      [
+        2.100079298019409,
+        0.15133506059646606,
+        1.9487441778182983
+      ],
+      [
+        0.49467816948890686,
+        0.14767012000083923,
+        0.3470080494880676
+      ],
+      [
+        2.3380215167999268,
+        0.14422737061977386,
+        2.1937942504882812
+      ],
+      [
+        0.3320603370666504,
+        0.11448482424020767,
+        0.21757550537586212
+      ],
+      [
+        1.1271084547042847,
+        0.1024378165602684,
+        1.0246706008911133
+      ],
+      [
+        0.9815069437026978,
+        0.0733167827129364,
+        0.908190131187439
+      ],
+      [
+        1.8271570205688477,
+        0.06345347315073013,
+        1.7637035846710205
+      ],
+      [
+        2.363424777984619,
+        0.07785943150520325,
+        2.2855653762817383
+      ],
+      [
+        1.2094608545303345,
+        0.06590864062309265,
+        1.1435521841049194
+      ],
+      [
+        3.911616086959839,
+        0.06640171259641647,
+        3.845214366912842
+      ],
+      [
+        1.0293902158737183,
+        0.06694524735212326,
+        0.9624449610710144
+      ],
+      [
+        1.5211474895477295,
+        0.0556611493229866,
+        1.4654862880706787
+      ],
+      [
+        2.8348798751831055,
+        0.06152758747339249,
+        2.7733523845672607
+      ],
+      [
+        1.1915063858032227,
+        0.05299908295273781,
+        1.1385072469711304
+      ],
+      [
+        0.2804994285106659,
+        0.059199728071689606,
+        0.2212996929883957
+      ],
+      [
+        2.805001735687256,
+        0.05902033671736717,
+        2.745981454849243
+      ],
+      [
+        2.199342727661133,
+        0.055888500064611435,
+        2.1434543132781982
+      ],
+      [
+        2.02614688873291,
+        0.062178172171115875,
+        1.9639687538146973
+      ]
+    ]
+  },
+  "paired_stage_updates": 100,
+  "Adam_steps_per_arm": 1100,
+  "planned_stage_remaining_updates": 1900,
+  "training_wall_s": 1.3427940998226404,
+  "CUDA_ms_per_two_arm_update": [
+    817.33203125,
+    6.962592124938965,
+    6.186624050140381,
+    6.082176208496094,
+    5.522496223449707,
+    5.7244157791137695,
+    5.337728023529053,
+    5.176032066345215,
+    5.796000003814697,
+    5.497024059295654,
+    5.1255998611450195,
+    5.096640110015869,
+    5.058047771453857,
+    5.091839790344238,
+    5.28272008895874,
+    4.910272121429443,
+    5.202079772949219,
+    5.464928150177002,
+    5.265312194824219,
+    5.065408229827881,
+    5.133887767791748,
+    5.133471965789795,
+    5.1274237632751465,
+    5.135392189025879,
+    5.572927951812744,
+    5.061823844909668,
+    5.24121618270874,
+    5.003903865814209,
+    5.017663955688477,
+    5.301631927490234,
+    5.2139201164245605,
+    5.043007850646973,
+    5.180543899536133,
+    5.441760063171387,
+    5.583871841430664,
+    5.45417594909668,
+    5.309055805206299,
+    5.333439826965332,
+    5.224991798400879,
+    5.16323184967041,
+    5.042687892913818,
+    5.35964822769165,
+    4.996255874633789,
+    4.895103931427002,
+    5.454751968383789,
+    5.237215995788574,
+    5.128352165222168,
+    5.296480178833008,
+    5.260863780975342,
+    4.858016014099121,
+    5.475935935974121,
+    6.011199951171875,
+    5.400288105010986,
+    5.59881591796875,
+    5.535808086395264,
+    5.3909759521484375,
+    5.2466559410095215,
+    5.222496032714844,
+    5.079999923706055,
+    6.333695888519287,
+    5.117216110229492,
+    5.377376079559326,
+    5.171999931335449,
+    5.031040191650391,
+    5.306399822235107,
+    5.259871959686279,
+    5.0083842277526855,
+    5.080319881439209,
+    5.291488170623779,
+    5.051648139953613,
+    5.211584091186523,
+    5.442848205566406,
+    5.056096076965332,
+    5.082943916320801,
+    5.105599880218506,
+    4.924863815307617,
+    5.041567802429199,
+    5.247615814208984,
+    5.08076810836792,
+    4.959712028503418,
+    5.629183769226074,
+    5.1714558601379395,
+    5.460639953613281,
+    5.340191841125488,
+    4.997600078582764,
+    5.116447925567627,
+    5.309823989868164,
+    5.086336135864258,
+    5.235392093658447,
+    5.226175785064697,
+    4.96560001373291,
+    5.258975982666016,
+    5.281951904296875,
+    5.0273919105529785,
+    5.053728103637695,
+    5.371967792510986,
+    4.912511825561523,
+    4.947103977203369,
+    5.676479816436768,
+    6.293727874755859
+  ],
+  "remaining_two_arm_compute_estimate_s": 9.926238226890565,
+  "estimate_scope": "Conditional1900 paired updates at last50 CUDA-event median; excludes native data, startup, saving and diagnostics. No background continuation.",
+  "GPU_telemetry": {
+    "samples": [
+      {
+        "start": 1541767.0982648,
+        "end": 1541767.1622175,
+        "values": [
+          0.0,
+          1814.0,
+          32607.0
+        ]
+      },
+      {
+        "start": 1541767.3758695,
+        "end": 1541767.4305123,
+        "values": [
+          1.0,
+          1884.0,
+          32607.0
+        ]
+      },
+      {
+        "start": 1541767.6435116,
+        "end": 1541767.6976597,
+        "values": [
+          1.0,
+          1950.0,
+          32607.0
+        ]
+      },
+      {
+        "start": 1541767.9115981,
+        "end": 1541767.964049,
+        "values": [
+          1.0,
+          1956.0,
+          32607.0
+        ]
+      },
+      {
+        "start": 1541768.1786365,
+        "end": 1541768.231762,
+        "values": [
+          27.0,
+          1955.0,
+          32607.0
+        ]
+      },
+      {
+        "start": 1541768.4323203,
+        "end": 1541768.4842691,
+        "values": [
+          27.0,
+          1957.0,
+          32607.0
+        ]
+      }
+    ],
+    "errors": [],
+    "scope": "Device-wide one-shot query windows overlapping the update loop; other desktop workloads included, not process-only occupancy.",
+    "GPU_utilization_median_percent": 1.0,
+    "GPU_utilization_max_percent": 27.0,
+    "VRAM_used_max_MiB": 1957.0,
+    "VRAM_total_MiB": 32607.0
+  },
+  "peak_Torch_allocated_bytes": 123219968,
+  "peak_Torch_reserved_bytes": 134217728,
+  "training_running": false,
+  "pause_goal_requested": true,
+  "scope": "First warm-start matched ABS/CF response checkpoint, not a policy/A1A2/CHORD benefit experiment, full trajectory holding, independent RGB or generalization. Structural save health does not certify physical gradients."
+}

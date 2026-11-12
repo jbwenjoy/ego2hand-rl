@@ -112,6 +112,14 @@ new102/87 one-step response baseline with TRAIN-only frozen scales and resident
 GPU tensors. It is not the frozen phone366/222 model, an Actor or an automatically
 loaded replacement. Original phone files/imports/config bytes remain unchanged.
 
+`learning/paired_response.py` owns the actual-control secant supervision, matched
+updates and response diagnostics. `paired_continuation.py` provides shared exact
+restore/next-update/readback orchestration, called by a thin CLI; executed older
+stage scripts remain frozen. `response_rollout.py` checks recorded CHECK control
+recursion using the explicit world-left chart in `mechanics/response_decode.py`.
+Predicted/native COM momentum defects are diagnostics, not constraints silently
+applied to targets or proof of physical trajectory feasibility.
+
 `configs` selects recipes and external artifacts. `ArtifactRegistry` resolves
 named data roots, declared roles and content hashes. TRAIN, MONITOR, CHECK and
 `ONLY_HELDOUT_TRIPOD_ACTION_RESPONSE` remain different roles; a loader must not
