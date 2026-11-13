@@ -1,0 +1,123 @@
+{
+  "schema": "projected_pen_native_saved_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_projected_pen_dynamics.py",
+    "bytes": 7211,
+    "sha256": "9a49c88415d83b85a6229b6caa3a3f5a3d4a2f0ad8ae1fe5beff8fa57f4acaee"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_native_v1\\report.json",
+    "bytes": 11952,
+    "sha256": "6c77003c23120ec64e81f182a02139eabd809d1653050c829b2ca95cbc83bf7e"
+  },
+  "checks": {
+    "four_cases": true,
+    "all_saved_checks": true
+  },
+  "cases": [
+    {
+      "name": "ORIGINAL_ZERO_RESIDUAL",
+      "dt": 0.005,
+      "checks": {
+        "initial_state": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "initial_first_tick": true,
+        "source_clock": true,
+        "native_clock": true,
+        "raw_action": true,
+        "no_force_aid": true,
+        "EMA_targets": true,
+        "raw_contact_reconstruction": true,
+        "force_and_impulse": true,
+        "pose_metrics": true,
+        "first_terminal": true,
+        "gates": true
+      },
+      "force_error_N_or_Nm": 2.7755575615628914e-17,
+      "generalized_force_error_N": 2.220446049250313e-16,
+      "max_impulse_residual_N_s": 1.0842021724855044e-18,
+      "pose_metric_error": 2.220446049250313e-16,
+      "qualified": false
+    },
+    {
+      "name": "ORIGINAL_ZERO_RESIDUAL",
+      "dt": 0.0025,
+      "checks": {
+        "initial_state": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "initial_first_tick": true,
+        "source_clock": true,
+        "native_clock": true,
+        "raw_action": true,
+        "no_force_aid": true,
+        "EMA_targets": true,
+        "raw_contact_reconstruction": true,
+        "force_and_impulse": true,
+        "pose_metrics": true,
+        "first_terminal": true,
+        "gates": true
+      },
+      "force_error_N_or_Nm": 5.551115123125783e-17,
+      "generalized_force_error_N": 2.220446049250313e-16,
+      "max_impulse_residual_N_s": 1.1926223897340549e-18,
+      "pose_metric_error": 4.440892098500626e-16,
+      "qualified": false
+    },
+    {
+      "name": "PROJECTED_CONSTANT_RESIDUAL",
+      "dt": 0.005,
+      "checks": {
+        "initial_state": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "initial_first_tick": true,
+        "source_clock": true,
+        "native_clock": true,
+        "raw_action": true,
+        "no_force_aid": true,
+        "EMA_targets": true,
+        "raw_contact_reconstruction": true,
+        "force_and_impulse": true,
+        "pose_metrics": true,
+        "first_terminal": true,
+        "gates": true
+      },
+      "force_error_N_or_Nm": 5.551115123125783e-17,
+      "generalized_force_error_N": 2.220446049250313e-16,
+      "max_impulse_residual_N_s": 1.734723475976807e-18,
+      "pose_metric_error": 0.0,
+      "qualified": false
+    },
+    {
+      "name": "PROJECTED_CONSTANT_RESIDUAL",
+      "dt": 0.0025,
+      "checks": {
+        "initial_state": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "initial_first_tick": true,
+        "source_clock": true,
+        "native_clock": true,
+        "raw_action": true,
+        "no_force_aid": true,
+        "EMA_targets": true,
+        "raw_contact_reconstruction": true,
+        "force_and_impulse": true,
+        "pose_metrics": true,
+        "first_terminal": true,
+        "gates": true
+      },
+      "force_error_N_or_Nm": 1.1102230246251565e-16,
+      "generalized_force_error_N": 2.220446049250313e-16,
+      "max_impulse_residual_N_s": 1.3010426069826053e-18,
+      "pose_metric_error": 4.440892098500626e-16,
+      "qualified": false
+    }
+  ],
+  "passed": 56,
+  "total": 56,
+  "neural_updates": 0,
+  "native_integration_steps": 0
+}

@@ -1,0 +1,111 @@
+{
+  "schema": "nominal_controlled_pen_reference_contact_wrench:1",
+  "projection": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_projection_v1\\report.json",
+    "bytes": 7220,
+    "sha256": "2c4e00293950a8c77591887437d4c762b0c9b02edc7f06e9d2997ea04a1f3d04"
+  },
+  "basis": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_support_diagnosis_v1\\basis.npz",
+    "bytes": 2535,
+    "sha256": "7be3db7faeaff89c486b21df315a1d71647795277881afc94242d4d6faf99b85"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\build_controlled_pen_reference_wrench.py",
+      "bytes": 3439,
+      "sha256": "c11665f52da462a3500d50f35894bfb6800dbbe9e7929f343b5d085b408ce647"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\reference_contact_wrench.py",
+      "bytes": 2276,
+      "sha256": "6c5f9d72704a804d183140f2e3ba0aa9f3f08db7caedb8b159c0a74252dece0d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\wrench_separation.py",
+      "bytes": 1950,
+      "sha256": "ca51d08dddbd58ffe1dec5c65e25b189eae2e7b80729cd6d6bec9cc73bbe5782"
+    }
+  ],
+  "targets": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_reference_wrench_v1\\targets.npz",
+    "bytes": 49242,
+    "sha256": "e5772fc2c3dee74073b22c050b957062538442890d1f8309b36418be2673c856"
+  },
+  "valid_frames": 366,
+  "original_frames": 369,
+  "estimator": "Four-sample forward stencil at ORIGINAL frame: position derivatives and local-world SO3 log derivatives at each frame. No smoothing/extrapolation; last3 frames invalid.",
+  "mass_kg": 0.029999999329447746,
+  "inertia_BODY": [
+    [
+      1.1704360076691955e-06,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.00019457894086372107,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.00019457894086372107
+    ]
+  ],
+  "first_dynamic_target_BODY": [
+    0.014843360961885176,
+    -0.04160857276595442,
+    0.2720344239076246,
+    -8.326310693747112e-06,
+    -0.00826168847327073,
+    0.0006778212597514546
+  ],
+  "first_static_target_BODY": [
+    0.06122940821680249,
+    -0.09910686116811845,
+    0.2702614951615259,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "first_dynamic_wrench_cone_feasible": false,
+  "first_dynamic_separating_certificate": {
+    "verified": true,
+    "solver_status": 0,
+    "radius_m": 0.125,
+    "witness_scaled6": [
+      0.0,
+      0.585231615500579,
+      -0.4036466018017273,
+      0.0,
+      12.968975058983155,
+      -1.6004445850873124
+    ],
+    "witness_dual_to_F_N_T_Nm": [
+      0.0,
+      0.585231615500579,
+      -0.4036466018017273,
+      0.0,
+      103.75180047186524,
+      -12.803556680698499
+    ],
+    "minimum_ray_dot": -6.661338147750939e-16,
+    "target_dot": -1.0,
+    "separating_tolerance": 1e-09,
+    "scope": "Checked numerical certificate for the supplied frozen native rays only; not global infeasibility, an applied twist, force estimate or physical policy gradient."
+  },
+  "initial_velocity_estimator_difference_m_s": [
+    -0.006172433495521545,
+    -0.016730589171250664,
+    0.007056196530659994
+  ],
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Nominal simulator inertia/gravity and finite-difference reference acceleration, not measured source forces or calibrated ego dynamics. Frozen first-frame cone feasibility is necessary only; moving-hand torque bounds/contact evolution/derivative uncertainty remain."
+}

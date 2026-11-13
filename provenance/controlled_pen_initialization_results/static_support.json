@@ -1,0 +1,76 @@
+{
+  "schema": "controlled_pen_fixed_geometry_preload_LP:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\controlled_pen_preload_v1.toml",
+    "bytes": 285,
+    "sha256": "ed51d61d8ece954292e2c8fdd89ab5e89ed31054888fcb8b3ea50a1c751a2e31"
+  },
+  "projection": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_projection_v1\\report.json",
+    "bytes": 7220,
+    "sha256": "2c4e00293950a8c77591887437d4c762b0c9b02edc7f06e9d2997ea04a1f3d04"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\check_controlled_pen_preload.py",
+      "bytes": 4751,
+      "sha256": "94b32785c98f0518cb5b403fbbab25f4a2781754a711f5c98b15a1a64f3b2467"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\indexed_contact_support.py",
+      "bytes": 3574,
+      "sha256": "a7c30337d5870e06c28c62276776e77225b71511a7357266b6784d1d01b98730"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    }
+  ],
+  "success": false,
+  "status": 2,
+  "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+  "full_wrench_rank": 6,
+  "contacts": [
+    {
+      "geoms": [
+        1,
+        18
+      ],
+      "dim": 4,
+      "distance_m": -4.984841471887107e-05,
+      "local_force6": [
+        0.1643662714782756,
+        -0.11505638807539427,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "geoms": [
+        1,
+        44
+      ],
+      "dim": 4,
+      "distance_m": -5.0027769527356144e-05,
+      "local_force6": [
+        0.21176791901006486,
+        -0.13865368085554652,
+        -0.009583859927028551,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "force_residual_N": null,
+  "moment_residual_Nm": null,
+  "minimum_torque_margin_Nm": null,
+  "native_readback": null,
+  "preload": null,
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Necessary frozen geometry/torque feasibility only, not compliance equilibrium, dynamic grasp, expert reference or task success."
+}

@@ -1,0 +1,22 @@
+schema = 1
+source_report = "../runs/controlled_evaluation_v4/report.json"
+source_clip = "../../dex-supermimic-research/src/dex_supermimic/tasks/pen_spin/data/rawdata/clips/01_single_axis/clip_001.npz"
+max_joint_delta_rad = 0.10
+contact_fingers = [1,2,3]
+contact_suffixes = ["link4_col","tip_sensor_col"]
+distance_limit_m = 0.03
+contact_floor_m = -0.00005
+contact_target_m = -0.00005
+other_clearance_m = 0.00020
+self_clearance_m = 0.00020
+collision_scale_m = 0.0005
+contact_scale_m = 0.001
+joint_scale_rad = 0.10
+joint_regularization = 0.05
+qualification_penetration_m = 0.0002
+qualification_self_penetration_m = 0.0002
+qualification_contact_gap_m = 0.0002
+maximum_residual_calls = 1600
+maximum_wall_s = 45.0
+max_nfev = 80
+# Three declared contact groups; one bounded proposal, no candidate/seed search.

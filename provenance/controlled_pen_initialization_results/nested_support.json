@@ -1,0 +1,64 @@
+{
+  "schema": "pen_nested_frozen_support_diagnosis:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\diagnose_pen_support_constraints.py",
+    "bytes": 3259,
+    "sha256": "2d4cf7ac4fb7ca81ef113eb5375fb2ff9a6e5941ef8b35703108abe23f71bdf7"
+  },
+  "preload": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_preload_v1\\report.json",
+    "bytes": 2321,
+    "sha256": "2250c9158e05a4d765ac4cc4b1d5aa8849f661ff90acd8b41992ebe32b25c850"
+  },
+  "basis": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_support_diagnosis_v1\\basis.npz",
+    "bytes": 2535,
+    "sha256": "7be3db7faeaff89c486b21df315a1d71647795277881afc94242d4d6faf99b85"
+  },
+  "bounded_full_wrench_success": false,
+  "unbounded_actuator_full_wrench_success": false,
+  "force_only_success": true,
+  "force_only_moment_residual_Nm": [
+    -0.0005109128749501497,
+    0.00129708976461453,
+    -0.002897887368655671
+  ],
+  "full_wrench_rank": 6,
+  "native_contacts": [
+    {
+      "geoms": [
+        1,
+        18
+      ],
+      "dim": 4,
+      "distance_m": -4.984841471887107e-05,
+      "local_force6": [
+        0.1643662714782756,
+        -0.11505638807539427,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "geoms": [
+        1,
+        44
+      ],
+      "dim": 4,
+      "distance_m": -5.0027769527356144e-05,
+      "local_force6": [
+        0.21176791901006486,
+        -0.13865368085554652,
+        -0.009583859927028551,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Counterfactual removal of actuator and then moment constraints identifies why original LP failed. Force-only is NOT qualification or an alternative support target."
+}

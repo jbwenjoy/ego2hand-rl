@@ -1,0 +1,84 @@
+{
+  "schema": "controlled_pen_initialization_and_support_results:1",
+  "inputs": {
+    "geometry": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_projection_v1\\report.json",
+      "bytes": 7220,
+      "sha256": "2c4e00293950a8c77591887437d4c762b0c9b02edc7f06e9d2997ea04a1f3d04"
+    },
+    "native_dynamics": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_native_v1\\report.json",
+      "bytes": 11952,
+      "sha256": "6c77003c23120ec64e81f182a02139eabd809d1653050c829b2ca95cbc83bf7e"
+    },
+    "native_readback": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_review_v1\\report.json",
+      "bytes": 3896,
+      "sha256": "db9b63f309a20a86e38bc50dca3090ea4f1f22e381038d167e7bc698e76b299d"
+    },
+    "static_support": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_preload_v1\\report.json",
+      "bytes": 2321,
+      "sha256": "2250c9158e05a4d765ac4cc4b1d5aa8849f661ff90acd8b41992ebe32b25c850"
+    },
+    "nested_support": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_support_diagnosis_v1\\report.json",
+      "bytes": 1843,
+      "sha256": "f241ca416d0e55c048fc4c9c9c1826715920a9e67d6ec626bb228b5aee488322"
+    },
+    "static_certificate": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_support_certificate_v1\\report.json",
+      "bytes": 1579,
+      "sha256": "de4f588c8366bc8c08ae7b6098bfb0e9d44f1f26d4f31d55289c99ee7eac03a1"
+    },
+    "dynamic_wrench": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_reference_wrench_v1\\report.json",
+      "bytes": 3825,
+      "sha256": "8b40fa6180c559c00d2dc58aa10de19bb7dc607a9449532cb3239688fee5ac55"
+    },
+    "video": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_video_v1\\report.json",
+      "bytes": 1097,
+      "sha256": "e6ad4499f1435101e3ae71daeec92781c419bbe7e73445dc6d63b5669a4dc19d"
+    },
+    "decoded_QA": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_video_v1\\decoded_QA.json",
+      "bytes": 126,
+      "sha256": "5c0482560cd98a1a989b7fac4e9faa06e1a0ee44aba02e738663435bb3ec338c"
+    },
+    "tests": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\reference_wrench_preflight_tests158.log",
+      "bytes": 679,
+      "sha256": "cbaa4111266dc6e7f098488d3e182fa0e3d9acf56b545ba2b556860a3bdf0ac8"
+    }
+  },
+  "geometry_qualified": true,
+  "geometry_max_joint_delta_rad": 0.034089431579243046,
+  "native_task_qualified": 0,
+  "native_task_cases": 4,
+  "native_saved_checks": [
+    56,
+    56
+  ],
+  "static_full_wrench_feasible": false,
+  "first_nominal_dynamic_wrench_feasible": false,
+  "valid_dynamic_wrench_frames": 366,
+  "original_reference_frames": 369,
+  "tests_passed": 158,
+  "neural_updates": 0,
+  "goal_complete": false,
+  "roles": {
+    "geometry": "BOUNDED_PROPOSAL_NOT_DYNAMIC_EXPERT",
+    "native_dynamics": "DIAGNOSTIC_ONLY_NOT_EXPERT_NOT_FIT",
+    "dynamic_wrench": "NOMINAL_DERIVATIVE_SUPPORT_TARGET_DIAGNOSTIC_NOT_MEASURED_SOURCE_FORCE"
+  },
+  "note": "Full original research scope retained. Next actual GPU contact activation versus native picture, derivative consistency, contact-support-aware retargeting and original no-aid tracking; no gate relaxation or expert relabeling.",
+  "geometry_cost_scope": {
+    "engine_native_distance_queries": 105854,
+    "final_unpruned_queries": 252,
+    "total_native_distance_queries": 106106,
+    "engine_kinematics_calls": 702,
+    "final_native_forward_readback": 1,
+    "solver_wall_excludes_setup_and_final_readback": true
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "schema": "controlled_pen_projection_native_dynamics:1",
+  "projection": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_projection_v1\\report.json",
+    "bytes": 7220,
+    "sha256": "2c4e00293950a8c77591887437d4c762b0c9b02edc7f06e9d2997ea04a1f3d04"
+  },
+  "clip": {
+    "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\data\\rawdata\\clips\\01_single_axis\\clip_001.npz",
+    "bytes": 159698,
+    "sha256": "ca0b9b5dfc5de0170538bb13e95c56d5c2f20853e22b8405fe4b6853180b8348"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\run_projected_pen_dynamics.py",
+      "bytes": 3329,
+      "sha256": "fe35fa86667f7db6c234d74e6484fd006da08b8abba01b955069cc55423153f1"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\projected_pen_dynamics.py",
+      "bytes": 6811,
+      "sha256": "4f4c6f5a3d4bc2200086e373b0db0da28963d7fbbd7511d19605c72e82275d8d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\controlled_snapshot.py",
+      "bytes": 1278,
+      "sha256": "b11d0246ea1d7ac2fc9063f1c07af10b9564493c958558ddb86fc62b5c61cdc6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_contacts.py",
+      "bytes": 3098,
+      "sha256": "573b9f5367782b91422598b6b09f3188c0d4d369c3090f702ee0536c2e5cf241"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_holding.py",
+      "bytes": 7455,
+      "sha256": "c00ddc866eacc219e30b0e0fb68be0a87222a7fe1a799d34d0d3268abd7b49b0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\controlled_evaluation.py",
+      "bytes": 16141,
+      "sha256": "e39fcfa4c9f67b1c5b920b449f7f1692f0a33c0dbc467ca32b16cb9d8c93fe6f"
+    }
+  ],
+  "neural_updates": 0,
+  "configurations": [
+    "ORIGINAL_ZERO_RESIDUAL",
+    "PROJECTED_CONSTANT_RESIDUAL"
+  ],
+  "dt": [
+    0.005,
+    0.0025
+  ],
+  "source_reference_frames": 369,
+  "planned_duration_s": 7.36,
+  "cases": [
+    {
+      "dt": 0.005,
+      "termination": "POSITION_ERROR_OVER_50MM",
+      "complete": false,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.16,
+          "COM_RMS_m": 0.030157452522100715,
+          "COM_max_m": 0.054099196161064185,
+          "angle_RMS_rad": 1.6218289261652459,
+          "angle_max_rad": 3.060130686715378,
+          "max_penetration_m": 0.006193325136482571,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.65625,
+          "object_speed_RMS_m_s": 0.38764860608425533,
+          "object_omega_RMS_rad_s": 37.61644400051252
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": 0,
+        "warning_scope": "Actual native counters, unlike copied Warp warnings."
+      },
+      "native_steps": 32,
+      "control_intervals": 8,
+      "clipped_target_coordinates": 0,
+      "max_target_clipping_rad": 0.0,
+      "wall_s": 0.03927589999511838,
+      "model_digest_except_dt": "6eb84b3b2d602ab6605f634c1907b709fd077ebcaeedd747a98d7138dc5aab74",
+      "source_velocities_preserved": true,
+      "object_body": 2,
+      "object_qposadr": 0,
+      "object_dofadr": 0,
+      "scope": "Native CPU original/half dt diagnostic, source joint reference plus fixed residual delta and declared initial EMA. No aid, no repeated pose injection, not GPU policy or initial-state-only causal experiment.",
+      "name": "ORIGINAL_ZERO_RESIDUAL",
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_native_v1\\ORIGINAL_ZERO_RESIDUAL_0.005\\trace.npz",
+        "bytes": 59142,
+        "sha256": "b22420971ca51b39594cde9dc7ffd36f734620c8f108371149ef6d899318a2c3"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "termination": "POSITION_ERROR_OVER_50MM",
+      "complete": false,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.16,
+          "COM_RMS_m": 0.029118025436377478,
+          "COM_max_m": 0.05357945366011722,
+          "angle_RMS_rad": 1.6361891617084943,
+          "angle_max_rad": 3.1044169093264444,
+          "max_penetration_m": 0.005134020115545812,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.65625,
+          "object_speed_RMS_m_s": 0.38159673578839987,
+          "object_omega_RMS_rad_s": 35.77999573496775
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": 0,
+        "warning_scope": "Actual native counters, unlike copied Warp warnings."
+      },
+      "native_steps": 64,
+      "control_intervals": 8,
+      "clipped_target_coordinates": 0,
+      "max_target_clipping_rad": 0.0,
+      "wall_s": 0.0431854999915231,
+      "model_digest_except_dt": "6eb84b3b2d602ab6605f634c1907b709fd077ebcaeedd747a98d7138dc5aab74",
+      "source_velocities_preserved": true,
+      "object_body": 2,
+      "object_qposadr": 0,
+      "object_dofadr": 0,
+      "scope": "Native CPU original/half dt diagnostic, source joint reference plus fixed residual delta and declared initial EMA. No aid, no repeated pose injection, not GPU policy or initial-state-only causal experiment.",
+      "name": "ORIGINAL_ZERO_RESIDUAL",
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_native_v1\\ORIGINAL_ZERO_RESIDUAL_0.0025\\trace.npz",
+        "bytes": 100418,
+        "sha256": "c6059bb721b23232b05ac76dbcb3d3a1f99f7db1083aa310c644d5fa02988312"
+      }
+    },
+    {
+      "dt": 0.005,
+      "termination": "POSITION_ERROR_OVER_50MM",
+      "complete": false,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.22,
+          "COM_RMS_m": 0.03311194924328882,
+          "COM_max_m": 0.05183261983759763,
+          "angle_RMS_rad": 1.6512706159772266,
+          "angle_max_rad": 3.064317074908958,
+          "max_penetration_m": 0.007247099563824246,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.7045454545454546,
+          "object_speed_RMS_m_s": 0.303892606133325,
+          "object_omega_RMS_rad_s": 23.99571367489052
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": 0,
+        "warning_scope": "Actual native counters, unlike copied Warp warnings."
+      },
+      "native_steps": 44,
+      "control_intervals": 11,
+      "clipped_target_coordinates": 0,
+      "max_target_clipping_rad": 0.0,
+      "wall_s": 0.04243890001089312,
+      "model_digest_except_dt": "6eb84b3b2d602ab6605f634c1907b709fd077ebcaeedd747a98d7138dc5aab74",
+      "source_velocities_preserved": true,
+      "object_body": 2,
+      "object_qposadr": 0,
+      "object_dofadr": 0,
+      "scope": "Native CPU original/half dt diagnostic, source joint reference plus fixed residual delta and declared initial EMA. No aid, no repeated pose injection, not GPU policy or initial-state-only causal experiment.",
+      "name": "PROJECTED_CONSTANT_RESIDUAL",
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_native_v1\\PROJECTED_CONSTANT_RESIDUAL_0.005\\trace.npz",
+        "bytes": 75349,
+        "sha256": "568a4b124ad0af513c8c236624a83aeeab1b292b1ad678f06a1e2d3855a85b44"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "termination": "POSITION_ERROR_OVER_50MM",
+      "complete": false,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.18,
+          "COM_RMS_m": 0.030136850568661767,
+          "COM_max_m": 0.05448326116842202,
+          "angle_RMS_rad": 1.5581907433490878,
+          "angle_max_rad": 3.120168502327446,
+          "max_penetration_m": 0.006076908385067182,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.6805555555555556,
+          "object_speed_RMS_m_s": 0.3594181826624158,
+          "object_omega_RMS_rad_s": 33.25026532841049
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": 0,
+        "warning_scope": "Actual native counters, unlike copied Warp warnings."
+      },
+      "native_steps": 72,
+      "control_intervals": 9,
+      "clipped_target_coordinates": 0,
+      "max_target_clipping_rad": 0.0,
+      "wall_s": 0.04482199999620207,
+      "model_digest_except_dt": "6eb84b3b2d602ab6605f634c1907b709fd077ebcaeedd747a98d7138dc5aab74",
+      "source_velocities_preserved": true,
+      "object_body": 2,
+      "object_qposadr": 0,
+      "object_dofadr": 0,
+      "scope": "Native CPU original/half dt diagnostic, source joint reference plus fixed residual delta and declared initial EMA. No aid, no repeated pose injection, not GPU policy or initial-state-only causal experiment.",
+      "name": "PROJECTED_CONSTANT_RESIDUAL",
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_native_v1\\PROJECTED_CONSTANT_RESIDUAL_0.0025\\trace.npz",
+        "bytes": 108431,
+        "sha256": "dfd32715bece6eebf2dc048a396c409300a4c96c0e64f5009c015efb4de30db8"
+      }
+    }
+  ],
+  "total_native_steps": 212,
+  "scope": "One predefined bounded geometry correction followed by declared constant residual baseline, native diagnostic at two dt. All original clocks/velocities retained, failures kept; not successful learning/ego generalization."
+}
