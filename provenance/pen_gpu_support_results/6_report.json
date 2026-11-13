@@ -1,0 +1,56 @@
+{
+  "schema": "support_pen_saved_wrench_drift:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\analyze_support_wrench_drift.py",
+    "bytes": 4184,
+    "sha256": "3b1ce00fb54bd20d7f1d0db0be6673258ce7a17b4db9388245983047b1b93624"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_support_pen_GPU_v1\\report.json",
+    "bytes": 27168,
+    "sha256": "c6b35145a24244d45481b48c54d3d6bdf7fa815aada71c5cfe38e799db3cea57"
+  },
+  "review": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_support_pen_GPU_review_v1\\report.json",
+    "bytes": 2862,
+    "sha256": "080a56ff66a9eae31666a5ada7ba7c94ca0bfb4c41b85f35ff6c1992261b61fb"
+  },
+  "nominal_targets": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_reference_wrench_v1\\targets.npz",
+    "bytes": 49242,
+    "sha256": "e5772fc2c3dee74073b22c050b957062538442890d1f8309b36418be2673c856"
+  },
+  "rows": [
+    {
+      "dt": 0.005,
+      "initial_execution_force_error_N": 0.012911490816553677,
+      "initial_execution_torque_error_Nm": 0.00012580723546816813,
+      "first_outside_proposal_tolerance_s": 0.005,
+      "first_hand_normal_below_0_1N_s": 0.095,
+      "first_control_shift_from_search_rad": 0.005982398986816406,
+      "terminal_duration_s": 0.22,
+      "artifact": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\support_pen_wrench_drift_v1\\wrench_drift_0.005.npz",
+        "bytes": 6020,
+        "sha256": "5fd0d0d254039f878a088c9b9ca6e20200ebfd8786ceb8290d23b6da5732fbe6"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "initial_execution_force_error_N": 0.012911469545033815,
+      "initial_execution_torque_error_Nm": 0.00012580726135709585,
+      "first_outside_proposal_tolerance_s": 0.005,
+      "first_hand_normal_below_0_1N_s": 0.08750000000000001,
+      "first_control_shift_from_search_rad": 0.005982398986816406,
+      "terminal_duration_s": 0.2,
+      "artifact": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\support_pen_wrench_drift_v1\\wrench_drift_0.0025.npz",
+        "bytes": 9794,
+        "sha256": "141d853ff84a52e9fd4c3fd9caeb69c7437b916f3e50cfbdf53e805f9bf5f9d2"
+      }
+    }
+  ],
+  "neural_updates": 0,
+  "simulation_integration_steps": 0,
+  "scope": "Actual PRE-step EFC wrench compared with original nominal WORLD force/moment demand rotated into the ACTUAL object BODY, interpolated on original pre-step clock. Conditional inertia/derivatives, no feedback correction, measured force supervision or causal attribution. First action uses original reference phase1 rather than search ctrl phase0."
+}

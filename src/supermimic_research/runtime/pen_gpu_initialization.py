@@ -8,7 +8,7 @@ from ..mechanics.support import static_feasibility
 from ..mechanics.wrench_separation import separating_witness
 
 
-def initialize_and_query_pen(env,folder,source_qpos,projected_qpos,delta20,dynamic_target_BODY):
+def initialize_and_query_pen(env,folder,source_qpos,projected_qpos,delta20,dynamic_target_BODY,*,support_all_robot_contacts=False):
     import torch,mujoco,mujoco_warp as mjwarp
     from .controlled_evaluation import write
     model=env.sim.mj_model;action=env.action_manager.get_term('joint_pos');robot=env.scene['robot'];command=env.command_manager.get_term('motion')
@@ -46,6 +46,10 @@ def initialize_and_query_pen(env,folder,source_qpos,projected_qpos,delta20,dynam
         if np.max(abs(f-force))>1e-10:raise ValueError('Corrected host contact decode must match actual GPU EFC values')
     body=host_model.body('object/cube').id;parts=[g for g in range(host_model.ngeom) if host_model.geom_bodyid[g]==body and (host_model.geom_contype[g] or host_model.geom_conaffinity[g])]
     allowed=[host_model.geom(f'robot/right_finger{i}_{s}').id for i in [1,2,3] for s in ['link4_col','tip_sensor_col']]
+    if support_all_robot_contacts:
+        allowed=[g for g in range(host_model.ngeom)
+                 if (mujoco.mj_id2name(host_model,mujoco.mjtObj.mjOBJ_GEOM,g) or '').startswith('robot/')
+                 and (host_model.geom_contype[g] or host_model.geom_conaffinity[g])]
     q=data.qpos[qids];jids=host_model.actuator_trnid[aids,0];lo=np.maximum(q-.05,np.maximum(host_model.jnt_range[jids,0],host_model.actuator_ctrlrange[aids,0]));hi=np.minimum(q+.05,np.minimum(host_model.jnt_range[jids,1],host_model.actuator_ctrlrange[aids,1]))
     support=indexed_static_support(host_model,data,body,parts,allowed,dofs,aids,lo,hi)
     pure_static=static_feasibility(support['wrench_BODY'],support['target_BODY'],radius=.125)
@@ -70,6 +74,7 @@ def initialize_and_query_pen(env,folder,source_qpos,projected_qpos,delta20,dynam
         static_support_with_PD_bounds=support['lp']['success'],static_wrench_cone_feasible=pure_static['success'],dynamic_wrench_cone_feasible=dynamic['success'],
         static_separating_certificate=static_certificate,dynamic_separating_certificate=dynamic_certificate,
         actual_active_support_contacts=support['contacts'],full_wrench_rank=support['full_wrench_rank'],
+        support_geom_ids=allowed,support_scope='all robot collision geoms' if support_all_robot_contacts else 'first three fingers link4 and tip',
         observation_scope='Actual GPU contact/constraint snapshot at zero static velocities. Host-only adhesion field cleared; no GPU force or pose overwritten for support query.',
         neural_updates=0,native_integration_steps=0)
     env.sim.data.qvel.copy_(velocity);env.sim.data.qacc_warmstart.copy_(warm);env.sim.forward()

@@ -1,0 +1,193 @@
+{
+  "schema": "GPU_contact_oracle_audit:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\pen_gpu_oracle_v1.toml",
+    "bytes": 383,
+    "sha256": "1285245f6271989b17a9a56f20da99c1e6e1ca9cc49a46fc3b7c1e21b5b5a4a2"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v2\\report.json",
+    "bytes": 45761,
+    "sha256": "203257c1123c1df8bafcf4a870b05371351360e8cc0c24a876a98430d5941163"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\audit_gpu_contact_oracle.py",
+      "bytes": 12332,
+      "sha256": "4b599dc36916d273528f85ba585da6cdc59bd823523c1cb784fa66336fb02a56"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\gpu_contact_oracle.py",
+      "bytes": 5647,
+      "sha256": "77db104b132e52fccc54f94ed79b8a04241b00706040e7e4536c47141f9398fc"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\warp_contact_labels.py",
+      "bytes": 1882,
+      "sha256": "975245638ba9d304b0f0fc6cd3d4852a6512ec945c5c547746a10c23794ac827"
+    }
+  ],
+  "role": "PHYSICS_DIAGNOSTIC_NOT_EXPERT_NOT_FIT",
+  "neural_updates": 0,
+  "simulation_integration_steps": 0,
+  "checks": {
+    "static_saved_replay": true,
+    "static_EFC_identity": true,
+    "moving_EFC_identity": true,
+    "batch_matches_individual": true,
+    "finite": true,
+    "original_velocity_and_nonjoint_state": true,
+    "legal_joint_and_control_bounds": true,
+    "capacity": true,
+    "no_integration": true,
+    "directional_step_consistency": false,
+    "directional_axis_consistency": false
+  },
+  "passed": 9,
+  "total": 11,
+  "artifacts": {
+    "static": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_oracle_audit_v1\\static.npz",
+      "bytes": 2462,
+      "sha256": "8f4172b5cc1659aa249369f7c572df184fc33e4aaee87c9d59120c1c99b5037c"
+    },
+    "static_contacts": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_oracle_audit_v1\\static_contacts.npz",
+      "bytes": 3119,
+      "sha256": "3f32a83cbcad110a33ee8b3731f4c7457aa38730f29f9f76d927c37464ac8ccf"
+    },
+    "batch_0": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_oracle_audit_v1\\batch_0.npz",
+      "bytes": 19855,
+      "sha256": "c9c760416257d82a0c88fa46b5c6a98506170fd6cd82f76065544cf0b95a73af"
+    },
+    "individual_0": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_oracle_audit_v1\\individual_0.npz",
+      "bytes": 19816,
+      "sha256": "da35da2fd2efd6a21028a4753db6f3f93fb68a68a0caf7dab75acd88f1f54fe4"
+    },
+    "batch_1": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_oracle_audit_v1\\batch_1.npz",
+      "bytes": 19844,
+      "sha256": "73e6d2a01cea02b5b84a2905312bdd4f1a8260d5d5cf38abd83d79e14366bbb7"
+    },
+    "individual_1": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_oracle_audit_v1\\individual_1.npz",
+      "bytes": 19836,
+      "sha256": "e746378d48e9a7cb73fb1516349d87c46de036c3f715390a605da54c37ef8809"
+    },
+    "batch_2": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_oracle_audit_v1\\batch_2.npz",
+      "bytes": 19941,
+      "sha256": "7aaa8efc1f65264677d369cb0921e0fb1f623749eca2989a66c409dcf45dd163"
+    },
+    "individual_2": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_oracle_audit_v1\\individual_2.npz",
+      "bytes": 19827,
+      "sha256": "55dd57e8e6810cd9461a279036f658c77a8b346919fac17db76a78f87b74d78f"
+    },
+    "moving_batch_contacts": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_oracle_audit_v1\\moving_batch_contacts.npz",
+      "bytes": 15711,
+      "sha256": "321582c32bf0e1ff798741033a2ffd2a8ff01ba1a900f6bf1ae22d8a8d6cbb25"
+    },
+    "derivatives": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_oracle_audit_v1\\derivatives.npz",
+      "bytes": 2844,
+      "sha256": "b9264773c107f36c5b10b9bcb4b167d7017da9453ca0a000908452f4d1e68b33"
+    }
+  },
+  "static_saved_error": {
+    "force_N": 4.0047930831122155e-08,
+    "torque_Nm": 7.261437529043702e-10
+  },
+  "static_EFC_error": {
+    "force_N": 1.2135223322062314e-08,
+    "torque_Nm": 1.4086718561665766e-10
+  },
+  "moving_EFC_error": {
+    "force_N": 5.881851240092868e-08,
+    "torque_Nm": 1.2173544642016448e-09
+  },
+  "batch_individual_error": {
+    "force_N": 9.005648285901329e-05,
+    "torque_Nm": 1.938184778799291e-06
+  },
+  "derivative_mode_sets": [
+    [
+      [
+        1,
+        18
+      ],
+      [
+        1,
+        31
+      ],
+      [
+        1,
+        44
+      ]
+    ],
+    [
+      [
+        1,
+        18
+      ],
+      [
+        1,
+        31
+      ],
+      [
+        1,
+        44
+      ]
+    ],
+    [
+      [
+        1,
+        18
+      ],
+      [
+        1,
+        31
+      ],
+      [
+        1,
+        44
+      ]
+    ],
+    [
+      [
+        1,
+        31
+      ],
+      [
+        1,
+        44
+      ]
+    ]
+  ],
+  "setup_and_warmup_s": 2.1549395000038203,
+  "timing": {
+    "queries_per_sweep": 81,
+    "repetitions": 3,
+    "batched_s": [
+      0.0013158000074326992,
+      0.001357600005576387,
+      0.0012239999778103083
+    ],
+    "individual_s": [
+      0.08059690002119169,
+      0.08119409999926575,
+      0.0804741999891121
+    ],
+    "median_query_speed_ratio": 61.25315364486656,
+    "includes": "State writes, captured GPU forward, output conversion and aggregate CPU readback; excludes setup, compilation, contact audit and file IO."
+  },
+  "query_counts": {
+    "static": 1,
+    "individual": 248,
+    "batched": 324
+  },
+  "scope": "Actual GPU forward queries, local finite differences and equal-query batching only; not training, WM gradients, full-cost retargeting speed or successful manipulation."
+}

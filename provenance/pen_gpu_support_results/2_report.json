@@ -1,0 +1,44 @@
+{
+  "schema": "GPU_pen_support_saved_review:1",
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_support_search_v1\\report.json",
+    "bytes": 14559,
+    "sha256": "0c8c06a98fd31c4140709a33a8d36f3ef4cf84b6e33d49afa3302c04d5f896e9"
+  },
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_gpu_pen_support.py",
+    "bytes": 10531,
+    "sha256": "dcd3d5d4bd0e2972ff375ab33f93e25f22f4db9cd3d9a02aa290dcf7cc7321be"
+  },
+  "checks": {
+    "complete_geometry_pairs": true,
+    "native_geometry_readback": true,
+    "moving_EFC_labels": true,
+    "moving_wrench_identity": true,
+    "moving_pose": true,
+    "full_dynamic_cone_primal": true,
+    "moving_full_target": true,
+    "source_velocity": true,
+    "static_EFC_labels": true,
+    "static_wrench_identity": true,
+    "static_pose": true,
+    "static_bounded_primal": true,
+    "all_scores_reconstructed": true,
+    "fixed_budget_global_selection": true,
+    "selected_pose_and_control": true,
+    "unchanged_nonjoint": true,
+    "object_and_self_geometry": true
+  },
+  "passed": 17,
+  "total": 17,
+  "primals": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_support_review_v1\\primal_readback.npz",
+    "bytes": 6687,
+    "sha256": "0a4db886b0b21ad7b6f6e8ef9bc67caa991cd0a6e7feeb709925032e3c093d9f"
+  },
+  "moving_force_error_N": 0.009236758336051448,
+  "moving_torque_error_Nm": 8.803361900975044e-05,
+  "neural_updates": 0,
+  "simulation_integration_steps": 0,
+  "scope": "Saved candidate score/selection, EFC, full geometry and numerical LP primal review only; static smooth/Jacobian readback uses native double parameters, not a physical rerun or trajectory success."
+}

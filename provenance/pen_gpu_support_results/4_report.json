@@ -1,0 +1,86 @@
+{
+  "schema": "GPU_support_pen_execution_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_gpu_support_execution.py",
+    "bytes": 6972,
+    "sha256": "bdc09541022434ae6321fe42798e81ca6d765daa5e85ddcfc869019407d96cf9"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_support_pen_GPU_v1\\report.json",
+    "bytes": 27168,
+    "sha256": "c6b35145a24244d45481b48c54d3d6bdf7fa815aada71c5cfe38e799db3cea57"
+  },
+  "cases": [
+    {
+      "dt": 0.005,
+      "checks": {
+        "selected_initial_pose": true,
+        "original_source_velocity": true,
+        "fixed_nonjoint": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "original_phase": true,
+        "original_decimation": true,
+        "raw_action": true,
+        "original_EMA_PD": true,
+        "first_target": true,
+        "static_probe_same_pose": true,
+        "mocap_warmstart": true,
+        "first_terminal": true,
+        "no_force_aid": true,
+        "static_full_wrench_primal": true,
+        "static_torque_bounds": true,
+        "dynamic_full_wrench_primal": true,
+        "all_robot_contact_scope": true,
+        "metrics": true,
+        "task_gates": true
+      },
+      "control_error_rad": 0.0,
+      "metric_error": 0.0,
+      "actual_duration_s": 0.22
+    },
+    {
+      "dt": 0.0025,
+      "checks": {
+        "selected_initial_pose": true,
+        "original_source_velocity": true,
+        "fixed_nonjoint": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "original_phase": true,
+        "original_decimation": true,
+        "raw_action": true,
+        "original_EMA_PD": true,
+        "first_target": true,
+        "static_probe_same_pose": true,
+        "mocap_warmstart": true,
+        "first_terminal": true,
+        "no_force_aid": true,
+        "static_full_wrench_primal": true,
+        "static_torque_bounds": true,
+        "dynamic_full_wrench_primal": true,
+        "all_robot_contact_scope": true,
+        "metrics": true,
+        "task_gates": true
+      },
+      "control_error_rad": 0.0,
+      "metric_error": 0.0,
+      "actual_duration_s": 0.2
+    }
+  ],
+  "passed": 40,
+  "total": 40,
+  "physical_tables_equal": true,
+  "EFC_review": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_support_pen_GPU_review_v1\\EFC\\report.json",
+    "bytes": 3209,
+    "sha256": "dfe5afa16c01d90033979885ada5d109275a80ec47cbe966eab77d6e4ecd1ec1"
+  },
+  "EFC_checks": [
+    14,
+    14
+  ],
+  "neural_updates": 0,
+  "simulation_integration_steps": 0,
+  "scope": "Saved initialization, source clock/control/EMA, LP primals, tracking and EFC review of two failed physical trajectories, not new successful manipulation or independent nominal-inertia calibration."
+}
