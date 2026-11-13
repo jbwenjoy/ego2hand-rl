@@ -1,0 +1,15 @@
+schema = 1
+base_config = "controlled_evaluation_v4.toml"
+proposal = "../runs/pen_gpu_support_search_v1/report.json"
+train_action_seeds = [7201,7202,7203,7204,7205,7206,7207,7208]
+check_action_seeds = [7301,7302,7303,7304]
+dt = [0.005,0.0025]
+raw_noise_std = 0.04
+raw_noise_clip = 0.08
+noise_memory = 0.5
+numerical_device_override = true
+[numerical_options]
+iterations = 50
+ls_iterations = 50
+tolerance = 0.000000000001
+ls_tolerance = 0.00000001
