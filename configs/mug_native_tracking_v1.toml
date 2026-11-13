@@ -1,0 +1,26 @@
+schema = 1
+oracle_parity = "../runs/mug_native_oracle_parity_v1/report.json"
+reference = "../runs/mug_closed_loop_reference_v1/report.json"
+binding = "../runs/right_mug_frames_v4/binding.json"
+tasks = ["HOLD","REFERENCE"]
+controllers = ["ZERO","NATIVE_MPC"]
+dt = [0.0003125,0.00015625]
+horizon = 3
+active_joints = [0,1,2,3,4,5,6,7,8,9,10,11]
+FD_action = 0.1
+ridge = 0.1
+max_action_step = 0.5
+line_search = [1.0,0.5,0.25,0.1]
+COM_scale_m = 0.005
+angle_scale_rad = 0.08726646259971647
+velocity_scale_m_s = 0.05
+omega_scale_rad_s = 0.5
+joint_weight = 0.02
+contact_weight = 0.1
+other_force_weight = 0.05
+action_weight = 0.002
+smooth_weight = 0.01
+decision_replay_k = [0,5]
+max_total_oracle_steps = 4000000
+# One fixed CPU privileged native baseline, horizon60ms; no NN/world-model fit.
+# Full20 raw action/EMA contract, optimized only first3 declared contact fingers.
