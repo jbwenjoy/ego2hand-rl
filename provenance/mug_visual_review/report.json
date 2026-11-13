@@ -1,0 +1,101 @@
+{
+  "schema": "mug_saved_progress_video:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\render_mug_progress_video.py",
+    "bytes": 9966,
+    "sha256": "a6da0fe21a50b9173cf25175a4e06a9bbf189a1d7caf503f5fa5cf675899dcde"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "binding": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+    "bytes": 3857,
+    "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+  },
+  "inputs": {
+    "native_trace": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_H20_collection_v1\\episode_016\\trace.npz",
+      "bytes": 2727479,
+      "sha256": "fc006e9e05503fc3558c5c71e3adf2582c4224496f967c48c92f06db613a92f2"
+    },
+    "native_transitions": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_H20_collection_v1\\episode_016\\transitions.npz",
+      "bytes": 95157,
+      "sha256": "9f700445394706373c78f3f7df98f3ed0524e05553ddf271b4c4973b5b8e843b"
+    },
+    "latest_health": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_impulse_resume2000_v1\\health_2000.json",
+      "bytes": 646509,
+      "sha256": "ed4ed35ed6df34301d8b5c2a25ebfe0da0ff130f3176fd8ceffdedae1b9c6636"
+    },
+    "prefix": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_interventions_v1\\CHECK_8200_0.0003125_prefix\\transitions.npz",
+      "bytes": 68165,
+      "sha256": "45c76b3c434f71f26e2cfd90c3740456581d7aefb2018f87e3add2746eac6d85"
+    },
+    "predictions": {
+      "DIRECT": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_impulse_resume2000_v1\\DIRECT_rollouts.npz",
+        "bytes": 49776,
+        "sha256": "a4ea3aa1eb7340ab5ec818be92c4cb77168712519ba8bb34a40a037fcd689360"
+      },
+      "IMPULSE": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_impulse_resume2000_v1\\IMPULSE_rollouts.npz",
+        "bytes": 51106,
+        "sha256": "bf801ee331f66213354d1034fcb5f63a2704d527309ef38398f06a340496236a"
+      }
+    }
+  },
+  "native": {
+    "seed": 1000,
+    "role": "CHECK",
+    "physical_duration_s": 0.503125,
+    "dt_s": 0.0003125,
+    "termination": "ORIENTATION_OVER_45DEG",
+    "slow_speed": 0.25,
+    "frames": 110,
+    "video": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_visual_review_v1\\native_recorded_control_slow.mp4",
+      "bytes": 809343,
+      "sha256": "4bd212c9102ce67a33b6db32a13f6de130495436630b9ff2f055764d06315425"
+    }
+  },
+  "comparison": {
+    "case_index": 3,
+    "case": {
+      "seed": 8200,
+      "dt": 0.0003125,
+      "start": 2,
+      "horizon": 10
+    },
+    "physical_duration_s": 0.2,
+    "slow_speed": 0.1,
+    "frames": 108,
+    "video": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_visual_review_v1\\world_models_200ms_comparison.mp4",
+      "bytes": 623075,
+      "sha256": "959d46cc126754166ebe443c3d2c04739dec09605647bbd6d26f7610469421fc"
+    }
+  },
+  "display": {
+    "camera_distance": 0.33,
+    "camera_elevation": -30,
+    "camera_azimuths": [
+      250,
+      100
+    ],
+    "lookat": [
+      -0.17586257965569285,
+      0.008337699773644566,
+      0.5632466054570954
+    ],
+    "initial_and_terminal_stills_explicit": true
+  },
+  "simulation_integration_steps": 0,
+  "neural_updates": 0,
+  "new_policy_execution": false,
+  "scope": "Saved native kinematic playback and latest saved WM prediction rendering. Forward calls refresh display only. Original data/model/weights unchanged; no holding success or ego RGB claim."
+}
