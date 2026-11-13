@@ -1,0 +1,347 @@
+{
+  "schema": "pen_response_preparation:1",
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_collection_v1\\report.json",
+    "bytes": 242772,
+    "sha256": "ef563c1f3ff8f9690eaf11316c50237e42569590afd17eb9b1a8ad64f5e497e1"
+  },
+  "EFC_review": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_collection_EFC_v1\\report.json",
+    "bytes": 26353,
+    "sha256": "1b5c64137f1693cbb7acdfb16a8e26fb0f464ea407573c8b67473de4a439e624"
+  },
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\prepare_pen_wm_data.py",
+    "bytes": 5551,
+    "sha256": "b8dd75f027e87dcb0eb40145b4457286096c0c4d236830112e9faaec624795d3"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\prepare_pen_wm_data.py",
+      "bytes": 5551,
+      "sha256": "b8dd75f027e87dcb0eb40145b4457286096c0c4d236830112e9faaec624795d3"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\controlled_pen_records.py",
+      "bytes": 3619,
+      "sha256": "50861a53949a50fe504429e1ec8cccc74c517966be06fda0d9e15417725d8cf1"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\transition_records.py",
+      "bytes": 715,
+      "sha256": "e60481f925a0e62ef9a1c82ebfaa2f737c5ff083b9773d7ba0ef1f151645bab6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\response_decode.py",
+      "bytes": 946,
+      "sha256": "f1d54ea12cfc1c668978ef8e767d8da4338573b804adab50b87a59a74a7377c5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\impulse_codec.py",
+      "bytes": 2237,
+      "sha256": "9e7b0444309ba442434936ce1b77c66f330fee1c08d06f80e57909c8bf6f5666"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\pen_response.py",
+      "bytes": 1763,
+      "sha256": "9797f961dadbe464cfc517ecfd8fa193e84327f32196da1e20893cb29e3daa81"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\compound_response.py",
+      "bytes": 2139,
+      "sha256": "e316bd7d3efda4a8ca286c3855905c3be64db95ecab7d6d1f1ece573b9c28f63"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\impulse_response.py",
+      "bytes": 2679,
+      "sha256": "3c95676308c73da2f01e874753ddda6835052f991d22da32324b9f5c10bbd6ab"
+    }
+  ],
+  "outputs": {
+    "TRAIN": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_prepared_v1\\TRAIN.npz",
+      "bytes": 204696,
+      "sha256": "0600be2eb6baaa0288df0672609b2b5e7f3da3b6fbc56324d33654b6bc5324de"
+    },
+    "CHECK": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_prepared_v1\\CHECK.npz",
+      "bytes": 105625,
+      "sha256": "08542bba24031db22b34d5fbaa0359c9e8a0d3a2be92f7b8ba5455f7fe59bf55"
+    }
+  },
+  "physics": {
+    "mass": 0.029999999329447746,
+    "inertia_BODY": [
+      [
+        1.1704360076691955e-06,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.00019457894086372107,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.00019457894086372107
+      ]
+    ],
+    "gravity": [
+      0.0,
+      0.0,
+      -9.8100004196167
+    ]
+  },
+  "scales": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_prepared_v1\\scales.npz",
+    "bytes": 3432,
+    "sha256": "6ac7a6e46001580e13b32d3952307771b365815e2002f54fb2db79eae4f59d41"
+  },
+  "head_scales": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_prepared_v1\\head_scales.npz",
+    "bytes": 1719,
+    "sha256": "60d2beacc18f10dbda8590556b91e60c236de26e39dc5f1e3f65f624a20fafd6"
+  },
+  "input_schema": "controlled_pen_objectFirst_state55_engineWarm26_actualPD20_nativeDt1:1",
+  "output_schema": "world_left_delta52_nextWarm26_sourceBODY_wrench6_Fn6_H20:1",
+  "head_schema": "pen_joint40_COM3_worlddR3_WORLD_defect6_nextWarm26_sourceBODY_wrench6_Fn6:1",
+  "checks": {
+    "TRAIN_finite": true,
+    "TRAIN_observed_defect_closure": true,
+    "TRAIN_nonnegative_Fn6": true,
+    "CHECK_finite": true,
+    "CHECK_observed_defect_closure": true,
+    "CHECK_nonnegative_Fn6": true,
+    "minimum_TRAIN": true,
+    "minimum_CHECK": true,
+    "episode_roles_disjoint": true
+  },
+  "passed": 9,
+  "total": 9,
+  "rows": [
+    {
+      "case_id": 0,
+      "role": "TRAIN",
+      "seed": 7201,
+      "dt": 0.005,
+      "rows": 12,
+      "valid": 12,
+      "task_qualified": false
+    },
+    {
+      "case_id": 1,
+      "role": "TRAIN",
+      "seed": 7201,
+      "dt": 0.0025,
+      "rows": 12,
+      "valid": 12,
+      "task_qualified": false
+    },
+    {
+      "case_id": 2,
+      "role": "TRAIN",
+      "seed": 7202,
+      "dt": 0.005,
+      "rows": 8,
+      "valid": 8,
+      "task_qualified": false
+    },
+    {
+      "case_id": 3,
+      "role": "TRAIN",
+      "seed": 7202,
+      "dt": 0.0025,
+      "rows": 8,
+      "valid": 8,
+      "task_qualified": false
+    },
+    {
+      "case_id": 4,
+      "role": "TRAIN",
+      "seed": 7203,
+      "dt": 0.005,
+      "rows": 8,
+      "valid": 8,
+      "task_qualified": false
+    },
+    {
+      "case_id": 5,
+      "role": "TRAIN",
+      "seed": 7203,
+      "dt": 0.0025,
+      "rows": 8,
+      "valid": 8,
+      "task_qualified": false
+    },
+    {
+      "case_id": 6,
+      "role": "TRAIN",
+      "seed": 7204,
+      "dt": 0.005,
+      "rows": 11,
+      "valid": 11,
+      "task_qualified": false
+    },
+    {
+      "case_id": 7,
+      "role": "TRAIN",
+      "seed": 7204,
+      "dt": 0.0025,
+      "rows": 11,
+      "valid": 11,
+      "task_qualified": false
+    },
+    {
+      "case_id": 8,
+      "role": "TRAIN",
+      "seed": 7205,
+      "dt": 0.005,
+      "rows": 11,
+      "valid": 11,
+      "task_qualified": false
+    },
+    {
+      "case_id": 9,
+      "role": "TRAIN",
+      "seed": 7205,
+      "dt": 0.0025,
+      "rows": 10,
+      "valid": 10,
+      "task_qualified": false
+    },
+    {
+      "case_id": 10,
+      "role": "TRAIN",
+      "seed": 7206,
+      "dt": 0.005,
+      "rows": 11,
+      "valid": 11,
+      "task_qualified": false
+    },
+    {
+      "case_id": 11,
+      "role": "TRAIN",
+      "seed": 7206,
+      "dt": 0.0025,
+      "rows": 11,
+      "valid": 11,
+      "task_qualified": false
+    },
+    {
+      "case_id": 12,
+      "role": "TRAIN",
+      "seed": 7207,
+      "dt": 0.005,
+      "rows": 8,
+      "valid": 8,
+      "task_qualified": false
+    },
+    {
+      "case_id": 13,
+      "role": "TRAIN",
+      "seed": 7207,
+      "dt": 0.0025,
+      "rows": 8,
+      "valid": 8,
+      "task_qualified": false
+    },
+    {
+      "case_id": 14,
+      "role": "TRAIN",
+      "seed": 7208,
+      "dt": 0.005,
+      "rows": 10,
+      "valid": 10,
+      "task_qualified": false
+    },
+    {
+      "case_id": 15,
+      "role": "TRAIN",
+      "seed": 7208,
+      "dt": 0.0025,
+      "rows": 10,
+      "valid": 10,
+      "task_qualified": false
+    },
+    {
+      "case_id": 16,
+      "role": "CHECK",
+      "seed": 7301,
+      "dt": 0.005,
+      "rows": 9,
+      "valid": 9,
+      "task_qualified": false
+    },
+    {
+      "case_id": 17,
+      "role": "CHECK",
+      "seed": 7301,
+      "dt": 0.0025,
+      "rows": 9,
+      "valid": 9,
+      "task_qualified": false
+    },
+    {
+      "case_id": 18,
+      "role": "CHECK",
+      "seed": 7302,
+      "dt": 0.005,
+      "rows": 10,
+      "valid": 10,
+      "task_qualified": false
+    },
+    {
+      "case_id": 19,
+      "role": "CHECK",
+      "seed": 7302,
+      "dt": 0.0025,
+      "rows": 9,
+      "valid": 9,
+      "task_qualified": false
+    },
+    {
+      "case_id": 20,
+      "role": "CHECK",
+      "seed": 7303,
+      "dt": 0.005,
+      "rows": 12,
+      "valid": 12,
+      "task_qualified": false
+    },
+    {
+      "case_id": 21,
+      "role": "CHECK",
+      "seed": 7303,
+      "dt": 0.0025,
+      "rows": 12,
+      "valid": 12,
+      "task_qualified": false
+    },
+    {
+      "case_id": 22,
+      "role": "CHECK",
+      "seed": 7304,
+      "dt": 0.005,
+      "rows": 10,
+      "valid": 10,
+      "task_qualified": false
+    },
+    {
+      "case_id": 23,
+      "role": "CHECK",
+      "seed": 7304,
+      "dt": 0.0025,
+      "rows": 9,
+      "valid": 9,
+      "task_qualified": false
+    }
+  ],
+  "closure_errors": {
+    "TRAIN": 1.6768808563938364e-12,
+    "CHECK": 1.2008172234345693e-12
+  },
+  "neural_updates": 0,
+  "scope": "Fresh predeclared episode/action roles, observed H20 dynamics and measured source-BODY wrenches/Fn6. Numerical-quality masks retain all failed rows. Valid TRAIN only fits scales; no expert demonstrations, successful policies, real ego validation or physical-gradient correctness claim."
+}

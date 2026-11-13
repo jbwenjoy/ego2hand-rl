@@ -1,0 +1,81 @@
+{
+  "schema": "controlled_pen_paired_WM_stage:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\pen_wm_first100_v1.toml",
+    "bytes": 374,
+    "sha256": "cf52e6e5f817d09182f30dec77efbabe6f1451b7c09a01267c2bd099cc01e1e2"
+  },
+  "prepared": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_prepared_v1\\report.json",
+    "bytes": 9020,
+    "sha256": "e56434c9589c31854ad08310b04bf03f4455cc350d272f7fdf3534610cc07c84"
+  },
+  "review": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_prepared_review_v1\\report.json",
+    "bytes": 15408,
+    "sha256": "e559a0b46b3551415c82bf099f2cc138d404d89cce46730f34e37ec90ca6d52c"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\train_pen_response.py",
+      "bytes": 544,
+      "sha256": "07ddfd3fb27d3292d67d7dc85bb944206fdf214e7b5993b17a94192f0bdb0e10"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\pen_stage.py",
+      "bytes": 14366,
+      "sha256": "f9e3ca602df9747241bc887cc9d8694b51c371aca0db898f4772c878d358a4f0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\pen_response.py",
+      "bytes": 1763,
+      "sha256": "9797f961dadbe464cfc517ecfd8fa193e84327f32196da1e20893cb29e3daa81"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\compound_response.py",
+      "bytes": 2139,
+      "sha256": "e316bd7d3efda4a8ca286c3855905c3be64db95ecab7d6d1f1ece573b9c28f63"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\impulse_response.py",
+      "bytes": 2679,
+      "sha256": "3c95676308c73da2f01e874753ddda6835052f991d22da32324b9f5c10bbd6ab"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\impulse_stage.py",
+      "bytes": 16297,
+      "sha256": "f2aceeffabfc34a0a16b54a7219fbf4115209a21bee51c308851ba4c97f5e691"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\world_model.py",
+      "bytes": 13810,
+      "sha256": "3eb05f8a449d4f5141b0787136b3eac56ab6912ae4731e4c23dc789bec846158"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\checkpoint.py",
+      "bytes": 10943,
+      "sha256": "4b18284fe81657f4f1246137806a5f29aaf210dbf878fc2b67f9ec45d4ff34bd"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\gpu_monitor.py",
+      "bytes": 1072,
+      "sha256": "b0bfa3b24a5c5057eaab234b91563326dddda1b474219a0fe39b2e68a75bc5d5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\impulse_codec.py",
+      "bytes": 2237,
+      "sha256": "9e7b0444309ba442434936ce1b77c66f330fee1c08d06f80e57909c8bf6f5666"
+    }
+  ],
+  "first_checkpoint_update": 100,
+  "planned_updates": 2000,
+  "stop_at_first_healthy_checkpoint": true,
+  "Actor_updates": 0,
+  "hardware": {
+    "GPU_name": "NVIDIA GeForce RTX 5090",
+    "Torch_version": "2.14.1+cu130",
+    "device": "cuda:0"
+  },
+  "difference": "DIRECT independent velocity heads versus measured source-BODY wrench/learned WORLD numerical-defect impulse closure, corresponding auxiliary labels; same NN weights/rows/batches/optimizer budget.",
+  "scope": "Fresh single-clip nonexpert controlled-dynamics component experiment; not Actor A1/A2, expert imitation, successful retargeting or ego generalization."
+}
