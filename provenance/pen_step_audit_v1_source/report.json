@@ -1,0 +1,276 @@
+{
+  "schema": "GPU_pen_steps_audit:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\pen_gpu_step_audit_v1.toml",
+    "bytes": 416,
+    "sha256": "c31b252e6cfe90e6c89531efb8cac31daf72f813f4e4d7886adda70a9fd1e436"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_support_pen_GPU_v1\\report.json",
+    "bytes": 27168,
+    "sha256": "c6b35145a24244d45481b48c54d3d6bdf7fa815aada71c5cfe38e799db3cea57"
+  },
+  "proposal": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_support_search_v1\\report.json",
+    "bytes": 14559,
+    "sha256": "0c8c06a98fd31c4140709a33a8d36f3ef4cf84b6e33d49afa3302c04d5f896e9"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\audit_gpu_pen_steps.py",
+      "bytes": 9882,
+      "sha256": "b406a4c5fbf027c5fc5f1b27e86b925393848a4ba113d724f2868ab0eb65dcb8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\gpu_pen_rollout.py",
+      "bytes": 5492,
+      "sha256": "c477fdacb66fa63adfd3a028ca415f16ce66c94a81e2362efb02238c02d8de81"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\gpu_contact_oracle.py",
+      "bytes": 5647,
+      "sha256": "77db104b132e52fccc54f94ed79b8a04241b00706040e7e4536c47141f9398fc"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\audit_gpu_contact_oracle.py",
+      "bytes": 12332,
+      "sha256": "4b599dc36916d273528f85ba585da6cdc59bd823523c1cb784fa66336fb02a56"
+    }
+  ],
+  "neural_updates": 0,
+  "role": "PHYSICAL_CLONE_FIDELITY_NOT_EXPERT_NOT_FIT",
+  "cases": [
+    {
+      "dt": 0.005,
+      "nworld": 1,
+      "checks": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_warmstart": true,
+        "fixed_mocap": true,
+        "original_EMA": true,
+        "original_PD": true,
+        "EFC_force": true,
+        "EFC_torque": true,
+        "no_aid": true,
+        "capacity": true,
+        "original_clock": true,
+        "finite": true
+      },
+      "horizon_errors": {
+        "hand_position_rad": 0.0004825592041015625,
+        "object_position_m": 0.0012918112790144569,
+        "object_rotation_rad": 0.06573673158932736,
+        "hand_velocity_rad_s": 0.08649597316980362,
+        "object_velocity_m_s": 0.04656588244513008,
+        "object_omega_rad_s": 2.8212313142122762
+      },
+      "complete_prefix_errors": {
+        "hand_position_rad": 0.0006598830223083496,
+        "object_position_m": 0.0033212960967080214,
+        "object_rotation_rad": 0.3949472412056109,
+        "hand_velocity_rad_s": 0.1319784540683031,
+        "object_velocity_m_s": 0.13530902123570226,
+        "object_omega_rad_s": 13.579964379633337
+      },
+      "EMA_error_rad": 0.0,
+      "PD_error_rad": 0.0,
+      "force_identity_error_N": 4.014049129303771e-08,
+      "torque_identity_error_Nm": 2.3666418546299725e-10,
+      "physical_world_ticks": 44,
+      "setup_integration_world_ticks": 1,
+      "wall_including_setup_and_readback_s": 4.552114599995548,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_step_audit_v1\\dt0.005_worlds1.npz",
+        "bytes": 29839,
+        "sha256": "f266e2395a36a89f048ed2174eb771cbc14481ca69536f29e85f6adca0c2fc95"
+      },
+      "last_contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_step_audit_v1\\dt0.005_worlds1_contacts.npz",
+        "bytes": 2906,
+        "sha256": "b24f3ec9ba3554eb317776670893d2b10730d5f040ef909b978eba5040e542ee"
+      }
+    },
+    {
+      "dt": 0.005,
+      "nworld": 128,
+      "checks": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_warmstart": true,
+        "fixed_mocap": true,
+        "original_EMA": true,
+        "original_PD": true,
+        "EFC_force": true,
+        "EFC_torque": true,
+        "no_aid": true,
+        "capacity": true,
+        "original_clock": true,
+        "finite": true
+      },
+      "horizon_errors": {
+        "hand_position_rad": 0.0009539127349853516,
+        "object_position_m": 0.00302205010747775,
+        "object_rotation_rad": 0.1555760565891357,
+        "hand_velocity_rad_s": 0.09302296489477158,
+        "object_velocity_m_s": 0.10876444581340923,
+        "object_omega_rad_s": 6.584252916937439
+      },
+      "complete_prefix_errors": {
+        "hand_position_rad": 0.0010222196578979492,
+        "object_position_m": 0.009691819956008136,
+        "object_rotation_rad": 0.9487736175536431,
+        "hand_velocity_rad_s": 0.1569152344018221,
+        "object_velocity_m_s": 0.1771121615959665,
+        "object_omega_rad_s": 16.791101528067777
+      },
+      "EMA_error_rad": 0.0,
+      "PD_error_rad": 0.0,
+      "force_identity_error_N": 6.32552818259586e-07,
+      "torque_identity_error_Nm": 5.215401521241445e-09,
+      "physical_world_ticks": 5632,
+      "setup_integration_world_ticks": 128,
+      "wall_including_setup_and_readback_s": 0.3462068999942858,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_step_audit_v1\\dt0.005_worlds128.npz",
+        "bytes": 1719147,
+        "sha256": "d33f1771fd69c377794ae47d95348dc86b481d0b64042b9b5f8bf1ac7c6008af"
+      },
+      "last_contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_step_audit_v1\\dt0.005_worlds128_contacts.npz",
+        "bytes": 19315,
+        "sha256": "7181ac598f0ba81e5e7077bde94c1fb4edfb5abb02f951ba90f018f87f8b4dc1"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "nworld": 1,
+      "checks": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_warmstart": true,
+        "fixed_mocap": true,
+        "original_EMA": true,
+        "original_PD": true,
+        "EFC_force": true,
+        "EFC_torque": true,
+        "no_aid": true,
+        "capacity": true,
+        "original_clock": true,
+        "finite": true
+      },
+      "horizon_errors": {
+        "hand_position_rad": 0.00022515654563903809,
+        "object_position_m": 0.0010242200750999531,
+        "object_rotation_rad": 0.07491116470560721,
+        "hand_velocity_rad_s": 0.01783033460378647,
+        "object_velocity_m_s": 0.036028874462235225,
+        "object_omega_rad_s": 2.847991952126666
+      },
+      "complete_prefix_errors": {
+        "hand_position_rad": 0.00030481815338134766,
+        "object_position_m": 0.00279481496747767,
+        "object_rotation_rad": 0.3769555431899986,
+        "hand_velocity_rad_s": 0.0965901967138052,
+        "object_velocity_m_s": 0.07029085260632406,
+        "object_omega_rad_s": 8.93688201851022
+      },
+      "EMA_error_rad": 0.0,
+      "PD_error_rad": 0.0,
+      "force_identity_error_N": 1.6108679392614297e-07,
+      "torque_identity_error_Nm": 4.964967850646023e-10,
+      "physical_world_ticks": 80,
+      "setup_integration_world_ticks": 1,
+      "wall_including_setup_and_readback_s": 0.1790061999927275,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_step_audit_v1\\dt0.0025_worlds1.npz",
+        "bytes": 50491,
+        "sha256": "dda82f0d4d1535fa7e9067ad29c8109885cbed65ea25e6c74d6f18e5a57988a6"
+      },
+      "last_contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_step_audit_v1\\dt0.0025_worlds1_contacts.npz",
+        "bytes": 2920,
+        "sha256": "f65781ff1d1edaa099eae6977ea56ea3ea72648313773e66ca5d84a2dfdad926"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "nworld": 128,
+      "checks": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_warmstart": true,
+        "fixed_mocap": true,
+        "original_EMA": true,
+        "original_PD": true,
+        "EFC_force": true,
+        "EFC_torque": true,
+        "no_aid": true,
+        "capacity": true,
+        "original_clock": true,
+        "finite": true
+      },
+      "horizon_errors": {
+        "hand_position_rad": 0.0008089542388916016,
+        "object_position_m": 0.0010244037794237347,
+        "object_rotation_rad": 0.07493764303120264,
+        "hand_velocity_rad_s": 0.08668776601552963,
+        "object_velocity_m_s": 0.037862378156272046,
+        "object_omega_rad_s": 3.596786550475543
+      },
+      "complete_prefix_errors": {
+        "hand_position_rad": 0.0008803606033325195,
+        "object_position_m": 0.0037122891151791055,
+        "object_rotation_rad": 0.3784443331557075,
+        "hand_velocity_rad_s": 0.09854945167899132,
+        "object_velocity_m_s": 0.10789780159502081,
+        "object_omega_rad_s": 8.93850604313634
+      },
+      "EMA_error_rad": 0.0,
+      "PD_error_rad": 0.0,
+      "force_identity_error_N": 5.586419825228221e-07,
+      "torque_identity_error_Nm": 4.884780408301264e-09,
+      "physical_world_ticks": 10240,
+      "setup_integration_world_ticks": 128,
+      "wall_including_setup_and_readback_s": 0.44750169999315403,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_step_audit_v1\\dt0.0025_worlds128.npz",
+        "bytes": 2399332,
+        "sha256": "41a4a93977da50f638eb6c16525135b9867cbfa284fbccd8992ddf2fa23af89c"
+      },
+      "last_contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_step_audit_v1\\dt0.0025_worlds128_contacts.npz",
+        "bytes": 18304,
+        "sha256": "b5453728b5a37ee34e96c825b64df72e70e35840c43c12630f2f5ec04a7e8703"
+      }
+    }
+  ],
+  "passed": 56,
+  "total": 72,
+  "ready_for_100ms_planning": false,
+  "scope": "Physical clone integration and original control/EMA/phase fidelity over preregistered100ms, with whole failed prefixes reported separately. No new physical task success, neural training or WM-gradient evidence."
+}

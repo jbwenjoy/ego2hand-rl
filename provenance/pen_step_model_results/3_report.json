@@ -1,0 +1,1445 @@
+{
+  "schema": "GPU_pen_model_repeatability:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\pen_step_repeatability_v1.toml",
+    "bytes": 272,
+    "sha256": "defdc9f423d3390049c11ed324dee65c6b744b16022736561980758919208a25"
+  },
+  "base_config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\controlled_evaluation_v4.toml",
+    "bytes": 1170,
+    "sha256": "17747b1fd703d3b096660b663f385900b0ab613b09d96a4bfef5ed48c4fe0cb8"
+  },
+  "gates": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\pen_gpu_step_audit_v1.toml",
+    "bytes": 416,
+    "sha256": "c31b252e6cfe90e6c89531efb8cac31daf72f813f4e4d7886adda70a9fd1e436"
+  },
+  "proposal": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_support_search_v1\\report.json",
+    "bytes": 14559,
+    "sha256": "0c8c06a98fd31c4140709a33a8d36f3ef4cf84b6e33d49afa3302c04d5f896e9"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\audit_pen_step_repeatability.py",
+      "bytes": 10864,
+      "sha256": "789d38413fa5ea0b65a287501aa81ae0886b6a0afdbab33ef8f184f76479c431"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\gpu_pen_rollout.py",
+      "bytes": 5775,
+      "sha256": "61d56d194dad867c32aa67b739ce76bf927883fdd75d6e96c0afb68c5b65b521"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\gpu_contact_oracle.py",
+      "bytes": 5647,
+      "sha256": "77db104b132e52fccc54f94ed79b8a04241b00706040e7e4536c47141f9398fc"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\gpu_model_snapshot.py",
+      "bytes": 2390,
+      "sha256": "e172a1c12e10d063fecbfd63a7812b4c9544a2d05de94b6d8969a4390d8b8c88"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\controlled_evaluation.py",
+      "bytes": 17461,
+      "sha256": "6f99861a245ffbbfc58b4e1b5b41e87cc4463cb27790d3a2c0276366fbddcc5d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_gpu_initialization.py",
+      "bytes": 8627,
+      "sha256": "38a8efb7576e228585cdd86ac40f90d3ada75c093d3152da46b6d914600a4c41"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\audit_gpu_pen_steps.py",
+      "bytes": 9882,
+      "sha256": "b406a4c5fbf027c5fc5f1b27e86b925393848a4ba113d724f2868ab0eb65dcb8"
+    }
+  ],
+  "neural_updates": 0,
+  "cases": [
+    {
+      "task": "hand2-pen-spin",
+      "controller": "CONSTANT_RESIDUAL",
+      "assets": {
+        "controlled_pen_xml": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\aruco_pen250\\xmls\\pen_tracking.xml",
+          "bytes": 1563,
+          "sha256": "2f6647d4a6ad0d23bbb23172447b12d644a1e50e563fd56dbde14be85792d36a"
+        }
+      },
+      "dt": 0.005,
+      "control_dt": 0.02,
+      "initial_reset_count": 1,
+      "resets_after_start": 0,
+      "planned_intervals": 368,
+      "actual_intervals": 11,
+      "physics_steps": 44,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.22,
+          "COM_RMS_m": 0.027326654887852565,
+          "COM_max_m": 0.06333356458918245,
+          "angle_RMS_rad": 1.2834626117252756,
+          "angle_max_rad": 3.0010673639516354,
+          "max_penetration_m": 0.0019758250564336777,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.7272727272727273,
+          "object_speed_RMS_m_s": 0.37321980494878737,
+          "object_omega_RMS_rad_s": 39.05234236269623
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_flags": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "phase_first": 1,
+      "phase_last": 11,
+      "termination_names": [
+        "time_out",
+        "unstable",
+        "object_position_error",
+        "reference_end",
+        "object_orientation_error"
+      ],
+      "initialization": {
+        "schema": "projected_pen_GPU_initialization:1",
+        "source": {
+          "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_gpu_initialization.py",
+          "bytes": 8627,
+          "sha256": "38a8efb7576e228585cdd86ac40f90d3ada75c093d3152da46b6d914600a4c41"
+        },
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\initial_GPU_support.npz",
+          "bytes": 10382,
+          "sha256": "d5532d9c0bd7775afbc25b9c1d0fec203f14d1cff09b553c5ef96dea8a90dc3c"
+        },
+        "joint_float32_rounding_max": 0.0,
+        "max_joint_delta_rad": 0.08154749870300293,
+        "static_support_with_PD_bounds": true,
+        "static_wrench_cone_feasible": true,
+        "dynamic_wrench_cone_feasible": true,
+        "static_separating_certificate": null,
+        "dynamic_separating_certificate": null,
+        "actual_active_support_contacts": [
+          {
+            "geoms": [
+              53,
+              1
+            ],
+            "dim": 4,
+            "distance_m": -0.00021463772282004356,
+            "local_force6": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              57
+            ],
+            "dim": 4,
+            "distance_m": -0.0013267279136925936,
+            "local_force6": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              18
+            ],
+            "dim": 4,
+            "distance_m": -0.0001274619862670079,
+            "local_force6": [
+              0.23785027861595154,
+              -0.09929744581158761,
+              0.06719774638418219,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              44
+            ],
+            "dim": 4,
+            "distance_m": -0.0015075764385983348,
+            "local_force6": [
+              0.13740437477827072,
+              -0.010678226318900474,
+              0.08550483438790124,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              55
+            ],
+            "dim": 4,
+            "distance_m": -0.0019758250564336777,
+            "local_force6": [
+              0.29975737165659666,
+              -0.13217160178641585,
+              -0.05590689757624867,
+              -2.5464114163873015e-05,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "full_wrench_rank": 6,
+        "support_geom_ids": [
+          5,
+          11,
+          14,
+          16,
+          18,
+          24,
+          27,
+          29,
+          31,
+          37,
+          40,
+          42,
+          44,
+          50,
+          53,
+          55,
+          57,
+          63,
+          66,
+          68,
+          70
+        ],
+        "support_scope": "all robot collision geoms",
+        "observation_scope": "Actual GPU contact/constraint snapshot at zero static velocities. Host-only adhesion field cleared; no GPU force or pose overwritten for support query.",
+        "neural_updates": 0,
+        "native_integration_steps": 0,
+        "source_initial_velocities_preserved": true,
+        "source_warmstart_preserved": true,
+        "scope": "One explicit pre-start joint/EMA correction; static probe followed by original source velocities, no mid-trajectory reset, object/wrist pose fixed.",
+        "repeatability_inventory": {
+          "array_fields": 404,
+          "scalar_fields": 195,
+          "full_reconstruction_exact": true,
+          "snapshot": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_arrays.npz",
+            "bytes": 1775868,
+            "sha256": "17287ced89bd647be016279707baff41d396b1ee4a740229819f4af031fb03ce"
+          },
+          "scalars": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_scalars.json",
+            "bytes": 5450,
+            "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+          },
+          "live_model_unchanged": true
+        }
+      },
+      "contact_label_schema": "GPU_constraint_indexed_no_adhesion:1",
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\trace.npz",
+        "bytes": 85256,
+        "sha256": "00b37055ee927919a0ad88b67e328989b8a3bcef10899c53836a1cb99706383e"
+      },
+      "wall_s": 1.5885374000063166,
+      "host_topology": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\host_topology.mjb",
+        "bytes": 55531644,
+        "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+      },
+      "GPU_physical_context": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\GPU_physical_context.npz",
+        "bytes": 4702,
+        "sha256": "472de30a0b17c6ca0ac0943123c5524505ce891fa8a4645da0f82f10bc674ba5"
+      },
+      "host_model_scope": "Compiled host topology plus separate actual GPU physical tables; host binary alone is not a GPU replay checkpoint.",
+      "model_layout": {
+        "nq": 27,
+        "nv": 26,
+        "nu": 20,
+        "object_qposadr": 0,
+        "object_dofadr": 0,
+        "object_body": 2,
+        "COM_BODY": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scope": "Actual original GPU plant, declared constant action; one reset and explicit pre-start initialization, stop first native terminal, no Actor inference or fitting.",
+      "name": "REPEATABILITY_CONSTANT_RESIDUAL"
+    },
+    {
+      "task": "hand2-pen-spin",
+      "controller": "CONSTANT_RESIDUAL",
+      "assets": {
+        "controlled_pen_xml": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\aruco_pen250\\xmls\\pen_tracking.xml",
+          "bytes": 1563,
+          "sha256": "2f6647d4a6ad0d23bbb23172447b12d644a1e50e563fd56dbde14be85792d36a"
+        }
+      },
+      "dt": 0.0025,
+      "control_dt": 0.02,
+      "initial_reset_count": 1,
+      "resets_after_start": 0,
+      "planned_intervals": 368,
+      "actual_intervals": 10,
+      "physics_steps": 80,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.2,
+          "COM_RMS_m": 0.022955460176304395,
+          "COM_max_m": 0.05365982788352749,
+          "angle_RMS_rad": 1.293848185155644,
+          "angle_max_rad": 3.064675035138775,
+          "max_penetration_m": 0.0019766760524362326,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.75,
+          "object_speed_RMS_m_s": 0.3513536521847588,
+          "object_omega_RMS_rad_s": 34.58026851017658
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_flags": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "phase_first": 1,
+      "phase_last": 10,
+      "termination_names": [
+        "time_out",
+        "unstable",
+        "object_position_error",
+        "reference_end",
+        "object_orientation_error"
+      ],
+      "initialization": {
+        "schema": "projected_pen_GPU_initialization:1",
+        "source": {
+          "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_gpu_initialization.py",
+          "bytes": 8627,
+          "sha256": "38a8efb7576e228585cdd86ac40f90d3ada75c093d3152da46b6d914600a4c41"
+        },
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\initial_GPU_support.npz",
+          "bytes": 10382,
+          "sha256": "d5532d9c0bd7775afbc25b9c1d0fec203f14d1cff09b553c5ef96dea8a90dc3c"
+        },
+        "joint_float32_rounding_max": 0.0,
+        "max_joint_delta_rad": 0.08154749870300293,
+        "static_support_with_PD_bounds": true,
+        "static_wrench_cone_feasible": true,
+        "dynamic_wrench_cone_feasible": true,
+        "static_separating_certificate": null,
+        "dynamic_separating_certificate": null,
+        "actual_active_support_contacts": [
+          {
+            "geoms": [
+              53,
+              1
+            ],
+            "dim": 4,
+            "distance_m": -0.00021463772282004356,
+            "local_force6": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              57
+            ],
+            "dim": 4,
+            "distance_m": -0.0013267279136925936,
+            "local_force6": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              18
+            ],
+            "dim": 4,
+            "distance_m": -0.0001274619862670079,
+            "local_force6": [
+              0.23785027861595154,
+              -0.09929744581158761,
+              0.06719774638418219,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              44
+            ],
+            "dim": 4,
+            "distance_m": -0.0015075764385983348,
+            "local_force6": [
+              0.13740437477827072,
+              -0.010678226318900474,
+              0.08550483438790124,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              55
+            ],
+            "dim": 4,
+            "distance_m": -0.0019758250564336777,
+            "local_force6": [
+              0.29975737165659666,
+              -0.13217160178641585,
+              -0.05590689757624867,
+              -2.5464114163873015e-05,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "full_wrench_rank": 6,
+        "support_geom_ids": [
+          5,
+          11,
+          14,
+          16,
+          18,
+          24,
+          27,
+          29,
+          31,
+          37,
+          40,
+          42,
+          44,
+          50,
+          53,
+          55,
+          57,
+          63,
+          66,
+          68,
+          70
+        ],
+        "support_scope": "all robot collision geoms",
+        "observation_scope": "Actual GPU contact/constraint snapshot at zero static velocities. Host-only adhesion field cleared; no GPU force or pose overwritten for support query.",
+        "neural_updates": 0,
+        "native_integration_steps": 0,
+        "source_initial_velocities_preserved": true,
+        "source_warmstart_preserved": true,
+        "scope": "One explicit pre-start joint/EMA correction; static probe followed by original source velocities, no mid-trajectory reset, object/wrist pose fixed.",
+        "repeatability_inventory": {
+          "array_fields": 404,
+          "scalar_fields": 195,
+          "full_reconstruction_exact": true,
+          "snapshot": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_arrays.npz",
+            "bytes": 1775868,
+            "sha256": "99b8c16fb9347a60e9d0d2842e0a883fc4941ef107cf520f18562b753a66b545"
+          },
+          "scalars": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_scalars.json",
+            "bytes": 5450,
+            "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+          },
+          "live_model_unchanged": true
+        }
+      },
+      "contact_label_schema": "GPU_constraint_indexed_no_adhesion:1",
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\trace.npz",
+        "bytes": 131793,
+        "sha256": "2c4a659e3b11d3ed09fb2265abe335d78ee5e7b859916e13b81d47bd62fb2849"
+      },
+      "wall_s": 1.9329656999907456,
+      "host_topology": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\host_topology.mjb",
+        "bytes": 55531644,
+        "sha256": "5be6babe80387c40a3cc6dc0a0d6e827db5b733b59488c2d21f5b3f78e28edb8"
+      },
+      "GPU_physical_context": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\GPU_physical_context.npz",
+        "bytes": 4702,
+        "sha256": "472de30a0b17c6ca0ac0943123c5524505ce891fa8a4645da0f82f10bc674ba5"
+      },
+      "host_model_scope": "Compiled host topology plus separate actual GPU physical tables; host binary alone is not a GPU replay checkpoint.",
+      "model_layout": {
+        "nq": 27,
+        "nv": 26,
+        "nu": 20,
+        "object_qposadr": 0,
+        "object_dofadr": 0,
+        "object_body": 2,
+        "COM_BODY": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scope": "Actual original GPU plant, declared constant action; one reset and explicit pre-start initialization, stop first native terminal, no Actor inference or fitting.",
+      "name": "REPEATABILITY_CONSTANT_RESIDUAL"
+    }
+  ],
+  "probes": [
+    {
+      "dt": 0.005,
+      "binding": "LIVE_READONLY",
+      "repeat": 0,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\LIVE_READONLY_0.npz",
+        "bytes": 553119,
+        "sha256": "ff0f032c705e4693449dc8c87a4a5d206b65f5ae22ffddb4cd646f4199de2452"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.0007959604263305664,
+        "object_position_m": 0.003076713333200546,
+        "object_rotation_rad": 0.17064064886521346,
+        "hand_velocity_rad_s": 0.09302299469709396,
+        "object_velocity_m_s": 0.10847172286058503,
+        "object_omega_rad_s": 6.7074829113807715
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.000987410545349121,
+        "object_position_m": 0.001833264727863666,
+        "object_rotation_rad": 0.09768898187270969,
+        "hand_velocity_rad_s": 0.11191149055957794,
+        "object_velocity_m_s": 0.05872386357053121,
+        "object_omega_rad_s": 4.251147242701991
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 0.0,
+        "object_position_m": 0.0,
+        "object_rotation_rad": 5.16191365590357e-08,
+        "hand_velocity_rad_s": 0.0,
+        "object_velocity_m_s": 0.0,
+        "object_omega_rad_s": 0.0
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "17287ced89bd647be016279707baff41d396b1ee4a740229819f4af031fb03ce"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.005,
+      "binding": "LIVE_READONLY",
+      "repeat": 1,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\LIVE_READONLY_1.npz",
+        "bytes": 538322,
+        "sha256": "abdd0a327240861b9faf65e3ff42fccf2c3f2ec49b14a780fd1ea894bb146758"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.0009719133377075195,
+        "object_position_m": 0.003013296245783125,
+        "object_rotation_rad": 0.1575228476889568,
+        "hand_velocity_rad_s": 0.09302299469709396,
+        "object_velocity_m_s": 0.10849850821881717,
+        "object_omega_rad_s": 6.558852875939712
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.0012745857238769531,
+        "object_position_m": 0.0030909020912803543,
+        "object_rotation_rad": 0.16454002095334985,
+        "hand_velocity_rad_s": 0.1338101625442505,
+        "object_velocity_m_s": 0.11091002984332875,
+        "object_omega_rad_s": 6.97715046053504
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 0.0007011890411376953,
+        "object_position_m": 0.0016975108026144855,
+        "object_rotation_rad": 0.08118554785859257,
+        "hand_velocity_rad_s": 0.07232631742954254,
+        "object_velocity_m_s": 0.052977633290505914,
+        "object_omega_rad_s": 3.3710952464139954
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "17287ced89bd647be016279707baff41d396b1ee4a740229819f4af031fb03ce"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.005,
+      "binding": "LIVE_READONLY",
+      "repeat": 2,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\LIVE_READONLY_2.npz",
+        "bytes": 544020,
+        "sha256": "16258cd08eee0c1de4123f752d2e31266357e238c69d921f9841003fd396bab8"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.0007959604263305664,
+        "object_position_m": 0.0030180912763072454,
+        "object_rotation_rad": 0.1576795932876074,
+        "hand_velocity_rad_s": 0.09217718988656998,
+        "object_velocity_m_s": 0.10859439771062342,
+        "object_omega_rad_s": 6.553581471009521
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.0014529228210449219,
+        "object_position_m": 0.0027282500469373665,
+        "object_rotation_rad": 0.12301337640958579,
+        "hand_velocity_rad_s": 0.13258779048919678,
+        "object_velocity_m_s": 0.10874179929904146,
+        "object_omega_rad_s": 6.253322657773223
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 0.0008107423782348633,
+        "object_position_m": 0.0009543071512230676,
+        "object_rotation_rad": 0.03833492971828477,
+        "hand_velocity_rad_s": 0.10875523090362549,
+        "object_velocity_m_s": 0.05206361108551887,
+        "object_omega_rad_s": 3.1980979696748304
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "17287ced89bd647be016279707baff41d396b1ee4a740229819f4af031fb03ce"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.005,
+      "binding": "FULL_ARRAY_SNAPSHOT",
+      "repeat": 0,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\FULL_ARRAY_SNAPSHOT_0.npz",
+        "bytes": 535074,
+        "sha256": "818d807f02ac0e28c7550c52bfacd5ac3289836493f61589be240d4e339beaf8"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.000931859016418457,
+        "object_position_m": 0.0029575428680847123,
+        "object_rotation_rad": 0.15767960761627403,
+        "hand_velocity_rad_s": 0.09302300959825516,
+        "object_velocity_m_s": 0.10466745030951637,
+        "object_omega_rad_s": 6.343294693608327
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.0012683868408203125,
+        "object_position_m": 0.0028374028816108452,
+        "object_rotation_rad": 0.14681468001869927,
+        "hand_velocity_rad_s": 0.12085525691509247,
+        "object_velocity_m_s": 0.11120229255474601,
+        "object_omega_rad_s": 7.04812258332829
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 0.0,
+        "object_position_m": 0.0,
+        "object_rotation_rad": 5.960464477539063e-08,
+        "hand_velocity_rad_s": 0.0,
+        "object_velocity_m_s": 0.0,
+        "object_omega_rad_s": 0.0
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "17287ced89bd647be016279707baff41d396b1ee4a740229819f4af031fb03ce"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.005,
+      "binding": "FULL_ARRAY_SNAPSHOT",
+      "repeat": 1,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\FULL_ARRAY_SNAPSHOT_1.npz",
+        "bytes": 530020,
+        "sha256": "6aa6a0ecbd009e88f2e55bb08d42df3e5beab99979d902211dce622cb3ce5db1"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.0009311437606811523,
+        "object_position_m": 0.0032806558242749946,
+        "object_rotation_rad": 0.15767930477413003,
+        "hand_velocity_rad_s": 0.09224755316972733,
+        "object_velocity_m_s": 0.12541208767779913,
+        "object_omega_rad_s": 6.558858591622255
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.0009338855743408203,
+        "object_position_m": 0.003439716440880621,
+        "object_rotation_rad": 0.16645235629092184,
+        "hand_velocity_rad_s": 0.09668076038360596,
+        "object_velocity_m_s": 0.12322819805716481,
+        "object_omega_rad_s": 6.318111187279685
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 0.0006701946258544922,
+        "object_position_m": 0.000540409207190487,
+        "object_rotation_rad": 0.04813501203084005,
+        "hand_velocity_rad_s": 0.0921771451830864,
+        "object_velocity_m_s": 0.05347310448183725,
+        "object_omega_rad_s": 4.336512399718475
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "17287ced89bd647be016279707baff41d396b1ee4a740229819f4af031fb03ce"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.005,
+      "binding": "FULL_ARRAY_SNAPSHOT",
+      "repeat": 2,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\FULL_ARRAY_SNAPSHOT_2.npz",
+        "bytes": 547973,
+        "sha256": "4642e85c04dbd85e6bc5b28c1018bd431832301c2d14322a63ec53f1a8bf4985"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.0009034872055053711,
+        "object_position_m": 0.0030162484876292183,
+        "object_rotation_rad": 0.1575229002910065,
+        "hand_velocity_rad_s": 0.09302300959825516,
+        "object_velocity_m_s": 0.10847172286058503,
+        "object_omega_rad_s": 6.5535290300099724
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.0008908510208129883,
+        "object_position_m": 0.0030472392434933984,
+        "object_rotation_rad": 0.15431910086814873,
+        "hand_velocity_rad_s": 0.09302297979593277,
+        "object_velocity_m_s": 0.10962689589014624,
+        "object_omega_rad_s": 6.5063232530730835
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 0.00043570995330810547,
+        "object_position_m": 0.0003117279176566349,
+        "object_rotation_rad": 0.0252301161102687,
+        "hand_velocity_rad_s": 0.08714208751916885,
+        "object_velocity_m_s": 0.06234408395181304,
+        "object_omega_rad_s": 5.046034923758048
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "17287ced89bd647be016279707baff41d396b1ee4a740229819f4af031fb03ce"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.005\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.0025,
+      "binding": "LIVE_READONLY",
+      "repeat": 0,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\LIVE_READONLY_0.npz",
+        "bytes": 882022,
+        "sha256": "968ffc81d29cc67c2e47318066c1779dc48b2081e573860764564ae13eed8b0d"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.000735163688659668,
+        "object_position_m": 0.001648278085073214,
+        "object_rotation_rad": 0.11909404866648644,
+        "hand_velocity_rad_s": 0.08263059705495834,
+        "object_velocity_m_s": 0.0507986019923032,
+        "object_omega_rad_s": 4.306734892176841
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.0008089542388916016,
+        "object_position_m": 0.0010240251421641212,
+        "object_rotation_rad": 0.07497625261614871,
+        "hand_velocity_rad_s": 0.08638163655996323,
+        "object_velocity_m_s": 0.038340098229381024,
+        "object_omega_rad_s": 3.598679883066852
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 0.0,
+        "object_position_m": 0.0,
+        "object_rotation_rad": 5.16191365590357e-08,
+        "hand_velocity_rad_s": 0.0,
+        "object_velocity_m_s": 0.0,
+        "object_omega_rad_s": 0.0
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "99b8c16fb9347a60e9d0d2842e0a883fc4941ef107cf520f18562b753a66b545"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.0025,
+      "binding": "LIVE_READONLY",
+      "repeat": 1,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\LIVE_READONLY_1.npz",
+        "bytes": 899147,
+        "sha256": "9789759e8b4856eece05b592e80b83ddba79463e64979353f310d1d869fa9e96"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.000735163688659668,
+        "object_position_m": 0.001648278085073214,
+        "object_rotation_rad": 0.11937248796179468,
+        "hand_velocity_rad_s": 0.08331189304590225,
+        "object_velocity_m_s": 0.050798606384444306,
+        "object_omega_rad_s": 4.307890804317546
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.0008089542388916016,
+        "object_position_m": 0.0010245090648265376,
+        "object_rotation_rad": 0.07490307737041785,
+        "hand_velocity_rad_s": 0.08706293255090714,
+        "object_velocity_m_s": 0.03837123989383936,
+        "object_omega_rad_s": 3.5944915123677066
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 1.1920928955078125e-07,
+        "object_position_m": 5.090110282103227e-07,
+        "object_rotation_rad": 7.321015561473416e-05,
+        "hand_velocity_rad_s": 8.11740756034851e-06,
+        "object_velocity_m_s": 3.1969504579078625e-05,
+        "object_omega_rad_s": 0.004195615108826348
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "99b8c16fb9347a60e9d0d2842e0a883fc4941ef107cf520f18562b753a66b545"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.0025,
+      "binding": "LIVE_READONLY",
+      "repeat": 2,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\LIVE_READONLY_2.npz",
+        "bytes": 890751,
+        "sha256": "f68495d75bdfe99b0e01e5c89ce04a19a37a5cb08f052b2b2bb37a69f744d556"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.000735163688659668,
+        "object_position_m": 0.001648278085073214,
+        "object_rotation_rad": 0.1193724948268214,
+        "hand_velocity_rad_s": 0.09060314297676086,
+        "object_velocity_m_s": 0.05079860745381182,
+        "object_omega_rad_s": 4.306734414045037
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.000735163688659668,
+        "object_position_m": 0.0016482649778790826,
+        "object_rotation_rad": 0.11937915105861388,
+        "hand_velocity_rad_s": 0.09060314297676086,
+        "object_velocity_m_s": 0.050802141777109774,
+        "object_omega_rad_s": 4.306734177633305
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 0.00022515654563903809,
+        "object_position_m": 0.00102391319334063,
+        "object_rotation_rad": 0.07495990812101265,
+        "hand_velocity_rad_s": 0.017830345779657364,
+        "object_velocity_m_s": 0.03601392796316887,
+        "object_omega_rad_s": 2.847998149004015
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "99b8c16fb9347a60e9d0d2842e0a883fc4941ef107cf520f18562b753a66b545"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.0025,
+      "binding": "FULL_ARRAY_SNAPSHOT",
+      "repeat": 0,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\FULL_ARRAY_SNAPSHOT_0.npz",
+        "bytes": 899565,
+        "sha256": "def0504e048a29d3c4b094f3bc76cefa17018592f14ee721f06917c0a58a9ffc"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.000735163688659668,
+        "object_position_m": 0.001648278085073214,
+        "object_rotation_rad": 0.1189829602535817,
+        "hand_velocity_rad_s": 0.08293672651052475,
+        "object_velocity_m_s": 0.0507986019923032,
+        "object_omega_rad_s": 4.277175116120988
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.000735163688659668,
+        "object_position_m": 0.0016482649778790826,
+        "object_rotation_rad": 0.1189896164975489,
+        "hand_velocity_rad_s": 0.08293671905994415,
+        "object_velocity_m_s": 0.05080213738689806,
+        "object_omega_rad_s": 4.277174880143063
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 0.0,
+        "object_position_m": 0.0,
+        "object_rotation_rad": 4.2146848510894035e-08,
+        "hand_velocity_rad_s": 0.0,
+        "object_velocity_m_s": 0.0,
+        "object_omega_rad_s": 0.0
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "99b8c16fb9347a60e9d0d2842e0a883fc4941ef107cf520f18562b753a66b545"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.0025,
+      "binding": "FULL_ARRAY_SNAPSHOT",
+      "repeat": 1,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\FULL_ARRAY_SNAPSHOT_1.npz",
+        "bytes": 905750,
+        "sha256": "31f1c531c348d7ee35054b7e3d920aa530a3851618735635346ec1a49af9cb7c"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.000735163688659668,
+        "object_position_m": 0.001648278085073214,
+        "object_rotation_rad": 0.11937244154906475,
+        "hand_velocity_rad_s": 0.08293674141168594,
+        "object_velocity_m_s": 0.05079860801716437,
+        "object_omega_rad_s": 4.307890805408071
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.000735163688659668,
+        "object_position_m": 0.0016483423686851995,
+        "object_rotation_rad": 0.11934558869465287,
+        "hand_velocity_rad_s": 0.08293671160936356,
+        "object_velocity_m_s": 0.05081141756629784,
+        "object_omega_rad_s": 4.307891521554531
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 2.9802322387695312e-08,
+        "object_position_m": 1.0563021062879134e-07,
+        "object_rotation_rad": 3.3523784525258936e-05,
+        "hand_velocity_rad_s": 5.736947059631348e-06,
+        "object_velocity_m_s": 1.5806071342550656e-05,
+        "object_omega_rad_s": 0.0027976023146480955
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "99b8c16fb9347a60e9d0d2842e0a883fc4941ef107cf520f18562b753a66b545"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    },
+    {
+      "dt": 0.0025,
+      "binding": "FULL_ARRAY_SNAPSHOT",
+      "repeat": 2,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\FULL_ARRAY_SNAPSHOT_2.npz",
+        "bytes": 872137,
+        "sha256": "721616b02bfadba861711174b7af51785ee5d571d2505a3eff447504a5d8107c"
+      },
+      "checks": {
+        "full_model_reconstruction": true,
+        "live_model_unchanged": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "initial_ema": true,
+        "initial_warmstart": true,
+        "initial_time": true,
+        "controls": true,
+        "original_clock": true,
+        "capacity": true,
+        "no_aid": true,
+        "fixed_mocap": true,
+        "finite": true
+      },
+      "fidelity": {
+        "hand_position_rad": true,
+        "object_position_m": false,
+        "object_rotation_rad": false,
+        "hand_velocity_rad_s": true,
+        "object_velocity_m_s": false,
+        "object_omega_rad_s": false
+      },
+      "actual_errors": {
+        "hand_position_rad": 0.000735163688659668,
+        "object_position_m": 0.001648278085073214,
+        "object_rotation_rad": 0.11909404180309859,
+        "hand_velocity_rad_s": 0.08293626457452774,
+        "object_velocity_m_s": 0.050798606384444306,
+        "object_omega_rad_s": 4.277175116897881
+      },
+      "identical_world_spread": {
+        "hand_position_rad": 0.000735163688659668,
+        "object_position_m": 0.001648278085073214,
+        "object_rotation_rad": 0.11909403834746204,
+        "hand_velocity_rad_s": 0.08293624967336655,
+        "object_velocity_m_s": 0.05079860475172529,
+        "object_omega_rad_s": 4.2771751189519565
+      },
+      "first_world_repeat_error": {
+        "hand_position_rad": 1.7462298274040222e-08,
+        "object_position_m": 5.78320573876054e-08,
+        "object_rotation_rad": 6.683166642387533e-06,
+        "hand_velocity_rad_s": 3.904104232788086e-06,
+        "object_velocity_m_s": 1.1718653099343256e-05,
+        "object_omega_rad_s": 0.0006365633639944695
+      },
+      "inventory": {
+        "array_fields": 404,
+        "scalar_fields": 195,
+        "full_reconstruction_exact": true,
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_arrays.npz",
+          "bytes": 1775868,
+          "sha256": "99b8c16fb9347a60e9d0d2842e0a883fc4941ef107cf520f18562b753a66b545"
+        },
+        "scalars": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\actual_0.0025\\full_device_model_scalars.json",
+          "bytes": 5450,
+          "sha256": "506c67bee9c8fb066b2ceaa922f1426baaf5e0eae24bcdfc4828464db2e10777"
+        },
+        "live_model_unchanged": true
+      }
+    }
+  ],
+  "integrity_passed": 156,
+  "integrity_total": 156,
+  "fidelity_passed": 24,
+  "fidelity_total": 72,
+  "ready_for_100ms_planning": false,
+  "scope": "Exact nested device-model reconstruction and100ms identical-input/reset-repeatability versus a fresh unchanged task. No injected randomness, shorter-horizon substitution, changed acceptance, physical planning, neural training or success claim."
+}
