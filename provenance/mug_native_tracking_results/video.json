@@ -1,0 +1,62 @@
+{
+  "schema": "mug_native_feedback_comparison_video:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\render_mug_native_tracking.py",
+      "bytes": 3978,
+      "sha256": "c8d06d54ab5de1c1704cd3343c7b78714fdd4035c76f6f47a5971cdf2a47d93b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\render_mug_progress_video.py",
+      "bytes": 9966,
+      "sha256": "a6da0fe21a50b9173cf25175a4e06a9bbf189a1d7caf503f5fa5cf675899dcde"
+    }
+  ],
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_v1\\report.json",
+    "bytes": 45812,
+    "sha256": "d5825938ff03a64f449b6cf54c9d620c4093ed6e33f0becd47f2e3e3f6da04dc"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "cases": [
+    {
+      "task": "REFERENCE",
+      "controller": "ZERO",
+      "dt": 0.0003125,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_v1\\REFERENCE_ZERO_0.0003125\\execution\\trace.npz",
+        "bytes": 2393157,
+        "sha256": "213f7541aadc05468ea3aecb377b82defde166b21452b827a03512e6728d455b"
+      }
+    },
+    {
+      "task": "REFERENCE",
+      "controller": "NATIVE_MPC",
+      "dt": 0.0003125,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_v1\\REFERENCE_NATIVE_MPC_0.0003125\\execution\\trace.npz",
+        "bytes": 4129699,
+        "sha256": "151d54e965c8063095c5baac699e49630debc3d5d3339b0e4739f65d3bdffe02"
+      }
+    }
+  ],
+  "output": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_video_v1\\reference_zero_vs_native_mpc.mp4",
+    "bytes": 1098555,
+    "sha256": "9f6e65b56a4d10c47e229aee428a920d6fb6707b4a0cccf2b0c27a284a6496e0"
+  },
+  "frames": 154,
+  "fps": 30,
+  "physical_durations_s": [
+    0.5190625,
+    0.86875
+  ],
+  "speed": 0.25,
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Actual recorded native ZERO/MPC reference runs, fixed first coarse-dt cases, no favorable-case selection. Explicit terminal holds, no frame extrapolation or learned-policy claim."
+}

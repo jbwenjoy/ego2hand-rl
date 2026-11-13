@@ -1,0 +1,99 @@
+{
+  "schema": "mug_public_actor_observation_diagnostic:2",
+  "observation_schema": "mug_actor144_state55_EMArad20_prevA20_phase1_relative_future3x15_valid3:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\build_mug_public_observations.py",
+    "bytes": 3256,
+    "sha256": "3ddb85b3f19ba185b82241dad45c03030d4b73070e8411a0c6be147dddfbcfce"
+  },
+  "codec": {
+    "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\control_observation.py",
+    "bytes": 1560,
+    "sha256": "4a477ff07b5562ba8ee74b2d17a467d8b94c02814303ad977162763603eda5a2"
+  },
+  "alias_codec": {
+    "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\control_alias.py",
+    "bytes": 1256,
+    "sha256": "99577b13f237e46f14350b1dda9c225d897ef48a3470466f224a9b2efe5abfa8"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_v1\\report.json",
+    "bytes": 45812,
+    "sha256": "d5825938ff03a64f449b6cf54c9d620c4093ed6e33f0becd47f2e3e3f6da04dc"
+  },
+  "reference": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_closed_loop_reference_v1\\reference101.npz",
+    "bytes": 39485,
+    "sha256": "d4e08877fc7c4d604ced4cdc1fc6a3f4ce844651614ae812196ea85635baaf8d"
+  },
+  "output": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_public_control_v2\\diagnostic_public_packets.npz",
+    "bytes": 233711,
+    "sha256": "758ba657ee3effec6db50bd6d615e866f8e325e14777b07c3d4d7bed8ad96d42"
+  },
+  "rows": 316,
+  "future_offsets_H": [
+    1,
+    3,
+    5
+  ],
+  "terminal_padding": "Repeat declared endpoint goal with validity0 beyond2s; no extrapolation.",
+  "future_frame": "Current BODY axes: relative COM3,relative R first2 columns6,relative COM velocity3/omega3; known reference only.",
+  "EMA_units": "radian residual, not raw policy action",
+  "solver_state_included": false,
+  "native_dt_included": false,
+  "future_actual_states_or_forces_included": false,
+  "alias_diagnostics": {
+    "mixed_controller_context_groups": [
+      {
+        "rows": [
+          0,
+          26,
+          53,
+          113
+        ],
+        "contexts": [
+          "HOLD/NATIVE_MPC",
+          "HOLD/ZERO"
+        ]
+      },
+      {
+        "rows": [
+          173,
+          199,
+          226,
+          270
+        ],
+        "contexts": [
+          "REFERENCE/NATIVE_MPC",
+          "REFERENCE/ZERO"
+        ]
+      }
+    ],
+    "same_context_alias_groups": 4,
+    "same_context_conflicting_actions": [
+      {
+        "context": "HOLD/NATIVE_MPC",
+        "rows": [
+          53,
+          113
+        ],
+        "max_pairwise_action_difference": 0.2480812503349568
+      },
+      {
+        "context": "REFERENCE/NATIVE_MPC",
+        "rows": [
+          226,
+          270
+        ],
+        "max_pairwise_action_difference": 0.6367989126043769
+      }
+    ],
+    "limitation": "Different controllers intentionally produce different labels. Same-context cross-dt teacher conflicts may reflect numerical state, optimizer nonuniqueness or sensitivity; they do not prove physical public observations are insufficient for control."
+  },
+  "data_role": "DIAGNOSTIC_ONLY_NOT_EXPERT_NOT_FIT",
+  "all_control_cases_qualified": false,
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Public packet contract and privileged-teacher alias diagnosis only. Actions came from failed baseline/MPC rollouts, not demonstrations. Native dt/warmstart excluded; public Markov sufficiency and hardware object observation remain unproven."
+}
