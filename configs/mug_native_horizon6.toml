@@ -1,0 +1,10 @@
+schema = 1
+base_config = "mug_native_tracking_v1.toml"
+baseline_report = "../runs/mug_native_tracking_v1/report.json"
+baseline_review = "../runs/mug_native_tracking_review_v2/report.json"
+horizon = 6
+tasks = ["REFERENCE"]
+controllers = ["NATIVE_MPC"]
+max_total_oracle_steps = 4000000
+# Only prediction horizon changes in controller math; same initializer/box/cost.
+# Both original dt. At most twice oracle integration per decision versus H3.
