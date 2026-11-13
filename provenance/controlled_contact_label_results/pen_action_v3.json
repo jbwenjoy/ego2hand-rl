@@ -1,0 +1,53 @@
+{
+  "schema": "controlled_pen_action_contract_audit:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\audit_controlled_action_contract.py",
+    "bytes": 3347,
+    "sha256": "86de198a63ca475420d2f82d186ea810c2ac6281068eb49664ff780e58b18e0b"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\report.json",
+    "bytes": 33909,
+    "sha256": "09b0a24153425688327ea99494f587fddd86f940f7dbddd7c2db8e73a2dabf94"
+  },
+  "clip": {
+    "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\data\\rawdata\\clips\\01_single_axis\\clip_001.npz",
+    "bytes": 159698,
+    "sha256": "ca0b9b5dfc5de0170538bb13e95c56d5c2f20853e22b8405fe4b6853180b8348"
+  },
+  "cases": [
+    {
+      "task": "hand2-pen-spin",
+      "controller": "ZERO",
+      "max_target_error_rad": 0.0,
+      "passed": true,
+      "max_absolute_target_clipping_rad": 0.0,
+      "clipped_coordinates": 0,
+      "initial_robot_reference_q_max_error_rad": 0.0,
+      "first_reference_target_motion_max_rad": 0.005982398986816406,
+      "max_residual_rad": 0.0,
+      "scale": 0.5,
+      "alpha": 0.5,
+      "absolute_clip_scope": "joint-hard / actuator-control intersection; residual memory is not clipped to absolute target bounds"
+    },
+    {
+      "task": "hand2-pen-spin",
+      "controller": "SAVED_ACTOR",
+      "max_target_error_rad": 0.0,
+      "passed": true,
+      "max_absolute_target_clipping_rad": 0.0,
+      "clipped_coordinates": 0,
+      "initial_robot_reference_q_max_error_rad": 0.0,
+      "first_reference_target_motion_max_rad": 0.005982398986816406,
+      "max_residual_rad": 0.007605793885886669,
+      "scale": 0.5,
+      "alpha": 0.5,
+      "absolute_clip_scope": "joint-hard / actuator-control intersection; residual memory is not clipped to absolute target bounds"
+    }
+  ],
+  "passed": 2,
+  "total": 2,
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "finding": "ZERO follows the moving source joint reference with zero residual; it does not open the hand by targeting joint zero. Actor residual uses original .5 scale/.5 EMA. Full task failure remains."
+}

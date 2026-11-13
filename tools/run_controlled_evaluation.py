@@ -54,7 +54,8 @@ def main(args):
                     ['initial_qpos', 'initial_qvel', 'initial_native_state', 'time_s', 'COM_world_m', 'quaternion_wxyz'])
         initial_pairs.append(dict(task=task, exact=equal))
     sources = [file_pin(__file__), file_pin(ROOT/'src/supermimic_research/runtime/controlled_evaluation.py'),
-               file_pin(ROOT/'src/supermimic_research/runtime/controlled_assets.py')]
+               file_pin(ROOT/'src/supermimic_research/runtime/controlled_assets.py'),
+               file_pin(ROOT/'src/supermimic_research/mechanics/warp_contact_labels.py')]
     for name, module in list(sys.modules.items()):
         path = getattr(module, '__file__', None)
         if name.startswith('dex_supermimic') and path:

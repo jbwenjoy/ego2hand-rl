@@ -1,0 +1,55 @@
+{
+  "schema": "controlled_cube_momentum_receipt:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\audit_controlled_cube_momentum.py",
+    "bytes": 6043,
+    "sha256": "fa35216d0cd8ded4f2cb2406f93c902edc6f47466ffc99155ef174669dbedf2e"
+  },
+  "original": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\report.json",
+    "bytes": 33909,
+    "sha256": "09b0a24153425688327ea99494f587fddd86f940f7dbddd7c2db8e73a2dabf94"
+  },
+  "trace": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_cube_momentum_v2\\trace.npz",
+    "bytes": 14352,
+    "sha256": "455cf0f22ba4aa35e950274eda2ef075e8f32a18161682bc03080f0e4cf0c914"
+  },
+  "exact_initial": true,
+  "exact_twelve_tick_state_replay": true,
+  "ticks": 12,
+  "neural_updates": 0,
+  "maximum_norms": {
+    "contact_vs_generalized_force_N": 0.042438386207816696,
+    "direct_contact_vs_generalized_force_N": 3.70016546000241e-06,
+    "direct_contact_momentum_residual_N_s": 1.9658603906495573e-08,
+    "force_balance_N": 2.0154753484940933e-06,
+    "integrator_velocity_residual_m_s": 2.3369925109082808e-08,
+    "generalized_momentum_residual_N_s": 2.1011443755579605e-08,
+    "contact_only_momentum_residual_N_s": 0.00042438296959616643
+  },
+  "mass_kg": 0.11999999731779099,
+  "dt": 0.01,
+  "integrator": 3,
+  "cone": 0,
+  "inactive_object_contact_counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "decoder_source": {
+    "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\warp_contact_labels.py",
+    "bytes": 1817,
+    "sha256": "f5069441648b000bd898460398c4541a41a97775f54a1070ccd3082c11fa69e2"
+  },
+  "scope": "Original GPU solver, ZERO, first120ms. Separate copied constraint force, contact force, qacc and actual dv; no altered plant or force aid."
+}

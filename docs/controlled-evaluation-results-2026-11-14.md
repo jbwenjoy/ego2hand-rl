@@ -1,5 +1,11 @@
 # Original cube and single-pen unified no-reset results
 
+**Later correction:** [GPU contact-label audit](contact-label-correction-2026-11-14.md)
+found copied host `adhesion` residue contaminating normal forces in this v3 run.
+Its force readback6/6 reproduces those labels, not GPU force truth. Original
+kinematic/geometry failures stand; corrected v4 data and independent27/28 EFC
+review are separate. Do not fit affected v3 force labels as trusted targets.
+
 2026-11-14. Previous goal turn was progress (ca54864). This turn implements and
 runs the v0.58 controlled milestone through the unified source on RTX5090.
 Four fixed cases complete normally in the final receipt run. None qualifies;

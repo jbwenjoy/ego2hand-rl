@@ -8,6 +8,7 @@ from scipy.spatial.transform import Rotation, Slerp
 from ..artifacts import file_pin
 from .controlled_assets import bind_controlled_assets
 from ..mechanics.compound_holding import object_state
+from ..mechanics.warp_contact_labels import read_warp_contact_labels
 
 
 def write(path, value):
@@ -80,6 +81,8 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder)
         mjwarp.get_data_into(host, m, env.sim.wp_data)
         if m.neq or np.any(m.body_gravcomp) or np.any(host.qfrc_applied) or np.any(host.xfrc_applied):
             raise ValueError('No applied force/equality/gravity compensation')
+        if not np.all(m.actuator_trntype==int(mujoco.mjtTrn.mjTRN_JOINT)):
+            raise ValueError('Only joint actuators; GPU cone labels exclude adhesion actuation')
         body = m.body('object/cube').id
         joint = m.body_jntadr[body]; qa = int(m.jnt_qposadr[joint]); da = int(m.jnt_dofadr[joint])
         if int(m.jnt_type[joint]) != int(mujoco.mjtJoint.mjJNT_FREE) or int(m.body('robot/right_palm_link').jntnum.item()):
@@ -128,15 +131,22 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder)
             'post_qfrc_applied', 'post_xfrc_applied', 'post_COM', 'post_quaternion_wxyz',
             'post_COM_velocity', 'post_omega_world', 'pre_object_COM', 'pre_hand_normal_N',
             'pre_object_nonhand_normal_N', 'pre_penetration_m', 'pre_self_penetration_m',
-            'post_joint_limit_excursion_rad', 'overflow', 'post_actuator_force', 'post_qfrc_actuator', 'post_GPU_time']}
+            'post_joint_limit_excursion_rad', 'overflow', 'post_actuator_force', 'post_qfrc_actuator', 'post_GPU_time',
+            'post_qfrc_constraint','post_qfrc_bias','post_qfrc_passive','post_qacc']}
         raw = []; action_rows = []; phase = []; terminations = []; ticks = 0
         observations = []; terminal_rows = []
+        efc_rows=[];efc_ranges=[0];contact_addresses=[];legacy_force=[];legacy_adhesion=[]
         def record_step():
             nonlocal ticks
             preq = env.sim.data.qpos[0].cpu().numpy().copy()
             prev = env.sim.data.qvel[0].cpu().numpy().copy()
             original_step()
             mjwarp.get_data_into(host, m, env.sim.wp_data)
+            labels=read_warp_contact_labels(env.sim.wp_model,env.sim.wp_data)
+            if len(labels['dim'])!=host.ncon or not np.array_equal(labels['geom'],host.contact.geom):
+                raise ValueError('GPU/host contact geometry order mismatch')
+            efc_rows.append(labels['efc_force']);efc_ranges.append(efc_ranges[-1]+len(labels['efc_force']))
+            contact_addresses.extend(labels['efc_address'])
             if not np.array_equal(np.r_[host.mocap_pos.ravel(), host.mocap_quat.ravel()], mocap0):
                 raise ValueError('Wrist mocap moved after reset')
             if np.any(host.qfrc_applied) or np.any(host.xfrc_applied):
@@ -145,8 +155,10 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder)
             hand_N = other_N = penetration = self_pen = 0.
             for ci in range(host.ncon):
                 c = host.contact[ci]; g1, g2 = map(int, c.geom)
-                force = np.zeros(6); mujoco.mj_contactForce(m, host, ci, force)
-                raw.append(np.r_[ticks, g1, g2, c.dim, c.efc_address, c.dist, c.pos, c.frame, force])
+                old_force=np.zeros(6);mujoco.mj_contactForce(m,host,ci,old_force)
+                legacy_force.append(old_force);legacy_adhesion.append(float(c.adhesion))
+                force=labels['local_force6'][ci]
+                raw.append(np.r_[ticks, g1, g2, c.dim, labels['efc_address'][ci,0], c.dist, c.pos, c.frame, force])
                 penetration = max(penetration, -c.dist)
                 bodies = m.geom_bodyid[[g1, g2]]
                 if (bodies == body).sum() == 1:
@@ -161,10 +173,11 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder)
             excursion = max(0., float((joint_ranges[:, 0] - host.qpos[qids]).max()),
                              float((host.qpos[qids] - joint_ranges[:, 1]).max()))
             wd = env.sim.wp_data
-            overflow = int(wd.nacon.numpy()[0]) > wd.naconmax or int(wd.nefc.numpy()[0]) > wd.njmax
+            overflow = int(wd.nacon.numpy()[0]) > wd.naconmax or int(wd.nefc.numpy()[0]) > wd.njmax or labels['overflow']
             values = [preq, prev, host.qpos.copy(), host.qvel.copy(), host.ctrl.copy(), host.qfrc_applied.copy(),
                 host.xfrc_applied.copy(), center, quat, velocity, omega, host.xipos[body].copy(), hand_N, other_N,
-                penetration, self_pen, excursion, overflow, host.actuator_force.copy(), host.qfrc_actuator.copy(), float(host.time)]
+                penetration, self_pen, excursion, overflow, host.actuator_force.copy(), host.qfrc_actuator.copy(), float(host.time),
+                host.qfrc_constraint.copy(),host.qfrc_bias.copy(),host.qfrc_passive.copy(),host.qacc.copy()]
             for key, value in zip(trace, values): trace[key].append(value)
             ticks += 1
         env.sim.step = record_step
@@ -195,13 +208,18 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder)
                             actions20=np.array(action_rows), pre_action_phase=np.array(phase),
                             initial_qpos=initial_qpos, initial_qvel=initial_qvel, initial_native_state=initial_native,
                             pre_action_observations=np.array(observations), terminated_truncated=np.array(terminal_rows),
-                            termination_flags=np.array([list(row.values()) for row in terminations]), **reference)
+                            termination_flags=np.array([list(row.values()) for row in terminations]),
+                            GPU_efc_force_flat=np.concatenate(efc_rows),GPU_efc_ranges=np.array(efc_ranges),
+                            GPU_contact_efc_addresses=np.array(contact_addresses),
+                            legacy_host_local_force6=np.array(legacy_force).reshape(-1,6),
+                            legacy_host_adhesion=np.array(legacy_adhesion), **reference)
         summary = summarize_trace(z, reference, dt, completed, config)
         result = dict(task=task, controller=controller, assets=assets, dt=dt, control_dt=.02,
             initial_reset_count=1, resets_after_start=0, planned_intervals=intervals,
             actual_intervals=len(action_rows), physics_steps=ticks, summary=summary,
             termination_flags=terminations[-1], phase_first=phase[0], phase_last=phase[-1],
             termination_names=list(terminations[0]),
+            contact_label_schema='GPU_constraint_indexed_no_adhesion:1',
             trace=file_pin(folder/'trace.npz'), wall_s=time.perf_counter()-started,
             host_topology=file_pin(folder/'host_topology.mjb'), GPU_physical_context=file_pin(folder/'GPU_physical_context.npz'),
             host_model_scope='Compiled host topology plus separate actual GPU physical tables; host binary alone is not a GPU replay checkpoint.',
