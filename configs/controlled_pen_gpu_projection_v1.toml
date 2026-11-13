@@ -1,0 +1,8 @@
+schema = 1
+base_config = "controlled_evaluation_v4.toml"
+projection = "../runs/controlled_pen_projection_v1/report.json"
+dynamic_wrench = "../runs/controlled_pen_reference_wrench_v1/report.json"
+variants = ["ORIGINAL_ZERO_RESIDUAL","PROJECTED_CONSTANT_RESIDUAL"]
+dt = [0.005,0.0025]
+# Static zero-velocity contact query and then original source velocities.
+# Same geometry/offset as native diagnostic, no new optimization or fitting.

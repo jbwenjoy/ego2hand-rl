@@ -1,0 +1,214 @@
+{
+  "schema": "GPU_projected_pen_saved_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_gpu_projected_pen.py",
+    "bytes": 8813,
+    "sha256": "7a98bd2e17990fc5ff11269ca8640599426b3993dc0b601e12d4e7981ee025b4"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v2\\report.json",
+    "bytes": 45761,
+    "sha256": "203257c1123c1df8bafcf4a870b05371351360e8cc0c24a876a98430d5941163"
+  },
+  "checks": {
+    "all_initialization_control_and_support": true,
+    "physical_tables_equal": true,
+    "all_EFC_checks": true
+  },
+  "cases": [
+    {
+      "name": "ORIGINAL_ZERO_RESIDUAL",
+      "dt": 0.005,
+      "checks": {
+        "initial_qpos_exact": true,
+        "source_velocity_exact": true,
+        "static_pose_same": true,
+        "static_velocity_zero": true,
+        "no_nonjoint_correction": true,
+        "source_clock": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "constant_action": true,
+        "actual_PD_targets": true,
+        "first_terminal": true,
+        "no_applied_force": true,
+        "mocap_warmstart_preserved": true,
+        "actual_GPU_wrench_basis": true,
+        "static_target_frame": true,
+        "frozen_LP_readback": true,
+        "static_separation": true,
+        "dynamic_separation": true,
+        "pose_metrics": true
+      },
+      "control_error_rad": 0.0,
+      "wrench_basis_error": 0.0,
+      "pose_metric_error": 0.0,
+      "active_support_contacts": [
+        [
+          1,
+          42
+        ],
+        [
+          1,
+          44
+        ],
+        [
+          1,
+          29
+        ],
+        [
+          1,
+          31
+        ]
+      ],
+      "qualified": false
+    },
+    {
+      "name": "ORIGINAL_ZERO_RESIDUAL",
+      "dt": 0.0025,
+      "checks": {
+        "initial_qpos_exact": true,
+        "source_velocity_exact": true,
+        "static_pose_same": true,
+        "static_velocity_zero": true,
+        "no_nonjoint_correction": true,
+        "source_clock": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "constant_action": true,
+        "actual_PD_targets": true,
+        "first_terminal": true,
+        "no_applied_force": true,
+        "mocap_warmstart_preserved": true,
+        "actual_GPU_wrench_basis": true,
+        "static_target_frame": true,
+        "frozen_LP_readback": true,
+        "static_separation": true,
+        "dynamic_separation": true,
+        "pose_metrics": true
+      },
+      "control_error_rad": 0.0,
+      "wrench_basis_error": 0.0,
+      "pose_metric_error": 0.0,
+      "active_support_contacts": [
+        [
+          1,
+          42
+        ],
+        [
+          1,
+          44
+        ],
+        [
+          1,
+          29
+        ],
+        [
+          1,
+          31
+        ]
+      ],
+      "qualified": false
+    },
+    {
+      "name": "PROJECTED_CONSTANT_RESIDUAL",
+      "dt": 0.005,
+      "checks": {
+        "initial_qpos_exact": true,
+        "source_velocity_exact": true,
+        "static_pose_same": true,
+        "static_velocity_zero": true,
+        "no_nonjoint_correction": true,
+        "source_clock": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "constant_action": true,
+        "actual_PD_targets": true,
+        "first_terminal": true,
+        "no_applied_force": true,
+        "mocap_warmstart_preserved": true,
+        "actual_GPU_wrench_basis": true,
+        "static_target_frame": true,
+        "frozen_LP_readback": true,
+        "static_separation": true,
+        "dynamic_separation": true,
+        "pose_metrics": true
+      },
+      "control_error_rad": 0.0,
+      "wrench_basis_error": 0.0,
+      "pose_metric_error": 0.0,
+      "active_support_contacts": [
+        [
+          1,
+          44
+        ],
+        [
+          1,
+          18
+        ],
+        [
+          1,
+          31
+        ]
+      ],
+      "qualified": false
+    },
+    {
+      "name": "PROJECTED_CONSTANT_RESIDUAL",
+      "dt": 0.0025,
+      "checks": {
+        "initial_qpos_exact": true,
+        "source_velocity_exact": true,
+        "static_pose_same": true,
+        "static_velocity_zero": true,
+        "no_nonjoint_correction": true,
+        "source_clock": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "constant_action": true,
+        "actual_PD_targets": true,
+        "first_terminal": true,
+        "no_applied_force": true,
+        "mocap_warmstart_preserved": true,
+        "actual_GPU_wrench_basis": true,
+        "static_target_frame": true,
+        "frozen_LP_readback": true,
+        "static_separation": true,
+        "dynamic_separation": true,
+        "pose_metrics": true
+      },
+      "control_error_rad": 0.0,
+      "wrench_basis_error": 0.0,
+      "pose_metric_error": 0.0,
+      "active_support_contacts": [
+        [
+          1,
+          44
+        ],
+        [
+          1,
+          18
+        ],
+        [
+          1,
+          31
+        ]
+      ],
+      "qualified": false
+    }
+  ],
+  "passed": 76,
+  "total": 76,
+  "EFC_review": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_review_v2\\EFC\\report.json",
+    "bytes": 5359,
+    "sha256": "b877c74a17a9f6e7ef1771c370f3cb635427afd3c12f8b41e09520006054cf90"
+  },
+  "EFC_checks": [
+    28,
+    28
+  ],
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Independent actual GPU cone/dual, LP readback, initialization/velocity/warmstart/control/clock and EFC force receipts. Not manipulation success or derivative/generalization certificate."
+}

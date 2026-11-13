@@ -42,7 +42,7 @@ def summarize_trace(z, reference, dt, complete, config):
         warning_count=None, warning_scope='Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0.')
 
 
-def evaluate_case(task, controller, saved, config, config_dir, registry, folder):
+def evaluate_case(task, controller, saved, config, config_dir, registry, folder, *, initializer=None, constant_action=None):
     import torch
     import mujoco
     import mujoco_warp as mjwarp
@@ -57,6 +57,9 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder)
         recipe_path=str((config_dir / config['pen_recipe']).resolve()) if task == 'hand2-pen-spin' else None,
         clips_root=str((config_dir / config['clips_root']).resolve()) if task == 'hand2-pen-spin' else None)
     cfg.seed = seed; cfg.auto_reset = False; cfg.scene.num_envs = 1
+    if 'physics_dt' in config:
+        cfg.sim.mujoco.timestep=config['physics_dt'];cfg.decimation=round(.02/config['physics_dt'])
+        if abs(cfg.decimation*config['physics_dt']-.02)>1e-15:raise ValueError('Exact declared 50Hz clock')
     assets = bind_controlled_assets(cfg, task, registry)
     if task == 'hand2-pen-spin':
         from dex_supermimic.tasks.pen_spin import mdp
@@ -77,6 +80,12 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder)
     started = time.perf_counter()
     try:
         observation = env.reset()[0]['policy']  # The only reset in this case.
+        initialization_receipt=None
+        if initializer is not None:
+            if task!='hand2-pen-spin' or constant_action is None:raise ValueError('Declared constant-residual pen diagnostic only')
+            initialization_receipt=initializer(env)
+            env.observation_manager.reset()
+            observation=env.observation_manager.compute(update_history=True)['policy']
         m = env.sim.mj_model; host = mujoco.MjData(m)
         mjwarp.get_data_into(host, m, env.sim.wp_data)
         if m.neq or np.any(m.body_gravcomp) or np.any(host.qfrc_applied) or np.any(host.xfrc_applied):
@@ -123,10 +132,14 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder)
             intervals = round(config['cube_duration_s']/.02)
             reference = dict(time_s=np.array([0., config['cube_duration_s']]),
                 COM_world_m=np.tile(center, (2, 1)), quaternion_wxyz=np.tile(command.goal_quat_w[0].cpu().numpy(), (2, 1)))
-        actor = Actor(saved['modules']['actor']['net.0.weight'].shape[1]).cuda().eval()
-        actor.load_state_dict(saved['modules']['actor'], strict=True)
-        if observation.shape[1] != actor.net[0].weight.shape[1]:
-            raise ValueError('Saved Actor observation width mismatch')
+        actor=None
+        if constant_action is None:
+            actor = Actor(saved['modules']['actor']['net.0.weight'].shape[1]).cuda().eval()
+            actor.load_state_dict(saved['modules']['actor'], strict=True)
+            if observation.shape[1] != actor.net[0].weight.shape[1]:
+                raise ValueError('Saved Actor observation width mismatch')
+        elif np.asarray(constant_action).shape!=(20,) or not np.isfinite(constant_action).all() or np.any(abs(constant_action)>1):
+            raise ValueError('Explicit bounded constant action20')
         trace = {k: [] for k in ['pre_qpos', 'pre_qvel', 'post_qpos', 'post_qvel', 'post_ctrl',
             'post_qfrc_applied', 'post_xfrc_applied', 'post_COM', 'post_quaternion_wxyz',
             'post_COM_velocity', 'post_omega_world', 'pre_object_COM', 'pre_hand_normal_N',
@@ -187,7 +200,7 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder)
                 before_phase = int(command.time_steps[0]) if task == 'hand2-pen-spin' else k+1
                 if task == 'hand2-pen-spin' and before_phase != k+1:
                     raise ValueError('Unexpected reference clock resampling')
-                action = torch.zeros((1, 20), device='cuda:0') if controller == 'ZERO' else actor(observation)
+                action = torch.as_tensor(constant_action,dtype=torch.float32,device='cuda:0')[None] if constant_action is not None else torch.zeros((1, 20), device='cuda:0') if controller == 'ZERO' else actor(observation)
                 observations.append(observation[0].cpu().numpy().copy())
                 action_rows.append(action[0].cpu().numpy())
                 obs, reward, terminated, truncated, _ = env.step(action)
@@ -219,13 +232,15 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder)
             actual_intervals=len(action_rows), physics_steps=ticks, summary=summary,
             termination_flags=terminations[-1], phase_first=phase[0], phase_last=phase[-1],
             termination_names=list(terminations[0]),
+            initialization=initialization_receipt,
             contact_label_schema='GPU_constraint_indexed_no_adhesion:1',
             trace=file_pin(folder/'trace.npz'), wall_s=time.perf_counter()-started,
             host_topology=file_pin(folder/'host_topology.mjb'), GPU_physical_context=file_pin(folder/'GPU_physical_context.npz'),
             host_model_scope='Compiled host topology plus separate actual GPU physical tables; host binary alone is not a GPU replay checkpoint.',
             model_layout=dict(nq=m.nq, nv=m.nv, nu=m.nu, object_qposadr=qa, object_dofadr=da,
                               object_body=body, COM_BODY=com_body.tolist()),
-            scope='Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization.')
+            scope=('Actual original GPU plant, declared constant action; one reset and explicit pre-start initialization, stop first native terminal, no Actor inference or fitting.' if constant_action is not None else
+                   'Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization.'))
         write(folder/'report.json', result)
         return result
     finally:

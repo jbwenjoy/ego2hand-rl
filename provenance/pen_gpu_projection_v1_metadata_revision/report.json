@@ -1,0 +1,995 @@
+{
+  "schema": "controlled_projected_pen_GPU:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\controlled_pen_gpu_projection_v1.toml",
+    "bytes": 434,
+    "sha256": "73eb2956863b6c9c2a826de4693a6896c52f09369324dc41561e524c14cb1b99"
+  },
+  "base_config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\controlled_evaluation_v4.toml",
+    "bytes": 1170,
+    "sha256": "17747b1fd703d3b096660b663f385900b0ab613b09d96a4bfef5ed48c4fe0cb8"
+  },
+  "projection": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_projection_v1\\report.json",
+    "bytes": 7220,
+    "sha256": "2c4e00293950a8c77591887437d4c762b0c9b02edc7f06e9d2997ea04a1f3d04"
+  },
+  "dynamic_wrench": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_reference_wrench_v1\\report.json",
+    "bytes": 3825,
+    "sha256": "8b40fa6180c559c00d2dc58aa10de19bb7dc607a9449532cb3239688fee5ac55"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\run_gpu_projected_pen.py",
+      "bytes": 4034,
+      "sha256": "155b24122edbdae122645d47cbfe84f8835027572d89fecd3176a36f8f712557"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\controlled_evaluation.py",
+      "bytes": 17241,
+      "sha256": "a985f5d4bdbec454f923e03a862a76284a8d6eed19586aff43e34e5c27394ea7"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_gpu_initialization.py",
+      "bytes": 7870,
+      "sha256": "c3f5a6c97301c57ac630a2dd34a9816ec03d3cbdf07d9e8e89cabe07caf28c57"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\warp_contact_labels.py",
+      "bytes": 1882,
+      "sha256": "975245638ba9d304b0f0fc6cd3d4852a6512ec945c5c547746a10c23794ac827"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\indexed_contact_support.py",
+      "bytes": 3574,
+      "sha256": "a7c30337d5870e06c28c62276776e77225b71511a7357266b6784d1d01b98730"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\support.py",
+      "bytes": 6845,
+      "sha256": "153e25611c91a6d9e73154f4a865a250bf7554d1b2ac70ec1b8a6b982124e2c0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\wrench_separation.py",
+      "bytes": 1950,
+      "sha256": "ca51d08dddbd58ffe1dec5c65e25b189eae2e7b80729cd6d6bec9cc73bbe5782"
+    }
+  ],
+  "neural_updates": 0,
+  "role": "DIAGNOSTIC_ONLY_NOT_EXPERT_NOT_FIT",
+  "cases": [
+    {
+      "task": "hand2-pen-spin",
+      "controller": "CONSTANT_RESIDUAL",
+      "assets": {
+        "controlled_pen_xml": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\aruco_pen250\\xmls\\pen_tracking.xml",
+          "bytes": 1563,
+          "sha256": "2f6647d4a6ad0d23bbb23172447b12d644a1e50e563fd56dbde14be85792d36a"
+        }
+      },
+      "dt": 0.005,
+      "control_dt": 0.02,
+      "initial_reset_count": 1,
+      "resets_after_start": 0,
+      "planned_intervals": 368,
+      "actual_intervals": 8,
+      "physics_steps": 32,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.16,
+          "COM_RMS_m": 0.029844169472929862,
+          "COM_max_m": 0.05784774051499176,
+          "angle_RMS_rad": 1.5692326488187278,
+          "angle_max_rad": 3.0590748932381118,
+          "max_penetration_m": 0.0038012051954865456,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.71875,
+          "object_speed_RMS_m_s": 0.4339541732242355,
+          "object_omega_RMS_rad_s": 47.30731020153104
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_flags": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "phase_first": 1,
+      "phase_last": 8,
+      "termination_names": [
+        "time_out",
+        "unstable",
+        "object_position_error",
+        "reference_end",
+        "object_orientation_error"
+      ],
+      "initialization": {
+        "schema": "projected_pen_GPU_initialization:1",
+        "source": {
+          "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_gpu_initialization.py",
+          "bytes": 7870,
+          "sha256": "c3f5a6c97301c57ac630a2dd34a9816ec03d3cbdf07d9e8e89cabe07caf28c57"
+        },
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\ORIGINAL_ZERO_RESIDUAL_0.005\\initial_GPU_support.npz",
+          "bytes": 8486,
+          "sha256": "ebc977d5d83dda8c36053ebd6602768da012b7a07f386b96433aad182cd53380"
+        },
+        "joint_float32_rounding_max": 0.0,
+        "max_joint_delta_rad": 0.0,
+        "static_support_with_PD_bounds": false,
+        "static_wrench_cone_feasible": false,
+        "dynamic_wrench_cone_feasible": false,
+        "static_separating_certificate": {
+          "verified": true,
+          "solver_status": 0,
+          "radius_m": 0.125,
+          "witness_scaled6": [
+            0.0,
+            10.090119278740548,
+            0.0,
+            0.0,
+            1.052449321195996,
+            0.0
+          ],
+          "witness_dual_to_F_N_T_Nm": [
+            0.0,
+            10.090119278740548,
+            0.0,
+            0.0,
+            8.419594569567968,
+            0.0
+          ],
+          "minimum_ray_dot": 1.0547118733938987e-15,
+          "target_dot": -1.0,
+          "separating_tolerance": 1e-09,
+          "scope": "Checked numerical certificate for the supplied frozen native rays only; not global infeasibility, an applied twist, force estimate or physical policy gradient."
+        },
+        "dynamic_separating_certificate": {
+          "verified": true,
+          "solver_status": 0,
+          "radius_m": 0.125,
+          "witness_scaled6": [
+            0.0,
+            4.47282843525501,
+            -1.4733811736143785,
+            0.0,
+            6.249957184266705,
+            0.0
+          ],
+          "witness_dual_to_F_N_T_Nm": [
+            0.0,
+            4.47282843525501,
+            -1.4733811736143785,
+            0.0,
+            49.99965747413364,
+            0.0
+          ],
+          "minimum_ray_dot": -4.440892098500626e-16,
+          "target_dot": -1.0,
+          "separating_tolerance": 1e-09,
+          "scope": "Checked numerical certificate for the supplied frozen native rays only; not global infeasibility, an applied twist, force estimate or physical policy gradient."
+        },
+        "actual_active_support_contacts": [
+          {
+            "geoms": [
+              1,
+              42
+            ],
+            "dim": 4,
+            "distance_m": -0.0007546604610979557,
+            "local_force6": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              44
+            ],
+            "dim": 4,
+            "distance_m": -0.002881978638470173,
+            "local_force6": [
+              0.006266558542847633,
+              0.0,
+              0.004386590905290144,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              29
+            ],
+            "dim": 4,
+            "distance_m": -0.002862407825887203,
+            "local_force6": [
+              0.12089328467845917,
+              -0.08462529783376116,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              31
+            ],
+            "dim": 4,
+            "distance_m": -0.0038012051954865456,
+            "local_force6": [
+              0.0804833173751831,
+              -0.03021653094093235,
+              0.0,
+              -0.0001865842151660274,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "full_wrench_rank": 6,
+        "observation_scope": "Actual GPU contact/constraint snapshot at zero static velocities. Host-only adhesion field cleared; no GPU force or pose overwritten for support query.",
+        "neural_updates": 0,
+        "native_integration_steps": 0,
+        "source_initial_velocities_preserved": true,
+        "scope": "One explicit pre-start joint/EMA correction; static probe followed by original source velocities, no mid-trajectory reset, object/wrist pose fixed."
+      },
+      "contact_label_schema": "GPU_constraint_indexed_no_adhesion:1",
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\ORIGINAL_ZERO_RESIDUAL_0.005\\trace.npz",
+        "bytes": 66788,
+        "sha256": "865d88a4c8e81001f1994a12b6686f380a2724290bac3e340209f589e8f4c27c"
+      },
+      "wall_s": 0.4199607000045944,
+      "host_topology": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\ORIGINAL_ZERO_RESIDUAL_0.005\\host_topology.mjb",
+        "bytes": 55531644,
+        "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+      },
+      "GPU_physical_context": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\ORIGINAL_ZERO_RESIDUAL_0.005\\GPU_physical_context.npz",
+        "bytes": 4702,
+        "sha256": "472de30a0b17c6ca0ac0943123c5524505ce891fa8a4645da0f82f10bc674ba5"
+      },
+      "host_model_scope": "Compiled host topology plus separate actual GPU physical tables; host binary alone is not a GPU replay checkpoint.",
+      "model_layout": {
+        "nq": 27,
+        "nv": 26,
+        "nu": 20,
+        "object_qposadr": 0,
+        "object_dofadr": 0,
+        "object_body": 2,
+        "COM_BODY": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scope": "Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization.",
+      "name": "ORIGINAL_ZERO_RESIDUAL"
+    },
+    {
+      "task": "hand2-pen-spin",
+      "controller": "CONSTANT_RESIDUAL",
+      "assets": {
+        "controlled_pen_xml": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\aruco_pen250\\xmls\\pen_tracking.xml",
+          "bytes": 1563,
+          "sha256": "2f6647d4a6ad0d23bbb23172447b12d644a1e50e563fd56dbde14be85792d36a"
+        }
+      },
+      "dt": 0.0025,
+      "control_dt": 0.02,
+      "initial_reset_count": 1,
+      "resets_after_start": 0,
+      "planned_intervals": 368,
+      "actual_intervals": 8,
+      "physics_steps": 64,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.16,
+          "COM_RMS_m": 0.02887033552441272,
+          "COM_max_m": 0.057091489611006505,
+          "angle_RMS_rad": 1.5826077158386438,
+          "angle_max_rad": 3.1173870302976012,
+          "max_penetration_m": 0.0038012051954865456,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.71875,
+          "object_speed_RMS_m_s": 0.4255449943084588,
+          "object_omega_RMS_rad_s": 44.181727824449865
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_flags": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "phase_first": 1,
+      "phase_last": 8,
+      "termination_names": [
+        "time_out",
+        "unstable",
+        "object_position_error",
+        "reference_end",
+        "object_orientation_error"
+      ],
+      "initialization": {
+        "schema": "projected_pen_GPU_initialization:1",
+        "source": {
+          "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_gpu_initialization.py",
+          "bytes": 7870,
+          "sha256": "c3f5a6c97301c57ac630a2dd34a9816ec03d3cbdf07d9e8e89cabe07caf28c57"
+        },
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\ORIGINAL_ZERO_RESIDUAL_0.0025\\initial_GPU_support.npz",
+          "bytes": 8486,
+          "sha256": "ebc977d5d83dda8c36053ebd6602768da012b7a07f386b96433aad182cd53380"
+        },
+        "joint_float32_rounding_max": 0.0,
+        "max_joint_delta_rad": 0.0,
+        "static_support_with_PD_bounds": false,
+        "static_wrench_cone_feasible": false,
+        "dynamic_wrench_cone_feasible": false,
+        "static_separating_certificate": {
+          "verified": true,
+          "solver_status": 0,
+          "radius_m": 0.125,
+          "witness_scaled6": [
+            0.0,
+            10.090119278740548,
+            0.0,
+            0.0,
+            1.052449321195996,
+            0.0
+          ],
+          "witness_dual_to_F_N_T_Nm": [
+            0.0,
+            10.090119278740548,
+            0.0,
+            0.0,
+            8.419594569567968,
+            0.0
+          ],
+          "minimum_ray_dot": 1.0547118733938987e-15,
+          "target_dot": -1.0,
+          "separating_tolerance": 1e-09,
+          "scope": "Checked numerical certificate for the supplied frozen native rays only; not global infeasibility, an applied twist, force estimate or physical policy gradient."
+        },
+        "dynamic_separating_certificate": {
+          "verified": true,
+          "solver_status": 0,
+          "radius_m": 0.125,
+          "witness_scaled6": [
+            0.0,
+            4.47282843525501,
+            -1.4733811736143785,
+            0.0,
+            6.249957184266705,
+            0.0
+          ],
+          "witness_dual_to_F_N_T_Nm": [
+            0.0,
+            4.47282843525501,
+            -1.4733811736143785,
+            0.0,
+            49.99965747413364,
+            0.0
+          ],
+          "minimum_ray_dot": -4.440892098500626e-16,
+          "target_dot": -1.0,
+          "separating_tolerance": 1e-09,
+          "scope": "Checked numerical certificate for the supplied frozen native rays only; not global infeasibility, an applied twist, force estimate or physical policy gradient."
+        },
+        "actual_active_support_contacts": [
+          {
+            "geoms": [
+              1,
+              42
+            ],
+            "dim": 4,
+            "distance_m": -0.0007546604610979557,
+            "local_force6": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              44
+            ],
+            "dim": 4,
+            "distance_m": -0.002881978638470173,
+            "local_force6": [
+              0.006266558542847633,
+              0.0,
+              0.004386590905290144,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              29
+            ],
+            "dim": 4,
+            "distance_m": -0.002862407825887203,
+            "local_force6": [
+              0.12089328467845917,
+              -0.08462529783376116,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              31
+            ],
+            "dim": 4,
+            "distance_m": -0.0038012051954865456,
+            "local_force6": [
+              0.0804833173751831,
+              -0.03021653094093235,
+              0.0,
+              -0.0001865842151660274,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "full_wrench_rank": 6,
+        "observation_scope": "Actual GPU contact/constraint snapshot at zero static velocities. Host-only adhesion field cleared; no GPU force or pose overwritten for support query.",
+        "neural_updates": 0,
+        "native_integration_steps": 0,
+        "source_initial_velocities_preserved": true,
+        "scope": "One explicit pre-start joint/EMA correction; static probe followed by original source velocities, no mid-trajectory reset, object/wrist pose fixed."
+      },
+      "contact_label_schema": "GPU_constraint_indexed_no_adhesion:1",
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\ORIGINAL_ZERO_RESIDUAL_0.0025\\trace.npz",
+        "bytes": 107939,
+        "sha256": "d9e4b70d149db00d625a710a013d7ed0ad3b296ef6cbd353e020b3c8e2029fbe"
+      },
+      "wall_s": 0.5427325000055134,
+      "host_topology": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\ORIGINAL_ZERO_RESIDUAL_0.0025\\host_topology.mjb",
+        "bytes": 55531644,
+        "sha256": "5be6babe80387c40a3cc6dc0a0d6e827db5b733b59488c2d21f5b3f78e28edb8"
+      },
+      "GPU_physical_context": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\ORIGINAL_ZERO_RESIDUAL_0.0025\\GPU_physical_context.npz",
+        "bytes": 4702,
+        "sha256": "472de30a0b17c6ca0ac0943123c5524505ce891fa8a4645da0f82f10bc674ba5"
+      },
+      "host_model_scope": "Compiled host topology plus separate actual GPU physical tables; host binary alone is not a GPU replay checkpoint.",
+      "model_layout": {
+        "nq": 27,
+        "nv": 26,
+        "nu": 20,
+        "object_qposadr": 0,
+        "object_dofadr": 0,
+        "object_body": 2,
+        "COM_BODY": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scope": "Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization.",
+      "name": "ORIGINAL_ZERO_RESIDUAL"
+    },
+    {
+      "task": "hand2-pen-spin",
+      "controller": "CONSTANT_RESIDUAL",
+      "assets": {
+        "controlled_pen_xml": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\aruco_pen250\\xmls\\pen_tracking.xml",
+          "bytes": 1563,
+          "sha256": "2f6647d4a6ad0d23bbb23172447b12d644a1e50e563fd56dbde14be85792d36a"
+        }
+      },
+      "dt": 0.005,
+      "control_dt": 0.02,
+      "initial_reset_count": 1,
+      "resets_after_start": 0,
+      "planned_intervals": 368,
+      "actual_intervals": 8,
+      "physics_steps": 32,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.16,
+          "COM_RMS_m": 0.031021770908417578,
+          "COM_max_m": 0.05877111597087681,
+          "angle_RMS_rad": 1.5179731673498122,
+          "angle_max_rad": 3.048324134392183,
+          "max_penetration_m": 0.0018286770209670067,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.6875,
+          "object_speed_RMS_m_s": 0.43188944390969075,
+          "object_omega_RMS_rad_s": 46.5370510312349
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_flags": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "phase_first": 1,
+      "phase_last": 8,
+      "termination_names": [
+        "time_out",
+        "unstable",
+        "object_position_error",
+        "reference_end",
+        "object_orientation_error"
+      ],
+      "initialization": {
+        "schema": "projected_pen_GPU_initialization:1",
+        "source": {
+          "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_gpu_initialization.py",
+          "bytes": 7870,
+          "sha256": "c3f5a6c97301c57ac630a2dd34a9816ec03d3cbdf07d9e8e89cabe07caf28c57"
+        },
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\PROJECTED_CONSTANT_RESIDUAL_0.005\\initial_GPU_support.npz",
+          "bytes": 8127,
+          "sha256": "212a70671d8fd8cedc210256df79374532ecc3dc2a4bdcfc358d2e8f5024bd13"
+        },
+        "joint_float32_rounding_max": 4.030059042037237e-08,
+        "max_joint_delta_rad": 0.03408944606781006,
+        "static_support_with_PD_bounds": false,
+        "static_wrench_cone_feasible": false,
+        "dynamic_wrench_cone_feasible": false,
+        "static_separating_certificate": {
+          "verified": true,
+          "solver_status": 0,
+          "radius_m": 0.125,
+          "witness_scaled6": [
+            -0.5920082389318385,
+            4.398557023742301,
+            -1.9530143948746637,
+            0.0,
+            2.788355514181881,
+            -42.00141703301374
+          ],
+          "witness_dual_to_F_N_T_Nm": [
+            -0.5920082389318385,
+            4.398557023742301,
+            -1.9530143948746637,
+            0.0,
+            22.30684411345505,
+            -336.0113362641099
+          ],
+          "minimum_ray_dot": -2.220446049250313e-16,
+          "target_dot": -1.0,
+          "separating_tolerance": 1e-09,
+          "scope": "Checked numerical certificate for the supplied frozen native rays only; not global infeasibility, an applied twist, force estimate or physical policy gradient."
+        },
+        "dynamic_separating_certificate": {
+          "verified": true,
+          "solver_status": 0,
+          "radius_m": 0.125,
+          "witness_scaled6": [
+            0.0,
+            0.585008782443032,
+            -0.402899213787316,
+            0.0,
+            12.972305874097033,
+            -1.5990507402629373
+          ],
+          "witness_dual_to_F_N_T_Nm": [
+            0.0,
+            0.585008782443032,
+            -0.402899213787316,
+            0.0,
+            103.77844699277627,
+            -12.792405922103498
+          ],
+          "minimum_ray_dot": -3.3306690738754696e-16,
+          "target_dot": -1.0,
+          "separating_tolerance": 1e-09,
+          "scope": "Checked numerical certificate for the supplied frozen native rays only; not global infeasibility, an applied twist, force estimate or physical policy gradient."
+        },
+        "actual_active_support_contacts": [
+          {
+            "geoms": [
+              1,
+              44
+            ],
+            "dim": 4,
+            "distance_m": -5.0092843594029546e-05,
+            "local_force6": [
+              0.15350702370051295,
+              -0.09759524149391918,
+              -0.0012827869635478814,
+              -6.126347326643449e-05,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              18
+            ],
+            "dim": 4,
+            "distance_m": -4.9933230911847204e-05,
+            "local_force6": [
+              0.1581074446439743,
+              -0.1106752093659944,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              31
+            ],
+            "dim": 4,
+            "distance_m": -4.986851490684785e-05,
+            "local_force6": [
+              0.06858133617788553,
+              -0.03884813533130482,
+              -0.007645521648410869,
+              -1.0809125137125133e-05,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "full_wrench_rank": 6,
+        "observation_scope": "Actual GPU contact/constraint snapshot at zero static velocities. Host-only adhesion field cleared; no GPU force or pose overwritten for support query.",
+        "neural_updates": 0,
+        "native_integration_steps": 0,
+        "source_initial_velocities_preserved": true,
+        "scope": "One explicit pre-start joint/EMA correction; static probe followed by original source velocities, no mid-trajectory reset, object/wrist pose fixed."
+      },
+      "contact_label_schema": "GPU_constraint_indexed_no_adhesion:1",
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\PROJECTED_CONSTANT_RESIDUAL_0.005\\trace.npz",
+        "bytes": 64484,
+        "sha256": "dd65c45fb1d20b04e2f0098dc9e5d0b1f417aa5bb7edd39f9ce3feb88a19b4f2"
+      },
+      "wall_s": 0.34597580000991,
+      "host_topology": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\PROJECTED_CONSTANT_RESIDUAL_0.005\\host_topology.mjb",
+        "bytes": 55531644,
+        "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+      },
+      "GPU_physical_context": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\PROJECTED_CONSTANT_RESIDUAL_0.005\\GPU_physical_context.npz",
+        "bytes": 4702,
+        "sha256": "472de30a0b17c6ca0ac0943123c5524505ce891fa8a4645da0f82f10bc674ba5"
+      },
+      "host_model_scope": "Compiled host topology plus separate actual GPU physical tables; host binary alone is not a GPU replay checkpoint.",
+      "model_layout": {
+        "nq": 27,
+        "nv": 26,
+        "nu": 20,
+        "object_qposadr": 0,
+        "object_dofadr": 0,
+        "object_body": 2,
+        "COM_BODY": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scope": "Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization.",
+      "name": "PROJECTED_CONSTANT_RESIDUAL"
+    },
+    {
+      "task": "hand2-pen-spin",
+      "controller": "CONSTANT_RESIDUAL",
+      "assets": {
+        "controlled_pen_xml": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\aruco_pen250\\xmls\\pen_tracking.xml",
+          "bytes": 1563,
+          "sha256": "2f6647d4a6ad0d23bbb23172447b12d644a1e50e563fd56dbde14be85792d36a"
+        }
+      },
+      "dt": 0.0025,
+      "control_dt": 0.02,
+      "initial_reset_count": 1,
+      "resets_after_start": 0,
+      "planned_intervals": 368,
+      "actual_intervals": 8,
+      "physics_steps": 64,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.16,
+          "COM_RMS_m": 0.029619911336227427,
+          "COM_max_m": 0.05876469246918334,
+          "angle_RMS_rad": 1.5042313377695857,
+          "angle_max_rad": 3.064983784499886,
+          "max_penetration_m": 0.003335332265123725,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.75,
+          "object_speed_RMS_m_s": 0.42964746398163517,
+          "object_omega_RMS_rad_s": 46.17618425640632
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_flags": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "phase_first": 1,
+      "phase_last": 8,
+      "termination_names": [
+        "time_out",
+        "unstable",
+        "object_position_error",
+        "reference_end",
+        "object_orientation_error"
+      ],
+      "initialization": {
+        "schema": "projected_pen_GPU_initialization:1",
+        "source": {
+          "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_gpu_initialization.py",
+          "bytes": 7870,
+          "sha256": "c3f5a6c97301c57ac630a2dd34a9816ec03d3cbdf07d9e8e89cabe07caf28c57"
+        },
+        "snapshot": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\PROJECTED_CONSTANT_RESIDUAL_0.0025\\initial_GPU_support.npz",
+          "bytes": 8127,
+          "sha256": "212a70671d8fd8cedc210256df79374532ecc3dc2a4bdcfc358d2e8f5024bd13"
+        },
+        "joint_float32_rounding_max": 4.030059042037237e-08,
+        "max_joint_delta_rad": 0.03408944606781006,
+        "static_support_with_PD_bounds": false,
+        "static_wrench_cone_feasible": false,
+        "dynamic_wrench_cone_feasible": false,
+        "static_separating_certificate": {
+          "verified": true,
+          "solver_status": 0,
+          "radius_m": 0.125,
+          "witness_scaled6": [
+            -0.5920082389318385,
+            4.398557023742301,
+            -1.9530143948746637,
+            0.0,
+            2.788355514181881,
+            -42.00141703301374
+          ],
+          "witness_dual_to_F_N_T_Nm": [
+            -0.5920082389318385,
+            4.398557023742301,
+            -1.9530143948746637,
+            0.0,
+            22.30684411345505,
+            -336.0113362641099
+          ],
+          "minimum_ray_dot": -2.220446049250313e-16,
+          "target_dot": -1.0,
+          "separating_tolerance": 1e-09,
+          "scope": "Checked numerical certificate for the supplied frozen native rays only; not global infeasibility, an applied twist, force estimate or physical policy gradient."
+        },
+        "dynamic_separating_certificate": {
+          "verified": true,
+          "solver_status": 0,
+          "radius_m": 0.125,
+          "witness_scaled6": [
+            0.0,
+            0.585008782443032,
+            -0.402899213787316,
+            0.0,
+            12.972305874097033,
+            -1.5990507402629373
+          ],
+          "witness_dual_to_F_N_T_Nm": [
+            0.0,
+            0.585008782443032,
+            -0.402899213787316,
+            0.0,
+            103.77844699277627,
+            -12.792405922103498
+          ],
+          "minimum_ray_dot": -3.3306690738754696e-16,
+          "target_dot": -1.0,
+          "separating_tolerance": 1e-09,
+          "scope": "Checked numerical certificate for the supplied frozen native rays only; not global infeasibility, an applied twist, force estimate or physical policy gradient."
+        },
+        "actual_active_support_contacts": [
+          {
+            "geoms": [
+              1,
+              44
+            ],
+            "dim": 4,
+            "distance_m": -5.0092843594029546e-05,
+            "local_force6": [
+              0.15350702370051295,
+              -0.09759524149391918,
+              -0.0012827869635478814,
+              -6.126347326643449e-05,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              18
+            ],
+            "dim": 4,
+            "distance_m": -4.9933230911847204e-05,
+            "local_force6": [
+              0.1581074446439743,
+              -0.1106752093659944,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "geoms": [
+              1,
+              31
+            ],
+            "dim": 4,
+            "distance_m": -4.986851490684785e-05,
+            "local_force6": [
+              0.06858133617788553,
+              -0.03884813533130482,
+              -0.007645521648410869,
+              -1.0809125137125133e-05,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "full_wrench_rank": 6,
+        "observation_scope": "Actual GPU contact/constraint snapshot at zero static velocities. Host-only adhesion field cleared; no GPU force or pose overwritten for support query.",
+        "neural_updates": 0,
+        "native_integration_steps": 0,
+        "source_initial_velocities_preserved": true,
+        "scope": "One explicit pre-start joint/EMA correction; static probe followed by original source velocities, no mid-trajectory reset, object/wrist pose fixed."
+      },
+      "contact_label_schema": "GPU_constraint_indexed_no_adhesion:1",
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\PROJECTED_CONSTANT_RESIDUAL_0.0025\\trace.npz",
+        "bytes": 104230,
+        "sha256": "9eb6a7f2f435c5a866e092c8f3409751a830b4bc1fb8512e7ac2a964d3c177ff"
+      },
+      "wall_s": 0.5041501999949105,
+      "host_topology": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\PROJECTED_CONSTANT_RESIDUAL_0.0025\\host_topology.mjb",
+        "bytes": 55531644,
+        "sha256": "5be6babe80387c40a3cc6dc0a0d6e827db5b733b59488c2d21f5b3f78e28edb8"
+      },
+      "GPU_physical_context": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_projected_pen_GPU_v1\\PROJECTED_CONSTANT_RESIDUAL_0.0025\\GPU_physical_context.npz",
+        "bytes": 4702,
+        "sha256": "472de30a0b17c6ca0ac0943123c5524505ce891fa8a4645da0f82f10bc674ba5"
+      },
+      "host_model_scope": "Compiled host topology plus separate actual GPU physical tables; host binary alone is not a GPU replay checkpoint.",
+      "model_layout": {
+        "nq": 27,
+        "nv": 26,
+        "nu": 20,
+        "object_qposadr": 0,
+        "object_dofadr": 0,
+        "object_body": 2,
+        "COM_BODY": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scope": "Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization.",
+      "name": "PROJECTED_CONSTANT_RESIDUAL"
+    }
+  ],
+  "wall_s": 6.10243649999029,
+  "GPU": "NVIDIA GeForce RTX 5090",
+  "scope": "Same projected/original pose and source velocity/clock, actual GPU contact and control execution, two dt; static contact queries distinct, no Actor fitting or force assistance."
+}
