@@ -12,12 +12,12 @@ from mjlab.entity import EntityCfg
 PEN_XML = Path(__file__).resolve().parent / "resources" / "aruco_pen250" / "xmls" / "pen_tracking.xml"
 
 
-def get_tracking_pen_spec(*, mass: float = 0.030) -> mujoco.MjSpec:
+def get_tracking_pen_spec(*, mass: float = 0.030, xml_path: str | Path | None = None) -> mujoco.MjSpec:
   """Load the tracking-frame pen and scale its inertia to ``mass``."""
   if not math.isfinite(mass) or mass <= 0:
     raise ValueError(f"Invalid pen mass: {mass}")
 
-  spec = mujoco.MjSpec.from_file(str(PEN_XML))
+  spec = mujoco.MjSpec.from_file(str(PEN_XML if xml_path is None else Path(xml_path)))
   source = spec.compile().body("cube")
   body = spec.body("cube")
   body.explicitinertial = 1
@@ -28,5 +28,5 @@ def get_tracking_pen_spec(*, mass: float = 0.030) -> mujoco.MjSpec:
   return spec
 
 
-def get_pen_cfg(mass: float = 0.030) -> EntityCfg:
-  return EntityCfg(spec_fn=partial(get_tracking_pen_spec, mass=mass))
+def get_pen_cfg(mass: float = 0.030, *, xml_path: str | Path | None = None) -> EntityCfg:
+  return EntityCfg(spec_fn=partial(get_tracking_pen_spec, mass=mass, xml_path=xml_path))

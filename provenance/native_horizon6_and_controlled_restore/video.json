@@ -1,0 +1,75 @@
+{
+  "schema": "mug_horizon_recorded_comparison:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\render_mug_horizon_comparison.py",
+      "bytes": 5657,
+      "sha256": "9ef7e73ac37532a473a97026095f13cbc3d0059d70471d4a682c5a18fdc3073b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\render_mug_progress_video.py",
+      "bytes": 9966,
+      "sha256": "a6da0fe21a50b9173cf25175a4e06a9bbf189a1d7caf503f5fa5cf675899dcde"
+    }
+  ],
+  "manifests": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_v1\\report.json",
+      "bytes": 45812,
+      "sha256": "d5825938ff03a64f449b6cf54c9d620c4093ed6e33f0becd47f2e3e3f6da04dc"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\report.json",
+      "bytes": 20789,
+      "sha256": "8e09a8459193d852bdbdd1d986443b56b5838eadb8c4b4bc17b6898ff6b9337a"
+    }
+  ],
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "traces": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_v1\\REFERENCE_ZERO_0.0003125\\execution\\trace.npz",
+      "bytes": 2393157,
+      "sha256": "213f7541aadc05468ea3aecb377b82defde166b21452b827a03512e6728d455b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_v1\\REFERENCE_NATIVE_MPC_0.0003125\\execution\\trace.npz",
+      "bytes": 4129699,
+      "sha256": "151d54e965c8063095c5baac699e49630debc3d5d3339b0e4739f65d3bdffe02"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\REFERENCE_NATIVE_MPC_0.0003125\\execution\\trace.npz",
+      "bytes": 6153359,
+      "sha256": "64b77eed6038e3bc1ec1cb72e3d703201ef0617466bf1f8b8b4f980ee72068f8"
+    }
+  ],
+  "output": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_horizon_video_v1\\zero_60ms_120ms_actual.mp4",
+    "bytes": 2007691,
+    "sha256": "2f252bdd3627a5187c5b042039c5c3d9938d6f1d9b8020e381a41eb1ba3b02b6"
+  },
+  "frames": 209,
+  "fps": 30,
+  "speed": 0.25,
+  "physical_durations_s": [
+    0.5190625,
+    0.86875,
+    1.32875
+  ],
+  "qualified": [
+    false,
+    false,
+    false
+  ],
+  "termination": [
+    "ORIENTATION_OVER_45DEG",
+    "ORIENTATION_OVER_45DEG",
+    "ORIENTATION_OVER_45DEG"
+  ],
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Fixed first coarse-dt cases, actual saved qpos only; terminal holds explicit. No learned-policy or success claim."
+}

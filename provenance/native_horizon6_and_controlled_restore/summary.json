@@ -1,0 +1,75 @@
+{
+  "schema": "native_horizon6_and_controlled_restore_provenance:1",
+  "inputs": {
+    "horizon_run": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\report.json",
+      "bytes": 20789,
+      "sha256": "8e09a8459193d852bdbdd1d986443b56b5838eadb8c4b4bc17b6898ff6b9337a"
+    },
+    "horizon_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_review_v1\\report.json",
+      "bytes": 2986,
+      "sha256": "7172a0c04fba614fff8123bb6c06a133ea68899bf7a76e933d8bf59ffdac14e2"
+    },
+    "horizon_chain": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_chain_v1\\report.json",
+      "bytes": 2455,
+      "sha256": "81f818398b043e5cffb8bc2c82623b0d2557cf9edd14169b15418aeefe9ec8b2"
+    },
+    "video": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_horizon_video_v1\\report.json",
+      "bytes": 2702,
+      "sha256": "51e7e9bd8fa35ecf23bb2716bb8d78668fa6d72c7dc3dc8d3156dd25e27922ca"
+    },
+    "pen_restore": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_restore_v2\\report.json",
+      "bytes": 18246,
+      "sha256": "24f8d76cb781cd92c5605e5c5adf870c2a9d64d7301163a68e863cdda6eda613"
+    },
+    "pen_assets": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_asset_equivalence_v1\\report.json",
+      "bytes": 4918,
+      "sha256": "b84404ee1cd16ef5f4d04ec07c2d81bcbb9b6d20c0a8180f5146cb448f8cc6ef"
+    },
+    "tests": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\horizon_restore_tests145.log",
+      "bytes": 666,
+      "sha256": "f04c3a66a0499cc08572614cd88aa335cfa5d865556a2120e05ed3373f59bb5d"
+    },
+    "historical_cube_eager": {
+      "path": "D:\\workspace\\dex-supermimic-research\\outputs\\windows_bringup_20261101\\cube_eager\\validation.json",
+      "bytes": 2178,
+      "sha256": "688cd64da030af8c03a75a64ba25f8249b398af7bdda19c312bf6c2fce75befa"
+    },
+    "historical_cube_resume": {
+      "path": "D:\\workspace\\dex-supermimic-research\\outputs\\windows_bringup_20261101\\cube_resume\\validation.json",
+      "bytes": 11045,
+      "sha256": "f4d53e590bdc4b00f4419190a3d7ff407bc1542072ec56813908222fd633335f"
+    },
+    "historical_pen_eager": {
+      "path": "D:\\workspace\\dex-supermimic-research\\outputs\\windows_bringup_20261101\\pen_eager\\validation.json",
+      "bytes": 11197,
+      "sha256": "a90017d4a471c783eac423b60c19728212113d82c184a09b3f3bc508e68a2a05"
+    }
+  },
+  "artifacts": {
+    "controlled_pen_xml": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\aruco_pen250\\xmls\\pen_tracking.xml",
+      "bytes": 1563,
+      "sha256": "2f6647d4a6ad0d23bbb23172447b12d644a1e50e563fd56dbde14be85792d36a"
+    },
+    "controlled_pen_recipe": {
+      "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\data\\recipe\\01_single_axis.json",
+      "bytes": 87,
+      "sha256": "db7c0402a8731e8a2944c313b5a25e279cc29040a61f2523bcea8d746ae59b6e"
+    }
+  },
+  "source_derived_from": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_native_tracking.py",
+    "bytes": 12550,
+    "sha256": "2b3cbcb3a631f2077295e91126a86d8db6f07ce5ccded9aad3a0074539408523"
+  },
+  "no_new_neural_training": true,
+  "goal_complete": false,
+  "note": "H6 0/2 task qualified despite 7/7 raw review and36/36 chains. Original pen 24/24 restore, not no-reset task success. Failure v1 retained separately. Sole existing Dex change: optional explicit pen XML argument; immutable archives untouched."
+}

@@ -1,0 +1,794 @@
+{
+  "schema": "native_reference_horizon_extension:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\run_mug_native_horizon.py",
+      "bytes": 5130,
+      "sha256": "02b0c8496f694b1b0e5c13f8fac8e3754f41e311b8dda8c7cbbbf0944e2a7e4e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\native_case.py",
+      "bytes": 3768,
+      "sha256": "d1de22d9d5252a1e02ed6e456ff978af97fe77133cdfb24765c65ea2c6a72064"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\run_mug_native_tracking.py",
+      "bytes": 12777,
+      "sha256": "ebafea5df563099c62643eab3712970e4205284b65bd0fa2f29b9c68dfca4397"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\native_tracking.py",
+      "bytes": 4778,
+      "sha256": "913ca028a58131b20214bb5c005b4c1a8340deaef0079ad27a949e06a88bfa7e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\native_oracle.py",
+      "bytes": 2458,
+      "sha256": "afefe37a72759df2f600cb957fa1d26ec26fb5ff6195274a85c8c8336532b927"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_transition.py",
+      "bytes": 8479,
+      "sha256": "e0a5bc7569531b9fe52f024dbea3fea6b0ae05686027e6be6b0a81e486494b78"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\compound_contacts.py",
+      "bytes": 3098,
+      "sha256": "573b9f5367782b91422598b6b09f3188c0d4d369c3090f702ee0536c2e5cf241"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\residual_control.py",
+      "bytes": 2757,
+      "sha256": "c62e2c120b73f668200029c28fe1ad4d988c140da83aacf14532dae051940163"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\transition_store.py",
+      "bytes": 1875,
+      "sha256": "3bf4dcb143795830428bb44c59027ed7caf60060f9c855a1fe0171b341025830"
+    }
+  ],
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\mug_native_horizon6.toml",
+    "bytes": 442,
+    "sha256": "abc219a906e0597fa0e419183e139b30a578927afe603c7a131c91e091b06530"
+  },
+  "base_config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\mug_native_tracking_v1.toml",
+    "bytes": 864,
+    "sha256": "c4b649c26ba2128b7de654d18c228a47eac1859340eaa8c866a5cbd348bd64a8"
+  },
+  "effective_config": {
+    "schema": 1,
+    "oracle_parity": "../runs/mug_native_oracle_parity_v1/report.json",
+    "reference": "../runs/mug_closed_loop_reference_v1/report.json",
+    "binding": "../runs/right_mug_frames_v4/binding.json",
+    "tasks": [
+      "REFERENCE"
+    ],
+    "controllers": [
+      "NATIVE_MPC"
+    ],
+    "dt": [
+      0.0003125,
+      0.00015625
+    ],
+    "horizon": 6,
+    "active_joints": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "FD_action": 0.1,
+    "ridge": 0.1,
+    "max_action_step": 0.5,
+    "line_search": [
+      1.0,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "COM_scale_m": 0.005,
+    "angle_scale_rad": 0.08726646259971647,
+    "velocity_scale_m_s": 0.05,
+    "omega_scale_rad_s": 0.5,
+    "joint_weight": 0.02,
+    "contact_weight": 0.1,
+    "other_force_weight": 0.05,
+    "action_weight": 0.002,
+    "smooth_weight": 0.01,
+    "decision_replay_k": [
+      0,
+      5
+    ],
+    "max_total_oracle_steps": 4000000
+  },
+  "baseline": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_v1\\report.json",
+    "bytes": 45812,
+    "sha256": "d5825938ff03a64f449b6cf54c9d620c4093ed6e33f0becd47f2e3e3f6da04dc"
+  },
+  "baseline_review": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_review_v2\\report.json",
+    "bytes": 4054,
+    "sha256": "64ccbf5004e7605b8afd4d63c33a16ad4b7f93d0e49c3f102266d8e146a2ced4"
+  },
+  "inputs": {
+    "oracle_parity": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_oracle_parity_v1\\report.json",
+      "bytes": 8402,
+      "sha256": "56a135b33a8b1fda1e90c03da1097983f89ac88d6db3665507b5573bae745d6e"
+    },
+    "reference": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_closed_loop_reference_v1\\report.json",
+      "bytes": 3928,
+      "sha256": "b23724764f8b63dbc7bf51c8b4a4653d6e67b8de14adc14a99586239bd696172"
+    },
+    "binding": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\binding.json",
+      "bytes": 3857,
+      "sha256": "3a3b0456f5533ce9694448407c7f42e1d3779283cb2a3f36b54e2734744c3db7"
+    }
+  },
+  "cases": [
+    {
+      "task": "REFERENCE",
+      "controller": "NATIVE_MPC",
+      "dt": 0.0003125,
+      "horizon": 6,
+      "execution": {
+        "transitions": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\REFERENCE_NATIVE_MPC_0.0003125\\execution\\transitions.npz",
+          "bytes": 269753,
+          "sha256": "ae74c36b3744f9440dee25cb7cbdc4a28949ba48d1506de143699bbb08237015"
+        },
+        "trace": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\REFERENCE_NATIVE_MPC_0.0003125\\execution\\trace.npz",
+          "bytes": 6153359,
+          "sha256": "64b77eed6038e3bc1ec1cb72e3d703201ef0617466bf1f8b8b4f980ee72068f8"
+        },
+        "rows": 67,
+        "native_steps": 4252,
+        "complete_rows": 66
+      },
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 1.32875,
+          "tracking_COM_RMS_m": 0.022057643267884938,
+          "tracking_COM_max_m": 0.042937130767788836,
+          "tracking_angle_RMS_rad": 0.3574160844964437,
+          "tracking_angle_max_rad": 0.7856399577917059,
+          "final_tracking_COM_m": 0.042937130767788836,
+          "final_tracking_angle_rad": 0.7856399577917059,
+          "tracking_velocity_RMS_m_s": 0.07923264541105217,
+          "tracking_omega_RMS_rad_s": 0.9897358533031534,
+          "final_COM_drift_m": 0.04256757017136486,
+          "final_angle_rad": 0.7855122088196748,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "tail_triple_pad_force_coverage": null,
+          "max_native_penetration_m": 0.0003185003164944168,
+          "max_self_penetration_m": 0.0003185003164944168,
+          "max_phone_nonpad_normal_force_N": 0.0,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0
+        },
+        "physical_gates": {
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": false,
+          "max_phone_nonpad_normal_force_N": true,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true,
+          "tail_triple_pad_force_coverage": false
+        },
+        "tracking_gates": {
+          "duration_complete": false,
+          "COM_RMS_5mm": false,
+          "COM_max_10mm": false,
+          "angle_RMS_5deg": false,
+          "angle_max_10deg": false,
+          "velocity_RMS_5cm_s": false,
+          "omega_RMS_half_rad_s": false
+        },
+        "tracking_qualified": false,
+        "original_static_hold_qualified": false,
+        "original_static_hold_gates": {
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false
+        },
+        "task_qualified": false,
+        "termination": "ORIENTATION_OVER_45DEG",
+        "scope": "Full per-tick execution metrics; new reference tracking uses linear COM/SLERP interpolation on declared50Hz goals. Original static hold gates retained separately, not substituted for moving-reference tracking."
+      },
+      "oracle_steps": 794880,
+      "oracle_calls": 2070,
+      "decision_replays": [
+        {
+          "k": 0,
+          "passed": true
+        },
+        {
+          "k": 5,
+          "passed": true
+        }
+      ],
+      "prediction_checks": [
+        {
+          "k": 0,
+          "passed": true
+        },
+        {
+          "k": 1,
+          "passed": true
+        },
+        {
+          "k": 2,
+          "passed": true
+        },
+        {
+          "k": 3,
+          "passed": true
+        },
+        {
+          "k": 4,
+          "passed": true
+        },
+        {
+          "k": 5,
+          "passed": true
+        },
+        {
+          "k": 6,
+          "passed": true
+        },
+        {
+          "k": 7,
+          "passed": true
+        },
+        {
+          "k": 8,
+          "passed": true
+        },
+        {
+          "k": 9,
+          "passed": true
+        },
+        {
+          "k": 10,
+          "passed": true
+        },
+        {
+          "k": 11,
+          "passed": true
+        },
+        {
+          "k": 12,
+          "passed": true
+        },
+        {
+          "k": 13,
+          "passed": true
+        },
+        {
+          "k": 14,
+          "passed": true
+        },
+        {
+          "k": 15,
+          "passed": true
+        },
+        {
+          "k": 16,
+          "passed": true
+        },
+        {
+          "k": 17,
+          "passed": true
+        },
+        {
+          "k": 18,
+          "passed": true
+        },
+        {
+          "k": 19,
+          "passed": true
+        },
+        {
+          "k": 20,
+          "passed": true
+        },
+        {
+          "k": 21,
+          "passed": true
+        },
+        {
+          "k": 22,
+          "passed": true
+        },
+        {
+          "k": 23,
+          "passed": true
+        },
+        {
+          "k": 24,
+          "passed": true
+        },
+        {
+          "k": 25,
+          "passed": true
+        },
+        {
+          "k": 26,
+          "passed": true
+        },
+        {
+          "k": 27,
+          "passed": true
+        },
+        {
+          "k": 28,
+          "passed": true
+        },
+        {
+          "k": 29,
+          "passed": true
+        },
+        {
+          "k": 30,
+          "passed": true
+        },
+        {
+          "k": 31,
+          "passed": true
+        },
+        {
+          "k": 32,
+          "passed": true
+        },
+        {
+          "k": 33,
+          "passed": true
+        },
+        {
+          "k": 34,
+          "passed": true
+        },
+        {
+          "k": 35,
+          "passed": true
+        },
+        {
+          "k": 36,
+          "passed": true
+        },
+        {
+          "k": 37,
+          "passed": true
+        },
+        {
+          "k": 38,
+          "passed": true
+        },
+        {
+          "k": 39,
+          "passed": true
+        },
+        {
+          "k": 40,
+          "passed": true
+        },
+        {
+          "k": 41,
+          "passed": true
+        },
+        {
+          "k": 42,
+          "passed": true
+        },
+        {
+          "k": 43,
+          "passed": true
+        },
+        {
+          "k": 44,
+          "passed": true
+        },
+        {
+          "k": 45,
+          "passed": true
+        },
+        {
+          "k": 46,
+          "passed": true
+        },
+        {
+          "k": 47,
+          "passed": true
+        },
+        {
+          "k": 48,
+          "passed": true
+        },
+        {
+          "k": 49,
+          "passed": true
+        },
+        {
+          "k": 50,
+          "passed": true
+        },
+        {
+          "k": 51,
+          "passed": true
+        },
+        {
+          "k": 52,
+          "passed": true
+        },
+        {
+          "k": 53,
+          "passed": true
+        },
+        {
+          "k": 54,
+          "passed": true
+        },
+        {
+          "k": 55,
+          "passed": true
+        },
+        {
+          "k": 56,
+          "passed": true
+        },
+        {
+          "k": 57,
+          "passed": true
+        },
+        {
+          "k": 58,
+          "passed": true
+        },
+        {
+          "k": 59,
+          "passed": true
+        },
+        {
+          "k": 60,
+          "passed": true
+        },
+        {
+          "k": 61,
+          "passed": true
+        },
+        {
+          "k": 62,
+          "passed": true
+        },
+        {
+          "k": 63,
+          "passed": true
+        },
+        {
+          "k": 64,
+          "passed": true
+        },
+        {
+          "k": 65,
+          "passed": true
+        }
+      ],
+      "median_decision_wall_s": 1.4420269999827724,
+      "case_wall_s": 102.80757290002657,
+      "decisions": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\REFERENCE_NATIVE_MPC_0.0003125\\decisions.npz",
+        "bytes": 2177915,
+        "sha256": "b147687ae4cd4c36af2984e51aba3a4c030c796c4767d1cf0bbe788cc2979427"
+      }
+    },
+    {
+      "task": "REFERENCE",
+      "controller": "NATIVE_MPC",
+      "dt": 0.00015625,
+      "horizon": 6,
+      "execution": {
+        "transitions": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\REFERENCE_NATIVE_MPC_0.00015625\\execution\\transitions.npz",
+          "bytes": 195008,
+          "sha256": "7a822d24c267fcc04f38ed761d1e809adfef2b095327c9d288e9473e609d5fca"
+        },
+        "trace": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\REFERENCE_NATIVE_MPC_0.00015625\\execution\\trace.npz",
+          "bytes": 8696878,
+          "sha256": "6e5c6cee860c8cbd88cc2a20c2f4230e46726dc83fb3911df8569f1305e98387"
+        },
+        "rows": 49,
+        "native_steps": 6147,
+        "complete_rows": 48
+      },
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.96046875,
+          "tracking_COM_RMS_m": 0.01611648214460279,
+          "tracking_COM_max_m": 0.044890612721944605,
+          "tracking_angle_RMS_rad": 0.23182221757375698,
+          "tracking_angle_max_rad": 0.7746790415560582,
+          "final_tracking_COM_m": 0.044890612721944605,
+          "final_tracking_angle_rad": 0.7746790415560582,
+          "tracking_velocity_RMS_m_s": 0.09854797200317675,
+          "tracking_omega_RMS_rad_s": 1.465766057176642,
+          "final_COM_drift_m": 0.043862431954613666,
+          "final_angle_rad": 0.7854659396676753,
+          "tail_linear_velocity_RMS_m_s": null,
+          "tail_angular_velocity_RMS_rad_s": null,
+          "tail_triple_pad_force_coverage": null,
+          "max_native_penetration_m": 0.00021005404352248888,
+          "max_self_penetration_m": 0.00021005404352248888,
+          "max_phone_nonpad_normal_force_N": 0.0,
+          "max_table_normal_force_N": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "warning_count": 0
+        },
+        "physical_gates": {
+          "max_native_penetration_m": true,
+          "max_self_penetration_m": false,
+          "max_phone_nonpad_normal_force_N": true,
+          "max_table_normal_force_N": true,
+          "max_joint_limit_excursion_rad": true,
+          "warning_count": true,
+          "tail_triple_pad_force_coverage": false
+        },
+        "tracking_gates": {
+          "duration_complete": false,
+          "COM_RMS_5mm": false,
+          "COM_max_10mm": false,
+          "angle_RMS_5deg": false,
+          "angle_max_10deg": false,
+          "velocity_RMS_5cm_s": false,
+          "omega_RMS_half_rad_s": false
+        },
+        "tracking_qualified": false,
+        "original_static_hold_qualified": false,
+        "original_static_hold_gates": {
+          "final_COM_drift_m": false,
+          "final_angle_rad": false,
+          "tail_linear_velocity_RMS_m_s": false,
+          "tail_angular_velocity_RMS_rad_s": false
+        },
+        "task_qualified": false,
+        "termination": "ORIENTATION_OVER_45DEG",
+        "scope": "Full per-tick execution metrics; new reference tracking uses linear COM/SLERP interpolation on declared50Hz goals. Original static hold gates retained separately, not substituted for moving-reference tracking."
+      },
+      "oracle_steps": 1175040,
+      "oracle_calls": 1530,
+      "decision_replays": [
+        {
+          "k": 0,
+          "passed": true
+        },
+        {
+          "k": 5,
+          "passed": true
+        }
+      ],
+      "prediction_checks": [
+        {
+          "k": 0,
+          "passed": true
+        },
+        {
+          "k": 1,
+          "passed": true
+        },
+        {
+          "k": 2,
+          "passed": true
+        },
+        {
+          "k": 3,
+          "passed": true
+        },
+        {
+          "k": 4,
+          "passed": true
+        },
+        {
+          "k": 5,
+          "passed": true
+        },
+        {
+          "k": 6,
+          "passed": true
+        },
+        {
+          "k": 7,
+          "passed": true
+        },
+        {
+          "k": 8,
+          "passed": true
+        },
+        {
+          "k": 9,
+          "passed": true
+        },
+        {
+          "k": 10,
+          "passed": true
+        },
+        {
+          "k": 11,
+          "passed": true
+        },
+        {
+          "k": 12,
+          "passed": true
+        },
+        {
+          "k": 13,
+          "passed": true
+        },
+        {
+          "k": 14,
+          "passed": true
+        },
+        {
+          "k": 15,
+          "passed": true
+        },
+        {
+          "k": 16,
+          "passed": true
+        },
+        {
+          "k": 17,
+          "passed": true
+        },
+        {
+          "k": 18,
+          "passed": true
+        },
+        {
+          "k": 19,
+          "passed": true
+        },
+        {
+          "k": 20,
+          "passed": true
+        },
+        {
+          "k": 21,
+          "passed": true
+        },
+        {
+          "k": 22,
+          "passed": true
+        },
+        {
+          "k": 23,
+          "passed": true
+        },
+        {
+          "k": 24,
+          "passed": true
+        },
+        {
+          "k": 25,
+          "passed": true
+        },
+        {
+          "k": 26,
+          "passed": true
+        },
+        {
+          "k": 27,
+          "passed": true
+        },
+        {
+          "k": 28,
+          "passed": true
+        },
+        {
+          "k": 29,
+          "passed": true
+        },
+        {
+          "k": 30,
+          "passed": true
+        },
+        {
+          "k": 31,
+          "passed": true
+        },
+        {
+          "k": 32,
+          "passed": true
+        },
+        {
+          "k": 33,
+          "passed": true
+        },
+        {
+          "k": 34,
+          "passed": true
+        },
+        {
+          "k": 35,
+          "passed": true
+        },
+        {
+          "k": 36,
+          "passed": true
+        },
+        {
+          "k": 37,
+          "passed": true
+        },
+        {
+          "k": 38,
+          "passed": true
+        },
+        {
+          "k": 39,
+          "passed": true
+        },
+        {
+          "k": 40,
+          "passed": true
+        },
+        {
+          "k": 41,
+          "passed": true
+        },
+        {
+          "k": 42,
+          "passed": true
+        },
+        {
+          "k": 43,
+          "passed": true
+        },
+        {
+          "k": 44,
+          "passed": true
+        },
+        {
+          "k": 45,
+          "passed": true
+        },
+        {
+          "k": 46,
+          "passed": true
+        },
+        {
+          "k": 47,
+          "passed": true
+        }
+      ],
+      "median_decision_wall_s": 2.7498083999962546,
+      "case_wall_s": 143.9577479000145,
+      "decisions": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\REFERENCE_NATIVE_MPC_0.00015625\\decisions.npz",
+        "bytes": 1565098,
+        "sha256": "2daebd1c7584fe80e722f4b241ca6f4795cce66d3fe64a071ad1aa1463fa84a4"
+      }
+    }
+  ],
+  "total_oracle_steps": 1969920,
+  "total_active_steps": 10399,
+  "wall_s": 246.98190400001477,
+  "neural_updates": 0,
+  "scope": "Fixed horizon diagnostic, original reference/scales/box/init/physics/gates. Longer summed objective window and higher native cost, not a pure matched-time or learned-policy/CHORD success comparison."
+}

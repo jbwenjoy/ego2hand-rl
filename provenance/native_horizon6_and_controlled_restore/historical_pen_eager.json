@@ -1,0 +1,541 @@
+{
+  "purpose": "pipeline smoke only; no task-success, speedup, or video-to-robot claim",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.15",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "torch_cuda": "13.0",
+  "versions": {
+    "torch": "2.14.1+cu130",
+    "mjlab": "1.6.0",
+    "mujoco": "3.11.0",
+    "mujoco-warp": "3.11.0",
+    "warp-lang": "1.14.0",
+    "wuji-description": "0.1.0",
+    "triton-windows": "3.8.0.post29"
+  },
+  "source_commit": "2becb7380fed86171056f9bf4338b2a6a0c14b01",
+  "source_has_local_changes": true,
+  "task": "hand2-pen-spin",
+  "compiled": false,
+  "num_envs": 16,
+  "controlled_play_configuration": true,
+  "contact_loss_weight": 0.0,
+  "failure_head_enabled": false,
+  "model_dimensions": {
+    "nq": 27,
+    "nv": 26,
+    "nu": 20,
+    "nbody": 31,
+    "ngeom": 73
+  },
+  "joint_names": [
+    "right_finger1_joint1",
+    "right_finger1_joint2",
+    "right_finger1_joint3",
+    "right_finger1_joint4",
+    "right_finger2_joint1",
+    "right_finger2_joint2",
+    "right_finger2_joint3",
+    "right_finger2_joint4",
+    "right_finger3_joint1",
+    "right_finger3_joint2",
+    "right_finger3_joint3",
+    "right_finger3_joint4",
+    "right_finger4_joint1",
+    "right_finger4_joint2",
+    "right_finger4_joint3",
+    "right_finger4_joint4",
+    "right_finger5_joint1",
+    "right_finger5_joint2",
+    "right_finger5_joint3",
+    "right_finger5_joint4"
+  ],
+  "fixed_wrist": {
+    "palm_joint_count": 0,
+    "palm_pos_w": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "palm_quat_w_wxyz": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "model_joint_contract": [
+    {
+      "name": "object/cube_freejoint",
+      "qpos_address": 0,
+      "dof_address": 0,
+      "type": 0,
+      "range_radians": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "robot/right_finger1_joint1",
+      "qpos_address": 7,
+      "dof_address": 6,
+      "type": 3,
+      "range_radians": [
+        -1.187,
+        1.291
+      ]
+    },
+    {
+      "name": "robot/right_finger1_joint2",
+      "qpos_address": 8,
+      "dof_address": 7,
+      "type": 3,
+      "range_radians": [
+        -1.484,
+        0.698
+      ]
+    },
+    {
+      "name": "robot/right_finger1_joint3",
+      "qpos_address": 9,
+      "dof_address": 8,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        1.57
+      ]
+    },
+    {
+      "name": "robot/right_finger1_joint4",
+      "qpos_address": 10,
+      "dof_address": 9,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        1.57
+      ]
+    },
+    {
+      "name": "robot/right_finger2_joint1",
+      "qpos_address": 11,
+      "dof_address": 10,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        1.57
+      ]
+    },
+    {
+      "name": "robot/right_finger2_joint2",
+      "qpos_address": 12,
+      "dof_address": 11,
+      "type": 3,
+      "range_radians": [
+        -0.698,
+        0.698
+      ]
+    },
+    {
+      "name": "robot/right_finger2_joint3",
+      "qpos_address": 13,
+      "dof_address": 12,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        2.094
+      ]
+    },
+    {
+      "name": "robot/right_finger2_joint4",
+      "qpos_address": 14,
+      "dof_address": 13,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        1.57
+      ]
+    },
+    {
+      "name": "robot/right_finger3_joint1",
+      "qpos_address": 15,
+      "dof_address": 14,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        1.57
+      ]
+    },
+    {
+      "name": "robot/right_finger3_joint2",
+      "qpos_address": 16,
+      "dof_address": 15,
+      "type": 3,
+      "range_radians": [
+        -0.698,
+        0.698
+      ]
+    },
+    {
+      "name": "robot/right_finger3_joint3",
+      "qpos_address": 17,
+      "dof_address": 16,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        2.094
+      ]
+    },
+    {
+      "name": "robot/right_finger3_joint4",
+      "qpos_address": 18,
+      "dof_address": 17,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        1.57
+      ]
+    },
+    {
+      "name": "robot/right_finger4_joint1",
+      "qpos_address": 19,
+      "dof_address": 18,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        1.57
+      ]
+    },
+    {
+      "name": "robot/right_finger4_joint2",
+      "qpos_address": 20,
+      "dof_address": 19,
+      "type": 3,
+      "range_radians": [
+        -0.698,
+        0.698
+      ]
+    },
+    {
+      "name": "robot/right_finger4_joint3",
+      "qpos_address": 21,
+      "dof_address": 20,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        2.094
+      ]
+    },
+    {
+      "name": "robot/right_finger4_joint4",
+      "qpos_address": 22,
+      "dof_address": 21,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        1.57
+      ]
+    },
+    {
+      "name": "robot/right_finger5_joint1",
+      "qpos_address": 23,
+      "dof_address": 22,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        1.57
+      ]
+    },
+    {
+      "name": "robot/right_finger5_joint2",
+      "qpos_address": 24,
+      "dof_address": 23,
+      "type": 3,
+      "range_radians": [
+        -0.698,
+        0.698
+      ]
+    },
+    {
+      "name": "robot/right_finger5_joint3",
+      "qpos_address": 25,
+      "dof_address": 24,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        2.094
+      ]
+    },
+    {
+      "name": "robot/right_finger5_joint4",
+      "qpos_address": 26,
+      "dof_address": 25,
+      "type": 3,
+      "range_radians": [
+        -1.047,
+        1.57
+      ]
+    }
+  ],
+  "model_actuator_contract": [
+    {
+      "name": "robot/right_finger1_joint1_actuator",
+      "joint_id": 1,
+      "control_range": [
+        -1.187,
+        1.291
+      ],
+      "force_range": [
+        -0.6204000000000001,
+        0.6204000000000001
+      ]
+    },
+    {
+      "name": "robot/right_finger1_joint2_actuator",
+      "joint_id": 2,
+      "control_range": [
+        -1.484,
+        0.698
+      ],
+      "force_range": [
+        -0.53175,
+        0.53175
+      ]
+    },
+    {
+      "name": "robot/right_finger1_joint3_actuator",
+      "joint_id": 3,
+      "control_range": [
+        -1.047,
+        1.57
+      ],
+      "force_range": [
+        -0.3324,
+        0.3324
+      ]
+    },
+    {
+      "name": "robot/right_finger1_joint4_actuator",
+      "joint_id": 4,
+      "control_range": [
+        -1.047,
+        1.57
+      ],
+      "force_range": [
+        -0.19934999999999997,
+        0.19934999999999997
+      ]
+    },
+    {
+      "name": "robot/right_finger2_joint1_actuator",
+      "joint_id": 5,
+      "control_range": [
+        -1.047,
+        1.57
+      ],
+      "force_range": [
+        -0.6204000000000001,
+        0.6204000000000001
+      ]
+    },
+    {
+      "name": "robot/right_finger2_joint2_actuator",
+      "joint_id": 6,
+      "control_range": [
+        -0.698,
+        0.698
+      ],
+      "force_range": [
+        -0.25095,
+        0.25095
+      ]
+    },
+    {
+      "name": "robot/right_finger2_joint3_actuator",
+      "joint_id": 7,
+      "control_range": [
+        -1.047,
+        2.094
+      ],
+      "force_range": [
+        -0.25095,
+        0.25095
+      ]
+    },
+    {
+      "name": "robot/right_finger2_joint4_actuator",
+      "joint_id": 8,
+      "control_range": [
+        -1.047,
+        1.57
+      ],
+      "force_range": [
+        -0.25095,
+        0.25095
+      ]
+    },
+    {
+      "name": "robot/right_finger3_joint1_actuator",
+      "joint_id": 9,
+      "control_range": [
+        -1.047,
+        1.57
+      ],
+      "force_range": [
+        -0.6204000000000001,
+        0.6204000000000001
+      ]
+    },
+    {
+      "name": "robot/right_finger3_joint2_actuator",
+      "joint_id": 10,
+      "control_range": [
+        -0.698,
+        0.698
+      ],
+      "force_range": [
+        -0.25095,
+        0.25095
+      ]
+    },
+    {
+      "name": "robot/right_finger3_joint3_actuator",
+      "joint_id": 11,
+      "control_range": [
+        -1.047,
+        2.094
+      ],
+      "force_range": [
+        -0.25095,
+        0.25095
+      ]
+    },
+    {
+      "name": "robot/right_finger3_joint4_actuator",
+      "joint_id": 12,
+      "control_range": [
+        -1.047,
+        1.57
+      ],
+      "force_range": [
+        -0.25095,
+        0.25095
+      ]
+    },
+    {
+      "name": "robot/right_finger4_joint1_actuator",
+      "joint_id": 13,
+      "control_range": [
+        -1.047,
+        1.57
+      ],
+      "force_range": [
+        -0.6204000000000001,
+        0.6204000000000001
+      ]
+    },
+    {
+      "name": "robot/right_finger4_joint2_actuator",
+      "joint_id": 14,
+      "control_range": [
+        -0.698,
+        0.698
+      ],
+      "force_range": [
+        -0.25095,
+        0.25095
+      ]
+    },
+    {
+      "name": "robot/right_finger4_joint3_actuator",
+      "joint_id": 15,
+      "control_range": [
+        -1.047,
+        2.094
+      ],
+      "force_range": [
+        -0.25095,
+        0.25095
+      ]
+    },
+    {
+      "name": "robot/right_finger4_joint4_actuator",
+      "joint_id": 16,
+      "control_range": [
+        -1.047,
+        1.57
+      ],
+      "force_range": [
+        -0.25095,
+        0.25095
+      ]
+    },
+    {
+      "name": "robot/right_finger5_joint1_actuator",
+      "joint_id": 17,
+      "control_range": [
+        -1.047,
+        1.57
+      ],
+      "force_range": [
+        -0.66915,
+        0.66915
+      ]
+    },
+    {
+      "name": "robot/right_finger5_joint2_actuator",
+      "joint_id": 18,
+      "control_range": [
+        -0.698,
+        0.698
+      ],
+      "force_range": [
+        -0.16725,
+        0.16725
+      ]
+    },
+    {
+      "name": "robot/right_finger5_joint3_actuator",
+      "joint_id": 19,
+      "control_range": [
+        -1.047,
+        2.094
+      ],
+      "force_range": [
+        -0.16725,
+        0.16725
+      ]
+    },
+    {
+      "name": "robot/right_finger5_joint4_actuator",
+      "joint_id": 20,
+      "control_range": [
+        -1.047,
+        1.57
+      ],
+      "force_range": [
+        -0.16725,
+        0.16725
+      ]
+    }
+  ],
+  "events": [
+    "reset_to_reference_state",
+    "pen_dimensions"
+  ],
+  "simulation_finite_steps": 100,
+  "mean_reward_sum": 6.930759657174349,
+  "simulation_terminated_transitions": 3,
+  "start_iteration": 0,
+  "final_iteration": 12,
+  "checkpoint": "D:\\workspace\\dex-supermimic-research\\outputs\\windows_bringup_20261101\\pen_eager\\train\\model_final.pt",
+  "checkpoint_readable": true,
+  "parameter_delta_l2": {
+    "actor": 0.37515398346355466,
+    "wm": 0.19294450769232377,
+    "critic": 0.7159447138588524
+  },
+  "collected_sim_steps": 736,
+  "peak_allocated_gib": 0.08626174926757812,
+  "elapsed_seconds": 65.19572829990648,
+  "status": "passed"
+}

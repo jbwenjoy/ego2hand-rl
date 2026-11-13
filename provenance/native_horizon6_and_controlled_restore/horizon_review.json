@@ -1,0 +1,90 @@
+{
+  "schema": "mug_native_feedback_saved_review:2",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\native_saved_review.py",
+    "bytes": 13068,
+    "sha256": "b7f1ce27126873b2ca844634f80732f25b74329552bbd5ff46b53fa7bd81451b"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\report.json",
+    "bytes": 20789,
+    "sha256": "8e09a8459193d852bdbdd1d986443b56b5838eadb8c4b4bc17b6898ff6b9337a"
+  },
+  "model": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\right_mug_frames_v4\\hand2_mug.mjb",
+    "bytes": 35965995,
+    "sha256": "8944eace43e9f9c54137c6707285ae0e6ec6b63af87809306ac986b5ff5b545f"
+  },
+  "horizon": 6,
+  "expected_cases": [
+    [
+      "REFERENCE",
+      "NATIVE_MPC",
+      0.00015625
+    ],
+    [
+      "REFERENCE",
+      "NATIVE_MPC",
+      0.0003125
+    ]
+  ],
+  "checks": {
+    "fixed_expected_cases": true,
+    "raw_control_and_pose": true,
+    "raw_contact_readback": true,
+    "independent_metrics": true,
+    "all_legal_no_aid": true,
+    "zero_baselines_preserved": null,
+    "optimizer_and_budget": true,
+    "selected_forecasts_equal_actual": true
+  },
+  "passed": 7,
+  "total": 7,
+  "max_errors": {
+    "control": 0.0,
+    "normal_forces": 0.0,
+    "penetration": 0.0,
+    "wrench_mean": 2.886579864025407e-15,
+    "COM_observer": 1.1102230246251565e-16,
+    "COM_velocity": 2.7755575615628914e-15,
+    "metrics": 1.3322676295501878e-15
+  },
+  "cases": [
+    {
+      "task": "REFERENCE",
+      "controller": "NATIVE_MPC",
+      "dt": 0.0003125,
+      "legal": true,
+      "no_aid": true,
+      "historical_zero_parity": null,
+      "optimizer_log_valid": true,
+      "forecast_actual_full_state_exact": true,
+      "qualified": false
+    },
+    {
+      "task": "REFERENCE",
+      "controller": "NATIVE_MPC",
+      "dt": 0.00015625,
+      "legal": true,
+      "no_aid": true,
+      "historical_zero_parity": null,
+      "optimizer_log_valid": true,
+      "forecast_actual_full_state_exact": true,
+      "qualified": false
+    }
+  ],
+  "raw_contact_records_reviewed": 53091,
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Independent raw contact/control/pose/metric, legacy-zero, optimizer-cost/budget and selected-forecast readback. Warning count comes from recorded online counter; no fresh per-state convex audit, policy training or holding/retargeting success beyond explicit qualification.",
+  "protocol_reviewer": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_mug_native_horizon.py",
+    "bytes": 2825,
+    "sha256": "f2fb71139130fe317b4a27f91b470eec547c8c0f4caa3a396b26d06f3c8854e5"
+  },
+  "baseline_review": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_tracking_review_v2\\report.json",
+    "bytes": 4054,
+    "sha256": "64ccbf5004e7605b8afd4d63c33a16ad4b7f93d0e49c3f102266d8e146a2ced4"
+  }
+}

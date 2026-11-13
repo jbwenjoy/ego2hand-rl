@@ -1,0 +1,39 @@
+D:\workspace\dex-supermimic-research\.venv\Lib\site-packages\torch\jit\_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Traceback (most recent call last):
+Warp 1.14.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.4
+   Devices:
+     "cpu"      : "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD"
+     "cuda:0"   : "NVIDIA GeForce RTX 5090" (32 GiB, sm_120, mempool enabled)
+   Kernel cache:
+     \\?\C:\Users\ASUS\AppData\Local\NVIDIA\warp\Cache\1.14.0
+Setting seed: 42
+  File "D:\workspace\supermimic-research\tools\check_controlled_checkpoint_restore.py", line 112, in <module>
+    main(p.parse_args())
+  File "D:\workspace\supermimic-research\tools\check_controlled_checkpoint_restore.py", line 62, in main
+    env = ManagerBasedRlEnv(env_cfg, device=cfg.device)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\workspace\dex-supermimic-research\.venv\Lib\site-packages\mjlab\envs\manager_based_rl_env.py", line 198, in __init__
+    self.scene = Scene(self.cfg.scene, device=device)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\workspace\dex-supermimic-research\.venv\Lib\site-packages\mjlab\scene\scene.py", line 66, in __init__
+    self._add_entities()
+  File "D:\workspace\dex-supermimic-research\.venv\Lib\site-packages\mjlab\scene\scene.py", line 214, in _add_entities
+    ent = ent_cfg.build()
+          ^^^^^^^^^^^^^^^
+  File "D:\workspace\dex-supermimic-research\.venv\Lib\site-packages\mjlab\entity\entity.py", line 124, in build
+    return Entity(self)
+           ^^^^^^^^^^^^
+  File "D:\workspace\dex-supermimic-research\.venv\Lib\site-packages\mjlab\entity\entity.py", line 167, in __init__
+    self._build_spec()
+  File "D:\workspace\dex-supermimic-research\.venv\Lib\site-packages\mjlab\entity\entity.py", line 179, in _build_spec
+    self._spec = auto_wrap_fixed_base_mocap(self.cfg.spec_fn)()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\workspace\dex-supermimic-research\.venv\Lib\site-packages\mjlab\utils\spec.py", line 168, in wrapper
+    original_spec = spec_fn()
+                    ^^^^^^^^^
+  File "D:\workspace\supermimic-research\src\dex_supermimic\assets\pen.py", line 20, in get_tracking_pen_spec
+    spec = mujoco.MjSpec.from_file(str(PEN_XML))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: ParseXML: Error opening file 'D:\workspace\supermimic-research\src\dex_supermimic\assets\resources\aruco_pen250\xmls\pen_tracking.xml'

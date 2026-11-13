@@ -1,0 +1,76 @@
+{
+  "schema": "native_saved_chronology_contract:1",
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_native_horizon6_v1\\report.json",
+    "bytes": 20789,
+    "sha256": "8e09a8459193d852bdbdd1d986443b56b5838eadb8c4b4bc17b6898ff6b9337a"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\check_mug_native_saved_contract.py",
+      "bytes": 2561,
+      "sha256": "0d55fd898038ddeb3d487b3403c5fa992782c6c854c157880a271b15b6810378"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\native_saved_contract.py",
+      "bytes": 2068,
+      "sha256": "2b37426efcd7d560df43e384bf3424e1ced2e2e876e070483ab8e74420afc209"
+    }
+  ],
+  "cases": [
+    {
+      "task": "REFERENCE",
+      "controller": "NATIVE_MPC",
+      "dt": 0.0003125,
+      "checks": {
+        "finite_arrays": true,
+        "sequential_k": true,
+        "contiguous_tick_ranges": true,
+        "legal_interval_lengths": true,
+        "interval_duration": true,
+        "complete_flags": true,
+        "no_continuation_after_termination": true,
+        "zero_initial_EMA": true,
+        "EMA_carry": true,
+        "EMA_update": true,
+        "actual_control": true,
+        "native_state_carry": true,
+        "observed_state_carry": true,
+        "warmstart_carry": true,
+        "per_tick_pose_carry": true,
+        "per_tick_velocity_carry": true,
+        "initial_pose_matches_reference": true,
+        "initial_velocity_zero": true
+      }
+    },
+    {
+      "task": "REFERENCE",
+      "controller": "NATIVE_MPC",
+      "dt": 0.00015625,
+      "checks": {
+        "finite_arrays": true,
+        "sequential_k": true,
+        "contiguous_tick_ranges": true,
+        "legal_interval_lengths": true,
+        "interval_duration": true,
+        "complete_flags": true,
+        "no_continuation_after_termination": true,
+        "zero_initial_EMA": true,
+        "EMA_carry": true,
+        "EMA_update": true,
+        "actual_control": true,
+        "native_state_carry": true,
+        "observed_state_carry": true,
+        "warmstart_carry": true,
+        "per_tick_pose_carry": true,
+        "per_tick_velocity_carry": true,
+        "initial_pose_matches_reference": true,
+        "initial_velocity_zero": true
+      }
+    }
+  ],
+  "passed": 36,
+  "total": 36,
+  "neural_updates": 0,
+  "native_integration_steps": 0
+}

@@ -1,0 +1,406 @@
+{
+  "schema": "controlled_runner_restore_only:1",
+  "checkpoint": {
+    "path": "D:\\workspace\\dex-supermimic-research\\outputs\\windows_bringup_20261101\\pen_eager\\train\\model_final.pt",
+    "bytes": 12489811,
+    "sha256": "a10db71f612b9efdac2e9c576029ad4d7ff2613b98d55e28b45a4ecbd530e25b"
+  },
+  "task": "hand2-pen-spin",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\check_controlled_checkpoint_restore.py",
+    "bytes": 6951,
+    "sha256": "3cb189bc03f01a9d2a6141deff5f5c1507d055b4f36d55978376b750074a2d41"
+  },
+  "neural_updates": 0,
+  "scope": "Construct real GPU task/runner, strict load modules/optimizers/RNG/counters, save/load roundtrip. No learn(), no task success or exact environment/replay resume claim.",
+  "pen_xml": {
+    "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\aruco_pen250\\xmls\\pen_tracking.xml",
+    "bytes": 1563,
+    "sha256": "2f6647d4a6ad0d23bbb23172447b12d644a1e50e563fd56dbde14be85792d36a"
+  },
+  "checks": {
+    "modules_exact": true,
+    "optimizers_exact": true,
+    "torque_norm_exact": true,
+    "iteration_exact": true,
+    "sim_steps_exact": true,
+    "common_step_exact": true,
+    "torch_rng_exact": true,
+    "cuda_rng_exact": true,
+    "numpy_rng_exact": true,
+    "python_rng_exact": true,
+    "reference_signature_exact": true,
+    "finite_parameters": true,
+    "fixed_wrist": true,
+    "roundtrip_modules": true,
+    "roundtrip_optimizers": true,
+    "roundtrip_torque_norm": true,
+    "roundtrip_iteration": true,
+    "roundtrip_sim_steps": true,
+    "roundtrip_common_step": true,
+    "roundtrip_cuda_rng": true,
+    "roundtrip_torch_rng": true,
+    "roundtrip_numpy_rng": true,
+    "roundtrip_python_rng": true,
+    "roundtrip_reference_signature": true
+  },
+  "passed": 24,
+  "total": 24,
+  "iteration": 12,
+  "sim_steps": 736,
+  "GPU": "NVIDIA GeForce RTX 5090",
+  "peak_allocated_bytes": 19149824,
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\__init__.py",
+      "bytes": 48,
+      "sha256": "69e500b946a5eac94ccfc2c43946432242cb6944bb0fd492b9ac2e4516ae439d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\__init__.py",
+      "bytes": 45,
+      "sha256": "0d8f010d7acd76f33669915b03ac2bd6c4c32698908a13f9a4b6889b030ef5bb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\__init__.py",
+      "bytes": 72,
+      "sha256": "1b0c2dba4f3d7b227979332d731704098cf4633d0946b07f322c0b1b6e4656b0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\__init__.py",
+      "bytes": 42,
+      "sha256": "8eebd2267050bcfaa5fd47100b760cf6924e6cb7374e91c3f4a6b1d7944ac2c1"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\__init__.py",
+      "bytes": 88,
+      "sha256": "9ffcbf5e4c5377ce7dd1e73ee2612de482f15c70a968e9212bb83c8dcc871bd6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\task.py",
+      "bytes": 1186,
+      "sha256": "5706c0976c65e40913e9467070a42a390587e3f7f1867379e4046cc92140bb7e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\config.py",
+      "bytes": 8390,
+      "sha256": "11889b65b5da121ea613d402b3ef9e7bc854d57462f96830af9b644a0b031323"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\rotations.py",
+      "bytes": 4576,
+      "sha256": "0fbb36bc8608dcc9a33edfac7f6551e742380e1e66c70e857b33d6d05cd81e70"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\metrics.py",
+      "bytes": 3553,
+      "sha256": "339478151feb281999c05c905df5cd5ef9da03d41e0b16acfa3b1c0bf6d428cb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\buffer.py",
+      "bytes": 3651,
+      "sha256": "3048a42d13aa5142a4c42a29b5f7c77df02c5c628f6276bf9d5256a644494d5f"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\common.py",
+      "bytes": 3261,
+      "sha256": "6d6ff994d592c8fec1d46401d7051d0511310281a3d28450db8bd9be8c327f8b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "bytes": 1950,
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\mdp.py",
+      "bytes": 9302,
+      "sha256": "5515dceaab115d97796bdcc6124ecd2bac691f0ef56b7b01ef6bcb12ffcf33ea"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "bytes": 5331,
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\observations.py",
+      "bytes": 6090,
+      "sha256": "75aafb1448c181bb340838e671d2d167b5523452b6f400473b93862fcf6f6bb8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\kinematics.py",
+      "bytes": 5122,
+      "sha256": "efca0cd2587a36d6208c5754e5ef91806c5fd0f6898500855bc78c3bd3c26cca"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\sim.py",
+      "bytes": 12972,
+      "sha256": "47d0523d8b0d569544f2873a2c7c8a17cad27e570154d6220ec98d1a97aa5d20"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\runner.py",
+      "bytes": 54563,
+      "sha256": "b19d9ac80e23e4f55b2eb64e458c05516fc5dd4ffb13e1a3050ce9fea2669d46"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\__init__.py",
+      "bytes": 142,
+      "sha256": "81c298aa8d5c19b9b23dbbe9b2c0952a618bfd84c2e44db22f13bedb86523e4f"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\contact_events.py",
+      "bytes": 2421,
+      "sha256": "faab349f098248740cfdd0490d04a982c93dadeeb3b33a340243e1d28066ce2c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\curriculum_utils.py",
+      "bytes": 988,
+      "sha256": "f03a359a42fc3637204c20d1eed78fd7563414f135e57d8123b839091df662ad"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\actions.py",
+      "bytes": 7663,
+      "sha256": "45e105031dfd195db25be70adceffd32c371cee671e9e5839cd1ccf12a8e73d0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\__init__.py",
+      "bytes": 83,
+      "sha256": "c94602917864fac7b1da8deb58391239458fca18d1997090939ab58ff57a5ac8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\clip_store.py",
+      "bytes": 7628,
+      "sha256": "869a2c0cbc748db240c8262fc9b34066a09a9da71b271b458250880edf269a6b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\recipe.py",
+      "bytes": 4934,
+      "sha256": "48eb8696a165b12cc90a8012704e46b4ebd65c67e1870363962254f30519851d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\observations.py",
+      "bytes": 13304,
+      "sha256": "74df1caa679d83f4cc3dd488845d452e7f3c2aecef7ad09b2d3ab6e9faf56cfa"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\commands.py",
+      "bytes": 31473,
+      "sha256": "e1adb7c183aa28dde49f6dc6e7795ed450567e6c54347bd7f1e0543922fcbcf0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\curriculums.py",
+      "bytes": 1617,
+      "sha256": "208cd3443cfd3290b18bf87a1c7be08cfadc7b22fc790c58270d01fb7418fb34"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\events.py",
+      "bytes": 20027,
+      "sha256": "8b8d9ca253b4a5a4c516e5bd4ac4b7adb674d4388a07712d12664e0496653544"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\metrics.py",
+      "bytes": 2339,
+      "sha256": "a01d9031a61a01e3cc74b4b173817763e473eff030a06d6c37af647ab221a9f8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\rewards.py",
+      "bytes": 7190,
+      "sha256": "fad15431729a9df98d0681707d112ccca133c0ad5f589eb18f00212bb6e69c5c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\terminations.py",
+      "bytes": 1952,
+      "sha256": "230a6373de7a9147cfa30789c245c464a82378c96d722b9eac1adf71fe7e1c5d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\__init__.py",
+      "bytes": 603,
+      "sha256": "5b8b6e092b0478c94fa6ac2cc5e619febf56f2931ab6dcfcccb02402460ac665"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\assets\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\assets\\pen.py",
+      "bytes": 1184,
+      "sha256": "6547fa3632cbb3905beb73bcdea6ea5e98196dbbdfb31c7776fb99ffbe94e4ed"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\pen_spin_env_cfg.py",
+      "bytes": 7416,
+      "sha256": "e012a43b711a25f54c627518f4dd79d683ac34f0b3dc03d6376915feeb8f8fdf"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\assets\\resource_utils.py",
+      "bytes": 455,
+      "sha256": "3eae98256db487f46885aa629dd26e10df83b27d4637d47e6a0e0803c04ea225"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\assets\\wuji_hand2.py",
+      "bytes": 18041,
+      "sha256": "91eed8ea9fc00f5663229359ca6b650552ff8fbd5f21d180648bb15b7ba98916"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\hand2_constants.py",
+      "bytes": 11958,
+      "sha256": "2a1a37a0c97f3bcab631006ac6e0dc47a1a63a92c7717ac4c6c712314ba35986"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\env_cfgs.py",
+      "bytes": 17238,
+      "sha256": "ebfd258d34e3f41e5957b382ecbccfc5b79a5b545680ed1138343d508414e083"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\task.py",
+      "bytes": 950,
+      "sha256": "488d85eb40dbe991dcff854918aca3fe48d51812992dda7c74b0e3ed8c0e17ac"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\pen.py",
+      "bytes": 19332,
+      "sha256": "c02906c409aedab59aaf68a5ef80f9dbcea52da10e72137091df81858262819a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\actions.py",
+      "bytes": 3098,
+      "sha256": "6016c424772838f82708521fba56e679087509e2514b00d6a06169b631d34944"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\command_visualization.py",
+      "bytes": 11789,
+      "sha256": "da15ca9aa35c9b388549b3d80e1dcd104d6f4597a034ad328919898cf56673db"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\reorient_constants.py",
+      "bytes": 1709,
+      "sha256": "8b638bebbc2d0212c97650e2d1b1d6d1e783f4234ac17bb1a49790a8e568ea35"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\cage.py",
+      "bytes": 9687,
+      "sha256": "88c8ab9766beb86fd79d3bbddc1bdcef75a8b4bd7a2972d6d741e8f1d74ef0a9"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\math.py",
+      "bytes": 4315,
+      "sha256": "3cf32b00c48862738ecab4503ec2478b2255b7c10b29eea88ea89a628f7786dd"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\commands.py",
+      "bytes": 12098,
+      "sha256": "fcb08b9084b123562d026833673dbe82884e99ed14981c70106fe8565ccab5ed"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\_env_utils.py",
+      "bytes": 503,
+      "sha256": "d2b4a6c124229baf009fc70094a05a72fc807b1af41c075c790be6376cc4db21"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\curriculum.py",
+      "bytes": 1046,
+      "sha256": "408685ef772dab13c67a7b98887ffcb723df881d84eddc398586f645ddc64c16"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\curriculums.py",
+      "bytes": 4429,
+      "sha256": "4416e85e97de1e077ffef36d090216714516fb3267ad27e3845cb9f3d50f9c05"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\__init__.py",
+      "bytes": 83,
+      "sha256": "c94602917864fac7b1da8deb58391239458fca18d1997090939ab58ff57a5ac8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\runtime_state.py",
+      "bytes": 3995,
+      "sha256": "ab6c14f4a21b047df2ddd07418bff69b2f945e24ae968260a7ebab08c940c994"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\disturbance.py",
+      "bytes": 2818,
+      "sha256": "069925204b10de2517e378db3befd192233e7be8f39683f6081539061dd6ab1c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\joint_reset.py",
+      "bytes": 5075,
+      "sha256": "5111ef1f0e27ff687e89451acd0d8d541bb164f0b3fc953134eef0c650d1fd88"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\randomization.py",
+      "bytes": 5980,
+      "sha256": "417e01a4d5088453032d5d63e127d6d05292742b15bd5c9eb3e3c556b02be4f3"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\reset.py",
+      "bytes": 4335,
+      "sha256": "f8098a0f0f4a5de9fa755ac2a64b300ac3f1f8ab853d44d8089a3e185efd5bc3"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\events.py",
+      "bytes": 980,
+      "sha256": "5c7b7dfeac68b25c0bea4c4aac2792097a209a6a26de16a6a5f1fd1dd6ca3b11"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\metrics.py",
+      "bytes": 6545,
+      "sha256": "d2f7614d6ec958b20b522e6de2ae3786df4cf1a0cb92b8177e77467e065cc31d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\observations.py",
+      "bytes": 10733,
+      "sha256": "75ba9e7d24fc006e7e8ff04c0d23d8bffbf87b14eb80f4946187b0e14b68cddc"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\reward_decorators.py",
+      "bytes": 1672,
+      "sha256": "a0bfe12109f12ff14554d7da7a0d8b709960f6af91bbb7bbde820d8c26eb0385"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\rewards.py",
+      "bytes": 10401,
+      "sha256": "666d5c5e12828a8f3e7756b27bcf1edfa643ef56d1d97b0e6221bf72b5076cc0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\terminations.py",
+      "bytes": 593,
+      "sha256": "e9acf8e78627b8a7b97003251fcd6d5c9ef67afe28889f1c2ac979c013eec458"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\types.py",
+      "bytes": 466,
+      "sha256": "cf4f7b0850df8f1af8fdc0e0f6f7f722c76367c8b789bbce48530ca2eb826025"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\__init__.py",
+      "bytes": 1114,
+      "sha256": "0c794af6136684e67ecbf97833365be66219d71034babc5a265ca4c6c370caef"
+    }
+  ],
+  "roundtrip": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_pen_restore_v2\\restored_roundtrip.pt",
+    "bytes": 12491599,
+    "sha256": "b9e10c52397e129d1b0aefbe4af0e2dcdf014f08ea6c315349ecead9a69e525c"
+  },
+  "wall_s": 31.19794080001884
+}
