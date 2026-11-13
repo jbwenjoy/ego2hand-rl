@@ -1,0 +1,22 @@
+schema = 1
+warm_health = "../runs/mug_response_resume1000_v1/health_1000.json"
+frozen_paired_health = "../runs/mug_paired_response_resume2000_v1/health_2000.json"
+intervention_review = "../runs/mug_interventions_packed_v1/report.json"
+old_packed = "../runs/mug_H20_packed_v1/report.json"
+old_probes = "../runs/mug_action_probes_v1/report.json"
+prepared = "../runs/mug_impulse_preparation_v1/report.json"
+device = "cuda:0"
+sampler_seed = 20261113
+batch_size = 256
+learning_rate = 0.001
+weight_decay = 0.0001
+gradient_clip_norm = 10.0
+auxiliary_weight = 0.1
+linear_defect_scale_floor_Ns = 0.0000001
+angular_defect_scale_floor_Nms = 0.000000001
+planned_updates = 2000
+first_checkpoint_update = 100
+stop_at_first_healthy_checkpoint = true
+# DIRECT and IMPULSE: same weights from PREDECLARED original single1000 parent.
+# Reset last-layer rows46:52 tozero for BOTH, same new Adam/sampler/batch/budget.
+# Only target-head representation/decoder and its auxiliary labels differ.

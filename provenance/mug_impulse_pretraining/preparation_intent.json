@@ -1,0 +1,83 @@
+{
+  "schema": "mug_impulse_head_preparation:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\mug_impulse_first100.toml",
+    "bytes": 972,
+    "sha256": "943a333676bdc052ef093499d7f2e1fba796da42bdb920fe1703940e99da140e"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\prepare_mug_impulse.py",
+      "bytes": 7519,
+      "sha256": "6edceef70020fa2f0e40773734fbde79cfe7c0189bd29dbd646f621533e14bc5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\impulse_codec.py",
+      "bytes": 2237,
+      "sha256": "9e7b0444309ba442434936ce1b77c66f330fee1c08d06f80e57909c8bf6f5666"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\impulse_response.py",
+      "bytes": 2679,
+      "sha256": "3c95676308c73da2f01e874753ddda6835052f991d22da32324b9f5c10bbd6ab"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\paired_response.py",
+      "bytes": 4161,
+      "sha256": "2913f71eea4a6997bffa1b063ce07eb65cb11096d7ab7d0b9ecff9188a303e7a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\response_training.py",
+      "bytes": 2098,
+      "sha256": "986fdeaea46458cd4384c168267058861cfb38f43b40efdac28e166eccf7945d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\response_rollout.py",
+      "bytes": 5835,
+      "sha256": "3cce361e62c2101d4d65933e6a2944215a3885eeb0b1740f53cef3e54f7bd819"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\response_decode.py",
+      "bytes": 946,
+      "sha256": "f1d54ea12cfc1c668978ef8e767d8da4338573b804adab50b87a59a74a7377c5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\transition_records.py",
+      "bytes": 715,
+      "sha256": "e60481f925a0e62ef9a1c82ebfaa2f737c5ff083b9773d7ba0ef1f151645bab6"
+    }
+  ],
+  "inputs": {
+    "warm_health": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_response_resume1000_v1\\health_1000.json",
+      "bytes": 70277,
+      "sha256": "78493f3bfc4fc7088c7dedc6f7d526e478dd9353c348b2d26c0d4c60621e27cd"
+    },
+    "frozen_paired_health": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_paired_response_resume2000_v1\\health_2000.json",
+      "bytes": 633836,
+      "sha256": "3a6abbc3d5ce55ee1c855f6da913cf7bee0719368e54f9217ae6f335b8a058f4"
+    },
+    "intervention_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_interventions_packed_v1\\report.json",
+      "bytes": 2275,
+      "sha256": "4275a1156e66017a142be23a5c0c24eaef802940542c1d3ecbcb803b1901052d"
+    },
+    "old_packed": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_H20_packed_v1\\report.json",
+      "bytes": 11481,
+      "sha256": "049dae1a61bba8d51607082611c15118a39cec8957adb432f6f2352549593cb9"
+    },
+    "old_probes": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_action_probes_v1\\report.json",
+      "bytes": 3171,
+      "sha256": "c7ec36ca0f1259001ba350c066e209188cd3f7f4e1d1009e71c76bea9b73dc8e"
+    }
+  },
+  "head_schema": "compound_joint40_COM3_worlddR3_WORLD_impulse_defect6_warm26_sourceBODY_wrench6_Fn3:1",
+  "scales_fit_role": "TRAIN_ONLY",
+  "native_contact_labels": "Preserved separately measured mean source-BODY moving-COM wrenches; residuals never replace them.",
+  "supervised_defect": "Endpoint WORLD linear Ns/angular Nms residual, label only, unavailable as inference input.",
+  "neural_updates": 0,
+  "native_steps": 0
+}
