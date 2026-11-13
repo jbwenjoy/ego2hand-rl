@@ -1,0 +1,4907 @@
+{
+  "schema": "compound_impulse_comparison_health:1",
+  "checkpoint": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_impulse_response_v1\\impulse_checkpoint_0100.pt",
+    "bytes": 20008231,
+    "sha256": "5ba8290d2291d03f890c0aae30592f186f4c1d70b11495bdcf6ea0c5e191c3e4"
+  },
+  "checks": {
+    "DIRECT_model_exact": true,
+    "DIRECT_optimizer_exact": true,
+    "DIRECT_Adam100": true,
+    "DIRECT_model_optimizer_gradients_finite": true,
+    "DIRECT_losses_finite": true,
+    "DIRECT_RNG_exact": true,
+    "DIRECT_next_batch_exact": true,
+    "DIRECT_CHECK_prediction_exact": true,
+    "DIRECT_frozen_output_scales_exact": true,
+    "DIRECT_physics_head_scales_exact": true,
+    "DIRECT_parameters_changed": true,
+    "DIRECT_finite_nonnegative_CHECK_Fn": true,
+    "DIRECT_first_update_losses_exact": true,
+    "DIRECT_first_update_batch_exact": true,
+    "DIRECT_first_update_gradients_exact": true,
+    "DIRECT_first_update_model_exact": true,
+    "DIRECT_first_update_optimizer_exact": true,
+    "DIRECT_first_update_sampler_exact": true,
+    "IMPULSE_model_exact": true,
+    "IMPULSE_optimizer_exact": true,
+    "IMPULSE_Adam100": true,
+    "IMPULSE_model_optimizer_gradients_finite": true,
+    "IMPULSE_losses_finite": true,
+    "IMPULSE_RNG_exact": true,
+    "IMPULSE_next_batch_exact": true,
+    "IMPULSE_CHECK_prediction_exact": true,
+    "IMPULSE_frozen_output_scales_exact": true,
+    "IMPULSE_physics_head_scales_exact": true,
+    "IMPULSE_parameters_changed": true,
+    "IMPULSE_finite_nonnegative_CHECK_Fn": true,
+    "IMPULSE_first_update_losses_exact": true,
+    "IMPULSE_first_update_batch_exact": true,
+    "IMPULSE_first_update_gradients_exact": true,
+    "IMPULSE_first_update_model_exact": true,
+    "IMPULSE_first_update_optimizer_exact": true,
+    "IMPULSE_first_update_sampler_exact": true,
+    "matched_sampler_cursor": true,
+    "fixed_checkpoint_cursor": true
+  },
+  "passed": 38,
+  "total": 38,
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\train_mug_impulse_response.py",
+      "bytes": 556,
+      "sha256": "ff9b3fa0369236990feb57b8fecc538268e39de3e040b72662f5d99286318b7d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\impulse_stage.py",
+      "bytes": 16297,
+      "sha256": "f2aceeffabfc34a0a16b54a7219fbf4115209a21bee51c308851ba4c97f5e691"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\impulse_response.py",
+      "bytes": 2679,
+      "sha256": "3c95676308c73da2f01e874753ddda6835052f991d22da32324b9f5c10bbd6ab"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\impulse_codec.py",
+      "bytes": 2237,
+      "sha256": "9e7b0444309ba442434936ce1b77c66f330fee1c08d06f80e57909c8bf6f5666"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\compound_response.py",
+      "bytes": 2139,
+      "sha256": "e316bd7d3efda4a8ca286c3855905c3be64db95ecab7d6d1f1ece573b9c28f63"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\world_model.py",
+      "bytes": 13810,
+      "sha256": "3eb05f8a449d4f5141b0787136b3eac56ab6912ae4731e4c23dc789bec846158"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\checkpoint.py",
+      "bytes": 10943,
+      "sha256": "4b18284fe81657f4f1246137806a5f29aaf210dbf878fc2b67f9ec45d4ff34bd"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\paired_response.py",
+      "bytes": 4161,
+      "sha256": "2913f71eea4a6997bffa1b063ce07eb65cb11096d7ab7d0b9ecff9188a303e7a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\response_diagnostics.py",
+      "bytes": 4580,
+      "sha256": "49ec998f16c31d14be1b8fc596e0170bfde424a0feb16089126ec7cdbd7ade20"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\response_rollout.py",
+      "bytes": 5835,
+      "sha256": "3cce361e62c2101d4d65933e6a2944215a3885eeb0b1740f53cef3e54f7bd819"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\response_decode.py",
+      "bytes": 946,
+      "sha256": "f1d54ea12cfc1c668978ef8e767d8da4338573b804adab50b87a59a74a7377c5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\transition_records.py",
+      "bytes": 715,
+      "sha256": "e60481f925a0e62ef9a1c82ebfaa2f737c5ff083b9773d7ba0ef1f151645bab6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\gpu_monitor.py",
+      "bytes": 1072,
+      "sha256": "b0bfa3b24a5c5057eaab234b91563326dddda1b474219a0fe39b2e68a75bc5d5"
+    }
+  ],
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\mug_impulse_first100.toml",
+    "bytes": 972,
+    "sha256": "943a333676bdc052ef093499d7f2e1fba796da42bdb920fe1703940e99da140e"
+  },
+  "preparation": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_impulse_preparation_v1\\report.json",
+    "bytes": 140716,
+    "sha256": "f08f1df05b75ecd12e2d7180f195b2a0a089ce99557a534f399ae208f4a1828f"
+  },
+  "warm_checkpoint": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\mug_response_resume1000_v1\\checkpoint_1000.pt",
+    "bytes": 12493691,
+    "sha256": "262f121fd5f76c6892b3458c7456e1503563cd26e4ef70544b8733849a117431"
+  },
+  "errors": {
+    "DIRECT": {
+      "delta52": 0.1665429238222396,
+      "warm26": 0.206913511454643,
+      "wrench6": 0.09560128801356946,
+      "Fn3": 0.2777147009439957,
+      "contact9": 0.15630575899037819,
+      "object12": 0.04008945726287047
+    },
+    "IMPULSE": {
+      "delta52": 0.1676496637566774,
+      "warm26": 0.20825825145249796,
+      "wrench6": 0.08951307852887666,
+      "Fn3": 0.2841381689287073,
+      "contact9": 0.15438810866215355,
+      "object12": 0.0439751947526897
+    }
+  },
+  "response": {
+    "DIRECT": {
+      "new_CHECK": {
+        "pairs": 960,
+        "by_amplitude": {
+          "0.04": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.8333255457141012,
+                "cosine": 0.44063548666694446,
+                "predicted_RMS": 0.1453126686279463,
+                "native_RMS": 0.5287001167419387
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.8333208912089219,
+                "cosine": 0.44064880874409473,
+                "predicted_RMS": 0.14530841391551627,
+                "native_RMS": 0.5287001167419387
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 1.0016954962771012,
+                "cosine": -0.008387058375290938,
+                "predicted_RMS": 0.13045794922322781,
+                "native_RMS": 3.8786565233782992
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0016950915334637,
+                "cosine": -0.008385481470719484,
+                "predicted_RMS": 0.13044416456707722,
+                "native_RMS": 3.8786565233782992
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.9422918106923144,
+                "cosine": 0.2500974068184958,
+                "predicted_RMS": 0.08078879037545117,
+                "native_RMS": 0.2527245826119574
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.9422855933545222,
+                "cosine": 0.25010420981245884,
+                "predicted_RMS": 0.08078539718697235,
+                "native_RMS": 0.2527245826119574
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 1.2049545132306294,
+                "cosine": 0.1689631907854598,
+                "predicted_RMS": 0.14914858028466021,
+                "native_RMS": 0.22869069049785923
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.2049360068439188,
+                "cosine": 0.16896811562400177,
+                "predicted_RMS": 0.1491457211024991,
+                "native_RMS": 0.22869069049785923
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 1.0185926161702883,
+                "cosine": 0.20040015319787743,
+                "predicted_RMS": 0.10847266368627462,
+                "native_RMS": 0.2449754145713156
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0185828289905585,
+                "cosine": 0.20040451213519067,
+                "predicted_RMS": 0.10846966844929232,
+                "native_RMS": 0.2449754145713156
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.9928792909831626,
+                "cosine": 0.12635055203608242,
+                "predicted_RMS": 0.042396377417107924,
+                "native_RMS": 0.19236823161633598
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.9928761883604138,
+                "cosine": 0.12635345780145976,
+                "predicted_RMS": 0.04239451394147785,
+                "native_RMS": 0.19236823161633598
+              }
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.7791532997778932,
+                "cosine": 0.5116606750854014,
+                "predicted_RMS": 0.1453087384901746,
+                "native_RMS": 0.4697990898799679
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.7790101890339404,
+                "cosine": 0.51203975033896,
+                "predicted_RMS": 0.14520291635621418,
+                "native_RMS": 0.4697990898799679
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 1.029611531492381,
+                "cosine": -0.011917944806601995,
+                "predicted_RMS": 0.1304592043680035,
+                "native_RMS": 0.8124539082391496
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0294707651059238,
+                "cosine": -0.011923140504262813,
+                "predicted_RMS": 0.13012337131638435,
+                "native_RMS": 0.8124539082391496
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.894303572113996,
+                "cosine": 0.34035194977439787,
+                "predicted_RMS": 0.08078597989562335,
+                "native_RMS": 0.18316136575746098
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.8939309374482913,
+                "cosine": 0.3406669027918766,
+                "predicted_RMS": 0.08069929595333417,
+                "native_RMS": 0.18316136575746098
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 1.6359586419887058,
+                "cosine": 0.2855085880100669,
+                "predicted_RMS": 0.14914998323555406,
+                "native_RMS": 0.1316943179027997
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.634626544194764,
+                "cosine": 0.2856163406571627,
+                "predicted_RMS": 0.1490653591267028,
+                "native_RMS": 0.1316943179027997
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 1.046635190504951,
+                "cosine": 0.28721268120643856,
+                "predicted_RMS": 0.10847191125595322,
+                "native_RMS": 0.1677692514339864
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0460654877181643,
+                "cosine": 0.2873825033794273,
+                "predicted_RMS": 0.10839008876322673,
+                "native_RMS": 0.1677692514339864
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.9807081398696904,
+                "cosine": 0.1988986713035165,
+                "predicted_RMS": 0.04239415462485532,
+                "native_RMS": 0.12422566375102603
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.9805019703354321,
+                "cosine": 0.19904396140040898,
+                "predicted_RMS": 0.042347361061730475,
+                "native_RMS": 0.12422566375102603
+              }
+            }
+          }
+        },
+        "derivative": "dy/du times.025rad; model AD at midpoint of ACTUAL executed controls. Includes asymmetric action-to-control room correctly; not da derivative at a kink.",
+        "scope": "Finite contact/solver secants at distinct prefix states; not smooth native Jacobian, deployment or multi-step validity."
+      },
+      "old_probes": {
+        "pairs": 72,
+        "by_amplitude": {
+          "0.01": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.9442737297276321,
+                "cosine": 0.46908762012057764,
+                "predicted_RMS": 0.18380445094537393,
+                "native_RMS": 0.21019486591841913
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.9442934987558452,
+                "cosine": 0.46908268096816186,
+                "predicted_RMS": 0.1838073367781146,
+                "native_RMS": 0.21019486591841913
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 34.098108406569075,
+                "cosine": -0.06658990815103001,
+                "predicted_RMS": 0.115571196663379,
+                "native_RMS": 0.02032238644171649
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 34.09847603417296,
+                "cosine": -0.06661946261496063,
+                "predicted_RMS": 0.11557125226252647,
+                "native_RMS": 0.02032238644171649
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.6996630527126209,
+                "cosine": 0.5569046530126988,
+                "predicted_RMS": 0.07383704456712437,
+                "native_RMS": 0.16125844048643775
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6996290500001342,
+                "cosine": 0.5569415812348311,
+                "predicted_RMS": 0.0738371953976364,
+                "native_RMS": 0.16125844048643775
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.3202657223202646,
+                "cosine": 0.8838310563944488,
+                "predicted_RMS": 0.1061838591889157,
+                "native_RMS": 0.18781596947717533
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.3202825335699362,
+                "cosine": 0.8838363833659421,
+                "predicted_RMS": 0.10617712639369056,
+                "native_RMS": 0.18781596947717533
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.5463328852015435,
+                "cosine": 0.7020333287325059,
+                "predicted_RMS": 0.08598222733617007,
+                "native_RMS": 0.17057100930588726
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.5463194185147623,
+                "cosine": 0.7020528689450101,
+                "predicted_RMS": 0.08597954217447937,
+                "native_RMS": 0.17057100930588726
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.7904078427988239,
+                "cosine": 0.466078402337171,
+                "predicted_RMS": 0.046914636724477925,
+                "native_RMS": 0.12388700340129863
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.7903939841824918,
+                "cosine": 0.4660946922586167,
+                "predicted_RMS": 0.0469157146873545,
+                "native_RMS": 0.12388700340129863
+              }
+            }
+          },
+          "0.05": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.9335417945318579,
+                "cosine": 0.47023206804067813,
+                "predicted_RMS": 0.18380445094537393,
+                "native_RMS": 0.21285971361891012
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.9334683683602184,
+                "cosine": 0.4702242992055404,
+                "predicted_RMS": 0.18378094587902014,
+                "native_RMS": 0.21285971361891012
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 33.37744031298995,
+                "cosine": -0.05131119628310987,
+                "predicted_RMS": 0.115571196663379,
+                "native_RMS": 0.02049484294074405
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 33.36128294077454,
+                "cosine": -0.051365092380793106,
+                "predicted_RMS": 0.11554100152919394,
+                "native_RMS": 0.02049484294074405
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.6981741212203108,
+                "cosine": 0.5580600220774666,
+                "predicted_RMS": 0.07383704456712437,
+                "native_RMS": 0.1604963471936355
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6981499349376837,
+                "cosine": 0.5580999705178921,
+                "predicted_RMS": 0.07382675914781119,
+                "native_RMS": 0.1604963471936355
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.31181468435179177,
+                "cosine": 0.8860034002932247,
+                "predicted_RMS": 0.1061838591889157,
+                "native_RMS": 0.1847159079384839
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.3118284424042562,
+                "cosine": 0.8860140477681787,
+                "predicted_RMS": 0.10617614270934542,
+                "native_RMS": 0.1847159079384839
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.5442406759580315,
+                "cosine": 0.7022372157945492,
+                "predicted_RMS": 0.08598222733617007,
+                "native_RMS": 0.16895573539691636
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.5442316074690222,
+                "cosine": 0.7022665140537799,
+                "predicted_RMS": 0.08597316250468927,
+                "native_RMS": 0.16895573539691636
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.7885455704142373,
+                "cosine": 0.46837327087043523,
+                "predicted_RMS": 0.046914636724477925,
+                "native_RMS": 0.12366003148414147
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.7885798541583023,
+                "cosine": 0.4683322446000812,
+                "predicted_RMS": 0.046912444298766405,
+                "native_RMS": 0.12366003148414147
+              }
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.903636999485287,
+                "cosine": 0.46619230359648517,
+                "predicted_RMS": 0.18380445094537393,
+                "native_RMS": 0.22580316841701142
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.9026200571168174,
+                "cosine": 0.46612761192396884,
+                "predicted_RMS": 0.18343937725298975,
+                "native_RMS": 0.22580316841701142
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 11.941026874777082,
+                "cosine": 0.019121503034767375,
+                "predicted_RMS": 0.115571196663379,
+                "native_RMS": 0.03473841371270825
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 11.861828360760994,
+                "cosine": 0.017346510188272532,
+                "predicted_RMS": 0.1150925667897543,
+                "native_RMS": 0.03473841371270825
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.8221378430737526,
+                "cosine": 0.422964695744654,
+                "predicted_RMS": 0.07383704456712437,
+                "native_RMS": 0.18895628775011983
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.8215633522482326,
+                "cosine": 0.42377090839156983,
+                "predicted_RMS": 0.07367992639107401,
+                "native_RMS": 0.18895628775011983
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.3782824253569134,
+                "cosine": 0.8249771316296436,
+                "predicted_RMS": 0.1061838591889157,
+                "native_RMS": 0.18233798153715802
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.3784144292933807,
+                "cosine": 0.8251504944245963,
+                "predicted_RMS": 0.1060586553500728,
+                "native_RMS": 0.18233798153715802
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.6811338935985323,
+                "cosine": 0.5765053749932603,
+                "predicted_RMS": 0.08598222733617007,
+                "native_RMS": 0.1867762448061469
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6807838419659287,
+                "cosine": 0.5770782745741224,
+                "predicted_RMS": 0.08584074689146504,
+                "native_RMS": 0.1867762448061469
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.8258810812692209,
+                "cosine": 0.420631824260579,
+                "predicted_RMS": 0.046914636724477925,
+                "native_RMS": 0.12762361901947514
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.8261469275615962,
+                "cosine": 0.4203086838529844,
+                "predicted_RMS": 0.04688049428279285,
+                "native_RMS": 0.12762361901947514
+              }
+            }
+          }
+        },
+        "native_coarse_vs_fine_dt": {
+          "0.01": {
+            "delta52": {
+              "versus_zero_NMSE": 0.000520511567531703,
+              "cosine": 0.9997449310508846,
+              "predicted_RMS": 0.21050692137482357,
+              "native_RMS": 0.20988234649493095
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.006605123662110618,
+              "cosine": 0.9966919849788839,
+              "predicted_RMS": 0.020286736074768677,
+              "native_RMS": 0.020357974378744162
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.0005394873782861079,
+              "cosine": 0.9997390384794703,
+              "predicted_RMS": 0.16157503348598007,
+              "native_RMS": 0.16094122470715944
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.0024618419369317286,
+              "cosine": 0.9990465355854818,
+              "predicted_RMS": 0.189904756120661,
+              "native_RMS": 0.18570368974270487
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.0013077576137977068,
+              "cosine": 0.9994182936343042,
+              "predicted_RMS": 0.17153891617670794,
+              "native_RMS": 0.16959757860352406
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.0003466607867843511,
+              "cosine": 0.9998266822749623,
+              "predicted_RMS": 0.12386168315871138,
+              "native_RMS": 0.1239123184699477
+            }
+          },
+          "0.05": {
+            "delta52": {
+              "versus_zero_NMSE": 0.0011101565540702417,
+              "cosine": 0.9994607904977095,
+              "predicted_RMS": 0.21219692484191555,
+              "native_RMS": 0.2135204450432869
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.005586618084241516,
+              "cosine": 0.9972377794020565,
+              "predicted_RMS": 0.020379964471839124,
+              "native_RMS": 0.020609081067774652
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.0010081618048662162,
+              "cosine": 0.9995225602062041,
+              "predicted_RMS": 0.1610422497913983,
+              "native_RMS": 0.15994858144767915
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.004190029176278663,
+              "cosine": 0.9983358159695777,
+              "predicted_RMS": 0.18722508562846651,
+              "native_RMS": 0.18217217296417768
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.002259980718709813,
+              "cosine": 0.9989993065215957,
+              "predicted_RMS": 0.17021794375088356,
+              "native_RMS": 0.16768402628827425
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.0005337232975116377,
+              "cosine": 0.9997399725124486,
+              "predicted_RMS": 0.12387255875983473,
+              "native_RMS": 0.12344713832085784
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "versus_zero_NMSE": 0.009270913889427707,
+              "cosine": 0.9954178096896974,
+              "predicted_RMS": 0.2239893349175474,
+              "native_RMS": 0.227602547388023
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.0568107125377387,
+              "cosine": 0.9812760652749712,
+              "predicted_RMS": 0.03161765194396876,
+              "native_RMS": 0.037601048656927136
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.059117233019643806,
+              "cosine": 0.9752582014759186,
+              "predicted_RMS": 0.17585879427672618,
+              "native_RMS": 0.20120298664818143
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.01565602640687757,
+              "cosine": 0.9921462287430611,
+              "predicted_RMS": 0.1813228986973537,
+              "native_RMS": 0.1833474445692636
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.046366453482622264,
+              "cosine": 0.9790309551089394,
+              "predicted_RMS": 0.17769883196102573,
+              "native_RMS": 0.19543248544563557
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.040795456469816326,
+              "cosine": 0.9803998403961661,
+              "predicted_RMS": 0.1233309937286091,
+              "native_RMS": 0.131776485949391
+            }
+          }
+        },
+        "source": "Full identical native state, central \u00b1amplitude after actual EMA; AD evaluated at action0. Same finite-width probes never fit.",
+        "limitation": "Central native secants include contact switches/finite solver effects; dt mismatch is not a pure discretization error bound. No assertion of smooth native gradient or imagined reward validity."
+      },
+      "old_RESPONSE": {
+        "delta52": {
+          "versus_zero_NMSE": 0.8880885897158941,
+          "cosine": 0.45454575177057205,
+          "predicted_RMS": 0.18159306242812656,
+          "native_RMS": 0.23822353752493164
+        },
+        "warm26": {
+          "versus_zero_NMSE": 1.8928142323858836,
+          "cosine": -0.15978547428884243,
+          "predicted_RMS": 0.11284722931435166,
+          "native_RMS": 0.14132082597555376
+        },
+        "wrench6": {
+          "versus_zero_NMSE": 0.8159994006740889,
+          "cosine": 0.4307100098201942,
+          "predicted_RMS": 0.07288269515197507,
+          "native_RMS": 0.1859989362309175
+        },
+        "Fn3": {
+          "versus_zero_NMSE": 0.35578873339670797,
+          "cosine": 0.849414161810456,
+          "predicted_RMS": 0.10540757475968732,
+          "native_RMS": 0.1844732212075182
+        },
+        "contact9": {
+          "versus_zero_NMSE": 0.6642759015627979,
+          "cosine": 0.595251062093711,
+          "predicted_RMS": 0.08511664804245707,
+          "native_RMS": 0.1854917589371055
+        },
+        "object12": {
+          "versus_zero_NMSE": 0.8165688513163831,
+          "cosine": 0.4308174560789069,
+          "predicted_RMS": 0.046703042784595944,
+          "native_RMS": 0.12155697081255874
+        }
+      }
+    },
+    "IMPULSE": {
+      "new_CHECK": {
+        "pairs": 960,
+        "by_amplitude": {
+          "0.04": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.8331826916674197,
+                "cosine": 0.43976304410112227,
+                "predicted_RMS": 0.1463161777104727,
+                "native_RMS": 0.5287001167419387
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.8331781791679715,
+                "cosine": 0.439776121195904,
+                "predicted_RMS": 0.1463117582999429,
+                "native_RMS": 0.5287001167419387
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 1.0016228591143768,
+                "cosine": -0.00715033369557313,
+                "predicted_RMS": 0.1309591335034604,
+                "native_RMS": 3.8786565233782992
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0016224768731783,
+                "cosine": -0.0071490336634699525,
+                "predicted_RMS": 0.13094517549259846,
+                "native_RMS": 3.8786565233782992
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.9425785852481161,
+                "cosine": 0.24967994860986836,
+                "predicted_RMS": 0.08082463772834561,
+                "native_RMS": 0.2527245826119574
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.942571758263285,
+                "cosine": 0.24968756762972869,
+                "predicted_RMS": 0.08082111699396265,
+                "native_RMS": 0.2527245826119574
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 1.2113845105109773,
+                "cosine": 0.16781693417533683,
+                "predicted_RMS": 0.15030749553857486,
+                "native_RMS": 0.22869069049785923
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.211386857189565,
+                "cosine": 0.16780707944977885,
+                "predicted_RMS": 0.15030501738458069,
+                "native_RMS": 0.22869069049785923
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 1.0206639335545307,
+                "cosine": 0.19930067682476102,
+                "predicted_RMS": 0.10902230252401772,
+                "native_RMS": 0.2449754145713156
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0206597714242875,
+                "cosine": 0.1992988640839478,
+                "predicted_RMS": 0.10901942358326595,
+                "native_RMS": 0.2449754145713156
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.9943729589469182,
+                "cosine": 0.1569966233429449,
+                "predicted_RMS": 0.0567318725803458,
+                "native_RMS": 0.19236823161633598
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.9943650290879382,
+                "cosine": 0.15700284100582176,
+                "predicted_RMS": 0.056728899557198974,
+                "native_RMS": 0.19236823161633598
+              }
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.778982069311641,
+                "cosine": 0.5105554057162627,
+                "predicted_RMS": 0.14631193188159994,
+                "native_RMS": 0.4697990898799679
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.778846032618832,
+                "cosine": 0.5109201541705337,
+                "predicted_RMS": 0.14620465644054761,
+                "native_RMS": 0.4697990898799679
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 1.0305311791078149,
+                "cosine": -0.014109730150212163,
+                "predicted_RMS": 0.13096006697966406,
+                "native_RMS": 0.8124539082391496
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0303919660188425,
+                "cosine": -0.014126699295926807,
+                "predicted_RMS": 0.1306244260336774,
+                "native_RMS": 0.8124539082391496
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.8930168614444961,
+                "cosine": 0.3418548595846482,
+                "predicted_RMS": 0.08082199110509829,
+                "native_RMS": 0.18316136575746098
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.8926396825619476,
+                "cosine": 0.3421747672989711,
+                "predicted_RMS": 0.08073411015274451,
+                "native_RMS": 0.18316136575746098
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 1.652263079863847,
+                "cosine": 0.2849270857840964,
+                "predicted_RMS": 0.15030825762820313,
+                "native_RMS": 0.1316943179027997
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.6509263961060605,
+                "cosine": 0.2850272407544667,
+                "predicted_RMS": 0.1502230199377035,
+                "native_RMS": 0.1316943179027997
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 1.0489615989739927,
+                "cosine": 0.28724188664580885,
+                "predicted_RMS": 0.10902134470462112,
+                "native_RMS": 0.1677692514339864
+              },
+              "secant": {
+                "versus_zero_NMSE": 1.0483873433957727,
+                "cosine": 0.2874093295306312,
+                "predicted_RMS": 0.10893874242514251,
+                "native_RMS": 0.1677692514339864
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.9868079404775432,
+                "cosine": 0.24277204700871474,
+                "predicted_RMS": 0.05672835461239061,
+                "native_RMS": 0.12422566375102603
+              },
+              "secant": {
+                "versus_zero_NMSE": 0.9862917504741419,
+                "cosine": 0.24305870799860546,
+                "predicted_RMS": 0.056654279113118884,
+                "native_RMS": 0.12422566375102603
+              }
+            }
+          }
+        },
+        "derivative": "dy/du times.025rad; model AD at midpoint of ACTUAL executed controls. Includes asymmetric action-to-control room correctly; not da derivative at a kink.",
+        "scope": "Finite contact/solver secants at distinct prefix states; not smooth native Jacobian, deployment or multi-step validity."
+      },
+      "old_probes": {
+        "pairs": 72,
+        "by_amplitude": {
+          "0.01": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.9214890093914376,
+                "cosine": 0.48423408600835155,
+                "predicted_RMS": 0.18479629731375144,
+                "native_RMS": 0.21019486591841913
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.9215065067992642,
+                "cosine": 0.48423064955821077,
+                "predicted_RMS": 0.18479934557360214,
+                "native_RMS": 0.21019486591841913
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 35.18648803305941,
+                "cosine": -0.059094879214822336,
+                "predicted_RMS": 0.11762851288728088,
+                "native_RMS": 0.02032238644171649
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 35.187137185640985,
+                "cosine": -0.05912693563676292,
+                "predicted_RMS": 0.1176289960903068,
+                "native_RMS": 0.02032238644171649
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.6972142103810772,
+                "cosine": 0.5670007665105019,
+                "predicted_RMS": 0.0693794940016881,
+                "native_RMS": 0.16125844048643775
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6971822092339378,
+                "cosine": 0.5670311756201042,
+                "predicted_RMS": 0.06938293346614378,
+                "native_RMS": 0.16125844048643775
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.322748348703657,
+                "cosine": 0.8863813635210902,
+                "predicted_RMS": 0.10463397238036312,
+                "native_RMS": 0.18781596947717533
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.3227778219866321,
+                "cosine": 0.8863636712256086,
+                "predicted_RMS": 0.1046311886965377,
+                "native_RMS": 0.18781596947717533
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.5458770535307621,
+                "cosine": 0.7104265286124766,
+                "predicted_RMS": 0.08281565180559196,
+                "native_RMS": 0.17057100930588726
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.545869896745752,
+                "cosine": 0.7104318656236466,
+                "predicted_RMS": 0.08281640047073033,
+                "native_RMS": 0.17057100930588726
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.6090814175731467,
+                "cosine": 0.6354251401349772,
+                "predicted_RMS": 0.06467925163768672,
+                "native_RMS": 0.12388700340129863
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6090569907625764,
+                "cosine": 0.6354466752148045,
+                "predicted_RMS": 0.06468031206090304,
+                "native_RMS": 0.12388700340129863
+              }
+            }
+          },
+          "0.05": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.9112056992145668,
+                "cosine": 0.4852193814431199,
+                "predicted_RMS": 0.18479629731375144,
+                "native_RMS": 0.21285971361891012
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.9111290704866206,
+                "cosine": 0.4852134604658322,
+                "predicted_RMS": 0.18477213955758978,
+                "native_RMS": 0.21285971361891012
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 34.440543245104934,
+                "cosine": -0.04352360599444418,
+                "predicted_RMS": 0.11762851288728088,
+                "native_RMS": 0.02049484294074405
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 34.4228660369259,
+                "cosine": -0.04357788855482677,
+                "predicted_RMS": 0.11759608046339176,
+                "native_RMS": 0.02049484294074405
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.6954151922569289,
+                "cosine": 0.5684401087433522,
+                "predicted_RMS": 0.0693794940016881,
+                "native_RMS": 0.1604963471936355
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6953894700087558,
+                "cosine": 0.5684873385447686,
+                "predicted_RMS": 0.06937059303600497,
+                "native_RMS": 0.1604963471936355
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.3143141555106358,
+                "cosine": 0.8884682733916878,
+                "predicted_RMS": 0.10463397238036312,
+                "native_RMS": 0.1847159079384839
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.31432422665048715,
+                "cosine": 0.888474344499268,
+                "predicted_RMS": 0.10462911133999953,
+                "native_RMS": 0.1847159079384839
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.5435768003831278,
+                "cosine": 0.7106651092057146,
+                "predicted_RMS": 0.08281565180559196,
+                "native_RMS": 0.16895573539691636
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.5435653389475825,
+                "cosine": 0.710695492090239,
+                "predicted_RMS": 0.08280863339880301,
+                "native_RMS": 0.16895573539691636
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.6071601823217248,
+                "cosine": 0.6370549658783529,
+                "predicted_RMS": 0.06467925163768672,
+                "native_RMS": 0.12366003148414147
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.6071615329762348,
+                "cosine": 0.6370640527259747,
+                "predicted_RMS": 0.06467336597944962,
+                "native_RMS": 0.12366003148414147
+              }
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "AD": {
+                "versus_zero_NMSE": 0.8890859377396878,
+                "cosine": 0.4769608690887887,
+                "predicted_RMS": 0.18479629731375144,
+                "native_RMS": 0.22580316841701142
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.887992719751562,
+                "cosine": 0.47693615564625924,
+                "predicted_RMS": 0.18442054059978416,
+                "native_RMS": 0.22580316841701142
+              }
+            },
+            "warm26": {
+              "AD": {
+                "versus_zero_NMSE": 12.289003763034765,
+                "cosine": 0.026109453623243004,
+                "predicted_RMS": 0.11762851288728088,
+                "native_RMS": 0.03473841371270825
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 12.201727557308795,
+                "cosine": 0.024328898034122748,
+                "predicted_RMS": 0.11711415331562494,
+                "native_RMS": 0.03473841371270825
+              }
+            },
+            "wrench6": {
+              "AD": {
+                "versus_zero_NMSE": 0.8153608995992181,
+                "cosine": 0.4350200344693534,
+                "predicted_RMS": 0.0693794940016881,
+                "native_RMS": 0.18895628775011983
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.8148895662431966,
+                "cosine": 0.435798600081275,
+                "predicted_RMS": 0.06924199936405323,
+                "native_RMS": 0.18895628775011983
+              }
+            },
+            "Fn3": {
+              "AD": {
+                "versus_zero_NMSE": 0.38033624173479014,
+                "cosine": 0.8268445265613695,
+                "predicted_RMS": 0.10463397238036312,
+                "native_RMS": 0.18233798153715802
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.38047422243469115,
+                "cosine": 0.8269977197321501,
+                "predicted_RMS": 0.10452109988201114,
+                "native_RMS": 0.18233798153715802
+              }
+            },
+            "contact9": {
+              "AD": {
+                "versus_zero_NMSE": 0.6771623051255484,
+                "cosine": 0.5857495267430399,
+                "predicted_RMS": 0.08281565180559196,
+                "native_RMS": 0.1867762448061469
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.676884538604416,
+                "cosine": 0.5862777432255611,
+                "predicted_RMS": 0.08269133221889793,
+                "native_RMS": 0.1867762448061469
+              }
+            },
+            "object12": {
+              "AD": {
+                "versus_zero_NMSE": 0.7296352867729174,
+                "cosine": 0.5201371709970212,
+                "predicted_RMS": 0.06467925163768672,
+                "native_RMS": 0.12762361901947514
+              },
+              "model_secant": {
+                "versus_zero_NMSE": 0.7291216974508284,
+                "cosine": 0.5206632333901835,
+                "predicted_RMS": 0.06459113626502427,
+                "native_RMS": 0.12762361901947514
+              }
+            }
+          }
+        },
+        "native_coarse_vs_fine_dt": {
+          "0.01": {
+            "delta52": {
+              "versus_zero_NMSE": 0.000520511567531703,
+              "cosine": 0.9997449310508846,
+              "predicted_RMS": 0.21050692137482357,
+              "native_RMS": 0.20988234649493095
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.006605123662110618,
+              "cosine": 0.9966919849788839,
+              "predicted_RMS": 0.020286736074768677,
+              "native_RMS": 0.020357974378744162
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.0005394873782861079,
+              "cosine": 0.9997390384794703,
+              "predicted_RMS": 0.16157503348598007,
+              "native_RMS": 0.16094122470715944
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.0024618419369317286,
+              "cosine": 0.9990465355854818,
+              "predicted_RMS": 0.189904756120661,
+              "native_RMS": 0.18570368974270487
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.0013077576137977068,
+              "cosine": 0.9994182936343042,
+              "predicted_RMS": 0.17153891617670794,
+              "native_RMS": 0.16959757860352406
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.0003466607867843511,
+              "cosine": 0.9998266822749623,
+              "predicted_RMS": 0.12386168315871138,
+              "native_RMS": 0.1239123184699477
+            }
+          },
+          "0.05": {
+            "delta52": {
+              "versus_zero_NMSE": 0.0011101565540702417,
+              "cosine": 0.9994607904977095,
+              "predicted_RMS": 0.21219692484191555,
+              "native_RMS": 0.2135204450432869
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.005586618084241516,
+              "cosine": 0.9972377794020565,
+              "predicted_RMS": 0.020379964471839124,
+              "native_RMS": 0.020609081067774652
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.0010081618048662162,
+              "cosine": 0.9995225602062041,
+              "predicted_RMS": 0.1610422497913983,
+              "native_RMS": 0.15994858144767915
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.004190029176278663,
+              "cosine": 0.9983358159695777,
+              "predicted_RMS": 0.18722508562846651,
+              "native_RMS": 0.18217217296417768
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.002259980718709813,
+              "cosine": 0.9989993065215957,
+              "predicted_RMS": 0.17021794375088356,
+              "native_RMS": 0.16768402628827425
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.0005337232975116377,
+              "cosine": 0.9997399725124486,
+              "predicted_RMS": 0.12387255875983473,
+              "native_RMS": 0.12344713832085784
+            }
+          },
+          "0.2": {
+            "delta52": {
+              "versus_zero_NMSE": 0.009270913889427707,
+              "cosine": 0.9954178096896974,
+              "predicted_RMS": 0.2239893349175474,
+              "native_RMS": 0.227602547388023
+            },
+            "warm26": {
+              "versus_zero_NMSE": 0.0568107125377387,
+              "cosine": 0.9812760652749712,
+              "predicted_RMS": 0.03161765194396876,
+              "native_RMS": 0.037601048656927136
+            },
+            "wrench6": {
+              "versus_zero_NMSE": 0.059117233019643806,
+              "cosine": 0.9752582014759186,
+              "predicted_RMS": 0.17585879427672618,
+              "native_RMS": 0.20120298664818143
+            },
+            "Fn3": {
+              "versus_zero_NMSE": 0.01565602640687757,
+              "cosine": 0.9921462287430611,
+              "predicted_RMS": 0.1813228986973537,
+              "native_RMS": 0.1833474445692636
+            },
+            "contact9": {
+              "versus_zero_NMSE": 0.046366453482622264,
+              "cosine": 0.9790309551089394,
+              "predicted_RMS": 0.17769883196102573,
+              "native_RMS": 0.19543248544563557
+            },
+            "object12": {
+              "versus_zero_NMSE": 0.040795456469816326,
+              "cosine": 0.9803998403961661,
+              "predicted_RMS": 0.1233309937286091,
+              "native_RMS": 0.131776485949391
+            }
+          }
+        },
+        "source": "Full identical native state, central \u00b1amplitude after actual EMA; AD evaluated at action0. Same finite-width probes never fit.",
+        "limitation": "Central native secants include contact switches/finite solver effects; dt mismatch is not a pure discretization error bound. No assertion of smooth native gradient or imagined reward validity."
+      },
+      "old_RESPONSE": {
+        "delta52": {
+          "versus_zero_NMSE": 0.8750400999052341,
+          "cosine": 0.46463803060659475,
+          "predicted_RMS": 0.18252252082275308,
+          "native_RMS": 0.23822353752493164
+        },
+        "warm26": {
+          "versus_zero_NMSE": 1.9303990702938643,
+          "cosine": -0.16735551508265553,
+          "predicted_RMS": 0.11469981057461907,
+          "native_RMS": 0.14132082597555376
+        },
+        "wrench6": {
+          "versus_zero_NMSE": 0.8089898933342747,
+          "cosine": 0.4434182102859672,
+          "predicted_RMS": 0.0685445010168773,
+          "native_RMS": 0.1859989362309175
+        },
+        "Fn3": {
+          "versus_zero_NMSE": 0.35942492428656037,
+          "cosine": 0.8501918169038691,
+          "predicted_RMS": 0.10393172925830843,
+          "native_RMS": 0.1844732212075182
+        },
+        "contact9": {
+          "versus_zero_NMSE": 0.660776096845575,
+          "cosine": 0.6046057228133834,
+          "predicted_RMS": 0.08205384733195574,
+          "native_RMS": 0.1854917589371055
+        },
+        "object12": {
+          "versus_zero_NMSE": 0.7139573805332772,
+          "cosine": 0.534878378850133,
+          "predicted_RMS": 0.06413944119680602,
+          "native_RMS": 0.12155697081255874
+        }
+      }
+    }
+  },
+  "recorded_control_rollouts": {
+    "DIRECT": {
+      "cases": 56,
+      "by_horizon": {
+        "1": {
+          "cases": 16,
+          "finite_cases": 16,
+          "failures": 0,
+          "COM_error_m_mean": 0.0002038101596065557,
+          "angle_error_rad_mean": 0.0033026744544418277,
+          "joint_position_RMS_rad_mean": 0.0011188333925778713,
+          "COM_velocity_error_m_s_mean": 0.005932536494743729,
+          "omega_error_rad_s_mean": 0.13323200538192237,
+          "world_force_RMS_N_mean": 0.049266980470222196,
+          "world_torque_RMS_Nm_mean": 0.0014953205576565998,
+          "model_linear_momentum_defect_RMS_Ns_mean": 0.0005043603340547439,
+          "native_linear_momentum_defect_RMS_Ns_mean": 1.8512543978707718e-08,
+          "model_angular_momentum_defect_RMS_Nms_mean": 1.2736258773141717e-05,
+          "native_angular_momentum_defect_RMS_Nms_mean": 3.2571659684824656e-11,
+          "model_joint_limit_excursion_rad_mean": 9.25234250259005e-06
+        },
+        "2": {
+          "cases": 16,
+          "finite_cases": 16,
+          "failures": 0,
+          "COM_error_m_mean": 0.00041027748776422177,
+          "angle_error_rad_mean": 0.006883699847718952,
+          "joint_position_RMS_rad_mean": 0.002406077121975616,
+          "COM_velocity_error_m_s_mean": 0.01085292128917293,
+          "omega_error_rad_s_mean": 0.20699953370011365,
+          "world_force_RMS_N_mean": 0.04697694491117268,
+          "world_torque_RMS_Nm_mean": 0.0015270187198560168,
+          "model_linear_momentum_defect_RMS_Ns_mean": 0.0005275986703632647,
+          "native_linear_momentum_defect_RMS_Ns_mean": 1.9441109793506447e-08,
+          "model_angular_momentum_defect_RMS_Nms_mean": 1.2765795054999415e-05,
+          "native_angular_momentum_defect_RMS_Nms_mean": 3.5761060046340945e-11,
+          "model_joint_limit_excursion_rad_mean": 2.3697874289803356e-05
+        },
+        "5": {
+          "cases": 16,
+          "finite_cases": 16,
+          "failures": 0,
+          "COM_error_m_mean": 0.001497797916065309,
+          "angle_error_rad_mean": 0.02558413243481566,
+          "joint_position_RMS_rad_mean": 0.006788093278257955,
+          "COM_velocity_error_m_s_mean": 0.026637390383477913,
+          "omega_error_rad_s_mean": 0.5546689979432327,
+          "world_force_RMS_N_mean": 0.05708261275295372,
+          "world_torque_RMS_Nm_mean": 0.001758899517510688,
+          "model_linear_momentum_defect_RMS_Ns_mean": 0.0006078906706825727,
+          "native_linear_momentum_defect_RMS_Ns_mean": 3.7220640102671885e-08,
+          "model_angular_momentum_defect_RMS_Nms_mean": 1.3597880136458308e-05,
+          "native_angular_momentum_defect_RMS_Nms_mean": 6.964080900516367e-11,
+          "model_joint_limit_excursion_rad_mean": 9.165589911864364e-05
+        },
+        "10": {
+          "cases": 8,
+          "finite_cases": 8,
+          "failures": 0,
+          "COM_error_m_mean": 0.004016236619205367,
+          "angle_error_rad_mean": 0.06151990613090843,
+          "joint_position_RMS_rad_mean": 0.012022713605458469,
+          "COM_velocity_error_m_s_mean": 0.0597334542355516,
+          "omega_error_rad_s_mean": 1.3995917465880579,
+          "world_force_RMS_N_mean": 0.06796556390826317,
+          "world_torque_RMS_Nm_mean": 0.0020181133408141865,
+          "model_linear_momentum_defect_RMS_Ns_mean": 0.0005610889182336373,
+          "native_linear_momentum_defect_RMS_Ns_mean": 4.6334984482122676e-08,
+          "model_angular_momentum_defect_RMS_Nms_mean": 1.2698887561077629e-05,
+          "native_angular_momentum_defect_RMS_Nms_mean": 8.770441500057222e-11,
+          "model_joint_limit_excursion_rad_mean": 5.241783917010745e-05
+        }
+      },
+      "rows": [
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00022123969277813198,
+          "angle_error_rad": 0.005529371356208233,
+          "joint_position_RMS_rad": 0.0018947848901651769,
+          "COM_velocity_error_m_s": 0.006614157498456548,
+          "omega_error_rad_s": 0.204280413013742,
+          "world_force_RMS_N": 0.04544018538524266,
+          "world_torque_RMS_Nm": 0.0019070917537162286,
+          "model_linear_momentum_defect_RMS_Ns": 0.0003247600666076699,
+          "native_linear_momentum_defect_RMS_Ns": 1.210206716873666e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.0609453204144123e-05,
+          "native_angular_momentum_defect_RMS_Nms": 1.6848093919909485e-11,
+          "model_joint_limit_excursion_rad": 8.684704948791477e-05
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00024989540896589677,
+          "angle_error_rad": 0.007013743476747444,
+          "joint_position_RMS_rad": 0.003291487599519277,
+          "COM_velocity_error_m_s": 0.007803386318129528,
+          "omega_error_rad_s": 0.1433521169928332,
+          "world_force_RMS_N": 0.033267079499482974,
+          "world_torque_RMS_Nm": 0.0015360819921754875,
+          "model_linear_momentum_defect_RMS_Ns": 0.00028152094302991897,
+          "native_linear_momentum_defect_RMS_Ns": 8.572168751129865e-09,
+          "model_angular_momentum_defect_RMS_Nms": 8.658474013941003e-06,
+          "native_angular_momentum_defect_RMS_Nms": 1.1928789283134461e-11,
+          "model_joint_limit_excursion_rad": 0.00021209142573752615
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0008539342477679194,
+          "angle_error_rad": 0.008052930126419083,
+          "joint_position_RMS_rad": 0.007396868140177611,
+          "COM_velocity_error_m_s": 0.009878452414412708,
+          "omega_error_rad_s": 0.19755116847421395,
+          "world_force_RMS_N": 0.02345871883341876,
+          "world_torque_RMS_Nm": 0.0010450543997421896,
+          "model_linear_momentum_defect_RMS_Ns": 0.0002671849720600161,
+          "native_linear_momentum_defect_RMS_Ns": 5.508646995825346e-09,
+          "model_angular_momentum_defect_RMS_Nms": 9.10107738845732e-06,
+          "native_angular_momentum_defect_RMS_Nms": 7.608242826650002e-12,
+          "model_joint_limit_excursion_rad": 0.0007375409229553043
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.003699043710322719,
+          "angle_error_rad": 0.054362484473922876,
+          "joint_position_RMS_rad": 0.012158598188971349,
+          "COM_velocity_error_m_s": 0.05390938719005158,
+          "omega_error_rad_s": 1.0202332136361547,
+          "world_force_RMS_N": 0.07226719968363822,
+          "world_torque_RMS_Nm": 0.0019291746693741716,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005183012948164485,
+          "native_linear_momentum_defect_RMS_Ns": 8.320592770776854e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.3233096181444264e-05,
+          "native_angular_momentum_defect_RMS_Nms": 1.643994341655553e-10,
+          "model_joint_limit_excursion_rad": 0.00013447519154397014
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 7.733070505677458e-05,
+          "angle_error_rad": 0.0009452018066118293,
+          "joint_position_RMS_rad": 0.0007510404444856082,
+          "COM_velocity_error_m_s": 0.001580350372864051,
+          "omega_error_rad_s": 0.02777269729881609,
+          "world_force_RMS_N": 0.02157628684953801,
+          "world_torque_RMS_Nm": 0.0007190102164523155,
+          "model_linear_momentum_defect_RMS_Ns": 0.000282449802743494,
+          "native_linear_momentum_defect_RMS_Ns": 1.4989477100447993e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.1895361661206536e-05,
+          "native_angular_momentum_defect_RMS_Nms": 2.2825187211023443e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00012370377554471413,
+          "angle_error_rad": 0.000893824988786011,
+          "joint_position_RMS_rad": 0.0015676946568571799,
+          "COM_velocity_error_m_s": 0.004380988560009031,
+          "omega_error_rad_s": 0.05380762491184887,
+          "world_force_RMS_N": 0.027917415519953522,
+          "world_torque_RMS_Nm": 0.0006136623509452456,
+          "model_linear_momentum_defect_RMS_Ns": 0.000315912945056268,
+          "native_linear_momentum_defect_RMS_Ns": 1.4852170057049719e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.0511840039825674e-05,
+          "native_angular_momentum_defect_RMS_Nms": 2.6276500344981798e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0008824955230881862,
+          "angle_error_rad": 0.014808682366735383,
+          "joint_position_RMS_rad": 0.0047373863503828465,
+          "COM_velocity_error_m_s": 0.023241486274742755,
+          "omega_error_rad_s": 0.32998542223477473,
+          "world_force_RMS_N": 0.05675369432899507,
+          "world_torque_RMS_Nm": 0.001190567792736663,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005782607484601328,
+          "native_linear_momentum_defect_RMS_Ns": 1.1754193983296428e-07,
+          "model_angular_momentum_defect_RMS_Nms": 8.60881184842615e-06,
+          "native_angular_momentum_defect_RMS_Nms": 2.3237138926511636e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00020972431913147832,
+          "angle_error_rad": 0.0030299501277040336,
+          "joint_position_RMS_rad": 0.001496818480565654,
+          "COM_velocity_error_m_s": 0.0063080193673405284,
+          "omega_error_rad_s": 0.1894854675526702,
+          "world_force_RMS_N": 0.04319514463106791,
+          "world_torque_RMS_Nm": 0.0017594916953146778,
+          "model_linear_momentum_defect_RMS_Ns": 0.00013017763162095512,
+          "native_linear_momentum_defect_RMS_Ns": 8.115544735895217e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.3382972386403729e-05,
+          "native_angular_momentum_defect_RMS_Nms": 7.259090839072722e-12,
+          "model_joint_limit_excursion_rad": 5.619370550757896e-05
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00029390771064272147,
+          "angle_error_rad": 0.0048194450557021516,
+          "joint_position_RMS_rad": 0.002671120516997891,
+          "COM_velocity_error_m_s": 0.008379214194640683,
+          "omega_error_rad_s": 0.15461319130232803,
+          "world_force_RMS_N": 0.033035331059142935,
+          "world_torque_RMS_Nm": 0.0014090428698753609,
+          "model_linear_momentum_defect_RMS_Ns": 0.00021294393269107978,
+          "native_linear_momentum_defect_RMS_Ns": 5.7439724099888225e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.0830651500204965e-05,
+          "native_angular_momentum_defect_RMS_Nms": 5.136947234378784e-12,
+          "model_joint_limit_excursion_rad": 0.00016707456289932754
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0009814607981709922,
+          "angle_error_rad": 0.0093521251642464,
+          "joint_position_RMS_rad": 0.006801126790220737,
+          "COM_velocity_error_m_s": 0.011740855969075406,
+          "omega_error_rad_s": 0.2565731738078333,
+          "world_force_RMS_N": 0.024489838973789823,
+          "world_torque_RMS_Nm": 0.0009905429322738333,
+          "model_linear_momentum_defect_RMS_Ns": 0.0002507837788752597,
+          "native_linear_momentum_defect_RMS_Ns": 3.6664091231943525e-09,
+          "model_angular_momentum_defect_RMS_Nms": 9.868219345789876e-06,
+          "native_angular_momentum_defect_RMS_Nms": 3.288661706934366e-12,
+          "model_joint_limit_excursion_rad": 0.0007289534629429939
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.004208746245806147,
+          "angle_error_rad": 0.06521150054311682,
+          "joint_position_RMS_rad": 0.011742589601883974,
+          "COM_velocity_error_m_s": 0.05838417444367863,
+          "omega_error_rad_s": 1.1434161674308136,
+          "world_force_RMS_N": 0.07455135472932219,
+          "world_torque_RMS_Nm": 0.0019826508040690365,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005037828612026947,
+          "native_linear_momentum_defect_RMS_Ns": 1.9078082931632725e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.2955317938550018e-05,
+          "native_angular_momentum_defect_RMS_Nms": 3.72807336890615e-11,
+          "model_joint_limit_excursion_rad": 0.00028486752181688946
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 6.43195670343188e-05,
+          "angle_error_rad": 0.000902435278184827,
+          "joint_position_RMS_rad": 0.0006962324032090025,
+          "COM_velocity_error_m_s": 0.0015108203919349192,
+          "omega_error_rad_s": 0.026318095474358233,
+          "world_force_RMS_N": 0.019362596849423326,
+          "world_torque_RMS_Nm": 0.0006038104462139686,
+          "model_linear_momentum_defect_RMS_Ns": 0.00026086136571326006,
+          "native_linear_momentum_defect_RMS_Ns": 7.572231616007934e-10,
+          "model_angular_momentum_defect_RMS_Nms": 1.1058297324563087e-05,
+          "native_angular_momentum_defect_RMS_Nms": 1.186478635820826e-12,
+          "model_joint_limit_excursion_rad": 4.996725045947059e-06
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00011023400190936207,
+          "angle_error_rad": 0.001034235185445421,
+          "joint_position_RMS_rad": 0.001469195152496079,
+          "COM_velocity_error_m_s": 0.004322580472924339,
+          "omega_error_rad_s": 0.056227005017390405,
+          "world_force_RMS_N": 0.027448675127421548,
+          "world_torque_RMS_Nm": 0.0005439751886317653,
+          "model_linear_momentum_defect_RMS_Ns": 0.00032140422668389785,
+          "native_linear_momentum_defect_RMS_Ns": 7.553772435846861e-10,
+          "model_angular_momentum_defect_RMS_Nms": 9.967803869627596e-06,
+          "native_angular_momentum_defect_RMS_Nms": 1.3575507637329596e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0009333552317894438,
+          "angle_error_rad": 0.017320276938820493,
+          "joint_position_RMS_rad": 0.0047870235953572865,
+          "COM_velocity_error_m_s": 0.024055048063890742,
+          "omega_error_rad_s": 0.36954877141301207,
+          "world_force_RMS_N": 0.0561921353045423,
+          "world_torque_RMS_Nm": 0.00115921664567177,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005936896343587823,
+          "native_linear_momentum_defect_RMS_Ns": 2.6730206524340004e-08,
+          "model_angular_momentum_defect_RMS_Nms": 8.242086840240772e-06,
+          "native_angular_momentum_defect_RMS_Nms": 5.262025192800576e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00035346069242673704,
+          "angle_error_rad": 0.005355295962177211,
+          "joint_position_RMS_rad": 0.0012004310282223562,
+          "COM_velocity_error_m_s": 0.007231662031172208,
+          "omega_error_rad_s": 0.22411015966052664,
+          "world_force_RMS_N": 0.06388232999377329,
+          "world_torque_RMS_Nm": 0.0021993268742244534,
+          "model_linear_momentum_defect_RMS_Ns": 0.0008499711841756384,
+          "native_linear_momentum_defect_RMS_Ns": 4.3691191054900614e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.0541291334002358e-05,
+          "native_angular_momentum_defect_RMS_Nms": 4.133696891766707e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0006866542948060311,
+          "angle_error_rad": 0.008739683104329144,
+          "joint_position_RMS_rad": 0.0027643144751008115,
+          "COM_velocity_error_m_s": 0.012598493580138448,
+          "omega_error_rad_s": 0.2696969152749071,
+          "world_force_RMS_N": 0.052581748712352966,
+          "world_torque_RMS_Nm": 0.002026700960681523,
+          "model_linear_momentum_defect_RMS_Ns": 0.0009849179997477111,
+          "native_linear_momentum_defect_RMS_Ns": 3.0895431562770366e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.2345861374525824e-05,
+          "native_angular_momentum_defect_RMS_Nms": 2.92559444749766e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0014335958653437357,
+          "angle_error_rad": 0.017509917684069298,
+          "joint_position_RMS_rad": 0.007012959223959538,
+          "COM_velocity_error_m_s": 0.02519538192101307,
+          "omega_error_rad_s": 0.606144570078837,
+          "world_force_RMS_N": 0.039900500601723794,
+          "world_torque_RMS_Nm": 0.001905241169668316,
+          "model_linear_momentum_defect_RMS_Ns": 0.0008210722851899356,
+          "native_linear_momentum_defect_RMS_Ns": 1.95461393789002e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.0263639191662061e-05,
+          "native_angular_momentum_defect_RMS_Nms": 1.8557846639876386e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.004461457783528477,
+          "angle_error_rad": 0.08125111102069331,
+          "joint_position_RMS_rad": 0.012212085918296105,
+          "COM_velocity_error_m_s": 0.08311970957259926,
+          "omega_error_rad_s": 1.7870617341659492,
+          "world_force_RMS_N": 0.08024126188163545,
+          "world_torque_RMS_Nm": 0.0023429938031953473,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006851562942800646,
+          "native_linear_momentum_defect_RMS_Ns": 4.180934558752777e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.2043887186896403e-05,
+          "native_angular_momentum_defect_RMS_Nms": 7.21534918931355e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00017299833470070595,
+          "angle_error_rad": 0.003593822009325011,
+          "joint_position_RMS_rad": 0.000727016675422074,
+          "COM_velocity_error_m_s": 0.0077985509421711575,
+          "omega_error_rad_s": 0.10915108682175931,
+          "world_force_RMS_N": 0.042862285671325516,
+          "world_torque_RMS_Nm": 0.0015291665817084427,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005623021979088562,
+          "native_linear_momentum_defect_RMS_Ns": 1.1661018554774317e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.0394068990200741e-05,
+          "native_angular_momentum_defect_RMS_Nms": 2.1605089500729723e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0003992150990046621,
+          "angle_error_rad": 0.009130345797532772,
+          "joint_position_RMS_rad": 0.0022562698417511297,
+          "COM_velocity_error_m_s": 0.01914932106016266,
+          "omega_error_rad_s": 0.2421434744052721,
+          "world_force_RMS_N": 0.04818824269930853,
+          "world_torque_RMS_Nm": 0.0017639450795582654,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006779324578855547,
+          "native_linear_momentum_defect_RMS_Ns": 1.2810570624360056e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.2647248129813765e-05,
+          "native_angular_momentum_defect_RMS_Nms": 2.3787735079079504e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0019175006026607296,
+          "angle_error_rad": 0.03925965504079162,
+          "joint_position_RMS_rad": 0.009687301467412524,
+          "COM_velocity_error_m_s": 0.05372062548083928,
+          "omega_error_rad_s": 0.842619135569771,
+          "world_force_RMS_N": 0.09133736999415419,
+          "world_torque_RMS_Nm": 0.0024892057392790754,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006810420110199471,
+          "native_linear_momentum_defect_RMS_Ns": 5.5803146795635663e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.5032125104447768e-05,
+          "native_angular_momentum_defect_RMS_Nms": 1.0033872190154891e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0003600227759328748,
+          "angle_error_rad": 0.0055846045943638645,
+          "joint_position_RMS_rad": 0.001224914935367386,
+          "COM_velocity_error_m_s": 0.008550348825000536,
+          "omega_error_rad_s": 0.2450383501267089,
+          "world_force_RMS_N": 0.07233048943590074,
+          "world_torque_RMS_Nm": 0.0024484971143946942,
+          "model_linear_momentum_defect_RMS_Ns": 0.0008826438701375141,
+          "native_linear_momentum_defect_RMS_Ns": 1.0924253067725107e-08,
+          "model_angular_momentum_defect_RMS_Nms": 8.859728828029832e-06,
+          "native_angular_momentum_defect_RMS_Nms": 1.0336027434315375e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0007057349743266306,
+          "angle_error_rad": 0.009224952946239186,
+          "joint_position_RMS_rad": 0.0026788719843563505,
+          "COM_velocity_error_m_s": 0.014101311634302418,
+          "omega_error_rad_s": 0.28705808295800145,
+          "world_force_RMS_N": 0.058339103811964756,
+          "world_torque_RMS_Nm": 0.0021973961996216225,
+          "model_linear_momentum_defect_RMS_Ns": 0.0009784352554825086,
+          "native_linear_momentum_defect_RMS_Ns": 7.72577587597105e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.1107231506557374e-05,
+          "native_angular_momentum_defect_RMS_Nms": 7.338950992728907e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0014456461782927613,
+          "angle_error_rad": 0.01852901360803852,
+          "joint_position_RMS_rad": 0.006921470107189846,
+          "COM_velocity_error_m_s": 0.02747950554991872,
+          "omega_error_rad_s": 0.6209320623920402,
+          "world_force_RMS_N": 0.042203929195582385,
+          "world_torque_RMS_Nm": 0.0019540848673095155,
+          "model_linear_momentum_defect_RMS_Ns": 0.0007968519703971912,
+          "native_linear_momentum_defect_RMS_Ns": 4.892238441131199e-09,
+          "model_angular_momentum_defect_RMS_Nms": 9.545481287078265e-06,
+          "native_angular_momentum_defect_RMS_Nms": 4.697748051897263e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.004538219112899956,
+          "angle_error_rad": 0.08381410926937977,
+          "joint_position_RMS_rad": 0.012472289006715424,
+          "COM_velocity_error_m_s": 0.08666974014121445,
+          "omega_error_rad_s": 1.79023956961501,
+          "world_force_RMS_N": 0.08117820238809607,
+          "world_torque_RMS_Nm": 0.0022845635618218615,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006600308671736473,
+          "native_linear_momentum_defect_RMS_Ns": 4.721424670481696e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.1557257592901141e-05,
+          "native_angular_momentum_defect_RMS_Nms": 6.093262096199523e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00018077081800587134,
+          "angle_error_rad": 0.003951642496483252,
+          "joint_position_RMS_rad": 0.0007171003984003585,
+          "COM_velocity_error_m_s": 0.008048998562807415,
+          "omega_error_rad_s": 0.11374450930044071,
+          "world_force_RMS_N": 0.050151839384423004,
+          "world_torque_RMS_Nm": 0.001659837995459533,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005513925638907508,
+          "native_linear_momentum_defect_RMS_Ns": 5.558786991046284e-10,
+          "model_angular_momentum_defect_RMS_Nms": 1.1080501280389716e-05,
+          "native_angular_momentum_defect_RMS_Nms": 1.1085003068335841e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0004217754461903872,
+          "angle_error_rad": 0.009939992869166268,
+          "joint_position_RMS_rad": 0.0022027660959851115,
+          "COM_velocity_error_m_s": 0.019640410580123682,
+          "omega_error_rad_s": 0.2533877818863817,
+          "world_force_RMS_N": 0.05497322253874171,
+          "world_torque_RMS_Nm": 0.001879273516824549,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006400809059991492,
+          "native_linear_momentum_defect_RMS_Ns": 6.296527426495987e-10,
+          "model_angular_momentum_defect_RMS_Nms": 1.3003296925305292e-05,
+          "native_angular_momentum_defect_RMS_Nms": 1.208989134083752e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0020338192613117353,
+          "angle_error_rad": 0.04159161476217053,
+          "joint_position_RMS_rad": 0.009411697949770426,
+          "COM_velocity_error_m_s": 0.05686226795293315,
+          "omega_error_rad_s": 0.8461642317429976,
+          "world_force_RMS_N": 0.09782863250987385,
+          "world_torque_RMS_Nm": 0.0025202349961007606,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006671727071419229,
+          "native_linear_momentum_defect_RMS_Ns": 4.544194634166164e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.497760519437048e-05,
+          "native_angular_momentum_defect_RMS_Nms": 7.2240465936245944e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00036592699062547383,
+          "angle_error_rad": 0.005861334206232296,
+          "joint_position_RMS_rad": 0.0015671813731992974,
+          "COM_velocity_error_m_s": 0.007342328461514909,
+          "omega_error_rad_s": 0.0341091470387769,
+          "world_force_RMS_N": 0.053296401208787376,
+          "world_torque_RMS_Nm": 0.0010171721115925878,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005367290283127041,
+          "native_linear_momentum_defect_RMS_Ns": 7.984170221371846e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.7252717570506812e-05,
+          "native_angular_momentum_defect_RMS_Nms": 3.27760043613046e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0006807904183391445,
+          "angle_error_rad": 0.01112526669293258,
+          "joint_position_RMS_rad": 0.003088095056452754,
+          "COM_velocity_error_m_s": 0.008331305313982282,
+          "omega_error_rad_s": 0.13813254281815335,
+          "world_force_RMS_N": 0.043089682225601965,
+          "world_torque_RMS_Nm": 0.0013922504961683734,
+          "model_linear_momentum_defect_RMS_Ns": 0.00047424905281261967,
+          "native_linear_momentum_defect_RMS_Ns": 5.6478377099808364e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.5370058869860098e-05,
+          "native_angular_momentum_defect_RMS_Nms": 2.3179539447643994e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0018225363323430385,
+          "angle_error_rad": 0.029251895555864525,
+          "joint_position_RMS_rad": 0.006936911510915212,
+          "COM_velocity_error_m_s": 0.01302489296961041,
+          "omega_error_rad_s": 0.4415491829740277,
+          "world_force_RMS_N": 0.04091641635479185,
+          "world_torque_RMS_Nm": 0.0012931587236080474,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005581747181087091,
+          "native_linear_momentum_defect_RMS_Ns": 3.577000351711138e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.2005577064654358e-05,
+          "native_angular_momentum_defect_RMS_Nms": 1.466174426798937e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.004297498432306826,
+          "angle_error_rad": 0.06965227064520958,
+          "joint_position_RMS_rad": 0.010513559134256932,
+          "COM_velocity_error_m_s": 0.02893876195334273,
+          "omega_error_rad_s": 1.1009976630836271,
+          "world_force_RMS_N": 0.047875993218426935,
+          "world_torque_RMS_Nm": 0.0014025150098353762,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005228338030607691,
+          "native_linear_momentum_defect_RMS_Ns": 3.305000253798222e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.6703479675094105e-05,
+          "native_angular_momentum_defect_RMS_Nms": 4.692360873809042e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0001595238933516931,
+          "angle_error_rad": 0.0017579051440416741,
+          "joint_position_RMS_rad": 0.0008066254181522993,
+          "COM_velocity_error_m_s": 0.00312424531522725,
+          "omega_error_rad_s": 0.09142355975259264,
+          "world_force_RMS_N": 0.037442777543560214,
+          "world_torque_RMS_Nm": 0.0005220246155368462,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006215459779501893,
+          "native_linear_momentum_defect_RMS_Ns": 3.7725815240388517e-10,
+          "model_angular_momentum_defect_RMS_Nms": 1.79260382588447e-05,
+          "native_angular_momentum_defect_RMS_Nms": 2.451550933417113e-13,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0003529420701494479,
+          "angle_error_rad": 0.004422436020155636,
+          "joint_position_RMS_rad": 0.0016392808088338746,
+          "COM_velocity_error_m_s": 0.006873126632896915,
+          "omega_error_rad_s": 0.19458991852141017,
+          "world_force_RMS_N": 0.04319473470637963,
+          "world_torque_RMS_Nm": 0.0004939141873608784,
+          "model_linear_momentum_defect_RMS_Ns": 0.0007034211616930508,
+          "native_linear_momentum_defect_RMS_Ns": 4.783547164138518e-10,
+          "model_angular_momentum_defect_RMS_Nms": 2.0081691743076377e-05,
+          "native_angular_momentum_defect_RMS_Nms": 3.0006995679764893e-13,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0015297910019031193,
+          "angle_error_rad": 0.027280901132376995,
+          "joint_position_RMS_rad": 0.005628428922218926,
+          "COM_velocity_error_m_s": 0.015681295108675462,
+          "omega_error_rad_s": 0.479116655513708,
+          "world_force_RMS_N": 0.053842055911969416,
+          "world_torque_RMS_Nm": 0.0010314913044178154,
+          "model_linear_momentum_defect_RMS_Ns": 0.0007746057584174552,
+          "native_linear_momentum_defect_RMS_Ns": 4.660268666080445e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.920123880347002e-05,
+          "native_angular_momentum_defect_RMS_Nms": 6.472003838866964e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0003714834083735664,
+          "angle_error_rad": 0.005972922939020933,
+          "joint_position_RMS_rad": 0.0013475990883561983,
+          "COM_velocity_error_m_s": 0.005998809178967379,
+          "omega_error_rad_s": 0.032062467408775774,
+          "world_force_RMS_N": 0.03665889231170147,
+          "world_torque_RMS_Nm": 0.0006568756877748387,
+          "model_linear_momentum_defect_RMS_Ns": 0.0004454326316197812,
+          "native_linear_momentum_defect_RMS_Ns": 3.761233321631934e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.2098706159248584e-05,
+          "native_angular_momentum_defect_RMS_Nms": 5.733828448996939e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0007428388573439812,
+          "angle_error_rad": 0.012028999202348185,
+          "joint_position_RMS_rad": 0.002950825843731788,
+          "COM_velocity_error_m_s": 0.008183894383419623,
+          "omega_error_rad_s": 0.0738346874568239,
+          "world_force_RMS_N": 0.03336073585576564,
+          "world_torque_RMS_Nm": 0.0010291408533218485,
+          "model_linear_momentum_defect_RMS_Ns": 0.0004935017407067092,
+          "native_linear_momentum_defect_RMS_Ns": 2.6598942906701423e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.1383057107599866e-05,
+          "native_angular_momentum_defect_RMS_Nms": 4.0559187508870935e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0018263425163060453,
+          "angle_error_rad": 0.028975971628188615,
+          "joint_position_RMS_rad": 0.006796669342855214,
+          "COM_velocity_error_m_s": 0.012940322545102636,
+          "omega_error_rad_s": 0.3700266013453783,
+          "world_force_RMS_N": 0.03202401861281819,
+          "world_torque_RMS_Nm": 0.0012241288316639208,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005194503881882056,
+          "native_linear_momentum_defect_RMS_Ns": 1.6844140484471936e-09,
+          "model_angular_momentum_defect_RMS_Nms": 9.644145252193448e-06,
+          "native_angular_momentum_defect_RMS_Nms": 2.5677807718353837e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.004764766705390274,
+          "angle_error_rad": 0.07864840638514992,
+          "joint_position_RMS_rad": 0.010971229370006262,
+          "COM_velocity_error_m_s": 0.0405972006713294,
+          "omega_error_rad_s": 1.20055570710455,
+          "world_force_RMS_N": 0.053480300528289205,
+          "world_torque_RMS_Nm": 0.0015569615122921164,
+          "model_linear_momentum_defect_RMS_Ns": 0.00047800930354282206,
+          "native_linear_momentum_defect_RMS_Ns": 1.959220308969767e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.5090548232753877e-05,
+          "native_angular_momentum_defect_RMS_Nms": 4.3073427720172425e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00016159355293711485,
+          "angle_error_rad": 0.0015096925970975962,
+          "joint_position_RMS_rad": 0.0008007462086374926,
+          "COM_velocity_error_m_s": 0.002939498091134814,
+          "omega_error_rad_s": 0.09025660916767742,
+          "world_force_RMS_N": 0.03068488525589065,
+          "world_torque_RMS_Nm": 0.0006088145245450424,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005634853153405213,
+          "native_linear_momentum_defect_RMS_Ns": 2.1516175196886455e-10,
+          "model_angular_momentum_defect_RMS_Nms": 1.7496134246655726e-05,
+          "native_angular_momentum_defect_RMS_Nms": 1.7360018615981082e-13,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0003447897910946493,
+          "angle_error_rad": 0.0037519820180900586,
+          "joint_position_RMS_rad": 0.0015958695231377115,
+          "COM_velocity_error_m_s": 0.006506894160429752,
+          "omega_error_rad_s": 0.1983327492019327,
+          "world_force_RMS_N": 0.03917887557266524,
+          "world_torque_RMS_Nm": 0.000551006856738291,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006511893306849421,
+          "native_linear_momentum_defect_RMS_Ns": 2.701195745520119e-10,
+          "model_angular_momentum_defect_RMS_Nms": 1.9547814356920762e-05,
+          "native_angular_momentum_defect_RMS_Nms": 2.022200495034356e-13,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0014568508664839427,
+          "angle_error_rad": 0.02668219709483138,
+          "joint_position_RMS_rad": 0.005306024102621387,
+          "COM_velocity_error_m_s": 0.01422667754246047,
+          "omega_error_rad_s": 0.5006794348963911,
+          "world_force_RMS_N": 0.05675718284828532,
+          "world_torque_RMS_Nm": 0.0010602924647559844,
+          "model_linear_momentum_defect_RMS_Ns": 0.0007466271218034583,
+          "native_linear_momentum_defect_RMS_Ns": 2.1999631250438977e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.8659586791936874e-05,
+          "native_angular_momentum_defect_RMS_Nms": 5.523848786769136e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00017778565623214875,
+          "angle_error_rad": 0.003678144460580802,
+          "joint_position_RMS_rad": 0.0010641322637190429,
+          "COM_velocity_error_m_s": 0.0043778921386916385,
+          "omega_error_rad_s": 0.21416940251548147,
+          "world_force_RMS_N": 0.05105594830794156,
+          "world_torque_RMS_Nm": 0.002141686408506928,
+          "model_linear_momentum_defect_RMS_Ns": 0.00046254969613264565,
+          "native_linear_momentum_defect_RMS_Ns": 7.011773784087185e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.1782903283606438e-05,
+          "native_angular_momentum_defect_RMS_Nms": 8.635972213142793e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00031355954781234105,
+          "angle_error_rad": 0.00766018174521851,
+          "joint_position_RMS_rad": 0.0018699316298404734,
+          "COM_velocity_error_m_s": 0.010241551220594418,
+          "omega_error_rad_s": 0.24801708418110383,
+          "world_force_RMS_N": 0.05582732091139546,
+          "world_torque_RMS_Nm": 0.0019438968178662733,
+          "model_linear_momentum_defect_RMS_Ns": 0.0004369481993361761,
+          "native_linear_momentum_defect_RMS_Ns": 5.142840234086204e-09,
+          "model_angular_momentum_defect_RMS_Nms": 9.954225615057678e-06,
+          "native_angular_momentum_defect_RMS_Nms": 7.759577414778586e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0007471165588695193,
+          "angle_error_rad": 0.013471269284671574,
+          "joint_position_RMS_rad": 0.005599456990510558,
+          "COM_velocity_error_m_s": 0.024719587764898618,
+          "omega_error_rad_s": 0.4631072356310049,
+          "world_force_RMS_N": 0.05867041296882023,
+          "world_torque_RMS_Nm": 0.0017461380341061705,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006098751795923864,
+          "native_linear_momentum_defect_RMS_Ns": 3.688944165850495e-08,
+          "model_angular_momentum_defect_RMS_Nms": 9.875386312974409e-06,
+          "native_angular_momentum_defect_RMS_Nms": 7.202127632166333e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.002766407516782778,
+          "angle_error_rad": 0.022150226708746834,
+          "joint_position_RMS_rad": 0.013140980483458313,
+          "COM_velocity_error_m_s": 0.05966232222762858,
+          "omega_error_rad_s": 1.509933764631985,
+          "world_force_RMS_N": 0.06418000407002211,
+          "world_torque_RMS_Nm": 0.002243456239834044,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005653397280989061,
+          "native_linear_momentum_defect_RMS_Ns": 1.5226224243100998e-07,
+          "model_angular_momentum_defect_RMS_Nms": 9.797758369197052e-06,
+          "native_angular_momentum_defect_RMS_Nms": 3.0192456816342357e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0001126438648625848,
+          "angle_error_rad": 0.0007438209277709364,
+          "joint_position_RMS_rad": 0.001313390037982557,
+          "COM_velocity_error_m_s": 0.008761964771437305,
+          "omega_error_rad_s": 0.1464245119126144,
+          "world_force_RMS_N": 0.07778840617980971,
+          "world_torque_RMS_Nm": 0.00186322241287826,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005651086120105498,
+          "native_linear_momentum_defect_RMS_Ns": 1.668727919243765e-07,
+          "model_angular_momentum_defect_RMS_Nms": 1.4422049400773526e-05,
+          "native_angular_momentum_defect_RMS_Nms": 3.3030858317709946e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00042281957912070067,
+          "angle_error_rad": 0.006261097920008292,
+          "joint_position_RMS_rad": 0.0031634342705717496,
+          "COM_velocity_error_m_s": 0.01525917899288415,
+          "omega_error_rad_s": 0.35539677620624643,
+          "world_force_RMS_N": 0.0666943834408555,
+          "world_torque_RMS_Nm": 0.0024034312417279624,
+          "model_linear_momentum_defect_RMS_Ns": 0.0004061992047638692,
+          "native_linear_momentum_defect_RMS_Ns": 1.9464460663065182e-07,
+          "model_angular_momentum_defect_RMS_Nms": 1.4540296792837764e-05,
+          "native_angular_momentum_defect_RMS_Nms": 3.8578590435958723e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0025328564025006513,
+          "angle_error_rad": 0.050247691735362095,
+          "joint_position_RMS_rad": 0.00780918030054428,
+          "COM_velocity_error_m_s": 0.041881735347904056,
+          "omega_error_rad_s": 1.0120811011461703,
+          "world_force_RMS_N": 0.08680158122123957,
+          "world_torque_RMS_Nm": 0.0033280354937136013,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006176377318125338,
+          "native_linear_momentum_defect_RMS_Ns": 2.121479437429528e-07,
+          "model_angular_momentum_defect_RMS_Nms": 2.6208933808380648e-05,
+          "native_angular_momentum_defect_RMS_Nms": 4.208679430395456e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00015182254212573064,
+          "angle_error_rad": 0.003235357941850297,
+          "joint_position_RMS_rad": 0.0010917042597084555,
+          "COM_velocity_error_m_s": 0.0050409566413953276,
+          "omega_error_rad_s": 0.2219833285270473,
+          "world_force_RMS_N": 0.056635109111021105,
+          "world_torque_RMS_Nm": 0.0022664383816948714,
+          "model_linear_momentum_defect_RMS_Ns": 0.00047369502766571564,
+          "native_linear_momentum_defect_RMS_Ns": 1.728323103199393e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.2200308715420554e-05,
+          "native_angular_momentum_defect_RMS_Nms": 2.673562922834977e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0002535513747407389,
+          "angle_error_rad": 0.0065437952542399275,
+          "joint_position_RMS_rad": 0.001909420684735337,
+          "COM_velocity_error_m_s": 0.011073815767303383,
+          "omega_error_rad_s": 0.2622673982266592,
+          "world_force_RMS_N": 0.0600788139587374,
+          "world_torque_RMS_Nm": 0.002051082108291438,
+          "model_linear_momentum_defect_RMS_Ns": 0.0004518507946986395,
+          "native_linear_momentum_defect_RMS_Ns": 1.4059320965878409e-09,
+          "model_angular_momentum_defect_RMS_Nms": 9.996168203936787e-06,
+          "native_angular_momentum_defect_RMS_Nms": 3.062977436609656e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0007440246008508527,
+          "angle_error_rad": 0.010313239012774032,
+          "joint_position_RMS_rad": 0.005514832641485592,
+          "COM_velocity_error_m_s": 0.026140731184145484,
+          "omega_error_rad_s": 0.4986366733649501,
+          "world_force_RMS_N": 0.059812245522643484,
+          "world_torque_RMS_Nm": 0.0017974728465807793,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005921571896160798,
+          "native_linear_momentum_defect_RMS_Ns": 5.593955896406528e-09,
+          "model_angular_momentum_defect_RMS_Nms": 9.795506533841137e-06,
+          "native_angular_momentum_defect_RMS_Nms": 1.084329074450602e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.0033937534466057613,
+          "angle_error_rad": 0.03706914000104832,
+          "joint_position_RMS_rad": 0.012970377140079398,
+          "COM_velocity_error_m_s": 0.06658633768456812,
+          "omega_error_rad_s": 1.6442961530363727,
+          "world_force_RMS_N": 0.06995019476667506,
+          "world_torque_RMS_Nm": 0.002402591126091538,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005552571936937465,
+          "native_linear_momentum_defect_RMS_Ns": 3.459362968160875e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.0209755311784163e-05,
+          "native_angular_momentum_defect_RMS_Nms": 6.855287848709462e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00012031574012968579,
+          "angle_error_rad": 0.0011912894234164476,
+          "joint_position_RMS_rad": 0.0012016163756529807,
+          "COM_velocity_error_m_s": 0.009691981325783682,
+          "omega_error_rad_s": 0.1613822805387699,
+          "world_force_RMS_N": 0.08590810940414854,
+          "world_torque_RMS_Nm": 0.002022662102491909,
+          "model_linear_momentum_defect_RMS_Ns": 0.0005566603730456563,
+          "native_linear_momentum_defect_RMS_Ns": 2.943878394679861e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.2779607726271007e-05,
+          "native_angular_momentum_defect_RMS_Nms": 5.808166082951989e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0004620274542361388,
+          "angle_error_rad": 0.007549215286561655,
+          "joint_position_RMS_rad": 0.003378655811242342,
+          "COM_velocity_error_m_s": 0.016801267754825554,
+          "omega_error_rad_s": 0.3811351898405254,
+          "world_force_RMS_N": 0.07445575293899312,
+          "world_torque_RMS_Nm": 0.002597498797907386,
+          "model_linear_momentum_defect_RMS_Ns": 0.00041107057454014076,
+          "native_linear_momentum_defect_RMS_Ns": 4.371951878892506e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.4307000830899818e-05,
+          "native_angular_momentum_defect_RMS_Nms": 8.65971579002059e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.002823440669362271,
+          "angle_error_rad": 0.056698737821690055,
+          "joint_position_RMS_rad": 0.008262155016505296,
+          "COM_velocity_error_m_s": 0.045409380046023656,
+          "omega_error_rad_s": 1.0399885465066119,
+          "world_force_RMS_N": 0.09233307086461115,
+          "world_torque_RMS_Nm": 0.0034075260385425664,
+          "model_linear_momentum_defect_RMS_Ns": 0.0006516645358791455,
+          "native_linear_momentum_defect_RMS_Ns": 4.8601914432721915e-08,
+          "model_angular_momentum_defect_RMS_Nms": 2.6536661415409372e-05,
+          "native_angular_momentum_defect_RMS_Nms": 9.634011284798679e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        }
+      ],
+      "contract": "No native integration or aid; playback of actual recorded CHECK controls, recursively predicted state55/warm26. State rotation uses world-left exponential, no joint clipping/teacher forcing. H1/H2/H5/H10 correspond20/40/100/200ms.",
+      "momentum_scope": "Predicted momentum change versus predicted mean contact wrench plus native gravity; native finite-solver/discrete-step defect reported as reference, not forced to zero. No native damping/gravcomp.",
+      "limitation": "Fixed recorded controls are not closed-loop reference tracking, policy evaluation, geometric contact qualification,2s holding or independently reconstructed ego validation."
+    },
+    "IMPULSE": {
+      "cases": 56,
+      "by_horizon": {
+        "1": {
+          "cases": 16,
+          "finite_cases": 16,
+          "failures": 0,
+          "COM_error_m_mean": 0.00020602488224222794,
+          "angle_error_rad_mean": 0.0034562154742463313,
+          "joint_position_RMS_rad_mean": 0.0011226633300926083,
+          "COM_velocity_error_m_s_mean": 0.006870511158368813,
+          "omega_error_rad_s_mean": 0.13096501962326834,
+          "world_force_RMS_N_mean": 0.04958237092181728,
+          "world_torque_RMS_Nm_mean": 0.0014344970009758026,
+          "model_linear_momentum_defect_RMS_Ns_mean": 9.506189508349186e-08,
+          "native_linear_momentum_defect_RMS_Ns_mean": 1.8512543978707718e-08,
+          "model_angular_momentum_defect_RMS_Nms_mean": 1.8188346414021997e-10,
+          "native_angular_momentum_defect_RMS_Nms_mean": 3.2571659684824656e-11,
+          "model_joint_limit_excursion_rad_mean": 8.098096109472597e-06
+        },
+        "2": {
+          "cases": 16,
+          "finite_cases": 16,
+          "failures": 0,
+          "COM_error_m_mean": 0.00042285345445386196,
+          "angle_error_rad_mean": 0.007311489870233634,
+          "joint_position_RMS_rad_mean": 0.0023929582983111134,
+          "COM_velocity_error_m_s_mean": 0.012432832953779501,
+          "omega_error_rad_s_mean": 0.21715642013645806,
+          "world_force_RMS_N_mean": 0.04870595796534069,
+          "world_torque_RMS_Nm_mean": 0.001515040829453149,
+          "model_linear_momentum_defect_RMS_Ns_mean": 1.0343954071419103e-07,
+          "native_linear_momentum_defect_RMS_Ns_mean": 1.9441109793506447e-08,
+          "model_angular_momentum_defect_RMS_Nms_mean": 1.979845804085804e-10,
+          "native_angular_momentum_defect_RMS_Nms_mean": 3.5761060046340945e-11,
+          "model_joint_limit_excursion_rad_mean": 2.279927215132621e-05
+        },
+        "5": {
+          "cases": 16,
+          "finite_cases": 16,
+          "failures": 0,
+          "COM_error_m_mean": 0.0015344553693791311,
+          "angle_error_rad_mean": 0.026490044268708754,
+          "joint_position_RMS_rad_mean": 0.006733107103294266,
+          "COM_velocity_error_m_s_mean": 0.032808667364357065,
+          "omega_error_rad_s_mean": 0.6397101839458447,
+          "world_force_RMS_N_mean": 0.05686314444376195,
+          "world_torque_RMS_Nm_mean": 0.0017350894623280612,
+          "model_linear_momentum_defect_RMS_Ns_mean": 1.2060356705132186e-07,
+          "native_linear_momentum_defect_RMS_Ns_mean": 3.7220640102671885e-08,
+          "model_angular_momentum_defect_RMS_Nms_mean": 2.2151491551915672e-10,
+          "native_angular_momentum_defect_RMS_Nms_mean": 6.964080900516367e-11,
+          "model_joint_limit_excursion_rad_mean": 8.478753610253326e-05
+        },
+        "10": {
+          "cases": 8,
+          "finite_cases": 8,
+          "failures": 0,
+          "COM_error_m_mean": 0.00393405398040373,
+          "angle_error_rad_mean": 0.06276524476995154,
+          "joint_position_RMS_rad_mean": 0.012069557058608554,
+          "COM_velocity_error_m_s_mean": 0.06402278482932874,
+          "omega_error_rad_s_mean": 1.2883074151028056,
+          "world_force_RMS_N_mean": 0.05991615084011963,
+          "world_torque_RMS_Nm_mean": 0.001834757549193576,
+          "model_linear_momentum_defect_RMS_Ns_mean": 1.3990103193830822e-07,
+          "native_linear_momentum_defect_RMS_Ns_mean": 4.6334984482122676e-08,
+          "model_angular_momentum_defect_RMS_Nms_mean": 2.3204106575445964e-10,
+          "native_angular_momentum_defect_RMS_Nms_mean": 8.770441500057222e-11,
+          "model_joint_limit_excursion_rad_mean": 0.0
+        }
+      },
+      "rows": [
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0002351413725051642,
+          "angle_error_rad": 0.0050229081235794205,
+          "joint_position_RMS_rad": 0.001882672465464367,
+          "COM_velocity_error_m_s": 0.006352511412431778,
+          "omega_error_rad_s": 0.16216992902895055,
+          "world_force_RMS_N": 0.045838823268651116,
+          "world_torque_RMS_Nm": 0.0017592063528859996,
+          "model_linear_momentum_defect_RMS_Ns": 1.4185902161190933e-07,
+          "native_linear_momentum_defect_RMS_Ns": 1.210206716873666e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.8758548245318934e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.6848093919909485e-11,
+          "model_joint_limit_excursion_rad": 8.694085113347683e-05
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00028438727360257927,
+          "angle_error_rad": 0.005644974757726799,
+          "joint_position_RMS_rad": 0.0032358881373837937,
+          "COM_velocity_error_m_s": 0.007055639478101639,
+          "omega_error_rad_s": 0.1305864307576039,
+          "world_force_RMS_N": 0.0335461642525414,
+          "world_torque_RMS_Nm": 0.0014219950801718502,
+          "model_linear_momentum_defect_RMS_Ns": 1.3508144365384547e-07,
+          "native_linear_momentum_defect_RMS_Ns": 8.572168751129865e-09,
+          "model_angular_momentum_defect_RMS_Nms": 2.0520936148439376e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.1928789283134461e-11,
+          "model_joint_limit_excursion_rad": 0.0002083887418393715
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0008826521825515983,
+          "angle_error_rad": 0.006665059491625708,
+          "joint_position_RMS_rad": 0.007264843975867715,
+          "COM_velocity_error_m_s": 0.00706493389486696,
+          "omega_error_rad_s": 0.11550622673918859,
+          "world_force_RMS_N": 0.02352251837532674,
+          "world_torque_RMS_Nm": 0.0009816361522375298,
+          "model_linear_momentum_defect_RMS_Ns": 1.160850914032632e-07,
+          "native_linear_momentum_defect_RMS_Ns": 5.508646995825346e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.9243319270656856e-10,
+          "native_angular_momentum_defect_RMS_Nms": 7.608242826650002e-12,
+          "model_joint_limit_excursion_rad": 0.0006853884958673007
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.0037169457678625046,
+          "angle_error_rad": 0.05573922595964984,
+          "joint_position_RMS_rad": 0.01293018629563397,
+          "COM_velocity_error_m_s": 0.054610151986989694,
+          "omega_error_rad_s": 0.9187602397904212,
+          "world_force_RMS_N": 0.05924330587597594,
+          "world_torque_RMS_Nm": 0.0016819414345844192,
+          "model_linear_momentum_defect_RMS_Ns": 1.112630424444648e-07,
+          "native_linear_momentum_defect_RMS_Ns": 8.320592770776854e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.7689944541709568e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.643994341655553e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 6.71865712197398e-05,
+          "angle_error_rad": 0.001209006745490272,
+          "joint_position_RMS_rad": 0.0007509228979224693,
+          "COM_velocity_error_m_s": 0.002848757869408283,
+          "omega_error_rad_s": 0.060419695953678555,
+          "world_force_RMS_N": 0.020559215820680626,
+          "world_torque_RMS_Nm": 0.0006693067373260899,
+          "model_linear_momentum_defect_RMS_Ns": 2.87899781254714e-08,
+          "native_linear_momentum_defect_RMS_Ns": 1.4989477100447993e-09,
+          "model_angular_momentum_defect_RMS_Nms": 8.157588630705303e-11,
+          "native_angular_momentum_defect_RMS_Nms": 2.2825187211023443e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00012571143218441096,
+          "angle_error_rad": 0.002370269115151733,
+          "joint_position_RMS_rad": 0.0015417343335318995,
+          "COM_velocity_error_m_s": 0.0074697712527177105,
+          "omega_error_rad_s": 0.08033649212746737,
+          "world_force_RMS_N": 0.030908835369935203,
+          "world_torque_RMS_Nm": 0.0006353393541871868,
+          "model_linear_momentum_defect_RMS_Ns": 2.7867749506565627e-08,
+          "native_linear_momentum_defect_RMS_Ns": 1.4852170057049719e-09,
+          "model_angular_momentum_defect_RMS_Nms": 7.184475987940511e-11,
+          "native_angular_momentum_defect_RMS_Nms": 2.6276500344981798e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0011074198126606464,
+          "angle_error_rad": 0.02105232059945575,
+          "joint_position_RMS_rad": 0.005007600012984742,
+          "COM_velocity_error_m_s": 0.035155780140400536,
+          "omega_error_rad_s": 0.42986393686795477,
+          "world_force_RMS_N": 0.059373051931995574,
+          "world_torque_RMS_Nm": 0.0013308585209435867,
+          "model_linear_momentum_defect_RMS_Ns": 2.70289861630104e-08,
+          "native_linear_momentum_defect_RMS_Ns": 1.1754193983296428e-07,
+          "model_angular_momentum_defect_RMS_Nms": 8.610423484845591e-11,
+          "native_angular_momentum_defect_RMS_Nms": 2.3237138926511636e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00022042216073146932,
+          "angle_error_rad": 0.0026211348881236816,
+          "joint_position_RMS_rad": 0.001492606810639299,
+          "COM_velocity_error_m_s": 0.0060908237741733075,
+          "omega_error_rad_s": 0.15401199789058606,
+          "world_force_RMS_N": 0.043952637309318976,
+          "world_torque_RMS_Nm": 0.001695123262778217,
+          "model_linear_momentum_defect_RMS_Ns": 1.0036855941839472e-07,
+          "native_linear_momentum_defect_RMS_Ns": 8.115544735895217e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.1913422559558086e-10,
+          "native_angular_momentum_defect_RMS_Nms": 7.259090839072722e-12,
+          "model_joint_limit_excursion_rad": 4.262868661808472e-05
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00032369108151955036,
+          "angle_error_rad": 0.0037282379295882464,
+          "joint_position_RMS_rad": 0.0026169649384605756,
+          "COM_velocity_error_m_s": 0.007935877686249423,
+          "omega_error_rad_s": 0.14375876029168197,
+          "world_force_RMS_N": 0.032498289604225725,
+          "world_torque_RMS_Nm": 0.0013453153856050094,
+          "model_linear_momentum_defect_RMS_Ns": 1.0131565463533525e-07,
+          "native_linear_momentum_defect_RMS_Ns": 5.7439724099888225e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.5485202710069828e-10,
+          "native_angular_momentum_defect_RMS_Nms": 5.136947234378784e-12,
+          "model_joint_limit_excursion_rad": 0.00015639961258184787
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.000994518886757537,
+          "angle_error_rad": 0.009492460900291783,
+          "joint_position_RMS_rad": 0.006595307277800105,
+          "COM_velocity_error_m_s": 0.008651547512393947,
+          "omega_error_rad_s": 0.16623646347688,
+          "world_force_RMS_N": 0.024102999644763794,
+          "world_torque_RMS_Nm": 0.0009568526391056234,
+          "model_linear_momentum_defect_RMS_Ns": 9.658170409027764e-08,
+          "native_linear_momentum_defect_RMS_Ns": 3.6664091231943525e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.6182002466054283e-10,
+          "native_angular_momentum_defect_RMS_Nms": 3.288661706934366e-12,
+          "model_joint_limit_excursion_rad": 0.0006712120817732314
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.004184023864900592,
+          "angle_error_rad": 0.06608199835561447,
+          "joint_position_RMS_rad": 0.012407973980726458,
+          "COM_velocity_error_m_s": 0.058881207560417884,
+          "omega_error_rad_s": 1.0119302223128448,
+          "world_force_RMS_N": 0.06165083120497995,
+          "world_torque_RMS_Nm": 0.0017396618908468782,
+          "model_linear_momentum_defect_RMS_Ns": 1.0082519404869282e-07,
+          "native_linear_momentum_defect_RMS_Ns": 1.9078082931632725e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.5856657888187874e-10,
+          "native_angular_momentum_defect_RMS_Nms": 3.72807336890615e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 5.701715563654749e-05,
+          "angle_error_rad": 0.0014132721737632635,
+          "joint_position_RMS_rad": 0.0007019200228024306,
+          "COM_velocity_error_m_s": 0.002621863794836373,
+          "omega_error_rad_s": 0.05132175082549944,
+          "world_force_RMS_N": 0.01892149870152935,
+          "world_torque_RMS_Nm": 0.0005674747417327717,
+          "model_linear_momentum_defect_RMS_Ns": 2.2184268474282812e-08,
+          "native_linear_momentum_defect_RMS_Ns": 7.572231616007934e-10,
+          "model_angular_momentum_defect_RMS_Nms": 7.230323325041783e-11,
+          "native_angular_momentum_defect_RMS_Nms": 1.186478635820826e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0001303729254532465,
+          "angle_error_rad": 0.0029363724296158173,
+          "joint_position_RMS_rad": 0.0014541367869441433,
+          "COM_velocity_error_m_s": 0.007519407324290203,
+          "omega_error_rad_s": 0.07694717642312225,
+          "world_force_RMS_N": 0.030614184333046936,
+          "world_torque_RMS_Nm": 0.0005826967748615378,
+          "model_linear_momentum_defect_RMS_Ns": 2.414317612956025e-08,
+          "native_linear_momentum_defect_RMS_Ns": 7.553772435846861e-10,
+          "model_angular_momentum_defect_RMS_Nms": 6.576131621857718e-11,
+          "native_angular_momentum_defect_RMS_Nms": 1.3575507637329596e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8200,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0011656153596739944,
+          "angle_error_rad": 0.023571641605461924,
+          "joint_position_RMS_rad": 0.005038696762307629,
+          "COM_velocity_error_m_s": 0.03568334880244275,
+          "omega_error_rad_s": 0.4607127026041539,
+          "world_force_RMS_N": 0.05887500101826265,
+          "world_torque_RMS_Nm": 0.0012811902371748223,
+          "model_linear_momentum_defect_RMS_Ns": 2.4504043188177838e-08,
+          "native_linear_momentum_defect_RMS_Ns": 2.6730206524340004e-08,
+          "model_angular_momentum_defect_RMS_Nms": 9.342476290098551e-11,
+          "native_angular_momentum_defect_RMS_Nms": 5.262025192800576e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0003419330794931649,
+          "angle_error_rad": 0.005231526147684688,
+          "joint_position_RMS_rad": 0.0012001681660173508,
+          "COM_velocity_error_m_s": 0.00895632249274446,
+          "omega_error_rad_s": 0.1888922825165652,
+          "world_force_RMS_N": 0.06463762917776675,
+          "world_torque_RMS_Nm": 0.0019810133595819074,
+          "model_linear_momentum_defect_RMS_Ns": 1.8699642478103136e-07,
+          "native_linear_momentum_defect_RMS_Ns": 4.3691191054900614e-08,
+          "model_angular_momentum_defect_RMS_Nms": 3.098087919437686e-10,
+          "native_angular_momentum_defect_RMS_Nms": 4.133696891766707e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0006681289917882076,
+          "angle_error_rad": 0.008794333035882567,
+          "joint_position_RMS_rad": 0.0027243402024821574,
+          "COM_velocity_error_m_s": 0.013444745783999209,
+          "omega_error_rad_s": 0.17168684756195363,
+          "world_force_RMS_N": 0.05347741686135769,
+          "world_torque_RMS_Nm": 0.0019021905963086485,
+          "model_linear_momentum_defect_RMS_Ns": 2.0868615508722496e-07,
+          "native_linear_momentum_defect_RMS_Ns": 3.0895431562770366e-08,
+          "model_angular_momentum_defect_RMS_Nms": 3.8685181999505036e-10,
+          "native_angular_momentum_defect_RMS_Nms": 2.92559444749766e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0014818287268272513,
+          "angle_error_rad": 0.021651021779227238,
+          "joint_position_RMS_rad": 0.006882112729976364,
+          "COM_velocity_error_m_s": 0.027272926596538568,
+          "omega_error_rad_s": 0.5880056218685837,
+          "world_force_RMS_N": 0.04502382858656842,
+          "world_torque_RMS_Nm": 0.0018136016091074658,
+          "model_linear_momentum_defect_RMS_Ns": 1.8265850567419426e-07,
+          "native_linear_momentum_defect_RMS_Ns": 1.95461393789002e-08,
+          "model_angular_momentum_defect_RMS_Nms": 3.4395178438837684e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.8557846639876386e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.004873534520347306,
+          "angle_error_rad": 0.0924017551783499,
+          "joint_position_RMS_rad": 0.012432207691893295,
+          "COM_velocity_error_m_s": 0.08875834200895187,
+          "omega_error_rad_s": 1.6884328080363575,
+          "world_force_RMS_N": 0.07852991910400363,
+          "world_torque_RMS_Nm": 0.0022855017120641556,
+          "model_linear_momentum_defect_RMS_Ns": 1.7706176120823035e-07,
+          "native_linear_momentum_defect_RMS_Ns": 4.180934558752777e-08,
+          "model_angular_momentum_defect_RMS_Nms": 3.0854583035992383e-10,
+          "native_angular_momentum_defect_RMS_Nms": 7.21534918931355e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0001885163130992446,
+          "angle_error_rad": 0.004150148052083711,
+          "joint_position_RMS_rad": 0.0007996112226028956,
+          "COM_velocity_error_m_s": 0.0063934736032651976,
+          "omega_error_rad_s": 0.13762695925277346,
+          "world_force_RMS_N": 0.04614025606135274,
+          "world_torque_RMS_Nm": 0.0015534036327306884,
+          "model_linear_momentum_defect_RMS_Ns": 4.7372541889500585e-08,
+          "native_linear_momentum_defect_RMS_Ns": 1.1661018554774317e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.153299433368231e-10,
+          "native_angular_momentum_defect_RMS_Nms": 2.1605089500729723e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00045675961994983094,
+          "angle_error_rad": 0.010883268000648889,
+          "joint_position_RMS_rad": 0.0024501874182571983,
+          "COM_velocity_error_m_s": 0.01476591344388408,
+          "omega_error_rad_s": 0.32775820161119645,
+          "world_force_RMS_N": 0.05384482542444636,
+          "world_torque_RMS_Nm": 0.0018751849381550044,
+          "model_linear_momentum_defect_RMS_Ns": 8.526619646366005e-08,
+          "native_linear_momentum_defect_RMS_Ns": 1.2810570624360056e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.5570310441951592e-10,
+          "native_angular_momentum_defect_RMS_Nms": 2.3787735079079504e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.002138551358722062,
+          "angle_error_rad": 0.04631996042226338,
+          "joint_position_RMS_rad": 0.010002507853724321,
+          "COM_velocity_error_m_s": 0.06234335656260984,
+          "omega_error_rad_s": 1.1333284163020803,
+          "world_force_RMS_N": 0.09894654173142306,
+          "world_torque_RMS_Nm": 0.0026575121367845367,
+          "model_linear_momentum_defect_RMS_Ns": 1.9060296755365177e-07,
+          "native_linear_momentum_defect_RMS_Ns": 5.5803146795635663e-08,
+          "model_angular_momentum_defect_RMS_Nms": 3.164316694935122e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.0033872190154891e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00035515862340029596,
+          "angle_error_rad": 0.005708445172441914,
+          "joint_position_RMS_rad": 0.0012508885570967226,
+          "COM_velocity_error_m_s": 0.010043930261459083,
+          "omega_error_rad_s": 0.21369628180834918,
+          "world_force_RMS_N": 0.0724861913755242,
+          "world_torque_RMS_Nm": 0.0022531017535602506,
+          "model_linear_momentum_defect_RMS_Ns": 1.8219152531239225e-07,
+          "native_linear_momentum_defect_RMS_Ns": 1.0924253067725107e-08,
+          "model_angular_momentum_defect_RMS_Nms": 3.0345201999986804e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.0336027434315375e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.000697810017042213,
+          "angle_error_rad": 0.00965268298505805,
+          "joint_position_RMS_rad": 0.0026876009198880993,
+          "COM_velocity_error_m_s": 0.01485795956008591,
+          "omega_error_rad_s": 0.20263741172376343,
+          "world_force_RMS_N": 0.059125256311469046,
+          "world_torque_RMS_Nm": 0.0020853141198237,
+          "model_linear_momentum_defect_RMS_Ns": 2.0162378935731715e-07,
+          "native_linear_momentum_defect_RMS_Ns": 7.72577587597105e-09,
+          "model_angular_momentum_defect_RMS_Nms": 3.720083923521832e-10,
+          "native_angular_momentum_defect_RMS_Nms": 7.338950992728907e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0015187385799047852,
+          "angle_error_rad": 0.02318117006850025,
+          "joint_position_RMS_rad": 0.006885162553235506,
+          "COM_velocity_error_m_s": 0.028383137300856887,
+          "omega_error_rad_s": 0.6039494830582617,
+          "world_force_RMS_N": 0.047073370646409596,
+          "world_torque_RMS_Nm": 0.0018763908191118622,
+          "model_linear_momentum_defect_RMS_Ns": 1.7499678633295905e-07,
+          "native_linear_momentum_defect_RMS_Ns": 4.892238441131199e-09,
+          "model_angular_momentum_defect_RMS_Nms": 3.2924547495462597e-10,
+          "native_angular_momentum_defect_RMS_Nms": 4.697748051897263e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.004998612134273683,
+          "angle_error_rad": 0.09557567241233889,
+          "joint_position_RMS_rad": 0.012698389247137159,
+          "COM_velocity_error_m_s": 0.09206560593709061,
+          "omega_error_rad_s": 1.682443430644461,
+          "world_force_RMS_N": 0.08068319907031912,
+          "world_torque_RMS_Nm": 0.002261092451818259,
+          "model_linear_momentum_defect_RMS_Ns": 1.7272108161797573e-07,
+          "native_linear_momentum_defect_RMS_Ns": 4.721424670481696e-09,
+          "model_angular_momentum_defect_RMS_Nms": 2.991213243587881e-10,
+          "native_angular_momentum_defect_RMS_Nms": 6.093262096199523e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0001955597585804918,
+          "angle_error_rad": 0.004538832180521891,
+          "joint_position_RMS_rad": 0.0007793826965408839,
+          "COM_velocity_error_m_s": 0.0073660168786601875,
+          "omega_error_rad_s": 0.14801022796612998,
+          "world_force_RMS_N": 0.05315951714470768,
+          "world_torque_RMS_Nm": 0.0016757187858813844,
+          "model_linear_momentum_defect_RMS_Ns": 4.0533459179657455e-08,
+          "native_linear_momentum_defect_RMS_Ns": 5.558786991046284e-10,
+          "model_angular_momentum_defect_RMS_Nms": 1.0255511210748685e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.1085003068335841e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.00048747274282897647,
+          "angle_error_rad": 0.011822885054634386,
+          "joint_position_RMS_rad": 0.0023732142690195447,
+          "COM_velocity_error_m_s": 0.016555459429048687,
+          "omega_error_rad_s": 0.34504793884239543,
+          "world_force_RMS_N": 0.060238311145225376,
+          "world_torque_RMS_Nm": 0.001979469043250046,
+          "model_linear_momentum_defect_RMS_Ns": 7.817034769289828e-08,
+          "native_linear_momentum_defect_RMS_Ns": 6.296527426495987e-10,
+          "model_angular_momentum_defect_RMS_Nms": 1.4299951755880305e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.208989134083752e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8201,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0022961584111354603,
+          "angle_error_rad": 0.04926320168120484,
+          "joint_position_RMS_rad": 0.009696441234642746,
+          "COM_velocity_error_m_s": 0.06767376881262256,
+          "omega_error_rad_s": 1.1464736606929895,
+          "world_force_RMS_N": 0.10596317847763483,
+          "world_torque_RMS_Nm": 0.002674874862836569,
+          "model_linear_momentum_defect_RMS_Ns": 1.8636578145033638e-07,
+          "native_linear_momentum_defect_RMS_Ns": 4.544194634166164e-09,
+          "model_angular_momentum_defect_RMS_Nms": 3.0990365178718375e-10,
+          "native_angular_momentum_defect_RMS_Nms": 7.2240465936245944e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00035743647222511907,
+          "angle_error_rad": 0.005948109263445673,
+          "joint_position_RMS_rad": 0.001598260338368356,
+          "COM_velocity_error_m_s": 0.007088196269704089,
+          "omega_error_rad_s": 0.09145544781025458,
+          "world_force_RMS_N": 0.051148008827111915,
+          "world_torque_RMS_Nm": 0.001037179528037717,
+          "model_linear_momentum_defect_RMS_Ns": 2.66018987729411e-07,
+          "native_linear_momentum_defect_RMS_Ns": 7.984170221371846e-09,
+          "model_angular_momentum_defect_RMS_Nms": 4.597248375101935e-10,
+          "native_angular_momentum_defect_RMS_Nms": 3.27760043613046e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0006694951425558961,
+          "angle_error_rad": 0.011450876098875157,
+          "joint_position_RMS_rad": 0.0030467116917810354,
+          "COM_velocity_error_m_s": 0.0073247866348092735,
+          "omega_error_rad_s": 0.2402857572926525,
+          "world_force_RMS_N": 0.04166684095658112,
+          "world_torque_RMS_Nm": 0.0014452548182806023,
+          "model_linear_momentum_defect_RMS_Ns": 2.2985155805267766e-07,
+          "native_linear_momentum_defect_RMS_Ns": 5.6478377099808364e-09,
+          "model_angular_momentum_defect_RMS_Nms": 3.8367611327325036e-10,
+          "native_angular_momentum_defect_RMS_Nms": 2.3179539447643994e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0017434799319503843,
+          "angle_error_rad": 0.028167764809785136,
+          "joint_position_RMS_rad": 0.006985637674047638,
+          "COM_velocity_error_m_s": 0.011614030133208178,
+          "omega_error_rad_s": 0.5326631677370427,
+          "world_force_RMS_N": 0.039390050277525124,
+          "world_torque_RMS_Nm": 0.0012868661348699394,
+          "model_linear_momentum_defect_RMS_Ns": 1.7951181143367015e-07,
+          "native_linear_momentum_defect_RMS_Ns": 3.577000351711138e-09,
+          "model_angular_momentum_defect_RMS_Nms": 2.869647754101436e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.466174426798937e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.0033635189011238208,
+          "angle_error_rad": 0.054548156699873646,
+          "joint_position_RMS_rad": 0.010459150703180478,
+          "COM_velocity_error_m_s": 0.027834265749327798,
+          "omega_error_rad_s": 0.719125418777529,
+          "world_force_RMS_N": 0.038228102914598425,
+          "world_torque_RMS_Nm": 0.001042469445180349,
+          "model_linear_momentum_defect_RMS_Ns": 1.4011687687471624e-07,
+          "native_linear_momentum_defect_RMS_Ns": 3.305000253798222e-08,
+          "model_angular_momentum_defect_RMS_Nms": 2.401453932089881e-10,
+          "native_angular_momentum_defect_RMS_Nms": 4.692360873809042e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00017276374155812178,
+          "angle_error_rad": 0.002099037785266048,
+          "joint_position_RMS_rad": 0.000759944726119606,
+          "COM_velocity_error_m_s": 0.006063671787678142,
+          "omega_error_rad_s": 0.042065568052770806,
+          "world_force_RMS_N": 0.04376206337687559,
+          "world_torque_RMS_Nm": 0.00047600273756847933,
+          "model_linear_momentum_defect_RMS_Ns": 5.5773490197402805e-08,
+          "native_linear_momentum_defect_RMS_Ns": 3.7725815240388517e-10,
+          "model_angular_momentum_defect_RMS_Nms": 1.8488651502402032e-10,
+          "native_angular_momentum_defect_RMS_Nms": 2.451550933417113e-13,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0003535087430279034,
+          "angle_error_rad": 0.005081018612811248,
+          "joint_position_RMS_rad": 0.0015789073651665429,
+          "COM_velocity_error_m_s": 0.014603478400713637,
+          "omega_error_rad_s": 0.059088356235777864,
+          "world_force_RMS_N": 0.05352693242042717,
+          "world_torque_RMS_Nm": 0.0003730872758493856,
+          "model_linear_momentum_defect_RMS_Ns": 6.89414040341456e-08,
+          "native_linear_momentum_defect_RMS_Ns": 4.783547164138518e-10,
+          "model_angular_momentum_defect_RMS_Nms": 2.1203836066884747e-10,
+          "native_angular_momentum_defect_RMS_Nms": 3.0006995679764893e-13,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0009331573857457456,
+          "angle_error_rad": 0.0163124098660241,
+          "joint_position_RMS_rad": 0.005432253408786762,
+          "COM_velocity_error_m_s": 0.02325411681571326,
+          "omega_error_rad_s": 0.1448524834874512,
+          "world_force_RMS_N": 0.04490610391842945,
+          "world_torque_RMS_Nm": 0.0005206742206868163,
+          "model_linear_momentum_defect_RMS_Ns": 7.242998446232594e-08,
+          "native_linear_momentum_defect_RMS_Ns": 4.660268666080445e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.5927213382405415e-10,
+          "native_angular_momentum_defect_RMS_Nms": 6.472003838866964e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0003666256609211859,
+          "angle_error_rad": 0.0061102775555219035,
+          "joint_position_RMS_rad": 0.0013489956537012546,
+          "COM_velocity_error_m_s": 0.004894462029700001,
+          "omega_error_rad_s": 0.06823645697952718,
+          "world_force_RMS_N": 0.035317047600460914,
+          "world_torque_RMS_Nm": 0.000771694848759987,
+          "model_linear_momentum_defect_RMS_Ns": 2.01574793998662e-07,
+          "native_linear_momentum_defect_RMS_Ns": 3.761233321631934e-09,
+          "model_angular_momentum_defect_RMS_Nms": 3.265088483476026e-10,
+          "native_angular_momentum_defect_RMS_Nms": 5.733828448996939e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0007225883965516776,
+          "angle_error_rad": 0.012175090508589465,
+          "joint_position_RMS_rad": 0.0028629320246669047,
+          "COM_velocity_error_m_s": 0.00660439595097761,
+          "omega_error_rad_s": 0.16067963959084436,
+          "world_force_RMS_N": 0.031318607228702694,
+          "world_torque_RMS_Nm": 0.0010557294651607077,
+          "model_linear_momentum_defect_RMS_Ns": 1.9325147548394885e-07,
+          "native_linear_momentum_defect_RMS_Ns": 2.6598942906701423e-09,
+          "model_angular_momentum_defect_RMS_Nms": 2.984345211605004e-10,
+          "native_angular_momentum_defect_RMS_Nms": 4.0559187508870935e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0017020494496506966,
+          "angle_error_rad": 0.02718374629426683,
+          "joint_position_RMS_rad": 0.00682167287024339,
+          "COM_velocity_error_m_s": 0.010644350281163718,
+          "omega_error_rad_s": 0.4722263660476476,
+          "world_force_RMS_N": 0.030759412285822515,
+          "world_torque_RMS_Nm": 0.0012055700205375211,
+          "model_linear_momentum_defect_RMS_Ns": 1.6738240746619675e-07,
+          "native_linear_momentum_defect_RMS_Ns": 1.6844140484471936e-09,
+          "model_angular_momentum_defect_RMS_Nms": 2.548200683069541e-10,
+          "native_angular_momentum_defect_RMS_Nms": 2.5677807718353837e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.0036253142084975943,
+          "angle_error_rad": 0.05855292932779462,
+          "joint_position_RMS_rad": 0.010834234469176576,
+          "COM_velocity_error_m_s": 0.02693946974452842,
+          "omega_error_rad_s": 0.8540880099233006,
+          "world_force_RMS_N": 0.034515625881997615,
+          "world_torque_RMS_Nm": 0.0011491506830254325,
+          "model_linear_momentum_defect_RMS_Ns": 1.3776364895337927e-07,
+          "native_linear_momentum_defect_RMS_Ns": 1.959220308969767e-09,
+          "model_angular_momentum_defect_RMS_Nms": 2.189585609268174e-10,
+          "native_angular_momentum_defect_RMS_Nms": 4.3073427720172425e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00017680151285275232,
+          "angle_error_rad": 0.001873399585234743,
+          "joint_position_RMS_rad": 0.0007601276740999196,
+          "COM_velocity_error_m_s": 0.005148731220929736,
+          "omega_error_rad_s": 0.05049242080319266,
+          "world_force_RMS_N": 0.03715905591699555,
+          "world_torque_RMS_Nm": 0.000571968741054261,
+          "model_linear_momentum_defect_RMS_Ns": 5.171027839166986e-08,
+          "native_linear_momentum_defect_RMS_Ns": 2.1516175196886455e-10,
+          "model_angular_momentum_defect_RMS_Nms": 1.6929084453441328e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.7360018615981082e-13,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0003444907635191276,
+          "angle_error_rad": 0.004325790525149786,
+          "joint_position_RMS_rad": 0.0015363250527877124,
+          "COM_velocity_error_m_s": 0.013395397308512774,
+          "omega_error_rad_s": 0.07186151800908315,
+          "world_force_RMS_N": 0.04967543216947239,
+          "world_torque_RMS_Nm": 0.00044926619638781555,
+          "model_linear_momentum_defect_RMS_Ns": 6.697897526821083e-08,
+          "native_linear_momentum_defect_RMS_Ns": 2.701195745520119e-10,
+          "model_angular_momentum_defect_RMS_Nms": 2.0204060780935508e-10,
+          "native_angular_momentum_defect_RMS_Nms": 2.022200495034356e-13,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8202,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0008624562892326959,
+          "angle_error_rad": 0.015402394145783637,
+          "joint_position_RMS_rad": 0.005108692138129453,
+          "COM_velocity_error_m_s": 0.01931879289111116,
+          "omega_error_rad_s": 0.19706349797401396,
+          "world_force_RMS_N": 0.04317985562249873,
+          "world_torque_RMS_Nm": 0.0005887114880484118,
+          "model_linear_momentum_defect_RMS_Ns": 7.121119135090653e-08,
+          "native_linear_momentum_defect_RMS_Ns": 2.1999631250438977e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.5579552208391862e-10,
+          "native_angular_momentum_defect_RMS_Nms": 5.523848786769136e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0001513237043439228,
+          "angle_error_rad": 0.0029171313166778045,
+          "joint_position_RMS_rad": 0.0010635869010170364,
+          "COM_velocity_error_m_s": 0.006642390865619628,
+          "omega_error_rad_s": 0.18749096960630332,
+          "world_force_RMS_N": 0.0479381885618026,
+          "world_torque_RMS_Nm": 0.002006842406220229,
+          "model_linear_momentum_defect_RMS_Ns": 7.902770797154526e-08,
+          "native_linear_momentum_defect_RMS_Ns": 7.011773784087185e-09,
+          "model_angular_momentum_defect_RMS_Nms": 9.17407782921119e-11,
+          "native_angular_momentum_defect_RMS_Nms": 8.635972213142793e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.000245334288281567,
+          "angle_error_rad": 0.005395738494697812,
+          "joint_position_RMS_rad": 0.0019263432651746343,
+          "COM_velocity_error_m_s": 0.014757337197276846,
+          "omega_error_rad_s": 0.27107959354067923,
+          "world_force_RMS_N": 0.05462331506666911,
+          "world_torque_RMS_Nm": 0.0019186061456940202,
+          "model_linear_momentum_defect_RMS_Ns": 8.554255274558327e-08,
+          "native_linear_momentum_defect_RMS_Ns": 5.142840234086204e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.168007583781148e-10,
+          "native_angular_momentum_defect_RMS_Nms": 7.759577414778586e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0006834856164988045,
+          "angle_error_rad": 0.006390480070181121,
+          "joint_position_RMS_rad": 0.005583446992108066,
+          "COM_velocity_error_m_s": 0.03649008584241495,
+          "omega_error_rad_s": 0.6139325112026423,
+          "world_force_RMS_N": 0.05505300887062456,
+          "world_torque_RMS_Nm": 0.001750567903802338,
+          "model_linear_momentum_defect_RMS_Ns": 9.45448027687174e-08,
+          "native_linear_momentum_defect_RMS_Ns": 3.688944165850495e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.4529201245582777e-10,
+          "native_angular_momentum_defect_RMS_Nms": 7.202127632166333e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.0029965572234478925,
+          "angle_error_rad": 0.03108068183300042,
+          "joint_position_RMS_rad": 0.012555720722576477,
+          "COM_velocity_error_m_s": 0.07760836433145209,
+          "omega_error_rad_s": 1.623214578236571,
+          "world_force_RMS_N": 0.05998210324839361,
+          "world_torque_RMS_Nm": 0.0021802344305864715,
+          "model_linear_momentum_defect_RMS_Ns": 1.39394976559433e-07,
+          "native_linear_momentum_defect_RMS_Ns": 1.5226224243100998e-07,
+          "model_angular_momentum_defect_RMS_Nms": 2.2797103327831503e-10,
+          "native_angular_momentum_defect_RMS_Nms": 3.0192456816342357e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.0001414572963223721,
+          "angle_error_rad": 0.0017263961317473947,
+          "joint_position_RMS_rad": 0.0013015222144553984,
+          "COM_velocity_error_m_s": 0.010389796805181113,
+          "omega_error_rad_s": 0.16292856391395127,
+          "world_force_RMS_N": 0.07497983094758232,
+          "world_torque_RMS_Nm": 0.001829770283780389,
+          "model_linear_momentum_defect_RMS_Ns": 2.6294259850517e-08,
+          "native_linear_momentum_defect_RMS_Ns": 1.668727919243765e-07,
+          "model_angular_momentum_defect_RMS_Nms": 1.4271621024857144e-10,
+          "native_angular_momentum_defect_RMS_Nms": 3.3030858317709946e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.000518382192016581,
+          "angle_error_rad": 0.00855977622119901,
+          "joint_position_RMS_rad": 0.00303523618047449,
+          "COM_velocity_error_m_s": 0.017169172720045665,
+          "omega_error_rad_s": 0.43174521980366765,
+          "world_force_RMS_N": 0.06340475959440536,
+          "world_torque_RMS_Nm": 0.00248669168791581,
+          "model_linear_momentum_defect_RMS_Ns": 3.947231356474142e-08,
+          "native_linear_momentum_defect_RMS_Ns": 1.9464460663065182e-07,
+          "model_angular_momentum_defect_RMS_Nms": 1.3781079452240402e-10,
+          "native_angular_momentum_defect_RMS_Nms": 3.8578590435958723e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.0003125,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.003009425807625068,
+          "angle_error_rad": 0.05944447396886436,
+          "joint_position_RMS_rad": 0.007296442552504381,
+          "COM_velocity_error_m_s": 0.054264195222121926,
+          "omega_error_rad_s": 1.451321219065987,
+          "world_force_RMS_N": 0.08499270559024324,
+          "world_torque_RMS_Nm": 0.003468913187982132,
+          "model_linear_momentum_defect_RMS_Ns": 1.3015556149134464e-07,
+          "native_linear_momentum_defect_RMS_Ns": 2.121479437429528e-07,
+          "model_angular_momentum_defect_RMS_Nms": 2.764694340450201e-10,
+          "native_angular_momentum_defect_RMS_Nms": 4.208679430395456e-10,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00012356372156772688,
+          "angle_error_rad": 0.002521528697512414,
+          "joint_position_RMS_rad": 0.0010838309967505248,
+          "COM_velocity_error_m_s": 0.0074965159565859715,
+          "omega_error_rad_s": 0.1992577588124168,
+          "world_force_RMS_N": 0.0541024117571992,
+          "world_torque_RMS_Nm": 0.0021371185882810453,
+          "model_linear_momentum_defect_RMS_Ns": 6.816113956269378e-08,
+          "native_linear_momentum_defect_RMS_Ns": 1.728323103199393e-09,
+          "model_angular_momentum_defect_RMS_Nms": 8.45730149227325e-11,
+          "native_angular_momentum_defect_RMS_Nms": 2.673562922834977e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0001905188610552882,
+          "angle_error_rad": 0.00433415230774984,
+          "joint_position_RMS_rad": 0.001958900259326339,
+          "COM_velocity_error_m_s": 0.015972721733158293,
+          "omega_error_rad_s": 0.29253782767408804,
+          "world_force_RMS_N": 0.05915627069328139,
+          "world_torque_RMS_Nm": 0.002029503221830847,
+          "model_linear_momentum_defect_RMS_Ns": 7.551820168372194e-08,
+          "native_linear_momentum_defect_RMS_Ns": 1.4059320965878409e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.0317387098196268e-10,
+          "native_angular_momentum_defect_RMS_Nms": 3.062977436609656e-12,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0007600258466086608,
+          "angle_error_rad": 0.004053553943506318,
+          "joint_position_RMS_rad": 0.005480983537009117,
+          "COM_velocity_error_m_s": 0.03775993422848095,
+          "omega_error_rad_s": 0.6546913499371803,
+          "world_force_RMS_N": 0.05654487261853836,
+          "world_torque_RMS_Nm": 0.0018098846703592075,
+          "model_linear_momentum_defect_RMS_Ns": 8.793191785964735e-08,
+          "native_linear_momentum_defect_RMS_Ns": 5.593955896406528e-09,
+          "model_angular_momentum_defect_RMS_Nms": 1.386602405510238e-10,
+          "native_angular_momentum_defect_RMS_Nms": 1.084329074450602e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 2,
+          "horizon": 10,
+          "failure": null,
+          "executed_predictions": 10,
+          "COM_error_m": 0.003713925222776455,
+          "angle_error_rad": 0.048141538392990464,
+          "joint_position_RMS_rad": 0.012238593358544027,
+          "COM_velocity_error_m_s": 0.08548487131587154,
+          "omega_error_rad_s": 1.808464613100959,
+          "world_force_RMS_N": 0.06649611942068864,
+          "world_torque_RMS_Nm": 0.002338008345442643,
+          "model_linear_momentum_defect_RMS_Ns": 1.4006167379957354e-07,
+          "native_linear_momentum_defect_RMS_Ns": 3.459362968160875e-08,
+          "model_angular_momentum_defect_RMS_Nms": 2.261203596038702e-10,
+          "native_angular_momentum_defect_RMS_Nms": 6.855287848709462e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 1,
+          "failure": null,
+          "executed_predictions": 1,
+          "COM_error_m": 0.00014549097141832793,
+          "angle_error_rad": 0.0022082937688464787,
+          "joint_position_RMS_rad": 0.0011881719378832169,
+          "COM_velocity_error_m_s": 0.011530713511523648,
+          "omega_error_rad_s": 0.1773640027513446,
+          "world_force_RMS_N": 0.083215558901517,
+          "world_torque_RMS_Nm": 0.0019670262554334255,
+          "model_linear_momentum_defect_RMS_Ns": 2.2133884841328208e-08,
+          "native_linear_momentum_defect_RMS_Ns": 2.943878394679861e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.5894968236968637e-10,
+          "native_angular_momentum_defect_RMS_Nms": 5.808166082951989e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 2,
+          "failure": null,
+          "executed_predictions": 2,
+          "COM_error_m": 0.0005470027998847361,
+          "angle_error_rad": 0.00982837184635934,
+          "joint_position_RMS_rad": 0.003257909927632744,
+          "COM_velocity_error_m_s": 0.019493263356601075,
+          "omega_error_rad_s": 0.4684655506973517,
+          "world_force_RMS_N": 0.07166988601366411,
+          "world_torque_RMS_Nm": 0.0026550091677682145,
+          "model_linear_momentum_defect_RMS_Ns": 3.3321658067619754e-08,
+          "native_linear_momentum_defect_RMS_Ns": 4.371951878892506e-08,
+          "model_angular_momentum_defect_RMS_Nms": 1.585479607342245e-10,
+          "native_angular_momentum_defect_RMS_Nms": 8.65971579002059e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        },
+        {
+          "seed": 8203,
+          "dt": 0.00015625,
+          "start": 7,
+          "horizon": 5,
+          "failure": null,
+          "executed_predictions": 5,
+          "COM_error_m": 0.0032717222645207078,
+          "angle_error_rad": 0.0656890486528977,
+          "joint_position_RMS_rad": 0.007647912079340316,
+          "COM_velocity_error_m_s": 0.05936437279276685,
+          "omega_error_rad_s": 1.5245358360714565,
+          "world_force_RMS_N": 0.09210381150412442,
+          "world_torque_RMS_Nm": 0.003557326793660619,
+          "model_linear_momentum_defect_RMS_Ns": 1.2766553013247022e-07,
+          "native_linear_momentum_defect_RMS_Ns": 4.8601914432721915e-08,
+          "model_angular_momentum_defect_RMS_Nms": 2.9364966588931394e-10,
+          "native_angular_momentum_defect_RMS_Nms": 9.634011284798679e-11,
+          "model_joint_limit_excursion_rad": 0.0
+        }
+      ],
+      "contract": "No native integration or aid; playback of actual recorded CHECK controls, recursively predicted state55/warm26. State rotation uses world-left exponential, no joint clipping/teacher forcing. H1/H2/H5/H10 correspond20/40/100/200ms.",
+      "momentum_scope": "Predicted momentum change versus predicted mean contact wrench plus native gravity; native finite-solver/discrete-step defect reported as reference, not forced to zero. No native damping/gravcomp.",
+      "limitation": "Fixed recorded controls are not closed-loop reference tracking, policy evaluation, geometric contact qualification,2s holding or independently reconstructed ego validation."
+    }
+  },
+  "logs": {
+    "DIRECT": [
+      [
+        0.3972287964821079,
+        0.3671620579850077,
+        0.3006673849710025
+      ],
+      [
+        0.4719913094099545,
+        0.45817429855629016,
+        0.13817010853664308
+      ],
+      [
+        0.23733202612025853,
+        0.22626352817364917,
+        0.11068497946609364
+      ],
+      [
+        0.24929954343656066,
+        0.2351387219653942,
+        0.14160821471166463
+      ],
+      [
+        0.2655954495392489,
+        0.24696209320635,
+        0.18633356332898945
+      ],
+      [
+        0.22310958284190818,
+        0.2125257881080012,
+        0.1058379473390696
+      ],
+      [
+        0.17248189202376463,
+        0.1618783864742765,
+        0.10603505549488125
+      ],
+      [
+        0.14371958686445088,
+        0.1368115507448993,
+        0.0690803611955158
+      ],
+      [
+        0.13551047101580038,
+        0.12971538598714077,
+        0.05795085028659615
+      ],
+      [
+        0.15102321053035547,
+        0.1423446527480671,
+        0.08678557782288385
+      ],
+      [
+        0.1575695536471202,
+        0.14506882586647557,
+        0.1250072778064461
+      ],
+      [
+        0.13023586197622533,
+        0.11984372922741249,
+        0.10392132748812828
+      ],
+      [
+        0.10313144254028242,
+        0.09792749127220168,
+        0.05203951268080731
+      ],
+      [
+        0.09871719512548403,
+        0.09332111512824186,
+        0.053960799972421813
+      ],
+      [
+        0.09338719969480455,
+        0.08861823390336787,
+        0.04768965791436678
+      ],
+      [
+        0.09794212020170678,
+        0.09348464067723765,
+        0.04457479524469132
+      ],
+      [
+        0.09338344576125042,
+        0.08735932341841186,
+        0.060241223428385594
+      ],
+      [
+        0.0753983237698107,
+        0.07026082772250648,
+        0.051374960473042165
+      ],
+      [
+        0.07463812528136056,
+        0.07083997313885344,
+        0.03798152142507112
+      ],
+      [
+        0.07765192870428296,
+        0.07272149453598514,
+        0.04930434168297816
+      ],
+      [
+        0.07174487807090245,
+        0.06628734335027645,
+        0.05457534720626009
+      ],
+      [
+        0.0688847734550193,
+        0.0663375720704195,
+        0.025472013845997933
+      ],
+      [
+        0.0631258301667468,
+        0.058709468889343,
+        0.04416361277403802
+      ],
+      [
+        0.059770005956677884,
+        0.055325457932882745,
+        0.04444548023795136
+      ],
+      [
+        0.05788023229306128,
+        0.053415674821963334,
+        0.04464557471097944
+      ],
+      [
+        0.05232786706722595,
+        0.04905514157112785,
+        0.032727254960980945
+      ],
+      [
+        0.050303486669941104,
+        0.047565394388035726,
+        0.027380922819053757
+      ],
+      [
+        0.058404789143864724,
+        0.0559843308476235,
+        0.02420458296241229
+      ],
+      [
+        0.04655645880803669,
+        0.04410702104763382,
+        0.02449437760402874
+      ],
+      [
+        0.04858342214911905,
+        0.0463307582591157,
+        0.022526638900033525
+      ],
+      [
+        0.051117239700177966,
+        0.04678366777568063,
+        0.04333571924497332
+      ],
+      [
+        0.044325725951919887,
+        0.04180696592205039,
+        0.025187600298694962
+      ],
+      [
+        0.04114722699703568,
+        0.03902167529021213,
+        0.021255517068235447
+      ],
+      [
+        0.03564559853791168,
+        0.03384568678723876,
+        0.017999117506729237
+      ],
+      [
+        0.03917483775403361,
+        0.03700921567680372,
+        0.021656220772298913
+      ],
+      [
+        0.03456668852537974,
+        0.03230847651815449,
+        0.022582120072252538
+      ],
+      [
+        0.03698824858014745,
+        0.03455906264594317,
+        0.02429185934204286
+      ],
+      [
+        0.04176501699501499,
+        0.04023145134056311,
+        0.015335656544518803
+      ],
+      [
+        0.03962418019444369,
+        0.03789402557771622,
+        0.017301546167274758
+      ],
+      [
+        0.03972225810732282,
+        0.038005936887992905,
+        0.01716321219329918
+      ],
+      [
+        0.03864455740108897,
+        0.03689615885245894,
+        0.017483985486300264
+      ],
+      [
+        0.034959456495188085,
+        0.032025064022309535,
+        0.029343924728785498
+      ],
+      [
+        0.04245868973987154,
+        0.03977435079855627,
+        0.026843389413152674
+      ],
+      [
+        0.0272716145483604,
+        0.026004407937958884,
+        0.012672066104015126
+      ],
+      [
+        0.036760379168673134,
+        0.035062806034116545,
+        0.016975731345565886
+      ],
+      [
+        0.031940212818318714,
+        0.030065126398612387,
+        0.018750864197063268
+      ],
+      [
+        0.023826655333393874,
+        0.02293375294741726,
+        0.008929023859766141
+      ],
+      [
+        0.02666633118351353,
+        0.025621944670595753,
+        0.010443865129177743
+      ],
+      [
+        0.02976363907520272,
+        0.027692523396650657,
+        0.02071115678552065
+      ],
+      [
+        0.029255947209682682,
+        0.027710991745229115,
+        0.015449554644535669
+      ],
+      [
+        0.027009646081636085,
+        0.02586195781780033,
+        0.01147688263835758
+      ],
+      [
+        0.02513643693322186,
+        0.023887909762191805,
+        0.01248527171030055
+      ],
+      [
+        0.023711473889651398,
+        0.02255161983445798,
+        0.011598540551934173
+      ],
+      [
+        0.026081300770853282,
+        0.024836567970421306,
+        0.01244732800431976
+      ],
+      [
+        0.024952435732063353,
+        0.023892428749646137,
+        0.010600069824172161
+      ],
+      [
+        0.02090276877473639,
+        0.019883176869577177,
+        0.010195919051592114
+      ],
+      [
+        0.029162620717154978,
+        0.027592598000675542,
+        0.01570022716479436
+      ],
+      [
+        0.023575253962681314,
+        0.02201587872341029,
+        0.015593752392710263
+      ],
+      [
+        0.021502929348879082,
+        0.020439193419168923,
+        0.010637359297101582
+      ],
+      [
+        0.022061593136694386,
+        0.021041456567927688,
+        0.010201365687666972
+      ],
+      [
+        0.02621822226957441,
+        0.02524231988027839,
+        0.009759023892960208
+      ],
+      [
+        0.02214086514645807,
+        0.0211401502018033,
+        0.010007149446547696
+      ],
+      [
+        0.025289679064334655,
+        0.02417497090347542,
+        0.011147081608592341
+      ],
+      [
+        0.02249288775496973,
+        0.02160780360090951,
+        0.008850841540602157
+      ],
+      [
+        0.01982435415135935,
+        0.01914213108241345,
+        0.006822230689459004
+      ],
+      [
+        0.026063274337301486,
+        0.02482337177031037,
+        0.012399025669911135
+      ],
+      [
+        0.021001039464140083,
+        0.02029567801161325,
+        0.007053614525268334
+      ],
+      [
+        0.019832891821790828,
+        0.01879772774996598,
+        0.010351640718248505
+      ],
+      [
+        0.019780315847138456,
+        0.01867223885437695,
+        0.011080769927615093
+      ],
+      [
+        0.02465085932005979,
+        0.023584958729643373,
+        0.010659005904164154
+      ],
+      [
+        0.02491013734371171,
+        0.023994609603461288,
+        0.009155277402504245
+      ],
+      [
+        0.019259515787355273,
+        0.018703100294900115,
+        0.00556415492455158
+      ],
+      [
+        0.015735791435880345,
+        0.014971177266633696,
+        0.007646141692466475
+      ],
+      [
+        0.02202111841295986,
+        0.021329410614230326,
+        0.0069170779872953295
+      ],
+      [
+        0.019918410392721964,
+        0.018821446130626508,
+        0.010969642620954548
+      ],
+      [
+        0.025671135016945974,
+        0.023236617666033486,
+        0.02434517350912488
+      ],
+      [
+        0.018199403864213003,
+        0.01743641583042225,
+        0.007629880337907542
+      ],
+      [
+        0.015979019676269,
+        0.015328050209091948,
+        0.006509694671770519
+      ],
+      [
+        0.022141792829820817,
+        0.021222647022265863,
+        0.009191458075549514
+      ],
+      [
+        0.02603004291967707,
+        0.024986436472871718,
+        0.010436064468053532
+      ],
+      [
+        0.01713391379623477,
+        0.016341119107899354,
+        0.007927946883354159
+      ],
+      [
+        0.017556900707635187,
+        0.016910866054936805,
+        0.006460346526983825
+      ],
+      [
+        0.02016141030672816,
+        0.018752308822499793,
+        0.014091014842283676
+      ],
+      [
+        0.019103729321828224,
+        0.01807004379166167,
+        0.010336855301665542
+      ],
+      [
+        0.02151757709513016,
+        0.020423522370919253,
+        0.010940547242109086
+      ],
+      [
+        0.02421740307895364,
+        0.023166143390169567,
+        0.01051259688784072
+      ],
+      [
+        0.016100218507075194,
+        0.015608678579040424,
+        0.004915399280347682
+      ],
+      [
+        0.017451938919224017,
+        0.016772843837789618,
+        0.006790950814343968
+      ],
+      [
+        0.021353686663313907,
+        0.020741330562615592,
+        0.00612356100698315
+      ],
+      [
+        0.01967082560130381,
+        0.018825432186928174,
+        0.008453934143756375
+      ],
+      [
+        0.016566227689898946,
+        0.015908903595743745,
+        0.00657324094155202
+      ],
+      [
+        0.020988485912134303,
+        0.02026996764246034,
+        0.007185182696739623
+      ],
+      [
+        0.01862357423253464,
+        0.017523323851804905,
+        0.011002503807297382
+      ],
+      [
+        0.021379429454507326,
+        0.020898659333012055,
+        0.004807701214952714
+      ],
+      [
+        0.016315409108880654,
+        0.015784582279777123,
+        0.005308268291035307
+      ],
+      [
+        0.021415832561239447,
+        0.020547626330649927,
+        0.008682062305895213
+      ],
+      [
+        0.023771159157068573,
+        0.022377936654801235,
+        0.013932225022673383
+      ],
+      [
+        0.01840370636711205,
+        0.017858785142279145,
+        0.0054492122483290615
+      ],
+      [
+        0.018651342875592652,
+        0.01816426827578313,
+        0.004870745998095227
+      ],
+      [
+        0.023934938715142576,
+        0.02324790664166742,
+        0.006870320734751556
+      ]
+    ],
+    "IMPULSE": [
+      [
+        0.46276722333442805,
+        0.3455504656052148,
+        1.1721675772921323
+      ],
+      [
+        0.5965889742595405,
+        0.4765228123106603,
+        1.200661619488802
+      ],
+      [
+        0.3288119377491211,
+        0.22045468220376338,
+        1.083572555453577
+      ],
+      [
+        0.2756058389962946,
+        0.22994771976793313,
+        0.4565811922836147
+      ],
+      [
+        0.3162026078347171,
+        0.238377550031576,
+        0.7782505780314111
+      ],
+      [
+        0.2145106808687678,
+        0.2096290860024919,
+        0.048815948662758936
+      ],
+      [
+        0.17362916793692396,
+        0.15926944476805097,
+        0.14359723168872982
+      ],
+      [
+        0.2106104824308866,
+        0.1415761623514099,
+        0.6903432007947666
+      ],
+      [
+        0.18694956242745792,
+        0.13270331989318862,
+        0.5424624253426931
+      ],
+      [
+        0.14509367861501832,
+        0.13914118439313292,
+        0.059524942218854085
+      ],
+      [
+        0.18299152368157826,
+        0.14459314964765155,
+        0.3839837403392671
+      ],
+      [
+        0.1328475316563464,
+        0.11410612216586297,
+        0.18741409490483457
+      ],
+      [
+        0.10146476425138597,
+        0.09644049407768661,
+        0.05024270173699359
+      ],
+      [
+        0.10486028977361328,
+        0.09355516677519521,
+        0.11305122998418071
+      ],
+      [
+        0.09661932367642291,
+        0.09115795354506205,
+        0.05461370131360863
+      ],
+      [
+        0.09936270356794027,
+        0.09505032817585829,
+        0.043123753920819796
+      ],
+      [
+        0.09520889966570174,
+        0.0876961126380423,
+        0.07512787027659443
+      ],
+      [
+        0.07161058401559289,
+        0.06658176714545035,
+        0.05028816870142544
+      ],
+      [
+        0.07287655295675015,
+        0.06898723625102188,
+        0.0388931670572827
+      ],
+      [
+        0.08117781553527527,
+        0.07261296053069513,
+        0.08564855004580137
+      ],
+      [
+        0.07188803086646499,
+        0.06632267973910222,
+        0.055653511273627665
+      ],
+      [
+        0.07962315236476203,
+        0.06948888675037546,
+        0.10134265614386574
+      ],
+      [
+        0.06720599576026029,
+        0.05795975753978602,
+        0.09246238220474264
+      ],
+      [
+        0.05993056049985892,
+        0.054194451558183726,
+        0.05736108941675192
+      ],
+      [
+        0.05878219184263374,
+        0.05229576905488474,
+        0.06486422787748994
+      ],
+      [
+        0.050517399038586444,
+        0.04807093198724254,
+        0.02446467051343903
+      ],
+      [
+        0.05096432930425464,
+        0.048452373396988116,
+        0.025119559072665214
+      ],
+      [
+        0.06507568371956365,
+        0.05777305996363043,
+        0.07302623755933228
+      ],
+      [
+        0.04918746553263312,
+        0.04526195745438567,
+        0.039255080782474416
+      ],
+      [
+        0.05152054862789347,
+        0.04860992507113417,
+        0.029106235567593022
+      ],
+      [
+        0.053021100279328916,
+        0.04602677987013004,
+        0.06994320409198872
+      ],
+      [
+        0.05382012244589431,
+        0.04148227237441279,
+        0.12337850071481517
+      ],
+      [
+        0.040902845963655676,
+        0.039047985397763815,
+        0.018548605658918613
+      ],
+      [
+        0.03651259536860678,
+        0.03381493342812969,
+        0.026976619404770908
+      ],
+      [
+        0.042120162132986985,
+        0.03871411724386972,
+        0.03406044889117266
+      ],
+      [
+        0.034872481886327855,
+        0.03266962031843548,
+        0.022028615678923714
+      ],
+      [
+        0.039468690514892185,
+        0.03491839999074499,
+        0.04550290524147199
+      ],
+      [
+        0.04474999258795699,
+        0.041834872733314425,
+        0.029151198546425637
+      ],
+      [
+        0.042248762441280625,
+        0.04013845934253206,
+        0.021103030987485675
+      ],
+      [
+        0.03969821972027968,
+        0.03789200172671886,
+        0.018062179935608248
+      ],
+      [
+        0.04163239404454896,
+        0.037882258295807936,
+        0.03750135748741025
+      ],
+      [
+        0.03340262652249722,
+        0.030624638540934154,
+        0.027779879815630643
+      ],
+      [
+        0.041548814808821485,
+        0.039381749286044765,
+        0.021670655227767205
+      ],
+      [
+        0.027571548757352918,
+        0.02557400482553288,
+        0.01997543931820039
+      ],
+      [
+        0.03828116523763478,
+        0.03551846369036384,
+        0.027627015472709328
+      ],
+      [
+        0.03414340572488707,
+        0.03151861401847265,
+        0.026247917064144245
+      ],
+      [
+        0.02414732505430485,
+        0.022975373776751205,
+        0.011719512775536428
+      ],
+      [
+        0.027399152432274733,
+        0.02545739188441768,
+        0.01941760547857051
+      ],
+      [
+        0.029515039183584803,
+        0.026498062526383426,
+        0.030169766572013777
+      ],
+      [
+        0.031184670569743812,
+        0.027514248660128204,
+        0.0367042190961561
+      ],
+      [
+        0.027436449769766516,
+        0.026171329625003206,
+        0.012651201447633107
+      ],
+      [
+        0.027049848322245613,
+        0.024801391175618998,
+        0.022484571466266173
+      ],
+      [
+        0.02605962865158767,
+        0.023692846589309535,
+        0.02366782062278134
+      ],
+      [
+        0.026529596692981376,
+        0.02481568344849066,
+        0.017139132444907158
+      ],
+      [
+        0.026333478872057538,
+        0.02347659395509627,
+        0.028568849169612696
+      ],
+      [
+        0.022887987346911068,
+        0.019899328331400595,
+        0.029886590155104743
+      ],
+      [
+        0.03129895067299927,
+        0.02728837054767914,
+        0.04010580125320135
+      ],
+      [
+        0.02584786092538003,
+        0.02191476754871745,
+        0.03933093376662578
+      ],
+      [
+        0.022572678325133922,
+        0.0205948971408198,
+        0.01977781184314122
+      ],
+      [
+        0.024149958804055932,
+        0.02125168207935022,
+        0.028982767247057117
+      ],
+      [
+        0.02651814617902346,
+        0.025414856891074138,
+        0.011032892879493219
+      ],
+      [
+        0.023436230613911768,
+        0.021843034286286037,
+        0.015931963276257316
+      ],
+      [
+        0.03128182232942229,
+        0.026567566492435576,
+        0.04714255836986712
+      ],
+      [
+        0.02277611374451676,
+        0.02149131372456427,
+        0.012848000199524909
+      ],
+      [
+        0.020511577655315763,
+        0.018884091359848656,
+        0.016274862954671083
+      ],
+      [
+        0.027849455009173046,
+        0.02541708278278862,
+        0.024323722263844265
+      ],
+      [
+        0.022576505871185357,
+        0.02010145976147331,
+        0.02475046109712048
+      ],
+      [
+        0.024606823710930432,
+        0.020496666952427894,
+        0.04110156758502538
+      ],
+      [
+        0.020702784549905442,
+        0.019245773643518385,
+        0.014570109063870563
+      ],
+      [
+        0.02526387772751058,
+        0.023275876662142807,
+        0.01988001065367774
+      ],
+      [
+        0.024958180155520676,
+        0.023342290240610988,
+        0.01615889914909687
+      ],
+      [
+        0.019434043085690585,
+        0.018762068266547714,
+        0.006719748191428694
+      ],
+      [
+        0.021738583184194946,
+        0.016579485898743293,
+        0.051590972854516526
+      ],
+      [
+        0.021964293275989036,
+        0.02123638766156502,
+        0.007279056144240144
+      ],
+      [
+        0.020167782376576435,
+        0.01861456388112046,
+        0.015532184954559769
+      ],
+      [
+        0.024316906151039545,
+        0.02123389654434539,
+        0.030830096066941544
+      ],
+      [
+        0.018112792711035393,
+        0.01729693749219103,
+        0.008158552188443642
+      ],
+      [
+        0.016138881452041044,
+        0.015364369269572301,
+        0.007745121824687438
+      ],
+      [
+        0.0229663213674969,
+        0.021951998587019007,
+        0.010143227804778915
+      ],
+      [
+        0.02887900779221295,
+        0.027218642777437855,
+        0.016603650147750948
+      ],
+      [
+        0.017461404208795744,
+        0.016077301117700483,
+        0.013841030910952599
+      ],
+      [
+        0.01804360630444828,
+        0.017282482045145663,
+        0.007611242593026153
+      ],
+      [
+        0.022763748878340997,
+        0.020118607124123267,
+        0.026451417542177315
+      ],
+      [
+        0.02089533706227819,
+        0.018741030546386758,
+        0.021543065158914302
+      ],
+      [
+        0.023694894932903245,
+        0.0216210807045819,
+        0.02073814228321344
+      ],
+      [
+        0.02928775738476069,
+        0.023532771720282328,
+        0.057549856644783626
+      ],
+      [
+        0.01633971630031519,
+        0.01568670337278472,
+        0.006530129275304699
+      ],
+      [
+        0.018487961902505876,
+        0.01782939425999541,
+        0.006585676425104684
+      ],
+      [
+        0.02177009216706406,
+        0.020764198114098013,
+        0.010058940529660443
+      ],
+      [
+        0.020118808187508382,
+        0.019074301000978164,
+        0.0104450718653022
+      ],
+      [
+        0.017200564642950354,
+        0.016543443015566983,
+        0.006571216273833714
+      ],
+      [
+        0.022331673603048947,
+        0.021154124051406833,
+        0.011775495516421139
+      ],
+      [
+        0.023956559331082566,
+        0.020909223942487235,
+        0.03047335388595331
+      ],
+      [
+        0.021822250366767763,
+        0.02106718241627221,
+        0.007550679504955533
+      ],
+      [
+        0.016113658510851312,
+        0.015453702521894833,
+        0.006599559889564786
+      ],
+      [
+        0.025111606011592475,
+        0.02190635364100044,
+        0.032052523705920356
+      ],
+      [
+        0.023494562043340286,
+        0.02181404547355474,
+        0.016805165697855454
+      ],
+      [
+        0.018228555547247793,
+        0.017657013956735742,
+        0.005715415905120523
+      ],
+      [
+        0.01905846419115058,
+        0.018301117575969167,
+        0.007573466151814106
+      ],
+      [
+        0.024361398723423255,
+        0.02308862122960129,
+        0.012727774938219638
+      ]
+    ]
+  },
+  "update": 100,
+  "planned_updates": 2000,
+  "remaining_updates": 1900,
+  "remaining_two_arm_compute_estimate_s": 12.542888116836547,
+  "regular99_update_wall_s": 0.6982194999873172,
+  "first_update_verification_wall_s": 2.384996399981901,
+  "extra_clone_updates": 2,
+  "CUDA_ms_per_two_arm_update": [
+    8.247072219848633,
+    8.37657642364502,
+    7.05452823638916,
+    7.477952003479004,
+    10.808671951293945,
+    7.671167850494385,
+    6.88483190536499,
+    7.243231773376465,
+    6.715231895446777,
+    7.686304092407227,
+    7.7129597663879395,
+    8.74300765991211,
+    8.378591537475586,
+    8.22326374053955,
+    7.974592208862305,
+    8.027039527893066,
+    8.087679862976074,
+    7.976672172546387,
+    7.8664960861206055,
+    8.638848304748535,
+    8.368864059448242,
+    8.335455894470215,
+    8.441696166992188,
+    7.026815891265869,
+    8.026111602783203,
+    6.814655780792236,
+    6.422976016998291,
+    6.591455936431885,
+    6.3351359367370605,
+    6.703519821166992,
+    6.775008201599121,
+    6.622560024261475,
+    6.943999767303467,
+    6.458623886108398,
+    6.717728137969971,
+    6.25984001159668,
+    6.835936069488525,
+    7.584799766540527,
+    6.931039810180664,
+    6.703167915344238,
+    6.725599765777588,
+    6.614687919616699,
+    6.577216148376465,
+    8.120800018310547,
+    6.480095863342285,
+    6.492159843444824,
+    6.7696638107299805,
+    6.529632091522217,
+    6.639840126037598,
+    6.780767917633057,
+    6.597536087036133,
+    6.258880138397217,
+    6.661183834075928,
+    6.429279804229736,
+    6.4585280418396,
+    6.531968116760254,
+    6.191199779510498,
+    6.7126078605651855,
+    6.423583984375,
+    6.3124799728393555,
+    6.275968074798584,
+    6.2906880378723145,
+    6.961184024810791,
+    6.762080192565918,
+    7.239168167114258,
+    6.552351951599121,
+    6.196800231933594,
+    6.2093119621276855,
+    6.5447678565979,
+    7.120607852935791,
+    6.273632049560547,
+    7.177472114562988,
+    6.444416046142578,
+    6.735519886016846,
+    6.605504035949707,
+    6.519231796264648,
+    7.751008033752441,
+    7.283904075622559,
+    7.209856033325195,
+    7.060544013977051,
+    6.629983901977539,
+    6.662271976470947,
+    6.24505615234375,
+    7.7111358642578125,
+    6.465824127197266,
+    6.466911792755127,
+    6.812064170837402,
+    6.924255847930908,
+    6.980991840362549,
+    6.410496234893799,
+    7.1539201736450195,
+    6.43503999710083,
+    6.914815902709961,
+    6.631936073303223,
+    6.366144180297852,
+    7.566463947296143,
+    6.423007965087891,
+    6.394495964050293,
+    6.88483190536499
+  ],
+  "GPU_telemetry": {
+    "samples": [
+      {
+        "start": 139632.5960984,
+        "end": 139632.6600852,
+        "values": [
+          0.0,
+          1993.0,
+          32607.0
+        ]
+      },
+      {
+        "start": 139632.8744004,
+        "end": 139632.9251414,
+        "values": [
+          18.0,
+          1993.0,
+          32607.0
+        ]
+      },
+      {
+        "start": 139633.1396216,
+        "end": 139633.1918632,
+        "values": [
+          18.0,
+          1993.0,
+          32607.0
+        ]
+      }
+    ],
+    "errors": [],
+    "scope": "Device-wide query windows overlapping99 regular two-arm updates, excludes first-update restore checks and later diagnostics.",
+    "GPU_utilization_median_percent": 18.0,
+    "GPU_utilization_max_percent": 18.0,
+    "VRAM_used_max_MiB": 1993.0,
+    "VRAM_total_MiB": 32607.0
+  },
+  "peak_Torch_allocated_bytes": 128745472,
+  "peak_Torch_reserved_bytes": 150994944,
+  "training_running": false,
+  "pause_goal_requested": true,
+  "scope": "New representation and auxiliary-target matched experiment; same external chart, not legacy checkpoint resume, Actor/A1A2, geometry/contact truth, holding or RGB benefit. Decoder consistency by construction does not prove correct physical actions.",
+  "estimate_scope": "Conditional remaining1900 paired updates from last50 CUDA-event median, excludes startup/save/diagnostics/data/native/retry costs; no background continuation."
+}
