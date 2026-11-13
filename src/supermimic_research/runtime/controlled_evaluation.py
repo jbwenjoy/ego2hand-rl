@@ -42,7 +42,7 @@ def summarize_trace(z, reference, dt, complete, config):
         warning_count=None, warning_scope='Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0.')
 
 
-def evaluate_case(task, controller, saved, config, config_dir, registry, folder, *, initializer=None, constant_action=None):
+def evaluate_case(task, controller, saved, config, config_dir, registry, folder, *, initializer=None, constant_action=None, action_provider=None):
     import torch
     import mujoco
     import mujoco_warp as mjwarp
@@ -50,6 +50,8 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
     from mjlab.managers import TerminationTermCfg, SceneEntityCfg
     from dex_supermimic.tasks.dex_reorient.config.task import make_env_cfg
     from dex_supermimic.rl.dex_supermimic.networks import Actor
+    if constant_action is not None and action_provider is not None:
+        raise ValueError('Choose one explicit controller source')
     seed = config['seed']
     random.seed(seed); np.random.seed(seed); torch.manual_seed(seed)
     folder.mkdir()
@@ -82,7 +84,7 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
         observation = env.reset()[0]['policy']  # The only reset in this case.
         initialization_receipt=None
         if initializer is not None:
-            if task!='hand2-pen-spin' or constant_action is None:raise ValueError('Declared constant-residual pen diagnostic only')
+            if task!='hand2-pen-spin' or (constant_action is None and action_provider is None):raise ValueError('Declared explicit-controller pen diagnostic only')
             initialization_receipt=initializer(env)
             env.observation_manager.reset()
             observation=env.observation_manager.compute(update_history=True)['policy']
@@ -133,12 +135,12 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
             reference = dict(time_s=np.array([0., config['cube_duration_s']]),
                 COM_world_m=np.tile(center, (2, 1)), quaternion_wxyz=np.tile(command.goal_quat_w[0].cpu().numpy(), (2, 1)))
         actor=None
-        if constant_action is None:
+        if constant_action is None and action_provider is None:
             actor = Actor(saved['modules']['actor']['net.0.weight'].shape[1]).cuda().eval()
             actor.load_state_dict(saved['modules']['actor'], strict=True)
             if observation.shape[1] != actor.net[0].weight.shape[1]:
                 raise ValueError('Saved Actor observation width mismatch')
-        elif np.asarray(constant_action).shape!=(20,) or not np.isfinite(constant_action).all() or np.any(abs(constant_action)>1):
+        elif constant_action is not None and (np.asarray(constant_action).shape!=(20,) or not np.isfinite(constant_action).all() or np.any(abs(constant_action)>1)):
             raise ValueError('Explicit bounded constant action20')
         trace = {k: [] for k in ['pre_qpos', 'pre_qvel', 'post_qpos', 'post_qvel', 'post_ctrl',
             'post_qfrc_applied', 'post_xfrc_applied', 'post_COM', 'post_quaternion_wxyz',
@@ -200,7 +202,12 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
                 before_phase = int(command.time_steps[0]) if task == 'hand2-pen-spin' else k+1
                 if task == 'hand2-pen-spin' and before_phase != k+1:
                     raise ValueError('Unexpected reference clock resampling')
-                action = torch.as_tensor(constant_action,dtype=torch.float32,device='cuda:0')[None] if constant_action is not None else torch.zeros((1, 20), device='cuda:0') if controller == 'ZERO' else actor(observation)
+                if action_provider is not None:
+                    action=action_provider(env,observation,k)
+                    if action.shape!=(1,20) or not action.is_cuda or not bool(torch.isfinite(action).all()) or bool((action.abs()>1).any()):
+                        raise ValueError('Explicit finite bounded CUDA action1x20')
+                else:
+                    action = torch.as_tensor(constant_action,dtype=torch.float32,device='cuda:0')[None] if constant_action is not None else torch.zeros((1, 20), device='cuda:0') if controller == 'ZERO' else actor(observation)
                 observations.append(observation[0].cpu().numpy().copy())
                 action_rows.append(action[0].cpu().numpy())
                 obs, reward, terminated, truncated, _ = env.step(action)
@@ -239,7 +246,8 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
             host_model_scope='Compiled host topology plus separate actual GPU physical tables; host binary alone is not a GPU replay checkpoint.',
             model_layout=dict(nq=m.nq, nv=m.nv, nu=m.nu, object_qposadr=qa, object_dofadr=da,
                               object_body=body, COM_BODY=com_body.tolist()),
-            scope=('Actual original GPU plant, declared constant action; one reset and explicit pre-start initialization, stop first native terminal, no Actor inference or fitting.' if constant_action is not None else
+            scope=('Actual original GPU plant, explicit action provider; one reset and declared pre-start initialization, stop first native terminal, no Actor inference or fitting.' if action_provider is not None else
+                   'Actual original GPU plant, declared constant action; one reset and explicit pre-start initialization, stop first native terminal, no Actor inference or fitting.' if constant_action is not None else
                    'Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization.'))
         write(folder/'report.json', result)
         return result

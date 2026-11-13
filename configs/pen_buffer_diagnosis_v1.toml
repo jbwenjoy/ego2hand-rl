@@ -1,0 +1,11 @@
+schema = 1
+source = "../runs/pen_step_repeatability_v3/report.json"
+proposal = "../runs/pen_gpu_support_search_v1/report.json"
+gates = "pen_gpu_step_audit_v1.toml"
+dt = [0.005, 0.0025]
+anchors_s = [0.0, 0.02, 0.04]
+modes = ["REUSE_DATA", "FRESH_DATA"]
+nworld = 128
+repeats = 3
+horizon_controls = 5
+detailed_duration_s = 0.06

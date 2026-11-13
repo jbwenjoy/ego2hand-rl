@@ -1,0 +1,630 @@
+{
+  "schema": "pen_numerical_quality_probe:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\pen_numerical_quality_probe_v1.toml",
+    "bytes": 379,
+    "sha256": "68040d69c137f1233539913c07789f3fa4973c381cd15f24201b29f779359c6e"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_action_envelope_v1\\report.json",
+    "bytes": 173837,
+    "sha256": "7ff48a836facf5a01c5feab87889dcf8b0a0e106bbdf1844718efa6d97ed5f76"
+  },
+  "EFC_review": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_action_envelope_review_v1\\EFC\\report.json",
+    "bytes": 20137,
+    "sha256": "81dfa71a5cc0973bde8cde24a5615222438c2d29caf5c68be5151f5d288d9f70"
+  },
+  "model_source": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_step_repeatability_v3\\report.json",
+    "bytes": 54442,
+    "sha256": "e529998dd1df4f2ee35559495e0c4b376efcfed264ae2e88ccf108b7a03d23bb"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\probe_pen_numerical_quality.py",
+      "bytes": 8402,
+      "sha256": "aa82e7ae084cd354d6ba092791a32887e985dafabdc23f4ddc85017102095cc0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\gpu_pen_rollout.py",
+      "bytes": 5775,
+      "sha256": "61d56d194dad867c32aa67b739ce76bf927883fdd75d6e96c0afb68c5b65b521"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\gpu_contact_oracle.py",
+      "bytes": 5647,
+      "sha256": "77db104b132e52fccc54f94ed79b8a04241b00706040e7e4536c47141f9398fc"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\gpu_model_snapshot.py",
+      "bytes": 2390,
+      "sha256": "e172a1c12e10d063fecbfd63a7812b4c9544a2d05de94b6d8969a4390d8b8c88"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\audit_gpu_contact_oracle.py",
+      "bytes": 12332,
+      "sha256": "4b599dc36916d273528f85ba585da6cdc59bd823523c1cb784fa66336fb02a56"
+    }
+  ],
+  "neural_updates": 0,
+  "cases": [
+    {
+      "dt": 0.005,
+      "source_name": "D4_PLUS",
+      "source_tick": 23,
+      "variant": "DEFAULT",
+      "repeat": 0,
+      "maximum_impulse_residual_N_s": 6.655971396070751e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 2.0586442136161245e-11,
+      "maximum_force_balance_N": 0.00013311946133760322,
+      "maximum_EFC_identity_error_N": 4.5321235598097427e-08,
+      "solver_iterations": [
+        2,
+        2
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_DEFAULT_0\\state.npz",
+        "bytes": 13106,
+        "sha256": "71555c47c4e98276af5b8e316091eab7dbd35f6e1c17d29b7869bfaa5a027a0f"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_DEFAULT_0\\contacts.npz",
+        "bytes": 9103,
+        "sha256": "aa7de1871fc57f9068ae2e4993638c9d71e866e60f2546d28362c9ccb3a875b8"
+      }
+    },
+    {
+      "dt": 0.005,
+      "source_name": "D4_PLUS",
+      "source_tick": 23,
+      "variant": "DEFAULT",
+      "repeat": 1,
+      "maximum_impulse_residual_N_s": 6.655971396070751e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 2.0203689990717553e-11,
+      "maximum_force_balance_N": 0.00013311946133760322,
+      "maximum_EFC_identity_error_N": 4.5321235598097427e-08,
+      "solver_iterations": [
+        2,
+        2
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_DEFAULT_1\\state.npz",
+        "bytes": 13893,
+        "sha256": "0ea209ee55bceabd5fdb7d903305f2a775835b88ce850672780b749cee17c9de"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_DEFAULT_1\\contacts.npz",
+        "bytes": 9105,
+        "sha256": "196ebec7dd92c02b4427031e650d6caf743fd37ec947f453dca1d30069e9f2da"
+      }
+    },
+    {
+      "dt": 0.005,
+      "source_name": "D4_PLUS",
+      "source_tick": 23,
+      "variant": "DEFAULT",
+      "repeat": 2,
+      "maximum_impulse_residual_N_s": 6.655971396070751e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 2.802894098383172e-11,
+      "maximum_force_balance_N": 0.00013311946133760322,
+      "maximum_EFC_identity_error_N": 4.5321235598097427e-08,
+      "solver_iterations": [
+        2,
+        2
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_DEFAULT_2\\state.npz",
+        "bytes": 12468,
+        "sha256": "4cf286926acf84a8d22f6fb985437fdc5199997303830ad07a3e1100dde9ae98"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_DEFAULT_2\\contacts.npz",
+        "bytes": 8654,
+        "sha256": "a5877ac6b9921d3232eb4ae4c29401de2b07497282c2d30828093e46a5b2b40b"
+      }
+    },
+    {
+      "dt": 0.005,
+      "source_name": "D4_PLUS",
+      "source_tick": 23,
+      "variant": "ITER50",
+      "repeat": 0,
+      "maximum_impulse_residual_N_s": 6.656101748289723e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 2.0203689990717553e-11,
+      "maximum_force_balance_N": 0.00013312255225249054,
+      "maximum_EFC_identity_error_N": 4.5321235598097427e-08,
+      "solver_iterations": [
+        2,
+        2
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_ITER50_0\\state.npz",
+        "bytes": 12574,
+        "sha256": "2d462dd1cdeb10b3c4d0baadc4eeee2861f7ced53d756000dfff96946e633f01"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_ITER50_0\\contacts.npz",
+        "bytes": 8650,
+        "sha256": "bab4b030f172eddb7c0adecce2e6c5e24545fb2ef2b0f72191925d1e98f69ebe"
+      }
+    },
+    {
+      "dt": 0.005,
+      "source_name": "D4_PLUS",
+      "source_tick": 23,
+      "variant": "ITER50",
+      "repeat": 1,
+      "maximum_impulse_residual_N_s": 6.655971396070751e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 2.7030824912471164e-11,
+      "maximum_force_balance_N": 0.00013311946133760322,
+      "maximum_EFC_identity_error_N": 4.5321235598097427e-08,
+      "solver_iterations": [
+        2,
+        2
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_ITER50_1\\state.npz",
+        "bytes": 13659,
+        "sha256": "dafc6fedb3a781fc2ed9514c1fee864d3fa524e0676fd5a0610985fce1344ffd"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_ITER50_1\\contacts.npz",
+        "bytes": 9026,
+        "sha256": "1175bbaf1fccb671277ab4c4c72069d7f4fd69760ac4530ff347873e694e94d2"
+      }
+    },
+    {
+      "dt": 0.005,
+      "source_name": "D4_PLUS",
+      "source_tick": 23,
+      "variant": "ITER50",
+      "repeat": 2,
+      "maximum_impulse_residual_N_s": 6.655971396070751e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 2.68686153257718e-11,
+      "maximum_force_balance_N": 0.00013311946133760322,
+      "maximum_EFC_identity_error_N": 4.5321235598097427e-08,
+      "solver_iterations": [
+        2,
+        2
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_ITER50_2\\state.npz",
+        "bytes": 13822,
+        "sha256": "17145f489f490d05a5df289be2dc9f822436e04a329092c83196764867c5778a"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_ITER50_2\\contacts.npz",
+        "bytes": 9000,
+        "sha256": "f6c2c425754b8013bce13596a8c258bacf033f3bf5bef8915118c35e6b516a9b"
+      }
+    },
+    {
+      "dt": 0.005,
+      "source_name": "D4_PLUS",
+      "source_tick": 23,
+      "variant": "TIGHT",
+      "repeat": 0,
+      "maximum_impulse_residual_N_s": 6.655678653569625e-07,
+      "passed_worlds": 105,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 2.7089962349771016e-11,
+      "maximum_force_balance_N": 0.00013311197650989548,
+      "maximum_EFC_identity_error_N": 5.046430370953904e-08,
+      "solver_iterations": [
+        3,
+        4
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_TIGHT_0\\state.npz",
+        "bytes": 13321,
+        "sha256": "2cd49cbd6ce1fe915f665f94865d33034ad32a730ff76ed3a932456e774ef743"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_TIGHT_0\\contacts.npz",
+        "bytes": 9260,
+        "sha256": "c845d84e3b6500de00567bb4bfc7612e5251fece8770ba03b2b4fa66ebc5df35"
+      }
+    },
+    {
+      "dt": 0.005,
+      "source_name": "D4_PLUS",
+      "source_tick": 23,
+      "variant": "TIGHT",
+      "repeat": 1,
+      "maximum_impulse_residual_N_s": 6.655678653569625e-07,
+      "passed_worlds": 106,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 3.0108809792736415e-11,
+      "maximum_force_balance_N": 0.00013311197650989548,
+      "maximum_EFC_identity_error_N": 6.383641805751528e-08,
+      "solver_iterations": [
+        3,
+        4
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_TIGHT_1\\state.npz",
+        "bytes": 13547,
+        "sha256": "62648397461cea8bb267ec58ef29fa3fbcd155edd13d3ad11d8a55bbf877248e"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_TIGHT_1\\contacts.npz",
+        "bytes": 9179,
+        "sha256": "7843dc6db2bd2df1565b6238e1b2f12f2dbd7d970ec3370e887e4c09edfe5519"
+      }
+    },
+    {
+      "dt": 0.005,
+      "source_name": "D4_PLUS",
+      "source_tick": 23,
+      "variant": "TIGHT",
+      "repeat": 2,
+      "maximum_impulse_residual_N_s": 6.655678653569625e-07,
+      "passed_worlds": 113,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 2.7089962349771016e-11,
+      "maximum_force_balance_N": 0.00013311197650989548,
+      "maximum_EFC_identity_error_N": 6.278435055932876e-08,
+      "solver_iterations": [
+        3,
+        4
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_TIGHT_2\\state.npz",
+        "bytes": 13083,
+        "sha256": "d771e52d02f819c7ac7e0d9d242c8c06e0ef87b17f387143d9f250488a2f54e0"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.005_23_TIGHT_2\\contacts.npz",
+        "bytes": 9087,
+        "sha256": "2f1e8051c44cbf8af25677d5dc6463d933974f959dc33b0a9a31101c6e5a9a64"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "source_name": "D4_PLUS",
+      "source_tick": 21,
+      "variant": "DEFAULT",
+      "repeat": 0,
+      "maximum_impulse_residual_N_s": 9.840728604253368e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 1.9040023524670562e-11,
+      "maximum_force_balance_N": 0.0003936315206681305,
+      "maximum_EFC_identity_error_N": 6.999057457596669e-08,
+      "solver_iterations": [
+        1,
+        1
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_DEFAULT_0\\state.npz",
+        "bytes": 11185,
+        "sha256": "8a26f3002b805895e38e21200af4ae867277e88ae3529f9b31ee01474791b7cd"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_DEFAULT_0\\contacts.npz",
+        "bytes": 8111,
+        "sha256": "5a21704c1b4eba0d979f2c6f9568ccb8fa68547fdd72cec63285446391537790"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "source_name": "D4_PLUS",
+      "source_tick": 21,
+      "variant": "DEFAULT",
+      "repeat": 1,
+      "maximum_impulse_residual_N_s": 9.840728604253368e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 1.9040023524670562e-11,
+      "maximum_force_balance_N": 0.0003936315206681305,
+      "maximum_EFC_identity_error_N": 6.999057457596669e-08,
+      "solver_iterations": [
+        1,
+        1
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_DEFAULT_1\\state.npz",
+        "bytes": 11066,
+        "sha256": "b86391f0b2d1cd5425553193b47507a10f2e0ce2b1517cba0d23903f07e0013e"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_DEFAULT_1\\contacts.npz",
+        "bytes": 8084,
+        "sha256": "776853183b3c18821b340128d4be12d2edb36c9e2d900d6feab488d49f1276d4"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "source_name": "D4_PLUS",
+      "source_tick": 21,
+      "variant": "DEFAULT",
+      "repeat": 2,
+      "maximum_impulse_residual_N_s": 9.840728604253368e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 1.9040023524670562e-11,
+      "maximum_force_balance_N": 0.0003936315206681305,
+      "maximum_EFC_identity_error_N": 6.999057458324477e-08,
+      "solver_iterations": [
+        1,
+        1
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_DEFAULT_2\\state.npz",
+        "bytes": 11511,
+        "sha256": "0479bd4530b2bb8b71507e7fe4c6c6b51d638f2f44fd5774abd6cbca2ad0aae4"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_DEFAULT_2\\contacts.npz",
+        "bytes": 8305,
+        "sha256": "68e67ef066478ec1c48cce3d1cd40655a0a6209d692f70e214108d092fe95b24"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "source_name": "D4_PLUS",
+      "source_tick": 21,
+      "variant": "ITER50",
+      "repeat": 0,
+      "maximum_impulse_residual_N_s": 9.840728604253368e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 1.9040023524670562e-11,
+      "maximum_force_balance_N": 0.0003936315206681305,
+      "maximum_EFC_identity_error_N": 3.933013709932012e-08,
+      "solver_iterations": [
+        1,
+        1
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_ITER50_0\\state.npz",
+        "bytes": 10600,
+        "sha256": "4e5ed584b55214575c3b032674a464bac839fe8e1296359d241b7f54696d7482"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_ITER50_0\\contacts.npz",
+        "bytes": 7767,
+        "sha256": "faf01f8e02264a0f6d1f21640010f0ad8a2832eca71273721a641e8e49e3b256"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "source_name": "D4_PLUS",
+      "source_tick": 21,
+      "variant": "ITER50",
+      "repeat": 1,
+      "maximum_impulse_residual_N_s": 9.840728604253368e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 1.9040023524670562e-11,
+      "maximum_force_balance_N": 0.0003936315206681305,
+      "maximum_EFC_identity_error_N": 5.2175538979533406e-08,
+      "solver_iterations": [
+        1,
+        1
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_ITER50_1\\state.npz",
+        "bytes": 10934,
+        "sha256": "5bdcef60363c9ca0fb8ddd354622067a404b04ba209916c6a8f8b4abcce5151b"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_ITER50_1\\contacts.npz",
+        "bytes": 7820,
+        "sha256": "81214622e58eeabbb2cb1b64eaaaa37eb15805955dd26dbaf3bbe61361fe7626"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "source_name": "D4_PLUS",
+      "source_tick": 21,
+      "variant": "ITER50",
+      "repeat": 2,
+      "maximum_impulse_residual_N_s": 9.840728604253368e-07,
+      "passed_worlds": 0,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 1.524185544895354e-11,
+      "maximum_force_balance_N": 0.0003936315206681305,
+      "maximum_EFC_identity_error_N": 3.827557766564011e-08,
+      "solver_iterations": [
+        1,
+        1
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_ITER50_2\\state.npz",
+        "bytes": 10274,
+        "sha256": "a1df9cbc3254179fe9779bbcfd22794bd3fc8f46b2827448e79b72b1363b9162"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_ITER50_2\\contacts.npz",
+        "bytes": 7677,
+        "sha256": "c81f4aba976ccd65c1e6f2f160230cabd81b1bb1af57099ecbcd246a15119769"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "source_name": "D4_PLUS",
+      "source_tick": 21,
+      "variant": "TIGHT",
+      "repeat": 0,
+      "maximum_impulse_residual_N_s": 2.373092705405242e-10,
+      "passed_worlds": 128,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 1.3713230473135312e-11,
+      "maximum_force_balance_N": 9.276314273063243e-08,
+      "maximum_EFC_identity_error_N": 8.146981588306078e-08,
+      "solver_iterations": [
+        2,
+        2
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_TIGHT_0\\state.npz",
+        "bytes": 11870,
+        "sha256": "1885e2ae478a7e650ac73739e3da1f715e534a7db1d08db7c15bc68202b73a3a"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_TIGHT_0\\contacts.npz",
+        "bytes": 8438,
+        "sha256": "6123232a13fe8a84d9ce2873e8849ee1a9dff60cfe9c7dc10f7bb73d56288cfe"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "source_name": "D4_PLUS",
+      "source_tick": 21,
+      "variant": "TIGHT",
+      "repeat": 1,
+      "maximum_impulse_residual_N_s": 2.4782207649470246e-10,
+      "passed_worlds": 128,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 1.3713230473135312e-11,
+      "maximum_force_balance_N": 9.99973725285304e-08,
+      "maximum_EFC_identity_error_N": 5.982519693736069e-08,
+      "solver_iterations": [
+        2,
+        2
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_TIGHT_1\\state.npz",
+        "bytes": 11301,
+        "sha256": "dd33be2a2fc95a8a66c4d6c78f78de4b73c36e6ac699f6341caea225453f0ddf"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_TIGHT_1\\contacts.npz",
+        "bytes": 8326,
+        "sha256": "c8df2a579b8c8752139dae575551e2c6254310a311692f653e1f61c31117c558"
+      }
+    },
+    {
+      "dt": 0.0025,
+      "source_name": "D4_PLUS",
+      "source_tick": 21,
+      "variant": "TIGHT",
+      "repeat": 2,
+      "maximum_impulse_residual_N_s": 2.4782207649470246e-10,
+      "passed_worlds": 128,
+      "total_worlds": 128,
+      "maximum_integration_roundoff_N_s": 1.3713230473135312e-11,
+      "maximum_force_balance_N": 9.99973725285304e-08,
+      "maximum_EFC_identity_error_N": 8.146981590313414e-08,
+      "solver_iterations": [
+        2,
+        2
+      ],
+      "checks": {
+        "EFC_force_identity": true,
+        "capacity": true,
+        "finite": true
+      },
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_TIGHT_2\\state.npz",
+        "bytes": 12062,
+        "sha256": "bf4d8efc5e208d2bab4256484bd236e0a74b20fbf033b7bb7ba64f6b92c1c7d4"
+      },
+      "contacts": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\0.0025_21_TIGHT_2\\contacts.npz",
+        "bytes": 8592,
+        "sha256": "02a0a7b4725720a34ecfb512ce0c994cb92f9813fc0ed064f95a596ba3e8a832"
+      }
+    }
+  ],
+  "scope": "Explicit local numerical-option interventions at every original failed source state,128 worlds/3 one-step repeats. No physical-parameter edits, original-gate relaxation, full task/100ms qualification, installed kernel change or neural training."
+}

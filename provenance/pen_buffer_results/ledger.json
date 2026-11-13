@@ -1,0 +1,164 @@
+{
+  "schema": "pen_buffer_action_quality_results:1",
+  "inputs": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_buffer_diagnosis_v2\\report.json",
+      "bytes": 244319,
+      "sha256": "bc14c8a26f2429b6bb5ddd1797f51d1f3333e1b4dde40286f4beb051f60d9dca"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_action_envelope_v1\\report.json",
+      "bytes": 173837,
+      "sha256": "7ff48a836facf5a01c5feab87889dcf8b0a0e106bbdf1844718efa6d97ed5f76"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_action_envelope_review_v1\\EFC\\report.json",
+      "bytes": 20137,
+      "sha256": "81dfa71a5cc0973bde8cde24a5615222438c2d29caf5c68be5151f5d288d9f70"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_action_envelope_review_v2\\report.json",
+      "bytes": 14829,
+      "sha256": "94809299e2e500ed18a34a00232fb4318e5e1e65e0a2943e17f000724f2fb3a9"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_action_force_balance_v1\\report.json",
+      "bytes": 16064,
+      "sha256": "eb1f738cb26ed0ac61f210f082570ef03cf33fdffe94db3b6e7d230e7d6b523a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_probe_v1\\report.json",
+      "bytes": 23193,
+      "sha256": "e6e6c615fbe153df431d461b8aafdf35844ee444b89c613b8860a3423cf43105"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_numerical_quality_review_v1\\report.json",
+      "bytes": 12130,
+      "sha256": "91f3a1eb4f016249d93663eceada0d39bd4cb830815b51d3dc27632dea1863cb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_buffer_action_tests166.log",
+      "bytes": 1091,
+      "sha256": "f1be943aa672e3458c28cd9f3b4ae698fdecf377c0858068dc211a93ce8c0a16"
+    }
+  ],
+  "source_aliases": [
+    {
+      "original": {
+        "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\controlled_evaluation.py",
+        "bytes": 17461,
+        "sha256": "6f99861a245ffbbfc58b4e1b5b41e87cc4463cb27790d3a2c0276366fbddcc5d"
+      },
+      "preserved": {
+        "path": "D:\\workspace\\supermimic-research\\provenance\\pen_action_provider_extension\\controlled_evaluation.py",
+        "bytes": 17461,
+        "sha256": "6f99861a245ffbbfc58b4e1b5b41e87cc4463cb27790d3a2c0276366fbddcc5d"
+      },
+      "reason": "Additive explicit bounded action-provider branch; old default control math retained."
+    },
+    {
+      "original": {
+        "path": "D:\\workspace\\supermimic-research\\tools\\diagnose_pen_buffers.py",
+        "bytes": 11820,
+        "sha256": "814aa35241458ce5f3c37dde4ef95c7cfcd1ce7e969b88947c752edb70ef089a"
+      },
+      "preserved": {
+        "path": "D:\\workspace\\supermimic-research\\provenance\\pen_buffer_results\\development_sources\\diagnose_pen_buffers_pre_json_fix.py",
+        "bytes": 11820,
+        "sha256": "814aa35241458ce5f3c37dde4ef95c7cfcd1ce7e969b88947c752edb70ef089a"
+      },
+      "reason": "NumPy bool serialization fix after first completed probe; failed raw run remains preserved."
+    }
+  ],
+  "checks": {
+    "buffer_integrity": [
+      216,
+      216
+    ],
+    "buffer_fidelity": [
+      24,
+      72
+    ],
+    "envelope_calibration": [
+      6,
+      6
+    ],
+    "envelope_CHECK": [
+      12,
+      12
+    ],
+    "envelope_readback": [
+      306,
+      306
+    ],
+    "EFC": [
+      124,
+      126
+    ],
+    "combined_envelope_review_passed": false,
+    "balance_algebra": [
+      54,
+      54
+    ],
+    "quality_readback": [
+      180,
+      180
+    ],
+    "unit_tests": 166
+  },
+  "measured_successful_run_budgets": {
+    "buffer_world_ticks": 49152,
+    "buffer_constructor_warmup_ticks": 3072,
+    "forecast_world_ticks": 69120,
+    "forecast_setup_ticks": 2304,
+    "actual_intervention_ticks": 1176,
+    "quality_one_step_world_ticks": 2304,
+    "quality_setup_ticks": 768
+  },
+  "quality_passed_worlds": {
+    "0.005": {
+      "DEFAULT": [
+        0,
+        384
+      ],
+      "ITER50": [
+        0,
+        384
+      ],
+      "TIGHT": [
+        324,
+        384
+      ]
+    },
+    "0.0025": {
+      "DEFAULT": [
+        0,
+        384
+      ],
+      "ITER50": [
+        0,
+        384
+      ],
+      "TIGHT": [
+        384,
+        384
+      ]
+    }
+  },
+  "physical_tasks_qualified": 0,
+  "neural_updates": 0,
+  "ready_for_100ms_deterministic_planning": false,
+  "scope": "Full failed gates preserved. Fresh/reuse test, prospective sample envelopes under fixed roles, actual failed tasks, final free-body balance and local numerical interventions. No new expert/training data, global solver repair, installed engine/driver edits or full-goal completion.",
+  "failed_metadata_development_run": {
+    "trace_pins": [
+      {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_buffer_diagnosis_v1\\0.005_0_REUSE_DATA_0\\trace.npz",
+        "bytes": 694943,
+        "sha256": "acbd4bb5022561ac4c4d66fbc4f89d27501be27723aa1a7741af114320c7c34c"
+      }
+    ],
+    "physical_world_ticks": 2560,
+    "constructor_setup_ticks": 128,
+    "note": "Separate from named successful-run budgets; first cohort executed before JSON bool serialization failed. Raw state preserved, no physics-based retry or selection."
+  }
+}

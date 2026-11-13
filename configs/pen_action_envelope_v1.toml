@@ -1,0 +1,11 @@
+schema = 1
+base_config = "controlled_evaluation_v4.toml"
+proposal = "../runs/pen_gpu_support_search_v1/report.json"
+dt = [0.005, 0.0025]
+nworld = 128
+horizon_controls = 5
+raw_amplitude = 0.04
+direction_count = 4
+position_component_margin_m = 0.0005
+rotation_log_component_margin_rad = 0.01
+roles = "baseline and direction1 +/- CALIBRATION; direction2..4 +/- CHECK; all NONEXPERT_NOT_FIT"
