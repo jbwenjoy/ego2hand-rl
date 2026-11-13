@@ -1,0 +1,728 @@
+{
+  "schema": "controlled_no_reset_evaluation:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\controlled_evaluation_v2.toml",
+    "bytes": 1170,
+    "sha256": "17747b1fd703d3b096660b663f385900b0ab613b09d96a4bfef5ed48c4fe0cb8"
+  },
+  "recipe": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\controlled_pen_single_clip.json",
+    "bytes": 81,
+    "sha256": "99fb6b8ff3c3f56969086489a7a24ce84584cfc6b2dad00c062115a366e2b298"
+  },
+  "checkpoints": {
+    "hand2-reorient": {
+      "path": "D:\\workspace\\dex-supermimic-research\\outputs\\windows_bringup_20261101\\cube_resume\\train\\model_final.pt",
+      "bytes": 11544595,
+      "sha256": "2403a29839d372ccadcb3a441099a3d77704da392328a7c972fd2b7268ad63f8"
+    },
+    "hand2-pen-spin": {
+      "path": "D:\\workspace\\dex-supermimic-research\\outputs\\windows_bringup_20261101\\pen_eager\\train\\model_final.pt",
+      "bytes": 12489811,
+      "sha256": "a10db71f612b9efdac2e9c576029ad4d7ff2613b98d55e28b45a4ecbd530e25b"
+    }
+  },
+  "neural_updates": 0,
+  "learned_policy_success_assumed": false,
+  "script_optimized_execution": false,
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\run_controlled_evaluation.py",
+      "bytes": 4741,
+      "sha256": "6f21d122dcd921e615db1303c6e6bab658fe126e488db8ddc46ff02d9e9bbb40"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\controlled_evaluation.py",
+      "bytes": 12993,
+      "sha256": "102e4d361da1a242d3c16cf55490c28f0bebb61deb119ea72366d58731cac359"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\controlled_assets.py",
+      "bytes": 836,
+      "sha256": "4180ffa99a9eb675db53e24e1920e6b9bab1350f0d9a912112ea558f52c4ee10"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\__init__.py",
+      "bytes": 48,
+      "sha256": "69e500b946a5eac94ccfc2c43946432242cb6944bb0fd492b9ac2e4516ae439d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\__init__.py",
+      "bytes": 42,
+      "sha256": "8eebd2267050bcfaa5fd47100b760cf6924e6cb7374e91c3f4a6b1d7944ac2c1"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\__init__.py",
+      "bytes": 88,
+      "sha256": "9ffcbf5e4c5377ce7dd1e73ee2612de482f15c70a968e9212bb83c8dcc871bd6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\task.py",
+      "bytes": 1186,
+      "sha256": "5706c0976c65e40913e9467070a42a390587e3f7f1867379e4046cc92140bb7e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\__init__.py",
+      "bytes": 45,
+      "sha256": "0d8f010d7acd76f33669915b03ac2bd6c4c32698908a13f9a4b6889b030ef5bb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\__init__.py",
+      "bytes": 72,
+      "sha256": "1b0c2dba4f3d7b227979332d731704098cf4633d0946b07f322c0b1b6e4656b0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\common.py",
+      "bytes": 3261,
+      "sha256": "6d6ff994d592c8fec1d46401d7051d0511310281a3d28450db8bd9be8c327f8b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\rotations.py",
+      "bytes": 4576,
+      "sha256": "0fbb36bc8608dcc9a33edfac7f6551e742380e1e66c70e857b33d6d05cd81e70"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\state.py",
+      "bytes": 1950,
+      "sha256": "4a95cec1951d4e54fac9256f757ca0d9a1f3cd81d66e9b97564954e3f55add06"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\rl\\dex_supermimic\\networks.py",
+      "bytes": 5331,
+      "sha256": "7fbec4de7aa92603565aa24e85d559f4b8c9dc309aae877d3fdd2981402e350a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand2\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\recipe.py",
+      "bytes": 3296,
+      "sha256": "3ffde3b30004ffbb56c89905b5a7e592f59222f0d9cf4271cbc2c2a5ef55c0c6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\assets\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\assets\\inhand_cube.py",
+      "bytes": 4832,
+      "sha256": "de6817c0cf64ede2a9f4b955be9aae47c159ba596646444833848959fe1f66ae"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\assets\\resource_utils.py",
+      "bytes": 455,
+      "sha256": "3eae98256db487f46885aa629dd26e10df83b27d4637d47e6a0e0803c04ea225"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\assets\\wuji_hand2.py",
+      "bytes": 18041,
+      "sha256": "91eed8ea9fc00f5663229359ca6b650552ff8fbd5f21d180648bb15b7ba98916"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand2\\hand2_constants.py",
+      "bytes": 15591,
+      "sha256": "255397618dced4906c6b48e6958f47c6f98c2ca5a3765fe18fb4ecb057a1a236"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\reorient_constants.py",
+      "bytes": 1709,
+      "sha256": "8b638bebbc2d0212c97650e2d1b1d6d1e783f4234ac17bb1a49790a8e568ea35"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\actions.py",
+      "bytes": 3098,
+      "sha256": "6016c424772838f82708521fba56e679087509e2514b00d6a06169b631d34944"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\command_visualization.py",
+      "bytes": 11789,
+      "sha256": "da15ca9aa35c9b388549b3d80e1dcd104d6f4597a034ad328919898cf56673db"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\cage.py",
+      "bytes": 9687,
+      "sha256": "88c8ab9766beb86fd79d3bbddc1bdcef75a8b4bd7a2972d6d741e8f1d74ef0a9"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\math.py",
+      "bytes": 4315,
+      "sha256": "3cf32b00c48862738ecab4503ec2478b2255b7c10b29eea88ea89a628f7786dd"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\commands.py",
+      "bytes": 12098,
+      "sha256": "fcb08b9084b123562d026833673dbe82884e99ed14981c70106fe8565ccab5ed"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\_env_utils.py",
+      "bytes": 503,
+      "sha256": "d2b4a6c124229baf009fc70094a05a72fc807b1af41c075c790be6376cc4db21"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\curriculum.py",
+      "bytes": 1046,
+      "sha256": "408685ef772dab13c67a7b98887ffcb723df881d84eddc398586f645ddc64c16"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\curriculums.py",
+      "bytes": 4429,
+      "sha256": "4416e85e97de1e077ffef36d090216714516fb3267ad27e3845cb9f3d50f9c05"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\__init__.py",
+      "bytes": 83,
+      "sha256": "c94602917864fac7b1da8deb58391239458fca18d1997090939ab58ff57a5ac8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\runtime_state.py",
+      "bytes": 3995,
+      "sha256": "ab6c14f4a21b047df2ddd07418bff69b2f945e24ae968260a7ebab08c940c994"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\disturbance.py",
+      "bytes": 2818,
+      "sha256": "069925204b10de2517e378db3befd192233e7be8f39683f6081539061dd6ab1c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\joint_reset.py",
+      "bytes": 5075,
+      "sha256": "5111ef1f0e27ff687e89451acd0d8d541bb164f0b3fc953134eef0c650d1fd88"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\randomization.py",
+      "bytes": 5980,
+      "sha256": "417e01a4d5088453032d5d63e127d6d05292742b15bd5c9eb3e3c556b02be4f3"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\event_impl\\reset.py",
+      "bytes": 4335,
+      "sha256": "f8098a0f0f4a5de9fa755ac2a64b300ac3f1f8ab853d44d8089a3e185efd5bc3"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\events.py",
+      "bytes": 980,
+      "sha256": "5c7b7dfeac68b25c0bea4c4aac2792097a209a6a26de16a6a5f1fd1dd6ca3b11"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\metrics.py",
+      "bytes": 6545,
+      "sha256": "d2f7614d6ec958b20b522e6de2ae3786df4cf1a0cb92b8177e77467e065cc31d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\observations.py",
+      "bytes": 10733,
+      "sha256": "75ba9e7d24fc006e7e8ff04c0d23d8bffbf87b14eb80f4946187b0e14b68cddc"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\utils\\reward_decorators.py",
+      "bytes": 1672,
+      "sha256": "a0bfe12109f12ff14554d7da7a0d8b709960f6af91bbb7bbde820d8c26eb0385"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\rewards.py",
+      "bytes": 10401,
+      "sha256": "666d5c5e12828a8f3e7756b27bcf1edfa643ef56d1d97b0e6221bf72b5076cc0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\terminations.py",
+      "bytes": 593,
+      "sha256": "e9acf8e78627b8a7b97003251fcd6d5c9ef67afe28889f1c2ac979c013eec458"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\types.py",
+      "bytes": 466,
+      "sha256": "cf4f7b0850df8f1af8fdc0e0f6f7f722c76367c8b789bbce48530ca2eb826025"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\mdp\\__init__.py",
+      "bytes": 1114,
+      "sha256": "0c794af6136684e67ecbf97833365be66219d71034babc5a265ca4c6c370caef"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\reorient_terms.py",
+      "bytes": 24480,
+      "sha256": "b6669ac458c2a7dac5f05d82f900bfcfe49cec5be3dbb527a3882212383566f2"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\reorient_env_cfg.py",
+      "bytes": 6097,
+      "sha256": "26154a4455fc83be67e53de502ed4f9b59c983a4e067a9328925b6ad222dd577"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand2\\env_cfgs.py",
+      "bytes": 3308,
+      "sha256": "bd8368e547c12035ce331d0bdadf6b23531c57b084280a56da1a747157634469"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\dex_reorient\\config\\wuji_hand2\\task.py",
+      "bytes": 370,
+      "sha256": "8afebcf0ca8bd2a52e7c6378d286b1162bb2699094d5736fc75f1e9f1cf388eb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\__init__.py",
+      "bytes": 142,
+      "sha256": "81c298aa8d5c19b9b23dbbe9b2c0952a618bfd84c2e44db22f13bedb86523e4f"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\contact_events.py",
+      "bytes": 2421,
+      "sha256": "faab349f098248740cfdd0490d04a982c93dadeeb3b33a340243e1d28066ce2c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\curriculum_utils.py",
+      "bytes": 988,
+      "sha256": "f03a359a42fc3637204c20d1eed78fd7563414f135e57d8123b839091df662ad"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\actions.py",
+      "bytes": 7663,
+      "sha256": "45e105031dfd195db25be70adceffd32c371cee671e9e5839cd1ccf12a8e73d0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\__init__.py",
+      "bytes": 83,
+      "sha256": "c94602917864fac7b1da8deb58391239458fca18d1997090939ab58ff57a5ac8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\clip_store.py",
+      "bytes": 7628,
+      "sha256": "869a2c0cbc748db240c8262fc9b34066a09a9da71b271b458250880edf269a6b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\tooling\\recipe.py",
+      "bytes": 4934,
+      "sha256": "48eb8696a165b12cc90a8012704e46b4ebd65c67e1870363962254f30519851d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\observations.py",
+      "bytes": 13304,
+      "sha256": "74df1caa679d83f4cc3dd488845d452e7f3c2aecef7ad09b2d3ab6e9faf56cfa"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\commands.py",
+      "bytes": 31473,
+      "sha256": "e1adb7c183aa28dde49f6dc6e7795ed450567e6c54347bd7f1e0543922fcbcf0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\curriculums.py",
+      "bytes": 1617,
+      "sha256": "208cd3443cfd3290b18bf87a1c7be08cfadc7b22fc790c58270d01fb7418fb34"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\events.py",
+      "bytes": 20027,
+      "sha256": "8b8d9ca253b4a5a4c516e5bd4ac4b7adb674d4388a07712d12664e0496653544"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\metrics.py",
+      "bytes": 2339,
+      "sha256": "a01d9031a61a01e3cc74b4b173817763e473eff030a06d6c37af647ab221a9f8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\rewards.py",
+      "bytes": 7190,
+      "sha256": "fad15431729a9df98d0681707d112ccca133c0ad5f589eb18f00212bb6e69c5c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\terminations.py",
+      "bytes": 1952,
+      "sha256": "230a6373de7a9147cfa30789c245c464a82378c96d722b9eac1adf71fe7e1c5d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\mdp\\__init__.py",
+      "bytes": 603,
+      "sha256": "5b8b6e092b0478c94fa6ac2cc5e619febf56f2931ab6dcfcccb02402460ac665"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\assets\\pen.py",
+      "bytes": 1184,
+      "sha256": "6547fa3632cbb3905beb73bcdea6ea5e98196dbbdfb31c7776fb99ffbe94e4ed"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\pen_spin_env_cfg.py",
+      "bytes": 7416,
+      "sha256": "e012a43b711a25f54c627518f4dd79d683ac34f0b3dc03d6376915feeb8f8fdf"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\hand2_constants.py",
+      "bytes": 11958,
+      "sha256": "2a1a37a0c97f3bcab631006ac6e0dc47a1a63a92c7717ac4c6c712314ba35986"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\config\\wuji_hand2\\env_cfgs.py",
+      "bytes": 17238,
+      "sha256": "ebfd258d34e3f41e5957b382ecbccfc5b79a5b545680ed1138343d508414e083"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\dex_supermimic\\tasks\\pen_spin\\task.py",
+      "bytes": 950,
+      "sha256": "488d85eb40dbe991dcff854918aca3fe48d51812992dda7c74b0e3ed8c0e17ac"
+    }
+  ],
+  "cases": [
+    {
+      "task": "hand2-reorient",
+      "controller": "ZERO",
+      "assets": {
+        "controlled_cube_xml": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\inhand_cube\\xmls\\cube.xml",
+          "bytes": 2335,
+          "sha256": "de4d6f912dd6fa37bdabfa6f7f1cb75db8fde528f952fcba16c76e188bd5eb72"
+        },
+        "controlled_jig_mesh": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\wuji_hand2\\jig_table.STL",
+          "bytes": 279284,
+          "sha256": "20b77abffbd8182573862279201597e2d79129f8a10cd5afe5f59364cd6a04e9"
+        }
+      },
+      "dt": 0.01,
+      "control_dt": 0.02,
+      "initial_reset_count": 1,
+      "resets_after_start": 0,
+      "planned_intervals": 100,
+      "actual_intervals": 100,
+      "physics_steps": 200,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 2.0,
+          "COM_RMS_m": 0.023821234750575473,
+          "COM_max_m": 0.028395246306115462,
+          "angle_RMS_rad": 2.44292893414382,
+          "angle_max_rad": 2.530810972059664,
+          "max_penetration_m": 0.0045701186172664165,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.98,
+          "object_speed_RMS_m_s": 0.05392656253400121,
+          "object_omega_RMS_rad_s": 1.7604675867020927
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": true,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_flags": {
+        "time_out": false,
+        "cage_drop": false,
+        "nan_guard": false
+      },
+      "phase_first": 1,
+      "phase_last": 100,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v2\\hand2-reorient_ZERO\\trace.npz",
+        "bytes": 160335,
+        "sha256": "1965fef1b63bb3909d1dd87b6006e256dcf6dcaa62316099efbd5364094540dc"
+      },
+      "wall_s": 3.196324700023979,
+      "model_layout": {
+        "nq": 27,
+        "nv": 26,
+        "nu": 20,
+        "object_qposadr": 20,
+        "object_dofadr": 20,
+        "object_body": 31,
+        "COM_BODY": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scope": "Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization."
+    },
+    {
+      "task": "hand2-reorient",
+      "controller": "SAVED_ACTOR",
+      "assets": {
+        "controlled_cube_xml": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\inhand_cube\\xmls\\cube.xml",
+          "bytes": 2335,
+          "sha256": "de4d6f912dd6fa37bdabfa6f7f1cb75db8fde528f952fcba16c76e188bd5eb72"
+        },
+        "controlled_jig_mesh": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\wuji_hand2\\jig_table.STL",
+          "bytes": 279284,
+          "sha256": "20b77abffbd8182573862279201597e2d79129f8a10cd5afe5f59364cd6a04e9"
+        }
+      },
+      "dt": 0.01,
+      "control_dt": 0.02,
+      "initial_reset_count": 1,
+      "resets_after_start": 0,
+      "planned_intervals": 100,
+      "actual_intervals": 100,
+      "physics_steps": 200,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 2.0,
+          "COM_RMS_m": 0.02454331633220116,
+          "COM_max_m": 0.02872575225519603,
+          "angle_RMS_rad": 2.4595211265789243,
+          "angle_max_rad": 2.5309901416917513,
+          "max_penetration_m": 0.0045701186172664165,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.98,
+          "object_speed_RMS_m_s": 0.054002682397023716,
+          "object_omega_RMS_rad_s": 1.7757480199366615
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": true,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_flags": {
+        "time_out": false,
+        "cage_drop": false,
+        "nan_guard": false
+      },
+      "phase_first": 1,
+      "phase_last": 100,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v2\\hand2-reorient_SAVED_ACTOR\\trace.npz",
+        "bytes": 196913,
+        "sha256": "7b907315addad49e81b5a7dabec4ad448fb0385a471bc57b20e6906aff2f5ba8"
+      },
+      "wall_s": 3.0153424000018276,
+      "model_layout": {
+        "nq": 27,
+        "nv": 26,
+        "nu": 20,
+        "object_qposadr": 20,
+        "object_dofadr": 20,
+        "object_body": 31,
+        "COM_BODY": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scope": "Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization."
+    },
+    {
+      "task": "hand2-pen-spin",
+      "controller": "ZERO",
+      "assets": {
+        "controlled_pen_xml": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\aruco_pen250\\xmls\\pen_tracking.xml",
+          "bytes": 1563,
+          "sha256": "2f6647d4a6ad0d23bbb23172447b12d644a1e50e563fd56dbde14be85792d36a"
+        }
+      },
+      "dt": 0.005,
+      "control_dt": 0.02,
+      "initial_reset_count": 1,
+      "resets_after_start": 0,
+      "planned_intervals": 368,
+      "actual_intervals": 8,
+      "physics_steps": 32,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.16,
+          "COM_RMS_m": 0.02984396735032385,
+          "COM_max_m": 0.05784707332773592,
+          "angle_RMS_rad": 1.5692392801796704,
+          "angle_max_rad": 3.0587538646643826,
+          "max_penetration_m": 0.0038012051954865456,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.71875,
+          "object_speed_RMS_m_s": 0.43395013912507985,
+          "object_omega_RMS_rad_s": 47.301387189561936
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_flags": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "phase_first": 1,
+      "phase_last": 8,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v2\\hand2-pen-spin_ZERO\\trace.npz",
+        "bytes": 42384,
+        "sha256": "17e153408614735767ef00eb7c8e9e78dbcb05f2786d6ac7a5abb6b59f2ea5c0"
+      },
+      "wall_s": 0.30462889999034815,
+      "model_layout": {
+        "nq": 27,
+        "nv": 26,
+        "nu": 20,
+        "object_qposadr": 0,
+        "object_dofadr": 0,
+        "object_body": 2,
+        "COM_BODY": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scope": "Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization."
+    },
+    {
+      "task": "hand2-pen-spin",
+      "controller": "SAVED_ACTOR",
+      "assets": {
+        "controlled_pen_xml": {
+          "path": "D:\\workspace\\dex-supermimic-research\\src\\dex_supermimic\\assets\\resources\\aruco_pen250\\xmls\\pen_tracking.xml",
+          "bytes": 1563,
+          "sha256": "2f6647d4a6ad0d23bbb23172447b12d644a1e50e563fd56dbde14be85792d36a"
+        }
+      },
+      "dt": 0.005,
+      "control_dt": 0.02,
+      "initial_reset_count": 1,
+      "resets_after_start": 0,
+      "planned_intervals": 368,
+      "actual_intervals": 8,
+      "physics_steps": 32,
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.16,
+          "COM_RMS_m": 0.0296012347655943,
+          "COM_max_m": 0.057272609352337744,
+          "angle_RMS_rad": 1.5808690045080847,
+          "angle_max_rad": 3.070183666826578,
+          "max_penetration_m": 0.0038012051954865456,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.71875,
+          "object_speed_RMS_m_s": 0.4280036157296982,
+          "object_omega_RMS_rad_s": 45.70215730472442
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": false,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_flags": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "phase_first": 1,
+      "phase_last": 8,
+      "trace": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v2\\hand2-pen-spin_SAVED_ACTOR\\trace.npz",
+        "bytes": 42910,
+        "sha256": "de8319085c429c03680affc9f29fb90417bbe91399aa763fa42f876db5b1574e"
+      },
+      "wall_s": 0.2805874999903608,
+      "model_layout": {
+        "nq": 27,
+        "nv": 26,
+        "nu": 20,
+        "object_qposadr": 0,
+        "object_dofadr": 0,
+        "object_body": 2,
+        "COM_BODY": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "scope": "Actual original GPU plant; one reset, stop first native terminal, recorded per-substep GPU contacts. Saved smoke Actor, not a trained expert or ego generalization."
+    }
+  ],
+  "initial_pairs": [
+    {
+      "task": "hand2-reorient",
+      "exact": true
+    },
+    {
+      "task": "hand2-pen-spin",
+      "exact": true
+    }
+  ],
+  "wall_s": 14.71097159999772,
+  "all_pairs_exact": true,
+  "GPU": "NVIDIA GeForce RTX 5090",
+  "peak_Torch_allocated_bytes": 35214848,
+  "scope": "Fixed no-reset diagnostic, native task dt, no learned-model/control fitting or ego success claim. Not the original mug gate."
+}

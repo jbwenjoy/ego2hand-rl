@@ -17,7 +17,6 @@ if TYPE_CHECKING:
 _ASSET_DIR = Path(__file__).resolve().parent / "resources" / "inhand_cube"
 
 INHAND_OBJECT_XML: Path = _ASSET_DIR / "xmls" / "cube.xml"
-assert INHAND_OBJECT_XML.exists(), f"Missing in-hand object XML: {INHAND_OBJECT_XML}"
 
 # Baseline cube — reflects values inside cube.xml. If cube.xml changes, update here.
 BASELINE_EDGE_M = 0.054
@@ -25,8 +24,9 @@ BASELINE_MASS_KG = 0.120
 CUBE_DENSITY = BASELINE_MASS_KG / (BASELINE_EDGE_M**3)  # ≈ 762.08 kg/m^3
 
 
-def _get_spec(edge_m: float | None = None, *, viser: bool = False) -> mujoco.MjSpec:
-    spec = mujoco.MjSpec.from_file(str(INHAND_OBJECT_XML))
+def _get_spec(edge_m: float | None = None, *, viser: bool = False, xml_path: str | Path | None = None) -> mujoco.MjSpec:
+    source = INHAND_OBJECT_XML if xml_path is None else Path(xml_path)
+    spec = mujoco.MjSpec.from_file(str(source))
     half = (BASELINE_EDGE_M if edge_m is None else edge_m) / 2.0
     if viser:
         _add_viser_cube_mesh(spec, half)
@@ -36,7 +36,7 @@ def _get_spec(edge_m: float | None = None, *, viser: bool = False) -> mujoco.MjS
 
     cube_geom = next((g for g in spec.geoms if g.name == "cube"), None)
     if cube_geom is None:
-        raise ValueError(f"{INHAND_OBJECT_XML} must contain a geom named 'cube'")
+        raise ValueError(f"{source} must contain a geom named 'cube'")
     cube_geom.size = [half, half, half]
     cube_geom.mass = mass
 
@@ -45,7 +45,7 @@ def _get_spec(edge_m: float | None = None, *, viser: bool = False) -> mujoco.MjS
     # the wrong 54 mm size.
     cube_visual = next((g for g in spec.geoms if g.name == "cube_visual"), None)
     if cube_visual is None:
-        raise ValueError(f"{INHAND_OBJECT_XML} must contain a geom named 'cube_visual'")
+        raise ValueError(f"{source} must contain a geom named 'cube_visual'")
     cube_visual.size = [half, half, half]
 
     return spec
@@ -102,7 +102,7 @@ def _add_viser_cube_mesh(spec: mujoco.MjSpec, half: float) -> None:
     visual.material = "viser_cube"
 
 
-def get_inhand_object_cfg(edge_m: float | None = None) -> EntityCfg:
+def get_inhand_object_cfg(edge_m: float | None = None, *, xml_path: str | Path | None = None) -> EntityCfg:
     from mjlab.entity import EntityCfg
 
     return EntityCfg(
@@ -112,5 +112,5 @@ def get_inhand_object_cfg(edge_m: float | None = None) -> EntityCfg:
             lin_vel=(0.0, 0.0, 0.0),
             ang_vel=(0.0, 0.0, 0.0),
         ),
-        spec_fn=partial(_get_spec, edge_m),
+        spec_fn=partial(_get_spec, edge_m, xml_path=xml_path),
     )

@@ -1,0 +1,107 @@
+{
+  "schema": "controlled_actual_replay_videos:1",
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\render_controlled_evaluation.py",
+      "bytes": 4540,
+      "sha256": "859161f028fca3747900d85775e2a6c21701046e006dc48b33e208afd8892275"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\render_mug_progress_video.py",
+      "bytes": 9966,
+      "sha256": "a6da0fe21a50b9173cf25175a4e06a9bbf189a1d7caf503f5fa5cf675899dcde"
+    }
+  ],
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\report.json",
+    "bytes": 33909,
+    "sha256": "09b0a24153425688327ea99494f587fddd86f940f7dbddd7c2db8e73a2dabf94"
+  },
+  "videos": [
+    {
+      "task": "hand2-reorient",
+      "output": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_video_v1\\hand2-reorient_zero_vs_saved_actor.mp4",
+        "bytes": 1890932,
+        "sha256": "d98e4fe970cbc3702280f40010440b96da6f4e2fa4ce46aa029b73e6fd34d62b"
+      },
+      "frames": 289,
+      "fps": 30,
+      "speed": 0.25,
+      "physical_durations_s": [
+        2.0,
+        2.0
+      ],
+      "inputs": [
+        {
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-reorient_ZERO\\trace.npz",
+            "bytes": 176434,
+            "sha256": "b0662c345d0ac152c3a87daef0157aaf2b6033af8c2e69dd6157ac72472cfa91"
+          },
+          "host_topology": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-reorient_ZERO\\host_topology.mjb",
+            "bytes": 36860249,
+            "sha256": "da68a628f43279ac311ae90d38e67322184fca09ae3466356f1626b92adeae51"
+          }
+        },
+        {
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-reorient_SAVED_ACTOR\\trace.npz",
+            "bytes": 225931,
+            "sha256": "2dc9163ee75fc93b5de9a69cb1393f873ecfdd76f85f724f3ee2123459dd71de"
+          },
+          "host_topology": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-reorient_SAVED_ACTOR\\host_topology.mjb",
+            "bytes": 36860249,
+            "sha256": "da68a628f43279ac311ae90d38e67322184fca09ae3466356f1626b92adeae51"
+          }
+        }
+      ]
+    },
+    {
+      "task": "hand2-pen-spin",
+      "output": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_video_v1\\hand2-pen-spin_zero_vs_saved_actor.mp4",
+        "bytes": 698177,
+        "sha256": "4e4c457423a217491d597bbe2d567c4e56404e2385cd671bcd7c10db34eda1b1"
+      },
+      "frames": 97,
+      "fps": 30,
+      "speed": 0.1,
+      "physical_durations_s": [
+        0.16,
+        0.16
+      ],
+      "inputs": [
+        {
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-pen-spin_ZERO\\trace.npz",
+            "bytes": 47837,
+            "sha256": "ed4ed633e0bdd61a0dd8ab5e36265a460167f42694bc88f384ceda3451744069"
+          },
+          "host_topology": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-pen-spin_ZERO\\host_topology.mjb",
+            "bytes": 55531644,
+            "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+          }
+        },
+        {
+          "trace": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-pen-spin_SAVED_ACTOR\\trace.npz",
+            "bytes": 48878,
+            "sha256": "1a7167a1736ca80fdce626da0759e5649bfaf550335c92818989db1b9481725e"
+          },
+          "host_topology": {
+            "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-pen-spin_SAVED_ACTOR\\host_topology.mjb",
+            "bytes": 55531644,
+            "sha256": "24fd7bf2658e1a6795e636eff1f1bc0a6f65f14baf4ed88a85dd2ffe125c33dd"
+          }
+        }
+      ]
+    }
+  ],
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "All fixed coarse task runs; recorded qpos with saved fixed mocap, no physics integration or extrapolation. Host model graphics, actual GPU physical context remains separate."
+}

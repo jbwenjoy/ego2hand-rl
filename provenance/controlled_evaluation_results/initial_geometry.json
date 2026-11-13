@@ -1,0 +1,77 @@
+{
+  "schema": "controlled_actual_initial_native_geometry:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\check_controlled_initial_geometry.py",
+    "bytes": 2708,
+    "sha256": "2ef8684f3222bce14d2d08104c065d2122f770a3488cb5a8a0739ee2a3cb6e15"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\report.json",
+    "bytes": 33909,
+    "sha256": "09b0a24153425688327ea99494f587fddd86f940f7dbddd7c2db8e73a2dabf94"
+  },
+  "cases": [
+    {
+      "task": "hand2-reorient",
+      "actual_initial_source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-reorient_ZERO\\trace.npz",
+        "bytes": 176434,
+        "sha256": "b0662c345d0ac152c3a87daef0157aaf2b6033af8c2e69dd6157ac72472cfa91"
+      },
+      "GPU_context": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-reorient_ZERO\\GPU_physical_context.npz",
+        "bytes": 4837,
+        "sha256": "5e0a912d7e49b22c031437073b4fee66009611d34b1d63696d6a1da790aabbef"
+      },
+      "max_penetration_m": 0.0,
+      "contacts": [],
+      "no_state_change": true,
+      "contact_geometry_only": true
+    },
+    {
+      "task": "hand2-pen-spin",
+      "actual_initial_source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-pen-spin_ZERO\\trace.npz",
+        "bytes": 47837,
+        "sha256": "ed4ed633e0bdd61a0dd8ab5e36265a460167f42694bc88f384ceda3451744069"
+      },
+      "GPU_context": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\hand2-pen-spin_ZERO\\GPU_physical_context.npz",
+        "bytes": 4702,
+        "sha256": "472de30a0b17c6ca0ac0943123c5524505ce891fa8a4645da0f82f10bc674ba5"
+      },
+      "max_penetration_m": 0.0028819982937949742,
+      "contacts": [
+        {
+          "geoms": [
+            "object/cube",
+            "robot/right_finger3_tip_sensor_col"
+          ],
+          "distance_m": -0.0028819982937949742,
+          "position_world_m": [
+            -0.1402403699827398,
+            0.008402212893453536,
+            0.5485759078380921
+          ]
+        },
+        {
+          "geoms": [
+            "object/cube",
+            "robot/right_finger3_link4_col"
+          ],
+          "distance_m": -0.0007544150108500217,
+          "position_world_m": [
+            -0.1434962671298194,
+            0.012288866420750215,
+            0.5458760639204707
+          ]
+        }
+      ],
+      "no_state_change": true,
+      "contact_geometry_only": true
+    }
+  ],
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Fresh native mj_forward geometry at saved initial GPU qpos/qvel/mocap, with captured GPU physical tables. Not GPU solver force truth, physical rollout, or calibrated geometry certificate."
+}

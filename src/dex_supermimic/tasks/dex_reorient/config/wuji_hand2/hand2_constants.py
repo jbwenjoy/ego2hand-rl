@@ -2,6 +2,7 @@
 # Copyright 2026 Wuji Technology Co., Ltd.
 
 from collections.abc import Callable
+from pathlib import Path
 
 import mujoco
 import numpy as np
@@ -370,12 +371,13 @@ def _in_mount(mount: mujoco.MjsBody, pos, quat) -> tuple[np.ndarray, np.ndarray]
     return out
 
 
-def inject_hand2_reorient_rig(spec: mujoco.MjSpec) -> mujoco.MjSpec:
+def inject_hand2_reorient_rig(spec: mujoco.MjSpec, *, jig_mesh: str | Path | None = None) -> mujoco.MjSpec:
     """Attach the calibration jig and wrist tag to the hand2 mount."""
-    filename = WUJI_HAND2_JIG_TABLE_MESH.name
+    source = WUJI_HAND2_JIG_TABLE_MESH if jig_mesh is None else Path(jig_mesh)
+    filename = source.name
     spec.add_mesh(name="jig_table", content_type="model/stl", file=filename)
     asset_key = f"{spec.meshdir}/{filename}" if spec.meshdir else filename
-    spec.assets = {**spec.assets, asset_key: WUJI_HAND2_JIG_TABLE_MESH.read_bytes()}
+    spec.assets = {**spec.assets, asset_key: source.read_bytes()}
 
     mount = spec.body("right_mount")
     jig_pos, jig_quat = _in_mount(mount, REORIENT_HAND2_JIG_POS, REORIENT_HAND2_JIG_ROT)
@@ -432,9 +434,10 @@ def apply_hand2_reorient_physics(spec: mujoco.MjSpec) -> mujoco.MjSpec:
 
 def get_hand2_reorient_spec(
     base_spec_fn: Callable[[], mujoco.MjSpec],
+    *, jig_mesh: str | Path | None = None,
 ) -> mujoco.MjSpec:
     """Build the robot spec with the reorient calibration rig attached."""
-    spec = inject_hand2_reorient_rig(base_spec_fn())
+    spec = inject_hand2_reorient_rig(base_spec_fn(), jig_mesh=jig_mesh)
     spec = apply_hand2_reorient_collision_overlay(spec)
     spec = apply_hand2_reorient_physics(spec)
     spec = apply_hand2_reorient_actuator_gains(spec)

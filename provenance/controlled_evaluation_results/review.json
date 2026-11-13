@@ -1,0 +1,179 @@
+{
+  "schema": "controlled_saved_review:1",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_controlled_evaluation.py",
+    "bytes": 10126,
+    "sha256": "1de2fab49ba968c95147d5ec82d7000f4e1cc4783802752e1e509cfb4cc67e7f"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_v3\\report.json",
+    "bytes": 33909,
+    "sha256": "09b0a24153425688327ea99494f587fddd86f940f7dbddd7c2db8e73a2dabf94"
+  },
+  "checks": {
+    "four_fixed_cases": true,
+    "cases": true,
+    "exact_initial_and_reference_pairs": true,
+    "raw_contacts": true,
+    "pose_metric_readback": true,
+    "GPU_PRE_COM_float32_tolerance": true
+  },
+  "passed": 6,
+  "total": 6,
+  "max_errors": {
+    "forces": 0.0,
+    "penetration": 0.0,
+    "COM": 0.0,
+    "pre_COM": 0.0,
+    "metrics": 2.220446049250313e-15,
+    "actor_action": 4.470348358154297e-08
+  },
+  "cases": [
+    {
+      "task": "hand2-reorient",
+      "controller": "ZERO",
+      "checks": {
+        "integer_clock": true,
+        "one_reset": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "phase": true,
+        "first_terminal_only": true,
+        "final_flags": true,
+        "no_applied_force": true,
+        "no_overflow": true,
+        "finite": true,
+        "bounded_actions": true,
+        "legal_control": true,
+        "no_eq_gravity_aid": true,
+        "single_finite_reference": true,
+        "raw_indices": true,
+        "gates_match": true,
+        "actor_or_zero_output": true
+      },
+      "qualified": false,
+      "wrenches": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_review_v1\\hand2-reorient_ZERO_wrenches.npz",
+        "bytes": 27289,
+        "sha256": "2cc1efde659fb120a6d0cb48d6765c6f895072d3b664c5a89f83a369a1a79e03"
+      },
+      "linear_momentum_residual_RMS_N_s": 4.981503795326202e-05,
+      "linear_momentum_residual_max_N_s": 0.00042438296959616643
+    },
+    {
+      "task": "hand2-reorient",
+      "controller": "SAVED_ACTOR",
+      "checks": {
+        "integer_clock": true,
+        "one_reset": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "phase": true,
+        "first_terminal_only": true,
+        "final_flags": true,
+        "no_applied_force": true,
+        "no_overflow": true,
+        "finite": true,
+        "bounded_actions": true,
+        "legal_control": true,
+        "no_eq_gravity_aid": true,
+        "single_finite_reference": true,
+        "raw_indices": true,
+        "gates_match": true,
+        "actor_or_zero_output": true
+      },
+      "qualified": false,
+      "wrenches": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_review_v1\\hand2-reorient_SAVED_ACTOR_wrenches.npz",
+        "bytes": 27405,
+        "sha256": "cf005e40f172e78994700df52f0f91bed1e890998c71d881c73e85fb1f067cb9"
+      },
+      "linear_momentum_residual_RMS_N_s": 0.00012685635145015067,
+      "linear_momentum_residual_max_N_s": 0.000424382986651398
+    },
+    {
+      "task": "hand2-pen-spin",
+      "controller": "ZERO",
+      "checks": {
+        "integer_clock": true,
+        "one_reset": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "phase": true,
+        "first_terminal_only": true,
+        "final_flags": true,
+        "no_applied_force": true,
+        "no_overflow": true,
+        "finite": true,
+        "bounded_actions": true,
+        "legal_control": true,
+        "no_eq_gravity_aid": true,
+        "single_finite_reference": true,
+        "raw_indices": true,
+        "gates_match": true,
+        "actor_or_zero_output": true
+      },
+      "qualified": false,
+      "wrenches": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_review_v1\\hand2-pen-spin_ZERO_wrenches.npz",
+        "bytes": 4324,
+        "sha256": "5486d16694d426ee6f27912e5fb1a7d523866aa580c51cb2ddc548e4cc3a7747"
+      },
+      "linear_momentum_residual_RMS_N_s": 9.259876325209216e-10,
+      "linear_momentum_residual_max_N_s": 3.977416236257163e-09
+    },
+    {
+      "task": "hand2-pen-spin",
+      "controller": "SAVED_ACTOR",
+      "checks": {
+        "integer_clock": true,
+        "one_reset": true,
+        "pose_carry": true,
+        "velocity_carry": true,
+        "initial_pose": true,
+        "initial_velocity": true,
+        "phase": true,
+        "first_terminal_only": true,
+        "final_flags": true,
+        "no_applied_force": true,
+        "no_overflow": true,
+        "finite": true,
+        "bounded_actions": true,
+        "legal_control": true,
+        "no_eq_gravity_aid": true,
+        "single_finite_reference": true,
+        "raw_indices": true,
+        "gates_match": true,
+        "actor_or_zero_output": true
+      },
+      "qualified": false,
+      "wrenches": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\controlled_evaluation_review_v1\\hand2-pen-spin_SAVED_ACTOR_wrenches.npz",
+        "bytes": 4325,
+        "sha256": "592a0171d0eb12b1d0d3a0fba199bedcf872fb93e1f41c69ae0ea9d9980bd8bc"
+      },
+      "linear_momentum_residual_RMS_N_s": 6.921647293545053e-10,
+      "linear_momentum_residual_max_N_s": 1.7641862802803973e-09
+    }
+  ],
+  "pairs": [
+    {
+      "task": "hand2-reorient",
+      "exact": true
+    },
+    {
+      "task": "hand2-pen-spin",
+      "exact": true
+    }
+  ],
+  "raw_contacts_reviewed": 1243,
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Independent saved chronology, raw GPU contact/pose/metric/flag, control-bound and CPU saved-Actor readback. Native warning counts unavailable, no fresh convex audit or task success beyond explicit failed qualifications. Wrenches are contact labels, not fitted support targets or WM gradient validation."
+}
