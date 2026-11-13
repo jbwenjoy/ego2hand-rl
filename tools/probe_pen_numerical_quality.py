@@ -14,6 +14,7 @@ from supermimic_research.artifacts import file_pin, verify_file_pin
 from supermimic_research.runtime.gpu_pen_rollout import GPUPenRollout
 from supermimic_research.runtime.gpu_model_snapshot import restore_model_arrays
 from tools.audit_gpu_contact_oracle import harvest
+from supermimic_research.runtime.numerical_options import set_model_numerical_options
 
 
 def main(args):
@@ -31,7 +32,7 @@ def main(args):
     out.mkdir()
     sources = [file_pin(__file__)] + [file_pin(ROOT / p) for p in [
         'src/supermimic_research/runtime/gpu_pen_rollout.py', 'src/supermimic_research/runtime/gpu_contact_oracle.py',
-        'src/supermimic_research/runtime/gpu_model_snapshot.py', 'tools/audit_gpu_contact_oracle.py']]
+        'src/supermimic_research/runtime/gpu_model_snapshot.py', 'src/supermimic_research/runtime/numerical_options.py', 'tools/audit_gpu_contact_oracle.py']]
     intent = dict(schema='pen_numerical_quality_probe:1', config=file_pin(cp), run=file_pin(rp),
                   EFC_review=file_pin(ep), model_source=file_pin(mp), sources=sources, neural_updates=0)
     (out / 'intent.json').write_text(json.dumps(intent, indent=2) + '\n')
@@ -63,9 +64,11 @@ def main(args):
                     getattr(m, key)[:] = value[0]
                 device = mw.put_model(m)
                 restore_model_arrays(device, values, scalars)
-                if variant in ['ITER50', 'TIGHT']:
+                if 'numerical_options' in cfg:
+                    set_model_numerical_options(m,device,cfg['numerical_options'][variant])
+                elif variant in ['ITER50', 'TIGHT']:
                     m.opt.iterations = device.opt.iterations = cfg['iterations']
-                if variant == 'TIGHT':
+                if 'numerical_options' not in cfg and variant == 'TIGHT':
                     m.opt.ls_iterations = device.opt.ls_iterations = cfg['ls_iterations']
                     m.opt.tolerance = cfg['tolerance']
                     m.opt.ls_tolerance = cfg['ls_tolerance']

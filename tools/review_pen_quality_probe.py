@@ -16,8 +16,14 @@ def main(args):
     if args.output.exists():
         raise ValueError('Fresh quality-probe readback')
     r = json.loads(args.report.read_text())
+    aliases=[] if args.source_aliases is None else json.loads(args.source_aliases.read_text())['source_aliases']
+    used_aliases=[]
     for pin in r['sources']:
-        verify_file_pin(pin)
+        try:verify_file_pin(pin)
+        except ValueError:
+            matched=[a for a in aliases if a['original']==pin and a['preserved']['sha256']==pin['sha256'] and a['preserved']['bytes']==pin['bytes']]
+            if len(matched)!=1:raise
+            verify_file_pin(matched[0]['preserved']);used_aliases.append(matched[0])
     actual = json.loads(verify_file_pin(r['run']).read_text())
     rows = []
     for c in r['cases']:
@@ -72,7 +78,7 @@ def main(args):
     args.output.mkdir()
     result = dict(schema='pen_quality_probe_saved_review:1', source=file_pin(__file__), run=file_pin(args.report),
         cases=rows, passed=sum(sum(c['checks'].values()) for c in rows), total=sum(len(c['checks']) for c in rows),
-        neural_updates=0, simulation_integration_steps=0,
+        neural_updates=0, simulation_integration_steps=0,used_source_aliases=used_aliases,
         scope='Saved source warmstart/controls, direct EFC decode, full COM force/torque and unchanged impulse-gate count readback. Passing review confirms mixed numerical-probe outcomes; not all-world or trajectory qualification.')
     (args.output / 'report.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(dict(passed=result['passed'], total=result['total'])))
@@ -84,4 +90,5 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('--report', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--source-aliases',type=Path)
     main(p.parse_args())

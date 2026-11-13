@@ -1,0 +1,10 @@
+schema = 1
+base_config = "controlled_evaluation_v4.toml"
+proposal = "../runs/pen_gpu_support_search_v1/report.json"
+factorial = "../runs/pen_quality_factorial_v1/report.json"
+profiles = ["BASELINE", "D4_PLUS", "D2_PLUS", "D2_MINUS"]
+dt = [0.005, 0.0025]
+raw_amplitude = 0.04
+intervention_controls = 5
+selection_order = ["CAPS50", "TOL_ONLY", "LS_ONLY", "BOTH", "BOTH_STRICT"]
+fallback = "BOTH_STRICT"

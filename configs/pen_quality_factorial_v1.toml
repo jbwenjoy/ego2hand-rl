@@ -1,0 +1,31 @@
+schema = 1
+run = "../runs/pen_action_envelope_v1/report.json"
+efc_review = "../runs/pen_action_envelope_review_v1/EFC/report.json"
+model_source = "../runs/pen_step_repeatability_v3/report.json"
+nworld = 128
+repeats = 3
+variants = ["DEFAULT", "CAPS50", "TOL_ONLY", "LS_ONLY", "BOTH", "BOTH_STRICT"]
+impulse_tolerance_N_s = 0.0000005
+
+[numerical_options.DEFAULT]
+[numerical_options.CAPS50]
+iterations = 50
+ls_iterations = 50
+[numerical_options.TOL_ONLY]
+iterations = 50
+ls_iterations = 50
+tolerance = 0.0000000001
+[numerical_options.LS_ONLY]
+iterations = 50
+ls_iterations = 50
+ls_tolerance = 0.000001
+[numerical_options.BOTH]
+iterations = 50
+ls_iterations = 50
+tolerance = 0.0000000001
+ls_tolerance = 0.000001
+[numerical_options.BOTH_STRICT]
+iterations = 50
+ls_iterations = 50
+tolerance = 0.000000000001
+ls_tolerance = 0.00000001

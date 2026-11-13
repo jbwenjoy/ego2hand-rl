@@ -9,6 +9,7 @@ from ..artifacts import file_pin
 from .controlled_assets import bind_controlled_assets
 from ..mechanics.compound_holding import object_state
 from ..mechanics.warp_contact_labels import read_warp_contact_labels
+from .numerical_options import validate_numerical_options, numerical_receipt, set_model_numerical_options
 
 
 def write(path, value):
@@ -59,6 +60,9 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
         recipe_path=str((config_dir / config['pen_recipe']).resolve()) if task == 'hand2-pen-spin' else None,
         clips_root=str((config_dir / config['clips_root']).resolve()) if task == 'hand2-pen-spin' else None)
     cfg.seed = seed; cfg.auto_reset = False; cfg.scene.num_envs = 1
+    numerical_options=validate_numerical_options(config.get('numerical_options',{}))
+    for key,value in numerical_options.items():
+        setattr(cfg.sim.mujoco,key,value)
     if 'physics_dt' in config:
         cfg.sim.mujoco.timestep=config['physics_dt'];cfg.decimation=round(.02/config['physics_dt'])
         if abs(cfg.decimation*config['physics_dt']-.02)>1e-15:raise ValueError('Exact declared 50Hz clock')
@@ -81,6 +85,14 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
     original_step = env.sim.step
     started = time.perf_counter()
     try:
+        numerical_before=numerical_receipt(env.sim.mj_model,env.sim.wp_model)
+        numerical_device_override=config.get('numerical_device_override',False)
+        if not isinstance(numerical_device_override,bool):raise ValueError('Explicit numerical device override boolean')
+        if numerical_device_override:
+            for key in ['iterations','ls_iterations']:
+                if key in numerical_options and getattr(env.sim.wp_model.opt,key)!=numerical_options[key]:
+                    raise ValueError('Iteration caps must already match before captured-graph execution')
+            set_model_numerical_options(env.sim.mj_model,env.sim.wp_model,numerical_options)
         observation = env.reset()[0]['policy']  # The only reset in this case.
         initialization_receipt=None
         if initializer is not None:
@@ -147,7 +159,7 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
             'post_COM_velocity', 'post_omega_world', 'pre_object_COM', 'pre_hand_normal_N',
             'pre_object_nonhand_normal_N', 'pre_penetration_m', 'pre_self_penetration_m',
             'post_joint_limit_excursion_rad', 'overflow', 'post_actuator_force', 'post_qfrc_actuator', 'post_GPU_time',
-            'post_qfrc_constraint','post_qfrc_bias','post_qfrc_passive','post_qacc']}
+            'post_qfrc_constraint','post_qfrc_bias','post_qfrc_passive','post_qacc','post_solver_niter']}
         raw = []; action_rows = []; phase = []; terminations = []; ticks = 0
         observations = []; terminal_rows = []
         efc_rows=[];efc_ranges=[0];contact_addresses=[];legacy_force=[];legacy_adhesion=[]
@@ -192,7 +204,7 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
             values = [preq, prev, host.qpos.copy(), host.qvel.copy(), host.ctrl.copy(), host.qfrc_applied.copy(),
                 host.xfrc_applied.copy(), center, quat, velocity, omega, host.xipos[body].copy(), hand_N, other_N,
                 penetration, self_pen, excursion, overflow, host.actuator_force.copy(), host.qfrc_actuator.copy(), float(host.time),
-                host.qfrc_constraint.copy(),host.qfrc_bias.copy(),host.qfrc_passive.copy(),host.qacc.copy()]
+                host.qfrc_constraint.copy(),host.qfrc_bias.copy(),host.qfrc_passive.copy(),host.qacc.copy(),int(wd.solver_niter.numpy()[0])]
             for key, value in zip(trace, values): trace[key].append(value)
             ticks += 1
         env.sim.step = record_step
@@ -240,6 +252,8 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
             termination_flags=terminations[-1], phase_first=phase[0], phase_last=phase[-1],
             termination_names=list(terminations[0]),
             initialization=initialization_receipt,
+            numerical_options=dict(requested=numerical_options,device_override=numerical_device_override,
+                before_override=numerical_before,**numerical_receipt(m,env.sim.wp_model)),
             contact_label_schema='GPU_constraint_indexed_no_adhesion:1',
             trace=file_pin(folder/'trace.npz'), wall_s=time.perf_counter()-started,
             host_topology=file_pin(folder/'host_topology.mjb'), GPU_physical_context=file_pin(folder/'GPU_physical_context.npz'),
