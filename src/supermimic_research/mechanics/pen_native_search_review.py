@@ -1,8 +1,6 @@
-"""Independent NumPy feedback-target, score, budget and actual replay review."""
-import argparse
+"""Independent NumPy native-objective, source and actual replay review."""
 import contextlib
 import json
-import sys
 import tomllib
 from pathlib import Path
 
@@ -12,6 +10,7 @@ from scipy.spatial.transform import Rotation
 
 ROOT=Path(__file__).resolve().parents[3]
 from supermimic_research.artifacts import file_pin,verify_file_pin
+from supermimic_research.frozen_sources import verify_source_snapshot,verify_source_pin
 from supermimic_research.mechanics.warp_saved_review import review_saved_warp_contacts
 from supermimic_research.mechanics.pen_replay_fidelity import compare_response
 from supermimic_research.runtime.controlled_evaluation import write
@@ -22,9 +21,14 @@ def main(a):
     cp=verify_file_pin(r['config']);gates=tomllib.loads((cp.parent/cfg['gates']).read_text())
     proposal=json.loads(verify_file_pin(r['proposal']).read_text());selected=np.load(verify_file_pin(proposal['artifacts']['selected']))
     offsets=np.load(verify_file_pin(r['candidates']))['raw_offsets']
-    expected={(mode,dt) for mode in ['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT'] for dt in [.005,.0025]}
-    if {(c['name'],c['dt']) for c in r['cases']}!=expected or len(r['cases'])!=6 or a.output.exists():raise ValueError('Exact predeclared6 cases and fresh review')
-    for pin in r['sources']+r['task_sources']:verify_file_pin(pin)
+    modes=(['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_VELOCITY','STATE_PLUS_VELOCITY_SUPPORT'] if cfg.get('experiment')=='VELOCITY' else ['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT'])
+    expected={(mode,dt) for mode in modes for dt in [.005,.0025]}
+    if {(c['name'],c['dt']) for c in r['cases']}!=expected or len(r['cases'])!=len(expected) or a.output.exists():raise ValueError('Exact predeclared objective cases and fresh review')
+    relocation_path=getattr(a,'source_relocations',None)
+    relocations=json.loads(relocation_path.read_text()) if relocation_path else None
+    if 'source_receipt' in r:
+        verify_source_snapshot(json.loads(verify_file_pin(r['source_receipt']).read_text()))
+    for pin in r['sources']+r['task_sources']:verify_source_pin(pin,relocations)
     a.output.mkdir()
     try:
         with (a.output/'EFC_console.log').open('w',encoding='utf8') as log,contextlib.redirect_stdout(log):efc=review_saved_warp_contacts(a.report,a.output/'EFC',expected)
@@ -69,7 +73,12 @@ def main(a):
             target=ref['wrench_world'][k].copy();target[:3]+=correction
             mean=d['W'].mean(1);support=((mean[:,:3]-target[:3])/.1)**2
             torque=((mean[:,3:]-target[3:])/.005)**2;support=support.mean(1)+torque.mean(1)
-            score=state+(0. if c['name']=='STATE_ONLY' else .1)*bool(ref['valid_interval'][k])*support
+            support_weight=.1 if c['name'] in ['STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT','STATE_PLUS_VELOCITY_SUPPORT'] else 0.
+            velocity_weight=1. if c['name'] in ['STATE_PLUS_VELOCITY','STATE_PLUS_VELOCITY_SUPPORT'] else 0.
+            endpoint_valid=k+1<len(ref['velocity_world'])
+            endpoint_velocity=ref['velocity_world'][k+1] if endpoint_valid else np.zeros(3)
+            velocity_cost=(((d['V'][:,-1,da:da+3].astype(float)-endpoint_velocity)/.25)**2).sum(1) if velocity_weight and endpoint_valid else np.zeros(57)
+            score=state+support_weight*bool(ref['valid_interval'][k])*support+velocity_weight*velocity_cost
             score_error=float(np.max(abs(score-d['score_total'])))
             feasible=d['score_feasible'].astype(bool);violation=d['score_violation'];cost=d['score_total']
             if feasible.any():best=np.flatnonzero(feasible)[np.argmin(cost[feasible])]
@@ -90,6 +99,11 @@ def main(a):
                 formula_within_FP32_roundoff=bool(np.all(abs(score-d['score_total'])<=1e-3+1e-5*abs(score))),
                 minimum_declared_score_or_violation=int(best)==index,
                 no_fallback_hidden=bool(decision['any_feasible'])==bool(feasible.any()) and bool(decision['selected_feasible'])==bool(feasible[index]))
+            if 'endpoint_velocity_world' in d:
+                checks.update(endpoint_velocity=np.allclose(endpoint_velocity,d['endpoint_velocity_world'],atol=1e-7,rtol=1e-5),
+                    derivative_mask=bool(d['endpoint_velocity_valid'])==endpoint_valid and decision['endpoint_velocity_valid']==endpoint_valid,
+                    predeclared_weights=float(d['velocity_weight'])==velocity_weight and float(d['support_weight'])==support_weight,
+                    velocity_score=np.allclose(d['score_velocity'],velocity_cost,atol=1e-4,rtol=1e-5))
             pred=dict(post_qpos=d['Q'][index].astype(float),post_qvel=d['V'][index].astype(float),post_ctrl=d['U'][index].astype(float),post_GPU_time=d['T'][index].astype(float))
             actual={key:z[key][lo:hi] for key in pred}
             metrics,fidelity=compare_response(pred,actual,d['W'][index].astype(float),actual_w[lo:hi],qids,dofs,qa,da,gates)
@@ -110,12 +124,12 @@ def main(a):
         pair=[c for c in r['cases'] if c['dt']==dt];intervals=min(c['actual_intervals'] for c in pair)
         common.append(dict(dt=dt,common_intervals=intervals,common_physical_s=intervals*.02,candidates_per_mode_common_prefix=57*intervals,
             selected_indices_all_equal=sum(len({c['planning'][i]['selected'] for c in pair})==1 for i in range(intervals))))
-    result=dict(schema='pen_native_feedback_support_saved_review:1',run=file_pin(a.report),source=file_pin(__file__),
-        comparison_source=file_pin(ROOT/'src/supermimic_research/mechanics/pen_replay_fidelity.py'),EFC=file_pin(a.output/'EFC'/'report.json'),EFC_counts=[efc['passed'],efc['total']],
+    result=dict(schema='pen_native_objective_saved_review:2',run=file_pin(a.report),source=file_pin(__file__),
+        source_relocations=file_pin(relocation_path) if relocation_path else None,comparison_source=file_pin(ROOT/'src/supermimic_research/mechanics/pen_replay_fidelity.py'),EFC=file_pin(a.output/'EFC'/'report.json'),EFC_counts=[efc['passed'],efc['total']],
         cases=results,common_prefix=common,contract_passed=contract_passed,contract_total=contract_total,
         selected_fidelity_passed=sum(d['fidelity_passed'] for d in all_decisions),selected_fidelity_total=len(all_decisions),
         nominal_model_support_benefit_established=False,neural_updates=0,native_integrations=0,
-        scope='Independent saved contracts, mean-reference momentum targets, source-state translational feedback target and masks, cost formula(debug FP32 roundoff only), exact argmin/fallback, original raw/EMA/selected PD and EVERY selected native20ms state/force comparison. Implied bias consistency is not a new observed hardware calibration. Actual task gates stay unrelaxed; all failures retained. Per-decision57 budget/common prefix, not equal total survival compute or final learned-policy A1/A2.')
+        scope='Independent saved contracts, mean-reference momentum targets, source-state translational feedback target and endpoint WORLD velocity targets/masks/cost, cost formula(debug FP32 roundoff only), exact argmin/fallback, original raw/EMA/selected PD and EVERY selected native20ms state/force comparison. Implied bias consistency is not a new observed hardware calibration. Actual task gates stay unrelaxed; all failures retained. Per-decision57 budget/common prefix, not equal total survival compute or final learned-policy A1/A2.')
     write(a.output/'report.json',result)
     print(json.dumps(dict(report=file_pin(a.output/'report.json'),contracts=[contract_passed,contract_total],EFC=result['EFC_counts'],fidelity=[result['selected_fidelity_passed'],len(all_decisions)],
         cases=[dict(mode=c['mode'],dt=c['dt'],duration=c['actual_duration_s'],fallbacks=c['fallbacks'],terminations=c['terminations'],qualified=c['qualified']) for c in results])))

@@ -1,8 +1,7 @@
-"""Shared actual native experiment; frozen two-mode predecessor stays historical."""
-import argparse
+"""Shared actual native objective comparisons with immutable source receipts."""
 import json
-import sys
 import time
+import subprocess
 import tomllib
 from pathlib import Path
 
@@ -11,6 +10,7 @@ from scipy.spatial.transform import Rotation
 
 ROOT=Path(__file__).resolve().parents[3]
 from supermimic_research.artifacts import ArtifactRegistry,file_pin,verify_file_pin
+from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot
 from supermimic_research.runtime.controlled_evaluation import evaluate_case,write
 from supermimic_research.runtime.pen_gpu_initialization import initialize_and_query_pen
 from supermimic_research.runtime.gpu_model_snapshot import capture_model
@@ -26,20 +26,27 @@ def main(a):
     from mjlab.utils.lab_api.math import combine_frame_transforms
     cp=a.config.resolve();cfg=tomllib.loads(cp.read_text());bp=(cp.parent/cfg['base_config']).resolve();base=tomllib.loads(bp.read_text())
     pp=(cp.parent/cfg['proposal']).resolve();proposal=json.loads(pp.read_text());s=np.load(verify_file_pin(proposal['artifacts']['selected']))
+    profile=cfg.get('experiment','FEEDBACK')
+    profiles={'FEEDBACK':['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT'],
+              'VELOCITY':['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_VELOCITY','STATE_PLUS_VELOCITY_SUPPORT']}
+    if profile not in profiles:raise ValueError('Unknown predeclared objective profile')
     if (a.output.exists() or not a.output.resolve().is_relative_to(ROOT/'runs') or cfg['candidates']!=57 or cfg['horizon_s']!=.02
-            or cfg['controllers']!=['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT'] or cfg['dt']!=[.005,.0025]
-            or cfg['feedback_position_gain_s2']!=100. or cfg['feedback_velocity_gain_s']!=20.
+            or cfg['controllers']!=profiles[profile] or cfg['dt']!=[.005,.0025]
+            or (profile=='FEEDBACK' and (cfg['feedback_position_gain_s2']!=100. or cfg['feedback_velocity_gain_s']!=20.))
+            or (profile=='VELOCITY' and (cfg['velocity_scale_m_s']!=.25 or cfg['velocity_weight']!=1.))
             or cfg['residual_reference']!='ZERO_PHYSICAL_EMA' or not cfg['numerical_device_override']):raise ValueError('Fixed fresh native search experiment')
     torch.set_num_threads(4);wp.set_device('cuda:0');a.output.mkdir();registry=ArtifactRegistry(bp.parent/base['artifact_manifest'])
     offsets=candidate_offsets(seed=cfg['candidate_seed']);np.savez_compressed(a.output/'candidates.npz',raw_offsets=offsets)
-    sources=[file_pin(__file__),file_pin(ROOT/'tools/run_pen_native_feedback.py'),file_pin(ROOT/'src/supermimic_research/mechanics/feedback_support.py')]+[file_pin(ROOT/p) for p in ['src/supermimic_research/runtime/native_pen_planner.py',
-        'src/supermimic_research/runtime/pen_native_planning_math.py','src/supermimic_research/runtime/gpu_data_fork.py',
-        'src/supermimic_research/runtime/gpu_data_snapshot.py','src/supermimic_research/runtime/gpu_model_snapshot.py',
-        'src/supermimic_research/runtime/controlled_evaluation.py','src/supermimic_research/runtime/pen_gpu_initialization.py',
-        'src/supermimic_research/mechanics/mean_reference_wrench.py','src/supermimic_research/mechanics/reference_contact_wrench.py']]
-    intent=dict(schema='pen_native_feedback_support_search:1',config=file_pin(cp),base_config=file_pin(bp),proposal=file_pin(pp),sources=sources,
+    revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+    paths=sorted({p for package in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/package).rglob('*.py')})
+    paths.extend(ROOT/p for p in ['tools/run_pen_native.py','tools/run_pen_native_feedback.py'])
+    source_receipt=freeze_sources(paths,a.output/'source_snapshot',ROOT,revision)
+    verify_source_snapshot(source_receipt,live=True)
+    write(a.output/'source_receipt.json',source_receipt)
+    sources=[r['snapshot'] for r in source_receipt['records']]
+    intent=dict(schema='pen_native_objective_search:2',experiment=profile,source_receipt=file_pin(a.output/'source_receipt.json'),code_revision=revision,config=file_pin(cp),base_config=file_pin(bp),proposal=file_pin(pp),sources=sources,
         candidates=file_pin(a.output/'candidates.npz'),neural_updates=0,Actor_updates=0,
-        scope='Native20ms57-candidate finite-action controller probe; state-only versus nominal feedforward support versus source-state feedback support. Gains100/s^2,20/s; nominal torque unchanged, objective only. Development on same clip, not held-out. Equal candidates/decision, not equal total compute under unequal survival. Full original7.36s clock, first native terminal, no object force/reset aid. Not learned-policy A1/A2, real-time, surrogate speedup or ego qualification.')
+        scope='Native20ms57-candidate finite-action objective comparison; profile and fixed gains/scales declared by config. Objectives only, no applied corrective force. Development on same clip, not held-out. Equal candidates/decision, not equal total compute under unequal survival. Full original7.36s clock, first native terminal, no object force/reset aid. Not learned-policy A1/A2, real-time, surrogate speedup or ego qualification.')
     write(a.output/'intent.json',intent);cases=[];keepers=[]
     for dt in cfg['dt']:
         for mode in cfg['controllers']:
@@ -85,15 +92,21 @@ def main(a):
                     feedback=feedback_support_target(nominal,reference['mass'],source_p,source_v,
                         reference['COM'][k],reference['velocity'][k],cfg['feedback_position_gain_s2'],cfg['feedback_velocity_gain_s'])
                     support_target=feedback['target_world'];correction=feedback['correction_force_world']
+                endpoint_velocity_valid=k+1<len(reference['velocity'])
+                endpoint_velocity=reference['velocity'][k+1] if endpoint_velocity_valid else torch.zeros_like(source_v)
+                velocity_weight=cfg['velocity_weight'] if mode in ['STATE_PLUS_VELOCITY','STATE_PLUS_VELOCITY_SUPPORT'] else 0.
+                support_weight=cfg['support_weight'] if mode in ['STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT','STATE_PLUS_VELOCITY_SUPPORT'] else 0.
                 selected,arrays,scores,cuda_ms=planner.search(targets,ema,reference['COM'][k+1],reference['shaft'][k+1],command.joint_pos[0],
-                    support_target,valid,0. if mode=='STATE_ONLY' else cfg['support_weight'],scorecfg)
+                    support_target,valid,support_weight,scorecfg,reference_velocity=endpoint_velocity,
+                    velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight)
                 compute_wall=time.perf_counter()-started
                 audit=planner.source.audit(env.sim.wp_data)
                 controller_same=all(np.array_equal(controller[key],getattr(action,key).detach().cpu().numpy()) for key in statekeys)
                 controller_same &= np.array_equal(controller['command_phase'],command.time_steps.detach().cpu().numpy())
                 if not audit['all_array_bytes_equal'] or not audit['scalar_equal'] or not controller_same:raise ValueError('Live planning isolation failed')
                 path=folder/f'decision_{k:04d}.npz'
-                np.savez_compressed(path,support_target_world=support_target.detach().cpu().numpy(),
+                np.savez_compressed(path,endpoint_velocity_world=endpoint_velocity.detach().cpu().numpy(),
+                    endpoint_velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,support_weight=support_weight,support_target_world=support_target.detach().cpu().numpy(),
                     support_feedback_force_world=correction.detach().cpu().numpy(),
                     support_source_position_error_world_m=position_error.detach().cpu().numpy(),
                     support_source_velocity_error_world_m_s=velocity_error.detach().cpu().numpy(),**arrays,**{'score_'+key:value for key,value in scores.items()},raw_candidates=raw.detach().cpu().numpy(),
@@ -103,7 +116,7 @@ def main(a):
                 decision=dict(k=k,phase=int(controller['command_phase'][0]),selected=selected,candidates=57,
                     any_feasible=bool(scores['feasible'].any()),selected_feasible=bool(scores['feasible'][selected]),
                     selected_finite=bool(scores['finite'][selected]),selected_capacity=bool(scores['capacity'][selected]),
-                    selected_violation=float(scores['violation'][selected]),nominal_wrench_valid=bool(reference['valid'][k]),
+                    selected_violation=float(scores['violation'][selected]),endpoint_velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,support_weight=support_weight,nominal_wrench_valid=bool(reference['valid'][k]),
                     live_data_controller_untouched=True,source=file_pin(source),prediction=file_pin(path),
                     candidate_cuda_ms=cuda_ms,compute_and_readback_wall_s=compute_wall,total_with_artifact_wall_s=time.perf_counter()-started)
                 decisions.append(decision);write(folder/'planning_progress.json',dict(decisions=decisions))
@@ -118,12 +131,13 @@ def main(a):
                 candidates_evaluated=57*len(decisions),candidate_physics_ticks=57*len(decisions)*round(.02/dt),
                 supervision='NATIVE_CONTROLLER_PROBE_NONEXPERT_UNLESS_ALL_ORIGINAL_GATES_PASS')
             cases.append(c);write(folder/'report.json',c);write(a.output/'progress.json',dict(cases=cases))
-    for pin in sources:verify_file_pin(pin)
+    verify_source_snapshot(source_receipt,live=True)
+    source_map={r['observed']['path']:r['snapshot'] for r in source_receipt['records']}
     task_sources=[]
     for name,module in list(sys.modules.items()):
         path=getattr(module,'__file__',None)
         if name.startswith('dex_supermimic') and path:
             if not Path(path).resolve().is_relative_to(ROOT/'src'):raise ValueError('Historical task import')
-            task_sources.append(file_pin(path))
+            task_sources.append(source_map[str(Path(path).resolve())])
     result=dict(**intent,cases=cases,task_sources=task_sources)
     write(a.output/'report.json',result);print(json.dumps(dict(report=file_pin(a.output/'report.json'),cases=[dict(mode=c['name'],dt=c['dt'],duration=c['summary']['metrics']['actual_duration_s'],qualified=c['summary']['qualified'],candidates=c['candidates_evaluated']) for c in cases])))

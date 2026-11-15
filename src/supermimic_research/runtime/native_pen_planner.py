@@ -129,7 +129,8 @@ class NativePenPlanner:
             for key,a in arrays.items():
                 if a.size:wp.copy(self.source.arrays[key],a)
 
-    def search(self,targets,ema,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg):
+    def search(self,targets,ema,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg,
+               *,reference_velocity=None,velocity_valid=False,velocity_weight=0.):
         caller=torch.cuda.current_stream();self.torch_stream.wait_stream(caller)
         begin,end=torch.cuda.Event(enable_timing=True),torch.cuda.Event(enable_timing=True)
         with torch.cuda.stream(self.torch_stream),wp.ScopedStream(self.stream):
@@ -139,7 +140,8 @@ class NativePenPlanner:
             for i in range(57):
                 self.views['slot'].fill_(i);wp.capture_launch(self.graph,stream=self.stream)
             result=score_candidates(self.views['Q'],self.views['V'],self.views['U'],self.views['W'],self.views['pen'],self.views['other'],self.views['bad'],ema,
-                self.qid_tensor,self.qa,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg)
+                self.qid_tensor,self.qa,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg,
+                object_da=self.da,reference_velocity=reference_velocity,velocity_valid=velocity_valid,velocity_weight=velocity_weight)
             end.record()
         end.synchronize();caller.wait_stream(self.torch_stream)
         index=int(result['index']);arrays={k:v.detach().cpu().numpy().copy() for k,v in self.views.items() if k not in ['slot','target_ctrl']}

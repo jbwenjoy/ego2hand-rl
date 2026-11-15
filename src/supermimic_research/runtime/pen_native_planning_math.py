@@ -19,7 +19,8 @@ def candidate_targets(raw,processed,reference,bias,lower,upper):
 
 def score_candidates(qpos,qvel,ctrl,wrench,penalties,other_force,overflow,ema,
                      qids,qa,reference_COM,reference_shaft,reference_hand,target_wrench,
-                     wrench_valid,support_weight,cfg):
+                     wrench_valid,support_weight,cfg,*,object_da=None,reference_velocity=None,
+                     velocity_valid=False,velocity_weight=0.):
     q=qpos[:,-1];quat=q[:,qa+3:qa+7];w,x,y,z=quat.unbind(-1)
     shaft=torch.stack([1-2*(y*y+z*z),2*(x*y+w*z),2*(x*z-w*y)],dim=-1)
     angle=torch.acos((shaft*reference_shaft).sum(-1).clamp(-1,1))
@@ -31,6 +32,11 @@ def score_candidates(qpos,qvel,ctrl,wrench,penalties,other_force,overflow,ema,
     mean=wrench.mean(1)
     support=((mean[:,:3]-target_wrench[:3])/cfg['force_scale_N']).square().mean(-1)+((mean[:,3:]-target_wrench[3:])/cfg['torque_scale_Nm']).square().mean(-1)
     total=state+support_weight*wrench_valid*support
+    velocity=q.new_zeros(len(q))
+    if velocity_weight and velocity_valid:
+        if object_da is None or reference_velocity is None:raise ValueError('Explicit WORLD free-object dof address and endpoint velocity required')
+        velocity=((qvel[:,-1,object_da:object_da+3]-reference_velocity)/cfg['velocity_scale_m_s']).square().sum(-1)
+        total=total+velocity_weight*velocity
     bounds=q.new_tensor([cfg['max_penetration_m'],cfg['max_self_penetration_m'],cfg['max_joint_limit_excursion_rad']])
     geometric=((penalties-bounds).clamp_min(0)/bounds).sum(-1)
     nonhand=((other_force.max(1).values-cfg['max_object_nonhand_normal_force_N']).clamp_min(0)/cfg['max_object_nonhand_normal_force_N'])
@@ -44,4 +50,4 @@ def score_candidates(qpos,qvel,ctrl,wrench,penalties,other_force,overflow,ema,
     fallback=torch.where(violation==violation.min(),clean,inf).argmin()
     index=torch.where(feasible.any(),best,fallback)
     return dict(index=index,total=total,state=state,support=support,feasible=feasible,violation=violation,
-                finite=finite,capacity=capacity,shaft_error_rad=angle,mean_world_wrench=mean)
+                finite=finite,capacity=capacity,shaft_error_rad=angle,mean_world_wrench=mean,velocity=velocity)

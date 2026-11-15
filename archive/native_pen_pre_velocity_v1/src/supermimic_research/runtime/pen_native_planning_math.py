@@ -1,0 +1,47 @@
+"""Declared finite actions, original control mapping and device-only scoring."""
+import numpy as np
+import torch
+
+
+def candidate_offsets(ncontrols=368,seed=8101):
+    if ncontrols!=368 or seed!=8101:raise ValueError('Original368-control clock and fixed candidate seed')
+    axes=.08*np.eye(20,dtype=np.float32)
+    fixed=np.concatenate([np.zeros((1,20),np.float32),axes,-axes])
+    random=np.random.default_rng(seed).normal(0,.04,(ncontrols,16,20)).clip(-.08,.08).astype(np.float32)
+    return np.concatenate([np.broadcast_to(fixed,(ncontrols,41,20)),random],axis=1).copy()
+
+
+def candidate_targets(raw,processed,reference,bias,lower,upper):
+    ema=.5*(.5*raw).clamp(-.6,.6)+.5*processed
+    intended=reference+ema-bias
+    return intended.clamp(min=lower,max=upper),ema,intended
+
+
+def score_candidates(qpos,qvel,ctrl,wrench,penalties,other_force,overflow,ema,
+                     qids,qa,reference_COM,reference_shaft,reference_hand,target_wrench,
+                     wrench_valid,support_weight,cfg):
+    q=qpos[:,-1];quat=q[:,qa+3:qa+7];w,x,y,z=quat.unbind(-1)
+    shaft=torch.stack([1-2*(y*y+z*z),2*(x*y+w*z),2*(x*z-w*y)],dim=-1)
+    angle=torch.acos((shaft*reference_shaft).sum(-1).clamp(-1,1))
+    position=((q[:,qa:qa+3]-reference_COM)/cfg['COM_scale_m']).square().sum(-1)
+    orientation=(angle/np.deg2rad(cfg['shaft_scale_deg'])).square()
+    hand=((q[:,qids]-reference_hand)/cfg['hand_scale_rad']).square().mean(-1)
+    residual=(ema/cfg['residual_scale_rad']).square().mean(-1)
+    state=position+orientation+cfg['hand_weight']*hand+cfg['residual_weight']*residual
+    mean=wrench.mean(1)
+    support=((mean[:,:3]-target_wrench[:3])/cfg['force_scale_N']).square().mean(-1)+((mean[:,3:]-target_wrench[3:])/cfg['torque_scale_Nm']).square().mean(-1)
+    total=state+support_weight*wrench_valid*support
+    bounds=q.new_tensor([cfg['max_penetration_m'],cfg['max_self_penetration_m'],cfg['max_joint_limit_excursion_rad']])
+    geometric=((penalties-bounds).clamp_min(0)/bounds).sum(-1)
+    nonhand=((other_force.max(1).values-cfg['max_object_nonhand_normal_force_N']).clamp_min(0)/cfg['max_object_nonhand_normal_force_N'])
+    finite=torch.isfinite(qpos).all(dim=(1,2))&torch.isfinite(qvel).all(dim=(1,2))&torch.isfinite(ctrl).all(dim=(1,2))&torch.isfinite(wrench).all(dim=(1,2))&torch.isfinite(total)&torch.isfinite(penalties).all(1)&torch.isfinite(other_force).all(1)
+    capacity=~overflow.bool().any(1)
+    feasible=finite&capacity&(geometric==0)&(nonhand==0)
+    violation=torch.nan_to_num(geometric+nonhand+(~capacity).to(q.dtype)*1e6+(~finite).to(q.dtype)*1e12,nan=1e12,posinf=1e12)
+    clean=torch.nan_to_num(total,nan=1e30,posinf=1e30,neginf=1e30)
+    inf=torch.full_like(clean,float('inf'))
+    best=torch.where(feasible,clean,inf).argmin()
+    fallback=torch.where(violation==violation.min(),clean,inf).argmin()
+    index=torch.where(feasible.any(),best,fallback)
+    return dict(index=index,total=total,state=state,support=support,feasible=feasible,violation=violation,
+                finite=finite,capacity=capacity,shaft_error_rad=angle,mean_world_wrench=mean)
