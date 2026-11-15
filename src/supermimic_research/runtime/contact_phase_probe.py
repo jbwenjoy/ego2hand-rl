@@ -47,10 +47,16 @@ def _phases(p:PairArrays,g:int,h:int,pairid:int,gjk_iterations:int,epa_iteration
         p.mesh_polyvert,p.mesh_polymapadr,p.mesh_polymapnum,p.mesh_polymap,p.geom_xpos,p.geom_xmat,pair,0)
     margin,gap=contact_margin_gap(p.geom_margin,p.geom_gap,p.pair_margin,p.pair_gap,pair,pairid,0)
     a.margin=margin;b.margin=margin
+    integers[9]=a.index;integers[10]=b.index
     # Match installed _discrete_geoms for supported cylinder/box/mesh inputs.
     discrete=(t1==GeomType.BOX or t1==GeomType.MESH) and (t2==GeomType.BOX or t2==GeomType.MESH) and margin==0.0
     raw=gjk(p.tolerance[0],gjk_iterations,a,b,a.pos,b.pos,t1,t2,gap,discrete)
-    need,dist,ncontact,x1,x2,result,a2,b2=gjk_phase(p.tolerance[0],gap,gjk_iterations,a,b,t1,t2,a.pos,b.pos)
+    integers[11]=a.index;integers[12]=b.index
+    c,d=geom_collision_pair(p.geom_type,p.geom_dataid,p.geom_size,p.mesh_vertadr,p.mesh_vertnum,p.mesh_graphadr,
+        p.mesh_vert,p.mesh_graph,p.mesh_polynum,p.mesh_polyadr,p.mesh_polynormal,p.mesh_polyvertadr,p.mesh_polyvertnum,
+        p.mesh_polyvert,p.mesh_polymapadr,p.mesh_polymapnum,p.mesh_polymap,p.geom_xpos,p.geom_xmat,pair,0)
+    c.margin=margin;d.margin=margin;integers[13]=c.index;integers[14]=d.index
+    need,dist,ncontact,x1,x2,result,a2,b2=gjk_phase(p.tolerance[0],gap,gjk_iterations,c,d,t1,t2,c.pos,d.pos)
     floats[0]=margin;floats[1]=gap;floats[2]=p.tolerance[0];floats[3]=raw.dist;floats[4]=dist
     integers[0]=raw.dim;integers[1]=int(need);integers[2]=result.dim
     integers[3]=raw.index1;integers[4]=raw.index2
@@ -84,7 +90,7 @@ class ContactPhaseProbe:
             face_pr=wp.zeros(6+MJ_MAX_EPAFACES*self.epa_iterations,dtype=wp.vec3,device=device),
             face_norm=wp.zeros(6+MJ_MAX_EPAFACES*self.epa_iterations,dtype=float,device=device),
             horizon=wp.zeros(MJ_MAX_EPAHORIZON,dtype=int,device=device),overflow=wp.zeros(1,dtype=int,device=device),
-            floats=wp.zeros(7,dtype=float,device=device),integers=wp.zeros(9,dtype=int,device=device),
+            floats=wp.zeros(7,dtype=float,device=device),integers=wp.zeros(15,dtype=int,device=device),
             simplices=wp.zeros((3,4),dtype=wp.vec3,device=device),indices=wp.zeros((2,4),dtype=int,device=device),witness=wp.zeros(2,dtype=wp.vec3,device=device))
 
     def query(self,g,h,pairid=-1):
@@ -95,6 +101,7 @@ class ContactPhaseProbe:
         result=dict(margin_m=float(f[0]),gap_m=float(f[1]),ccd_tolerance_m=float(f[2]),raw_gjk_distance_m=float(f[3]),
             phase_gjk_distance_m=float(f[4]),final_pre_margin_distance_m=float(f[5]),final_surface_distance_m=float(f[6]),
             raw_simplex_dim=int(i[0]),needs_epa=bool(i[1]),phase_simplex_dim=int(i[2]),support_cache_indices=[int(i[3]),int(i[4])],
+            geometry_cache_before_raw=[int(i[9]),int(i[10])],geometry_cache_after_raw=[int(i[11]),int(i[12])],geometry_cache_fresh_phase=[int(i[13]),int(i[14])],
             pre_multiccd_contacts=int(i[5]),multiccd_index=int(i[6]),native_gap_reject=bool(i[7]),pre_multiccd_emit=bool(i[8]),
             overflow=bool(values['overflow'][0]),geometry_types=[int(self.types[g]),int(self.types[h])],configured_gjk_iterations=self.gjk_iterations,configured_epa_iterations=self.epa_iterations,
             scratch_policy='ZERO_BEFORE_EACH_QUERY_SEPARATE_FROM_NATIVE_PIPELINE',

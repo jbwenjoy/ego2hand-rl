@@ -28,7 +28,7 @@ def main(a):
     from mujoco_warp._src.collision_core import create_collision_context
     cp=a.config.resolve();cfg=tomllib.loads(cp.read_text());bp=(cp.parent/cfg['branch']).resolve();branch=json.loads(bp.read_text())
     if (a.output.exists() or not a.output.resolve().is_relative_to(ROOT/'runs') or cfg['pair']!=[1,29] or cfg['poses']!=[p['name'] for p in branch['poses']]
-            or cfg.get('calibration_pairs')!=['BOX_BOX','CYLINDER_MESH_BOX'] or cfg['repeats']!=5 or cfg['phase_scratch']!='ZERO_BEFORE_EACH_QUERY' or cfg['calibration_center_separations_m']!=[.5,.15,.05]
+            or cfg.get('phase_geometries')!='FRESH_FOR_RAW_AND_PHASE' or cfg.get('phase_distance_debug_tolerance_m')!=1e-7 or cfg.get('calibration_pairs')!=['BOX_BOX','CYLINDER_MESH_BOX'] or cfg['repeats']!=5 or cfg['phase_scratch']!='ZERO_BEFORE_EACH_QUERY' or cfg['calibration_center_separations_m']!=[.5,.15,.05]
             or cfg['calibration_box_halfsize_m']!=.1 or cfg['calibration_distance_tolerance_m']!=1e-5):raise ValueError('Fixed pair-stage diagnostic and calibrations')
     wp.init();wp.set_device('cuda:0');stream=wp.Stream(device='cuda:0');a.output.mkdir()
     receipt=freeze_sources(sorted((ROOT/'src/supermimic_research').rglob('*.py'))+[Path(__file__)],a.output/'source_snapshot',ROOT,
@@ -95,7 +95,11 @@ def main(a):
                 old=next(e for e in branch['records'] if e['pose']==pose['name'] and e['repeat']==repeat)
                 checks=dict(public_source_exact=before['all_array_bytes_equal'] and before['scalar_equal'],
                     original_contact_presence=(len(contact_ids)>0)==(old['pair_contacts']>0),no_overflow=not phase['overflow'] and not bool(data.overflow.numpy()[0]),
-                    staged_distances_exact=np.array_equal(np.sort(distances[contact_ids]),np.sort(np.asarray(old['pair_distances_m'],dtype=np.float32))))
+                    staged_distances_exact=np.array_equal(np.sort(distances[contact_ids]),np.sort(np.asarray(old['pair_distances_m'],dtype=np.float32))),
+                    raw_phase_cache_reset=phase['geometry_cache_before_raw']==[-1,-1] and phase['geometry_cache_fresh_phase']==[-1,-1],
+                    phase_native_contact_presence=phase['pre_multiccd_emit']==bool(len(contact_ids)),
+                    phase_native_distance=(not len(contact_ids)) or abs(phase['final_surface_distance_m']-float(distances[contact_ids].min()))<=1e-7,
+                    raw_phase_gjk_distance=abs(phase['raw_gjk_distance_m']-phase['phase_gjk_distance_m'])<=1e-7)
                 records.append(dict(pose=pose['name'],repeat=repeat,ncollision=ncollision,nacon=nacon,broadphase_pair_rows=ids.tolist(),
                     broadphase_pair_order=order.astype(int).tolist(),broadphase_pairids=pairid.astype(int).tolist(),direct_query_bypasses_culled_pair=not len(ids),
                     pair_contacts=len(contact_ids),pair_distances_m=distances[contact_ids].astype(float).tolist(),phase=phase,checks=checks,trace=file_pin(path)))
