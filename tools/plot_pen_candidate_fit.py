@@ -17,7 +17,8 @@ def main(a):
     if a.output.exists():
         raise ValueError('Fresh figure directory required')
     e, r = [json.loads(p.read_text()) for p in (a.evaluation, a.rollout)]
-    colors = dict(DIRECT='#2878b5', IMPULSE='#d75a26')
+    if len(e['models'])!=2 or set(e['models'])!=set(r['models']):raise ValueError('Matching paired component reports required')
+    colors = dict(zip(e['models'],['#2878b5','#d75a26']))
     fig, axes = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=True)
     ax = axes[0, 0]
     for i, mode in enumerate(colors):
@@ -49,13 +50,16 @@ def main(a):
         baseline = r['models']['DIRECT']
         ax.plot([20, 40, 100, 200], [baseline[str(h)]['persistence'][quantity]['mean'] * factor for h in [1, 2, 5, 10]],
                 'x--', color='#555555', label='State persistence')
+        if 'constant_velocity_all_valid' in baseline['1']:
+            ax.plot([20,40,100,200],[baseline[str(h)]['constant_velocity_all_valid'][quantity]['mean']*factor for h in [1,2,5,10]],
+                    's:',color='#3c8c58',label='Constant velocity')
         ax.set_xlabel('Prediction horizon (ms); windows 63 / 58 / 43 / 18')
         ax.set_ylabel('Mean COM error (mm)' if factor == 1000. else 'Mean full-angle error (deg)')
         ax.set_title(title)
         ax.legend(fontsize=8)
         if factor == 1000.:
             ax.set_yscale('log')
-    fig.suptitle('Fixed 2000-update WM components: predictive/gradient readiness fails', fontsize=14)
+    fig.suptitle('Fixed 2000-update WM component diagnostics', fontsize=14)
     fig.text(.5, -.025, 'Same-clip development parents; correlated windows; failed source tasks. No Actor, ego, or task-success claim.', ha='center')
     a.output.mkdir()
     path = a.output / 'summary.png'

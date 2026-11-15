@@ -4,7 +4,8 @@ from pathlib import Path
 import numpy as np
 import torch
 from ..artifacts import file_pin,verify_file_pin
-from .pen_response import PenResponseWM,INPUT_SCHEMA,OUTPUT_SCHEMA,HEAD_SCHEMA
+from .pen_response import (PenResponseWM,INPUT_SCHEMA,OUTPUT_SCHEMA,head_schema,pen_families,
+                          model_from_arm,training_cache,training_head_scales)
 from .impulse_stage import update_impulse
 from .world_model import capture_rng,restore_rng,raw_tree_equal,atomic_checkpoint
 from .checkpoint import _finite_tree,_adam_valid
@@ -23,18 +24,17 @@ def metrics(model,x,y):
 
 
 def payload(arm,cfg,scales,head_scales,physics,device,gradient):
-    return dict(schema='controlled_pen_response_arm:1',mode=arm['mode'],coupled=arm['model'].coupled,width=cfg['width'],
+    version=cfg.get('schema',1)
+    return dict(schema=f'controlled_pen_response_arm:{version}',mode=arm['mode'],coupled=arm['model'].coupled,width=cfg['width'],
+        **(dict(pose_baseline=arm['model'].pose_baseline) if version==2 else {}),
         config=cfg,scales=scales,head_scales=head_scales,physics=physics,update=100,input_schema=INPUT_SCHEMA,output_schema=OUTPUT_SCHEMA,
-        head_schema=HEAD_SCHEMA if arm['model'].coupled else OUTPUT_SCHEMA,
+        head_schema=head_schema(arm['mode']),
         model=arm['model'].state_dict(),optimizer=arm['optimizer'].state_dict(),sampler=arm['sampler'].get_state(),
         rng=capture_rng(device=device),gradient_snapshot=gradient)
 
 
 def restore_arm(saved,device):
-    if saved['schema']!='controlled_pen_response_arm:1' or saved['input_schema']!=INPUT_SCHEMA or saved['output_schema']!=OUTPUT_SCHEMA:
-        raise ValueError('Explicit pen Fn6 checkpoint only; no frozen mug/phone resume')
-    m=PenResponseWM(saved['scales'],saved['head_scales'],saved['physics'],width=saved['width'],coupled=saved['coupled']).to(device)
-    m.load_state_dict(saved['model'],strict=True);c=saved['config']
+    m=model_from_arm(saved,device);c=saved['config']
     opt=torch.optim.AdamW(m.parameters(),lr=c['learning_rate'],weight_decay=c['weight_decay'],fused=True);opt.load_state_dict(saved['optimizer'])
     sampler=torch.Generator(device=device);sampler.set_state(saved['sampler']);restore_rng(saved['rng'],device=device)
     return dict(model=m,optimizer=opt,sampler=sampler,mode=saved['mode'])
@@ -42,6 +42,7 @@ def restore_arm(saved,device):
 
 def run_pen_stage(root,config_path,out,*,run=False):
     root,cp,out=Path(root).resolve(),Path(config_path).resolve(),Path(out).resolve();cfg=tomllib.loads(cp.read_text())
+    modes=pen_families(cfg);version=cfg.get('schema',1)
     pp=(cp.parent/cfg['prepared']).resolve();rp=(cp.parent/cfg['review']).resolve();prep=json.loads(pp.read_text());review=json.loads(rp.read_text())
     if not all(prep['checks'].values()) or review['passed']!=review['total'] or verify_file_pin(review['prepared']).resolve()!=pp:
         raise ValueError('Healthy prepared data and independent indexed/frame review required')
@@ -59,24 +60,25 @@ def run_pen_stage(root,config_path,out,*,run=False):
     sources=[file_pin(root/q) for q in ['tools/train_pen_response.py','src/supermimic_research/learning/pen_stage.py','src/supermimic_research/learning/pen_response.py',
         'src/supermimic_research/learning/compound_response.py','src/supermimic_research/learning/impulse_response.py','src/supermimic_research/learning/impulse_stage.py',
         'src/supermimic_research/learning/world_model.py','src/supermimic_research/learning/checkpoint.py','src/supermimic_research/learning/gpu_monitor.py','src/supermimic_research/mechanics/impulse_codec.py']]
-    out.mkdir();write(out/'intent.json',dict(schema='controlled_pen_paired_WM_stage:1',config=file_pin(cp),prepared=file_pin(pp),review=file_pin(rp),sources=sources,
+    out.mkdir();write(out/'intent.json',dict(schema=f'controlled_pen_paired_WM_stage:{version}',config=file_pin(cp),prepared=file_pin(pp),review=file_pin(rp),sources=sources,
         first_checkpoint_update=100,planned_updates=2000,stop_at_first_healthy_checkpoint=True,Actor_updates=0,hardware=hardware,
-        difference='DIRECT independent velocity heads versus measured source-BODY wrench/learned WORLD numerical-defect impulse closure, corresponding auxiliary labels; same NN weights/rows/batches/optimizer budget.',
+        difference=('DIRECT versus DIRECT_CV additive H20 kinematic pose prior with TRAIN residual head mean; same parameter count/scales/data/sampler/budget.' if version==2 else
+            'DIRECT independent velocity heads versus measured source-BODY wrench/learned WORLD numerical-defect impulse closure, corresponding auxiliary labels; same NN weights/rows/batches/optimizer budget.'),
         scope='Fresh single-clip nonexpert controlled-dynamics component experiment; not Actor A1/A2, expert imitation, successful retargeting or ego generalization.'))
     valid=data['TRAIN']['valid'];x=data['TRAIN']['x'][valid];y=data['TRAIN']['y'][valid];heads=data['TRAIN']['heads'][valid]
-    cache=dict(x=torch.as_tensor(x,dtype=torch.float32,device=device),y=torch.as_tensor(y,dtype=torch.float64,device=device),
-               DIRECT=torch.as_tensor(y,dtype=torch.float64,device=device),IMPULSE=torch.as_tensor(heads,dtype=torch.float64,device=device))
+    cache=training_cache(data['TRAIN'],device,modes)
     check=data['CHECK'];mask=check['valid'];check_x=torch.as_tensor(check['x'][mask],dtype=torch.float32,device=device);check_y=torch.as_tensor(check['y'][mask],dtype=torch.float64,device=device)
-    head_scales=dict(DIRECT=dict(head_mean=scales['y_mean'],head_scale=scales['y_scale']),IMPULSE=coupled_scales)
+    head_scales=training_head_scales(scales,coupled_scales,x,y,modes)
     arms={};initial_net=None;initial_check={}
-    for mode in ['DIRECT','IMPULSE']:
-        model=PenResponseWM(scales,head_scales[mode],prep['physics'],width=cfg['width'],coupled=mode=='IMPULSE').to(device)
+    for mode in modes:
+        model=PenResponseWM(scales,head_scales[mode],prep['physics'],width=cfg['width'],coupled=mode=='IMPULSE',
+                            pose_baseline='CONSTANT_VELOCITY' if mode=='DIRECT_CV' else 'ZERO').to(device)
         if initial_net is None:initial_net={k:v.detach().cpu().clone() for k,v in model.net.state_dict().items()}
         else:model.net.load_state_dict(initial_net,strict=True)
         opt=torch.optim.AdamW(model.parameters(),lr=cfg['learning_rate'],weight_decay=cfg['weight_decay'],fused=True)
         sampler=torch.Generator(device=device).manual_seed(cfg['sampler_seed'])
         arms[mode]=dict(model=model,optimizer=opt,sampler=sampler,mode=mode);initial_check[mode],_=metrics(model,check_x,check_y)
-    if not raw_tree_equal(arms['DIRECT']['model'].net.state_dict(),arms['IMPULSE']['model'].net.state_dict()):raise ValueError('Matched NN initialization')
+    if not raw_tree_equal(arms[modes[0]]['model'].net.state_dict(),arms[modes[1]]['model'].net.state_dict()):raise ValueError('Matched NN initialization')
     logs={m:[] for m in arms};timers=[];gradients={};sample_last={};monitor=GPUMonitor();monitor.start();torch.cuda.reset_peak_memory_stats(device);start=time.perf_counter()
     try:
         for update in range(1,101):
@@ -91,7 +93,7 @@ def run_pen_stage(root,config_path,out,*,run=False):
     logs={mode:torch.stack(v).cpu().tolist() for mode,v in logs.items()}
     saved_arms={mode:payload(arm,cfg,scales,head_scales[mode],prep['physics'],device,gradients[mode]) for mode,arm in arms.items()}
     checkpoint=out/'pen_response_checkpoint_0100.pt'
-    atomic_checkpoint(checkpoint,dict(schema='controlled_pen_response_pair_checkpoint:1',update=100,planned_updates=2000,arms=saved_arms,
+    atomic_checkpoint(checkpoint,dict(schema=f'controlled_pen_response_pair_checkpoint:{version}',update=100,planned_updates=2000,arms=saved_arms,
         config=file_pin(cp),prepared=file_pin(pp),review=file_pin(rp),sources=sources,dataset_pins=prep['outputs'],logs=logs))
     # No live optimizer runs after the saved first100 boundary.
     read=torch.load(checkpoint,map_location='cpu',weights_only=False);checks={};errors={};gradmetrics={};parity={}
@@ -121,21 +123,24 @@ def run_pen_stage(root,config_path,out,*,run=False):
             model_exact=raw_tree_equal(a['model'].state_dict(),b['model'].state_dict()),optimizer_exact=raw_tree_equal(a['optimizer'].state_dict(),b['optimizer'].state_dict()),sampler_exact=raw_tree_equal(a['sampler'].get_state(),b['sampler'].get_state()))
         checks.update({mode+'_next_update_'+k:v for k,v in parity[mode].items()})
         del clone,a,b,P,g,check_input
-    checks.update(matched_last_batch=raw_tree_equal(sample_last['DIRECT'],sample_last['IMPULSE']),matched_sampler_cursor=raw_tree_equal(read['arms']['DIRECT']['sampler'],read['arms']['IMPULSE']['sampler']),
+    checks.update(matched_last_batch=raw_tree_equal(sample_last[modes[0]],sample_last[modes[1]]),matched_sampler_cursor=raw_tree_equal(read['arms'][modes[0]]['sampler'],read['arms'][modes[1]]['sampler']),
                   saved_cursor=read['update']==100 and read['planned_updates']==2000)
+    if version==2:
+        checks.update(matched_parameter_count=len({sum(p.numel() for p in a['model'].parameters()) for a in arms.values()})==1,
+            matched_physical_loss_scales=raw_tree_equal(arms[modes[0]]['model'].y_scale,arms[modes[1]]['model'].y_scale))
     eta=1900*float(np.median(milliseconds[-50:]))/1000
     samples=[s for s in monitor.samples if s['start']<=start+wall and s['end']>=start]
     telemetry=dict(samples=samples,errors=monitor.errors,scope='Device-wide query windows overlapping this short100-paired-update compute interval; not whole-pipeline utilization.')
     for pin in sources+prep['sources']+[file_pin(pp),file_pin(rp)]:verify_file_pin(pin)
-    result=dict(schema='controlled_pen_first100_health:1',checkpoint=file_pin(checkpoint),config=file_pin(cp),prepared=file_pin(pp),review=file_pin(rp),sources=sources,
+    result=dict(schema=f'controlled_pen_first100_health:{version}',checkpoint=file_pin(checkpoint),config=file_pin(cp),prepared=file_pin(pp),review=file_pin(rp),sources=sources,
         checks=checks,passed=sum(checks.values()),total=len(checks),initial_CHECK_metrics=initial_check,CHECK_metrics=errors,network_PD_gradients=gradmetrics,
         first_next_update_parity=parity,logs=logs,update=100,planned_updates=2000,remaining_updates=1900,paired_compute_wall_s=wall,
         CUDA_ms_per_paired_update=milliseconds,remaining_paired_compute_estimate_s=eta,training_peak_bytes=training_peak,GPU_telemetry=telemetry,hardware=hardware,
-        extra_clone_optimizer_updates=4,Actor_optimizer_updates=0,training_running=False,pause_goal_requested=True,
+        extra_clone_optimizer_updates=4,Actor_optimizer_updates=0,training_running=False,pause_goal_requested=version==1,
         estimate_scope='Last50 CUDA-event median times1900 paired updates; excludes startup, collection, packing, checkpoint/diagnostic IO and later policy/gradient/rollout work.',
-        scope='Numerically healthy first checkpoint of matched DIRECT/IMPULSE Fn6 controlled-dynamics models only. Finite network gradients do not validate physical action gradients, predictive accuracy, full task success, Actor A1/A2 benefit or ego generalization.')
+        scope=f'First checkpoint of matched {modes} Fn6 WM components only. Finite network gradients do not validate physical action gradients, predictive accuracy, full task success, Actor A1/A2 benefit or ego generalization.')
     write(out/'health_0100.json',result)
     if not all(checks.values()):raise ValueError('Retain unhealthy first checkpoint; no further updates or Goal pause')
     return dict(training_started=True,training_running=False,checkpoint=file_pin(checkpoint),health=file_pin(out/'health_0100.json'),
         passed=result['passed'],total=result['total'],remaining_paired_compute_estimate_s=eta,paired_compute_wall_s=wall,
-        CHECK_metrics=errors,pause_goal_requested=True)
+        CHECK_metrics=errors,pause_goal_requested=version==1)

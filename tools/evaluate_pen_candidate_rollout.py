@@ -16,8 +16,10 @@ from supermimic_research.mechanics.observed_parent_records import pack_observed_
 from supermimic_research.mechanics.warp_packet_decode import decode_saved_case
 from supermimic_research.mechanics.pen_contact_groups import normal_group
 from supermimic_research.learning.pen_stage import write
-from supermimic_research.learning.pen_response import PenResponseWM
+from supermimic_research.learning.pen_response import model_from_arm
 from supermimic_research.learning.pen_diagnostics import rollout_diagnostics, window_indices
+from supermimic_research.learning.pen_diagnostics import endpoint_errors
+from supermimic_research.learning.pen_fit_diagnostics import constant_velocity
 
 
 def load(pin):
@@ -27,7 +29,7 @@ def load(pin):
 def main(a):
     h = json.loads(a.health.read_text())
     cp = verify_file_pin(h['checkpoint'])
-    if (h['schema'] != 'pen_response_continuation_health:1' or h['update'] != 2000
+    if (h['schema'] not in ['pen_response_continuation_health:1','pen_response_continuation_health:2'] or h['update'] != 2000
             or not all(h['checks'].values()) or h['training_running']):
         raise ValueError('Healthy terminal2000 required')
     ck = torch.load(cp, map_location='cpu', weights_only=False)
@@ -91,11 +93,16 @@ def main(a):
     torch.backends.cudnn.allow_tf32 = False
     reports, outputs = {}, {}
     for mode, saved in ck['arms'].items():
-        model = PenResponseWM(saved['scales'], saved['head_scales'], saved['physics'],
-                              width=saved['width'], coupled=saved['coupled']).to(device)
-        model.load_state_dict(saved['model'], strict=True)
+        model = model_from_arm(saved,device)
         model.eval()
         reports[mode], arrays = rollout_diagnostics(model, data, device)
+        for H,row in reports[mode].items():
+            if not row['windows']:continue
+            state=arrays[f'H{H}_states'];pred=arrays[f'H{H}_predictions'];target_state=arrays[f'H{H}_targets']
+            finite=np.isfinite(state).all(axis=(1,2))&np.isfinite(pred).all(axis=(1,2))
+            cv=constant_velocity(torch.as_tensor(state[:,0]),int(H)*.02).numpy()
+            row['constant_velocity_all_valid']=endpoint_errors(cv,target_state)
+            if finite.any():row['constant_velocity_matched_finite']=endpoint_errors(cv[finite],target_state[finite])
         target = a.output / (mode + '_rollout.npz')
         np.savez_compressed(target, **arrays)
         outputs[mode] = file_pin(target)

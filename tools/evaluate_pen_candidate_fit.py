@@ -11,7 +11,7 @@ sys.path.insert(0, str(ROOT / 'src'))
 import numpy as np
 import torch
 from supermimic_research.artifacts import file_pin, verify_file_pin
-from supermimic_research.learning.pen_response import PenResponseWM
+from supermimic_research.learning.pen_response import model_from_arm
 from supermimic_research.learning.pen_stage import write
 from supermimic_research.learning.candidate_response_evaluation import candidate_pairs, evaluate_pairs
 
@@ -19,7 +19,7 @@ from supermimic_research.learning.candidate_response_evaluation import candidate
 def main(a):
     health = json.loads(a.health.read_text())
     cp = verify_file_pin(health['checkpoint'])
-    if (health['schema'] != 'pen_response_continuation_health:1' or health['update'] != 2000
+    if (health['schema'] not in ['pen_response_continuation_health:1','pen_response_continuation_health:2'] or health['update'] != 2000
             or not health['checks'] or not all(health['checks'].values()) or health['training_running']):
         raise ValueError('Healthy terminal2000 continuation required')
     ck = torch.load(cp, map_location='cpu', weights_only=False)
@@ -47,10 +47,10 @@ def main(a):
     a.output.mkdir()
     reports, outputs = {}, {}
     for mode, saved in ck['arms'].items():
-        model = PenResponseWM(saved['scales'], saved['head_scales'], saved['physics'],
-                              width=saved['width'], coupled=saved['coupled']).to(device)
-        model.load_state_dict(saved['model'], strict=True)
+        model = model_from_arm(saved,device)
         model.eval()
+        blocks = dict(delta52=slice(0, 52), object12=slice(40, 52), warm26=slice(52, 78),
+                      source_BODY_wrench6=slice(78, 84), Fn6=slice(84, 90))
         fit = {}
         for role, d in data.items():
             with torch.no_grad():
@@ -65,8 +65,6 @@ def main(a):
                 result = dict(rows=int(mask.sum()), finite_predictions=int(np.isfinite(p[mask]).all(axis=1).sum()),
                               labels_uncertain=name != 'valid')
                 if mask.any() and np.isfinite(p[mask]).all():
-                    blocks = dict(delta52=slice(0, 52), object12=slice(40, 52), warm26=slice(52, 78),
-                                  source_BODY_wrench6=slice(78, 84), Fn6=slice(84, 90))
                     result['normalized_MSE'] = {b: float(np.mean(((p[mask, s] - d['y'][mask, s]) / scale[s])**2)) for b, s in blocks.items()}
                     result['frozen_TRAIN_mean_MSE'] = {b: float(np.mean(((mean[s] - d['y'][mask, s]) / scale[s])**2)) for b, s in blocks.items()}
                 fit[role][name] = result
@@ -74,7 +72,14 @@ def main(a):
         path = a.output / (mode + '_responses.npz')
         np.savez_compressed(path, **arrays)
         outputs[mode] = file_pin(path)
-        reports[mode] = dict(one_step=fit, physical_finite_response=response)
+        d=data['CHECK'];p=arrays['all_predictions'];per_parent={}
+        for parent_id in sorted(set(d['parent_id'].tolist())):
+            mask=(d['parent_id']==parent_id)&d['valid']
+            row=dict(rows=int(mask.sum()),finite_predictions=int(np.isfinite(p[mask]).all(1).sum()))
+            if mask.any() and np.isfinite(p[mask]).all():row['normalized_MSE']={b:float(np.mean(
+                ((p[mask,s]-d['y'][mask,s])/scale[s])**2)) for b,s in blocks.items()}
+            per_parent[str(parent_id)]=row
+        reports[mode] = dict(one_step=fit, physical_finite_response=response,per_CHECK_parent=per_parent)
     result = dict(schema='pen_candidate_fit_evaluation:1', health=file_pin(a.health), checkpoint=file_pin(cp),
                   prepared=ck['prepared'], dataset_pins=ck['dataset_pins'], outputs=outputs, pairs=pairs, models=reports,
                   sources=[file_pin(__file__), file_pin(ROOT / 'src/supermimic_research/learning/candidate_response_evaluation.py')],

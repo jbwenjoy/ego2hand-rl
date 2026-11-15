@@ -32,12 +32,14 @@ class ImpulseResponseWM(CompoundResponseWM):
         raw=self.net((x-self.x_mean)/self.x_scale)
         return torch.cat([raw[...,:84],torch.nn.functional.softplus(raw[...,84:])],dim=-1)
     def physical_heads(self,x):return self.normalized_heads(x)*self.head_scale+self.head_mean
+    def decode_heads(self,x,h):
+        return close_velocities(x,h,self.mass,self.inertia_BODY,self.inverse_inertia_BODY,self.gravity,h[...,46:52].double()) if self.coupled else h.double()
     def prediction(self,x):
         h=self.physical_heads(x)
-        return close_velocities(x,h,self.mass,self.inertia_BODY,self.inverse_inertia_BODY,self.gravity,h[...,46:52].double()) if self.coupled else h.double()
+        return self.decode_heads(x,h)
     def forward(self,x):return (self.prediction(x)-self.y_mean)/self.y_scale
     def supervised_loss(self,x,y,head_target,*,auxiliary_weight=.1):
-        h=self.physical_heads(x);p=close_velocities(x,h,self.mass,self.inertia_BODY,self.inverse_inertia_BODY,self.gravity,h[...,46:52].double()) if self.coupled else h.double()
+        h=self.physical_heads(x);p=self.decode_heads(x,h)
         error=((p-y)/self.y_scale).square()
         absolute=error[...,:52].mean()+.1*error[...,52:78].mean()+.2*error[...,78:84].mean()+.1*error[...,84:].mean()
         auxiliary=((h[...,46:52]-head_target[...,46:52])/self.head_scale[46:52]).square().mean()

@@ -14,30 +14,32 @@ from ..artifacts import file_pin, verify_file_pin
 from .checkpoint import _adam_valid, _finite_tree
 from .gpu_monitor import GPUMonitor
 from .impulse_stage import update_impulse
-from .pen_response import INPUT_SCHEMA, OUTPUT_SCHEMA, HEAD_SCHEMA
+from .pen_response import INPUT_SCHEMA, OUTPUT_SCHEMA, pen_families, validate_arm_schema, training_cache
 from .pen_stage import restore_arm, metrics, write
 from .world_model import atomic_checkpoint, capture_rng, raw_tree_equal
 
 
 def validate_parent(saved, health, prep):
     """Reject lineage/schema/cursor drift before creating an output directory."""
-    if (saved['schema'] != 'controlled_pen_response_pair_checkpoint:1'
+    if not saved['arms']:raise ValueError('Explicit paired parent required')
+    cfg=next(iter(saved['arms'].values()))['config'];modes=pen_families(cfg);version=cfg.get('schema',1)
+    if (saved['schema'] != f'controlled_pen_response_pair_checkpoint:{version}'
             or saved['update'] != 100 or saved['planned_updates'] != 2000
-            or health['schema'] != 'controlled_pen_first100_health:1'
+            or health['schema'] != f'controlled_pen_first100_health:{version}'
             or health['update'] != 100 or health['training_running']
             or not health['checks'] or not all(health['checks'].values())
             or health['passed'] != health['total']
             or health['total'] != len(health['checks'])
             or saved['dataset_pins'] != prep['outputs']
-            or set(saved['arms']) != {'DIRECT', 'IMPULSE'}):
+            or set(saved['arms']) != set(modes)):
         raise ValueError('Healthy first100 Fn6 pair with unchanged data required')
     configs = []
     for mode, arm in saved['arms'].items():
+        validate_arm_schema(arm)
         cfg = arm['config']; configs.append(cfg)
-        if (arm['schema'] != 'controlled_pen_response_arm:1'
+        if (arm['schema'] != f'controlled_pen_response_arm:{version}'
                 or arm['input_schema'] != INPUT_SCHEMA
                 or arm['output_schema'] != OUTPUT_SCHEMA
-                or arm['head_schema'] != (HEAD_SCHEMA if mode == 'IMPULSE' else OUTPUT_SCHEMA)
                 or arm['mode'] != mode or arm['coupled'] != (mode == 'IMPULSE')
                 or arm['update'] != 100 or arm['physics'] != prep['physics']
                 or cfg['first_checkpoint_update'] != 100
@@ -45,7 +47,7 @@ def validate_parent(saved, health, prep):
                 or len(saved['logs'][mode]) != 100):
             raise ValueError('Explicit matched arm schema, physics and cursor required')
     if configs[0] != configs[1] or not raw_tree_equal(
-            saved['arms']['DIRECT']['sampler'], saved['arms']['IMPULSE']['sampler']):
+            saved['arms'][modes[0]]['sampler'], saved['arms'][modes[1]]['sampler']):
         raise ValueError('Matched hyperparameters and sampler cursors required')
     return configs[0]
 
@@ -65,6 +67,7 @@ def run_continuation(root, checkpoint_path, health_path, out, *, run=False):
     prep_path = verify_file_pin(saved['prepared']); prep = json.loads(prep_path.read_text())
     review_path = verify_file_pin(saved['review']); review = json.loads(review_path.read_text())
     cfg = validate_parent(saved, health, prep)
+    modes=pen_families(cfg);version=cfg.get('schema',1)
     if not all(prep['checks'].values()) or review['passed'] != review['total'] or verify_file_pin(review['prepared']) != prep_path:
         raise ValueError('Unchanged healthy preparation/review required')
     pins = saved['sources'] + prep['sources'] + [saved['config'], review['source'], prep['scales'], prep['head_scales']]
@@ -96,17 +99,14 @@ def run_continuation(root, checkpoint_path, health_path, out, *, run=False):
             Adam100=_adam_valid(arm['optimizer'], arm['model'], 100, torch)).items()})
     if not all(prechecks.values()): raise ValueError('Exact continuation restoration failed')
     d = data['TRAIN']; mask = d['valid']
-    cache = dict(x=torch.as_tensor(d['x'][mask], dtype=torch.float32, device=device),
-                 y=torch.as_tensor(d['y'][mask], dtype=torch.float64, device=device),
-                 DIRECT=torch.as_tensor(d['y'][mask], dtype=torch.float64, device=device),
-                 IMPULSE=torch.as_tensor(d['heads'][mask], dtype=torch.float64, device=device))
+    cache = training_cache(d,device,modes)
     check = data['CHECK']; mask = check['valid']
     cx = torch.as_tensor(check['x'][mask], dtype=torch.float32, device=device)
     cy = torch.as_tensor(check['y'][mask], dtype=torch.float64, device=device)
     curve = {'100': {m: metrics(a['model'], cx, cy)[0] for m, a in arms.items()}}
     prechecks['parent_CHECK_metrics_exact'] = curve['100'] == health['CHECK_metrics']
     if not all(prechecks.values()): raise ValueError('Restored parent evaluation changed')
-    out.mkdir(); write(out / 'intent.json', dict(schema='pen_response_continuation:1', **lineage,
+    out.mkdir(); write(out / 'intent.json', dict(schema=f'pen_response_continuation:{version}', **lineage,
         **summary, restored=prechecks, optimizer_reset=False, scales_refitted=False,
         CHECK_used_for_optimizer_or_selection=False,
         scope='Fixed 2000-update paired component experiment; no policy training or ego validation.'))
@@ -158,11 +158,11 @@ def run_continuation(root, checkpoint_path, health_path, out, *, run=False):
             sampler_exact=raw_tree_equal(a['sampler'].get_state(), b['sampler'].get_state()))
         checks.update({mode + '_clone_next_' + k: v for k, v in parity[mode].items()})
         del clone, a, b
-    checks.update(matched_last_batch=raw_tree_equal(last_batch['DIRECT'], last_batch['IMPULSE']),
-        matched_sampler_cursor=raw_tree_equal(read['arms']['DIRECT']['sampler'], read['arms']['IMPULSE']['sampler']),
+    checks.update(matched_last_batch=raw_tree_equal(last_batch[modes[0]], last_batch[modes[1]]),
+        matched_sampler_cursor=raw_tree_equal(read['arms'][modes[0]]['sampler'], read['arms'][modes[1]]['sampler']),
         saved_cursor=read['update'] == 2000)
     for pin in pins + sources + [lineage['parent_checkpoint'], lineage['parent_health']]: verify_file_pin(pin)
-    result = dict(schema='pen_response_continuation_health:1', **lineage,
+    result = dict(schema=f'pen_response_continuation_health:{version}', **lineage,
         checkpoint=file_pin(final_cp), checks=checks, passed=sum(checks.values()), total=len(checks),
         CHECK_curve=curve, update=2000, additional_live_updates_per_arm=1900,
         extra_clone_optimizer_updates=4, Actor_optimizer_updates=0, training_running=False,
