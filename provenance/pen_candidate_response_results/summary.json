@@ -1,0 +1,2059 @@
+{
+  "schema": "fresh_parent_candidate_data_summary:1",
+  "roots": {
+    "parents": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\report.json",
+      "bytes": 429624,
+      "sha256": "8806e2663f757b4b1eb8e2e8ae30d9e72bf78d44b008dd00266fc8a9b767ff4e"
+    },
+    "prepared": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\report.json",
+      "bytes": 23972441,
+      "sha256": "6ca5feb7454c4a8a62194ee979dbdb7fd8cd6e41f01ad1b43a03119343d6f058"
+    },
+    "readback": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_readback_v1\\report.json",
+      "bytes": 2257056,
+      "sha256": "d50769cd7d8d086794348df94bb02b50b982d1f9574b1fd58c37475a2519496d"
+    },
+    "decoder_parity": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_parent_decoder_parity_v1\\report.json",
+      "bytes": 1355,
+      "sha256": "6f6fe1d4c23e364e4a80af15f282ad749646295d9c43fdcf986daee884ad4ba3"
+    }
+  },
+  "physics": {
+    "mass": 0.029999999329447746,
+    "inertia_BODY": [
+      [
+        1.1704360076691955e-06,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.00019457894086372107,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.00019457894086372107
+      ]
+    ],
+    "gravity": [
+      0.0,
+      0.0,
+      -9.8100004196167
+    ]
+  },
+  "roles": {
+    "TRAIN": {
+      "parents": 24,
+      "rows": 4104,
+      "valid": 3858
+    },
+    "CHECK": {
+      "parents": 12,
+      "rows": 2052,
+      "valid": 1773
+    }
+  },
+  "attempted_rows": 6156,
+  "base_valid": 5885,
+  "group_valid": 5631,
+  "EFC_failed_flags": {
+    "linear_impulse": 17
+  },
+  "fidelity_failed_flags": {
+    "EFC_force_N": 247,
+    "EFC_torque_Nm": 199,
+    "object_rotation_rad": 4,
+    "hand_velocity_rad_s": 6,
+    "object_velocity_m_s": 19,
+    "object_omega_rad_s": 17,
+    "hand_position_rad": 2
+  },
+  "target_failed_flags": {
+    "Fn_graph_agreement": 248
+  },
+  "readback": [
+    49253,
+    49253
+  ],
+  "readback_errors": {
+    "x": 0.0,
+    "y": 1.249000902703301e-16,
+    "heads": 1.249000902703301e-16
+  },
+  "closure_identity": {
+    "TRAIN": 1.4477308241112041e-13,
+    "CHECK": 2.078337502098293e-13
+  },
+  "parent_sources": [
+    {
+      "parent_id": 0,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.005/1",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "k": 1,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\source_0001.npz",
+        "bytes": 51208,
+        "sha256": "f75509ead42c7365f3a549710a09cf928261e729ca916433701215147e6d67e6"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_000\\targets.npz",
+        "bytes": 133942,
+        "sha256": "074934187b628fc2002942ff78841483999a7c451c5e8ca12fc10af15bd28f2c"
+      },
+      "rows": 171,
+      "valid": 168
+    },
+    {
+      "parent_id": 1,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.005/2",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "k": 2,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\source_0002.npz",
+        "bytes": 51177,
+        "sha256": "c7d651f34c6453e223b1bee76bb7e737e020e3d6a6cae6e4cf942ced50c5a90d"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_001\\targets.npz",
+        "bytes": 132601,
+        "sha256": "72f09c2c687691e61bedd9ff97e92bc6fe978e7706371b15d579de87abbbc57a"
+      },
+      "rows": 171,
+      "valid": 165
+    },
+    {
+      "parent_id": 2,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.005/3",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "k": 3,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\source_0003.npz",
+        "bytes": 51200,
+        "sha256": "9e857ff9230742ffe33c222f22ddef17e63e033175830cc0a87e64d9c85977bd"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_002\\targets.npz",
+        "bytes": 134043,
+        "sha256": "a9e6d64f70a66e8a049cd87197efd11b09d176030604d9034853d5dff4220e16"
+      },
+      "rows": 171,
+      "valid": 162
+    },
+    {
+      "parent_id": 3,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.005/5",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "k": 5,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\source_0005.npz",
+        "bytes": 51186,
+        "sha256": "e68c4217b4d136286749db3e60f5be183cc6589ba581fba92843b3e27c94a010"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_003\\targets.npz",
+        "bytes": 137724,
+        "sha256": "dcdc09e605f8ca48a25c1e37de0166a6975ac343484099e907ed2f59a7e17821"
+      },
+      "rows": 171,
+      "valid": 153
+    },
+    {
+      "parent_id": 4,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.005/6",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "k": 6,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\source_0006.npz",
+        "bytes": 51134,
+        "sha256": "c36629a1399a788db93b214a9bc9718e78c63e80cbe25a4bde32c614aa247d5d"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_004\\targets.npz",
+        "bytes": 125902,
+        "sha256": "a4fc44b1823d9b290eda476f9bf86cd63b0b86b14b7eff45520126b921118605"
+      },
+      "rows": 171,
+      "valid": 168
+    },
+    {
+      "parent_id": 5,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.005/7",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "k": 7,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\source_0007.npz",
+        "bytes": 51200,
+        "sha256": "22791b3a5021f32e695f24f3b996ad3aa21d1d6695b41a40f8abeb675da80590"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_005\\targets.npz",
+        "bytes": 137866,
+        "sha256": "6c52b88e37e5b4dc47c8a4e220267001bf704ee49633d2bebbd4bc0ed0532375"
+      },
+      "rows": 171,
+      "valid": 156
+    },
+    {
+      "parent_id": 6,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.005/8",
+      "role": "CHECK",
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "k": 8,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\source_0008.npz",
+        "bytes": 51267,
+        "sha256": "1a93c7076dfaa9b436bdcdb63f63c9da72fe6b059dfd4a1999079622521abda2"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_006\\targets.npz",
+        "bytes": 134785,
+        "sha256": "4d93b370a27d8b109959aaa4f97afd66efd4bb264cae231f3d05b67dbb73be6b"
+      },
+      "rows": 171,
+      "valid": 162
+    },
+    {
+      "parent_id": 7,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.005/9",
+      "role": "CHECK",
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "k": 9,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\source_0009.npz",
+        "bytes": 51156,
+        "sha256": "7ff1a303c60c96ef43819385a765d3de31a1f5ad93e076288f3d945b6841b6a9"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_007\\targets.npz",
+        "bytes": 118817,
+        "sha256": "c1bed7767b6bc703590905208429077c657bab810ffd2ed16ac7fef678443098"
+      },
+      "rows": 171,
+      "valid": 171
+    },
+    {
+      "parent_id": 8,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.005/10",
+      "role": "CHECK",
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "k": 10,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\source_0010.npz",
+        "bytes": 51099,
+        "sha256": "73bac3b68e37e9a087ad64444d8e03e878c9734db04da0d7a153dd84e1ef01bf"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_008\\targets.npz",
+        "bytes": 122658,
+        "sha256": "a08f7abef0890896a46b17f8c9936357fedbcea4a7632228e855fe847286bd8b"
+      },
+      "rows": 171,
+      "valid": 156
+    },
+    {
+      "parent_id": 9,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.005/1",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "k": 1,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\source_0001.npz",
+        "bytes": 51208,
+        "sha256": "f75509ead42c7365f3a549710a09cf928261e729ca916433701215147e6d67e6"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_009\\targets.npz",
+        "bytes": 134123,
+        "sha256": "7a07d37d8523ec2ede8b9f410c8dfb766f28379371598a6d0e44194cb46dfc00"
+      },
+      "rows": 171,
+      "valid": 162
+    },
+    {
+      "parent_id": 10,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.005/2",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "k": 2,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\source_0002.npz",
+        "bytes": 51068,
+        "sha256": "0dbf0a87e319faf96c422af4759516edeb7d47b868343db3011cd2d65f271f78"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_010\\targets.npz",
+        "bytes": 115926,
+        "sha256": "b016669f667e6fa1bcdeb9a271251d2f9de02465ac41744e16553d5f0e03f0c6"
+      },
+      "rows": 171,
+      "valid": 171
+    },
+    {
+      "parent_id": 11,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.005/3",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "k": 3,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\source_0003.npz",
+        "bytes": 51055,
+        "sha256": "b903ed7fa0bdb3d36d5c8aa4675cb3368c6c122de390813f0151663a6e4f4c7d"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_011\\targets.npz",
+        "bytes": 86134,
+        "sha256": "6a53b4b1af55ec041157096672cdf932267069522f8dc6de72b0bc3854a8617e"
+      },
+      "rows": 171,
+      "valid": 171
+    },
+    {
+      "parent_id": 12,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.005/5",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "k": 5,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\source_0005.npz",
+        "bytes": 51205,
+        "sha256": "c239248b660bd60462172e95b7fda92ef2dcac4ee8358de9640d22d657a77b28"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_012\\targets.npz",
+        "bytes": 133476,
+        "sha256": "248d53e38da24758d139b4974d4e5b8e1b8d0cc38b5cc9d8608ab7b4df71d750"
+      },
+      "rows": 171,
+      "valid": 153
+    },
+    {
+      "parent_id": 13,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.005/6",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "k": 6,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\source_0006.npz",
+        "bytes": 51175,
+        "sha256": "1f9ca006de0afcd9b2ca4afbfd1d4244a8e07ee1afef4f48aa012be7be3c37d3"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_013\\targets.npz",
+        "bytes": 133044,
+        "sha256": "fc745fc8f65f5c3bb1861dcdda5b9d1b1dfa8e19caeba376434fa71f87c02762"
+      },
+      "rows": 171,
+      "valid": 159
+    },
+    {
+      "parent_id": 14,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.005/7",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "k": 7,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\source_0007.npz",
+        "bytes": 51051,
+        "sha256": "34714f4a482c9e45040f933e05c31630a75ad4a855abfe011634d0849971cc76"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_014\\targets.npz",
+        "bytes": 122348,
+        "sha256": "df4e671ea9dc0d5e6bc1585916a549ed4ec1e8e0d6ed2fa5ba68afefcdc6417f"
+      },
+      "rows": 171,
+      "valid": 162
+    },
+    {
+      "parent_id": 15,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.005/8",
+      "role": "CHECK",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "k": 8,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\source_0008.npz",
+        "bytes": 51101,
+        "sha256": "422a6e461e91e6e784e479de7c1a9f3811b0d99479ff15f9280fa2158defbd61"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_015\\targets.npz",
+        "bytes": 125939,
+        "sha256": "9e767007f359d2225dd981035b2ed886a01d513a6d0f28ec2f0179435fe24d4b"
+      },
+      "rows": 171,
+      "valid": 147
+    },
+    {
+      "parent_id": 16,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.005/9",
+      "role": "CHECK",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "k": 9,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\source_0009.npz",
+        "bytes": 51100,
+        "sha256": "c4054d959538ff3198ae59fc60176e4a4125d6bd0a9e36fb1b3c9b88b52e4c7c"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_016\\targets.npz",
+        "bytes": 125584,
+        "sha256": "a9a6fe3cc363a2985f547a870478df0eb6469a5f3ebc40edbe3e96f1bfdf3b64"
+      },
+      "rows": 171,
+      "valid": 150
+    },
+    {
+      "parent_id": 17,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.005/10",
+      "role": "CHECK",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "k": 10,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\source_0010.npz",
+        "bytes": 51076,
+        "sha256": "5983171a4282e9d94e83f0a1e103b489d32c5a1f37c0e54293269aabef84dd70"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.005\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_017\\targets.npz",
+        "bytes": 127258,
+        "sha256": "bd0f26850ca50cddacb765dceb498d630655168df8e78f9c69bdd1c718dc0bcb"
+      },
+      "rows": 171,
+      "valid": 132
+    },
+    {
+      "parent_id": 18,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.0025/1",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "k": 1,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\source_0001.npz",
+        "bytes": 51074,
+        "sha256": "1ff9d846e462b6c73336afc49533aa54bd63c0ad895485e800437a5581bc049c"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_018\\targets.npz",
+        "bytes": 135185,
+        "sha256": "074acb5a5742d06493c623d7cb4d1dea68c7c667889d4df81796945b75f99a24"
+      },
+      "rows": 171,
+      "valid": 156
+    },
+    {
+      "parent_id": 19,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.0025/2",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "k": 2,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\source_0002.npz",
+        "bytes": 51103,
+        "sha256": "dd954861f1023e5e82b454e678180bd712732a665a527a5a4205bfdea08756b4"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_019\\targets.npz",
+        "bytes": 131287,
+        "sha256": "243b1712fa2fb247f210d804e72fdae3aeee2119fb0f0ba31bcadd3afec6ed96"
+      },
+      "rows": 171,
+      "valid": 168
+    },
+    {
+      "parent_id": 20,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.0025/3",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "k": 3,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\source_0003.npz",
+        "bytes": 51170,
+        "sha256": "7e53d0441066e703754885c36b770f9425ba63afd38f41303aab5f6d2bc8b0a5"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_020\\targets.npz",
+        "bytes": 134682,
+        "sha256": "5a5eb588b9b1bdc740ac2e2ee9694c78cdd05ee40c96a3d96d114b2cf1c3390b"
+      },
+      "rows": 171,
+      "valid": 153
+    },
+    {
+      "parent_id": 21,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.0025/5",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "k": 5,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\source_0005.npz",
+        "bytes": 51074,
+        "sha256": "1054ca58d5884f40f0f358795533f4aa9fb78afbf0d7741f4011a2d810077a79"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_021\\targets.npz",
+        "bytes": 118541,
+        "sha256": "410e7d5b8cf552c874907d598dc01195283529ae72a8e91ade208615d1eda13e"
+      },
+      "rows": 171,
+      "valid": 171
+    },
+    {
+      "parent_id": 22,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.0025/6",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "k": 6,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\source_0006.npz",
+        "bytes": 51069,
+        "sha256": "55c7cbad476df508d2bd035d6ce95af49e835e58b05dc5eb286e85b5bb684378"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_022\\targets.npz",
+        "bytes": 125958,
+        "sha256": "7f72edefab9d993c396dc8f80de47a891ac40bba55c74a15b5f7931ddb962b20"
+      },
+      "rows": 171,
+      "valid": 171
+    },
+    {
+      "parent_id": 23,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.0025/7",
+      "role": "TRAIN",
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "k": 7,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\source_0007.npz",
+        "bytes": 51063,
+        "sha256": "49efa98c321749a7eb7691cd3f7c0d5cdf89cc76816195abb9aecf226ea54dbd"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_023\\targets.npz",
+        "bytes": 133548,
+        "sha256": "4e3fab21d5838d9dc2e775ff7007cd804a357065027384123c557f4f2daf492f"
+      },
+      "rows": 171,
+      "valid": 165
+    },
+    {
+      "parent_id": 24,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.0025/8",
+      "role": "CHECK",
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "k": 8,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\source_0008.npz",
+        "bytes": 50997,
+        "sha256": "541198d28acbb834ce66d5bf7571340a63ec21c17b53577af1448ce695b2ef00"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_024\\targets.npz",
+        "bytes": 126492,
+        "sha256": "341e5acb8b54eb5687167fc5e1db8c370c3d768568d0ba163e23a62d40bc80fc"
+      },
+      "rows": 171,
+      "valid": 147
+    },
+    {
+      "parent_id": 25,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.0025/9",
+      "role": "CHECK",
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "k": 9,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\source_0009.npz",
+        "bytes": 51089,
+        "sha256": "0f067548de47b1c03509a19da4107701545367da138534c8d3a1ddb4ec312189"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_025\\targets.npz",
+        "bytes": 124990,
+        "sha256": "6b52a271be06a5430b375def3ac4cb2f611d17651eece9c7e0ad5991af22c532"
+      },
+      "rows": 171,
+      "valid": 147
+    },
+    {
+      "parent_id": 26,
+      "key": "pen_response_parents_v1/STATE_ONLY/0.0025/10",
+      "role": "CHECK",
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "k": 10,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\source_0010.npz",
+        "bytes": 51008,
+        "sha256": "0e55f447f05f3b2269eb45678065af29598e2041337662bcda96236643007dc8"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_ONLY_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_026\\targets.npz",
+        "bytes": 84583,
+        "sha256": "414b3c002368ddef7ba089ce8c037ee7f5ca80ef44a1b414a040f4b2d3b8be6e"
+      },
+      "rows": 171,
+      "valid": 171
+    },
+    {
+      "parent_id": 27,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.0025/1",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "k": 1,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\source_0001.npz",
+        "bytes": 51077,
+        "sha256": "868ad3cf594b1704034f49ea51fe854c24d1e348c19aaa23c63586fb52445478"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_027\\targets.npz",
+        "bytes": 134457,
+        "sha256": "baaac534328e66d8f8dfe4d3667e8578a293c2eaeab3849fa6e47485c571ab08"
+      },
+      "rows": 171,
+      "valid": 159
+    },
+    {
+      "parent_id": 28,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.0025/2",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "k": 2,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\source_0002.npz",
+        "bytes": 51131,
+        "sha256": "ef8f56455e3d9c5d7a6a0b196c6b2bd1c4c34e07dcbc2a66236930c26384bc3b"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_028\\targets.npz",
+        "bytes": 133989,
+        "sha256": "81d342f8b583addfe2b26546aebb82a0c7420e61f1e3054322fbe4295ddade4b"
+      },
+      "rows": 171,
+      "valid": 150
+    },
+    {
+      "parent_id": 29,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.0025/3",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "k": 3,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\source_0003.npz",
+        "bytes": 51061,
+        "sha256": "1c9a56340f102159c4b9e1a368a534ba88d70c01e5db7699291f63dbe18a15e6"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_029\\targets.npz",
+        "bytes": 128969,
+        "sha256": "6773c2d9f691dabae08cf5f28f34021c85aebef54dbc9ac98199f5acc2747c69"
+      },
+      "rows": 171,
+      "valid": 171
+    },
+    {
+      "parent_id": 30,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.0025/5",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "k": 5,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\source_0005.npz",
+        "bytes": 51071,
+        "sha256": "16a2e8553c06569c03ea1327b4c0939c5d2cf0a33b13e1cff7a0fb8fe1adfa46"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_030\\targets.npz",
+        "bytes": 118986,
+        "sha256": "08e972c1fd7569719929d0985c239cd898ed4d341a3665dba183590360d906a1"
+      },
+      "rows": 171,
+      "valid": 171
+    },
+    {
+      "parent_id": 31,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.0025/6",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "k": 6,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\source_0006.npz",
+        "bytes": 51057,
+        "sha256": "2b1060d46e9ef0280963b66bcede54b10c875c3f9c346151138a65f86e2dc441"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_031\\targets.npz",
+        "bytes": 119277,
+        "sha256": "b394926e38b0a22518cf22fc9d00577b95ac3823699720708f57e379f7d33f39"
+      },
+      "rows": 171,
+      "valid": 156
+    },
+    {
+      "parent_id": 32,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.0025/7",
+      "role": "TRAIN",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "k": 7,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\source_0007.npz",
+        "bytes": 51226,
+        "sha256": "27ddd1aa65278486563e1edaedc87edda4077ef1514567e9d56b4e7e1e266ec2"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_032\\targets.npz",
+        "bytes": 130205,
+        "sha256": "d84b73c1e129142b2273453fea4b865e0672fa58071c5b76f32441123ed2b6ac"
+      },
+      "rows": 171,
+      "valid": 117
+    },
+    {
+      "parent_id": 33,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.0025/8",
+      "role": "CHECK",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "k": 8,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\source_0008.npz",
+        "bytes": 51118,
+        "sha256": "b487b3309b274b47c3d21880d648151babc49f1eda1f584b5185423ca5d47937"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_033\\targets.npz",
+        "bytes": 134308,
+        "sha256": "aff6116da037ecef3ccc66591d86f2a8f418ee9d063e3d95a10d9e3ab5be53c3"
+      },
+      "rows": 171,
+      "valid": 90
+    },
+    {
+      "parent_id": 34,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.0025/9",
+      "role": "CHECK",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "k": 9,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\source_0009.npz",
+        "bytes": 50955,
+        "sha256": "71da659cb2770accd60557604368b0a813bb5c205126e688b423f8f3fbc9cc88"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_034\\targets.npz",
+        "bytes": 115525,
+        "sha256": "640f5911d67f8b0c994cff0acba34ad8ad26e497d82af21aeb51b4cf76d42af6"
+      },
+      "rows": 171,
+      "valid": 159
+    },
+    {
+      "parent_id": 35,
+      "key": "pen_response_parents_v1/STATE_PLUS_SUPPORT/0.0025/10",
+      "role": "CHECK",
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "k": 10,
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\source_0010.npz",
+        "bytes": 51138,
+        "sha256": "5c707ce8829bfda0d6cedcc4a3736aba0d906c1c181d72df84dfc2fae158418c"
+      },
+      "observations": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+        "bytes": 31368,
+        "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+      },
+      "reconstruction": {
+        "builder": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_scalars": {
+          "nworld": 1,
+          "naconmax": 192,
+          "naccdmax": 192,
+          "njmax": 4096,
+          "nvmax": 26,
+          "nvmax_pad": 32,
+          "njmax_pad": 4096,
+          "njmax_nnz": 106496
+        },
+        "Data_static_role": "MATCHED_RECORDED_OBSERVATIONS",
+        "Data_observation": {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_parents_v1\\STATE_PLUS_SUPPORT_0.0025\\observed_Data_layout.json",
+          "bytes": 31368,
+          "sha256": "ca85c3521cb3580166c9c65cd4feb80b97714f76053d68b5440dddd977495147"
+        },
+        "model_arrays": 404,
+        "model_scalars": 195,
+        "model_exact": true
+      },
+      "targets": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\parent_035\\targets.npz",
+        "bytes": 128315,
+        "sha256": "91f59e90dde3bd80824394c3d5d2b8255be49f6229373e5ddf7205499b635fba"
+      },
+      "rows": 171,
+      "valid": 141
+    }
+  ],
+  "parent_tasks": [
+    {
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "duration": 0.62,
+      "qualified": false
+    },
+    {
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "duration": 0.44,
+      "qualified": false
+    },
+    {
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "duration": 0.52,
+      "qualified": false
+    },
+    {
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "duration": 0.42,
+      "qualified": false
+    }
+  ],
+  "budgets": {
+    "parent_primary_candidate_ticks": 33516,
+    "parent_actual_ticks": 588,
+    "parent_extra_response_ticks": 24624,
+    "native_audit_ticks": 36936
+  },
+  "total_native_integrations": 95664,
+  "outputs": {
+    "TRAIN": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\TRAIN.npz",
+      "bytes": 3017455,
+      "sha256": "9668f4bcff5af378acc81dacf7b83e11f22f4a4ed1451d0dad7bc5fc4de5d066"
+    },
+    "CHECK": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\CHECK.npz",
+      "bytes": 1443239,
+      "sha256": "4791875ee0d5b77a3c3a25d3e63dac8b7756e1f18814ec78ffa244c659b1dd69"
+    }
+  },
+  "scales": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\scales.npz",
+    "bytes": 3742,
+    "sha256": "5d6e1d8bd272d9bee3320a53290372cdcb4d2bf4df6316cc74c88940e0229a3c"
+  },
+  "head_scales": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_candidate_responses_v1\\head_scales.npz",
+    "bytes": 1785,
+    "sha256": "64613125b48731c7cba1893d503378d43add37cd3148f506a251a5f5a4250dd0"
+  },
+  "scope": "Masks/normalization verified, rejected rows retained. Development same-clip parent/phase holdout, not experts/unseen trajectories/ego/gradient or acceleration qualification. No neural updates."
+}
