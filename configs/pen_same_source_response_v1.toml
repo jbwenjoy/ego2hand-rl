@@ -1,0 +1,16 @@
+schema = 1
+base_config = "controlled_evaluation_v4.toml"
+proposal = "../runs/pen_gpu_support_search_v1/report.json"
+gates = "pen_gpu_step_audit_v1.toml"
+anchors = [0, 2, 4, 6]
+dt = [0.005, 0.0025]
+direction_seed = 7801
+amplitudes = [0.002, 0.005]
+repeats = 3
+horizon_s = 0.02
+numerical_device_override = true
+[numerical_options]
+iterations = 50
+ls_iterations = 50
+tolerance = 0.000000000001
+ls_tolerance = 0.00000001
