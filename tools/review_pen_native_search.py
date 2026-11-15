@@ -71,13 +71,13 @@ def main(a):
             if feasible.any():best=np.flatnonzero(feasible)[np.argmin(cost[feasible])]
             else:
                 ids=np.flatnonzero(violation==violation.min());best=ids[np.argmin(cost[ids])]
-            warm=native.qacc_warmstart if lo==0 else z['post_qacc'][lo-1]
+            warm=native.qacc_warmstart if lo==0 else z['post_qacc_warmstart'][lo-1] if 'post_qacc_warmstart' in z else None
             checks=dict(raw_table=np.array_equal(raw,d['raw_candidates']),original_EMA=bool(abs(ema-d['EMA_candidates']).max()<1e-7),
                 encoder_bias_constant_within_candidates=bool(abs(implied_bias-implied_bias[:1]).max()<2e-7),
                 selected_raw_exact=np.array_equal(d['raw_candidates'][index],z['actions20'][k]),
                 selected_target_exact=bool(abs(d['PD_targets'][index]-z['post_ctrl'][lo:hi,aids]).max()<2e-7),
                 source_state_exact=np.array_equal(source['qpos'][0],z['pre_qpos'][lo]) and np.array_equal(source['qvel'][0],z['pre_qvel'][lo]),
-                source_warm_exact=np.array_equal(source['qacc_warmstart'][0],warm),
+                source_warm_exact=warm is not None and np.array_equal(source['qacc_warmstart'][0],warm),
                 source_clock=decision['phase']==k+1 and int(z['pre_action_phase'][k])==k+1,
                 live_isolation=bool(decision['live_data_controller_untouched']),fixed57_candidates=d['raw_candidates'].shape==(57,20),
                 formula_within_FP32_roundoff=bool(np.all(abs(score-d['score_total'])<=1e-3+1e-5*abs(score))),

@@ -23,6 +23,7 @@ class PenRecordTests(unittest.TestCase):
             for geom,normal in [(1,2.),(2,3.)]:
                 row=np.zeros(24);row[:3]=[tick,0,geom];row[18]=normal;raw.append(row)
         z=dict(pre_qpos=q,pre_qvel=v,post_qpos=post,post_qvel=v.copy(),post_ctrl=np.zeros((N,20)),post_qacc=np.zeros((N,26)),actions20=np.zeros((1,20)),
+            post_qacc_warmstart=np.full((N,26),7.),
             raw_contact_tick_plus23=np.array(raw),overflow=np.zeros(N),post_qfrc_applied=np.zeros((N,26)),post_xfrc_applied=np.zeros((N,4,6)),
             pre_penetration_m=np.zeros(N),pre_self_penetration_m=np.zeros(N),post_joint_limit_excursion_rad=np.zeros(N))
         names=['object/shaft','robot/right_finger4_tip_sensor_col','robot/right_palm_col']
@@ -32,3 +33,7 @@ class PenRecordTests(unittest.TestCase):
         p=pack_case(m,c,z,w,np.arange(7,27),np.arange(6,26),np.arange(20),np.zeros(26),dict(mass=1.,inertia_BODY=np.eye(3),gravity=[0,0,0]))
         np.testing.assert_allclose(p['y'][0,78:84],[1.,0,0,0,0,0],atol=1e-15)
         np.testing.assert_array_equal(p['y'][0,84:],[0,0,0,2,0,3]);self.assertEqual(p['y'].shape,(1,90))
+        np.testing.assert_array_equal(p['y'][0,52:78],np.full(26,7.))
+        del z['post_qacc_warmstart']
+        with self.assertRaisesRegex(ValueError,'Actual engine warmstart'):
+            pack_case(m,c,z,w,np.arange(7,27),np.arange(6,26),np.arange(20),np.zeros(26),dict(mass=1.,inertia_BODY=np.eye(3),gravity=[0,0,0]))

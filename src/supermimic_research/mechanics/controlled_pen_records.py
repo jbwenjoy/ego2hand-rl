@@ -15,6 +15,8 @@ def native_state55(qpos,qvel,qids,dofs,qa,da):
 
 
 def pack_case(model,case,z,wrench,qids,dofs,aids,initial_warm,physics):
+    if 'post_qacc_warmstart' not in z or z['post_qacc_warmstart'].shape!=z['post_qacc'].shape:
+        raise ValueError('Actual engine warmstart capture required; post_qacc is not a memory observation. Historical preparation requires its frozen source.')
     body=case['model_layout']['object_body'];qa=case['model_layout']['object_qposadr'];da=case['model_layout']['object_dofadr']
     if np.any(case['model_layout']['COM_BODY']) or model.body_parentid[body]!=0:raise ValueError('Explicit world free body with COM at origin')
     n=round(.02/case['dt']);N=len(z['post_qpos']);K=len(z['actions20'])
@@ -42,8 +44,8 @@ def pack_case(model,case,z,wrench,qids,dofs,aids,initial_warm,physics):
         if not np.array_equal(z['post_ctrl'][a:b+1][:,aids],np.tile(target,(n,1))):raise ValueError('Held actual PD target per20ms interval')
         mean_world=wrench['world_COM_wrench'][a:b+1].mean(0);R=state_rotation(s)
         mean_BODY=np.r_[R.T@mean_world[:3],R.T@mean_world[3:]]
-        transition=dict(source55=s,next55=t,warmstart26_before=initial_warm if a==0 else z['post_qacc'][a-1],
-            warmstart26_after=z['post_qacc'][b],decision=dict(actual_control20=target),
+        transition=dict(source55=s,next55=t,warmstart26_before=initial_warm if a==0 else z['post_qacc_warmstart'][a-1],
+            warmstart26_after=z['post_qacc_warmstart'][b],decision=dict(actual_control20=target),
             mean_native_wrench_source_BODY_COM=mean_BODY,mean_native_group_Fn_N=Fn[a:b+1].mean(0))
         x,y=transition_xy(transition,case['dt']);head=y.copy()
         head[46:52]=momentum_defect(s,t,y,physics['mass'],np.asarray(physics['inertia_BODY']),np.asarray(physics['gravity']),.02)
