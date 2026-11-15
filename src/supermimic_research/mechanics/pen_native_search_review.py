@@ -130,6 +130,12 @@ def main(a):
                     declared_orientation_objective=decision['orientation_objective']==c['orientation_objective']==orientation_objective)
                 if orientation_objective=='FULL_SO3':
                     checks['full_SO3_angle']=np.allclose(full_angle,d['score_orientation_error_rad'],atol=2e-6,rtol=1e-6)
+            if 'PD_lower20' in d:
+                intended=ref['reference_hand'][k+1]+ema-d['encoder_bias20']
+                clamped=np.clip(intended,d['PD_lower20'],d['PD_upper20'])
+                checks.update(explicit_encoder_bias=np.allclose(intended,d['intended_PD'],atol=2e-7,rtol=0),
+                    all57_PD_clamp=np.allclose(clamped,d['PD_targets'],atol=2e-7,rtol=0),
+                    action_and_clamped_bounds=bool(abs(d['raw_candidates']).max()<=1) and bool(np.all(d['PD_targets']>=d['PD_lower20']) and np.all(d['PD_targets']<=d['PD_upper20'])))
             pred=dict(post_qpos=d['Q'][index].astype(float),post_qvel=d['V'][index].astype(float),post_ctrl=d['U'][index].astype(float),post_GPU_time=d['T'][index].astype(float))
             actual={key:z[key][lo:hi] for key in pred}
             metrics,fidelity=compare_response(pred,actual,d['W'][index].astype(float),actual_w[lo:hi],qids,dofs,qa,da,gates)

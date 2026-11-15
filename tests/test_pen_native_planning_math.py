@@ -7,6 +7,20 @@ from supermimic_research.runtime.pen_native_planning_math import candidate_offse
 
 
 class PlanningMathTests(unittest.TestCase):
+    def test_amplitude_table_retains_directions_seed_and_zero_center(self):
+        a=candidate_offsets();wide=candidate_offsets(multiplier=4)
+        self.assertEqual(wide.shape,a.shape);self.assertEqual(wide.dtype,np.float32)
+        np.testing.assert_array_equal(wide,4*a);np.testing.assert_array_equal(wide[:,0],0)
+        np.testing.assert_array_equal(candidate_offsets(multiplier=1),a)
+        for value in [True,False,0,2,-4,float('nan')]:
+            with self.assertRaises(ValueError):candidate_offsets(multiplier=value)
+
+    def test_wider_raw_actions_keep_original_ema_encoder_bias_and_PD_limits(self):
+        a=candidate_offsets();raw=torch.tensor([[.1+a[0,1,0]],[.1+4*a[0,1,0]]])
+        target,ema,intended=candidate_targets(raw,torch.full_like(raw,.04),torch.full_like(raw,.2),torch.full_like(raw,.01),torch.full_like(raw,-.3),torch.full_like(raw,.3))
+        torch.testing.assert_close(ema,torch.tensor([[.065],[.125]]));torch.testing.assert_close(intended,torch.tensor([[.255],[.315]]))
+        torch.testing.assert_close(target,torch.tensor([[.255],[.3]]))
+
     def test_full_rotation_sign_scale_and_independent_scipy_reference(self):
         from scipy.spatial.transform import Rotation
         rng=np.random.default_rng(8253)

@@ -3,12 +3,14 @@ import numpy as np
 import torch
 
 
-def candidate_offsets(ncontrols=368,seed=8101):
+def candidate_offsets(ncontrols=368,seed=8101,*,multiplier=1):
     if ncontrols!=368 or seed!=8101:raise ValueError('Original368-control clock and fixed candidate seed')
+    if isinstance(multiplier,bool) or multiplier not in [1,4]:raise ValueError('Predeclared amplitude multiplier1 or4')
     axes=.08*np.eye(20,dtype=np.float32)
     fixed=np.concatenate([np.zeros((1,20),np.float32),axes,-axes])
     random=np.random.default_rng(seed).normal(0,.04,(ncontrols,16,20)).clip(-.08,.08).astype(np.float32)
-    return np.concatenate([np.broadcast_to(fixed,(ncontrols,41,20)),random],axis=1).copy()
+    offsets=np.concatenate([np.broadcast_to(fixed,(ncontrols,41,20)),random],axis=1).copy()
+    return offsets if multiplier==1 else offsets*np.float32(multiplier)
 
 
 def candidate_targets(raw,processed,reference,bias,lower,upper):

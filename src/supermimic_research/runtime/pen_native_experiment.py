@@ -41,13 +41,19 @@ def main(a):
     if orientation not in ['SHAFT','FULL_SO3']:raise ValueError('Declared orientation objective')
     if 'orientation_objective' in cfg and (profile!='STATE_SUPPORT' or ccd!=dict(ccd_iterations=50,ccd_tolerance=1e-6) or cfg['shaft_scale_deg']!=5.):
         raise ValueError('Orientation matrix fixes original CCD and5deg scale')
+    multiplier=cfg.get('candidate_offset_multiplier',1)
+    if 'candidate_offset_multiplier' in cfg and (profile!='STATE_SUPPORT' or orientation!='FULL_SO3'):
+        raise ValueError('Amplitude matrix requires declared full-SO3 state/support profile')
+    offsets=candidate_offsets(seed=cfg['candidate_seed'],multiplier=multiplier)
+    raw_table=offsets+(2*s['delta20']).astype(np.float32)
+    if not np.isfinite(raw_table).all() or abs(raw_table).max()>1:raise ValueError('Entire bounded raw candidate table required before execution')
     if (a.output.exists() or not a.output.resolve().is_relative_to(ROOT/'runs') or cfg['candidates']!=57 or cfg['horizon_s']!=.02
             or cfg['controllers']!=profiles[profile] or cfg['dt']!=[.005,.0025]
             or (profile=='FEEDBACK' and (cfg['feedback_position_gain_s2']!=100. or cfg['feedback_velocity_gain_s']!=20.))
             or (profile=='VELOCITY' and (cfg['velocity_scale_m_s']!=.25 or cfg['velocity_weight']!=1.))
             or cfg['residual_reference']!='ZERO_PHYSICAL_EMA' or not cfg['numerical_device_override']):raise ValueError('Fixed fresh native search experiment')
     torch.set_num_threads(4);wp.set_device('cuda:0');a.output.mkdir();registry=ArtifactRegistry(bp.parent/base['artifact_manifest'])
-    offsets=candidate_offsets(seed=cfg['candidate_seed']);np.savez_compressed(a.output/'candidates.npz',raw_offsets=offsets)
+    np.savez_compressed(a.output/'candidates.npz',raw_offsets=offsets)
     revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     paths=sorted({p for package in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/package).rglob('*.py')})
     paths.extend(ROOT/p for p in ['tools/run_pen_native.py','tools/run_pen_native_feedback.py'])
@@ -68,6 +74,7 @@ def main(a):
         engine_source_receipt=file_pin(a.output/'engine_source_receipt.json'),
         collision_profile_fidelity='UNQUALIFIED_DEVELOPMENT' if ccd is not None else 'NOT_NEWLY_QUALIFIED',code_revision=revision,config=file_pin(cp),base_config=file_pin(bp),proposal=file_pin(pp),sources=sources,
         candidates=file_pin(a.output/'candidates.npz'),orientation_objective=orientation,neural_updates=0,Actor_updates=0,
+        candidate_offset_multiplier=multiplier,entire_raw_table_max_abs=float(abs(raw_table).max()),entire_raw_table_valid=True,
         scope='Native20ms57-candidate finite-action objective comparison; profile and fixed gains/scales declared by config. Objectives only, no applied corrective force. Development on same clip, not held-out. Equal candidates/decision, not equal total compute under unequal survival. Full original7.36s clock, first native terminal, no object force/reset aid. Not learned-policy A1/A2, real-time, surrogate speedup or ego qualification.')
     write(a.output/'intent.json',intent);cases=[];keepers=[]
     for dt in cfg['dt']:
@@ -133,6 +140,7 @@ def main(a):
                 if not audit['all_array_bytes_equal'] or not audit['scalar_equal'] or not controller_same:raise ValueError('Live planning isolation failed')
                 path=folder/f'decision_{k:04d}.npz'
                 np.savez_compressed(path,endpoint_velocity_world=endpoint_velocity.detach().cpu().numpy(),
+                    PD_lower20=lower.detach().cpu().numpy(),PD_upper20=upper.detach().cpu().numpy(),encoder_bias20=bias.detach().cpu().numpy(),
                     orientation_reference_quaternion_wxyz=reference['quaternion'][k+1].detach().cpu().numpy(),
                     endpoint_velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,support_weight=support_weight,support_target_world=support_target.detach().cpu().numpy(),
                     support_feedback_force_world=correction.detach().cpu().numpy(),
@@ -142,6 +150,7 @@ def main(a):
                     **{'controller_'+key:value for key,value in controller.items()})
                 source=folder/f'source_{k:04d}.npz';np.savez_compressed(source,**planner.source.host_values())
                 decision=dict(k=k,phase=int(controller['command_phase'][0]),selected=selected,candidates=57,
+                    candidate_offset_multiplier=multiplier,
                     orientation_objective=orientation,
                     any_feasible=bool(scores['feasible'].any()),selected_feasible=bool(scores['feasible'][selected]),
                     selected_finite=bool(scores['finite'][selected]),selected_capacity=bool(scores['capacity'][selected]),
@@ -157,6 +166,7 @@ def main(a):
                 bp.parent,registry,folder,initializer=initialize,action_provider=provider)
             planner=planning['planner'];_,after_scalars,after_hashes=capture_model(planner.model)
             c.update(name=mode,planning=decisions,planning_model_unchanged=after_hashes==model_before and after_scalars==model_scalars,
+                candidate_offset_multiplier=multiplier,
                 orientation_objective=orientation,
                 observed_Data_layout=file_pin(folder/'observed_Data_layout.json'),
                 fixed_model_arrays=file_pin(folder/'fixed_model_arrays.npz'),fixed_model_scalars=file_pin(folder/'fixed_model_scalars.json'),

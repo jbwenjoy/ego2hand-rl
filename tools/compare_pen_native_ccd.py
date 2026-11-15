@@ -27,16 +27,23 @@ def main(a):
     reviews=[json.loads(p.read_text()) for p in [a.baseline_review,a.tight_review]]
     configs=[tomllib.loads(verify_file_pin(r['config']).read_text()) for r in runs]
     axis=getattr(a,'axis','CCD')
-    if axis not in ['CCD','ORIENTATION']:raise ValueError('Declared matrix axis')
-    omitted='collision_numerics' if axis=='CCD' else 'orientation_objective'
-    labels=['BASELINE','TIGHT'] if axis=='CCD' else ['SHAFT','FULL_SO3']
+    if axis not in ['CCD','ORIENTATION','AMPLITUDE']:raise ValueError('Declared matrix axis')
+    omitted={'CCD':'collision_numerics','ORIENTATION':'orientation_objective','AMPLITUDE':'candidate_offset_multiplier'}[axis]
+    labels={'CCD':['BASELINE','TIGHT'],'ORIENTATION':['SHAFT','FULL_SO3'],'AMPLITUDE':['X1','X4']}[axis]
     expected_CCD=[dict(ccd_iterations=50,ccd_tolerance=1e-6),dict(ccd_iterations=50,ccd_tolerance=1e-7 if axis=='CCD' else 1e-6)]
     checks=dict(config_fixed_except_axis={k:v for k,v in configs[0].items() if k!=omitted}=={k:v for k,v in configs[1].items() if k!=omitted},
         predeclared_CCD=[r['collision_numerics'] for r in runs]==expected_CCD,
-        candidate_table_exact=np.array_equal(np.load(verify_file_pin(runs[0]['candidates']))['raw_offsets'],np.load(verify_file_pin(runs[1]['candidates']))['raw_offsets']),
+        candidate_table_relation=np.array_equal(np.load(verify_file_pin(runs[0]['candidates']))['raw_offsets']*(4 if axis=='AMPLITUDE' else 1),np.load(verify_file_pin(runs[1]['candidates']))['raw_offsets']),
         original_proposal=runs[0]['proposal']==runs[1]['proposal'],base_config=runs[0]['base_config']==runs[1]['base_config'])
     if axis=='ORIENTATION':
         checks['predeclared_orientation']=[r['orientation_objective'] for r in runs]==[c['orientation_objective'] for c in configs]==labels
+    candidate_reference=None
+    if axis=='AMPLITUDE':
+        if a.candidate_reference is None:raise ValueError('Explicit frozen original-candidate run required')
+        old=json.loads(a.candidate_reference.read_text());candidate_reference=dict(run=file_pin(a.candidate_reference),candidates=old['candidates'])
+        checks.update(original_candidate_table=np.array_equal(np.load(verify_file_pin(old['candidates']))['raw_offsets'],np.load(verify_file_pin(runs[0]['candidates']))['raw_offsets']),
+            predeclared_amplitude=[r['candidate_offset_multiplier'] for r in runs]==[c['candidate_offset_multiplier'] for c in configs]==[1,4],
+            full_orientation_fixed=all(r['orientation_objective']=='FULL_SO3' for r in runs))
     receipts=[]
     for r in runs:
         maps=[]
@@ -85,22 +92,35 @@ def main(a):
                 f'profile{i}_no_aid_no_reset':c['initial_reset_count']==1 and c['resets_after_start']==0 and c['summary']['gates']['no_applied_force']})
             reviewed=next(e for e in review['cases'] if (e['mode'],e['dt'])==key)
             if axis=='ORIENTATION':local[f'profile{i}_objective_metadata']=c['orientation_objective']==labels[i] and all(d['orientation_objective']==labels[i] for d in c['planning'])
+            clipping=[]
+            if axis=='AMPLITUDE':
+                multiplier=[1,4][i]
+                local[f'profile{i}_amplitude_metadata']=c['candidate_offset_multiplier']==multiplier and all(d['candidate_offset_multiplier']==multiplier for d in c['planning'])
+                proposal=read(run['proposal']);selected=np.load(verify_file_pin(proposal['artifacts']['selected']))
+                raw_all=np.load(verify_file_pin(run['candidates']))['raw_offsets']+(2*selected['delta20']).astype(np.float32)
+                local[f'profile{i}_entire_raw_table']=run['entire_raw_table_valid'] and abs(raw_all).max()<=1 and float(abs(raw_all).max())==run['entire_raw_table_max_abs']
+                for decision in c['planning']:
+                    d=np.load(verify_file_pin(decision['prediction']))
+                    clipping.append(dict(k=decision['k'],PD_clipped_components=int(np.count_nonzero(d['intended_PD']!=d['PD_targets'])),
+                        max_PD_clip_rad=float(abs(d['intended_PD']-d['PD_targets']).max()),max_abs_raw=float(abs(d['raw_candidates']).max()),
+                        max_EMA_deviation_from_center_rad=float(abs(d['EMA_candidates']-d['EMA_candidates'][0]).max()),
+                        max_PD_deviation_from_center_rad=float(abs(d['PD_targets']-d['PD_targets'][0]).max())))
             outcomes.append(dict(profile=labels[i],duration_s=c['summary']['metrics']['actual_duration_s'],metrics=c['summary']['metrics'],task_qualified=c['summary']['qualified'],
                 prediction_passed=sum(d['fidelity_passed'] for d in reviewed['decisions']),prediction_total=len(reviewed['decisions']),
                 failed_predictions=[d for d in reviewed['decisions'] if not d['fidelity_passed']],candidate_ticks=c['candidate_physics_ticks'],actual_ticks=c['physics_steps'],wall_s=c['wall_s'],
-                candidate_cuda_ms=sum(d['candidate_cuda_ms'] for d in c['planning'])))
+                candidate_cuda_ms=sum(d['candidate_cuda_ms'] for d in c['planning']),clipping=clipping))
         cells.append(dict(mode=key[0],dt=key[1],checks=local,outcomes=outcomes))
     passed=sum(checks.values())+sum(sum(c['checks'].values()) for c in cells);total=len(checks)+sum(len(c['checks']) for c in cells)
     a.output.mkdir();result=dict(schema='fresh_native_'+axis+'_matrix_audit:2',axis=axis,source=file_pin(__file__),baseline=file_pin(a.baseline),tight=file_pin(a.tight),
-        baseline_review=file_pin(a.baseline_review),tight_review=file_pin(a.tight_review),checks=checks,cells=cells,passed=passed,total=total,
+        baseline_review=file_pin(a.baseline_review),tight_review=file_pin(a.tight_review),candidate_reference=candidate_reference,checks=checks,cells=cells,passed=passed,total=total,
         actual_integrations=sum(c['physics_steps'] for r in runs for c in r['cases']),candidate_integrations=sum(c['candidate_physics_ticks'] for r in runs for c in r['cases']),
-        new_integrations=0,neural_updates=0,scope='Declared axis only: CCD permits tolerance difference, ORIENTATION requires exact same model bytes and only SHAFT/FULL_SO3 scoring difference. Fresh actual task metrics and provenance. One episode/cell, unequal survival cost; failed force/task gates retained. No expert/ego/gradient/acceleration qualification.')
+        new_integrations=0,neural_updates=0,scope='Declared axis only: CCD permits tolerance difference; ORIENTATION/AMPLITUDE require exact model bytes with only scoring mode/offset multiplier difference. Amplitude1/4 must relate to explicit frozen original table. Fresh actual metrics and provenance, unequal survival cost, failed force/task gates retained. No expert/ego/gradient/acceleration qualification.')
     write(a.output/'report.json',result);print(json.dumps(dict(report=file_pin(a.output/'report.json'),contracts=[passed,total],actual=result['actual_integrations'],candidate=result['candidate_integrations'])))
     if passed!=total:raise ValueError('Matrix contract failed; retain report')
 
 
 if __name__=='__main__':
     p=argparse.ArgumentParser()
-    p.add_argument('--axis',choices=['CCD','ORIENTATION'],default='CCD')
+    p.add_argument('--axis',choices=['CCD','ORIENTATION','AMPLITUDE'],default='CCD');p.add_argument('--candidate-reference',type=Path)
     for name in ['baseline','tight','baseline-review','tight-review','output']:p.add_argument('--'+name,type=Path,required=True)
     main(p.parse_args())
