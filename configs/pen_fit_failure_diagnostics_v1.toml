@@ -1,0 +1,11 @@
+schema = 1
+prepared = "../runs/pen_candidate_responses_v1/report.json"
+evaluation = "../runs/pen_candidate_fit_evaluation_v1/report.json"
+rollout = "../runs/pen_candidate_fit_rollout_v1/report.json"
+health = "../runs/pen_candidate_fit_continuation_v1/health_2000.json"
+base_config = "controlled_evaluation_v4.toml"
+device = "cuda:0"
+horizons = [1, 2, 5, 10]
+source_distance = "TRAIN_X_SCALE_RMS_SAME_NATIVE_DT_NO_PD"
+oracle_modes = ["FULL", "OBSERVED_WARM", "OBSERVED_STATE", "OBSERVED_BOTH"]
+scope = "Read-only development diagnosis. Observed-state/memory replacements are privileged teacher-forcing interventions, never closed-loop predictions or deployable controls. No fitting, role changes, physical gradients or new task-success claims."
