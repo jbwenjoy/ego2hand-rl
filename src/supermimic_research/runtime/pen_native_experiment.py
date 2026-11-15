@@ -77,6 +77,11 @@ def main(a):
                 if 'planner' not in planning:
                     wp.synchronize();planner=NativePenPlanner(env.sim.mj_model,env.sim.wp_model,env.sim.wp_data,s['qids'],s['aids'],round(.02/dt))
                     planning['planner']=planner;keepers.append(planner)
+                    write(folder/'observed_Data_layout.json',dict(schema='observed_live_dynamic_Data_layout:1',
+                        scalars=planner.live_scalars,layout=planner.layout,
+                        arrays={key:dict(shape=list(shape),dtype=str(dtype),strides=list(strides))
+                            for key,(_,shape,dtype,strides) in planner.live_layout.items()},
+                        scope='Observed in this fresh native episode; static layout/scalars rechecked at every source load. Never backfilled into historical runs.'))
                 planner=planning['planner'];wp.synchronize();planner.load_source()
                 raw=center+offset_tensor[k];lower,upper=action.target_position_limits;bias=env.scene['robot'].data.encoder_bias[:,action._target_ids]
                 targets,ema,intended=candidate_targets(raw,action._processed_actions,command.joint_pos,bias,lower,upper)
@@ -127,6 +132,7 @@ def main(a):
                 bp.parent,registry,folder,initializer=initialize,action_provider=provider)
             planner=planning['planner'];_,after_scalars,after_hashes=capture_model(planner.model)
             c.update(name=mode,planning=decisions,planning_model_unchanged=after_hashes==model_before and after_scalars==model_scalars,
+                observed_Data_layout=file_pin(folder/'observed_Data_layout.json'),
                 fixed_model_arrays=file_pin(folder/'fixed_model_arrays.npz'),fixed_model_scalars=file_pin(folder/'fixed_model_scalars.json'),
                 candidates_evaluated=57*len(decisions),candidate_physics_ticks=57*len(decisions)*round(.02/dt),
                 supervision='NATIVE_CONTROLLER_PROBE_NONEXPERT_UNLESS_ALL_ORIGINAL_GATES_PASS')
