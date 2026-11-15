@@ -1,0 +1,14 @@
+schema = 1
+prepared = "../runs/pen_candidate_responses_v1/report.json"
+review = "../runs/pen_candidate_responses_readback_v1/report.json"
+device = "cuda:0"
+width = 512
+batch_size = 2048
+learning_rate = 0.0003
+weight_decay = 0.00001
+gradient_clip_norm = 1.0
+auxiliary_weight = 0.1
+sampler_seed = 7411
+first_checkpoint_update = 100
+planned_updates = 2000
+stop_at_first_healthy_checkpoint = true
