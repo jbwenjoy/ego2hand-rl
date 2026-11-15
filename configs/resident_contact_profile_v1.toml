@@ -1,0 +1,9 @@
+schema = 1
+native_report = "../runs/resident_contact_native_v2/report.json"
+evaluation_ledger = "../provenance/pen_native_ppo_results/ledger.json"
+device = "cuda:0"
+use_native_capacity = true
+warmup = 128
+samples_per_repeat = 512
+repeats = 5
+scope = "Resident metric-only repeated fixed-input microbenchmark; no physics, CPU contact dump or policy/optimizer work in timed region; not end-to-end collection or training speedup."

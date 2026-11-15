@@ -1,0 +1,12 @@
+schema = 1
+device = "cuda:0"
+evaluation_ledger = "../provenance/pen_native_ppo_results/ledger.json"
+portable_ledger = "../provenance/pen_portable_state_results/ledger.json"
+portable_case = "pen_native_resume_contiguous_W32_producer_v1"
+window_samples = 8
+partial_reset_tick = 4
+partial_reset_worlds = [0, 7, 31]
+absolute_tolerance = 1e-9
+relative_tolerance = 1e-12
+legacy_torque_tolerance = 1e-5
+scope = "Saved raw EFC/contact arithmetic replay only; zero physics and optimizer updates; host upload/readback costs are not throughput measurements."

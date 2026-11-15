@@ -1,0 +1,85 @@
+{
+  "schema": "resident_contact_evidence_summary:1",
+  "roots": {
+    "replay": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\resident_contact_replay_v1\\report.json",
+      "bytes": 22483,
+      "sha256": "2d9a840c31633b3f2fc6bbc693cccb3ca26512afb5e07a0a2dc92f695ccc0d0c"
+    },
+    "live": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\resident_contact_native_v2\\report.json",
+      "bytes": 52890,
+      "sha256": "4985f027f0b661a600a52da7623fc313f4fadecafa16dddbeddd7ed1d68d1e4d"
+    },
+    "profile_minimal": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\resident_contact_profile_v1\\report.json",
+      "bytes": 6989,
+      "sha256": "0b575d5319b1df75c4f9fbaea7fedbcf8b858dccfc443f53a12cd993e0f8bbff"
+    },
+    "profile_native": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\resident_contact_profile_v2\\report.json",
+      "bytes": 6945,
+      "sha256": "5698810485f393912d543d517269a58d902b88b6d45c8c2efc7133bb39372518"
+    }
+  },
+  "checks": {
+    "replay": [
+      81,
+      81
+    ],
+    "live": [
+      63,
+      63
+    ],
+    "profile_minimal": [
+      10,
+      10
+    ],
+    "profile_native": [
+      10,
+      10
+    ]
+  },
+  "replay_packets": 648,
+  "replay_world_samples": 2632,
+  "confirmed_physical_integrations": 4224,
+  "additional_failed_physical_integrations": {
+    "exact": null,
+    "lower": 0,
+    "upper": 128
+  },
+  "optimizer_steps": 0,
+  "source_capture": {
+    "model_fields": 404,
+    "data_fields": 169,
+    "native_indices": [
+      4,
+      5,
+      6
+    ],
+    "role": "New diagnostic sources, not historical W32 divergence sources"
+  },
+  "native_profile": [
+    {
+      "worlds": 1,
+      "global_active_contacts": 5,
+      "launched_contact_capacity": 192,
+      "median_GPU_us_per_sample": 27.236562222242355,
+      "median_host_dispatch_us_per_sample": 10.033789067165344
+    },
+    {
+      "worlds": 32,
+      "global_active_contacts": 160,
+      "launched_contact_capacity": 6144,
+      "median_GPU_us_per_sample": 34.10249948501587,
+      "median_host_dispatch_us_per_sample": 9.872851478576194
+    }
+  ],
+  "unit_tests": 299,
+  "failed_live": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\resident_contact_archive_v1\\failed_live_v1.json",
+    "bytes": 1072,
+    "sha256": "ef9fb6ecd77a0a0fa319c890c1b596618dff52d0632fe8d6ccab1e7efac9f8fd"
+  },
+  "scope": "Read-only resident arithmetic/live fold qualification only. No new policy learning, end-to-end speedup, W32 physical repeatability, WM gradients, CHORD/ego or full Goal success."
+}

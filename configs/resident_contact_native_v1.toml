@@ -1,0 +1,12 @@
+schema = 1
+adapter_config = "pen_full_pose_native_v1.toml"
+worlds = [1, 32]
+controls = 16
+decimation = 8
+native_dt = 0.0025
+reset_before_control = 8
+partial_window_reset_before_sample = 4
+source_capture_samples = [4, 5, 6]
+absolute_tolerance = 1e-9
+relative_tolerance = 1e-12
+scope = "Diagnostic scripted controls, no optimizer; read-only live per-native-step metrics. Not a policy/task, numerical repeatability, WM-gradient or throughput qualification."
