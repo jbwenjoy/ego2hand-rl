@@ -23,13 +23,14 @@ def main(axis='ORIENTATION'):
     review_keys=['shaft_review','full_review'];raw_keys=['shaft','full'];test_log='pen_native_orientation_tests211.log';plan='research-plan-v0.83.md'
     if axis=='AMPLITUDE':
         names=dict(x1='pen_native_amplitude_x1_v1',x4='pen_native_amplitude_x4_v1',x1_review='pen_native_amplitude_x1_review_v1',x4_review='pen_native_amplitude_x4_review_v1',
-            matrix='pen_native_amplitude_matrix_review_v1',coverage='pen_native_amplitude_coverage_v1',video='pen_native_amplitude_video_v1')
+            matrix='pen_native_amplitude_matrix_review_v1',coverage='pen_native_amplitude_coverage_v1',video='pen_native_amplitude_video_v1',momentum='pen_native_amplitude_momentum_v1')
         review_keys=['x1_review','x4_review'];raw_keys=['x1','x4'];test_log='pen_native_amplitude_tests213.log';plan='research-plan-v0.84.md'
     reports={k:ROOT/'runs'/v/'report.json' for k,v in names.items()}
     for k in review_keys:reports[k+'_EFC']=reports[k].parent/'EFC/report.json'
     revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     files=[Path(__file__)]+[ROOT/'tools'/p for p in ['archive_pen_source_ccd_evidence.py','rescore_pen_full_orientation.py','compare_pen_native_ccd.py',
         'audit_pen_candidate_coverage.py','render_pen_native_ccd.py','render_mug_progress_video.py']]+[ROOT/'tests/test_pen_native_planning_math.py']
+    if axis=='AMPLITUDE':files.append(ROOT/'tools/decompose_pen_momentum_residual.py')
     analysis.mkdir();receipt=freeze_sources(files,analysis/'snapshot',ROOT,revision);write(analysis/'source_receipt.json',receipt)
     prior=ROOT/('provenance/pen_native_ccd_results/supplement_source_resolutions.json' if axis=='ORIENTATION' else 'provenance/pen_native_orientation_results/source_resolutions.json')
     aliases={json.dumps(r['original'],sort_keys=True):r for r in json.loads(prior.read_text())['records']}
@@ -60,7 +61,7 @@ def main(axis='ORIENTATION'):
     raw=[json.loads(reports[k].read_text()) for k in raw_keys]
     if any(c['summary']['qualified'] for r in raw for c in r['cases']):raise ValueError('Review scientific conclusion before changing evidence')
     out.mkdir();copies={}
-    for key in review_keys+['matrix','coverage','video']+([ 'offline'] if axis=='ORIENTATION' else [])+[k+'_EFC' for k in review_keys]:
+    for key in review_keys+['matrix','coverage','video']+(['offline'] if axis=='ORIENTATION' else ['momentum'])+[k+'_EFC' for k in review_keys]:
         target=out/(key+'.json');shutil.copyfile(reports[key],target)
         if file_pin(target)['sha256']!=file_pin(reports[key])['sha256']:raise ValueError('Copied bytes differ')
         copies[key]=file_pin(target)
