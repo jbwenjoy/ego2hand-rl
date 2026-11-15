@@ -4,13 +4,19 @@ import numpy as np
 from ..mechanics.warp_contact_labels import read_warp_contact_labels
 
 
-def record_response(model,device_model,data,graph,aids,target20,nsteps,*,instrument=False):
+def record_response(model,device_model,data,graph,aids,target20,nsteps,*,instrument=False,control_schedule=None):
     import mujoco
     import mujoco_warp as mw
     import warp as wp
     host=mujoco.MjData(model);body=model.body('object/cube').id
     qa=int(model.jnt_qposadr[model.body_jntadr[body]])
     ctrl=data.ctrl.numpy().copy();ctrl[0,aids]=target20;data.ctrl.assign(ctrl)
+    if control_schedule is not None:
+        schedule=np.asarray(control_schedule)
+        if (schedule.ndim!=2 or schedule.shape[1]!=20 or not len(schedule) or nsteps%len(schedule)
+                or not np.array_equal(schedule[0],target20) or abs(model.opt.timestep*nsteps/len(schedule)-.02)>1e-9):
+            raise ValueError('Explicit scheduled PD20 controls held exactly20ms')
+        per_control=nsteps//len(schedule)
     mw.get_data_into(host,model,data)
     signature=mujoco.mjtState.mjSTATE_INTEGRATION;initial=np.empty(mujoco.mj_stateSize(model,signature));mujoco.mj_getState(model,host,initial,signature)
     trace={key:[] for key in ['pre_qpos','pre_qvel','post_qpos','post_qvel','post_ctrl','post_qacc','post_qacc_warmstart',
@@ -21,6 +27,8 @@ def record_response(model,device_model,data,graph,aids,target20,nsteps,*,instrum
             'post_M','post_qacc_smooth','post_efc_Ma','post_qfrc_smooth','post_qfrc_bias','post_qfrc_passive','post_qfrc_actuator']})
     raw=[];addresses=[];efc=[];ranges=[0];legacy=[];adhesion=[]
     for tick in range(nsteps):
+        if control_schedule is not None and tick and tick%per_control==0:
+            ctrl[0,aids]=schedule[tick//per_control];data.ctrl.assign(ctrl)
         preq,prev=data.qpos.numpy()[0].copy(),data.qvel.numpy()[0].copy()
         if instrument:
             pre_instrument=dict(pre_qacc_warmstart=data.qacc_warmstart.numpy()[0].copy(),

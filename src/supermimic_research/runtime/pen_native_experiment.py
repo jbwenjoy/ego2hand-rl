@@ -15,7 +15,7 @@ from supermimic_research.runtime.controlled_evaluation import evaluate_case,writ
 from supermimic_research.runtime.pen_gpu_initialization import initialize_and_query_pen
 from supermimic_research.runtime.gpu_model_snapshot import capture_model
 from supermimic_research.runtime.native_pen_planner import NativePenPlanner
-from supermimic_research.runtime.pen_native_planning_math import candidate_offsets,candidate_targets
+from supermimic_research.runtime.pen_native_planning_math import candidate_offsets,candidate_targets,candidate_sequence_targets
 from supermimic_research.mechanics.mean_reference_wrench import mean_reference_wrench
 from supermimic_research.mechanics.feedback_support import feedback_support_target
 from supermimic_research.runtime.collision_numerics import validate_collision_numerics
@@ -43,14 +43,17 @@ def main(a):
     if 'orientation_objective' in cfg and (profile!='STATE_SUPPORT' or ccd!=dict(ccd_iterations=50,ccd_tolerance=1e-6) or cfg['shaft_scale_deg']!=5.):
         raise ValueError('Orientation matrix fixes original CCD and5deg scale')
     multiplier=cfg.get('candidate_offset_multiplier',1)
+    horizon=cfg.get('prediction_controls',1)
+    if isinstance(horizon,bool) or horizon not in [1,5] or horizon>1 and (profile!='STATE_SUPPORT' or orientation!='FULL_SO3'):
+        raise ValueError('Predeclared H1/H5 full-SO3 state/support prediction')
     response_spec=cfg.get('response_parent_split');roles=parent_roles(response_spec) if response_spec is not None else {}
-    if roles and (multiplier!=4 or orientation!='FULL_SO3' or profile!='STATE_SUPPORT'):raise ValueError('Frozen fresh X4 response-parent collection')
+    if roles and (multiplier!=4 or orientation!='FULL_SO3' or profile!='STATE_SUPPORT' or horizon!=1):raise ValueError('Frozen fresh X4 response-parent collection')
     if 'candidate_offset_multiplier' in cfg and (profile!='STATE_SUPPORT' or orientation!='FULL_SO3'):
         raise ValueError('Amplitude matrix requires declared full-SO3 state/support profile')
     offsets=candidate_offsets(seed=cfg['candidate_seed'],multiplier=multiplier)
     raw_table=offsets+(2*s['delta20']).astype(np.float32)
     if not np.isfinite(raw_table).all() or abs(raw_table).max()>1:raise ValueError('Entire bounded raw candidate table required before execution')
-    if (a.output.exists() or not a.output.resolve().is_relative_to(ROOT/'runs') or cfg['candidates']!=57 or cfg['horizon_s']!=.02
+    if (a.output.exists() or not a.output.resolve().is_relative_to(ROOT/'runs') or cfg['candidates']!=57 or cfg['horizon_s']!=.02*horizon
             or cfg['controllers']!=profiles[profile] or cfg['dt']!=[.005,.0025]
             or (profile=='FEEDBACK' and (cfg['feedback_position_gain_s2']!=100. or cfg['feedback_velocity_gain_s']!=20.))
             or (profile=='VELOCITY' and (cfg['velocity_scale_m_s']!=.25 or cfg['velocity_weight']!=1.))
@@ -73,13 +76,14 @@ def main(a):
     engine_sources=freeze_sources([engine_path],a.output/'engine_source_snapshot',engine_path.parents[1],'installed-mjlab-simulation-source-not-git')
     write(a.output/'engine_source_receipt.json',engine_sources)
     sources=[r['snapshot'] for r in source_receipt['records']]
-    intent=dict(schema='pen_native_objective_search:3',experiment=profile,source_receipt=file_pin(a.output/'source_receipt.json'),installed_source_receipt=file_pin(a.output/'installed_source_receipt.json'),collision_numerics=ccd,
+    intent=dict(schema='pen_native_objective_search:4' if horizon>1 else 'pen_native_objective_search:3',experiment=profile,source_receipt=file_pin(a.output/'source_receipt.json'),installed_source_receipt=file_pin(a.output/'installed_source_receipt.json'),collision_numerics=ccd,
         engine_source_receipt=file_pin(a.output/'engine_source_receipt.json'),
         collision_profile_fidelity='UNQUALIFIED_DEVELOPMENT' if ccd is not None else 'NOT_NEWLY_QUALIFIED',code_revision=revision,config=file_pin(cp),base_config=file_pin(bp),proposal=file_pin(pp),sources=sources,
         candidates=file_pin(a.output/'candidates.npz'),orientation_objective=orientation,neural_updates=0,Actor_updates=0,
         candidate_offset_multiplier=multiplier,entire_raw_table_max_abs=float(abs(raw_table).max()),entire_raw_table_valid=True,
+        planning_horizon_controls=horizon,actual_applied_controls_per_decision=1,
         response_parent_split=response_spec,response_data_role='FRESH_WM_PARENTS' if roles else 'CONTROLLER_DIAGNOSTIC',
-        scope='Native20ms57-candidate finite-action objective comparison; profile and fixed gains/scales declared by config. Objectives only, no applied corrective force. Development on same clip, not held-out. Equal candidates/decision, not equal total compute under unequal survival. Full original7.36s clock, first native terminal, no object force/reset aid. Not learned-policy A1/A2, real-time, surrogate speedup or ego qualification.')
+        scope=f'Native57-candidate H{horizon} receding-horizon objective comparison, apply only first20ms. Future per-phase raw/EMA/reference PD, mean per-control cost; full forecast geometry. Unequal forecast/survival compute explicitly counted. Full original7.36s clock, first native terminal, no object force/reset aid. Diagnostic same-clip development, not learning data, learned-policy A1/A2, real-time, surrogate speedup or ego qualification.')
     write(a.output/'intent.json',intent);cases=[];keepers=[];response_rows=[]
     for dt in cfg['dt']:
         for mode in cfg['controllers']:
@@ -98,6 +102,7 @@ def main(a):
                 np.savez_compressed(folder/'reference.npz',COM_world_m=COM,quaternion_wxyz=Q,reference_hand=command._frames['joint_pos'].detach().cpu().numpy(),
                     **{k:v for k,v in targets.items() if isinstance(v,np.ndarray)})
                 reference.update(mass=float(dm.body_mass.numpy()[0,b]),velocity=torch.tensor(targets['velocity_world'],dtype=torch.float32,device='cuda'),COM=torch.tensor(COM,device='cuda'),quaternion=torch.tensor(Q,dtype=torch.float32,device='cuda'),shaft=torch.tensor(Rotation.from_quat(Q[:,[1,2,3,0]]).as_matrix()[:,:,0],dtype=torch.float32,device='cuda'),
+                    hand=torch.tensor(command._frames['joint_pos'].detach().cpu().numpy(),device='cuda'),
                     wrench=torch.tensor(targets['wrench_world'],dtype=torch.float32,device='cuda'),valid=targets['valid_interval'])
                 arrays,scalars,hashes=capture_model(dm);model_before.update(hashes);model_scalars.update(scalars)
                 np.savez_compressed(folder/'fixed_model_arrays.npz',**arrays);write(folder/'fixed_model_scalars.json',scalars)
@@ -107,17 +112,29 @@ def main(a):
                 if action._mask_enabled or action.cfg.alpha!=.5 or action.cfg.scale!=.5:raise ValueError('Original unmasked .5/.5 controller')
                 statekeys=['_raw_actions','_processed_actions','_targets','_targets_valid','_mask_active','_mask_remaining','_mask_dofs']
                 controller={key:getattr(action,key).detach().cpu().numpy().copy() for key in statekeys};controller['command_phase']=command.time_steps.detach().cpu().numpy().copy()
-                if 'planner' not in planning:
-                    wp.synchronize();planner=NativePenPlanner(env.sim.mj_model,env.sim.wp_model,env.sim.wp_data,s['qids'],s['aids'],round(.02/dt),response_heads=bool(roles))
-                    planning['planner']=planner;keepers.append(planner)
-                    write(folder/'observed_Data_layout.json',dict(schema='observed_live_dynamic_Data_layout:1',
+                effective_horizon=min(horizon,368-k);planner_key=f'planner_H{effective_horizon}'
+                if planner_key not in planning:
+                    wp.synchronize();planner=NativePenPlanner(env.sim.mj_model,env.sim.wp_model,env.sim.wp_data,s['qids'],s['aids'],round(.02/dt)*effective_horizon,response_heads=bool(roles),horizon_controls=effective_horizon)
+                    planning[planner_key]=planner;keepers.append(planner)
+                    if not (folder/'observed_Data_layout.json').exists():write(folder/'observed_Data_layout.json',dict(schema='observed_live_dynamic_Data_layout:1',
                         scalars=planner.live_scalars,layout=planner.layout,
                         arrays={key:dict(shape=list(shape),dtype=str(dtype),strides=list(strides))
                             for key,(_,shape,dtype,strides) in planner.live_layout.items()},
                         scope='Observed in this fresh native episode; static layout/scalars rechecked at every source load. Never backfilled into historical runs.'))
-                planner=planning['planner'];wp.synchronize();planner.load_source()
+                planner=planning[planner_key];planning['planner']=planner;wp.synchronize();planner.load_source()
                 raw=center+offset_tensor[k];lower,upper=action.target_position_limits;bias=env.scene['robot'].data.encoder_bias[:,action._target_ids]
                 targets,ema,intended=candidate_targets(raw,action._processed_actions,command.joint_pos,bias,lower,upper)
+                sequence_reference=None;sequence_payload={}
+                if effective_horizon>1:
+                    raw_sequence=center+offset_tensor[k:k+effective_horizon].permute(1,0,2)
+                    targets,ema,intended=candidate_sequence_targets(raw_sequence,action._processed_actions,
+                        reference['hand'][k+1:k+1+effective_horizon],bias,lower,upper)
+                    sequence_reference={key:reference[key][k+1:k+1+effective_horizon] for key in ['COM','shaft','hand','quaternion']}
+                    sequence_reference.update(wrench=reference['wrench'][k:k+effective_horizon],valid=reference['valid'][k:k+effective_horizon])
+                    sequence_payload=dict(raw_sequence=raw_sequence.detach().cpu().numpy(),PD_schedule=targets.detach().cpu().numpy(),
+                        EMA_schedule=ema.detach().cpu().numpy(),intended_PD_schedule=intended.detach().cpu().numpy(),
+                        sequence_reference_COM=sequence_reference['COM'].detach().cpu().numpy(),
+                        sequence_reference_quaternion=sequence_reference['quaternion'].detach().cpu().numpy())
                 valid=bool(reference['valid'][k])
                 source_p=wp.to_torch(env.sim.wp_data.qpos)[0,planner.qa:planner.qa+3]
                 source_v=wp.to_torch(env.sim.wp_data.qvel)[0,planner.da:planner.da+3]
@@ -136,7 +153,7 @@ def main(a):
                 support_weight=cfg['support_weight'] if mode in ['STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT','STATE_PLUS_VELOCITY_SUPPORT'] else 0.
                 selected,arrays,scores,cuda_ms=planner.search(targets,ema,reference['COM'][k+1],reference['shaft'][k+1],command.joint_pos[0],
                     support_target,valid,support_weight,scorecfg,reference_velocity=endpoint_velocity,
-                    velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,reference_quaternion=reference['quaternion'][k+1])
+                    velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,reference_quaternion=reference['quaternion'][k+1],reference_sequence=sequence_reference)
                 primary_search_timing=dict(planner.last_search_timing)
                 compute_wall=time.perf_counter()-started
                 audit=planner.source.audit(env.sim.wp_data)
@@ -144,14 +161,17 @@ def main(a):
                 controller_same &= np.array_equal(controller['command_phase'],command.time_steps.detach().cpu().numpy())
                 if not audit['all_array_bytes_equal'] or not audit['scalar_equal'] or not controller_same:raise ValueError('Live planning isolation failed')
                 path=folder/f'decision_{k:04d}.npz'
-                payload=dict(endpoint_velocity_world=endpoint_velocity.detach().cpu().numpy(),
+                first_ema=ema[:,0] if effective_horizon>1 else ema
+                first_PD=targets[:,0] if effective_horizon>1 else targets
+                first_intended=intended[:,0] if effective_horizon>1 else intended
+                payload=dict(prediction_controls=effective_horizon,**sequence_payload,endpoint_velocity_world=endpoint_velocity.detach().cpu().numpy(),
                     PD_lower20=lower.detach().cpu().numpy(),PD_upper20=upper.detach().cpu().numpy(),encoder_bias20=bias.detach().cpu().numpy(),
                     orientation_reference_quaternion_wxyz=reference['quaternion'][k+1].detach().cpu().numpy(),
                     endpoint_velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,support_weight=support_weight,support_target_world=support_target.detach().cpu().numpy(),
                     support_feedback_force_world=correction.detach().cpu().numpy(),
                     support_source_position_error_world_m=position_error.detach().cpu().numpy(),
                     support_source_velocity_error_world_m_s=velocity_error.detach().cpu().numpy(),**arrays,**{'score_'+key:value for key,value in scores.items()},raw_candidates=raw.detach().cpu().numpy(),
-                    EMA_candidates=ema.detach().cpu().numpy(),PD_targets=targets.detach().cpu().numpy(),intended_PD=intended.detach().cpu().numpy(),
+                    EMA_candidates=first_ema.detach().cpu().numpy(),PD_targets=first_PD.detach().cpu().numpy(),intended_PD=first_intended.detach().cpu().numpy(),
                     **{'controller_'+key:value for key,value in controller.items()})
                 np.savez_compressed(path,**payload)
                 source=folder/f'source_{k:04d}.npz';np.savez_compressed(source,**planner.source.host_values())
@@ -173,6 +193,7 @@ def main(a):
                     if not after_extra['all_array_bytes_equal'] or not after_extra['scalar_equal'] or not after_controller:raise ValueError('Extra response repeats changed live source/controller')
                     write(a.output/'response_progress.json',dict(rows=response_rows))
                 decision=dict(k=k,phase=int(controller['command_phase'][0]),selected=selected,candidates=57,
+                    prediction_controls=effective_horizon,native_candidate_ticks=57*effective_horizon*round(.02/dt),
                     candidate_offset_multiplier=multiplier,
                     orientation_objective=orientation,
                     any_feasible=bool(scores['feasible'].any()),selected_feasible=bool(scores['feasible'][selected]),
@@ -190,10 +211,11 @@ def main(a):
             planner=planning['planner'];_,after_scalars,after_hashes=capture_model(planner.model)
             c.update(name=mode,planning=decisions,planning_model_unchanged=after_hashes==model_before and after_scalars==model_scalars,
                 candidate_offset_multiplier=multiplier,
+                planning_horizon_controls=horizon,
                 orientation_objective=orientation,
                 observed_Data_layout=file_pin(folder/'observed_Data_layout.json'),
                 fixed_model_arrays=file_pin(folder/'fixed_model_arrays.npz'),fixed_model_scalars=file_pin(folder/'fixed_model_scalars.json'),
-                candidates_evaluated=57*len(decisions),candidate_physics_ticks=57*len(decisions)*round(.02/dt),
+                candidates_evaluated=57*len(decisions),candidate_physics_ticks=sum(d['native_candidate_ticks'] for d in decisions),
                 supervision='NATIVE_CONTROLLER_PROBE_NONEXPERT_UNLESS_ALL_ORIGINAL_GATES_PASS')
             cases.append(c);write(folder/'report.json',c);write(a.output/'progress.json',dict(cases=cases))
     task_sources=frozen_import_sources(source_receipt,ROOT/'src','dex_supermimic')

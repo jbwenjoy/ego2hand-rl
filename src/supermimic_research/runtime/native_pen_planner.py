@@ -9,7 +9,7 @@ import warp as wp
 from .gpu_data_fork import fork_dynamic_data
 from .gpu_data_snapshot import ResidentDataSnapshot
 from .gpu_model_snapshot import model_leaves
-from .pen_native_planning_math import score_candidates
+from .pen_native_planning_math import score_candidates,score_sequence
 from ..mechanics.pen_contact_groups import normal_group
 
 
@@ -21,6 +21,11 @@ def _clear(slot:wp.array(dtype=int),pen:wp.array2d(dtype=float)):
 @wp.kernel
 def _set_ctrl(slot:wp.array(dtype=int),targets:wp.array2d(dtype=float),ctrl:wp.array2d(dtype=float)):
     j=wp.tid();ctrl[0,j]=targets[slot[0],j]
+
+
+@wp.kernel
+def _set_scheduled_ctrl(slot:wp.array(dtype=int),phase:int,targets:wp.array3d(dtype=float),ctrl:wp.array2d(dtype=float)):
+    j=wp.tid();ctrl[0,j]=targets[slot[0],phase,j]
 
 
 @wp.kernel
@@ -105,12 +110,16 @@ def _response_heads(slot:wp.array(dtype=int),tick:int,warm:wp.array2d(dtype=floa
 
 
 class NativePenPlanner:
-    def __init__(self,model,device_model,live,qids,aids,nsteps,*,response_heads=False):
+    def __init__(self,model,device_model,live,qids,aids,nsteps,*,response_heads=False,horizon_controls=1):
         import mujoco
         import mujoco_warp as mw
         if (live.nworld!=1 or model.na or model.nhistory or model.nplugin or model.neq
                 or int(model.opt.cone)!=0 or model.opt.enableflags & int(mujoco.mjtEnableBit.mjENBL_SLEEP)):
             raise ValueError('One-world no-hidden-state/no-equality pyramidal controlled plant')
+        if (isinstance(horizon_controls,bool) or horizon_controls not in range(1,6) or nsteps<1 or nsteps%horizon_controls or
+                abs(float(model.opt.timestep)*(nsteps//horizon_controls)-.02)>1e-9 or response_heads and horizon_controls!=1):
+            raise ValueError('Whole20ms controls, horizon1..5, response heads only H1')
+        self.horizon_controls=horizon_controls;self.control_substeps=nsteps//horizon_controls
         self.model,self.live,self.nsteps=device_model,live,nsteps;self.host_model=model;self.aids=aids;self.response_heads=response_heads
         self.body=model.body('object/cube').id;joint=model.body_jntadr[self.body]
         self.qa=int(model.jnt_qposadr[joint]);self.da=int(model.jnt_dofadr[joint])
@@ -121,6 +130,7 @@ class NativePenPlanner:
         with wp.ScopedStream(self.stream):
             self.data,self.layout=fork_dynamic_data(live);self.source=ResidentDataSnapshot(self.data)
             self.slot=wp.zeros(1,dtype=int,device='cuda');self.target_ctrl=wp.zeros((57,model.nu),device='cuda')
+            if horizon_controls>1:self.schedule_ctrl=wp.zeros((57,horizon_controls,model.nu),device='cuda')
             self.Q=wp.zeros((57,nsteps,model.nq),device='cuda');self.V=wp.zeros((57,nsteps,model.nv),device='cuda')
             self.U=wp.zeros((57,nsteps,model.nu),device='cuda');self.W=wp.zeros((57,nsteps,6),device='cuda')
             self.T=wp.zeros((57,nsteps),device='cuda');self.pen=wp.zeros((57,3),device='cuda')
@@ -140,8 +150,11 @@ class NativePenPlanner:
                 with wp.ScopedCapture(stream=self.stream) as capture:
                     self.source.restore(self.data)
                     wp.launch(_clear,3,inputs=[self.slot,self.pen],stream=self.stream)
-                    wp.launch(_set_ctrl,model.nu,inputs=[self.slot,self.target_ctrl,self.data.ctrl],stream=self.stream)
+                    if horizon_controls==1:
+                        wp.launch(_set_ctrl,model.nu,inputs=[self.slot,self.target_ctrl,self.data.ctrl],stream=self.stream)
                     for tick in range(nsteps):
+                        if horizon_controls>1 and tick%self.control_substeps==0:
+                            wp.launch(_set_scheduled_ctrl,model.nu,inputs=[self.slot,tick//self.control_substeps,self.schedule_ctrl,self.data.ctrl],stream=self.stream)
                         mw.step(device_model,self.data)
                         wp.launch(_record,max(model.nq,model.nv,model.nu,20),inputs=[self.slot,tick,self.data.qpos,self.data.qvel,self.data.ctrl,
                             self.data.qfrc_constraint,self.data.xmat,self.data.time,self.data.nacon,self.data.nefc,self.data.overflow,
@@ -157,6 +170,7 @@ class NativePenPlanner:
             finally:
                 if was_gc:gc.enable()
         self.views={k:wp.to_torch(getattr(self,k)) for k in ['slot','target_ctrl','Q','V','U','W','T','pen','other','bad']}
+        if horizon_controls>1:self.views['schedule_ctrl']=wp.to_torch(self.schedule_ctrl)
         if response_heads:self.views.update({k:wp.to_torch(getattr(self,k)) for k in ['Warm','Fn']})
         self.qid_tensor=torch.as_tensor(qids.astype(np.int64),device='cuda');self.ctrl_tensor=wp.to_torch(live.ctrl)
         self.aid_tensor=torch.as_tensor(np.asarray(aids,dtype=np.int64),device='cuda')
@@ -173,24 +187,33 @@ class NativePenPlanner:
                 if a.size:wp.copy(self.source.arrays[key],a)
 
     def search(self,targets,ema,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg,
-               *,reference_velocity=None,velocity_valid=False,velocity_weight=0.,reference_quaternion=None):
+               *,reference_velocity=None,velocity_valid=False,velocity_weight=0.,reference_quaternion=None,reference_sequence=None):
         wall_started=time.perf_counter()
         caller=torch.cuda.current_stream();self.torch_stream.wait_stream(caller)
         begin,end=torch.cuda.Event(enable_timing=True),torch.cuda.Event(enable_timing=True)
         with torch.cuda.stream(self.torch_stream),wp.ScopedStream(self.stream):
-            self.views['target_ctrl'].copy_(self.ctrl_tensor.expand(57,-1))
-            self.views['target_ctrl'][:,self.aid_tensor]=targets
+            if self.horizon_controls==1:
+                self.views['target_ctrl'].copy_(self.ctrl_tensor.expand(57,-1))
+                self.views['target_ctrl'][:,self.aid_tensor]=targets
+            else:
+                if reference_sequence is None or velocity_weight:raise ValueError('Explicit scheduled state/support reference')
+                self.views['schedule_ctrl'].copy_(self.ctrl_tensor.expand(57,self.horizon_controls,-1))
+                self.views['schedule_ctrl'][:,:,self.aid_tensor]=targets
             begin.record()
             for i in range(57):
                 self.views['slot'].fill_(i);wp.capture_launch(self.graph,stream=self.stream)
-            result=score_candidates(self.views['Q'],self.views['V'],self.views['U'],self.views['W'],self.views['pen'],self.views['other'],self.views['bad'],ema,
-                self.qid_tensor,self.qa,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg,
-                object_da=self.da,reference_velocity=reference_velocity,velocity_valid=velocity_valid,velocity_weight=velocity_weight,
-                reference_quaternion=reference_quaternion)
+            if self.horizon_controls==1:
+                result=score_candidates(self.views['Q'],self.views['V'],self.views['U'],self.views['W'],self.views['pen'],self.views['other'],self.views['bad'],ema,
+                    self.qid_tensor,self.qa,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg,
+                    object_da=self.da,reference_velocity=reference_velocity,velocity_valid=velocity_valid,velocity_weight=velocity_weight,
+                    reference_quaternion=reference_quaternion)
+            else:
+                result=score_sequence(self.views['Q'],self.views['V'],self.views['U'],self.views['W'],self.views['pen'],self.views['other'],self.views['bad'],
+                    ema,self.qid_tensor,self.qa,reference_sequence,support_weight,cfg)
             end.record()
         end.synchronize();caller.wait_stream(self.torch_stream)
         readback_started=time.perf_counter()
-        index=int(result['index']);arrays={k:v.detach().cpu().numpy().copy() for k,v in self.views.items() if k not in ['slot','target_ctrl']}
+        index=int(result['index']);arrays={k:v.detach().cpu().numpy().copy() for k,v in self.views.items() if k not in ['slot','target_ctrl','schedule_ctrl']}
         scores={k:v.detach().cpu().numpy().copy() for k,v in result.items()}
         cuda_ms=float(begin.elapsed_time(end));ended=time.perf_counter()
         self.last_search_timing=dict(candidate_cuda_ms=cuda_ms,submit_and_wait_wall_s=readback_started-wall_started,

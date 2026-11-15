@@ -16,6 +16,7 @@ def main(a):
     rows=[];cases=[];angles=[];positions=[];safe_rows=[];joint_rows=[]
     for path in a.reports:
         r=json.loads(path.read_text());base=tomllib.loads(verify_file_pin(r['base_config']).read_text())
+        if r.get('planning_horizon_controls',1)!=1:raise ValueError('This coverage reader interprets20ms endpoints only, not scheduled forecasts')
         for c in r['cases']:
             ref=np.load(verify_file_pin(c['initialization']['nominal_mean_wrench']));qa=c['model_layout']['object_qposadr'];first=len(rows)
             for decision in c['planning']:

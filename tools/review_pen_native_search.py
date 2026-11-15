@@ -19,6 +19,7 @@ from supermimic_research.runtime.controlled_evaluation import write
 
 def main(a):
     r=json.loads(a.report.read_text());cfg=tomllib.loads(verify_file_pin(r['config']).read_text());base=tomllib.loads(verify_file_pin(r['base_config']).read_text())
+    if r.get('planning_horizon_controls',1)!=1:raise ValueError('Scheduled forecasts require horizon-aware prefix/score review; this reader is H1 only')
     cp=verify_file_pin(r['config']);gates=tomllib.loads((cp.parent/cfg['gates']).read_text())
     proposal=json.loads(verify_file_pin(r['proposal']).read_text());selected=np.load(verify_file_pin(proposal['artifacts']['selected']))
     offsets=np.load(verify_file_pin(r['candidates']))['raw_offsets']

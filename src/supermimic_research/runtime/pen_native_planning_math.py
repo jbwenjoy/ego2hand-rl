@@ -19,6 +19,25 @@ def candidate_targets(raw,processed,reference,bias,lower,upper):
     return intended.clamp(min=lower,max=upper),ema,intended
 
 
+def candidate_sequence_targets(raw,processed,reference,bias,lower,upper):
+    """raw[N,H,20], future reference[H,20], copied initial controller EMA."""
+    if raw.ndim!=3 or raw.shape[-1]!=20 or reference.shape!=(raw.shape[1],20) or raw.shape[1]<1:
+        raise ValueError('Explicit future raw actions and per-control reference')
+    targets=[];memories=[];intended=[];ema=processed
+    for j in range(raw.shape[1]):
+        target,ema,desired=candidate_targets(raw[:,j],ema,reference[j],bias,lower,upper)
+        targets.append(target);memories.append(ema);intended.append(desired)
+    return tuple(torch.stack(v,dim=1) for v in [targets,memories,intended])
+
+
+def select_candidate(total,feasible,violation):
+    clean=torch.nan_to_num(total,nan=1e30,posinf=1e30,neginf=1e30)
+    inf=torch.full_like(clean,float('inf'))
+    best=torch.where(feasible,clean,inf).argmin()
+    fallback=torch.where(violation==violation.min(),clean,inf).argmin()
+    return torch.where(feasible.any(),best,fallback)
+
+
 def quaternion_distance_wxyz(actual,reference):
     """Sign-invariant SO(3) angle; invalid zero/nonfinite inputs stay invalid.
 
@@ -69,10 +88,34 @@ def score_candidates(qpos,qvel,ctrl,wrench,penalties,other_force,overflow,ema,
     capacity=~overflow.bool().any(1)
     feasible=finite&capacity&(geometric==0)&(nonhand==0)
     violation=torch.nan_to_num(geometric+nonhand+(~capacity).to(q.dtype)*1e6+(~finite).to(q.dtype)*1e12,nan=1e12,posinf=1e12)
-    clean=torch.nan_to_num(total,nan=1e30,posinf=1e30,neginf=1e30)
-    inf=torch.full_like(clean,float('inf'))
-    best=torch.where(feasible,clean,inf).argmin()
-    fallback=torch.where(violation==violation.min(),clean,inf).argmin()
-    index=torch.where(feasible.any(),best,fallback)
+    index=select_candidate(total,feasible,violation)
     return dict(index=index,total=total,state=state,support=support,feasible=feasible,violation=violation,
                 finite=finite,capacity=capacity,shaft_error_rad=angle,orientation_error_rad=orientation_angle,mean_world_wrench=mean,velocity=velocity)
+
+
+def score_sequence(qpos,qvel,ctrl,wrench,penalties,other_force,overflow,ema,qids,qa,
+                   reference,support_weight,cfg):
+    """Mean unchanged per-control costs; full forecast safety, no host readback."""
+    H=ema.shape[1]
+    if H<1 or qpos.shape[1]%H or reference['COM'].shape!=(H,3):
+        raise ValueError('Whole20ms prediction controls and explicit future references')
+    n=qpos.shape[1]//H;rows=[]
+    for j in range(H):
+        sl=slice(j*n,(j+1)*n)
+        rows.append(score_candidates(qpos[:,sl],qvel[:,sl],ctrl[:,sl],wrench[:,sl],penalties,
+            other_force[:,sl],overflow[:,sl],ema[:,j],qids,qa,reference['COM'][j],reference['shaft'][j],
+            reference['hand'][j],reference['wrench'][j],reference['valid'][j],support_weight,cfg,
+            reference_quaternion=reference['quaternion'][j]))
+    result={key:torch.stack([r[key] for r in rows]).mean(0)
+            for key in ['total','state','support','mean_world_wrench','velocity']}
+    for key in ['feasible','finite','capacity']:
+        result[key]=torch.stack([r[key] for r in rows]).all(0)
+    for key in ['shaft_error_rad','orientation_error_rad']:
+        result[key]=torch.stack([r[key] for r in rows]).max(0).values
+    bounds=qpos.new_tensor([cfg['max_penetration_m'],cfg['max_self_penetration_m'],cfg['max_joint_limit_excursion_rad']])
+    geometric=((penalties-bounds).clamp_min(0)/bounds).sum(-1)
+    nonhand=((other_force.max(1).values-cfg['max_object_nonhand_normal_force_N']).clamp_min(0)/cfg['max_object_nonhand_normal_force_N'])
+    result['violation']=torch.nan_to_num(geometric+nonhand+(~result['capacity']).to(qpos.dtype)*1e6+
+        (~result['finite']).to(qpos.dtype)*1e12,nan=1e12,posinf=1e12)
+    result['index']=select_candidate(result['total'],result['feasible'],result['violation'])
+    return result
