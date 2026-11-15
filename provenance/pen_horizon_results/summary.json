@@ -1,0 +1,1431 @@
+{
+  "schema": "native_horizon_evidence_summary:1",
+  "roots": {
+    "pilot": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_prefix_audit_v1\\report.json",
+      "bytes": 649043,
+      "sha256": "65a73bb5e211f32f82d914491315fb3ad8c62807b403a9dacec4e91964969665"
+    },
+    "H1": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_horizon_H1_v1\\report.json",
+      "bytes": 304200,
+      "sha256": "d227b70d9c52cf3259d7dd59e11ec1e0976a474cd4f0ef6c1ef32c10d7272ef7"
+    },
+    "H5": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_horizon_H5_v1\\report.json",
+      "bytes": 492365,
+      "sha256": "684b9cf03b1321004f824760f44ea79be8b04106af33a3876c546b6be9591734"
+    },
+    "H1_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_horizon_H1_review_v1\\report.json",
+      "bytes": 146397,
+      "sha256": "27349d0a5310a6c0c152c49d5e8c8e41918a4ab4b02716557249473f2ed635f7"
+    },
+    "H5_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_horizon_H5_review_v1\\report.json",
+      "bytes": 294911,
+      "sha256": "c4e1c7c5c81047a6cc3850f233c779052a4292d327b31fba8591ef13f9b3e06c"
+    },
+    "matrix": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_matrix_review_v1\\report.json",
+      "bytes": 29968,
+      "sha256": "9a2d650874a713a75fedf04a073a50345c3c0363c4813a1ca7aa65aedb4c55b1"
+    },
+    "video": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_video_v1\\report.json",
+      "bytes": 110901,
+      "sha256": "602478fc0ccc0671ad36f8fab25806200ea8cf9ee97c30042e83e8a11b2146fa"
+    }
+  },
+  "pilot_counts": {
+    "sources": [
+      8,
+      8
+    ],
+    "prefixes": [
+      441,
+      456
+    ],
+    "EFC": [
+      108,
+      111
+    ],
+    "fidelity": [
+      47,
+      111
+    ],
+    "contract": [
+      111,
+      111
+    ]
+  },
+  "matrix_counts": [
+    128,
+    128
+  ],
+  "matrix_cells": [
+    {
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "checks": {
+        "expected_model_array_diffs": true,
+        "all_model_scalars_exact": true,
+        "initial_qpos_exact": true,
+        "initial_qvel_exact": true,
+        "reference_exact": true,
+        "observed_layout_exact": true,
+        "profile0_summary_metrics": true,
+        "profile0_summary_gates": true,
+        "profile0_full_clock": true,
+        "profile0_device_CCD": true,
+        "profile0_construction_CCD": true,
+        "profile0_override_diffs": true,
+        "profile0_unchanged_diffs_metadata": true,
+        "profile0_source_keys": true,
+        "profile0_observed_Data": true,
+        "profile0_57_budget": true,
+        "profile0_no_aid_no_reset": true,
+        "profile1_summary_metrics": true,
+        "profile1_summary_gates": true,
+        "profile1_full_clock": true,
+        "profile1_device_CCD": true,
+        "profile1_construction_CCD": true,
+        "profile1_override_diffs": true,
+        "profile1_unchanged_diffs_metadata": true,
+        "profile1_source_keys": true,
+        "profile1_observed_Data": true,
+        "profile1_57_budget": true,
+        "profile1_no_aid_no_reset": true
+      },
+      "outcomes": [
+        {
+          "profile": "H1",
+          "duration_s": 0.56,
+          "metrics": {
+            "actual_duration_s": 0.56,
+            "COM_RMS_m": 0.019646149740050346,
+            "COM_max_m": 0.05740437351939115,
+            "angle_RMS_rad": 0.7216871609268032,
+            "angle_max_rad": 3.1058210774585664,
+            "max_penetration_m": 0.0019766760524362326,
+            "max_self_penetration_m": 0.0,
+            "max_joint_limit_excursion_rad": 0.0,
+            "max_object_nonhand_normal_force_N": 0.0,
+            "hand_contact_coverage_over_0_1N": 0.8973214285714286,
+            "object_speed_RMS_m_s": 0.18421065185434826,
+            "object_omega_RMS_rad_s": 15.429123497220825
+          },
+          "task_qualified": false,
+          "prediction_passed": 28,
+          "prediction_total": 28,
+          "failed_predictions": [],
+          "candidate_ticks": 12768,
+          "actual_ticks": 224,
+          "wall_s": 10.380110000027344,
+          "candidate_cuda_ms": 7247.885055541992,
+          "clipping": []
+        },
+        {
+          "profile": "H5",
+          "duration_s": 1.02,
+          "metrics": {
+            "actual_duration_s": 1.02,
+            "COM_RMS_m": 0.01356112915151268,
+            "COM_max_m": 0.051975807744235915,
+            "angle_RMS_rad": 0.48768789900210996,
+            "angle_max_rad": 2.838183549067341,
+            "max_penetration_m": 0.0019766760524362326,
+            "max_self_penetration_m": 0.0,
+            "max_joint_limit_excursion_rad": 0.0,
+            "max_object_nonhand_normal_force_N": 0.0,
+            "hand_contact_coverage_over_0_1N": 0.9509803921568627,
+            "object_speed_RMS_m_s": 0.1343981358913116,
+            "object_omega_RMS_rad_s": 10.467278903145157
+          },
+          "task_qualified": false,
+          "prediction_passed": 50,
+          "prediction_total": 51,
+          "failed_predictions": [
+            {
+              "mode": "STATE_ONLY",
+              "dt": 0.0025,
+              "k": 27,
+              "H": 5,
+              "checks": {
+                "horizon_clock": true,
+                "prediction_shape": true,
+                "raw_first": true,
+                "future_raw": true,
+                "EMA": true,
+                "PD": true,
+                "graph_PD_exact": true,
+                "applied_first_raw": true,
+                "applied_first_PD": true,
+                "source_qv": true,
+                "source_actual_warm": true,
+                "source_time": true,
+                "live_isolation": true,
+                "independent_mean_cost": true,
+                "full_forecast_safety": true,
+                "selected_minimum": true,
+                "budget": true
+              },
+              "fidelity": {
+                "hand_position_rad": true,
+                "object_position_m": true,
+                "object_rotation_rad": true,
+                "hand_velocity_rad_s": true,
+                "object_velocity_m_s": true,
+                "object_omega_rad_s": true,
+                "control_rad": true,
+                "EFC_force_N": false,
+                "EFC_torque_Nm": false,
+                "time_exact": true
+              },
+              "fidelity_metrics": {
+                "hand_position_rad": 2.5033950805664062e-06,
+                "object_position_m": 1.3668566799877087e-07,
+                "object_rotation_rad": 1.3727554919962153e-05,
+                "hand_velocity_rad_s": 0.0010251998901367188,
+                "object_velocity_m_s": 4.990598782026059e-05,
+                "object_omega_rad_s": 0.005353835373725175,
+                "control_rad": 0.0,
+                "EFC_force_N": 0.0005885875909886094,
+                "EFC_torque_Nm": 0.00010182793607504636
+              },
+              "score_max_abs_error": 3.072271385917702e-05
+            }
+          ],
+          "candidate_ticks": 116280,
+          "actual_ticks": 408,
+          "wall_s": 68.73277940001572,
+          "candidate_cuda_ms": 62364.252502441406,
+          "clipping": []
+        }
+      ]
+    },
+    {
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "checks": {
+        "expected_model_array_diffs": true,
+        "all_model_scalars_exact": true,
+        "initial_qpos_exact": true,
+        "initial_qvel_exact": true,
+        "reference_exact": true,
+        "observed_layout_exact": true,
+        "profile0_summary_metrics": true,
+        "profile0_summary_gates": true,
+        "profile0_full_clock": true,
+        "profile0_device_CCD": true,
+        "profile0_construction_CCD": true,
+        "profile0_override_diffs": true,
+        "profile0_unchanged_diffs_metadata": true,
+        "profile0_source_keys": true,
+        "profile0_observed_Data": true,
+        "profile0_57_budget": true,
+        "profile0_no_aid_no_reset": true,
+        "profile1_summary_metrics": true,
+        "profile1_summary_gates": true,
+        "profile1_full_clock": true,
+        "profile1_device_CCD": true,
+        "profile1_construction_CCD": true,
+        "profile1_override_diffs": true,
+        "profile1_unchanged_diffs_metadata": true,
+        "profile1_source_keys": true,
+        "profile1_observed_Data": true,
+        "profile1_57_budget": true,
+        "profile1_no_aid_no_reset": true
+      },
+      "outcomes": [
+        {
+          "profile": "H1",
+          "duration_s": 0.3,
+          "metrics": {
+            "actual_duration_s": 0.3,
+            "COM_RMS_m": 0.023304077811800987,
+            "COM_max_m": 0.05748593349727614,
+            "angle_RMS_rad": 1.0186247222590248,
+            "angle_max_rad": 3.0062129043238675,
+            "max_penetration_m": 0.0019758250564336777,
+            "max_self_penetration_m": 0.0,
+            "max_joint_limit_excursion_rad": 0.0,
+            "max_object_nonhand_normal_force_N": 0.0,
+            "hand_contact_coverage_over_0_1N": 0.75,
+            "object_speed_RMS_m_s": 0.29028396797968514,
+            "object_omega_RMS_rad_s": 27.642052358783474
+          },
+          "task_qualified": false,
+          "prediction_passed": 14,
+          "prediction_total": 15,
+          "failed_predictions": [
+            {
+              "mode": "STATE_ONLY",
+              "dt": 0.005,
+              "k": 0,
+              "H": 1,
+              "checks": {
+                "horizon_clock": true,
+                "prediction_shape": true,
+                "raw_first": true,
+                "future_raw": true,
+                "EMA": true,
+                "PD": true,
+                "graph_PD_exact": true,
+                "applied_first_raw": true,
+                "applied_first_PD": true,
+                "source_qv": true,
+                "source_actual_warm": true,
+                "source_time": true,
+                "live_isolation": true,
+                "independent_mean_cost": true,
+                "full_forecast_safety": true,
+                "selected_minimum": true,
+                "budget": true
+              },
+              "fidelity": {
+                "hand_position_rad": true,
+                "object_position_m": true,
+                "object_rotation_rad": true,
+                "hand_velocity_rad_s": true,
+                "object_velocity_m_s": true,
+                "object_omega_rad_s": true,
+                "control_rad": true,
+                "EFC_force_N": false,
+                "EFC_torque_Nm": true,
+                "time_exact": true
+              },
+              "fidelity_metrics": {
+                "hand_position_rad": 4.470348358154297e-08,
+                "object_position_m": 2.7939677238464355e-09,
+                "object_rotation_rad": 7.014921453496965e-07,
+                "hand_velocity_rad_s": 1.0341405868530273e-05,
+                "object_velocity_m_s": 9.418007306410627e-07,
+                "object_omega_rad_s": 0.00013641205099682607,
+                "control_rad": 0.0,
+                "EFC_force_N": 0.00016257727014078513,
+                "EFC_torque_Nm": 3.812435225413892e-06
+              },
+              "score_max_abs_error": 1.1092009040147843e-06
+            }
+          ],
+          "candidate_ticks": 3420,
+          "actual_ticks": 60,
+          "wall_s": 4.090973099984694,
+          "candidate_cuda_ms": 2165.5291595458984,
+          "clipping": []
+        },
+        {
+          "profile": "H5",
+          "duration_s": 0.9,
+          "metrics": {
+            "actual_duration_s": 0.9,
+            "COM_RMS_m": 0.013530873211462083,
+            "COM_max_m": 0.05688577214241703,
+            "angle_RMS_rad": 0.385760938915541,
+            "angle_max_rad": 2.3947194659996516,
+            "max_penetration_m": 0.0019758250564336777,
+            "max_self_penetration_m": 0.0,
+            "max_joint_limit_excursion_rad": 0.0,
+            "max_object_nonhand_normal_force_N": 0.0,
+            "hand_contact_coverage_over_0_1N": 0.9388888888888889,
+            "object_speed_RMS_m_s": 0.17318246646195343,
+            "object_omega_RMS_rad_s": 10.946755541070255
+          },
+          "task_qualified": false,
+          "prediction_passed": 44,
+          "prediction_total": 45,
+          "failed_predictions": [
+            {
+              "mode": "STATE_ONLY",
+              "dt": 0.005,
+              "k": 38,
+              "H": 5,
+              "checks": {
+                "horizon_clock": true,
+                "prediction_shape": true,
+                "raw_first": true,
+                "future_raw": true,
+                "EMA": true,
+                "PD": true,
+                "graph_PD_exact": true,
+                "applied_first_raw": true,
+                "applied_first_PD": true,
+                "source_qv": true,
+                "source_actual_warm": true,
+                "source_time": true,
+                "live_isolation": true,
+                "independent_mean_cost": true,
+                "full_forecast_safety": true,
+                "selected_minimum": true,
+                "budget": true
+              },
+              "fidelity": {
+                "hand_position_rad": true,
+                "object_position_m": true,
+                "object_rotation_rad": true,
+                "hand_velocity_rad_s": true,
+                "object_velocity_m_s": true,
+                "object_omega_rad_s": false,
+                "control_rad": true,
+                "EFC_force_N": false,
+                "EFC_torque_Nm": false,
+                "time_exact": true
+              },
+              "fidelity_metrics": {
+                "hand_position_rad": 5.02467155456543e-05,
+                "object_position_m": 1.779561320334204e-05,
+                "object_rotation_rad": 0.003033022521972872,
+                "hand_velocity_rad_s": 0.010042190551757812,
+                "object_velocity_m_s": 0.003556161038868126,
+                "object_omega_rad_s": 0.6066107682904633,
+                "control_rad": 0.0,
+                "EFC_force_N": 0.02133700608789947,
+                "EFC_torque_Nm": 0.00048636710473658575
+              },
+              "score_max_abs_error": 2.985311320458095e-05
+            }
+          ],
+          "candidate_ticks": 51300,
+          "actual_ticks": 180,
+          "wall_s": 34.72117640002398,
+          "candidate_cuda_ms": 30414.56362915039,
+          "clipping": []
+        }
+      ]
+    },
+    {
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "checks": {
+        "expected_model_array_diffs": true,
+        "all_model_scalars_exact": true,
+        "initial_qpos_exact": true,
+        "initial_qvel_exact": true,
+        "reference_exact": true,
+        "observed_layout_exact": true,
+        "profile0_summary_metrics": true,
+        "profile0_summary_gates": true,
+        "profile0_full_clock": true,
+        "profile0_device_CCD": true,
+        "profile0_construction_CCD": true,
+        "profile0_override_diffs": true,
+        "profile0_unchanged_diffs_metadata": true,
+        "profile0_source_keys": true,
+        "profile0_observed_Data": true,
+        "profile0_57_budget": true,
+        "profile0_no_aid_no_reset": true,
+        "profile1_summary_metrics": true,
+        "profile1_summary_gates": true,
+        "profile1_full_clock": true,
+        "profile1_device_CCD": true,
+        "profile1_construction_CCD": true,
+        "profile1_override_diffs": true,
+        "profile1_unchanged_diffs_metadata": true,
+        "profile1_source_keys": true,
+        "profile1_observed_Data": true,
+        "profile1_57_budget": true,
+        "profile1_no_aid_no_reset": true
+      },
+      "outcomes": [
+        {
+          "profile": "H1",
+          "duration_s": 0.62,
+          "metrics": {
+            "actual_duration_s": 0.62,
+            "COM_RMS_m": 0.017398704404352545,
+            "COM_max_m": 0.056733604951971724,
+            "angle_RMS_rad": 0.5628539893721882,
+            "angle_max_rad": 2.562319709967248,
+            "max_penetration_m": 0.0019766760524362326,
+            "max_self_penetration_m": 0.0,
+            "max_joint_limit_excursion_rad": 0.0,
+            "max_object_nonhand_normal_force_N": 0.0,
+            "hand_contact_coverage_over_0_1N": 0.9274193548387096,
+            "object_speed_RMS_m_s": 0.1707997268475405,
+            "object_omega_RMS_rad_s": 11.96170665224269
+          },
+          "task_qualified": false,
+          "prediction_passed": 31,
+          "prediction_total": 31,
+          "failed_predictions": [],
+          "candidate_ticks": 14136,
+          "actual_ticks": 248,
+          "wall_s": 11.867634800029919,
+          "candidate_cuda_ms": 8415.781280517578,
+          "clipping": []
+        },
+        {
+          "profile": "H5",
+          "duration_s": 0.98,
+          "metrics": {
+            "actual_duration_s": 0.98,
+            "COM_RMS_m": 0.013123163769860169,
+            "COM_max_m": 0.052646692451553484,
+            "angle_RMS_rad": 0.42710571911007045,
+            "angle_max_rad": 2.7523613323267404,
+            "max_penetration_m": 0.0019766760524362326,
+            "max_self_penetration_m": 0.0,
+            "max_joint_limit_excursion_rad": 0.0,
+            "max_object_nonhand_normal_force_N": 0.0,
+            "hand_contact_coverage_over_0_1N": 0.9540816326530612,
+            "object_speed_RMS_m_s": 0.14033066528877589,
+            "object_omega_RMS_rad_s": 11.379035302356945
+          },
+          "task_qualified": false,
+          "prediction_passed": 48,
+          "prediction_total": 49,
+          "failed_predictions": [
+            {
+              "mode": "STATE_PLUS_SUPPORT",
+              "dt": 0.0025,
+              "k": 26,
+              "H": 5,
+              "checks": {
+                "horizon_clock": true,
+                "prediction_shape": true,
+                "raw_first": true,
+                "future_raw": true,
+                "EMA": true,
+                "PD": true,
+                "graph_PD_exact": true,
+                "applied_first_raw": true,
+                "applied_first_PD": true,
+                "source_qv": true,
+                "source_actual_warm": true,
+                "source_time": true,
+                "live_isolation": true,
+                "independent_mean_cost": true,
+                "full_forecast_safety": true,
+                "selected_minimum": true,
+                "budget": true
+              },
+              "fidelity": {
+                "hand_position_rad": true,
+                "object_position_m": true,
+                "object_rotation_rad": true,
+                "hand_velocity_rad_s": true,
+                "object_velocity_m_s": true,
+                "object_omega_rad_s": true,
+                "control_rad": true,
+                "EFC_force_N": false,
+                "EFC_torque_Nm": false,
+                "time_exact": true
+              },
+              "fidelity_metrics": {
+                "hand_position_rad": 5.0067901611328125e-06,
+                "object_position_m": 6.741669082303546e-07,
+                "object_rotation_rad": 2.563505066026936e-05,
+                "hand_velocity_rad_s": 0.0012090504169464111,
+                "object_velocity_m_s": 0.0001905519418573051,
+                "object_omega_rad_s": 0.0156347823094457,
+                "control_rad": 0.0,
+                "EFC_force_N": 0.0017875413576329588,
+                "EFC_torque_Nm": 0.00023610181211615125
+              },
+              "score_max_abs_error": 4.628867662859193e-05
+            }
+          ],
+          "candidate_ticks": 111720,
+          "actual_ticks": 392,
+          "wall_s": 65.63188950001495,
+          "candidate_cuda_ms": 59467.90563964844,
+          "clipping": []
+        }
+      ]
+    },
+    {
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "checks": {
+        "expected_model_array_diffs": true,
+        "all_model_scalars_exact": true,
+        "initial_qpos_exact": true,
+        "initial_qvel_exact": true,
+        "reference_exact": true,
+        "observed_layout_exact": true,
+        "profile0_summary_metrics": true,
+        "profile0_summary_gates": true,
+        "profile0_full_clock": true,
+        "profile0_device_CCD": true,
+        "profile0_construction_CCD": true,
+        "profile0_override_diffs": true,
+        "profile0_unchanged_diffs_metadata": true,
+        "profile0_source_keys": true,
+        "profile0_observed_Data": true,
+        "profile0_57_budget": true,
+        "profile0_no_aid_no_reset": true,
+        "profile1_summary_metrics": true,
+        "profile1_summary_gates": true,
+        "profile1_full_clock": true,
+        "profile1_device_CCD": true,
+        "profile1_construction_CCD": true,
+        "profile1_override_diffs": true,
+        "profile1_unchanged_diffs_metadata": true,
+        "profile1_source_keys": true,
+        "profile1_observed_Data": true,
+        "profile1_57_budget": true,
+        "profile1_no_aid_no_reset": true
+      },
+      "outcomes": [
+        {
+          "profile": "H1",
+          "duration_s": 0.36,
+          "metrics": {
+            "actual_duration_s": 0.36,
+            "COM_RMS_m": 0.02258409611280693,
+            "COM_max_m": 0.06166067137225992,
+            "angle_RMS_rad": 0.9998431226016966,
+            "angle_max_rad": 3.090213215439313,
+            "max_penetration_m": 0.0019758250564336777,
+            "max_self_penetration_m": 0.0,
+            "max_joint_limit_excursion_rad": 0.0,
+            "max_object_nonhand_normal_force_N": 0.0,
+            "hand_contact_coverage_over_0_1N": 0.7777777777777778,
+            "object_speed_RMS_m_s": 0.2603763306720969,
+            "object_omega_RMS_rad_s": 23.98425034100031
+          },
+          "task_qualified": false,
+          "prediction_passed": 16,
+          "prediction_total": 18,
+          "failed_predictions": [
+            {
+              "mode": "STATE_PLUS_SUPPORT",
+              "dt": 0.005,
+              "k": 6,
+              "H": 1,
+              "checks": {
+                "horizon_clock": true,
+                "prediction_shape": true,
+                "raw_first": true,
+                "future_raw": true,
+                "EMA": true,
+                "PD": true,
+                "graph_PD_exact": true,
+                "applied_first_raw": true,
+                "applied_first_PD": true,
+                "source_qv": true,
+                "source_actual_warm": true,
+                "source_time": true,
+                "live_isolation": true,
+                "independent_mean_cost": true,
+                "full_forecast_safety": true,
+                "selected_minimum": true,
+                "budget": true
+              },
+              "fidelity": {
+                "hand_position_rad": true,
+                "object_position_m": true,
+                "object_rotation_rad": true,
+                "hand_velocity_rad_s": true,
+                "object_velocity_m_s": true,
+                "object_omega_rad_s": true,
+                "control_rad": true,
+                "EFC_force_N": false,
+                "EFC_torque_Nm": false,
+                "time_exact": true
+              },
+              "fidelity_metrics": {
+                "hand_position_rad": 6.973743438720703e-06,
+                "object_position_m": 1.6464940271770522e-06,
+                "object_rotation_rad": 5.014086508347235e-05,
+                "hand_velocity_rad_s": 0.000820457935333252,
+                "object_velocity_m_s": 0.00029603150907838864,
+                "object_omega_rad_s": 0.01963440113793358,
+                "control_rad": 0.0,
+                "EFC_force_N": 0.0015710463929031965,
+                "EFC_torque_Nm": 0.00011989467054460843
+              },
+              "score_max_abs_error": 1.3020269404862006e-06
+            },
+            {
+              "mode": "STATE_PLUS_SUPPORT",
+              "dt": 0.005,
+              "k": 7,
+              "H": 1,
+              "checks": {
+                "horizon_clock": true,
+                "prediction_shape": true,
+                "raw_first": true,
+                "future_raw": true,
+                "EMA": true,
+                "PD": true,
+                "graph_PD_exact": true,
+                "applied_first_raw": true,
+                "applied_first_PD": true,
+                "source_qv": true,
+                "source_actual_warm": true,
+                "source_time": true,
+                "live_isolation": true,
+                "independent_mean_cost": true,
+                "full_forecast_safety": true,
+                "selected_minimum": true,
+                "budget": true
+              },
+              "fidelity": {
+                "hand_position_rad": true,
+                "object_position_m": true,
+                "object_rotation_rad": true,
+                "hand_velocity_rad_s": true,
+                "object_velocity_m_s": true,
+                "object_omega_rad_s": true,
+                "control_rad": true,
+                "EFC_force_N": false,
+                "EFC_torque_Nm": false,
+                "time_exact": true
+              },
+              "fidelity_metrics": {
+                "hand_position_rad": 9.164214134216309e-06,
+                "object_position_m": 1.6707711547486665e-06,
+                "object_rotation_rad": 0.0003002226696928725,
+                "hand_velocity_rad_s": 0.001862168312072754,
+                "object_velocity_m_s": 0.00032085780487151836,
+                "object_omega_rad_s": 0.058766766200196205,
+                "control_rad": 0.0,
+                "EFC_force_N": 0.0018796876393759314,
+                "EFC_torque_Nm": 7.553629644825905e-05
+              },
+              "score_max_abs_error": 1.1624294131706847e-06
+            }
+          ],
+          "candidate_ticks": 4104,
+          "actual_ticks": 72,
+          "wall_s": 4.340309699997306,
+          "candidate_cuda_ms": 2587.7737884521484,
+          "clipping": []
+        },
+        {
+          "profile": "H5",
+          "duration_s": 0.96,
+          "metrics": {
+            "actual_duration_s": 0.96,
+            "COM_RMS_m": 0.015070681061030256,
+            "COM_max_m": 0.05526172224570169,
+            "angle_RMS_rad": 0.5074255315834977,
+            "angle_max_rad": 2.8128863625059943,
+            "max_penetration_m": 0.0019758250564336777,
+            "max_self_penetration_m": 0.0,
+            "max_joint_limit_excursion_rad": 0.0,
+            "max_object_nonhand_normal_force_N": 0.0,
+            "hand_contact_coverage_over_0_1N": 0.9322916666666666,
+            "object_speed_RMS_m_s": 0.14369062575512356,
+            "object_omega_RMS_rad_s": 10.312869139379337
+          },
+          "task_qualified": false,
+          "prediction_passed": 47,
+          "prediction_total": 48,
+          "failed_predictions": [
+            {
+              "mode": "STATE_PLUS_SUPPORT",
+              "dt": 0.005,
+              "k": 0,
+              "H": 5,
+              "checks": {
+                "horizon_clock": true,
+                "prediction_shape": true,
+                "raw_first": true,
+                "future_raw": true,
+                "EMA": true,
+                "PD": true,
+                "graph_PD_exact": true,
+                "applied_first_raw": true,
+                "applied_first_PD": true,
+                "source_qv": true,
+                "source_actual_warm": true,
+                "source_time": true,
+                "live_isolation": true,
+                "independent_mean_cost": true,
+                "full_forecast_safety": true,
+                "selected_minimum": true,
+                "budget": true
+              },
+              "fidelity": {
+                "hand_position_rad": true,
+                "object_position_m": true,
+                "object_rotation_rad": true,
+                "hand_velocity_rad_s": true,
+                "object_velocity_m_s": true,
+                "object_omega_rad_s": true,
+                "control_rad": true,
+                "EFC_force_N": false,
+                "EFC_torque_Nm": true,
+                "time_exact": true
+              },
+              "fidelity_metrics": {
+                "hand_position_rad": 1.4901161193847656e-08,
+                "object_position_m": 1.862645149230957e-09,
+                "object_rotation_rad": 5.431466708094072e-07,
+                "hand_velocity_rad_s": 4.366040229797363e-06,
+                "object_velocity_m_s": 9.97063896555763e-07,
+                "object_omega_rad_s": 0.00010369053726458882,
+                "control_rad": 0.0,
+                "EFC_force_N": 0.00018436836364169222,
+                "EFC_torque_Nm": 3.1994880023255054e-06
+              },
+              "score_max_abs_error": 3.2811510834562796e-05
+            }
+          ],
+          "candidate_ticks": 54720,
+          "actual_ticks": 192,
+          "wall_s": 35.171562399948016,
+          "candidate_cuda_ms": 30682.273071289062,
+          "clipping": []
+        }
+      ]
+    }
+  ],
+  "actual_reviews": {
+    "H1_review": {
+      "contracts": [
+        1592,
+        1592
+      ],
+      "EFC": [
+        26,
+        28
+      ],
+      "prefix": [
+        89,
+        92
+      ],
+      "cases": [
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "H": 1,
+          "global_checks": {
+            "no_aid_reset": true,
+            "actual_native_budget": true,
+            "forecast_budget": true,
+            "fixed_model": true,
+            "first_terminal": true,
+            "reference_COM": true,
+            "reference_quat": true
+          },
+          "qualified": false,
+          "task": {
+            "metrics": {
+              "actual_duration_s": 0.3,
+              "COM_RMS_m": 0.023304077811800987,
+              "COM_max_m": 0.05748593349727614,
+              "angle_RMS_rad": 1.0186247222590248,
+              "angle_max_rad": 3.0062129043238675,
+              "max_penetration_m": 0.0019758250564336777,
+              "max_self_penetration_m": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "max_object_nonhand_normal_force_N": 0.0,
+              "hand_contact_coverage_over_0_1N": 0.75,
+              "object_speed_RMS_m_s": 0.29028396797968514,
+              "object_omega_RMS_rad_s": 27.642052358783474
+            },
+            "gates": {
+              "COM_RMS_m": false,
+              "COM_max_m": false,
+              "angle_RMS_rad": false,
+              "angle_max_rad": false,
+              "max_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_joint_limit_excursion_rad": true,
+              "max_object_nonhand_normal_force_N": true,
+              "duration_complete": false,
+              "no_applied_force": true,
+              "finite_dynamics": true,
+              "no_contact_constraint_overflow": true
+            },
+            "qualified": false,
+            "warning_count": null,
+            "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+          },
+          "duration": 0.3,
+          "forecast_integrations": 3420,
+          "actual_integrations": 60,
+          "decisions": [
+            0,
+            15
+          ],
+          "fallbacks": 0
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "H": 1,
+          "global_checks": {
+            "no_aid_reset": true,
+            "actual_native_budget": true,
+            "forecast_budget": true,
+            "fixed_model": true,
+            "first_terminal": true,
+            "reference_COM": true,
+            "reference_quat": true
+          },
+          "qualified": false,
+          "task": {
+            "metrics": {
+              "actual_duration_s": 0.36,
+              "COM_RMS_m": 0.02258409611280693,
+              "COM_max_m": 0.06166067137225992,
+              "angle_RMS_rad": 0.9998431226016966,
+              "angle_max_rad": 3.090213215439313,
+              "max_penetration_m": 0.0019758250564336777,
+              "max_self_penetration_m": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "max_object_nonhand_normal_force_N": 0.0,
+              "hand_contact_coverage_over_0_1N": 0.7777777777777778,
+              "object_speed_RMS_m_s": 0.2603763306720969,
+              "object_omega_RMS_rad_s": 23.98425034100031
+            },
+            "gates": {
+              "COM_RMS_m": false,
+              "COM_max_m": false,
+              "angle_RMS_rad": false,
+              "angle_max_rad": false,
+              "max_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_joint_limit_excursion_rad": true,
+              "max_object_nonhand_normal_force_N": true,
+              "duration_complete": false,
+              "no_applied_force": true,
+              "finite_dynamics": true,
+              "no_contact_constraint_overflow": true
+            },
+            "qualified": false,
+            "warning_count": null,
+            "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+          },
+          "duration": 0.36,
+          "forecast_integrations": 4104,
+          "actual_integrations": 72,
+          "decisions": [
+            15,
+            33
+          ],
+          "fallbacks": 0
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "H": 1,
+          "global_checks": {
+            "no_aid_reset": true,
+            "actual_native_budget": true,
+            "forecast_budget": true,
+            "fixed_model": true,
+            "first_terminal": true,
+            "reference_COM": true,
+            "reference_quat": true
+          },
+          "qualified": false,
+          "task": {
+            "metrics": {
+              "actual_duration_s": 0.56,
+              "COM_RMS_m": 0.019646149740050346,
+              "COM_max_m": 0.05740437351939115,
+              "angle_RMS_rad": 0.7216871609268032,
+              "angle_max_rad": 3.1058210774585664,
+              "max_penetration_m": 0.0019766760524362326,
+              "max_self_penetration_m": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "max_object_nonhand_normal_force_N": 0.0,
+              "hand_contact_coverage_over_0_1N": 0.8973214285714286,
+              "object_speed_RMS_m_s": 0.18421065185434826,
+              "object_omega_RMS_rad_s": 15.429123497220825
+            },
+            "gates": {
+              "COM_RMS_m": false,
+              "COM_max_m": false,
+              "angle_RMS_rad": false,
+              "angle_max_rad": false,
+              "max_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_joint_limit_excursion_rad": true,
+              "max_object_nonhand_normal_force_N": true,
+              "duration_complete": false,
+              "no_applied_force": true,
+              "finite_dynamics": true,
+              "no_contact_constraint_overflow": true
+            },
+            "qualified": false,
+            "warning_count": null,
+            "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+          },
+          "duration": 0.56,
+          "forecast_integrations": 12768,
+          "actual_integrations": 224,
+          "decisions": [
+            33,
+            61
+          ],
+          "fallbacks": 0
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "H": 1,
+          "global_checks": {
+            "no_aid_reset": true,
+            "actual_native_budget": true,
+            "forecast_budget": true,
+            "fixed_model": true,
+            "first_terminal": true,
+            "reference_COM": true,
+            "reference_quat": true
+          },
+          "qualified": false,
+          "task": {
+            "metrics": {
+              "actual_duration_s": 0.62,
+              "COM_RMS_m": 0.017398704404352545,
+              "COM_max_m": 0.056733604951971724,
+              "angle_RMS_rad": 0.5628539893721882,
+              "angle_max_rad": 2.562319709967248,
+              "max_penetration_m": 0.0019766760524362326,
+              "max_self_penetration_m": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "max_object_nonhand_normal_force_N": 0.0,
+              "hand_contact_coverage_over_0_1N": 0.9274193548387096,
+              "object_speed_RMS_m_s": 0.1707997268475405,
+              "object_omega_RMS_rad_s": 11.96170665224269
+            },
+            "gates": {
+              "COM_RMS_m": false,
+              "COM_max_m": false,
+              "angle_RMS_rad": false,
+              "angle_max_rad": false,
+              "max_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_joint_limit_excursion_rad": true,
+              "max_object_nonhand_normal_force_N": true,
+              "duration_complete": false,
+              "no_applied_force": true,
+              "finite_dynamics": true,
+              "no_contact_constraint_overflow": true
+            },
+            "qualified": false,
+            "warning_count": null,
+            "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+          },
+          "duration": 0.62,
+          "forecast_integrations": 14136,
+          "actual_integrations": 248,
+          "decisions": [
+            61,
+            92
+          ],
+          "fallbacks": 0
+        }
+      ]
+    },
+    "H5_review": {
+      "contracts": [
+        3309,
+        3309
+      ],
+      "EFC": [
+        27,
+        28
+      ],
+      "prefix": [
+        189,
+        193
+      ],
+      "cases": [
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "H": 5,
+          "global_checks": {
+            "no_aid_reset": true,
+            "actual_native_budget": true,
+            "forecast_budget": true,
+            "fixed_model": true,
+            "first_terminal": true,
+            "reference_COM": true,
+            "reference_quat": true
+          },
+          "qualified": false,
+          "task": {
+            "metrics": {
+              "actual_duration_s": 0.9,
+              "COM_RMS_m": 0.013530873211462083,
+              "COM_max_m": 0.05688577214241703,
+              "angle_RMS_rad": 0.385760938915541,
+              "angle_max_rad": 2.3947194659996516,
+              "max_penetration_m": 0.0019758250564336777,
+              "max_self_penetration_m": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "max_object_nonhand_normal_force_N": 0.0,
+              "hand_contact_coverage_over_0_1N": 0.9388888888888889,
+              "object_speed_RMS_m_s": 0.17318246646195343,
+              "object_omega_RMS_rad_s": 10.946755541070255
+            },
+            "gates": {
+              "COM_RMS_m": false,
+              "COM_max_m": false,
+              "angle_RMS_rad": false,
+              "angle_max_rad": false,
+              "max_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_joint_limit_excursion_rad": true,
+              "max_object_nonhand_normal_force_N": true,
+              "duration_complete": false,
+              "no_applied_force": true,
+              "finite_dynamics": true,
+              "no_contact_constraint_overflow": true
+            },
+            "qualified": false,
+            "warning_count": null,
+            "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+          },
+          "duration": 0.9,
+          "forecast_integrations": 51300,
+          "actual_integrations": 180,
+          "decisions": [
+            0,
+            45
+          ],
+          "fallbacks": 0
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "H": 5,
+          "global_checks": {
+            "no_aid_reset": true,
+            "actual_native_budget": true,
+            "forecast_budget": true,
+            "fixed_model": true,
+            "first_terminal": true,
+            "reference_COM": true,
+            "reference_quat": true
+          },
+          "qualified": false,
+          "task": {
+            "metrics": {
+              "actual_duration_s": 0.96,
+              "COM_RMS_m": 0.015070681061030256,
+              "COM_max_m": 0.05526172224570169,
+              "angle_RMS_rad": 0.5074255315834977,
+              "angle_max_rad": 2.8128863625059943,
+              "max_penetration_m": 0.0019758250564336777,
+              "max_self_penetration_m": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "max_object_nonhand_normal_force_N": 0.0,
+              "hand_contact_coverage_over_0_1N": 0.9322916666666666,
+              "object_speed_RMS_m_s": 0.14369062575512356,
+              "object_omega_RMS_rad_s": 10.312869139379337
+            },
+            "gates": {
+              "COM_RMS_m": false,
+              "COM_max_m": false,
+              "angle_RMS_rad": false,
+              "angle_max_rad": false,
+              "max_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_joint_limit_excursion_rad": true,
+              "max_object_nonhand_normal_force_N": true,
+              "duration_complete": false,
+              "no_applied_force": true,
+              "finite_dynamics": true,
+              "no_contact_constraint_overflow": true
+            },
+            "qualified": false,
+            "warning_count": null,
+            "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+          },
+          "duration": 0.96,
+          "forecast_integrations": 54720,
+          "actual_integrations": 192,
+          "decisions": [
+            45,
+            93
+          ],
+          "fallbacks": 0
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "H": 5,
+          "global_checks": {
+            "no_aid_reset": true,
+            "actual_native_budget": true,
+            "forecast_budget": true,
+            "fixed_model": true,
+            "first_terminal": true,
+            "reference_COM": true,
+            "reference_quat": true
+          },
+          "qualified": false,
+          "task": {
+            "metrics": {
+              "actual_duration_s": 1.02,
+              "COM_RMS_m": 0.01356112915151268,
+              "COM_max_m": 0.051975807744235915,
+              "angle_RMS_rad": 0.48768789900210996,
+              "angle_max_rad": 2.838183549067341,
+              "max_penetration_m": 0.0019766760524362326,
+              "max_self_penetration_m": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "max_object_nonhand_normal_force_N": 0.0,
+              "hand_contact_coverage_over_0_1N": 0.9509803921568627,
+              "object_speed_RMS_m_s": 0.1343981358913116,
+              "object_omega_RMS_rad_s": 10.467278903145157
+            },
+            "gates": {
+              "COM_RMS_m": false,
+              "COM_max_m": false,
+              "angle_RMS_rad": false,
+              "angle_max_rad": false,
+              "max_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_joint_limit_excursion_rad": true,
+              "max_object_nonhand_normal_force_N": true,
+              "duration_complete": false,
+              "no_applied_force": true,
+              "finite_dynamics": true,
+              "no_contact_constraint_overflow": true
+            },
+            "qualified": false,
+            "warning_count": null,
+            "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+          },
+          "duration": 1.02,
+          "forecast_integrations": 116280,
+          "actual_integrations": 408,
+          "decisions": [
+            93,
+            144
+          ],
+          "fallbacks": 0
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "H": 5,
+          "global_checks": {
+            "no_aid_reset": true,
+            "actual_native_budget": true,
+            "forecast_budget": true,
+            "fixed_model": true,
+            "first_terminal": true,
+            "reference_COM": true,
+            "reference_quat": true
+          },
+          "qualified": false,
+          "task": {
+            "metrics": {
+              "actual_duration_s": 0.98,
+              "COM_RMS_m": 0.013123163769860169,
+              "COM_max_m": 0.052646692451553484,
+              "angle_RMS_rad": 0.42710571911007045,
+              "angle_max_rad": 2.7523613323267404,
+              "max_penetration_m": 0.0019766760524362326,
+              "max_self_penetration_m": 0.0,
+              "max_joint_limit_excursion_rad": 0.0,
+              "max_object_nonhand_normal_force_N": 0.0,
+              "hand_contact_coverage_over_0_1N": 0.9540816326530612,
+              "object_speed_RMS_m_s": 0.14033066528877589,
+              "object_omega_RMS_rad_s": 11.379035302356945
+            },
+            "gates": {
+              "COM_RMS_m": false,
+              "COM_max_m": false,
+              "angle_RMS_rad": false,
+              "angle_max_rad": false,
+              "max_penetration_m": true,
+              "max_self_penetration_m": true,
+              "max_joint_limit_excursion_rad": true,
+              "max_object_nonhand_normal_force_N": true,
+              "duration_complete": false,
+              "no_applied_force": true,
+              "finite_dynamics": true,
+              "no_contact_constraint_overflow": true
+            },
+            "qualified": false,
+            "warning_count": null,
+            "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+          },
+          "duration": 0.98,
+          "forecast_integrations": 111720,
+          "actual_integrations": 392,
+          "decisions": [
+            144,
+            193
+          ],
+          "fallbacks": 0
+        }
+      ]
+    }
+  },
+  "timings": {
+    "H1": [
+      {
+        "mode": "STATE_ONLY",
+        "dt": 0.005,
+        "duration": 0.3,
+        "case_wall_s": 4.090973099984694,
+        "candidate_CUDA_ms": 2165.5291595458984,
+        "readback_and_copy_wall_s": 0.007430400117300451,
+        "provider_with_artifact_wall_s": 2.8224955999758095,
+        "native_candidate_ticks": 3420,
+        "actual_ticks": 60
+      },
+      {
+        "mode": "STATE_PLUS_SUPPORT",
+        "dt": 0.005,
+        "duration": 0.36,
+        "case_wall_s": 4.340309699997306,
+        "candidate_CUDA_ms": 2587.7737884521484,
+        "readback_and_copy_wall_s": 0.008537899993825704,
+        "provider_with_artifact_wall_s": 3.282229200063739,
+        "native_candidate_ticks": 4104,
+        "actual_ticks": 72
+      },
+      {
+        "mode": "STATE_ONLY",
+        "dt": 0.0025,
+        "duration": 0.56,
+        "case_wall_s": 10.380110000027344,
+        "candidate_CUDA_ms": 7247.885055541992,
+        "readback_and_copy_wall_s": 0.0141453001415357,
+        "provider_with_artifact_wall_s": 8.394451700150967,
+        "native_candidate_ticks": 12768,
+        "actual_ticks": 224
+      },
+      {
+        "mode": "STATE_PLUS_SUPPORT",
+        "dt": 0.0025,
+        "duration": 0.62,
+        "case_wall_s": 11.867634800029919,
+        "candidate_CUDA_ms": 8415.781280517578,
+        "readback_and_copy_wall_s": 0.01503979996778071,
+        "provider_with_artifact_wall_s": 9.70559470000444,
+        "native_candidate_ticks": 14136,
+        "actual_ticks": 248
+      }
+    ],
+    "H5": [
+      {
+        "mode": "STATE_ONLY",
+        "dt": 0.005,
+        "duration": 0.9,
+        "case_wall_s": 34.72117640002398,
+        "candidate_CUDA_ms": 30414.56362915039,
+        "readback_and_copy_wall_s": 0.02375399979064241,
+        "provider_with_artifact_wall_s": 32.62212809995981,
+        "native_candidate_ticks": 51300,
+        "actual_ticks": 180
+      },
+      {
+        "mode": "STATE_PLUS_SUPPORT",
+        "dt": 0.005,
+        "duration": 0.96,
+        "case_wall_s": 35.171562399948016,
+        "candidate_CUDA_ms": 30682.273071289062,
+        "readback_and_copy_wall_s": 0.02518859994597733,
+        "provider_with_artifact_wall_s": 33.07278739969479,
+        "native_candidate_ticks": 54720,
+        "actual_ticks": 192
+      },
+      {
+        "mode": "STATE_ONLY",
+        "dt": 0.0025,
+        "duration": 1.02,
+        "case_wall_s": 68.73277940001572,
+        "candidate_CUDA_ms": 62364.252502441406,
+        "readback_and_copy_wall_s": 0.03149539994774386,
+        "provider_with_artifact_wall_s": 65.4054907001555,
+        "native_candidate_ticks": 116280,
+        "actual_ticks": 408
+      },
+      {
+        "mode": "STATE_PLUS_SUPPORT",
+        "dt": 0.0025,
+        "duration": 0.98,
+        "case_wall_s": 65.63188950001495,
+        "candidate_CUDA_ms": 59467.90563964844,
+        "readback_and_copy_wall_s": 0.029523200064431876,
+        "provider_with_artifact_wall_s": 62.407039000070654,
+        "native_candidate_ticks": 111720,
+        "actual_ticks": 392
+      }
+    ]
+  },
+  "videos": [
+    {
+      "dt": 0.005,
+      "video": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_video_v1\\GPU_pen_HORIZON_matrix_0.005s.mp4",
+        "bytes": 5629163,
+        "sha256": "8bcab8aab52d998ee7e5a8cbf081cd45054c9ee6bef396d8c78c0bf0f5205cfb"
+      },
+      "fps": 30,
+      "speed": 0.05,
+      "frames": 625,
+      "physical_durations_s": [
+        0.3,
+        0.36,
+        0.9,
+        0.96
+      ],
+      "decoded_frames": [
+        {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_video_v1\\0.005_decoded_start.png",
+          "bytes": 522525,
+          "sha256": "ceb27e3ebecf3cbf6ffddad6b50cf846b2f8d4706229bf79891ed06d1417b4b6"
+        },
+        {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_video_v1\\0.005_decoded_mid.png",
+          "bytes": 636367,
+          "sha256": "e0c2eef6faa35fdceeea0b370e894d1ae516a741abb034ba3aa508176de85208"
+        },
+        {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_video_v1\\0.005_decoded_end.png",
+          "bytes": 638161,
+          "sha256": "3e0a662b88e362ce5ba990de0b9d18d7917e193ea794ec3fccbc3ef2fb0e00f6"
+        }
+      ]
+    },
+    {
+      "dt": 0.0025,
+      "video": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_video_v1\\GPU_pen_HORIZON_matrix_0.0025s.mp4",
+        "bytes": 8210408,
+        "sha256": "97a4c5e75bb6dcbd02dc45be75d821f461eee79c114aeee696c7ff09d5071c16"
+      },
+      "fps": 30,
+      "speed": 0.05,
+      "frames": 661,
+      "physical_durations_s": [
+        0.56,
+        0.62,
+        1.02,
+        0.98
+      ],
+      "decoded_frames": [
+        {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_video_v1\\0.0025_decoded_start.png",
+          "bytes": 549481,
+          "sha256": "544fa065dbb647c65a8c5fdf3bd5bdd9fbe6c1bceed104a0f3b4ce7954d7a90f"
+        },
+        {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_video_v1\\0.0025_decoded_mid.png",
+          "bytes": 657356,
+          "sha256": "2ba529b1d9f385d897245ee5850ab51be49cd75f2cf95eff000c1595587dd8a5"
+        },
+        {
+          "path": "D:\\workspace\\supermimic-research\\runs\\pen_horizon_video_v1\\0.0025_decoded_end.png",
+          "bytes": 635955,
+          "sha256": "97c3c0bfc4ca6e279f5bc72948e8538c1f6db64bb2fd68c4c2a34368b53464ae"
+        }
+      ]
+    }
+  ],
+  "budgets": {
+    "pilot": 19776,
+    "candidate": 368448,
+    "actual": 1776,
+    "total": 390000
+  },
+  "optimizer_updates": 0,
+  "scope": "All original tasks fail; graph/independent dynamics and actual EFC have failures. H5 longer survival in unequal-compute same-clip diagnostic, not qualified control/Actor/ego/acceleration benefit. Full Goal remains active/incomplete."
+}
