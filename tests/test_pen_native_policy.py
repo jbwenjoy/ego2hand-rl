@@ -1,7 +1,8 @@
 import unittest
+from types import SimpleNamespace
 import numpy as np
 import torch
-from supermimic_research.runtime.pen_native_policy import orientation_errors,tracking_reward
+from supermimic_research.runtime.pen_native_policy import orientation_errors,tracking_reward,NativePenPolicyAdapter
 
 
 class NativePenPolicyTests(unittest.TestCase):
@@ -37,6 +38,29 @@ class NativePenPolicyTests(unittest.TestCase):
             torch.zeros(1,20),torch.full((1,20),2.).clamp(-1,1),cfg)
         self.assertAlmostEqual(float(r[0]),2.099,places=6)
         self.assertEqual(float(parts['action'][0]),1.)
+
+    def test_step_reuses_native_observation_without_second_pose_encoding(self):
+        a=NativePenPolicyAdapter.__new__(NativePenPolicyAdapter)
+        pose=torch.tensor([[0.,0,0,1,0,0,0]])
+        policy=torch.zeros(1,161);phase=torch.tensor([1])
+        a.num_envs=1;a.pending=torch.zeros(1,dtype=torch.bool);a.control_transitions=0;a.physics_integrations=0
+        a.cfg={'reward':dict(COM_scale_m=.005,angle_scale_rad=np.pi/36,hand_scale_rad=.02,
+            COM_weight=1.,angle_weight=1.,hand_weight=.1,action_weight=.001)}
+        a.motion=SimpleNamespace(time_steps=phase,joint_pos=torch.zeros(1,20),_frames={'joint_pos':torch.zeros(369,20)})
+        def reencode():raise AssertionError('Policy observation was already computed by native env.step')
+        a.features=SimpleNamespace(reference_pose_world=lambda:pose,pose=lambda:pose,qids=torch.arange(7,27),
+            policy=reencode,critic=lambda p:torch.cat((p,torch.zeros(1,27)),-1))
+        def step(raw):
+            phase.add_(1)
+            return {'policy':policy},None,None,None,None
+        a.env=SimpleNamespace(step=step,cfg=SimpleNamespace(decimation=8),sim=SimpleNamespace(data=SimpleNamespace(
+            qpos=torch.cat((pose,torch.zeros(1,20)),-1),qvel=torch.zeros(1,26))))
+        obs,_,term,trunc,info=a.step(torch.full((1,20),1.5))
+        self.assertIs(obs['policy'],policy)
+        self.assertEqual(obs['critic'].shape,(1,188));self.assertEqual(a.physics_integrations,8)
+        self.assertFalse(bool((term|trunc).any()))
+        self.assertEqual(int(info['reference_phase'][0]),1)
+        torch.testing.assert_close(info['applied_raw'],torch.ones(1,20))
 
 
 if __name__=='__main__':unittest.main()

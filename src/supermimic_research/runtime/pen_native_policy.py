@@ -191,7 +191,7 @@ class NativePenPolicyAdapter:
         applied=sampled_raw.clamp(-1,1)
         phase=self.motion.time_steps.clone();refpose=self.features.reference_pose_world().clone();refq=self.motion.joint_pos.clone()
         # Post-step obs points to the NEXT reference. Reward uses the saved one.
-        self.env.step(applied)
+        native_observation=self.env.step(applied)[0]
         pose=self.features.pose();q=self.env.sim.data.qpos[:,self.features.qids]
         reward,parts=tracking_reward(pose[:,:3],pose[:,3:],q,refpose,refq,applied,self.cfg['reward'])
         finite=torch.isfinite(pose).all(-1)&torch.isfinite(self.env.sim.data.qvel).all(-1)&torch.isfinite(reward)
@@ -200,7 +200,9 @@ class NativePenPolicyAdapter:
         terminated=position|shaft|~finite;truncated=reference_end&~terminated
         self.pending.copy_(terminated|truncated)
         self.control_transitions+=self.num_envs;self.physics_integrations+=self.num_envs*self.env.cfg.decimation
-        return self.observation(),reward,terminated,truncated,dict(sampled_raw=sampled_raw.clone(),applied_raw=applied,
+        policy=native_observation['policy']
+        observation=dict(policy=policy,critic=self.features.critic(policy))
+        return observation,reward,terminated,truncated,dict(sampled_raw=sampled_raw.clone(),applied_raw=applied,
             reference_phase=phase,reference_pose_world=refpose,reference_joints=refq,
             termination_reasons=dict(position=position,shaft=shaft,nonfinite=~finite,reference_end=reference_end),**parts)
 
