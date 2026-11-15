@@ -19,6 +19,7 @@ from supermimic_research.runtime.pen_native_planning_math import candidate_offse
 from supermimic_research.mechanics.mean_reference_wrench import mean_reference_wrench
 from supermimic_research.mechanics.feedback_support import feedback_support_target
 from supermimic_research.runtime.collision_numerics import validate_collision_numerics
+from supermimic_research.runtime.response_parent_split import parent_roles
 
 
 def main(a):
@@ -42,6 +43,8 @@ def main(a):
     if 'orientation_objective' in cfg and (profile!='STATE_SUPPORT' or ccd!=dict(ccd_iterations=50,ccd_tolerance=1e-6) or cfg['shaft_scale_deg']!=5.):
         raise ValueError('Orientation matrix fixes original CCD and5deg scale')
     multiplier=cfg.get('candidate_offset_multiplier',1)
+    response_spec=cfg.get('response_parent_split');roles=parent_roles(response_spec) if response_spec is not None else {}
+    if roles and (multiplier!=4 or orientation!='FULL_SO3' or profile!='STATE_SUPPORT'):raise ValueError('Frozen fresh X4 response-parent collection')
     if 'candidate_offset_multiplier' in cfg and (profile!='STATE_SUPPORT' or orientation!='FULL_SO3'):
         raise ValueError('Amplitude matrix requires declared full-SO3 state/support profile')
     offsets=candidate_offsets(seed=cfg['candidate_seed'],multiplier=multiplier)
@@ -75,8 +78,9 @@ def main(a):
         collision_profile_fidelity='UNQUALIFIED_DEVELOPMENT' if ccd is not None else 'NOT_NEWLY_QUALIFIED',code_revision=revision,config=file_pin(cp),base_config=file_pin(bp),proposal=file_pin(pp),sources=sources,
         candidates=file_pin(a.output/'candidates.npz'),orientation_objective=orientation,neural_updates=0,Actor_updates=0,
         candidate_offset_multiplier=multiplier,entire_raw_table_max_abs=float(abs(raw_table).max()),entire_raw_table_valid=True,
+        response_parent_split=response_spec,response_data_role='FRESH_WM_PARENTS' if roles else 'CONTROLLER_DIAGNOSTIC',
         scope='Native20ms57-candidate finite-action objective comparison; profile and fixed gains/scales declared by config. Objectives only, no applied corrective force. Development on same clip, not held-out. Equal candidates/decision, not equal total compute under unequal survival. Full original7.36s clock, first native terminal, no object force/reset aid. Not learned-policy A1/A2, real-time, surrogate speedup or ego qualification.')
-    write(a.output/'intent.json',intent);cases=[];keepers=[]
+    write(a.output/'intent.json',intent);cases=[];keepers=[];response_rows=[]
     for dt in cfg['dt']:
         for mode in cfg['controllers']:
             folder=a.output/f'{mode}_{dt}';planning={};decisions=[];model_before={};model_scalars={};reference={}
@@ -104,7 +108,7 @@ def main(a):
                 statekeys=['_raw_actions','_processed_actions','_targets','_targets_valid','_mask_active','_mask_remaining','_mask_dofs']
                 controller={key:getattr(action,key).detach().cpu().numpy().copy() for key in statekeys};controller['command_phase']=command.time_steps.detach().cpu().numpy().copy()
                 if 'planner' not in planning:
-                    wp.synchronize();planner=NativePenPlanner(env.sim.mj_model,env.sim.wp_model,env.sim.wp_data,s['qids'],s['aids'],round(.02/dt))
+                    wp.synchronize();planner=NativePenPlanner(env.sim.mj_model,env.sim.wp_model,env.sim.wp_data,s['qids'],s['aids'],round(.02/dt),response_heads=bool(roles))
                     planning['planner']=planner;keepers.append(planner)
                     write(folder/'observed_Data_layout.json',dict(schema='observed_live_dynamic_Data_layout:1',
                         scalars=planner.live_scalars,layout=planner.layout,
@@ -133,13 +137,14 @@ def main(a):
                 selected,arrays,scores,cuda_ms=planner.search(targets,ema,reference['COM'][k+1],reference['shaft'][k+1],command.joint_pos[0],
                     support_target,valid,support_weight,scorecfg,reference_velocity=endpoint_velocity,
                     velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,reference_quaternion=reference['quaternion'][k+1])
+                primary_search_timing=dict(planner.last_search_timing)
                 compute_wall=time.perf_counter()-started
                 audit=planner.source.audit(env.sim.wp_data)
                 controller_same=all(np.array_equal(controller[key],getattr(action,key).detach().cpu().numpy()) for key in statekeys)
                 controller_same &= np.array_equal(controller['command_phase'],command.time_steps.detach().cpu().numpy())
                 if not audit['all_array_bytes_equal'] or not audit['scalar_equal'] or not controller_same:raise ValueError('Live planning isolation failed')
                 path=folder/f'decision_{k:04d}.npz'
-                np.savez_compressed(path,endpoint_velocity_world=endpoint_velocity.detach().cpu().numpy(),
+                payload=dict(endpoint_velocity_world=endpoint_velocity.detach().cpu().numpy(),
                     PD_lower20=lower.detach().cpu().numpy(),PD_upper20=upper.detach().cpu().numpy(),encoder_bias20=bias.detach().cpu().numpy(),
                     orientation_reference_quaternion_wxyz=reference['quaternion'][k+1].detach().cpu().numpy(),
                     endpoint_velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,support_weight=support_weight,support_target_world=support_target.detach().cpu().numpy(),
@@ -148,7 +153,25 @@ def main(a):
                     support_source_velocity_error_world_m_s=velocity_error.detach().cpu().numpy(),**arrays,**{'score_'+key:value for key,value in scores.items()},raw_candidates=raw.detach().cpu().numpy(),
                     EMA_candidates=ema.detach().cpu().numpy(),PD_targets=targets.detach().cpu().numpy(),intended_PD=intended.detach().cpu().numpy(),
                     **{'controller_'+key:value for key,value in controller.items()})
+                np.savez_compressed(path,**payload)
                 source=folder/f'source_{k:04d}.npz';np.savez_compressed(source,**planner.source.host_values())
+                if k in roles:
+                    parent=dict(role=roles[k],mode=mode,dt=dt,k=k,parent_key=f'{a.output.name}/{mode}/{dt}/{k}',source=file_pin(source),
+                        primary_prediction=file_pin(path),native_physics_ticks=57*round(.02/dt))
+                    response_rows.append(dict(**parent,repeat=0,trace=file_pin(path),selected=selected,candidate_cuda_ms=cuda_ms))
+                    for repeat in [1,2]:
+                        planner.load_source()
+                        extra_index,extra_arrays,extra_scores,extra_cuda=planner.search(targets,ema,reference['COM'][k+1],reference['shaft'][k+1],command.joint_pos[0],
+                            support_target,valid,support_weight,scorecfg,reference_velocity=endpoint_velocity,velocity_valid=endpoint_velocity_valid,
+                            velocity_weight=velocity_weight,reference_quaternion=reference['quaternion'][k+1])
+                        extra=folder/f'response_{k:04d}_R{repeat}.npz'
+                        np.savez_compressed(extra,**{**payload,**extra_arrays,**{'score_'+key:value for key,value in extra_scores.items()}})
+                        response_rows.append(dict(**parent,repeat=repeat,trace=file_pin(extra),selected=extra_index,candidate_cuda_ms=extra_cuda))
+                    after_extra=planner.source.audit(env.sim.wp_data)
+                    after_controller=all(np.array_equal(controller[key],getattr(action,key).detach().cpu().numpy()) for key in statekeys)
+                    after_controller &= np.array_equal(controller['command_phase'],command.time_steps.detach().cpu().numpy())
+                    if not after_extra['all_array_bytes_equal'] or not after_extra['scalar_equal'] or not after_controller:raise ValueError('Extra response repeats changed live source/controller')
+                    write(a.output/'response_progress.json',dict(rows=response_rows))
                 decision=dict(k=k,phase=int(controller['command_phase'][0]),selected=selected,candidates=57,
                     candidate_offset_multiplier=multiplier,
                     orientation_objective=orientation,
@@ -156,7 +179,7 @@ def main(a):
                     selected_finite=bool(scores['finite'][selected]),selected_capacity=bool(scores['capacity'][selected]),
                     selected_violation=float(scores['violation'][selected]),endpoint_velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,support_weight=support_weight,nominal_wrench_valid=bool(reference['valid'][k]),
                     live_data_controller_untouched=True,source=file_pin(source),prediction=file_pin(path),
-                    candidate_cuda_ms=cuda_ms,search_timing=dict(planner.last_search_timing),compute_and_readback_wall_s=compute_wall,total_with_artifact_wall_s=time.perf_counter()-started)
+                    candidate_cuda_ms=cuda_ms,search_timing=primary_search_timing,compute_and_readback_wall_s=compute_wall,total_with_artifact_wall_s=time.perf_counter()-started)
                 decisions.append(decision);write(folder/'planning_progress.json',dict(decisions=decisions))
                 print(json.dumps(dict(mode=mode,dt=dt,k=k,selected=selected,feasible=decision['selected_feasible'],violation=decision['selected_violation'],cuda_ms=cuda_ms)),flush=True)
                 if not decision['selected_finite'] or not decision['selected_capacity']:raise ValueError('No numerical/capacity-valid selected forecast')
@@ -175,5 +198,7 @@ def main(a):
             cases.append(c);write(folder/'report.json',c);write(a.output/'progress.json',dict(cases=cases))
     task_sources=frozen_import_sources(source_receipt,ROOT/'src','dex_supermimic')
     verify_source_snapshot(source_receipt,live=True);verify_source_snapshot(installed,live=True);verify_source_snapshot(engine_sources,live=True)
-    result=dict(**intent,cases=cases,task_sources=task_sources,source_import_enumeration_available=True)
+    result=dict(**intent,cases=cases,task_sources=task_sources,source_import_enumeration_available=True,response_rows=response_rows,
+        response_candidate_ticks_including_parent_primary=sum(e['native_physics_ticks'] for e in response_rows),
+        extra_response_candidate_ticks=sum(e['native_physics_ticks'] for e in response_rows if e['repeat']>0))
     write(a.output/'report.json',result);print(json.dumps(dict(report=file_pin(a.output/'report.json'),cases=[dict(mode=c['name'],dt=c['dt'],duration=c['summary']['metrics']['actual_duration_s'],qualified=c['summary']['qualified'],candidates=c['candidates_evaluated']) for c in cases])))

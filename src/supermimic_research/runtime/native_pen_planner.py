@@ -10,6 +10,7 @@ from .gpu_data_fork import fork_dynamic_data
 from .gpu_data_snapshot import ResidentDataSnapshot
 from .gpu_model_snapshot import model_leaves
 from .pen_native_planning_math import score_candidates
+from ..mechanics.pen_contact_groups import normal_group
 
 
 @wp.kernel
@@ -71,14 +72,46 @@ def _contacts(slot:wp.array(dtype=int),tick:int,nacon:wp.array(dtype=int),geom:w
                 wp.atomic_add(other,s,tick,wp.max(0.0,normal))
 
 
+@wp.kernel
+def _clear_response(slot:wp.array(dtype=int),tick:int,Fn:wp.array3d(dtype=float)):
+    j=wp.tid();Fn[slot[0],tick,j]=0.0
+
+
+@wp.kernel
+def _response_heads(slot:wp.array(dtype=int),tick:int,warm:wp.array2d(dtype=float),nacon:wp.array(dtype=int),
+                    geom:wp.array(dtype=wp.vec2i),dim:wp.array(dtype=int),address:wp.array2d(dtype=int),force:wp.array2d(dtype=float),
+                    nefc:wp.array(dtype=int),tags:wp.array(dtype=int),groups:wp.array(dtype=int),
+                    Warm:wp.array3d(dtype=float),Fn:wp.array3d(dtype=float),bad:wp.array2d(dtype=int)):
+    i=wp.tid();s=slot[0]
+    if i<warm.shape[1]:Warm[s,tick,i]=warm[0,i]
+    if i<nacon[0]:
+        g=geom[i][0];h=geom[i][1]
+        if g<0 or h<0 or g>=tags.shape[0] or h>=tags.shape[0]:wp.atomic_max(bad,s,tick,1)
+        else:
+            other=int(-1)
+            if tags[g]==2 and tags[h]==1:other=h
+            elif tags[h]==2 and tags[g]==1:other=g
+            if other>=0:
+                group=groups[other];normal=float(0.0)
+                if group<0 or group>5:wp.atomic_max(bad,s,tick,1)
+                elif address[i,0]>=0:
+                    count=int(1)
+                    if dim[i]>1:count=2*(dim[i]-1)
+                    for edge in range(count):
+                        index=address[i,edge]
+                        if index>=0 and index<nefc[0] and index<force.shape[1]:normal+=force[0,index]
+                        else:wp.atomic_max(bad,s,tick,1)
+                    wp.atomic_add(Fn,s,tick,group,wp.max(0.0,normal))
+
+
 class NativePenPlanner:
-    def __init__(self,model,device_model,live,qids,aids,nsteps):
+    def __init__(self,model,device_model,live,qids,aids,nsteps,*,response_heads=False):
         import mujoco
         import mujoco_warp as mw
         if (live.nworld!=1 or model.na or model.nhistory or model.nplugin or model.neq
                 or int(model.opt.cone)!=0 or model.opt.enableflags & int(mujoco.mjtEnableBit.mjENBL_SLEEP)):
             raise ValueError('One-world no-hidden-state/no-equality pyramidal controlled plant')
-        self.model,self.live,self.nsteps=device_model,live,nsteps;self.host_model=model;self.aids=aids
+        self.model,self.live,self.nsteps=device_model,live,nsteps;self.host_model=model;self.aids=aids;self.response_heads=response_heads
         self.body=model.body('object/cube').id;joint=model.body_jntadr[self.body]
         self.qa=int(model.jnt_qposadr[joint]);self.da=int(model.jnt_dofadr[joint])
         if np.any(device_model.body_ipos.numpy()[0,self.body]):raise ValueError('COM at free-body origin')
@@ -97,6 +130,10 @@ class NativePenPlanner:
             self.lower=wp.array(ranges[:,0].astype(np.float32),device='cuda');self.upper=wp.array(ranges[:,1].astype(np.float32),device='cuda')
             tags=np.array([2 if model.geom_bodyid[g]==self.body else 1 if (model.geom(g).name or '').startswith('robot/') else 0 for g in range(model.ngeom)],np.int32)
             self.tags=wp.array(tags,device='cuda')
+            if response_heads:
+                self.Warm=wp.zeros((57,nsteps,model.nv),device='cuda');self.Fn=wp.zeros((57,nsteps,6),device='cuda')
+                groups=np.array([normal_group(model.geom(g).name or '') for g in range(model.ngeom)],np.int32)
+                self.normal_groups=wp.array(groups,device='cuda')
             wp.load_module(module=__name__,device='cuda')
             was_gc=gc.isenabled();gc.disable()
             try:
@@ -112,10 +149,15 @@ class NativePenPlanner:
                             self.Q,self.V,self.U,self.W,self.T,self.pen,self.other,self.bad],stream=self.stream)
                         wp.launch(_contacts,self.data.naconmax,inputs=[self.slot,tick,self.data.nacon,self.data.contact.geom,self.data.contact.dist,
                             self.data.contact.dim,self.data.contact.efc_address,self.data.efc.force,self.data.nefc,self.tags,self.pen,self.other,self.bad],stream=self.stream)
+                        if response_heads:
+                            wp.launch(_clear_response,6,inputs=[self.slot,tick,self.Fn],stream=self.stream)
+                            wp.launch(_response_heads,max(self.data.naconmax,model.nv),inputs=[self.slot,tick,self.data.qacc_warmstart,self.data.nacon,self.data.contact.geom,
+                                self.data.contact.dim,self.data.contact.efc_address,self.data.efc.force,self.data.nefc,self.tags,self.normal_groups,self.Warm,self.Fn,self.bad],stream=self.stream)
                 self.graph=capture.graph
             finally:
                 if was_gc:gc.enable()
         self.views={k:wp.to_torch(getattr(self,k)) for k in ['slot','target_ctrl','Q','V','U','W','T','pen','other','bad']}
+        if response_heads:self.views.update({k:wp.to_torch(getattr(self,k)) for k in ['Warm','Fn']})
         self.qid_tensor=torch.as_tensor(qids.astype(np.int64),device='cuda');self.ctrl_tensor=wp.to_torch(live.ctrl)
         self.aid_tensor=torch.as_tensor(np.asarray(aids,dtype=np.int64),device='cuda')
         wp.synchronize_stream(self.stream)
