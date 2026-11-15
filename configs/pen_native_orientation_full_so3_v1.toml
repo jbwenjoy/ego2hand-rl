@@ -1,0 +1,32 @@
+schema = 1
+experiment = "STATE_SUPPORT"
+orientation_objective = "FULL_SO3"
+base_config = "controlled_evaluation_v4.toml"
+proposal = "../runs/pen_gpu_support_search_v1/report.json"
+gates = "pen_gpu_step_audit_v1.toml"
+dt = [0.005, 0.0025]
+controllers = ["STATE_ONLY", "STATE_PLUS_SUPPORT"]
+candidate_seed = 8101
+candidates = 57
+horizon_s = 0.02
+COM_scale_m = 0.005
+shaft_scale_deg = 5.0
+hand_scale_rad = 0.02
+residual_scale_rad = 0.02
+hand_weight = 0.01
+residual_weight = 0.01
+force_scale_N = 0.1
+torque_scale_Nm = 0.005
+support_weight = 0.1
+residual_reference = "ZERO_PHYSICAL_EMA"
+fallback = "MIN_SUM_NORMALIZED_GEOMETRY_VIOLATION_THEN_SCORE"
+numerical_device_override = true
+[numerical_options]
+iterations = 50
+ls_iterations = 50
+tolerance = 0.000000000001
+ls_tolerance = 0.00000001
+
+[collision_numerics]
+ccd_iterations = 50
+ccd_tolerance = 0.000001

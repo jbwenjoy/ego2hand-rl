@@ -3,10 +3,44 @@ import importlib.util
 from pathlib import Path
 import numpy as np
 import torch
-from supermimic_research.runtime.pen_native_planning_math import candidate_offsets,candidate_targets,score_candidates
+from supermimic_research.runtime.pen_native_planning_math import candidate_offsets,candidate_targets,score_candidates,quaternion_distance_wxyz
 
 
 class PlanningMathTests(unittest.TestCase):
+    def test_full_rotation_sign_scale_and_independent_scipy_reference(self):
+        from scipy.spatial.transform import Rotation
+        rng=np.random.default_rng(8253)
+        q=rng.normal(size=(128,4));ref=rng.normal(size=(4,))
+        expected=(Rotation.from_quat(q[:,[1,2,3,0]])*Rotation.from_quat(ref[[1,2,3,0]]).inv()).magnitude()
+        for dtype,tol in [(torch.float64,1e-12),(torch.float32,2e-6)]:
+            actual=torch.tensor(q,dtype=dtype);target=torch.tensor(ref,dtype=dtype)
+            value=quaternion_distance_wxyz(actual,target)
+            np.testing.assert_allclose(value.numpy(),expected,atol=tol,rtol=tol)
+            torch.testing.assert_close(value,quaternion_distance_wxyz(-actual,target),atol=tol,rtol=tol)
+            torch.testing.assert_close(value,quaternion_distance_wxyz(actual*3,-target*2),atol=tol,rtol=tol)
+        self.assertTrue(torch.isnan(quaternion_distance_wxyz(torch.zeros(4),torch.tensor([1.,0,0,0]))))
+        with self.assertRaises(ValueError):quaternion_distance_wxyz(torch.ones(3),torch.ones(4))
+
+    def test_axial_half_turn_changes_full_rotation_ranking_and_invalid_is_infeasible(self):
+        cfg=dict(COM_scale_m=.005,shaft_scale_deg=5.,hand_scale_rad=.02,residual_scale_rad=.02,hand_weight=.01,residual_weight=.01,
+            force_scale_N=.1,torque_scale_Nm=.005,max_penetration_m=.002,max_self_penetration_m=.0002,
+            max_joint_limit_excursion_rad=.001,max_object_nonhand_normal_force_N=.1)
+        q=torch.zeros(2,1,27);q[0,0,4]=1;q[1,0,3]=1;q[1,0,0]=.001
+        pen=torch.zeros(2,3)
+        args=(q,torch.zeros(2,1,26),torch.zeros(2,1,20),torch.zeros(2,1,6),pen,torch.zeros(2,1),torch.zeros(2,1,dtype=torch.int32),
+              torch.zeros(2,20),torch.arange(7,27),0,torch.zeros(3),torch.tensor([1.,0,0]),torch.zeros(20),torch.zeros(6),True,0.)
+        legacy=score_candidates(*args,cfg);self.assertEqual(int(legacy['index']),0)
+        torch.testing.assert_close(legacy['shaft_error_rad'],torch.zeros(2))
+        fullcfg={**cfg,'orientation_objective':'FULL_SO3'};ref=torch.tensor([1.,0,0,0])
+        full=score_candidates(*args,fullcfg,reference_quaternion=ref)
+        torch.testing.assert_close(full['orientation_error_rad'],torch.tensor([np.pi,0.],dtype=torch.float32));self.assertEqual(int(full['index']),1)
+        pen[1,0]=.003
+        self.assertEqual(int(score_candidates(*args,fullcfg,reference_quaternion=ref)['index']),0)
+        pen.zero_();q[0,0,3:7]=0
+        invalid=score_candidates(*args,fullcfg,reference_quaternion=ref)
+        self.assertFalse(bool(invalid['finite'][0]));self.assertEqual(int(invalid['index']),1)
+        with self.assertRaises(ValueError):score_candidates(*args,fullcfg)
+
     def test_fixed_candidate_budget_and_original_ema_clamp(self):
         a=candidate_offsets();self.assertEqual(a.shape,(368,57,20));np.testing.assert_array_equal(a,candidate_offsets())
         self.assertLessEqual(abs(a).max(),.08);np.testing.assert_array_equal(a[:,0],0)

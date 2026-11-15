@@ -17,15 +17,38 @@ def candidate_targets(raw,processed,reference,bias,lower,upper):
     return intended.clamp(min=lower,max=upper),ema,intended
 
 
+def quaternion_distance_wxyz(actual,reference):
+    """Sign-invariant SO(3) angle; invalid zero/nonfinite inputs stay invalid.
+
+    Normalization handles finite nonunit inputs. atan2 of the relative
+    quaternion avoids acos precision loss at matching orientations. This
+    finite-action score is not a qualification of learned contact gradients.
+    """
+    if actual.shape[-1]!=4 or reference.shape[-1]!=4:
+        raise ValueError('Explicit WORLD quaternion wxyz with four components')
+    a=actual/torch.linalg.vector_norm(actual,dim=-1,keepdim=True)
+    b=reference/torch.linalg.vector_norm(reference,dim=-1,keepdim=True)
+    a,b=torch.broadcast_tensors(a,b)
+    vector=b[...,:1]*a[...,1:]-a[...,:1]*b[...,1:]-torch.linalg.cross(a[...,1:],b[...,1:],dim=-1)
+    scalar=(a*b).sum(-1).abs()
+    return 2*torch.atan2(torch.linalg.vector_norm(vector,dim=-1),scalar)
+
+
 def score_candidates(qpos,qvel,ctrl,wrench,penalties,other_force,overflow,ema,
                      qids,qa,reference_COM,reference_shaft,reference_hand,target_wrench,
                      wrench_valid,support_weight,cfg,*,object_da=None,reference_velocity=None,
-                     velocity_valid=False,velocity_weight=0.):
+                     velocity_valid=False,velocity_weight=0.,reference_quaternion=None):
     q=qpos[:,-1];quat=q[:,qa+3:qa+7];w,x,y,z=quat.unbind(-1)
     shaft=torch.stack([1-2*(y*y+z*z),2*(x*y+w*z),2*(x*z-w*y)],dim=-1)
     angle=torch.acos((shaft*reference_shaft).sum(-1).clamp(-1,1))
     position=((q[:,qa:qa+3]-reference_COM)/cfg['COM_scale_m']).square().sum(-1)
-    orientation=(angle/np.deg2rad(cfg['shaft_scale_deg'])).square()
+    objective=cfg.get('orientation_objective','SHAFT')
+    if objective not in ['SHAFT','FULL_SO3']:raise ValueError('Explicit SHAFT or FULL_SO3 objective')
+    orientation_angle=angle
+    if objective=='FULL_SO3':
+        if reference_quaternion is None:raise ValueError('Full SO3 needs explicit WORLD reference quaternion wxyz')
+        orientation_angle=quaternion_distance_wxyz(quat,reference_quaternion)
+    orientation=(orientation_angle/np.deg2rad(cfg['shaft_scale_deg'])).square()
     hand=((q[:,qids]-reference_hand)/cfg['hand_scale_rad']).square().mean(-1)
     residual=(ema/cfg['residual_scale_rad']).square().mean(-1)
     state=position+orientation+cfg['hand_weight']*hand+cfg['residual_weight']*residual
@@ -50,4 +73,4 @@ def score_candidates(qpos,qvel,ctrl,wrench,penalties,other_force,overflow,ema,
     fallback=torch.where(violation==violation.min(),clean,inf).argmin()
     index=torch.where(feasible.any(),best,fallback)
     return dict(index=index,total=total,state=state,support=support,feasible=feasible,violation=violation,
-                finite=finite,capacity=capacity,shaft_error_rad=angle,mean_world_wrench=mean,velocity=velocity)
+                finite=finite,capacity=capacity,shaft_error_rad=angle,orientation_error_rad=orientation_angle,mean_world_wrench=mean,velocity=velocity)

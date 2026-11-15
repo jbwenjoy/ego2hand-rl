@@ -37,6 +37,10 @@ def main(a):
         ccd=validate_collision_numerics(ccd)
         if ccd['ccd_iterations']!=50 or ccd['ccd_tolerance'] not in [1e-6,1e-7]:raise ValueError('Predeclared two CCD profiles only')
     elif ccd is not None:raise ValueError('CCD comparison requires explicit STATE_SUPPORT profile')
+    orientation=cfg.get('orientation_objective','SHAFT')
+    if orientation not in ['SHAFT','FULL_SO3']:raise ValueError('Declared orientation objective')
+    if 'orientation_objective' in cfg and (profile!='STATE_SUPPORT' or ccd!=dict(ccd_iterations=50,ccd_tolerance=1e-6) or cfg['shaft_scale_deg']!=5.):
+        raise ValueError('Orientation matrix fixes original CCD and5deg scale')
     if (a.output.exists() or not a.output.resolve().is_relative_to(ROOT/'runs') or cfg['candidates']!=57 or cfg['horizon_s']!=.02
             or cfg['controllers']!=profiles[profile] or cfg['dt']!=[.005,.0025]
             or (profile=='FEEDBACK' and (cfg['feedback_position_gain_s2']!=100. or cfg['feedback_velocity_gain_s']!=20.))
@@ -63,7 +67,7 @@ def main(a):
     intent=dict(schema='pen_native_objective_search:3',experiment=profile,source_receipt=file_pin(a.output/'source_receipt.json'),installed_source_receipt=file_pin(a.output/'installed_source_receipt.json'),collision_numerics=ccd,
         engine_source_receipt=file_pin(a.output/'engine_source_receipt.json'),
         collision_profile_fidelity='UNQUALIFIED_DEVELOPMENT' if ccd is not None else 'NOT_NEWLY_QUALIFIED',code_revision=revision,config=file_pin(cp),base_config=file_pin(bp),proposal=file_pin(pp),sources=sources,
-        candidates=file_pin(a.output/'candidates.npz'),neural_updates=0,Actor_updates=0,
+        candidates=file_pin(a.output/'candidates.npz'),orientation_objective=orientation,neural_updates=0,Actor_updates=0,
         scope='Native20ms57-candidate finite-action objective comparison; profile and fixed gains/scales declared by config. Objectives only, no applied corrective force. Development on same clip, not held-out. Equal candidates/decision, not equal total compute under unequal survival. Full original7.36s clock, first native terminal, no object force/reset aid. Not learned-policy A1/A2, real-time, surrogate speedup or ego qualification.')
     write(a.output/'intent.json',intent);cases=[];keepers=[]
     for dt in cfg['dt']:
@@ -82,7 +86,7 @@ def main(a):
                 targets=mean_reference_wrench(COM,Q,float(dm.body_mass.numpy()[0,b]),I,dm.opt.gravity.numpy()[0])
                 np.savez_compressed(folder/'reference.npz',COM_world_m=COM,quaternion_wxyz=Q,reference_hand=command._frames['joint_pos'].detach().cpu().numpy(),
                     **{k:v for k,v in targets.items() if isinstance(v,np.ndarray)})
-                reference.update(mass=float(dm.body_mass.numpy()[0,b]),velocity=torch.tensor(targets['velocity_world'],dtype=torch.float32,device='cuda'),COM=torch.tensor(COM,device='cuda'),shaft=torch.tensor(Rotation.from_quat(Q[:,[1,2,3,0]]).as_matrix()[:,:,0],dtype=torch.float32,device='cuda'),
+                reference.update(mass=float(dm.body_mass.numpy()[0,b]),velocity=torch.tensor(targets['velocity_world'],dtype=torch.float32,device='cuda'),COM=torch.tensor(COM,device='cuda'),quaternion=torch.tensor(Q,dtype=torch.float32,device='cuda'),shaft=torch.tensor(Rotation.from_quat(Q[:,[1,2,3,0]]).as_matrix()[:,:,0],dtype=torch.float32,device='cuda'),
                     wrench=torch.tensor(targets['wrench_world'],dtype=torch.float32,device='cuda'),valid=targets['valid_interval'])
                 arrays,scalars,hashes=capture_model(dm);model_before.update(hashes);model_scalars.update(scalars)
                 np.savez_compressed(folder/'fixed_model_arrays.npz',**arrays);write(folder/'fixed_model_scalars.json',scalars)
@@ -121,7 +125,7 @@ def main(a):
                 support_weight=cfg['support_weight'] if mode in ['STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT','STATE_PLUS_VELOCITY_SUPPORT'] else 0.
                 selected,arrays,scores,cuda_ms=planner.search(targets,ema,reference['COM'][k+1],reference['shaft'][k+1],command.joint_pos[0],
                     support_target,valid,support_weight,scorecfg,reference_velocity=endpoint_velocity,
-                    velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight)
+                    velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,reference_quaternion=reference['quaternion'][k+1])
                 compute_wall=time.perf_counter()-started
                 audit=planner.source.audit(env.sim.wp_data)
                 controller_same=all(np.array_equal(controller[key],getattr(action,key).detach().cpu().numpy()) for key in statekeys)
@@ -129,6 +133,7 @@ def main(a):
                 if not audit['all_array_bytes_equal'] or not audit['scalar_equal'] or not controller_same:raise ValueError('Live planning isolation failed')
                 path=folder/f'decision_{k:04d}.npz'
                 np.savez_compressed(path,endpoint_velocity_world=endpoint_velocity.detach().cpu().numpy(),
+                    orientation_reference_quaternion_wxyz=reference['quaternion'][k+1].detach().cpu().numpy(),
                     endpoint_velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,support_weight=support_weight,support_target_world=support_target.detach().cpu().numpy(),
                     support_feedback_force_world=correction.detach().cpu().numpy(),
                     support_source_position_error_world_m=position_error.detach().cpu().numpy(),
@@ -137,6 +142,7 @@ def main(a):
                     **{'controller_'+key:value for key,value in controller.items()})
                 source=folder/f'source_{k:04d}.npz';np.savez_compressed(source,**planner.source.host_values())
                 decision=dict(k=k,phase=int(controller['command_phase'][0]),selected=selected,candidates=57,
+                    orientation_objective=orientation,
                     any_feasible=bool(scores['feasible'].any()),selected_feasible=bool(scores['feasible'][selected]),
                     selected_finite=bool(scores['finite'][selected]),selected_capacity=bool(scores['capacity'][selected]),
                     selected_violation=float(scores['violation'][selected]),endpoint_velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,support_weight=support_weight,nominal_wrench_valid=bool(reference['valid'][k]),
@@ -151,6 +157,7 @@ def main(a):
                 bp.parent,registry,folder,initializer=initialize,action_provider=provider)
             planner=planning['planner'];_,after_scalars,after_hashes=capture_model(planner.model)
             c.update(name=mode,planning=decisions,planning_model_unchanged=after_hashes==model_before and after_scalars==model_scalars,
+                orientation_objective=orientation,
                 observed_Data_layout=file_pin(folder/'observed_Data_layout.json'),
                 fixed_model_arrays=file_pin(folder/'fixed_model_arrays.npz'),fixed_model_scalars=file_pin(folder/'fixed_model_scalars.json'),
                 candidates_evaluated=57*len(decisions),candidate_physics_ticks=57*len(decisions)*round(.02/dt),

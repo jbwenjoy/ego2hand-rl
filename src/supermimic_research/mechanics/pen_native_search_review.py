@@ -82,7 +82,11 @@ def main(a):
             refshaft=Rotation.from_quat(ref['quaternion_wxyz'][k+1][[1,2,3,0]]).as_matrix()[:,0]
             angle=np.arccos(np.clip(shaft@refshaft,-1,1));position=((q[:,qa:qa+3]-ref['COM_world_m'][k+1])/.005)**2
             hand=((q[:,qids]-ref['reference_hand'][k+1])/.02)**2;residual=(ema/.02)**2
-            state=position.sum(1)+(angle/np.deg2rad(5))**2+.01*hand.mean(1)+.01*residual.mean(1)
+            full_angle=(Rotation.from_quat(quat[:,[1,2,3,0]])*Rotation.from_quat(ref['quaternion_wxyz'][k+1][[1,2,3,0]]).inv()).magnitude()
+            orientation_objective=cfg.get('orientation_objective','SHAFT')
+            if orientation_objective not in ['SHAFT','FULL_SO3']:raise ValueError('Unknown saved orientation objective')
+            orientation_angle=full_angle if orientation_objective=='FULL_SO3' else angle
+            state=position.sum(1)+(orientation_angle/np.deg2rad(5))**2+.01*hand.mean(1)+.01*residual.mean(1)
             position_error=ref['COM_world_m'][k]-source['qpos'][0,qa:qa+3]
             valid=bool(ref['valid_interval'][k])
             velocity_error=ref['velocity_world'][k]-source['qvel'][0,da:da+3] if valid else np.full(3,np.nan)
@@ -121,6 +125,11 @@ def main(a):
                     derivative_mask=bool(d['endpoint_velocity_valid'])==endpoint_valid and decision['endpoint_velocity_valid']==endpoint_valid,
                     predeclared_weights=float(d['velocity_weight'])==velocity_weight and float(d['support_weight'])==support_weight,
                     velocity_score=np.allclose(d['score_velocity'],velocity_cost,atol=1e-4,rtol=1e-5))
+            if 'orientation_objective' in cfg:
+                checks.update(orientation_reference=np.array_equal(ref['quaternion_wxyz'][k+1].astype(np.float32),d['orientation_reference_quaternion_wxyz']),
+                    declared_orientation_objective=decision['orientation_objective']==c['orientation_objective']==orientation_objective)
+                if orientation_objective=='FULL_SO3':
+                    checks['full_SO3_angle']=np.allclose(full_angle,d['score_orientation_error_rad'],atol=2e-6,rtol=1e-6)
             pred=dict(post_qpos=d['Q'][index].astype(float),post_qvel=d['V'][index].astype(float),post_ctrl=d['U'][index].astype(float),post_GPU_time=d['T'][index].astype(float))
             actual={key:z[key][lo:hi] for key in pred}
             metrics,fidelity=compare_response(pred,actual,d['W'][index].astype(float),actual_w[lo:hi],qids,dofs,qa,da,gates)
