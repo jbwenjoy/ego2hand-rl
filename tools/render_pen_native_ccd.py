@@ -17,6 +17,12 @@ from tools.render_mug_progress_video import Scene,canvas,writer
 
 def main(a):
     r,b=[json.loads(p.read_text()) for p in [a.report,a.baseline]]
+    axis=getattr(a,'axis','CCD')
+    if axis not in ['CCD','ORIENTATION']:raise ValueError('Declared video matrix axis')
+    labels0=(['CCD 1e-6：状态','CCD 1e-6：状态＋支持','CCD 1e-7：状态','CCD 1e-7：状态＋支持'] if axis=='CCD' else
+        ['笔轴：状态','笔轴：状态＋支持','完整姿态：状态','完整姿态：状态＋支持'])
+    title=('最新 GPU 受控转笔：CCD 数值配置与接触支持对照，八组均未完成任务' if axis=='CCD' else
+        '最新 GPU 受控转笔：笔轴与完整姿态评分对照，八组均未完成任务')
     if a.output.exists():raise ValueError('Fresh native control replay')
     for pin in r['sources']+b['sources']:verify_file_pin(pin)
     a.output.mkdir();videos=[]
@@ -29,22 +35,22 @@ def main(a):
             for key,value in dict(np.load(verify_file_pin(c['GPU_physical_context']))).items():getattr(m,key)[:]=value[0]
             m.vis.global_.offwidth=768;m.vis.global_.offheight=560;m.vis.headlight.ambient[:]=.45;m.vis.headlight.diffuse[:]=.75
             scene=Scene(m,512,550,z['COM_world_m'][0]);mujoco.mj_setState(m,scene.data,z['initial_native_state'],mujoco.mjtState.mjSTATE_INTEGRATION);mujoco.mj_setConst(m,scene.data);scenes.append(scene)
-        durations=[c['summary']['metrics']['actual_duration_s'] for c in cases];path=a.output/f'GPU_pen_CCD_matrix_{dt:g}s.mp4';frames=0;selected=[]
+        durations=[c['summary']['metrics']['actual_duration_s'] for c in cases];path=a.output/f'GPU_pen_{axis}_matrix_{dt:g}s.mp4';frames=0;selected=[]
         try:
             samples=np.linspace(0,max(durations),math.ceil(max(durations)/.05*30)+1)
             with writer(path) as video:
                 for i,t in enumerate(samples):
                     panels=[];labels=[];indices=[]
-                    for name,z,scene,duration in zip(['CCD 1e-6：状态','CCD 1e-6：状态＋支持','CCD 1e-7：状态','CCD 1e-7：状态＋支持'],traces,scenes,durations):
+                    for name,z,scene,duration in zip(labels0,traces,scenes,durations):
                         j=int(np.searchsorted(np.arange(1,len(z['post_qpos'])+1)*dt,min(t,duration)+1e-12,side='right')-1)
                         panels.append(scene.draw(z['initial_qpos'] if j<0 else z['post_qpos'][j],250));indices.append(j)
                         labels.append(name+('：终止静帧' if t>=duration else '：实测'))
                     selected.append(indices)
-                    frame=canvas(2048,'最新 GPU 受控转笔：CCD 数值配置与接触支持对照，八组均未完成任务',
+                    frame=canvas(2048,title,
                         f'步长 {dt*1000:g} ms；每步57候选、预测20ms；20倍慢放，保存实测姿态，无插值',panels,labels,
                         '各列物理时间：'+' / '.join(f'{min(t,d):.3f}' for d in durations)+' 秒',
                         ['计划7.36秒；实际终止：'+' / '.join(f'{d:.2f}' for d in durations)+'秒。终止列停留末帧，未继续仿真。',
-                         '无物体外力辅助；未训练Actor；受控参考，非真实ego。CCD候选未通过力预测资格，全部失败保留。'])
+                         '无物体外力辅助；未训练Actor；受控参考，非真实ego。独立预测与任务验收分别报告，任务失败保留。'])
                     if i==0:
                         Image.fromarray(frame).save(a.output/f'{dt:g}_start.png')
                         for _ in range(18):video.append_data(frame);frames+=1
@@ -64,10 +70,10 @@ def main(a):
         finally:reader.close()
         videos.append(dict(dt=dt,video=file_pin(path),frames=frames,fps=30,speed=.05,physical_durations_s=durations,selected_post_indices=selected,decoded_frames=decoded,
             inputs=[{key:c[key] for key in ['trace','host_topology','GPU_physical_context']} for c in cases]))
-    result=dict(schema='pen_native_CCD_matrix_actual_video:1',run=file_pin(a.report),baseline=file_pin(a.baseline),sources=[file_pin(__file__),file_pin(ROOT/'tools/render_mug_progress_video.py')],videos=videos,
+    result=dict(schema='pen_native_matrix_actual_video:2',axis=axis,run=file_pin(a.report),baseline=file_pin(a.baseline),sources=[file_pin(__file__),file_pin(ROOT/'tools/render_mug_progress_video.py')],videos=videos,
         neural_updates=0,native_integrations=0,scope='Actual saved native GPU trajectories, explicit per-column clocks and terminal stills. Graphics forward only, no new dynamics, interpolation or successful policy/ego claim.')
     (a.output/'report.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf8');print(json.dumps(dict(videos=[v['video'] for v in videos])))
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--report',type=Path,required=True);p.add_argument('--baseline',type=Path,required=True);p.add_argument('--output',type=Path,required=True);main(p.parse_args())
+    p=argparse.ArgumentParser();p.add_argument('--axis',choices=['CCD','ORIENTATION'],default='CCD');p.add_argument('--report',type=Path,required=True);p.add_argument('--baseline',type=Path,required=True);p.add_argument('--output',type=Path,required=True);main(p.parse_args())
