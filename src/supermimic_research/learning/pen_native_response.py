@@ -10,6 +10,19 @@ def vector_comparison(prediction, target):
         cosine=float(prediction@target/(pn*tn)) if pn*tn > 1e-24 else None)
 
 
+def repeated_contrast_spread(plus,minus,scales):
+    """Observed finite-contrast envelope; neither a probability bound nor a JVP."""
+    plus,minus,scales=[np.asarray(v,float) for v in [plus,minus,scales]]
+    if (plus.shape!=minus.shape or plus.ndim!=2 or len(plus)<2 or plus.shape[1:]!=scales.shape
+            or np.any(scales<=0) or not all(np.isfinite(v).all() for v in [plus,minus,scales])):
+        raise ValueError('Paired repeated finite responses and positive fixed scales')
+    p,m=plus/scales,minus/scales;contrast=p.mean(0)-m.mean(0)
+    spread=max(np.linalg.norm(p-p.mean(0),axis=1))+max(np.linalg.norm(m-m.mean(0),axis=1))
+    signal=float(np.linalg.norm(contrast))
+    return dict(normalized_contrast_L2=signal,observed_spread_envelope_L2=float(spread),
+        contrast_exceeds_observed_spread=bool(signal>spread),execution_repeats=len(plus))
+
+
 def compare_native_response(plus, minus, derivative, scales, epsilon):
     """Rows are execution repeats at the same fixed inputs, not IID samples."""
     plus, minus, derivative, scales = [np.asarray(a,float) for a in (plus,minus,derivative,scales)]
