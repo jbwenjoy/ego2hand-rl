@@ -1,0 +1,18 @@
+schema = 1
+probe = "MATCHED_AMPLITUDE"
+run = "../runs/pen_native_amplitude_x4_v1/report.json"
+review = "../runs/pen_native_amplitude_x4_review_v1/report.json"
+gates = "pen_gpu_step_audit_v1.toml"
+amplitudes = [1, 4]
+repeats = 3
+horizon_s = 0.02
+data_role = "DIAGNOSTIC_NEVER_FIT"
+paths = ["ORIGINAL_57_CANDIDATE_GRAPH", "INSTRUMENTED_SELECTED_SINGLE_STEP_GRAPH"]
+[[cohorts]]
+mode = "STATE_ONLY"
+dt = 0.005
+anchors = [0]
+[[cohorts]]
+mode = "STATE_PLUS_SUPPORT"
+dt = 0.005
+anchors = [4]

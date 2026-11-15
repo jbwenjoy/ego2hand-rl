@@ -37,7 +37,11 @@ def patterns(z,tick,m,body):
 
 
 def main(a):
-    r=json.loads(a.report.read_text());cfg=tomllib.loads(verify_file_pin(r['config']).read_text());cp=verify_file_pin(r['config'])
+    r=json.loads(a.report.read_text())
+    if r['schema']=='pen_matched_amplitude_sources:1':
+        from .matched_source_review import main as matched_main
+        return matched_main(a,r)
+    cfg=tomllib.loads(verify_file_pin(r['config']).read_text());cp=verify_file_pin(r['config'])
     gates=tomllib.loads((cp.parent/cfg['gates']).read_text());original=json.loads(verify_file_pin(r['original_run']).read_text())
     old_review=json.loads(verify_file_pin(r['original_review']).read_text());old_efc=json.loads(verify_file_pin(old_review['EFC']).read_text())
     if a.output.exists():raise ValueError('Fresh independent visited-source review')

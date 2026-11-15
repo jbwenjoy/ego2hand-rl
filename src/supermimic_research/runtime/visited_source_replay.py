@@ -32,6 +32,9 @@ def main(a):
     import warp as wp
     cp=a.config.resolve();cfg=tomllib.loads(cp.read_text());rp=(cp.parent/cfg['run']).resolve();vp=(cp.parent/cfg['review']).resolve()
     r=json.loads(rp.read_text());v=json.loads(vp.read_text())
+    if cfg.get('probe')=='MATCHED_AMPLITUDE':
+        from .matched_source_replay import main as matched_main
+        return matched_main(a,cfg,cp,rp,vp,r,v)
     ccd=cfg.get('collision_numerics');profile=cfg.get('ccd_profile','ORIGINAL_RECONSTRUCTION')
     if ('ccd_profile' in cfg)!=('collision_numerics' in cfg):raise ValueError('CCD profile and explicit options must occur together')
     if ccd is not None and (profile not in ['BASELINE','TIGHT'] or ccd!={'ccd_iterations':50,'ccd_tolerance':1e-6 if profile=='BASELINE' else 1e-7}):

@@ -17,7 +17,8 @@ def record_response(model,device_model,data,graph,aids,target20,nsteps,*,instrum
         'pre_object_COM','post_qfrc_constraint','post_qfrc_applied','post_xfrc_applied','post_GPU_time','overflow','post_nefc',
         'post_mocap_pos','post_mocap_quat']}
     if instrument:
-        trace.update({key:[] for key in ['pre_qacc_warmstart','pre_solver_niter','post_solver_niter','pre_nacon','pre_nefc']})
+        trace.update({key:[] for key in ['pre_qacc_warmstart','pre_solver_niter','post_solver_niter','pre_nacon','pre_nefc',
+            'post_M','post_qacc_smooth','post_efc_Ma','post_qfrc_smooth','post_qfrc_bias','post_qfrc_passive','post_qfrc_actuator']})
     raw=[];addresses=[];efc=[];ranges=[0];legacy=[];adhesion=[]
     for tick in range(nsteps):
         preq,prev=data.qpos.numpy()[0].copy(),data.qvel.numpy()[0].copy()
@@ -36,7 +37,10 @@ def record_response(model,device_model,data,graph,aids,target20,nsteps,*,instrum
             post_qfrc_constraint=host.qfrc_constraint.copy(),post_qfrc_applied=host.qfrc_applied.copy(),post_xfrc_applied=host.xfrc_applied.copy(),
             post_GPU_time=float(host.time),overflow=bool(labels['overflow'] or data.overflow.numpy()[0]),post_nefc=labels['nefc'],
             post_mocap_pos=host.mocap_pos.copy(),post_mocap_quat=host.mocap_quat.copy())
-        if instrument:values.update(pre_instrument,post_solver_niter=int(data.solver_niter.numpy()[0]))
+        if instrument:
+            values.update(pre_instrument,post_solver_niter=int(data.solver_niter.numpy()[0]),post_M=data.M.numpy()[0].copy(),
+                post_qacc_smooth=data.qacc_smooth.numpy()[0].copy(),post_efc_Ma=data.efc.Ma.numpy()[0].copy(),
+                **{'post_'+key:getattr(data,key).numpy()[0].copy() for key in ['qfrc_smooth','qfrc_bias','qfrc_passive','qfrc_actuator']})
         for key,value in values.items():trace[key].append(value)
     return {**{key:np.array(values) for key,values in trace.items()},
         'initial_native_state':initial,'raw_contact_tick_plus23':np.array(raw).reshape(-1,24),
