@@ -24,3 +24,21 @@ def set_collision_numerics(host,device,options):
     device.opt.ccd_iterations=requested['ccd_iterations'];device.opt.ccd_tolerance.fill_(requested['ccd_tolerance'])
     return dict(requested=requested,before=before,after=collision_numerical_receipt(host,device),
                 scope='Explicit host/device CCD numerical override only; model-wide array/scalar diffs must be audited separately.')
+
+
+def configure_collision_numerics(config,options):
+    """Apply tolerance before device/graph construction despite mjlab's absent field.
+
+    Wrap only this fresh configuration instance's host-model apply hook. The
+    installed class and its default policy remain untouched. A live device
+    receipt/override is still mandatory after construction (float32/clamping).
+    """
+    requested=validate_collision_numerics(options)
+    original_apply=config.apply
+    config.ccd_iterations=requested['ccd_iterations']
+    def apply(model):
+        original_apply(model)
+        model.opt.ccd_iterations=requested['ccd_iterations']
+        model.opt.ccd_tolerance=requested['ccd_tolerance']
+    config.apply=apply
+    return requested

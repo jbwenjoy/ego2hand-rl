@@ -10,6 +10,7 @@ from .controlled_assets import bind_controlled_assets
 from ..mechanics.compound_holding import object_state
 from ..mechanics.warp_contact_labels import read_warp_contact_labels
 from .numerical_options import validate_numerical_options, numerical_receipt, set_model_numerical_options
+from .collision_numerics import configure_collision_numerics,set_collision_numerics
 
 
 def write(path, value):
@@ -63,6 +64,9 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
     numerical_options=validate_numerical_options(config.get('numerical_options',{}))
     for key,value in numerical_options.items():
         setattr(cfg.sim.mujoco,key,value)
+    collision_options=config.get('collision_numerics')
+    if collision_options is not None:
+        configure_collision_numerics(cfg.sim.mujoco,collision_options)
     if 'physics_dt' in config:
         cfg.sim.mujoco.timestep=config['physics_dt'];cfg.decimation=round(.02/config['physics_dt'])
         if abs(cfg.decimation*config['physics_dt']-.02)>1e-15:raise ValueError('Exact declared 50Hz clock')
@@ -93,6 +97,23 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
                 if key in numerical_options and getattr(env.sim.wp_model.opt,key)!=numerical_options[key]:
                     raise ValueError('Iteration caps must already match before captured-graph execution')
             set_model_numerical_options(env.sim.mj_model,env.sim.wp_model,numerical_options)
+        collision_receipt=None
+        if collision_options is not None:
+            from .gpu_model_snapshot import capture_model
+            if env.sim.wp_model.opt.ccd_iterations!=collision_options['ccd_iterations']:
+                raise ValueError('CCD cap must match before captured-graph execution')
+            constructed_arrays,constructed_scalars,constructed_hashes=capture_model(env.sim.wp_model)
+            np.savez_compressed(folder/'constructed_model_arrays.npz',**constructed_arrays)
+            write(folder/'constructed_model_scalars.json',constructed_scalars)
+            collision_receipt=set_collision_numerics(env.sim.mj_model,env.sim.wp_model,collision_options)
+            _,after_scalars,after_hashes=capture_model(env.sim.wp_model)
+            changed_arrays=sorted(k for k in after_hashes if after_hashes[k]!=constructed_hashes[k])
+            changed_scalars=sorted(k for k in after_scalars if after_scalars[k]!=constructed_scalars[k])
+            if set(changed_arrays)-{'opt.ccd_tolerance'} or changed_scalars:
+                raise ValueError('Only CCD tolerance may change after construction')
+            collision_receipt.update(constructed_model_arrays=file_pin(folder/'constructed_model_arrays.npz'),
+                constructed_model_scalars=file_pin(folder/'constructed_model_scalars.json'),
+                changed_arrays=changed_arrays,changed_scalars=changed_scalars)
         observation = env.reset()[0]['policy']  # The only reset in this case.
         initialization_receipt=None
         if initializer is not None:
@@ -252,6 +273,7 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
             termination_flags=terminations[-1], phase_first=phase[0], phase_last=phase[-1],
             termination_names=list(terminations[0]),
             initialization=initialization_receipt,
+            collision_numerics=collision_receipt,
             numerical_options=dict(requested=numerical_options,device_override=numerical_device_override,
                 before_override=numerical_before,**numerical_receipt(m,env.sim.wp_model)),
             contact_label_schema='GPU_constraint_indexed_no_adhesion:1',

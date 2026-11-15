@@ -18,6 +18,7 @@ from supermimic_research.runtime.native_pen_planner import NativePenPlanner
 from supermimic_research.runtime.pen_native_planning_math import candidate_offsets,candidate_targets
 from supermimic_research.mechanics.mean_reference_wrench import mean_reference_wrench
 from supermimic_research.mechanics.feedback_support import feedback_support_target
+from supermimic_research.runtime.collision_numerics import validate_collision_numerics
 
 
 def main(a):
@@ -28,8 +29,14 @@ def main(a):
     pp=(cp.parent/cfg['proposal']).resolve();proposal=json.loads(pp.read_text());s=np.load(verify_file_pin(proposal['artifacts']['selected']))
     profile=cfg.get('experiment','FEEDBACK')
     profiles={'FEEDBACK':['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT'],
+              'STATE_SUPPORT':['STATE_ONLY','STATE_PLUS_SUPPORT'],
               'VELOCITY':['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_VELOCITY','STATE_PLUS_VELOCITY_SUPPORT']}
     if profile not in profiles:raise ValueError('Unknown predeclared objective profile')
+    ccd=cfg.get('collision_numerics')
+    if profile=='STATE_SUPPORT':
+        ccd=validate_collision_numerics(ccd)
+        if ccd['ccd_iterations']!=50 or ccd['ccd_tolerance'] not in [1e-6,1e-7]:raise ValueError('Predeclared two CCD profiles only')
+    elif ccd is not None:raise ValueError('CCD comparison requires explicit STATE_SUPPORT profile')
     if (a.output.exists() or not a.output.resolve().is_relative_to(ROOT/'runs') or cfg['candidates']!=57 or cfg['horizon_s']!=.02
             or cfg['controllers']!=profiles[profile] or cfg['dt']!=[.005,.0025]
             or (profile=='FEEDBACK' and (cfg['feedback_position_gain_s2']!=100. or cfg['feedback_velocity_gain_s']!=20.))
@@ -43,8 +50,19 @@ def main(a):
     source_receipt=freeze_sources(paths,a.output/'source_snapshot',ROOT,revision)
     verify_source_snapshot(source_receipt,live=True)
     write(a.output/'source_receipt.json',source_receipt)
+    import mujoco_warp as mw
+    package=Path(mw.__file__).resolve().parent
+    installed=freeze_sources(sorted(p for p in package.rglob('*.py') if not p.name.endswith('_test.py') and not p.name.startswith('test_')),
+        a.output/'installed_source_snapshot',package,'installed-package-source-not-git')
+    write(a.output/'installed_source_receipt.json',installed)
+    import mjlab.sim.sim as engine_module
+    engine_path=Path(engine_module.__file__).resolve()
+    engine_sources=freeze_sources([engine_path],a.output/'engine_source_snapshot',engine_path.parents[1],'installed-mjlab-simulation-source-not-git')
+    write(a.output/'engine_source_receipt.json',engine_sources)
     sources=[r['snapshot'] for r in source_receipt['records']]
-    intent=dict(schema='pen_native_objective_search:2',experiment=profile,source_receipt=file_pin(a.output/'source_receipt.json'),code_revision=revision,config=file_pin(cp),base_config=file_pin(bp),proposal=file_pin(pp),sources=sources,
+    intent=dict(schema='pen_native_objective_search:3',experiment=profile,source_receipt=file_pin(a.output/'source_receipt.json'),installed_source_receipt=file_pin(a.output/'installed_source_receipt.json'),collision_numerics=ccd,
+        engine_source_receipt=file_pin(a.output/'engine_source_receipt.json'),
+        collision_profile_fidelity='UNQUALIFIED_DEVELOPMENT' if ccd is not None else 'NOT_NEWLY_QUALIFIED',code_revision=revision,config=file_pin(cp),base_config=file_pin(bp),proposal=file_pin(pp),sources=sources,
         candidates=file_pin(a.output/'candidates.npz'),neural_updates=0,Actor_updates=0,
         scope='Native20ms57-candidate finite-action objective comparison; profile and fixed gains/scales declared by config. Objectives only, no applied corrective force. Development on same clip, not held-out. Equal candidates/decision, not equal total compute under unequal survival. Full original7.36s clock, first native terminal, no object force/reset aid. Not learned-policy A1/A2, real-time, surrogate speedup or ego qualification.')
     write(a.output/'intent.json',intent);cases=[];keepers=[]
@@ -123,12 +141,13 @@ def main(a):
                     selected_finite=bool(scores['finite'][selected]),selected_capacity=bool(scores['capacity'][selected]),
                     selected_violation=float(scores['violation'][selected]),endpoint_velocity_valid=endpoint_velocity_valid,velocity_weight=velocity_weight,support_weight=support_weight,nominal_wrench_valid=bool(reference['valid'][k]),
                     live_data_controller_untouched=True,source=file_pin(source),prediction=file_pin(path),
-                    candidate_cuda_ms=cuda_ms,compute_and_readback_wall_s=compute_wall,total_with_artifact_wall_s=time.perf_counter()-started)
+                    candidate_cuda_ms=cuda_ms,search_timing=dict(planner.last_search_timing),compute_and_readback_wall_s=compute_wall,total_with_artifact_wall_s=time.perf_counter()-started)
                 decisions.append(decision);write(folder/'planning_progress.json',dict(decisions=decisions))
                 print(json.dumps(dict(mode=mode,dt=dt,k=k,selected=selected,feasible=decision['selected_feasible'],violation=decision['selected_violation'],cuda_ms=cuda_ms)),flush=True)
                 if not decision['selected_finite'] or not decision['selected_capacity']:raise ValueError('No numerical/capacity-valid selected forecast')
                 return raw[selected:selected+1]
-            c=evaluate_case('hand2-pen-spin',mode,None,{**base,'physics_dt':dt,'numerical_options':cfg['numerical_options'],'numerical_device_override':True},
+            c=evaluate_case('hand2-pen-spin',mode,None,{**base,'physics_dt':dt,'numerical_options':cfg['numerical_options'],'numerical_device_override':True,
+                **({'collision_numerics':ccd} if ccd is not None else {})},
                 bp.parent,registry,folder,initializer=initialize,action_provider=provider)
             planner=planning['planner'];_,after_scalars,after_hashes=capture_model(planner.model)
             c.update(name=mode,planning=decisions,planning_model_unchanged=after_hashes==model_before and after_scalars==model_scalars,
@@ -138,5 +157,6 @@ def main(a):
                 supervision='NATIVE_CONTROLLER_PROBE_NONEXPERT_UNLESS_ALL_ORIGINAL_GATES_PASS')
             cases.append(c);write(folder/'report.json',c);write(a.output/'progress.json',dict(cases=cases))
     task_sources=frozen_import_sources(source_receipt,ROOT/'src','dex_supermimic')
+    verify_source_snapshot(source_receipt,live=True);verify_source_snapshot(installed,live=True);verify_source_snapshot(engine_sources,live=True)
     result=dict(**intent,cases=cases,task_sources=task_sources,source_import_enumeration_available=True)
     write(a.output/'report.json',result);print(json.dumps(dict(report=file_pin(a.output/'report.json'),cases=[dict(mode=c['name'],dt=c['dt'],duration=c['summary']['metrics']['actual_duration_s'],qualified=c['summary']['qualified'],candidates=c['candidates_evaluated']) for c in cases])))

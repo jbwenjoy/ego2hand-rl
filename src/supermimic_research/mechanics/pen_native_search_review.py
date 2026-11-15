@@ -22,7 +22,9 @@ def main(a):
     cp=verify_file_pin(r['config']);gates=tomllib.loads((cp.parent/cfg['gates']).read_text())
     proposal=json.loads(verify_file_pin(r['proposal']).read_text());selected=np.load(verify_file_pin(proposal['artifacts']['selected']))
     offsets=np.load(verify_file_pin(r['candidates']))['raw_offsets']
-    modes=(['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_VELOCITY','STATE_PLUS_VELOCITY_SUPPORT'] if cfg.get('experiment')=='VELOCITY' else ['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT'])
+    modes=({'STATE_SUPPORT':['STATE_ONLY','STATE_PLUS_SUPPORT'],
+        'VELOCITY':['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_VELOCITY','STATE_PLUS_VELOCITY_SUPPORT'],
+        'FEEDBACK':['STATE_ONLY','STATE_PLUS_SUPPORT','STATE_PLUS_FEEDBACK_SUPPORT']}[cfg.get('experiment','FEEDBACK')])
     expected={(mode,dt) for mode in modes for dt in [.005,.0025]}
     if {(c['name'],c['dt']) for c in r['cases']}!=expected or len(r['cases'])!=len(expected) or a.output.exists():raise ValueError('Exact predeclared objective cases and fresh review')
     relocation_path=getattr(a,'source_relocations',None)
