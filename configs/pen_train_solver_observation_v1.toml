@@ -1,0 +1,11 @@
+schema = 1
+probe_report = "../runs/pen_response_train_coverage_v1/report.json"
+preparation_report = "../runs/pen_response_train_preparation_v1/report.json"
+objective_config = "pen_centered_support_training_v1.toml"
+protocol = "../docs/pen-train-solver-observation-protocol-v1.md"
+replicas = ["A", "B"]
+repeats = 3
+restore_mode = "STRICT"
+scopes = ["PACKET_BASELINE", "PACKET_PLUS_SOLVER_FIELDS"]
+failure_cases = ["RESIDUAL_N8801_P036_D1_E0.005_S-1_R0", "RESIDUAL_N8801_P064_D1_E0.002_S1_R0", "RESIDUAL_N8802_P036_D1_E0.002_S1_R0", "SUPPORT_N8802_P072_D2_E0.005_S-1_R0"]
+role = "STRICT_SOLVER_OBSERVATION_DIAGNOSTIC_NOT_TRAIN"

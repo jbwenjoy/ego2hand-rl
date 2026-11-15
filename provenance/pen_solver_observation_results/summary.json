@@ -1,0 +1,149 @@
+{
+  "schema": "pen_solver_observation_common_data_summary:1",
+  "roots": {
+    "observation_A": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_train_solver_observation_A_v1\\report.json",
+      "bytes": 180106,
+      "sha256": "b387d138aced093c0cad4eeda51b1057fdd3c14eada6a56de441398be2b8f640"
+    },
+    "observation_B": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_train_solver_observation_B_v1\\report.json",
+      "bytes": 180071,
+      "sha256": "6feb43f2855cd5884a56db53119e18945618315a3a8eda59237e474ff8b9a397"
+    },
+    "review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_train_solver_observation_review_v1\\report.json",
+      "bytes": 259806,
+      "sha256": "43a7e0e667060052033b78b0cd653d476857d70a0e87b0492dadb918e949695d"
+    },
+    "common_data": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_contact_response_common_data_v1\\report.json",
+      "bytes": 45290,
+      "sha256": "b6b6e3bff2279294f699a8aff65bdd7af19e0021baa232c9d0faf432fe486bb3"
+    }
+  },
+  "checks": {
+    "observation_A": [
+      266,
+      266
+    ],
+    "observation_B": [
+      266,
+      266
+    ],
+    "review": [
+      485,
+      485
+    ],
+    "common_data": [
+      45,
+      45
+    ]
+  },
+  "physical_status": "RETAINED_STRICT_PATH_IMPULSE_FAILURES",
+  "summaries": [
+    {
+      "replica": "A",
+      "scope": "PACKET_BASELINE",
+      "selected_role": "ORIGINAL_IMPULSE_FAILURE",
+      "cases": 12,
+      "physical_invalid": 9,
+      "impulse_failures": 9,
+      "max_impulse_Ns": 2.5985522393834133e-06
+    },
+    {
+      "replica": "A",
+      "scope": "PACKET_BASELINE",
+      "selected_role": "MATCHED_ORIGINAL_PASS",
+      "cases": 12,
+      "physical_invalid": 0,
+      "impulse_failures": 0,
+      "max_impulse_Ns": 9.921395560449163e-10
+    },
+    {
+      "replica": "A",
+      "scope": "PACKET_PLUS_SOLVER_FIELDS",
+      "selected_role": "ORIGINAL_IMPULSE_FAILURE",
+      "cases": 12,
+      "physical_invalid": 10,
+      "impulse_failures": 10,
+      "max_impulse_Ns": 2.6301628195785465e-06
+    },
+    {
+      "replica": "A",
+      "scope": "PACKET_PLUS_SOLVER_FIELDS",
+      "selected_role": "MATCHED_ORIGINAL_PASS",
+      "cases": 12,
+      "physical_invalid": 0,
+      "impulse_failures": 0,
+      "max_impulse_Ns": 9.921395560449163e-10
+    },
+    {
+      "replica": "B",
+      "scope": "PACKET_BASELINE",
+      "selected_role": "ORIGINAL_IMPULSE_FAILURE",
+      "cases": 12,
+      "physical_invalid": 9,
+      "impulse_failures": 9,
+      "max_impulse_Ns": 2.5985522393834133e-06
+    },
+    {
+      "replica": "B",
+      "scope": "PACKET_BASELINE",
+      "selected_role": "MATCHED_ORIGINAL_PASS",
+      "cases": 12,
+      "physical_invalid": 0,
+      "impulse_failures": 0,
+      "max_impulse_Ns": 9.921395560449163e-10
+    },
+    {
+      "replica": "B",
+      "scope": "PACKET_PLUS_SOLVER_FIELDS",
+      "selected_role": "ORIGINAL_IMPULSE_FAILURE",
+      "cases": 12,
+      "physical_invalid": 11,
+      "impulse_failures": 11,
+      "max_impulse_Ns": 2.6301628195785465e-06
+    },
+    {
+      "replica": "B",
+      "scope": "PACKET_PLUS_SOLVER_FIELDS",
+      "selected_role": "MATCHED_ORIGINAL_PASS",
+      "cases": 12,
+      "physical_invalid": 0,
+      "impulse_failures": 0,
+      "max_impulse_Ns": 9.921395560449163e-10
+    }
+  ],
+  "extra_failed_ticks": 21,
+  "observed_failed_solver_niters": [
+    2,
+    4
+  ],
+  "iteration_cap": 50,
+  "private_solver_context_captured": false,
+  "exact_scope_pairs": [
+    40,
+    48
+  ],
+  "TRAIN_valid": 808,
+  "TRAIN_total": 816,
+  "CHECK_valid": 324,
+  "TRAIN_pairs": 188,
+  "masked_TRAIN_rows": [
+    72,
+    88,
+    137,
+    155,
+    273,
+    291,
+    790,
+    806
+  ],
+  "scale_input_role": "VALID_TRAIN_ONLY",
+  "normalizer_fits": 2,
+  "actual_native_integrations": 768,
+  "optimizer_steps": 0,
+  "unit_tests": 360,
+  "scope": "Selected strict failures reproduce in two fresh processes before iteration cap;private stopping cause unresolved,observer/order variation retained. Common within-reference TRAIN/CHECK/pair data ready;no neural/Actor/task/ego/performance conclusion."
+}
