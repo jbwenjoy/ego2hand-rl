@@ -18,7 +18,7 @@ from tools.render_mug_progress_video import Scene,canvas,writer
 def main(a):
     r,b=[json.loads(p.read_text()) for p in [a.report,a.baseline]]
     axis=getattr(a,'axis','CCD')
-    if axis not in ['CCD','ORIENTATION','AMPLITUDE']:raise ValueError('Declared video matrix axis')
+    if axis not in ['CCD','ORIENTATION','AMPLITUDE','HORIZON']:raise ValueError('Declared video matrix axis')
     labels0=(['CCD 1e-6：状态','CCD 1e-6：状态＋支持','CCD 1e-7：状态','CCD 1e-7：状态＋支持'] if axis=='CCD' else
         ['笔轴：状态','笔轴：状态＋支持','完整姿态：状态','完整姿态：状态＋支持'])
     title=('最新 GPU 受控转笔：CCD 数值配置与接触支持对照，八组均未完成任务' if axis=='CCD' else
@@ -26,6 +26,10 @@ def main(a):
     if axis=='AMPLITUDE':
         labels0=['幅度1倍：状态','幅度1倍：状态＋支持','幅度4倍：状态','幅度4倍：状态＋支持']
         title='最新 GPU 受控转笔：完整姿态评分，原动作幅度与四倍幅度对照，八组均未完成任务'
+    if axis=='HORIZON':
+        if b.get('planning_horizon_controls')!=1 or r.get('planning_horizon_controls')!=5:raise ValueError('Explicit H1/H5 matrix')
+        labels0=['预测20ms：状态','预测20ms：状态＋支持','预测100ms：状态','预测100ms：状态＋支持']
+        title='GPU 受控转笔：20/100ms预测诊断；动力学未获资格，八组均未完成任务'
     if a.output.exists():raise ValueError('Fresh native control replay')
     for pin in r['sources']+b['sources']:verify_file_pin(pin)
     a.output.mkdir();videos=[]
@@ -50,10 +54,12 @@ def main(a):
                         labels.append(name+('：终止静帧' if t>=duration else '：实测'))
                     selected.append(indices)
                     frame=canvas(2048,title,
-                        f'步长 {dt*1000:g} ms；每步57候选、预测20ms；20倍慢放，保存实测姿态，无插值',panels,labels,
+                        (f'步长 {dt*1000:g} ms；57动作序列，20ms重新规划；20倍慢放，保存实测姿态，无插值' if axis=='HORIZON' else
+                         f'步长 {dt*1000:g} ms；每步57候选、预测20ms；20倍慢放，保存实测姿态，无插值'),panels,labels,
                         '各列物理时间：'+' / '.join(f'{min(t,d):.3f}' for d in durations)+' 秒',
                         ['计划7.36秒；实际终止：'+' / '.join(f'{d:.2f}' for d in durations)+'秒。终止列停留末帧，未继续仿真。',
-                         '无物体外力辅助；未训练Actor；受控参考，非真实ego。独立预测与任务验收分别报告，任务失败保留。'])
+                         ('无物体外力辅助；未训练Actor；受控参考，非真实ego。预测仍有受力/状态失败，不宣称控制收益。' if axis=='HORIZON' else
+                          '无物体外力辅助；未训练Actor；受控参考，非真实ego。独立预测与任务验收分别报告，任务失败保留。')])
                     if i==0:
                         Image.fromarray(frame).save(a.output/f'{dt:g}_start.png')
                         for _ in range(18):video.append_data(frame);frames+=1
@@ -79,4 +85,4 @@ def main(a):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--axis',choices=['CCD','ORIENTATION','AMPLITUDE'],default='CCD');p.add_argument('--report',type=Path,required=True);p.add_argument('--baseline',type=Path,required=True);p.add_argument('--output',type=Path,required=True);main(p.parse_args())
+    p=argparse.ArgumentParser();p.add_argument('--axis',choices=['CCD','ORIENTATION','AMPLITUDE','HORIZON'],default='CCD');p.add_argument('--report',type=Path,required=True);p.add_argument('--baseline',type=Path,required=True);p.add_argument('--output',type=Path,required=True);main(p.parse_args())
