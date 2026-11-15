@@ -1,0 +1,222 @@
+{
+  "schema": "native_collection_evidence_summary:1",
+  "roots": {
+    "profile": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\native_collection_profile_v1\\report.json",
+      "bytes": 58876,
+      "sha256": "a298d44d9304cd8c4eb1ce6317de95533506ed418cd01757284a37bce29f7fc0"
+    },
+    "cache": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\native_reference_cache_v1\\report.json",
+      "bytes": 50875,
+      "sha256": "2f828ef511a9feaed798c534e0a751aa8ac6769a9eb4d070f449d67a5af75028"
+    },
+    "review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\native_collection_review_v1\\report.json",
+      "bytes": 52782,
+      "sha256": "8ac7161738320f456e6010b92ef8b6049ced0c2777afb9c4f77465d0efca70c2"
+    }
+  },
+  "checks": {
+    "profile": [
+      7,
+      7
+    ],
+    "cache": [
+      9,
+      9
+    ],
+    "review": [
+      125,
+      125
+    ]
+  },
+  "profile_medians": {
+    "baseline": {
+      "collection": {
+        "host_dispatch_s": 1.616635199985467,
+        "host_complete_s": 1.6166714999708347,
+        "GPU_stream_interval_s": 1.6165960693359376
+      },
+      "update": {
+        "host_dispatch_s": 0.12166479998268187,
+        "host_complete_s": 0.12169950001407415,
+        "GPU_stream_interval_s": 0.12168402862548829
+      }
+    },
+    "resident": {
+      "collection": {
+        "host_dispatch_s": 1.6520807999768294,
+        "host_complete_s": 1.6521092999610119,
+        "GPU_stream_interval_s": 1.6520357666015626
+      },
+      "update": {
+        "host_dispatch_s": 0.1277356999926269,
+        "host_complete_s": 0.12776890001259744,
+        "GPU_stream_interval_s": 0.12775164794921876
+      }
+    }
+  },
+  "cache_medians": {
+    "baseline": {
+      "host_dispatch_s": 1.6075560000026599,
+      "host_complete_s": 1.6075940000009723,
+      "GPU_stream_interval_s": 1.6075184326171874
+    },
+    "cached_reference": {
+      "host_dispatch_s": 1.410419500025455,
+      "host_complete_s": 1.410458100028336,
+      "GPU_stream_interval_s": 1.4103902587890624
+    }
+  },
+  "observed_collection_time_reduction_fraction": 0.1226279147424767,
+  "parity": {
+    "cases": 372,
+    "max_error": 0,
+    "mixed_error": 0.0,
+    "live_calls": 142,
+    "live_max_error": 0
+  },
+  "resident_cache_bytes": 4677504,
+  "timed_rollout_reset_accounting": [
+    {
+      "study": "profile",
+      "mode": "baseline",
+      "repeat": 0,
+      "reset_calls": 40,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.6282935999915935,
+      "phase_max": 12
+    },
+    {
+      "study": "profile",
+      "mode": "baseline",
+      "repeat": 1,
+      "reset_calls": 39,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.6166714999708347,
+      "phase_max": 12
+    },
+    {
+      "study": "profile",
+      "mode": "baseline",
+      "repeat": 2,
+      "reset_calls": 36,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.5711799000273459,
+      "phase_max": 12
+    },
+    {
+      "study": "profile",
+      "mode": "resident",
+      "repeat": 0,
+      "reset_calls": 39,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.6521092999610119,
+      "phase_max": 12
+    },
+    {
+      "study": "profile",
+      "mode": "resident",
+      "repeat": 1,
+      "reset_calls": 39,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.6437045999919064,
+      "phase_max": 12
+    },
+    {
+      "study": "profile",
+      "mode": "resident",
+      "repeat": 2,
+      "reset_calls": 40,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.680468500009738,
+      "phase_max": 12
+    },
+    {
+      "study": "cache",
+      "mode": "baseline",
+      "repeat": 0,
+      "reset_calls": 38,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.6053582999738865,
+      "phase_max": 12
+    },
+    {
+      "study": "cache",
+      "mode": "baseline",
+      "repeat": 1,
+      "reset_calls": 39,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.6075940000009723,
+      "phase_max": 12
+    },
+    {
+      "study": "cache",
+      "mode": "baseline",
+      "repeat": 2,
+      "reset_calls": 40,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.6265686000115238,
+      "phase_max": 12
+    },
+    {
+      "study": "cache",
+      "mode": "cached_reference",
+      "repeat": 0,
+      "reset_calls": 40,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.3978330999962054,
+      "phase_max": 12
+    },
+    {
+      "study": "cache",
+      "mode": "cached_reference",
+      "repeat": 1,
+      "reset_calls": 41,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.410458100028336,
+      "phase_max": 12
+    },
+    {
+      "study": "cache",
+      "mode": "cached_reference",
+      "repeat": 2,
+      "reset_calls": 41,
+      "reset_worlds": 224,
+      "native_integrations": 16384,
+      "collection_s": 1.429891299980227,
+      "phase_max": 12
+    }
+  ],
+  "fixed_input_feature": [
+    {
+      "mode": "baseline",
+      "ATen_ops": 378,
+      "index_ops": 21,
+      "median_host_us_per_call": 2730.8623047019864
+    },
+    {
+      "mode": "cached_reference",
+      "ATen_ops": 147,
+      "index_ops": 9,
+      "median_host_us_per_call": 1116.1658203491243
+    }
+  ],
+  "actual_native_integrations": 278528,
+  "discarded_optimizer_steps": 256,
+  "retained_policy_optimizer_steps": 0,
+  "unit_tests": 305,
+  "scope": "Opt-in fixed-reference computational cache. Same-input exact observed feature parity, short controlled collection timings; reset counts/W32 trajectories differ, cold guards excluded. No default checkpoint3 migration, new policy/task/WM-gradient/ego or full training speedup claim."
+}

@@ -1,0 +1,10 @@
+schema = 1
+training_config = "pen_native_ppo_v1.toml"
+prior_ledger = "../provenance/pen_native_ppo_results/ledger.json"
+resident_ledger = "../provenance/resident_contact_results/ledger.json"
+num_envs = 32
+controls = 64
+repeats = 3
+warmup_rollouts = 1
+instrumented_rollouts = 1
+scope = "Equal initial state/actions/counts computational profiling; forced scripted actions and discarded PPO updates are not valid policy-learning evidence or training speedup. W32 future physics repeatability remains unqualified."
