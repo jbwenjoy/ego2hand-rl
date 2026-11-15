@@ -1,0 +1,11 @@
+schema = 1
+training_report = "../runs/pen_centered_support_training_v1/report.json"
+W1_context_report = "../runs/pen_trained_response_probe_v1/report.json"
+prior_ledger = "../provenance/trained_pen_response_results/ledger.json"
+objective_config = "pen_centered_support_training_v1.toml"
+protocol = "../docs/source-epoch-benchmark-protocol-v1.md"
+source_phases = [10, 30, 60]
+restore_repeats = 3
+modes = ["STRICT", "READ_LOCKED_EPOCH"]
+role = "CHECK_SOURCE_EPOCH_EQUIVALENCE_NEVER_FIT"
+scope = "Matched current-code W1 states; alternating strict/read-locked restores and same native PD probes. Restore-only speed excludes separate entry/exit cost; no PPO or end-to-end speedup claim."

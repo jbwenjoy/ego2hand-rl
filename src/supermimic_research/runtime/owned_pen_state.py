@@ -18,6 +18,7 @@ from .portable_inventory import runtime_inventory,describe_inventory,path_value,
 from .gpu_model_snapshot import model_leaves
 from supermimic_research.artifacts import file_pin,verify_file_pin
 from supermimic_research.frozen_sources import verify_source_snapshot
+from .source_validation_epoch import validate_state_sources
 
 SCHEMA='controlled_pen_owned_state:4'
 EXCLUDED=base.EXCLUDED+((('attr','_binding_resources'),),(('attr','contact_metrics'),('attr','_reset_ids_owner')))
@@ -91,12 +92,11 @@ def capture(runtime,sources):
         scope='Owned cache/metric/native state. No trained module payload or future physical-repeat qualification.')
 
 
-def preflight(runtime,state):
+def preflight(runtime,state,*,source_epoch=None):
     if state.get('schema')!=SCHEMA or state['metadata']!=runtime.metadata() or state['worlds']!=runtime.num_envs:raise ValueError('Owned native4 runtime/schema contract mismatch')
     if state['config']!=file_pin(runtime.config_path) or state['host_model_digest']!=base.host_model_digest(runtime.env.sim.mj_model):raise ValueError('Owned config/host model mismatch')
     if state['reference_signature']!=base.reference_signature(runtime) or state['cache_metadata']!=runtime.reference_cache.metadata() or state['metric_metadata']!=runtime.contact_metrics.metadata():raise ValueError('Owned immutable reference/metric contract mismatch')
-    verify_source_snapshot(state['sources'],live=True)
-    for pin in state['engine_sources']:verify_file_pin(pin)
+    validate_state_sources(state['sources'],state['engine_sources'],source_epoch)
     validate_rng(state['rng'])
     torch.cuda.synchronize();wp.synchronize();inv=inventory(runtime);inv['_root']=runtime
     if any(set(inv[k])!=set(state['python'][k]) for k in ['arrays','tensors','scalars']):raise ValueError('Owned Python payload keys mismatch')
@@ -126,8 +126,8 @@ def preflight(runtime,state):
 
 
 @torch.no_grad()
-def restore(runtime,state):
-    inv,writes=preflight(runtime,state)
+def restore(runtime,state,*,source_epoch=None):
+    inv,writes=preflight(runtime,state,source_epoch=source_epoch)
     for write in writes:write.apply()
     for path,value in state['python']['scalars'].items():assign_path(runtime,path,copy.deepcopy(value))
     torch.cuda.synchronize();wp.synchronize();base.restore_rng(state['rng'])

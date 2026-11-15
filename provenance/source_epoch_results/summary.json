@@ -1,0 +1,232 @@
+{
+  "schema": "source_epoch_evidence_summary:1",
+  "roots": {
+    "benchmark": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\source_epoch_benchmark_v1\\report.json",
+      "bytes": 1131000,
+      "sha256": "ed3462d541ea85855c89660fdab4bab29696eef13faa3cab1f9c8c9de580550e"
+    },
+    "physical_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\source_epoch_benchmark_review_v1\\report.json",
+      "bytes": 616178,
+      "sha256": "8d74e30355f5c0878505cd6808096aec6bdc536f5e3af2d0e31a9ab571f84b9a"
+    },
+    "amortized": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\source_epoch_amortized_v1\\report.json",
+      "bytes": 4526,
+      "sha256": "b8119cfc420c0f837ecead0c0f39eb4ffff1cf75be6fc0a7f5d59b3d96c08259"
+    },
+    "replay": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\source_epoch_impulse_replay_v1\\report.json",
+      "bytes": 108738,
+      "sha256": "e8170dad29c7930c2d838a7e855ad8b154431f0c27714b5ee45f77d145bf77fe"
+    },
+    "outcomes": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\source_epoch_outcome_analysis_v1\\report.json",
+      "bytes": 36975,
+      "sha256": "3c186503e1a04a7ef5a38027d9af2d9c314ad0d7ac921dcbe630ba87cbebfa44"
+    }
+  },
+  "checks": {
+    "benchmark": [
+      80,
+      80
+    ],
+    "physical_review": [
+      6157,
+      6159
+    ],
+    "amortized": [
+      76,
+      76
+    ],
+    "replay": [
+      93,
+      93
+    ],
+    "outcomes": [
+      257,
+      257
+    ]
+  },
+  "whole_batch": {
+    "STRICT": 14.89784549997421,
+    "READ_LOCKED_EPOCH": 6.082959100021981
+  },
+  "whole_batch_ratio": 2.449111568072252,
+  "per_call_only_ratio": 3.268647530728789,
+  "physical_status": "INCOMPLETE_ORIGINAL_IMPULSE_FAILURE_RETAINED",
+  "original_anomaly": {
+    "case": "RESIDUAL_P030_READ_LOCKED_EPOCH_D2_E0.005_S1_R0",
+    "tick": 4,
+    "physical_time_s": 0.5924995541572571,
+    "metrics": {
+      "checks": {
+        "valid_source_indices": true,
+        "local_labels_exact": true,
+        "generalized_force": true,
+        "generalized_torque": true,
+        "linear_impulse": false,
+        "copied_host_difference_explained": true,
+        "all_joint_actuators": true
+      },
+      "raw_contacts": 32,
+      "local_label_max_error": 0.0,
+      "max_force_residual_N": 2.1868292523091894e-07,
+      "max_torque_residual_Nm": 2.809454081123025e-09,
+      "max_linear_impulse_residual_N_s": 1.723085764142695e-06,
+      "changed_host_contact_rows": 0,
+      "nonfinite_host_rows": 0,
+      "max_legacy_normal_plus_adhesion_error": 0.0
+    },
+    "maximum_velocity_vs_qacc_increment_error_m_s": 5.665779550769538e-10,
+    "pre_velocity_continuity_exact": true,
+    "impulse_residual_N_s": [
+      -1.006048082973672e-06,
+      -1.1915300011324567e-06,
+      -7.329038557256357e-07
+    ],
+    "root_cause": "UNRESOLVED;matching labels/generalized force and consistent qacc integration do not explain the isolated force-to-motion mismatch."
+  },
+  "replay_summaries": {
+    "STRICT_A": {
+      "cases": 30,
+      "impulse_failures": 0,
+      "maximum_impulse_residual_N_s": 4.944611612269932e-10
+    },
+    "STRICT_B": {
+      "cases": 30,
+      "impulse_failures": 0,
+      "maximum_impulse_residual_N_s": 4.944611612269932e-10
+    },
+    "READ_LOCKED_EPOCH": {
+      "cases": 30,
+      "impulse_failures": 0,
+      "maximum_impulse_residual_N_s": 4.944611612269932e-10
+    }
+  },
+  "observed_endpoint_envelopes": [
+    270,
+    270
+  ],
+  "qualified_finite_response_pairs": [
+    23,
+    24
+  ],
+  "W1_W32_contexts": [
+    {
+      "actor": "RESIDUAL",
+      "actor_checkpoint": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_training_v1\\RESIDUAL\\checkpoint_0064.pt",
+        "bytes": 57460469,
+        "sha256": "fa054d99b280e4c0f736812663378e273e4728b2489a5df1c620d96596057f71"
+      },
+      "W1_source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\source_epoch_benchmark_v1\\RESIDUAL\\phase010.pt",
+        "bytes": 6404934,
+        "sha256": "c0427232836077e9b4d78ffef3e497abc62cea79ca2e3037178b061ec05a22cc"
+      },
+      "scalars_exact": true,
+      "different_arrays": [
+        {
+          "array": "body_invweight0",
+          "W1_shape": [
+            1,
+            31,
+            2
+          ],
+          "W32_shape": [
+            32,
+            31,
+            2
+          ],
+          "max_abs_difference": 0.0029296875
+        },
+        {
+          "array": "dof_invweight0",
+          "W1_shape": [
+            1,
+            26
+          ],
+          "W32_shape": [
+            32,
+            26
+          ],
+          "max_abs_difference": 0.0078125
+        },
+        {
+          "array": "actuator_acc0",
+          "W1_shape": [
+            1,
+            20
+          ],
+          "W32_shape": [
+            32,
+            20
+          ],
+          "max_abs_difference": 0.0087890625
+        }
+      ]
+    },
+    {
+      "actor": "SUPPORT",
+      "actor_checkpoint": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_training_v1\\SUPPORT\\checkpoint_0064.pt",
+        "bytes": 57462197,
+        "sha256": "c9f39696b794a311725bd54cd427b522a3ad9e2a3d334da8e39f90aab6948f60"
+      },
+      "W1_source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\source_epoch_benchmark_v1\\SUPPORT\\phase010.pt",
+        "bytes": 6404742,
+        "sha256": "16bcc058ef79253feba832957c2d68a07eb6ab445b4e5a4c309e2f297c2e503e"
+      },
+      "scalars_exact": true,
+      "different_arrays": [
+        {
+          "array": "body_invweight0",
+          "W1_shape": [
+            1,
+            31,
+            2
+          ],
+          "W32_shape": [
+            32,
+            31,
+            2
+          ],
+          "max_abs_difference": 0.0029296875
+        },
+        {
+          "array": "dof_invweight0",
+          "W1_shape": [
+            1,
+            26
+          ],
+          "W32_shape": [
+            32,
+            26
+          ],
+          "max_abs_difference": 0.0078125
+        },
+        {
+          "array": "actuator_acc0",
+          "W1_shape": [
+            1,
+            20
+          ],
+          "W32_shape": [
+            32,
+            20
+          ],
+          "max_abs_difference": 0.0087890625
+        }
+      ]
+    }
+  ],
+  "actual_native_integrations": 4256,
+  "optimizer_steps": 0,
+  "unit_tests": 345,
+  "default_loading": "STRICT",
+  "adoption": "EXPLICIT_EXPERIMENTAL_OPTION_NO_AUTOMATIC_TRAIN_ENABLEMENT",
+  "scope": "Measured restore-batch speed and exact source/state checks,with one retained original impulse failure not reproduced in90 selected replays. No full physical equivalence,ordinary PPO/end-to-end speedup,WM-gradient/task/ego claim."
+}

@@ -27,7 +27,7 @@ def source_frame_gap(qpos,qa,cached_R,cached_COM):
         cached_COM_gap_m=float(np.linalg.norm(COM-cached_COM)))
 
 
-def restore_source(runtime,source):
+def restore_source(runtime,source,*,source_epoch=None):
     if source['schema']!='owned_trained_actor_probe_source:1':raise ValueError('Explicit probe-source schema')
     contract=static_contract(runtime,native.inventory(runtime))
     if contract!=source['task_static']:raise ValueError('Immutable task contract differs')
@@ -39,7 +39,7 @@ def restore_source(runtime,source):
         if hashlib.sha256(str((v.shape,v.dtype)).encode()+v.tobytes()).hexdigest()!=digest:raise ValueError('Saved probe target array corrupted')
     for path,value in contract['scalars'].items():
         if not scalar_equal(p['scalars'][path],value):raise ValueError('Saved probe task scalar corrupted')
-    return native.restore(runtime,source['native'])
+    return native.restore(runtime,source['native'],source_epoch=source_epoch)
 
 
 def save_physics(runtime,folder):
