@@ -1,0 +1,751 @@
+{
+  "schema": "pen_response_final_diagnostics:1",
+  "health": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_continuation_v1\\health_2000.json",
+    "bytes": 63418,
+    "sha256": "6ab7f004dfb233f2ce4888c1e9a5a9b202d80d29c6b5fdb31cc1b8038737230f"
+  },
+  "checkpoint": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_continuation_v1\\pen_response_checkpoint_2000.pt",
+    "bytes": 20190119,
+    "sha256": "d65d13224280562db1c949c46beb3bc02fcea137cd964581bd73c1a47418adb8"
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\evaluate_pen_response.py",
+      "bytes": 3914,
+      "sha256": "2c95230fc047412739dce317c405dfc62049d4814e063dd5bb92cf2ffba97525"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\pen_diagnostics.py",
+      "bytes": 6517,
+      "sha256": "a6930dace03daaaa6ee93a35452d344f97b0b8eefa9385814f6a806cf34e9d7e"
+    }
+  ],
+  "dataset_pins": {
+    "TRAIN": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_prepared_v1\\TRAIN.npz",
+      "bytes": 204696,
+      "sha256": "0600be2eb6baaa0288df0672609b2b5e7f3da3b6fbc56324d33654b6bc5324de"
+    },
+    "CHECK": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_prepared_v1\\CHECK.npz",
+      "bytes": 105625,
+      "sha256": "08542bba24031db22b34d5fbaa0359c9e8a0d3a2be92f7b8ba5455f7fe59bf55"
+    }
+  },
+  "outputs": {
+    "DIRECT": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_final_diagnostics_v1\\DIRECT_diagnostics.npz",
+      "bytes": 748391,
+      "sha256": "b7f304dc180d7999bdf384504368d44f9097d79ddb062219bcf7bc9c6dce64f5"
+    },
+    "IMPULSE": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_final_diagnostics_v1\\IMPULSE_diagnostics.npz",
+      "bytes": 767098,
+      "sha256": "b7cdad55ee3569f371a62aaa1d3c192e5da9ab3d8897311dcf10122a312e8942"
+    }
+  },
+  "models": {
+    "DIRECT": {
+      "one_step": {
+        "TRAIN": {
+          "delta52": 3.842975680557743e-05,
+          "object12": 1.710165981859163e-05,
+          "warm26": 0.0008897172382416476,
+          "wrench6": 1.0277560649170473e-05,
+          "Fn6": 0.00013581028212779982
+        },
+        "CHECK": {
+          "delta52": 0.7021178351168306,
+          "object12": 0.3789085857883112,
+          "warm26": 1.2566943695797723,
+          "wrench6": 0.23524445117971624,
+          "Fn6": 0.29453719387233684
+        }
+      },
+      "recorded_control_rollout": {
+        "1": {
+          "windows": 80,
+          "finite_windows": 80,
+          "duration_s": 0.02,
+          "episode_count": 8,
+          "failed_or_nonfinite_windows": 0,
+          "model": {
+            "COM_error_m": {
+              "mean": 0.0011174469829135507,
+              "median": 0.0009695229284466939,
+              "p95": 0.002609161209358983,
+              "max": 0.003963740350338796
+            },
+            "angle_error_deg": {
+              "mean": 4.646183600635115,
+              "median": 3.3006362386404873,
+              "p95": 11.746536997173186,
+              "max": 15.66782159191402
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.0012117993016827003,
+              "median": 0.0011705463113330372,
+              "p95": 0.0018118931682110757,
+              "max": 0.002395487483476717
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.07494118552705319,
+              "median": 0.05487877557030979,
+              "p95": 0.20233483820827586,
+              "max": 0.3227742278202498
+            },
+            "omega_error_rad_s": {
+              "mean": 4.277806057608304,
+              "median": 2.316679165344369,
+              "p95": 16.230715216691415,
+              "max": 24.12848815838357
+            }
+          },
+          "persistence": {
+            "COM_error_m": {
+              "mean": 0.0059827893296392955,
+              "median": 0.0074041790835455475,
+              "p95": 0.01197628630077089,
+              "max": 0.01253370801411905
+            },
+            "angle_error_deg": {
+              "mean": 31.094833879406405,
+              "median": 17.095871854587187,
+              "p95": 81.79988907781699,
+              "max": 89.85816944092991
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.0021691914263726997,
+              "median": 0.00218533059423355,
+              "p95": 0.002939152647891408,
+              "max": 0.003230126409942866
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.10615381809826285,
+              "median": 0.09260500171596656,
+              "p95": 0.1994547057683406,
+              "max": 0.2708528768523507
+            },
+            "omega_error_rad_s": {
+              "mean": 7.8603159308795,
+              "median": 5.945640657662526,
+              "p95": 27.373640889294578,
+              "max": 31.826316190658872
+            }
+          },
+          "world_force_RMS_N": 0.09042776479779058,
+          "world_torque_RMS_Nm": 0.0019937226479483285
+        },
+        "2": {
+          "windows": 72,
+          "finite_windows": 72,
+          "duration_s": 0.04,
+          "episode_count": 8,
+          "failed_or_nonfinite_windows": 0,
+          "model": {
+            "COM_error_m": {
+              "mean": 0.0023848565432094578,
+              "median": 0.002064943460042403,
+              "p95": 0.0058575784590338765,
+              "max": 0.008657786438751962
+            },
+            "angle_error_deg": {
+              "mean": 9.145986047264358,
+              "median": 6.968644193747375,
+              "p95": 23.374384885972827,
+              "max": 27.713536266417925
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.002387269997719102,
+              "median": 0.002385280681835838,
+              "p95": 0.0033749895599049446,
+              "max": 0.0041095281057317145
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.07880623954447584,
+              "median": 0.0637248035166821,
+              "p95": 0.21224235506277891,
+              "max": 0.26303055689600596
+            },
+            "omega_error_rad_s": {
+              "mean": 4.517607059508661,
+              "median": 3.9656517009545604,
+              "p95": 10.640340004019173,
+              "max": 16.011896633625152
+            }
+          },
+          "persistence": {
+            "COM_error_m": {
+              "mean": 0.011838477156286475,
+              "median": 0.013485040185341208,
+              "p95": 0.022664543753729022,
+              "max": 0.024020868707757236
+            },
+            "angle_error_deg": {
+              "mean": 59.783485045551,
+              "median": 37.48195279637178,
+              "p95": 154.15911336690888,
+              "max": 166.9643661831241
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.004255682121604178,
+              "median": 0.004264517655987854,
+              "p95": 0.005629036654368084,
+              "max": 0.006068111957983956
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.17798026253480426,
+              "median": 0.16607832947976067,
+              "p95": 0.3554500369407224,
+              "max": 0.36906294078278157
+            },
+            "omega_error_rad_s": {
+              "mean": 15.758830722159457,
+              "median": 14.148486717368035,
+              "p95": 41.31433397227084,
+              "max": 44.14106592904744
+            }
+          },
+          "world_force_RMS_N": 0.09792028240566342,
+          "world_torque_RMS_Nm": 0.0021251865773393155
+        },
+        "5": {
+          "windows": 48,
+          "finite_windows": 48,
+          "duration_s": 0.1,
+          "episode_count": 8,
+          "failed_or_nonfinite_windows": 0,
+          "model": {
+            "COM_error_m": {
+              "mean": 0.00756960271385157,
+              "median": 0.005834364943775,
+              "p95": 0.016539708760459983,
+              "max": 0.019370957509427304
+            },
+            "angle_error_deg": {
+              "mean": 34.4901914664919,
+              "median": 30.717407756538435,
+              "p95": 81.80422773353457,
+              "max": 100.47521647890298
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.004841309318044479,
+              "median": 0.004578034162597828,
+              "p95": 0.006662800284629724,
+              "max": 0.007164844033992962
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.1280930525838271,
+              "median": 0.10737146627802605,
+              "p95": 0.2934526280009411,
+              "max": 0.3029306963166925
+            },
+            "omega_error_rad_s": {
+              "mean": 10.37705891691082,
+              "median": 7.579443396032377,
+              "p95": 27.719025814354136,
+              "max": 35.664277376550956
+            }
+          },
+          "persistence": {
+            "COM_error_m": {
+              "mean": 0.02918169240766058,
+              "median": 0.029806591778336514,
+              "p95": 0.04873794695246751,
+              "max": 0.050390605935204454
+            },
+            "angle_error_deg": {
+              "mean": 90.61533583624846,
+              "median": 88.04905743578254,
+              "p95": 166.9077494642264,
+              "max": 178.15326239040786
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.009944432006541786,
+              "median": 0.009768450449664293,
+              "p95": 0.012463202472781765,
+              "max": 0.012634868040827226
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.38526608760926434,
+              "median": 0.40386904397784307,
+              "p95": 0.51837331244455,
+              "max": 0.5297969690130293
+            },
+            "omega_error_rad_s": {
+              "mean": 40.83238229404444,
+              "median": 48.13978373471325,
+              "p95": 61.16195391512866,
+              "max": 69.1662890651182
+            }
+          },
+          "world_force_RMS_N": 0.10338449229956553,
+          "world_torque_RMS_Nm": 0.002398966973469749
+        },
+        "10": {
+          "windows": 8,
+          "finite_windows": 8,
+          "duration_s": 0.2,
+          "episode_count": 4,
+          "failed_or_nonfinite_windows": 0,
+          "model": {
+            "COM_error_m": {
+              "mean": 0.021376671438698203,
+              "median": 0.025930222592976962,
+              "p95": 0.028322801778240432,
+              "max": 0.028872167274096163
+            },
+            "angle_error_deg": {
+              "mean": 129.04453891465573,
+              "median": 147.84919821676647,
+              "p95": 176.35068147774675,
+              "max": 178.5000744367384
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.0061679682401964975,
+              "median": 0.006272831570748483,
+              "p95": 0.007234851021931836,
+              "max": 0.007237622806567672
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.17025777976906348,
+              "median": 0.18300124599358414,
+              "p95": 0.2139780187908731,
+              "max": 0.21715025856409007
+            },
+            "omega_error_rad_s": {
+              "mean": 20.952255154035385,
+              "median": 23.729360469859095,
+              "p95": 30.26074656790427,
+              "max": 31.073115520278375
+            }
+          },
+          "persistence": {
+            "COM_error_m": {
+              "mean": 0.0484661030377459,
+              "median": 0.048876085737631705,
+              "p95": 0.06296120315227689,
+              "max": 0.0641636131610165
+            },
+            "angle_error_deg": {
+              "mean": 96.08563722894755,
+              "median": 110.96517198221386,
+              "p95": 160.5127747630143,
+              "max": 167.7713008009228
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.017400953277229875,
+              "median": 0.01737922234970872,
+              "p95": 0.018242812568380243,
+              "max": 0.018304662288863852
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.575013804391659,
+              "median": 0.5847671097131236,
+              "p95": 0.6441193274506798,
+              "max": 0.6527842869539568
+            },
+            "omega_error_rad_s": {
+              "mean": 65.64390592956929,
+              "median": 66.0928577794949,
+              "p95": 80.95142242215307,
+              "max": 81.63152700787062
+            }
+          },
+          "world_force_RMS_N": 0.12166403141681101,
+          "world_torque_RMS_Nm": 0.002943438975430465
+        }
+      },
+      "network_derivative": {
+        "rows": 80,
+        "seed": 7461,
+        "automatic_derivative_finite": true,
+        "contract": "Unit PD-target20 directions at fixed state/warm/dt; normalized physical outputs. Not native physics gradients.",
+        "0.001": {
+          "object12": {
+            "relative_L2": 6.638579137907513e-05,
+            "max_abs_error": 0.002007694292981199
+          },
+          "wrench6": {
+            "relative_L2": 7.280560492233906e-05,
+            "max_abs_error": 0.001462191793046852
+          }
+        },
+        "0.0003": {
+          "object12": {
+            "relative_L2": 0.00021825262283998737,
+            "max_abs_error": 0.00853814997912039
+          },
+          "wrench6": {
+            "relative_L2": 0.0002251032096463131,
+            "max_abs_error": 0.007027182808538868
+          }
+        },
+        "0.0001": {
+          "object12": {
+            "relative_L2": 0.0007130763785412602,
+            "max_abs_error": 0.03130582000052584
+          },
+          "wrench6": {
+            "relative_L2": 0.000683033749918759,
+            "max_abs_error": 0.02106308957094072
+          }
+        }
+      }
+    },
+    "IMPULSE": {
+      "one_step": {
+        "TRAIN": {
+          "delta52": 0.0006624085040576414,
+          "object12": 0.0024094395070370835,
+          "warm26": 0.0016124949222603752,
+          "wrench6": 0.0001629062088859092,
+          "Fn6": 0.0004441378134796995
+        },
+        "CHECK": {
+          "delta52": 0.6996051764806792,
+          "object12": 0.3793158854542103,
+          "warm26": 1.2110102443963153,
+          "wrench6": 0.20053318360338104,
+          "Fn6": 0.28467580046010066
+        }
+      },
+      "recorded_control_rollout": {
+        "1": {
+          "windows": 80,
+          "finite_windows": 80,
+          "duration_s": 0.02,
+          "episode_count": 8,
+          "failed_or_nonfinite_windows": 0,
+          "model": {
+            "COM_error_m": {
+              "mean": 0.0010735600899755588,
+              "median": 0.0008905386701690575,
+              "p95": 0.002694785116866568,
+              "max": 0.004270069595993936
+            },
+            "angle_error_deg": {
+              "mean": 4.708492054820636,
+              "median": 3.8898858530935687,
+              "p95": 11.015719602341708,
+              "max": 13.341404296852593
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.001214367476210483,
+              "median": 0.0011882175991753722,
+              "p95": 0.001757266261073501,
+              "max": 0.0023462771983189966
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.07621839214014788,
+              "median": 0.06511626035062243,
+              "p95": 0.22601340078440604,
+              "max": 0.27158087647009543
+            },
+            "omega_error_rad_s": {
+              "mean": 4.626989023791355,
+              "median": 3.079603609332808,
+              "p95": 11.196113201897694,
+              "max": 21.092260853963626
+            }
+          },
+          "persistence": {
+            "COM_error_m": {
+              "mean": 0.0059827893296392955,
+              "median": 0.0074041790835455475,
+              "p95": 0.01197628630077089,
+              "max": 0.01253370801411905
+            },
+            "angle_error_deg": {
+              "mean": 31.094833879406405,
+              "median": 17.095871854587187,
+              "p95": 81.79988907781699,
+              "max": 89.85816944092991
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.0021691914263726997,
+              "median": 0.00218533059423355,
+              "p95": 0.002939152647891408,
+              "max": 0.003230126409942866
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.10615381809826285,
+              "median": 0.09260500171596656,
+              "p95": 0.1994547057683406,
+              "max": 0.2708528768523507
+            },
+            "omega_error_rad_s": {
+              "mean": 7.8603159308795,
+              "median": 5.945640657662526,
+              "p95": 27.373640889294578,
+              "max": 31.826316190658872
+            }
+          },
+          "world_force_RMS_N": 0.08443912142769364,
+          "world_torque_RMS_Nm": 0.0017860900485430703
+        },
+        "2": {
+          "windows": 72,
+          "finite_windows": 72,
+          "duration_s": 0.04,
+          "episode_count": 8,
+          "failed_or_nonfinite_windows": 0,
+          "model": {
+            "COM_error_m": {
+              "mean": 0.0022806047805877918,
+              "median": 0.0016621007799247035,
+              "p95": 0.006079997348519846,
+              "max": 0.007809543652063437
+            },
+            "angle_error_deg": {
+              "mean": 9.539524861924706,
+              "median": 7.937242807463427,
+              "p95": 21.398702873675933,
+              "max": 27.772139908637033
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.002399567293701636,
+              "median": 0.0023820900752548105,
+              "p95": 0.003372605588024473,
+              "max": 0.004085568342997193
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.09599755923423231,
+              "median": 0.07751947030941425,
+              "p95": 0.2283872962298503,
+              "max": 0.3642455926254758
+            },
+            "omega_error_rad_s": {
+              "mean": 4.3690622193367235,
+              "median": 3.954499432848561,
+              "p95": 10.861381799966196,
+              "max": 14.91862396046269
+            }
+          },
+          "persistence": {
+            "COM_error_m": {
+              "mean": 0.011838477156286475,
+              "median": 0.013485040185341208,
+              "p95": 0.022664543753729022,
+              "max": 0.024020868707757236
+            },
+            "angle_error_deg": {
+              "mean": 59.783485045551,
+              "median": 37.48195279637178,
+              "p95": 154.15911336690888,
+              "max": 166.9643661831241
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.004255682121604178,
+              "median": 0.004264517655987854,
+              "p95": 0.005629036654368084,
+              "max": 0.006068111957983956
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.17798026253480426,
+              "median": 0.16607832947976067,
+              "p95": 0.3554500369407224,
+              "max": 0.36906294078278157
+            },
+            "omega_error_rad_s": {
+              "mean": 15.758830722159457,
+              "median": 14.148486717368035,
+              "p95": 41.31433397227084,
+              "max": 44.14106592904744
+            }
+          },
+          "world_force_RMS_N": 0.08716367252478699,
+          "world_torque_RMS_Nm": 0.001896924642727218
+        },
+        "5": {
+          "windows": 48,
+          "finite_windows": 48,
+          "duration_s": 0.1,
+          "episode_count": 8,
+          "failed_or_nonfinite_windows": 0,
+          "model": {
+            "COM_error_m": {
+              "mean": 0.006879244586946578,
+              "median": 0.004704073552724576,
+              "p95": 0.015005683725267034,
+              "max": 0.017878526017591326
+            },
+            "angle_error_deg": {
+              "mean": 31.845346000434855,
+              "median": 27.903552418071605,
+              "p95": 73.97323110062213,
+              "max": 96.05115725451775
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.004858712411668659,
+              "median": 0.004540315792284041,
+              "p95": 0.0068315319868936025,
+              "max": 0.007148081278208037
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.16264309868904467,
+              "median": 0.15815351294299582,
+              "p95": 0.27684198761875267,
+              "max": 0.29031793345171103
+            },
+            "omega_error_rad_s": {
+              "mean": 9.71595176495655,
+              "median": 8.09734793726036,
+              "p95": 21.38264387759491,
+              "max": 27.214214428592122
+            }
+          },
+          "persistence": {
+            "COM_error_m": {
+              "mean": 0.02918169240766058,
+              "median": 0.029806591778336514,
+              "p95": 0.04873794695246751,
+              "max": 0.050390605935204454
+            },
+            "angle_error_deg": {
+              "mean": 90.61533583624846,
+              "median": 88.04905743578254,
+              "p95": 166.9077494642264,
+              "max": 178.15326239040786
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.009944432006541786,
+              "median": 0.009768450449664293,
+              "p95": 0.012463202472781765,
+              "max": 0.012634868040827226
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.38526608760926434,
+              "median": 0.40386904397784307,
+              "p95": 0.51837331244455,
+              "max": 0.5297969690130293
+            },
+            "omega_error_rad_s": {
+              "mean": 40.83238229404444,
+              "median": 48.13978373471325,
+              "p95": 61.16195391512866,
+              "max": 69.1662890651182
+            }
+          },
+          "world_force_RMS_N": 0.09493399877174871,
+          "world_torque_RMS_Nm": 0.0022584090877553493
+        },
+        "10": {
+          "windows": 8,
+          "finite_windows": 8,
+          "duration_s": 0.2,
+          "episode_count": 4,
+          "failed_or_nonfinite_windows": 0,
+          "model": {
+            "COM_error_m": {
+              "mean": 0.018012425323113382,
+              "median": 0.02013471711212208,
+              "p95": 0.026637281785631607,
+              "max": 0.028352987227343113
+            },
+            "angle_error_deg": {
+              "mean": 125.70529823922482,
+              "median": 148.31179158268085,
+              "p95": 176.67360318072838,
+              "max": 177.62534913850445
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.006163263776995894,
+              "median": 0.006091201772961369,
+              "p95": 0.0073841174717251224,
+              "max": 0.007401550933461851
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.3730970968439625,
+              "median": 0.39655769852146483,
+              "p95": 0.4620956321345261,
+              "max": 0.4630473282364911
+            },
+            "omega_error_rad_s": {
+              "mean": 13.408025824017898,
+              "median": 12.247608774603407,
+              "p95": 24.34727709474899,
+              "max": 28.91410279293749
+            }
+          },
+          "persistence": {
+            "COM_error_m": {
+              "mean": 0.0484661030377459,
+              "median": 0.048876085737631705,
+              "p95": 0.06296120315227689,
+              "max": 0.0641636131610165
+            },
+            "angle_error_deg": {
+              "mean": 96.08563722894755,
+              "median": 110.96517198221386,
+              "p95": 160.5127747630143,
+              "max": 167.7713008009228
+            },
+            "joint_position_RMS_rad": {
+              "mean": 0.017400953277229875,
+              "median": 0.01737922234970872,
+              "p95": 0.018242812568380243,
+              "max": 0.018304662288863852
+            },
+            "COM_velocity_error_m_s": {
+              "mean": 0.575013804391659,
+              "median": 0.5847671097131236,
+              "p95": 0.6441193274506798,
+              "max": 0.6527842869539568
+            },
+            "omega_error_rad_s": {
+              "mean": 65.64390592956929,
+              "median": 66.0928577794949,
+              "p95": 80.95142242215307,
+              "max": 81.63152700787062
+            }
+          },
+          "world_force_RMS_N": 0.10682949391611951,
+          "world_torque_RMS_Nm": 0.0027110268604208093
+        }
+      },
+      "network_derivative": {
+        "rows": 80,
+        "seed": 7461,
+        "automatic_derivative_finite": true,
+        "contract": "Unit PD-target20 directions at fixed state/warm/dt; normalized physical outputs. Not native physics gradients.",
+        "0.001": {
+          "object12": {
+            "relative_L2": 8.770109166873703e-05,
+            "max_abs_error": 0.0031237258183125505
+          },
+          "wrench6": {
+            "relative_L2": 6.820596465055582e-05,
+            "max_abs_error": 0.0012256205357248362
+          }
+        },
+        "0.0003": {
+          "object12": {
+            "relative_L2": 0.0002620471121710836,
+            "max_abs_error": 0.007654102715251909
+          },
+          "wrench6": {
+            "relative_L2": 0.00023422527645489843,
+            "max_abs_error": 0.0039180197472949985
+          }
+        },
+        "0.0001": {
+          "object12": {
+            "relative_L2": 0.0008158598389346878,
+            "max_abs_error": 0.024140384280567417
+          },
+          "wrench6": {
+            "relative_L2": 0.0006828527503118659,
+            "max_abs_error": 0.010367722466678941
+          }
+        }
+      }
+    }
+  },
+  "optimizer_updates": 0,
+  "native_integrations": 0,
+  "contract": "All contiguous valid CHECK windows at predeclared H1/2/5/10, no crossing episodes. First state/warm observed, later states/warm predicted; actual recorded PD targets and native dt only. No teacher forcing, clipping, reference reset or object aid. Overlapping windows are correlated, not independent samples.",
+  "limitation": "Single fixed initial state/clip with held-out action streams; failed/nonexpert physical episodes. Network AD/FD consistency is not native physical gradient correctness. No closed-loop Actor, task success or ego-generalization result."
+}
