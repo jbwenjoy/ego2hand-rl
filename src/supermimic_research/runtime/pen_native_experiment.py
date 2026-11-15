@@ -10,7 +10,7 @@ from scipy.spatial.transform import Rotation
 
 ROOT=Path(__file__).resolve().parents[3]
 from supermimic_research.artifacts import ArtifactRegistry,file_pin,verify_file_pin
-from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot
+from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot,frozen_import_sources
 from supermimic_research.runtime.controlled_evaluation import evaluate_case,write
 from supermimic_research.runtime.pen_gpu_initialization import initialize_and_query_pen
 from supermimic_research.runtime.gpu_model_snapshot import capture_model
@@ -131,13 +131,6 @@ def main(a):
                 candidates_evaluated=57*len(decisions),candidate_physics_ticks=57*len(decisions)*round(.02/dt),
                 supervision='NATIVE_CONTROLLER_PROBE_NONEXPERT_UNLESS_ALL_ORIGINAL_GATES_PASS')
             cases.append(c);write(folder/'report.json',c);write(a.output/'progress.json',dict(cases=cases))
-    verify_source_snapshot(source_receipt,live=True)
-    source_map={r['observed']['path']:r['snapshot'] for r in source_receipt['records']}
-    task_sources=[]
-    for name,module in list(sys.modules.items()):
-        path=getattr(module,'__file__',None)
-        if name.startswith('dex_supermimic') and path:
-            if not Path(path).resolve().is_relative_to(ROOT/'src'):raise ValueError('Historical task import')
-            task_sources.append(source_map[str(Path(path).resolve())])
-    result=dict(**intent,cases=cases,task_sources=task_sources)
+    task_sources=frozen_import_sources(source_receipt,ROOT/'src','dex_supermimic')
+    result=dict(**intent,cases=cases,task_sources=task_sources,source_import_enumeration_available=True)
     write(a.output/'report.json',result);print(json.dumps(dict(report=file_pin(a.output/'report.json'),cases=[dict(mode=c['name'],dt=c['dt'],duration=c['summary']['metrics']['actual_duration_s'],qualified=c['summary']['qualified'],candidates=c['candidates_evaluated']) for c in cases])))

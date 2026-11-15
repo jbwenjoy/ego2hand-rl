@@ -1,6 +1,7 @@
 """Independent NumPy native-objective, source and actual replay review."""
 import contextlib
 import json
+import subprocess
 import tomllib
 from pathlib import Path
 
@@ -10,7 +11,7 @@ from scipy.spatial.transform import Rotation
 
 ROOT=Path(__file__).resolve().parents[3]
 from supermimic_research.artifacts import file_pin,verify_file_pin
-from supermimic_research.frozen_sources import verify_source_snapshot,verify_source_pin
+from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot,verify_source_pin
 from supermimic_research.mechanics.warp_saved_review import review_saved_warp_contacts
 from supermimic_research.mechanics.pen_replay_fidelity import compare_response
 from supermimic_research.runtime.controlled_evaluation import write
@@ -30,8 +31,22 @@ def main(a):
         verify_source_snapshot(json.loads(verify_file_pin(r['source_receipt']).read_text()))
     for pin in r['sources']+r['task_sources']:verify_source_pin(pin,relocations)
     a.output.mkdir()
+    review_sources=freeze_sources([Path(__file__),ROOT/'src/supermimic_research/frozen_sources.py',
+        ROOT/'src/supermimic_research/mechanics/pen_replay_fidelity.py',ROOT/'src/supermimic_research/mechanics/warp_saved_review.py',
+        ROOT/'tools/review_pen_native.py'],a.output/'source_snapshot',ROOT,
+        subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip())
+    write(a.output/'source_receipt.json',review_sources)
+    review_source_map={q['observed']['path']:q['snapshot'] for q in review_sources['records']}
+    efc_input=a.report
+    if relocations is not None:
+        # A new explicit review view; the original collected report is never rewritten.
+        view={**r,'sources':[file_pin(verify_source_pin(p,relocations)) for p in r['sources']],
+            'task_sources':[file_pin(verify_source_pin(p,relocations)) for p in r['task_sources']],
+            'source_relocation_view':dict(original_report=file_pin(a.report),relocations=file_pin(relocation_path),
+                scope='Only source paths relocated by exact original pin; all case data/physics unchanged.')}
+        efc_input=a.output/'explicit_source_view.json';write(efc_input,view)
     try:
-        with (a.output/'EFC_console.log').open('w',encoding='utf8') as log,contextlib.redirect_stdout(log):efc=review_saved_warp_contacts(a.report,a.output/'EFC',expected)
+        with (a.output/'EFC_console.log').open('w',encoding='utf8') as log,contextlib.redirect_stdout(log):efc=review_saved_warp_contacts(efc_input,a.output/'EFC',expected)
     except ValueError:
         if not (a.output/'EFC'/'report.json').exists():raise
         efc=json.loads((a.output/'EFC'/'report.json').read_text())
@@ -124,8 +139,11 @@ def main(a):
         pair=[c for c in r['cases'] if c['dt']==dt];intervals=min(c['actual_intervals'] for c in pair)
         common.append(dict(dt=dt,common_intervals=intervals,common_physical_s=intervals*.02,candidates_per_mode_common_prefix=57*intervals,
             selected_indices_all_equal=sum(len({c['planning'][i]['selected'] for c in pair})==1 for i in range(intervals))))
-    result=dict(schema='pen_native_objective_saved_review:2',run=file_pin(a.report),source=file_pin(__file__),
-        source_relocations=file_pin(relocation_path) if relocation_path else None,comparison_source=file_pin(ROOT/'src/supermimic_research/mechanics/pen_replay_fidelity.py'),EFC=file_pin(a.output/'EFC'/'report.json'),EFC_counts=[efc['passed'],efc['total']],
+    verify_source_snapshot(review_sources,live=True)
+    source_provenance_qualified=r.get('source_import_enumeration_available',True)
+    result=dict(schema='pen_native_objective_saved_review:2',run=file_pin(a.report),source=review_source_map[str(Path(__file__).resolve())],source_receipt=file_pin(a.output/'source_receipt.json'),
+        source_provenance_qualified=source_provenance_qualified,EFC_input_report=file_pin(efc_input),
+        source_relocations=file_pin(relocation_path) if relocation_path else None,comparison_source=review_source_map[str((ROOT/'src/supermimic_research/mechanics/pen_replay_fidelity.py').resolve())],EFC=file_pin(a.output/'EFC'/'report.json'),EFC_counts=[efc['passed'],efc['total']],
         cases=results,common_prefix=common,contract_passed=contract_passed,contract_total=contract_total,
         selected_fidelity_passed=sum(d['fidelity_passed'] for d in all_decisions),selected_fidelity_total=len(all_decisions),
         nominal_model_support_benefit_established=False,neural_updates=0,native_integrations=0,
@@ -133,4 +151,4 @@ def main(a):
     write(a.output/'report.json',result)
     print(json.dumps(dict(report=file_pin(a.output/'report.json'),contracts=[contract_passed,contract_total],EFC=result['EFC_counts'],fidelity=[result['selected_fidelity_passed'],len(all_decisions)],
         cases=[dict(mode=c['mode'],dt=c['dt'],duration=c['actual_duration_s'],fallbacks=c['fallbacks'],terminations=c['terminations'],qualified=c['qualified']) for c in results])))
-    if contract_passed!=contract_total or efc['passed']!=efc['total'] or result['selected_fidelity_passed']!=len(all_decisions):raise ValueError('Retain failing audit; no global contract/replay qualification')
+    if not source_provenance_qualified or contract_passed!=contract_total or efc['passed']!=efc['total'] or result['selected_fidelity_passed']!=len(all_decisions):raise ValueError('Retain failing audit; no global provenance/contract/replay qualification')

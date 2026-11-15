@@ -48,3 +48,20 @@ def verify_source_pin(pin, relocations=None):
             if any(pin[k]!=archived[k] for k in ['bytes','sha256']):raise ValueError('Source relocation changes bytes')
             return verify_file_pin(archived)
     return verify_file_pin(pin)
+
+
+def frozen_import_sources(manifest, source_root, namespace):
+    """Enumerate this live process's namespace imports, never a reconstructed past process."""
+    import sys
+    verify_source_snapshot(manifest,live=True)
+    source_root=Path(source_root).resolve(strict=True)
+    mapping={r['observed']['path']:r['snapshot'] for r in manifest['records']}
+    result=[]
+    for name,module in sorted(list(sys.modules.items())):
+        path=getattr(module,'__file__',None)
+        if path and (name==namespace or name.startswith(namespace+'.')):
+            path=Path(path).resolve(strict=True)
+            if not path.is_relative_to(source_root) or str(path) not in mapping:
+                raise ValueError('Imported source outside captured namespace sources')
+            result.append(mapping[str(path)])
+    return result

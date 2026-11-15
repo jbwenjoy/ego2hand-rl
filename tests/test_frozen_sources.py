@@ -1,9 +1,12 @@
 import tempfile
 import unittest
+import sys
+import types
+from unittest.mock import patch
 from pathlib import Path
 
 from supermimic_research.artifacts import file_pin
-from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot,verify_source_pin
+from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot,verify_source_pin,frozen_import_sources
 
 
 class FrozenSourceTests(unittest.TestCase):
@@ -35,3 +38,15 @@ class FrozenSourceTests(unittest.TestCase):
             with self.assertRaises(ValueError):freeze_sources([p,p],root/'snap',root,'rev')
             with self.assertRaises(ValueError):freeze_sources([p],outside/'snap',outside,'rev')
             self.assertFalse((root/'snap').exists());self.assertFalse((outside/'snap').exists())
+
+    def test_final_live_import_enumeration_uses_captured_namespace_and_checks_drift(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);p=root/'src'/'child.py';p.parent.mkdir();p.write_bytes(b'physics')
+            m=freeze_sources([p],root/'sources',root,'rev')
+            module=types.ModuleType('frozen_test_fixture.child');module.__file__=str(p)
+            with patch.dict(sys.modules,{'frozen_test_fixture.child':module}):
+                self.assertEqual(frozen_import_sources(m,root/'src','frozen_test_fixture'),[m['records'][0]['snapshot']])
+                q=root/'untracked.py';q.write_bytes(b'external');module.__file__=str(q)
+                with self.assertRaises(ValueError):frozen_import_sources(m,root/'src','frozen_test_fixture')
+                module.__file__=str(p);p.write_bytes(b'changed')
+                with self.assertRaises(ValueError):frozen_import_sources(m,root/'src','frozen_test_fixture')
