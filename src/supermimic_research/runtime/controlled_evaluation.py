@@ -181,6 +181,7 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
             'pre_object_nonhand_normal_N', 'pre_penetration_m', 'pre_self_penetration_m',
             'post_joint_limit_excursion_rad', 'overflow', 'post_actuator_force', 'post_qfrc_actuator', 'post_GPU_time',
             'post_qfrc_constraint','post_qfrc_bias','post_qfrc_passive','post_qacc','post_solver_niter']}
+        if config.get('record_engine_warmstart',False):trace['post_qacc_warmstart']=[]
         raw = []; action_rows = []; phase = []; terminations = []; ticks = 0
         observations = []; terminal_rows = []
         efc_rows=[];efc_ranges=[0];contact_addresses=[];legacy_force=[];legacy_adhesion=[]
@@ -226,6 +227,7 @@ def evaluate_case(task, controller, saved, config, config_dir, registry, folder,
                 host.xfrc_applied.copy(), center, quat, velocity, omega, host.xipos[body].copy(), hand_N, other_N,
                 penetration, self_pen, excursion, overflow, host.actuator_force.copy(), host.qfrc_actuator.copy(), float(host.time),
                 host.qfrc_constraint.copy(),host.qfrc_bias.copy(),host.qfrc_passive.copy(),host.qacc.copy(),int(wd.solver_niter.numpy()[0])]
+            if config.get('record_engine_warmstart',False):values.append(wd.qacc_warmstart.numpy()[0].copy())
             for key, value in zip(trace, values): trace[key].append(value)
             ticks += 1
         env.sim.step = record_step

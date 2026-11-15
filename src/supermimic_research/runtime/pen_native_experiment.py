@@ -82,6 +82,7 @@ def main(a):
         candidates=file_pin(a.output/'candidates.npz'),orientation_objective=orientation,neural_updates=0,Actor_updates=0,
         candidate_offset_multiplier=multiplier,entire_raw_table_max_abs=float(abs(raw_table).max()),entire_raw_table_valid=True,
         planning_horizon_controls=horizon,actual_applied_controls_per_decision=1,
+        engine_warmstart_recorded=cfg.get('record_engine_warmstart',False),
         response_parent_split=response_spec,response_data_role='FRESH_WM_PARENTS' if roles else 'CONTROLLER_DIAGNOSTIC',
         scope=f'Native57-candidate H{horizon} receding-horizon objective comparison, apply only first20ms. Future per-phase raw/EMA/reference PD, mean per-control cost; full forecast geometry. Unequal forecast/survival compute explicitly counted. Full original7.36s clock, first native terminal, no object force/reset aid. Diagnostic same-clip development, not learning data, learned-policy A1/A2, real-time, surrogate speedup or ego qualification.')
     write(a.output/'intent.json',intent);cases=[];keepers=[];response_rows=[]
@@ -206,6 +207,7 @@ def main(a):
                 if not decision['selected_finite'] or not decision['selected_capacity']:raise ValueError('No numerical/capacity-valid selected forecast')
                 return raw[selected:selected+1]
             c=evaluate_case('hand2-pen-spin',mode,None,{**base,'physics_dt':dt,'numerical_options':cfg['numerical_options'],'numerical_device_override':True,
+                'record_engine_warmstart':cfg.get('record_engine_warmstart',False),
                 **({'collision_numerics':ccd} if ccd is not None else {})},
                 bp.parent,registry,folder,initializer=initialize,action_provider=provider)
             planner=planning['planner'];_,after_scalars,after_hashes=capture_model(planner.model)
