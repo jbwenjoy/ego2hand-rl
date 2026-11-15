@@ -27,7 +27,7 @@ def main(a):
                 q0=s['qpos'][0,qa+3:qa+7];source_error=(Rotation.from_quat(q0[[1,2,3,0]])*target.inv()).magnitude()
                 checks=dict(fixed57=endpoint.shape==(57,7),finite_endpoints=bool(np.isfinite(endpoint).all()),valid_unit_quaternions=bool(np.max(abs(np.linalg.norm(endpoint[:,3:],axis=1)-1))<1e-6),
                     selected_finite=bool(d['score_finite'][decision['selected']]),correct_reference_clock=decision['phase']==k+1)
-                rows.append(dict(run=file_pin(path),orientation=r['orientation_objective'],mode=c['name'],dt=c['dt'],k=k,checks=checks,
+                rows.append(dict(run=file_pin(path),orientation=r['orientation_objective'],candidate_offset_multiplier=r.get('candidate_offset_multiplier',1),mode=c['name'],dt=c['dt'],k=k,checks=checks,
                     safe_candidates=int(safe.sum()),endpoint_joint_pass=int(joint.sum()),selected_endpoint_joint_pass=bool(joint[decision['selected']]),
                     min_safe_COM_m=float(distance[safe].min()) if safe.any() else None,
                     min_safe_full_angle_deg=float(np.rad2deg(angle[safe].min())) if safe.any() else None,
@@ -37,7 +37,7 @@ def main(a):
                     prediction=decision['prediction'],source=decision['source']))
                 angles.append(angle);positions.append(distance);safe_rows.append(safe);joint_rows.append(joint)
             segment=rows[first:];holes=[d for d in segment if not d['endpoint_joint_pass']]
-            cases.append(dict(run=file_pin(path),orientation=r['orientation_objective'],mode=c['name'],dt=c['dt'],rows=[first,len(rows)],
+            cases.append(dict(run=file_pin(path),orientation=r['orientation_objective'],candidate_offset_multiplier=r.get('candidate_offset_multiplier',1),mode=c['name'],dt=c['dt'],rows=[first,len(rows)],
                 decisions=len(segment),endpoint_joint_available=sum(bool(d['endpoint_joint_pass']) for d in segment),
                 first_no_joint_candidate=dict(k=holes[0]['k'],source_time_s=holes[0]['k']*.02,endpoint_time_s=(holes[0]['k']+1)*.02) if holes else None,
                 max_min_safe_full_angle_deg=max(d['min_safe_full_angle_deg'] for d in segment if d['min_safe_full_angle_deg'] is not None),

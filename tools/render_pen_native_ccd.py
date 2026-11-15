@@ -18,11 +18,14 @@ from tools.render_mug_progress_video import Scene,canvas,writer
 def main(a):
     r,b=[json.loads(p.read_text()) for p in [a.report,a.baseline]]
     axis=getattr(a,'axis','CCD')
-    if axis not in ['CCD','ORIENTATION']:raise ValueError('Declared video matrix axis')
+    if axis not in ['CCD','ORIENTATION','AMPLITUDE']:raise ValueError('Declared video matrix axis')
     labels0=(['CCD 1e-6：状态','CCD 1e-6：状态＋支持','CCD 1e-7：状态','CCD 1e-7：状态＋支持'] if axis=='CCD' else
         ['笔轴：状态','笔轴：状态＋支持','完整姿态：状态','完整姿态：状态＋支持'])
     title=('最新 GPU 受控转笔：CCD 数值配置与接触支持对照，八组均未完成任务' if axis=='CCD' else
         '最新 GPU 受控转笔：笔轴与完整姿态评分对照，八组均未完成任务')
+    if axis=='AMPLITUDE':
+        labels0=['幅度1倍：状态','幅度1倍：状态＋支持','幅度4倍：状态','幅度4倍：状态＋支持']
+        title='最新 GPU 受控转笔：完整姿态评分，原动作幅度与四倍幅度对照，八组均未完成任务'
     if a.output.exists():raise ValueError('Fresh native control replay')
     for pin in r['sources']+b['sources']:verify_file_pin(pin)
     a.output.mkdir();videos=[]
@@ -76,4 +79,4 @@ def main(a):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--axis',choices=['CCD','ORIENTATION'],default='CCD');p.add_argument('--report',type=Path,required=True);p.add_argument('--baseline',type=Path,required=True);p.add_argument('--output',type=Path,required=True);main(p.parse_args())
+    p=argparse.ArgumentParser();p.add_argument('--axis',choices=['CCD','ORIENTATION','AMPLITUDE'],default='CCD');p.add_argument('--report',type=Path,required=True);p.add_argument('--baseline',type=Path,required=True);p.add_argument('--output',type=Path,required=True);main(p.parse_args())
