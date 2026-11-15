@@ -37,6 +37,7 @@ class ResidentDataTests(unittest.TestCase):
         snap=ResidentDataSnapshot(data);data.qpos.zero_();data.scratch.count=2
         with self.assertRaises(ValueError):snap.restore(data)
         np.testing.assert_array_equal(data.qpos.numpy(),[0,0])
+        data.scratch.count=1
         data.scratch.values=wp.array([3.],device='cpu')
         with self.assertRaises(ValueError):snap.restore(data)
         np.testing.assert_array_equal(data.qpos.numpy(),[0,0])
