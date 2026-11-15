@@ -1,4 +1,8 @@
-"""Read-only wrapper around installed GJK/EPA; never used as the task simulator."""
+"""UNQUALIFIED separate GJK/EPA diagnostic; target-native equivalence failed.
+
+Analytic calibration does not qualify the complex-mesh wrapper. Retain its
+outputs only as diagnostic evidence; never use them for task forces/control.
+"""
 import numpy as np
 import warp as wp
 
@@ -104,6 +108,6 @@ class ContactPhaseProbe:
             geometry_cache_before_raw=[int(i[9]),int(i[10])],geometry_cache_after_raw=[int(i[11]),int(i[12])],geometry_cache_fresh_phase=[int(i[13]),int(i[14])],
             pre_multiccd_contacts=int(i[5]),multiccd_index=int(i[6]),native_gap_reject=bool(i[7]),pre_multiccd_emit=bool(i[8]),
             overflow=bool(values['overflow'][0]),geometry_types=[int(self.types[g]),int(self.types[h])],configured_gjk_iterations=self.gjk_iterations,configured_epa_iterations=self.epa_iterations,
-            scratch_policy='ZERO_BEFORE_EACH_QUERY_SEPARATE_FROM_NATIVE_PIPELINE',
+            native_internal_equivalence_qualified=False,scratch_policy='ZERO_BEFORE_EACH_QUERY_SEPARATE_FROM_NATIVE_PIPELINE',
             scope='Installed GJK/EPA function outputs, no original iteration counter/termination label fabricated. Pre-multiccd is not the final native contact manifold.')
         return result,values
