@@ -1,0 +1,9 @@
+schema = 2
+adapter_config = "pen_full_pose_native_v1.toml"
+gates = "pen_gpu_step_audit_v1.toml"
+worlds = [1, 32]
+prefix_controls = 8
+continuation_controls = 8
+partial_reset_at_boundary = false
+role = "DIAGNOSTIC_NEVER_FIT"
+scope = "Uninterrupted native physical continuation across saved boundary; no injected boundary reset. Normal terminal resets remain explicit and compared. No optimizer/expert/ego/success claim."
