@@ -1,0 +1,325 @@
+{
+  "schema": "geometry_support_pilot_evidence_summary:1",
+  "roots": {
+    "initial_qualification": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_qualification_v1\\report.json",
+      "bytes": 10500,
+      "sha256": "6ba89319a5ea0bf97e1a9c3fcd3100b3c93da5ee84c10a13ce2b8bf7dc62699b"
+    },
+    "qualification": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_qualification_v2\\report.json",
+      "bytes": 10584,
+      "sha256": "2faf0654c4d0ef36ee1cdd9b5f2398bbd318ac19dba3ddf139daa1888226fcf5"
+    },
+    "training": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_pilot_v1\\report.json",
+      "bytes": 17128,
+      "sha256": "b36c2094d022f4345e220ae355e7a355ae23b313fcecdb2bee0f5cdfbfe6f1e2"
+    },
+    "state_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_pilot_state_review_v1\\report.json",
+      "bytes": 26025,
+      "sha256": "877f7a0120a01952f4b5a0817f5956f4ba73ecbb2d3f16ee5eaf2957e47df4f9"
+    },
+    "preview_shown": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_pilot_preview_v1\\report.json",
+      "bytes": 19241,
+      "sha256": "83e590bbab90dfc1aca9e1582e8a73fc97bfa2b122ac39c72ea72e47c66e0e86"
+    },
+    "preview_raw": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_pilot_preview_v2\\report.json",
+      "bytes": 20960,
+      "sha256": "bd3daf2a2796855c1ee70132a2e056dec5a2db22dc00a97abf66665c2f158615"
+    },
+    "independent_preview_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_pilot_preview_review_v1\\report.json",
+      "bytes": 45111,
+      "sha256": "eca355e8a7eb6911787475cdc07cfe4aa79407c670345b2221f419f7b922dbae"
+    },
+    "signal_audit": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_signal_audit_v1\\report.json",
+      "bytes": 8737,
+      "sha256": "6acb0c722b6fb8bca97fc6fd1c2a8a9777bed5c6966d6c43a63435222d815139"
+    }
+  },
+  "checks": {
+    "initial_qualification": [
+      72,
+      72
+    ],
+    "qualification": [
+      74,
+      74
+    ],
+    "training": [
+      5,
+      5
+    ],
+    "state_review": [
+      214,
+      214
+    ],
+    "independent_preview_review": [
+      114,
+      114
+    ],
+    "signal_audit": [
+      10,
+      10
+    ]
+  },
+  "initial_check_limit": "Qualifier v1 overall no-optimizer check used contact-row count and was uninformative; v2 checks saved counters and empty Adam state directly. Both actually0 optimizer steps.",
+  "archive_v1_limit": "First archive pinned its own incomplete console before final print. v2 excludes live archive consoles, retains v1, and resolves its exact historical prefix by full size/SHA. Independent final revalidation required.",
+  "state_audits": [
+    {
+      "arm": "RESIDUAL",
+      "checkpoint": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_pilot_v1\\RESIDUAL\\checkpoint_0002.pt",
+        "bytes": 57444405,
+        "sha256": "96186e8b181a5664455fc8013b1731b359d553bd5504805cd34749e75c41453b"
+      },
+      "schema": "pen_geometry_support_PPO_training:3",
+      "native_schema": "controlled_pen_owned_state:4",
+      "iteration": 2,
+      "optimizer_steps": 64,
+      "training_transitions": 4096,
+      "normalizer_count": 2336,
+      "role": "CONTROLLED_SINGLE_SEED_FEASIBILITY_PILOT"
+    },
+    {
+      "arm": "SUPPORT",
+      "checkpoint": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_pilot_v1\\SUPPORT\\checkpoint_0002.pt",
+        "bytes": 57442421,
+        "sha256": "6812c5e18900e6130ae982bf5759d99034d83b9ebca629a1187f903788ad6e62"
+      },
+      "schema": "pen_geometry_support_PPO_training:3",
+      "native_schema": "controlled_pen_owned_state:4",
+      "iteration": 2,
+      "optimizer_steps": 64,
+      "training_transitions": 4096,
+      "normalizer_count": 2336,
+      "role": "CONTROLLED_SINGLE_SEED_FEASIBILITY_PILOT"
+    }
+  ],
+  "strict_outcomes": [
+    {
+      "name": "INITIAL",
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.2,
+          "COM_RMS_m": 0.024912544758588073,
+          "COM_max_m": 0.05699858779276096,
+          "angle_RMS_rad": 1.3268903715525813,
+          "angle_max_rad": 3.1347593637434996,
+          "max_penetration_m": 0.0019766760524362326,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.7125,
+          "object_speed_RMS_m_s": 0.36777934432029724,
+          "object_omega_RMS_rad_s": 36.42119216918945
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_reasons": {
+        "position": true,
+        "shaft": false,
+        "nonfinite": false,
+        "reference_end": false,
+        "geometry": false
+      }
+    },
+    {
+      "name": "RESIDUAL",
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.24,
+          "COM_RMS_m": 0.021517916323008146,
+          "COM_max_m": 0.05524972581955999,
+          "angle_RMS_rad": 1.2196202448781936,
+          "angle_max_rad": 3.074207067306915,
+          "max_penetration_m": 0.0019765144679695368,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.7708333333333334,
+          "object_speed_RMS_m_s": 0.32404419779777527,
+          "object_omega_RMS_rad_s": 32.61385726928711
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_reasons": {
+        "position": true,
+        "shaft": false,
+        "nonfinite": false,
+        "reference_end": false,
+        "geometry": false
+      }
+    },
+    {
+      "name": "SUPPORT",
+      "summary": {
+        "metrics": {
+          "actual_duration_s": 0.24,
+          "COM_RMS_m": 0.02147841919205232,
+          "COM_max_m": 0.054883765643092323,
+          "angle_RMS_rad": 1.2227414947205788,
+          "angle_max_rad": 3.0855801666992275,
+          "max_penetration_m": 0.001977045089006424,
+          "max_self_penetration_m": 0.0,
+          "max_joint_limit_excursion_rad": 0.0,
+          "max_object_nonhand_normal_force_N": 0.0,
+          "hand_contact_coverage_over_0_1N": 0.7708333333333334,
+          "object_speed_RMS_m_s": 0.32160109281539917,
+          "object_omega_RMS_rad_s": 32.65399169921875
+        },
+        "gates": {
+          "COM_RMS_m": false,
+          "COM_max_m": false,
+          "angle_RMS_rad": false,
+          "angle_max_rad": false,
+          "max_penetration_m": true,
+          "max_self_penetration_m": true,
+          "max_joint_limit_excursion_rad": true,
+          "max_object_nonhand_normal_force_N": true,
+          "duration_complete": false,
+          "no_applied_force": true,
+          "finite_dynamics": true,
+          "no_contact_constraint_overflow": true
+        },
+        "qualified": false,
+        "warning_count": null,
+        "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+      },
+      "termination_reasons": {
+        "position": true,
+        "shaft": false,
+        "nonfinite": false,
+        "reference_end": false,
+        "geometry": false
+      }
+    }
+  ],
+  "independent_failures": [
+    {
+      "name": "INITIAL",
+      "first_breaches": {
+        "COM_max_m": {
+          "native_index": 40,
+          "time_s": 0.10250000000000001,
+          "value": 0.010090498258683559,
+          "limit": 0.01
+        },
+        "angle_max_rad": {
+          "native_index": 30,
+          "time_s": 0.0775,
+          "value": 0.1810403374511892,
+          "limit": 0.17453292519943295
+        },
+        "max_penetration_m": null,
+        "max_self_penetration_m": null
+      },
+      "common_0_20s": {
+        "COM_RMS_m": 0.024912544758588073,
+        "angle_RMS_rad": 1.3268903715525813
+      }
+    },
+    {
+      "name": "RESIDUAL",
+      "first_breaches": {
+        "COM_max_m": {
+          "native_index": 57,
+          "time_s": 0.145,
+          "value": 0.010626261215664533,
+          "limit": 0.01
+        },
+        "angle_max_rad": {
+          "native_index": 48,
+          "time_s": 0.1225,
+          "value": 0.1956385523100855,
+          "limit": 0.17453292519943295
+        },
+        "max_penetration_m": null,
+        "max_self_penetration_m": null
+      },
+      "common_0_20s": {
+        "COM_RMS_m": 0.012412117393970697,
+        "angle_RMS_rad": 0.7855636974699917
+      }
+    },
+    {
+      "name": "SUPPORT",
+      "first_breaches": {
+        "COM_max_m": {
+          "native_index": 57,
+          "time_s": 0.145,
+          "value": 0.010867120111188257,
+          "limit": 0.01
+        },
+        "angle_max_rad": {
+          "native_index": 48,
+          "time_s": 0.1225,
+          "value": 0.20053370940999568,
+          "limit": 0.17453292519943295
+        },
+        "max_penetration_m": null,
+        "max_self_penetration_m": null
+      },
+      "common_0_20s": {
+        "COM_RMS_m": 0.01238303659014406,
+        "angle_RMS_rad": 0.7860279864829804
+      }
+    }
+  ],
+  "support_zero_wrench_audit": {
+    "valid_intervals": 365,
+    "zero_wrench_score": {
+      "count": 365,
+      "min": 1.7509202294089085e-103,
+      "median": 0.2725309196136277,
+      "mean": 0.3725587236503045,
+      "max": 0.8518085307700629
+    },
+    "fraction_zero_score_over_0_8": 0.273972602739726,
+    "fraction_zero_score_over_0_5": 0.4136986301369863
+  },
+  "actual_native_integrations": 76320,
+  "retained_pilot_optimizer_steps": 128,
+  "diagnostic_optimizer_steps": 64,
+  "total_actual_optimizer_steps": 192,
+  "unit_tests": 329,
+  "scope": "Registered equal-budget single-seed/single-clip actual pilot with failed original full-task evaluation, complete resume and independent raw readback. Weak/zero-contact high absolute support scores identified offline; no statistical support/ego/physical WM-gradient/speedup claim."
+}
