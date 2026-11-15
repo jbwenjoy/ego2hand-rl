@@ -1,0 +1,141 @@
+{
+  "schema": "pen_response_loss_ablation:1",
+  "config": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\pen_contrast_fit_v1.toml",
+    "bytes": 260,
+    "sha256": "592fdc6a26a761bb48f93e31295863f4f23a6b4790fabfb5bab9bd38e8e9f2c5"
+  },
+  "base_fit": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_branch_fit_v1\\report.json",
+    "bytes": 73320,
+    "sha256": "319f35649911d267a01c176500486e9640e66c2d77dc7a2c9c37cb8121182bb6"
+  },
+  "contrasts": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_TRAIN_contrasts_v1\\report.json",
+    "bytes": 34512,
+    "sha256": "4a3af02f0520910b1b67b6c854d697105a7b7823ce1aa50ff7950a97816172c4"
+  },
+  "contrast_readback": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_TRAIN_contrasts_v1\\saved_readback.json",
+    "bytes": 570,
+    "sha256": "d94b19da26f2f8cc2a75ea21cee38ade37188f851f349c802492a8090c6c6831"
+  },
+  "prepared": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_branch_prepared_v1\\report.json",
+    "bytes": 120281,
+    "sha256": "71cdebd0c0cbefaa24ca9ccda59490be35c1e9ab7a5143cfdb85ff0f98731cd8"
+  },
+  "review": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_branch_prepared_review_v1\\report.json",
+    "bytes": 195475,
+    "sha256": "178bc790f6e456c323ce2753d566cbe950257c6a917e834f6a05618ab7d38c74"
+  },
+  "dataset_pins": {
+    "TRAIN": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_branch_prepared_v1\\TRAIN.npz",
+      "bytes": 412405,
+      "sha256": "c60bd402bac10f6bac58e40dea1102d518a877ad710ddf24e759f633ed3f954c"
+    },
+    "CHECK": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_branch_prepared_v1\\CHECK.npz",
+      "bytes": 72107,
+      "sha256": "6dd54c2a8e1880cc6f3e1f1c7448102985352456eee0d5d6b04c01889d0f3292"
+    },
+    "NEW_TRAIN": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_branch_prepared_v1\\NEW_TRAIN.npz",
+      "bytes": 209923,
+      "sha256": "45f04eafac7440591664bb3c91756ee24e9e7e2176579f578ceaa30f117d29ae"
+    },
+    "SEQUENCE_CHECK": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_wm_prepared_v1\\CHECK.npz",
+      "bytes": 105625,
+      "sha256": "08542bba24031db22b34d5fbaa0359c9e8a0d3a2be92f7b8ba5455f7fe59bf55"
+    }
+  },
+  "sources": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\train_pen_contrasts.py",
+      "bytes": 562,
+      "sha256": "161924909eb3535ca612166d9e2eec809dace9d89d1a7d0ab67d4f0415b6b5fe"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\pen_contrast_fit.py",
+      "bytes": 13177,
+      "sha256": "e7b6176dcc123aec4670fe9e3865121986592c1d9aa0a9d16c15a48b65bc4c7a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\pen_contrast_update.py",
+      "bytes": 2118,
+      "sha256": "afca8a9478d7d42299a7ae06e5779984f0a8c874c68fc3c8ff60d41a569cd348"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\tools\\train_pen_branches.py",
+      "bytes": 560,
+      "sha256": "eea5824721d58e2ada8d4b175de94948e25715dec9d4e59d63d5399be87786fd"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\pen_branch_fit.py",
+      "bytes": 11735,
+      "sha256": "89257f6af01c56506525589f9c9bd8b242b75ab20c76722b409daaedceeccc7e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\pen_response.py",
+      "bytes": 1763,
+      "sha256": "9797f961dadbe464cfc517ecfd8fa193e84327f32196da1e20893cb29e3daa81"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\pen_stage.py",
+      "bytes": 14366,
+      "sha256": "f9e3ca602df9747241bc887cc9d8694b51c371aca0db898f4772c878d358a4f0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\impulse_stage.py",
+      "bytes": 16297,
+      "sha256": "f2aceeffabfc34a0a16b54a7219fbf4115209a21bee51c308851ba4c97f5e691"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\impulse_response.py",
+      "bytes": 2679,
+      "sha256": "3c95676308c73da2f01e874753ddda6835052f991d22da32324b9f5c10bbd6ab"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\compound_response.py",
+      "bytes": 2139,
+      "sha256": "e316bd7d3efda4a8ca286c3855905c3be64db95ecab7d6d1f1ece573b9c28f63"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\impulse_codec.py",
+      "bytes": 2237,
+      "sha256": "9e7b0444309ba442434936ce1b77c66f330fee1c08d06f80e57909c8bf6f5666"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\world_model.py",
+      "bytes": 13810,
+      "sha256": "3eb05f8a449d4f5141b0787136b3eac56ab6912ae4731e4c23dc789bec846158"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\checkpoint.py",
+      "bytes": 10943,
+      "sha256": "4b18284fe81657f4f1246137806a5f29aaf210dbf878fc2b67f9ec45d4ff34bd"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\learning\\gpu_monitor.py",
+      "bytes": 1072,
+      "sha256": "b0bfa3b24a5c5057eaab234b91563326dddda1b474219a0fe39b2e68a75bc5d5"
+    }
+  ],
+  "planned_updates_per_model": 2000,
+  "models": [
+    "POINT_DIRECT",
+    "POINT_IMPULSE",
+    "RESPONSE_DIRECT",
+    "RESPONSE_IMPULSE"
+  ],
+  "matched_initial_NN": true,
+  "point_batch": 256,
+  "response_pair_batch": 32,
+  "response_weight": 0.1,
+  "pair_seed": 7751,
+  "response_loss": "mean object12 + mean source-BODY wrench6 squared finite-action contrast error, divided by unchanged frozen V2 output scales",
+  "scope": "Same point streams and optimizer counts, additional64 pair endpoints/response-arm update; not equal FLOPs. No CHECK fitting/selection or Actor training."
+}

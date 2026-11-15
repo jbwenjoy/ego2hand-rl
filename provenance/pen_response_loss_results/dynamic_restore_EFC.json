@@ -1,0 +1,80 @@
+{
+  "schema": "corrected_warp_contact_receipts_review:2",
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\warp_saved_review.py",
+    "bytes": 7027,
+    "sha256": "ba2b7c7c11f7bf6819aa38792683eadd444c6fafd9134cbec4b5668a90e2b032"
+  },
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_resident_data_audit_v1\\report.json",
+    "bytes": 90954,
+    "sha256": "717a4acc1989cc11bec862fca2e4c54cd84ca49f8ed52b5d6c073e3bc658c74c"
+  },
+  "checks": {
+    "expected_cases": true,
+    "all_receipt_checks": true
+  },
+  "cases": [
+    {
+      "task": "hand2-pen-spin",
+      "controller": "DATA_SNAPSHOT_PREFLIGHT",
+      "name": "RESTORED_BASELINE",
+      "dt": 0.005,
+      "checks": {
+        "valid_source_indices": true,
+        "local_labels_exact": true,
+        "generalized_force": true,
+        "generalized_torque": true,
+        "linear_impulse": true,
+        "copied_host_difference_explained": true,
+        "all_joint_actuators": true
+      },
+      "raw_contacts": 78,
+      "local_label_max_error": 0.0,
+      "max_force_residual_N": 1.8184086968641877e-07,
+      "max_torque_residual_Nm": 7.3076988547369606e-09,
+      "max_linear_impulse_residual_N_s": 1.0275740250594567e-08,
+      "changed_host_contact_rows": 0,
+      "nonfinite_host_rows": 0,
+      "max_legacy_normal_plus_adhesion_error": 5.3049894786e-313,
+      "wrenches": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_resident_data_EFC_v1\\RESTORED_BASELINE_0.005.npz",
+        "bytes": 6485,
+        "sha256": "25064a89313aa167933a38917a46c53c8e0581224a48b099bf8f4ace4b9209ae"
+      }
+    },
+    {
+      "task": "hand2-pen-spin",
+      "controller": "DATA_SNAPSHOT_PREFLIGHT",
+      "name": "RESTORED_BASELINE",
+      "dt": 0.0025,
+      "checks": {
+        "valid_source_indices": true,
+        "local_labels_exact": true,
+        "generalized_force": true,
+        "generalized_torque": true,
+        "linear_impulse": true,
+        "copied_host_difference_explained": true,
+        "all_joint_actuators": true
+      },
+      "raw_contacts": 145,
+      "local_label_max_error": 0.0,
+      "max_force_residual_N": 2.207166952114334e-07,
+      "max_torque_residual_Nm": 5.616025380464866e-09,
+      "max_linear_impulse_residual_N_s": 7.417097530943192e-10,
+      "changed_host_contact_rows": 0,
+      "nonfinite_host_rows": 0,
+      "max_legacy_normal_plus_adhesion_error": 5.3049894786e-313,
+      "wrenches": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_resident_data_EFC_v1\\RESTORED_BASELINE_0.0025.npz",
+        "bytes": 10526,
+        "sha256": "f7852cb3a198ef30f460cfe74014c378c0d6b31c26ba1db90fdff600775e234e"
+      }
+    }
+  ],
+  "passed": 14,
+  "total": 14,
+  "neural_updates": 0,
+  "native_integration_steps": 0,
+  "scope": "Actual saved GPU constraint indices/forces, copied-host adhesion difference, moving-COM wrenches, generalized force/torque and free-object linear impulse. Not task success, measured material calibration, or WM gradient validation."
+}

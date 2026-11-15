@@ -1,0 +1,35 @@
+{
+  "numerical_health": [
+    [
+      97,
+      97
+    ],
+    [
+      97,
+      97
+    ]
+  ],
+  "frozen_V2_control_replay": "Model/Adam/sampler/gradient/logs exact at100/2000; CHECK predictions exact2/2",
+  "native_restore": {
+    "checks": [
+      14,
+      14
+    ],
+    "array_counts": [
+      169,
+      169
+    ],
+    "scalar_counts": [
+      8,
+      8
+    ],
+    "actual_EFC": [
+      14,
+      14
+    ],
+    "extra_prestart_physics_ticks": 4
+  },
+  "repository_tests": 185,
+  "targeted_snapshot_tests": 2,
+  "conclusion": "Point predictions improve, but IMPULSE pooled physical AD worsens and no model qualifies task control. Full Data restoration verified only at initial single-step preflight; independent later-source20ms fidelity is next."
+}
