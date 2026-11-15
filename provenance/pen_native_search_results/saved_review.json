@@ -1,0 +1,4441 @@
+{
+  "schema": "pen_native_search_saved_review:1",
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_search_v2\\report.json",
+    "bytes": 132590,
+    "sha256": "e795899999f286a1a8ef2d7420dc99be9190a9be0307e9e7c97177fa7cb19ecb"
+  },
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\review_pen_native_search.py",
+    "bytes": 11260,
+    "sha256": "a8316ed61812b41f2d66db972a952f84fead55e0e1b1010516b57c99394fcb26"
+  },
+  "comparison_source": {
+    "path": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\mechanics\\pen_replay_fidelity.py",
+    "bytes": 1552,
+    "sha256": "94bdffc1b318466e4da54d05ce5a13636ab6158532a33c53948e622903da07d9"
+  },
+  "EFC": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_search_review_v1\\EFC\\report.json",
+    "bytes": 5263,
+    "sha256": "f3193ef083d1b390e48177f41592a594889ff0a1b9415d0eb9dae321a367df06"
+  },
+  "EFC_counts": [
+    27,
+    28
+  ],
+  "cases": [
+    {
+      "mode": "STATE_ONLY",
+      "dt": 0.005,
+      "global_checks": {
+        "actual_reference_COM_exact": true,
+        "actual_reference_quat_exact": true,
+        "nominal_momentum_target": true,
+        "nominal_tail_mask": true,
+        "first_native_terminal": true,
+        "original_no_reset_no_aid": true,
+        "unchanged_model": true,
+        "all_actual_EFC": true,
+        "candidate_budget": true
+      },
+      "decisions": [
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 0,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 1.893282613887881e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.036696664110456e-08,
+            "EFC_torque_Nm": 1.9578743322090467e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 1,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0019758250564336777,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0019758250564336777,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 1,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.7638463412318903e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 3.7247562431417313e-09,
+            "hand_velocity_rad_s": 5.960464477539063e-08,
+            "object_velocity_m_s": 1.7423449953896652e-09,
+            "object_omega_rad_s": 1.7872806421728082e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 7.222327284255894e-08,
+            "EFC_torque_Nm": 9.380240562792344e-10
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 47,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0017203360330313444,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0017203360330313444,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 2,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.6733972824877217e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 9.948892789995593e-08,
+            "EFC_torque_Nm": 1.3179310058612884e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 56,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0013416734291240573,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0013416734291240573,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 3,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.0326632982237136e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 3.7239345985609165e-09,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 2.7939677238464355e-09,
+            "object_omega_rad_s": 2.0670051073718933e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.1774764879754809e-07,
+            "EFC_torque_Nm": 1.8504137788098785e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 9,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0010217106901109219,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0010217106901109219,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 4,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.512524344450151e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 9.313225746154785e-10,
+            "object_omega_rad_s": 1.3348812511956006e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 8.493505491286098e-08,
+            "EFC_torque_Nm": 1.1574116149978929e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 49,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0007473073783330619,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0007473073783330619,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 5,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.1713576181414673e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 7.444979939486032e-09,
+            "hand_velocity_rad_s": 2.9802322387695312e-08,
+            "object_velocity_m_s": 2.08250058582033e-09,
+            "object_omega_rad_s": 2.5448805846970406e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 7.28823124328422e-08,
+            "EFC_torque_Nm": 1.081845725211692e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 55,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.000580023683141917,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.000580023683141917,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 6,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.457767591734772e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 4.2921220752887096e-08,
+            "EFC_torque_Nm": 1.0619135859511668e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 41,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0004204797151032835,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0004204797151032835,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 7,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.214084154084084e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.849493064615586e-08,
+            "EFC_torque_Nm": 2.3557255684920175e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 9,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0002753053850028664,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0002753053850028664,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 8,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.2538395921211105e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 1.1641532182693481e-10,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 1.862645149230957e-09,
+            "object_omega_rad_s": 1.373819180894102e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 3.209024448276314e-08,
+            "EFC_torque_Nm": 1.147854136867109e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 1,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00019009537936653942,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00019009537936653942,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 9,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.2570882874717313e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.229570532251771e-07,
+            "EFC_torque_Nm": 1.3482716140032225e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 3,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00014509449829347432,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00014509449829347432,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 10,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.0548098845551976e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 4.3097137867698526e-08,
+            "EFC_torque_Nm": 2.6417479466709083e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 3,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            9.260176739189774e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            9.260176739189774e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 11,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.732117840498205e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 8.76299304678578e-08,
+            "EFC_torque_Nm": 1.3728958564176305e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 55,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            3.871342778438702e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            3.871342778438702e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 12,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.29557476597131e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.048147741170809e-08,
+            "EFC_torque_Nm": 8.32804464507196e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 26,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00016045309894252568,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00016045309894252568,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 13,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 1.7559289522850463e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 5.812187869125724e-08,
+            "EFC_torque_Nm": 4.751811737434126e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 49,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0006346814334392548,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0006346814334392548,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 14,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.288617310597374e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.7020920009774838e-08,
+            "EFC_torque_Nm": 2.322042933338329e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0006024525500833988,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0006024525500833988,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 15,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.451198829334089e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 8.359908030455218e-08,
+            "EFC_torque_Nm": 2.836062275242263e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            3.846827894449234e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            3.846827894449234e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 16,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 1.628317254898093e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 5.445865497622839e-08,
+            "EFC_torque_Nm": 4.765828565656871e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 52,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            5.660299211740494e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            5.660299211740494e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 17,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.3334412702524787e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 5.697768081390455e-08,
+            "EFC_torque_Nm": 2.09556847381784e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0005745114758610725,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0005745114758610725,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 18,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.6891715066312827e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 4.786245115588593e-08,
+            "EFC_torque_Nm": 1.2480162588107263e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 25,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00026183249428868294,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00026183249428868294,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.005,
+          "k": 19,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.327443749867598e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 4.0225770619532e-07,
+            "EFC_torque_Nm": 7.2797498062045934e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00024039298295974731,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00024039298295974731,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "actual_duration_s": 0.4,
+      "qualified": false,
+      "task_gates": {
+        "COM_RMS_m": false,
+        "COM_max_m": false,
+        "angle_RMS_rad": false,
+        "angle_max_rad": false,
+        "max_penetration_m": true,
+        "max_self_penetration_m": true,
+        "max_joint_limit_excursion_rad": true,
+        "max_object_nonhand_normal_force_N": true,
+        "duration_complete": false,
+        "no_applied_force": true,
+        "finite_dynamics": true,
+        "no_contact_constraint_overflow": true
+      },
+      "terminations": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "fallbacks": 0,
+      "candidate_physics_ticks": 4560,
+      "actual_physics_ticks": 80,
+      "candidate_cuda_ms": [
+        1689.2601318359375,
+        182.5173797607422,
+        179.1446075439453,
+        171.44163513183594,
+        166.23583984375,
+        165.39251708984375,
+        161.8191375732422,
+        156.887939453125,
+        155.62374877929688,
+        143.16412353515625,
+        156.36773681640625,
+        135.33920288085938,
+        133.91017150878906,
+        140.852294921875,
+        116.42559814453125,
+        98.74755096435547,
+        96.08998107910156,
+        86.17625427246094,
+        77.82575988769531,
+        85.75212860107422
+      ],
+      "wall_with_artifact_s": [
+        1.7590905000106432,
+        0.21895050001330674,
+        0.21506309998221695,
+        0.20771539997076616,
+        0.2019010999938473,
+        0.20111690001795068,
+        0.19762690004426986,
+        0.19569329998921603,
+        0.19814670004416257,
+        0.1859429000178352,
+        0.1991155999712646,
+        0.17290639999555424,
+        0.16884489997755736,
+        0.1785253999987617,
+        0.15231370000401512,
+        0.13478439999744296,
+        0.13183710002340376,
+        0.12153770000441,
+        0.11307149997446686,
+        0.12159039999824017
+      ]
+    },
+    {
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.005,
+      "global_checks": {
+        "actual_reference_COM_exact": true,
+        "actual_reference_quat_exact": true,
+        "nominal_momentum_target": true,
+        "nominal_tail_mask": true,
+        "first_native_terminal": true,
+        "original_no_reset_no_aid": true,
+        "unchanged_model": true,
+        "all_actual_EFC": true,
+        "candidate_budget": true
+      },
+      "decisions": [
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 0,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 1.8931009235917395e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 3.725096169692693e-09,
+            "hand_velocity_rad_s": 7.450580596923828e-08,
+            "object_velocity_m_s": 5.890201144234053e-09,
+            "object_omega_rad_s": 3.2843693600485667e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 4.093411178403821e-08,
+            "EFC_torque_Nm": 2.1798935150017032e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0019758250564336777,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0019758250564336777,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 1,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.0091656466991736e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 2.9802322387695312e-08,
+            "object_velocity_m_s": 1.6130980174698654e-09,
+            "object_omega_rad_s": 1.4919776007605547e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.445481874363166e-08,
+            "EFC_torque_Nm": 1.411139416239128e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 1,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0016868249513208866,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0016868249513208866,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 2,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.475710897997807e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": false,
+            "EFC_torque_Nm": false,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 7.092952728271484e-06,
+            "object_position_m": 1.0861860711505062e-06,
+            "object_rotation_rad": 1.1370412044337682e-05,
+            "hand_velocity_rad_s": 0.0009656697511672974,
+            "object_velocity_m_s": 0.00015103316123425865,
+            "object_omega_rad_s": 0.0022793960010908097,
+            "control_rad": 0.0,
+            "EFC_force_N": 0.0009061455225844849,
+            "EFC_torque_Nm": 4.3241385315632314e-05
+          },
+          "fidelity_passed": false,
+          "any_feasible": true,
+          "selected": 9,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0013455272419378161,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0013455272419378161,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 3,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 1.9789928939806245e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 2.3283064365386963e-10,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 1.6789656483866224e-09,
+            "object_omega_rad_s": 7.497580555400978e-08,
+            "control_rad": 0.0,
+            "EFC_force_N": 7.401763707436509e-08,
+            "EFC_torque_Nm": 1.1766891748944306e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 45,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0010216833325102925,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0010216833325102925,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 4,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.5970071417247276e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 5.890201144234053e-09,
+            "object_omega_rad_s": 4.80605763993222e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.700223559846466e-08,
+            "EFC_torque_Nm": 1.124481208315884e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 9,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0008106909226626158,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0008106909226626158,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 5,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.306573855070937e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 5.820766091346741e-11,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 5.960464477539063e-08,
+            "object_velocity_m_s": 2.08250058582033e-09,
+            "object_omega_rad_s": 2.9802322384957416e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 8.820674324648983e-08,
+            "EFC_torque_Nm": 1.2185364771991237e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 9,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0004746879276353866,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0004746879276353866,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 6,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.2758171061232346e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 5.4681144802304616e-08,
+            "EFC_torque_Nm": 1.3756602249126082e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 45,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.000302844651741907,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.000302844651741907,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 7,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.7318061751889786e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": false,
+            "EFC_torque_Nm": false,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 1.1324882507324219e-05,
+            "object_position_m": 9.140821711146096e-06,
+            "object_rotation_rad": 0.0002623099911065435,
+            "hand_velocity_rad_s": 0.0013432465493679047,
+            "object_velocity_m_s": 0.0009236218955327535,
+            "object_omega_rad_s": 0.02894966388727989,
+            "control_rad": 0.0,
+            "EFC_force_N": 0.005431157869108686,
+            "EFC_torque_Nm": 0.00017333914226023108
+          },
+          "fidelity_passed": false,
+          "any_feasible": true,
+          "selected": 46,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0001946698612300679,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0001946698612300679,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 8,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.509701233499584e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.36245958552582e-07,
+            "EFC_torque_Nm": 2.1109523106995936e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 52,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            7.986205309862271e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            7.986205309862271e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 9,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.354927309244914e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 5.3094827087982677e-08,
+            "EFC_torque_Nm": 1.0484730365902262e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 44,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            4.8136134864762425e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            4.8136134864762425e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 10,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 7.97756010051387e-06,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.1233057448299385e-07,
+            "EFC_torque_Nm": 4.627961305584168e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 55,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            8.434802293777466e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            8.434802293777466e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 11,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.989245529150253e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 3.164689038887036e-08,
+            "EFC_torque_Nm": 3.5908600928420473e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0006316290237009525,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0006316290237009525,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 12,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.587176676627223e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 2.6738533522211796e-07,
+            "EFC_torque_Nm": 4.43766470917921e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            9.295996278524399e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            9.295996278524399e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 13,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.2749550410594566e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 4.3467740789145385e-08,
+            "EFC_torque_Nm": 4.326106533608828e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00021250499412417412,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00021250499412417412,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 14,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 4.657824968035129e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 2.9207029948130823e-08,
+            "EFC_torque_Nm": 2.200374267944187e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            3.878399729728699e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            3.878399729728699e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.005,
+          "k": 15,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.5628987831159975e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.27579026089234e-08,
+            "EFC_torque_Nm": 2.0846792164746755e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00023105740547180176,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00023105740547180176,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "actual_duration_s": 0.32,
+      "qualified": false,
+      "task_gates": {
+        "COM_RMS_m": false,
+        "COM_max_m": false,
+        "angle_RMS_rad": false,
+        "angle_max_rad": false,
+        "max_penetration_m": true,
+        "max_self_penetration_m": true,
+        "max_joint_limit_excursion_rad": true,
+        "max_object_nonhand_normal_force_N": true,
+        "duration_complete": false,
+        "no_applied_force": true,
+        "finite_dynamics": true,
+        "no_contact_constraint_overflow": true
+      },
+      "terminations": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "fallbacks": 0,
+      "candidate_physics_ticks": 3648,
+      "actual_physics_ticks": 64,
+      "candidate_cuda_ms": [
+        201.8074188232422,
+        188.9291229248047,
+        177.84678649902344,
+        173.52182006835938,
+        172.3225860595703,
+        160.06381225585938,
+        155.68453979492188,
+        154.63145446777344,
+        150.49095153808594,
+        126.10348510742188,
+        105.0865249633789,
+        102.6060791015625,
+        80.75257873535156,
+        82.72777557373047,
+        78.2715835571289,
+        82.51046752929688
+      ],
+      "wall_with_artifact_s": [
+        0.26716759998816997,
+        0.22661140002310276,
+        0.21419779997086152,
+        0.2086795999784954,
+        0.20686699997168034,
+        0.19633259996771812,
+        0.19254709995584562,
+        0.1897713000071235,
+        0.18660189997171983,
+        0.1620507999905385,
+        0.14081239997176453,
+        0.13883439998608083,
+        0.11641490005422384,
+        0.11792430002242327,
+        0.11410539998905733,
+        0.11717129999306053
+      ]
+    },
+    {
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "global_checks": {
+        "actual_reference_COM_exact": true,
+        "actual_reference_quat_exact": true,
+        "nominal_momentum_target": true,
+        "nominal_tail_mask": true,
+        "first_native_terminal": true,
+        "original_no_reset_no_aid": true,
+        "unchanged_model": true,
+        "all_actual_EFC": true,
+        "candidate_budget": true
+      },
+      "decisions": [
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 0,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.925894926533723e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 1.862579719726538e-09,
+            "hand_velocity_rad_s": 2.9802322387695312e-08,
+            "object_velocity_m_s": 2.675020437006852e-09,
+            "object_omega_rad_s": 1.519183204766682e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 9.026073398964802e-08,
+            "EFC_torque_Nm": 4.256317462513457e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 33,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0019758250564336777,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0019758250564336777,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 1,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.1827675936503255e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 1.8625752048831726e-09,
+            "hand_velocity_rad_s": 1.862645149230957e-08,
+            "object_velocity_m_s": 2.08250058582033e-09,
+            "object_omega_rad_s": 1.2078321596540783e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 2.406614036067001e-07,
+            "EFC_torque_Nm": 2.9273757423938346e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 42,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0017047777073457837,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0017047777073457837,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 2,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.719994716823826e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 8.352964593452936e-08,
+            "EFC_torque_Nm": 8.87378218906286e-10
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 56,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.001284130965359509,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.001284130965359509,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 3,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 1.8804789420068246e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 9.450779647056349e-08,
+            "EFC_torque_Nm": 7.73208737544034e-10
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 9,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.000979317817837,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.000979317817837,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 4,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.067567803671789e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 7.049970725078967e-08,
+            "EFC_torque_Nm": 1.1065139048992348e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 9,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00073268823325634,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00073268823325634,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 5,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.560568412968145e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 9.801441313536892e-08,
+            "EFC_torque_Nm": 1.2020167120947644e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 54,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0005196029669605196,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0005196029669605196,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 6,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.410436645616798e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 2.9802322387695312e-08,
+            "object_velocity_m_s": 2.2812650937430355e-09,
+            "object_omega_rad_s": 1.3662219665258257e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.41291789662872e-08,
+            "EFC_torque_Nm": 1.326512964861422e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 9,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00036603654734790325,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00036603654734790325,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 7,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.863234846328666e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 8.961546490860312e-08,
+            "EFC_torque_Nm": 7.871432986829297e-10
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 9,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00025780079886317253,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00025780079886317253,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 8,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.9133292994920623e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 8.510036519427987e-08,
+            "EFC_torque_Nm": 3.5611528260734533e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 3,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00012120408791815862,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00012120408791815862,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 9,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.74912703517316e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.976181841664902e-08,
+            "EFC_torque_Nm": 2.894287483332598e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 3,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00010736162948887795,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00010736162948887795,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 10,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.3974952987337872e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.598558282744219e-08,
+            "EFC_torque_Nm": 3.158440769245652e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 56,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00011784785601776093,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00011784785601776093,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 11,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 1.9454266958263133e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 4.721631981123117e-08,
+            "EFC_torque_Nm": 2.2720611067494406e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 13,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            1.6733509255573153e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            1.6733509255573153e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 12,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.058313099695397e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.304354658522119e-08,
+            "EFC_torque_Nm": 5.8459370396973104e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.001071218866854906,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.001071218866854906,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 13,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.589765726985661e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.564215380748919e-08,
+            "EFC_torque_Nm": 3.0812247678313047e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.000888437032699585,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.000888437032699585,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 14,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.7745944450430216e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 4.2674695535534387e-07,
+            "EFC_torque_Nm": 1.1095944781726513e-08
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0003683352842926979,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0003683352842926979,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 15,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.065435403153515e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.551735266442313e-07,
+            "EFC_torque_Nm": 2.0791447492906295e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 47,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00043383706361055374,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00043383706361055374,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 16,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.741319542882593e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.967414585331504e-08,
+            "EFC_torque_Nm": 1.566669308328323e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            7.327878847718239e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            7.327878847718239e-05,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "actual_duration_s": 0.34,
+      "qualified": false,
+      "task_gates": {
+        "COM_RMS_m": false,
+        "COM_max_m": false,
+        "angle_RMS_rad": false,
+        "angle_max_rad": false,
+        "max_penetration_m": true,
+        "max_self_penetration_m": true,
+        "max_joint_limit_excursion_rad": true,
+        "max_object_nonhand_normal_force_N": true,
+        "duration_complete": false,
+        "no_applied_force": true,
+        "finite_dynamics": true,
+        "no_contact_constraint_overflow": true
+      },
+      "terminations": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "fallbacks": 0,
+      "candidate_physics_ticks": 7752,
+      "actual_physics_ticks": 136,
+      "candidate_cuda_ms": [
+        375.5506286621094,
+        353.5082092285156,
+        334.9330139160156,
+        324.3664245605469,
+        310.1999816894531,
+        297.93701171875,
+        287.0926818847656,
+        294.04754638671875,
+        271.2972106933594,
+        259.3358154296875,
+        239.62112426757812,
+        202.2310028076172,
+        204.46047973632812,
+        177.35317993164062,
+        147.36087036132812,
+        152.31202697753906,
+        147.48374938964844
+      ],
+      "wall_with_artifact_s": [
+        0.4568929999950342,
+        0.39237220003269613,
+        0.3726880999747664,
+        0.3619417999871075,
+        0.3478606999851763,
+        0.33404470002278686,
+        0.3256485000019893,
+        0.3292900000233203,
+        0.3090085999574512,
+        0.3114549999590963,
+        0.27711129997624084,
+        0.23857330001192167,
+        0.2422550999908708,
+        0.21532740001566708,
+        0.18293700000504032,
+        0.18976249999832362,
+        0.18473129998892546
+      ]
+    },
+    {
+      "mode": "STATE_PLUS_SUPPORT",
+      "dt": 0.0025,
+      "global_checks": {
+        "actual_reference_COM_exact": true,
+        "actual_reference_quat_exact": true,
+        "nominal_momentum_target": true,
+        "nominal_tail_mask": true,
+        "first_native_terminal": true,
+        "original_no_reset_no_aid": true,
+        "unchanged_model": true,
+        "all_actual_EFC": false,
+        "candidate_budget": true
+      },
+      "decisions": [
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 0,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.9259304046361234e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 2.9802322387695312e-08,
+            "object_velocity_m_s": 1.9199706733309015e-09,
+            "object_omega_rad_s": 8.442222093476978e-08,
+            "control_rad": 0.0,
+            "EFC_force_N": 9.592929016922565e-08,
+            "EFC_torque_Nm": 2.2772953529888436e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0019766760524362326,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0019766760524362326,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 1,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.8588713594374093e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 2.9802322387695312e-08,
+            "object_velocity_m_s": 2.08250058582033e-09,
+            "object_omega_rad_s": 1.194418933704225e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 8.299907512328686e-08,
+            "EFC_torque_Nm": 1.391352951686678e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 1,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0017370178829878569,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0017370178829878569,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 2,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.87130470133512e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 3.725290298461914e-09,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 3.724230965559584e-09,
+            "hand_velocity_rad_s": 4.470348358154297e-08,
+            "object_velocity_m_s": 1.9199706733309015e-09,
+            "object_omega_rad_s": 1.1934089405434195e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.317292036574973e-07,
+            "EFC_torque_Nm": 1.3028978727337202e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 30,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0013806724455207586,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0013806724455207586,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 3,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.3311463702713198e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 6.284444797017569e-08,
+            "EFC_torque_Nm": 1.2702331960026607e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 42,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.001074767205864191,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.001074767205864191,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 4,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.7136467081079196e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.0682882436000839e-07,
+            "EFC_torque_Nm": 2.563873608750656e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 49,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0008296289015561342,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0008296289015561342,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 5,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.367622720633733e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 2.1339280972982942e-09,
+            "object_omega_rad_s": 8.429369706775259e-08,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.0610833531201868e-07,
+            "EFC_torque_Nm": 1.97270379506958e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 55,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0005981175927445292,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0005981175927445292,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 6,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.368883913634768e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.1676404527832067e-07,
+            "EFC_torque_Nm": 2.4829882727143273e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 48,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00039491086499765515,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00039491086499765515,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 7,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.8358752935719878e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 5.608610590522235e-08,
+            "EFC_torque_Nm": 1.0569733843396774e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 9,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00019224744755774736,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00019224744755774736,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 8,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.312369631380818e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 7.98489341518317e-08,
+            "EFC_torque_Nm": 1.0846322346992077e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 52,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            9.383329597767442e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            9.383329597767442e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 9,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.714230187539357e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 5.960464477539063e-08,
+            "object_velocity_m_s": 9.313225746154785e-10,
+            "object_omega_rad_s": 1.1920928974634798e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.4968491475854502e-07,
+            "EFC_torque_Nm": 2.659234257920903e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 51,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            4.939281279803254e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            4.939281279803254e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 10,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.293504762462817e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 8.041622311607119e-08,
+            "EFC_torque_Nm": 3.3128742063004834e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 56,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            3.3593998523429036e-05,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            3.3593998523429036e-05,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 11,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 1.8858409422506384e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 2.5827774615953234e-07,
+            "EFC_torque_Nm": 8.980635009225579e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0008510318584740162,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0008510318584740162,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 12,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.2626830212146842e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.3138428665586993e-07,
+            "EFC_torque_Nm": 7.92261363719041e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0010935780592262745,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0010935780592262745,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 13,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.7953338232578062e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.3115733486051068e-07,
+            "EFC_torque_Nm": 4.51888535986732e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0005284030921757221,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0005284030921757221,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 14,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 2.3351754137479475e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.1040540594994433e-07,
+            "EFC_torque_Nm": 3.1395271459725615e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.0004443931393325329,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.0004443931393325329,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 15,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 3.213228643517141e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 2.032235642108043e-08,
+            "EFC_torque_Nm": 7.434759807283533e-10
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00040138280019164085,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00040138280019164085,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "mode": "STATE_PLUS_SUPPORT",
+          "dt": 0.0025,
+          "k": 16,
+          "checks": {
+            "raw_table": true,
+            "original_EMA": true,
+            "encoder_bias_constant_within_candidates": true,
+            "selected_raw_exact": true,
+            "selected_target_exact": true,
+            "source_state_exact": true,
+            "source_warm_exact": true,
+            "source_clock": true,
+            "live_isolation": true,
+            "fixed57_candidates": true,
+            "formula_within_FP32_roundoff": true,
+            "minimum_declared_score_or_violation": true,
+            "no_fallback_hidden": true
+          },
+          "score_max_abs_error": 4.881158596958812e-05,
+          "fidelity": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "fidelity_metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 9.221148064297461e-08,
+            "EFC_torque_Nm": 1.6988235138921981e-09
+          },
+          "fidelity_passed": true,
+          "any_feasible": true,
+          "selected": 5,
+          "selected_violation": 0.0,
+          "selected_predicted_geometry": [
+            0.00012124935165047646,
+            0.0,
+            0.0
+          ],
+          "selected_actual_geometry": [
+            0.00012124935165047646,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "actual_duration_s": 0.34,
+      "qualified": false,
+      "task_gates": {
+        "COM_RMS_m": false,
+        "COM_max_m": false,
+        "angle_RMS_rad": false,
+        "angle_max_rad": false,
+        "max_penetration_m": true,
+        "max_self_penetration_m": true,
+        "max_joint_limit_excursion_rad": true,
+        "max_object_nonhand_normal_force_N": true,
+        "duration_complete": false,
+        "no_applied_force": true,
+        "finite_dynamics": true,
+        "no_contact_constraint_overflow": true
+      },
+      "terminations": {
+        "time_out": false,
+        "unstable": false,
+        "object_position_error": true,
+        "reference_end": false,
+        "object_orientation_error": false
+      },
+      "fallbacks": 0,
+      "candidate_physics_ticks": 7752,
+      "actual_physics_ticks": 136,
+      "candidate_cuda_ms": [
+        378.0533752441406,
+        357.56500244140625,
+        347.45904541015625,
+        340.16790771484375,
+        327.3638916015625,
+        279.009765625,
+        289.1036376953125,
+        300.13970947265625,
+        274.1595458984375,
+        251.60301208496094,
+        227.26226806640625,
+        205.0164794921875,
+        197.4665985107422,
+        167.6580810546875,
+        150.25439453125,
+        149.38819885253906,
+        154.7665557861328
+      ],
+      "wall_with_artifact_s": [
+        0.461120399995707,
+        0.3949532000115141,
+        0.38427959999535233,
+        0.37784909998299554,
+        0.36479309998685494,
+        0.31491770001593977,
+        0.32679970003664494,
+        0.33935100003145635,
+        0.3113747999886982,
+        0.28849030000856146,
+        0.2651560000376776,
+        0.2431450000149198,
+        0.23405710002407432,
+        0.20431449997704476,
+        0.19008470000699162,
+        0.1867694000247866,
+        0.1910226999898441
+      ]
+    }
+  ],
+  "common_prefix": [
+    {
+      "dt": 0.005,
+      "common_intervals": 16,
+      "common_physical_s": 0.32,
+      "candidates_per_mode_common_prefix": 912,
+      "selected_indices_equal": 2
+    },
+    {
+      "dt": 0.0025,
+      "common_intervals": 17,
+      "common_physical_s": 0.34,
+      "candidates_per_mode_common_prefix": 969,
+      "selected_indices_equal": 6
+    }
+  ],
+  "contract_passed": 945,
+  "contract_total": 946,
+  "selected_fidelity_passed": 68,
+  "selected_fidelity_total": 70,
+  "nominal_model_support_benefit_established": false,
+  "neural_updates": 0,
+  "native_integrations": 0,
+  "scope": "Independent saved contracts, mean-reference momentum targets, cost formula(debug FP32 roundoff only), exact argmin/fallback, original raw/EMA/selected PD and EVERY selected native20ms state/force comparison. Implied bias consistency is not a new observed hardware calibration. Actual task gates stay unrelaxed; all failures retained. Per-decision57 budget/common prefix, not equal total survival compute or final learned-policy A1/A2."
+}
