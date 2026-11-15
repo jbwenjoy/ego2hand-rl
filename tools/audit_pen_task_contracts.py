@@ -136,7 +136,7 @@ def main(a):
     verify_source_snapshot(receipt,live=True)
     result=dict(schema='pen_task_reference_and_learning_contract_audit:1',config=file_pin(cp),inputs={k:file_pin(v) for k,v in paths.items()},
         clip=file_pin(clip),catalog=file_pin(index),source_receipt=file_pin(a.output/'source_receipt.json'),
-        checks={k:bool(v) for k,v in checks.items()},passed=sum(checks.values()),total=len(checks),cases=cases,frame_audits=frames,
+        checks={k:bool(v) for k,v in checks.items()},passed=int(sum(checks.values())),total=len(checks),cases=cases,frame_audits=frames,
         candidate_tables=tables,common_prefix=common,paths=file_pin(a.output/'actual_paths.npz'),
         policy_contract=dict(axis_feature_source=file_pin(source),axis_radius_m=radius,position_tanh_scale_m=bound,
             instantaneous_axial_roll_witness=witness,PPO_pen_guard=ppo_guard,
