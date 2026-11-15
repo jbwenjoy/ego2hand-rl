@@ -28,7 +28,7 @@ def main(a):
     from mujoco_warp._src.collision_core import create_collision_context
     cp=a.config.resolve();cfg=tomllib.loads(cp.read_text());bp=(cp.parent/cfg['branch']).resolve();branch=json.loads(bp.read_text())
     if (a.output.exists() or not a.output.resolve().is_relative_to(ROOT/'runs') or cfg['pair']!=[1,29] or cfg['poses']!=[p['name'] for p in branch['poses']]
-            or cfg['repeats']!=5 or cfg['phase_scratch']!='ZERO_BEFORE_EACH_QUERY' or cfg['calibration_center_separations_m']!=[.5,.15,.05]
+            or cfg.get('calibration_pairs')!=['BOX_BOX','CYLINDER_MESH_BOX'] or cfg['repeats']!=5 or cfg['phase_scratch']!='ZERO_BEFORE_EACH_QUERY' or cfg['calibration_center_separations_m']!=[.5,.15,.05]
             or cfg['calibration_box_halfsize_m']!=.1 or cfg['calibration_distance_tolerance_m']!=1e-5):raise ValueError('Fixed pair-stage diagnostic and calibrations')
     wp.init();wp.set_device('cuda:0');stream=wp.Stream(device='cuda:0');a.output.mkdir()
     receipt=freeze_sources(sorted((ROOT/'src/supermimic_research').rglob('*.py'))+[Path(__file__)],a.output/'source_snapshot',ROOT,
@@ -38,8 +38,12 @@ def main(a):
         a.output/'installed_source_snapshot',package,'installed-package-source-not-git');write(a.output/'installed_source_receipt.json',installed)
     calibrations=[];keepers=[]
     with wp.ScopedStream(stream):
-        for separation in cfg['calibration_center_separations_m']:
-            m=mujoco.MjModel.from_xml_string(f'<mujoco><option ccd_iterations="50"/><worldbody><body><freejoint/><geom type="box" size=".1 .1 .1"/></body><body pos="{separation} 0 0"><freejoint/><geom type="box" size=".1 .1 .1"/></body></worldbody></mujoco>')
+        for fixture,separation in [(f,s) for f in cfg['calibration_pairs'] for s in cfg['calibration_center_separations_m']]:
+            vertices=' '.join(str(v) for x in [-.1,.1] for y in [-.1,.1] for z in [-.1,.1] for v in [x,y,z])
+            asset=f'<asset><mesh name="box" vertex="{vertices}"/></asset>' if fixture=='CYLINDER_MESH_BOX' else ''
+            first='type="cylinder" size=".1 .1"' if fixture=='CYLINDER_MESH_BOX' else 'type="box" size=".1 .1 .1"'
+            second='type="mesh" mesh="box"' if fixture=='CYLINDER_MESH_BOX' else 'type="box" size=".1 .1 .1"'
+            m=mujoco.MjModel.from_xml_string(f'<mujoco><option ccd_iterations="50"/>{asset}<worldbody><body><freejoint/><geom {first}/></body><body pos="{separation} 0 0"><freejoint/><geom {second}/></body></worldbody></mujoco>')
             dm=mw.put_model(m);data=mw.make_data(m,nworld=1,naconmax=32,njmax=128);data.qpos.assign(m.qpos0.astype(np.float32)[None])
             mw.kinematics(dm,data);mw.collision(dm,data);wp.synchronize_stream(stream)
             probe=ContactPhaseProbe(dm,data);result,packet=probe.query(0,1);wp.synchronize_stream(stream)
@@ -47,8 +51,8 @@ def main(a):
             checks=dict(native_contact_presence=(contact_count>0)==present,phase_contact_presence=result['pre_multiccd_emit']==present,
                 no_overflow=not result['overflow'] and not bool(data.overflow.numpy()[0]),
                 analytic_penetration=(not present) or abs(result['final_surface_distance_m']-(separation-.2))<=1e-5)
-            path=a.output/f'calibration_{separation:g}.npz';np.savez_compressed(path,**packet)
-            calibrations.append(dict(separation_m=separation,expected_signed_distance_m=separation-.2,native_contacts=contact_count,phase=result,checks=checks,trace=file_pin(path)))
+            path=a.output/f'calibration_{fixture}_{separation:g}.npz';np.savez_compressed(path,**packet)
+            calibrations.append(dict(fixture=fixture,separation_m=separation,expected_signed_distance_m=separation-.2,native_contacts=contact_count,phase=result,checks=checks,trace=file_pin(path)))
             keepers.append((dm,data,probe))
         write(a.output/'calibration.json',dict(cases=calibrations))
         if not all(all(c['checks'].values()) for c in calibrations):raise ValueError('Analytic wrapper calibration failed; source queries not run')

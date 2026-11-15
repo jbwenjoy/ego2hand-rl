@@ -4,7 +4,7 @@ import warp as wp
 
 from mujoco_warp._src.collision_core import geom_collision_pair,contact_margin_gap
 from mujoco_warp._src.collision_gjk import gjk,gjk_phase,epa_phase
-from mujoco_warp._src.types import MJ_MAX_EPAFACES,MJ_MAX_EPAHORIZON
+from mujoco_warp._src.types import MJ_MAX_EPAFACES,MJ_MAX_EPAHORIZON,GeomType
 
 
 @wp.struct
@@ -47,8 +47,9 @@ def _phases(p:PairArrays,g:int,h:int,pairid:int,gjk_iterations:int,epa_iteration
         p.mesh_polyvert,p.mesh_polymapadr,p.mesh_polymapnum,p.mesh_polymap,p.geom_xpos,p.geom_xmat,pair,0)
     margin,gap=contact_margin_gap(p.geom_margin,p.geom_gap,p.pair_margin,p.pair_gap,pair,pairid,0)
     a.margin=margin;b.margin=margin
-    # This wrapper is deliberately restricted to the box/mesh discrete path.
-    raw=gjk(p.tolerance[0],gjk_iterations,a,b,a.pos,b.pos,t1,t2,gap,True)
+    # Match installed _discrete_geoms for supported cylinder/box/mesh inputs.
+    discrete=(t1==GeomType.BOX or t1==GeomType.MESH) and (t2==GeomType.BOX or t2==GeomType.MESH) and margin==0.0
+    raw=gjk(p.tolerance[0],gjk_iterations,a,b,a.pos,b.pos,t1,t2,gap,discrete)
     need,dist,ncontact,x1,x2,result,a2,b2=gjk_phase(p.tolerance[0],gap,gjk_iterations,a,b,t1,t2,a.pos,b.pos)
     floats[0]=margin;floats[1]=gap;floats[2]=p.tolerance[0];floats[3]=raw.dist;floats[4]=dist
     integers[0]=raw.dim;integers[1]=int(need);integers[2]=result.dim
@@ -68,7 +69,7 @@ def _phases(p:PairArrays,g:int,h:int,pairid:int,gjk_iterations:int,epa_iteration
 class ContactPhaseProbe:
     def __init__(self,model,data,*,device='cuda:0'):
         # Kernels use native functions verbatim with explicit separate diagnostic
-        # scratch. Only BOX/MESH, no collision-sensor pairs or margin special cases.
+        # scratch. CYLINDER/BOX/MESH; no sphere/capsule shrink or sensor cutoff.
         self.p=PairArrays()
         for name in PairArrays.vars:
             if name=='tolerance':value=model.opt.ccd_tolerance
@@ -87,7 +88,7 @@ class ContactPhaseProbe:
             simplices=wp.zeros((3,4),dtype=wp.vec3,device=device),indices=wp.zeros((2,4),dtype=int,device=device),witness=wp.zeros(2,dtype=wp.vec3,device=device))
 
     def query(self,g,h,pairid=-1):
-        if any(int(self.types[x]) not in [6,7] for x in [g,h]):raise ValueError('Diagnostic restricted to BOX/MESH')
+        if any(int(self.types[x]) not in [5,6,7] for x in [g,h]):raise ValueError('Diagnostic restricted to CYLINDER/BOX/MESH')
         for value in self.arrays.values():value.zero_()
         wp.launch(_phases,1,inputs=[self.p,g,h,pairid,self.gjk_iterations,self.epa_iterations,*self.arrays.values()],device=self.device)
         values={key:value.numpy().copy() for key,value in self.arrays.items()};f,i=values['floats'],values['integers']
@@ -95,7 +96,7 @@ class ContactPhaseProbe:
             phase_gjk_distance_m=float(f[4]),final_pre_margin_distance_m=float(f[5]),final_surface_distance_m=float(f[6]),
             raw_simplex_dim=int(i[0]),needs_epa=bool(i[1]),phase_simplex_dim=int(i[2]),support_cache_indices=[int(i[3]),int(i[4])],
             pre_multiccd_contacts=int(i[5]),multiccd_index=int(i[6]),native_gap_reject=bool(i[7]),pre_multiccd_emit=bool(i[8]),
-            overflow=bool(values['overflow'][0]),configured_gjk_iterations=self.gjk_iterations,configured_epa_iterations=self.epa_iterations,
+            overflow=bool(values['overflow'][0]),geometry_types=[int(self.types[g]),int(self.types[h])],configured_gjk_iterations=self.gjk_iterations,configured_epa_iterations=self.epa_iterations,
             scratch_policy='ZERO_BEFORE_EACH_QUERY_SEPARATE_FROM_NATIVE_PIPELINE',
             scope='Installed GJK/EPA function outputs, no original iteration counter/termination label fabricated. Pre-multiccd is not the final native contact manifold.')
         return result,values
