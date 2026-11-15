@@ -1,0 +1,403 @@
+{
+  "schema": "native_pen_failed_forecast_tick_diagnostics:1",
+  "run": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_velocity_recovery_v1\\report.json",
+    "bytes": 322577,
+    "sha256": "e7e53793d9bb90d0cbe5d67aa4d0cb586316ada66b5e5b6f7dd295c3b813d34b"
+  },
+  "review": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_velocity_review_v1\\report.json",
+    "bytes": 329484,
+    "sha256": "196c8c09f0467178c57a87a610d8774faaf4e5836673622572bebfc6bf7607a4"
+  },
+  "gates": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\pen_gpu_step_audit_v1.toml",
+    "bytes": 416,
+    "sha256": "c31b252e6cfe90e6c89531efb8cac31daf72f813f4e4d7886adda70a9fd1e436"
+  },
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\diagnose_pen_native_fidelity_ticks.py",
+    "bytes": 3615,
+    "sha256": "787b0eb7c7074674b05c188da2ed860b5e002c63850846c610d8e273df771b3d"
+  },
+  "failures": [
+    {
+      "mode": "STATE_PLUS_VELOCITY_SUPPORT",
+      "dt": 0.005,
+      "k": 9,
+      "source_s": 0.18,
+      "prediction": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_velocity_v1\\STATE_PLUS_VELOCITY_SUPPORT_0.005\\decision_0009.npz",
+        "bytes": 49232,
+        "sha256": "072ca325efdda8c40452940e30439f13f4aa3fde0f3fbe1c39c3aca152c59d67"
+      },
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_velocity_v1\\STATE_PLUS_VELOCITY_SUPPORT_0.005\\source_0009.npz",
+        "bytes": 51159,
+        "sha256": "1339af0fa4b54aec3df5acc5cc1530059bb0ed0e42ee23838049b7a7fe45036e"
+      },
+      "first_failed_tick": 3,
+      "ticks": [
+        {
+          "tick": 0,
+          "elapsed_s": 0.005,
+          "metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 5.960464477539063e-08,
+            "object_velocity_m_s": 7.450580596923828e-09,
+            "object_omega_rad_s": 2.402740042728543e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.5024262054633871e-07,
+            "EFC_torque_Nm": 2.6579609984514746e-09
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "passed": true
+        },
+        {
+          "tick": 1,
+          "elapsed_s": 0.01,
+          "metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 5.6471402277906883e-08,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 1.862645149230957e-09,
+            "object_omega_rad_s": 4.6374315430763046e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 4.860830807163276e-08,
+            "EFC_torque_Nm": 1.8018932587235876e-09
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "passed": true
+        },
+        {
+          "tick": 2,
+          "elapsed_s": 0.015,
+          "metrics": {
+            "hand_position_rad": 4.656612873077393e-10,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 5.6173045405123816e-08,
+            "hand_velocity_rad_s": 7.450580596923828e-09,
+            "object_velocity_m_s": 2.3283064365386963e-09,
+            "object_omega_rad_s": 4.623014626849626e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 2.1073424255447017e-08,
+            "EFC_torque_Nm": 1.1664708537325336e-10
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "passed": true
+        },
+        {
+          "tick": 3,
+          "elapsed_s": 0.02,
+          "metrics": {
+            "hand_position_rad": 0.00019693374633789062,
+            "object_position_m": 0.0003873565653633559,
+            "object_rotation_rad": 0.03833221323177813,
+            "hand_velocity_rad_s": 0.03938852250576019,
+            "object_velocity_m_s": 0.07746899322921387,
+            "object_omega_rad_s": 7.666532950397489,
+            "control_rad": 0.0,
+            "EFC_force_N": 0.4648139750050836,
+            "EFC_torque_Nm": 0.014849716051062266
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": false,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": false,
+            "object_omega_rad_s": false,
+            "control_rad": true,
+            "EFC_force_N": false,
+            "EFC_torque_Nm": false,
+            "time_exact": true
+          },
+          "passed": false
+        }
+      ]
+    },
+    {
+      "mode": "STATE_ONLY",
+      "dt": 0.0025,
+      "k": 1,
+      "source_s": 0.02,
+      "prediction": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_velocity_v1\\STATE_ONLY_0.0025\\decision_0001.npz",
+        "bytes": 90907,
+        "sha256": "cc919033ca13b03ede442f91cc960ef0aa42c1264b232df422c125ecbca6e76f"
+      },
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_native_velocity_v1\\STATE_ONLY_0.0025\\source_0001.npz",
+        "bytes": 51126,
+        "sha256": "557270c748cee783157edbb3811ffdd65c1b4dde9e294b8283aee1f82169ce44"
+      },
+      "first_failed_tick": 5,
+      "ticks": [
+        {
+          "tick": 0,
+          "elapsed_s": 0.0025,
+          "metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 0.0,
+            "object_velocity_m_s": 0.0,
+            "object_omega_rad_s": 0.0,
+            "control_rad": 0.0,
+            "EFC_force_N": 3.218207321511675e-08,
+            "EFC_torque_Nm": 9.50588370780986e-10
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "passed": true
+        },
+        {
+          "tick": 1,
+          "elapsed_s": 0.005,
+          "metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 0.0,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 1.0073793890319735e-08,
+            "object_omega_rad_s": 9.542634869710458e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.4269059896636646e-07,
+            "EFC_torque_Nm": 2.999756399931616e-09
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "passed": true
+        },
+        {
+          "tick": 2,
+          "elapsed_s": 0.0075,
+          "metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 1.862557564401374e-09,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 7.508562643358995e-09,
+            "object_omega_rad_s": 1.1344033569150368e-06,
+            "control_rad": 0.0,
+            "EFC_force_N": 8.192928390685469e-08,
+            "EFC_torque_Nm": 7.099122074160049e-10
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "passed": true
+        },
+        {
+          "tick": 3,
+          "elapsed_s": 0.01,
+          "metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 1.8625547979857435e-09,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 6.969379981558661e-09,
+            "object_omega_rad_s": 8.368609052904709e-07,
+            "control_rad": 0.0,
+            "EFC_force_N": 4.552580622587223e-08,
+            "EFC_torque_Nm": 9.795492185109252e-10
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "passed": true
+        },
+        {
+          "tick": 4,
+          "elapsed_s": 0.0125,
+          "metrics": {
+            "hand_position_rad": 0.0,
+            "object_position_m": 0.0,
+            "object_rotation_rad": 2.9692079855781604e-08,
+            "hand_velocity_rad_s": 1.4901161193847656e-08,
+            "object_velocity_m_s": 1.9800189533707965e-08,
+            "object_omega_rad_s": 2.3842789018593164e-06,
+            "control_rad": 0.0,
+            "EFC_force_N": 1.2342236491517402e-07,
+            "EFC_torque_Nm": 6.54390019404334e-09
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": true,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "passed": true
+        },
+        {
+          "tick": 5,
+          "elapsed_s": 0.015,
+          "metrics": {
+            "hand_position_rad": 2.384185791015625e-07,
+            "object_position_m": 7.957223565613414e-08,
+            "object_rotation_rad": 4.9554345954036835e-06,
+            "hand_velocity_rad_s": 6.228161510080099e-05,
+            "object_velocity_m_s": 2.7263532277195464e-05,
+            "object_omega_rad_s": 0.001993549416032706,
+            "control_rad": 0.0,
+            "EFC_force_N": 0.0003271513822800352,
+            "EFC_torque_Nm": 5.2738667648815664e-05
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": false,
+            "EFC_torque_Nm": false,
+            "time_exact": true
+          },
+          "passed": false
+        },
+        {
+          "tick": 6,
+          "elapsed_s": 0.0175,
+          "metrics": {
+            "hand_position_rad": 2.7567148208618164e-07,
+            "object_position_m": 8.989072227488201e-08,
+            "object_rotation_rad": 1.2835011227815352e-05,
+            "hand_velocity_rad_s": 4.999339580535889e-05,
+            "object_velocity_m_s": 9.81642109640846e-06,
+            "object_omega_rad_s": 0.0031575166718811397,
+            "control_rad": 0.0,
+            "EFC_force_N": 0.00025959292682249094,
+            "EFC_torque_Nm": 2.8256703126431663e-06
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": false,
+            "EFC_torque_Nm": true,
+            "time_exact": true
+          },
+          "passed": false
+        },
+        {
+          "tick": 7,
+          "elapsed_s": 0.02,
+          "metrics": {
+            "hand_position_rad": 2.7567148208618164e-07,
+            "object_position_m": 8.348723810544226e-08,
+            "object_rotation_rad": 1.5279667090244647e-05,
+            "hand_velocity_rad_s": 1.1621043086051941e-05,
+            "object_velocity_m_s": 1.2006596508946284e-05,
+            "object_omega_rad_s": 0.0009699867040514423,
+            "control_rad": 0.0,
+            "EFC_force_N": 0.0002140722801625383,
+            "EFC_torque_Nm": 3.489338422014051e-05
+          },
+          "checks": {
+            "hand_position_rad": true,
+            "object_position_m": true,
+            "object_rotation_rad": true,
+            "hand_velocity_rad_s": true,
+            "object_velocity_m_s": true,
+            "object_omega_rad_s": true,
+            "control_rad": true,
+            "EFC_force_N": false,
+            "EFC_torque_Nm": false,
+            "time_exact": true
+          },
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "all_original_failed_forecasts_included": true,
+  "native_integrations": 0,
+  "neural_updates": 0,
+  "scope": "Every originally failed selected forecast, all physics ticks at unchanged gates. Failure timing is descriptive, not proof of contact/solver cause; unavailable predicted solver/contact internals are not fabricated."
+}
