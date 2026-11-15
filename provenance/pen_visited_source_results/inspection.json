@@ -1,0 +1,26 @@
+{
+  "schema": "installed_native_source_inspection:1",
+  "source_receipt": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_visited_source_inspection_v1\\source_receipt.json",
+    "bytes": 4140,
+    "sha256": "378ee0b7bd07a2d7af195b09ebe81bbf905c87e4bc4f45e89b29e06f1aa4651d"
+  },
+  "observations": [
+    {
+      "file": "solver.py",
+      "function": "solve/_create_solver_context",
+      "finding": "SolverContext arrays are allocated separately from Data, including wp.empty scratch. Existence alone does not establish stale-workspace failure."
+    },
+    {
+      "file": "collision_driver.py",
+      "function": "collision",
+      "finding": "CollisionContext allocated separately; ncollision/nacon cleared before broad/narrowphase. Collision-only observed branching does not require constraint solving."
+    },
+    {
+      "file": "io.py",
+      "function": "make_data",
+      "finding": "Reconstructed capacities use source array dimensions and declared constructor defaults. Old unsaved naccdmax is not independently observed."
+    }
+  ],
+  "scope": "Read-only primary installed-source inspection, frozen bytes. No backend/library/driver changes and no causal bug verdict."
+}
