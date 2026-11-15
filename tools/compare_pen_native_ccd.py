@@ -26,10 +26,17 @@ def main(a):
     runs=[json.loads(p.read_text()) for p in [a.baseline,a.tight]]
     reviews=[json.loads(p.read_text()) for p in [a.baseline_review,a.tight_review]]
     configs=[tomllib.loads(verify_file_pin(r['config']).read_text()) for r in runs]
-    checks=dict(config_fixed_except_CCD={k:v for k,v in configs[0].items() if k!='collision_numerics'}=={k:v for k,v in configs[1].items() if k!='collision_numerics'},
-        predeclared_CCD=[r['collision_numerics'] for r in runs]==[dict(ccd_iterations=50,ccd_tolerance=1e-6),dict(ccd_iterations=50,ccd_tolerance=1e-7)],
+    axis=getattr(a,'axis','CCD')
+    if axis not in ['CCD','ORIENTATION']:raise ValueError('Declared matrix axis')
+    omitted='collision_numerics' if axis=='CCD' else 'orientation_objective'
+    labels=['BASELINE','TIGHT'] if axis=='CCD' else ['SHAFT','FULL_SO3']
+    expected_CCD=[dict(ccd_iterations=50,ccd_tolerance=1e-6),dict(ccd_iterations=50,ccd_tolerance=1e-7 if axis=='CCD' else 1e-6)]
+    checks=dict(config_fixed_except_axis={k:v for k,v in configs[0].items() if k!=omitted}=={k:v for k,v in configs[1].items() if k!=omitted},
+        predeclared_CCD=[r['collision_numerics'] for r in runs]==expected_CCD,
         candidate_table_exact=np.array_equal(np.load(verify_file_pin(runs[0]['candidates']))['raw_offsets'],np.load(verify_file_pin(runs[1]['candidates']))['raw_offsets']),
         original_proposal=runs[0]['proposal']==runs[1]['proposal'],base_config=runs[0]['base_config']==runs[1]['base_config'])
+    if axis=='ORIENTATION':
+        checks['predeclared_orientation']=[r['orientation_objective'] for r in runs]==[c['orientation_objective'] for c in configs]==labels
     receipts=[]
     for r in runs:
         maps=[]
@@ -49,7 +56,7 @@ def main(a):
         pair=[next(c for c in r['cases'] if (c['name'],c['dt'])==key) for r in runs]
         models=[np.load(verify_file_pin(c['fixed_model_arrays'])) for c in pair]
         traces=[dict(np.load(verify_file_pin(c['trace']))) for c in pair]
-        local=dict(only_CCD_array_diff=differences(*models)==['opt.ccd_tolerance'],all_model_scalars_exact=read(pair[0]['fixed_model_scalars'])==read(pair[1]['fixed_model_scalars']),
+        local=dict(expected_model_array_diffs=differences(*models)==(['opt.ccd_tolerance'] if axis=='CCD' else []),all_model_scalars_exact=read(pair[0]['fixed_model_scalars'])==read(pair[1]['fixed_model_scalars']),
             initial_qpos_exact=np.array_equal(traces[0]['initial_qpos'],traces[1]['initial_qpos']),initial_qvel_exact=np.array_equal(traces[0]['initial_qvel'],traces[1]['initial_qvel']),
             reference_exact=all(np.array_equal(traces[0][k],traces[1][k]) for k in ['time_s','COM_world_m','quaternion_wxyz']),
             observed_layout_exact=read(pair[0]['observed_Data_layout'])==read(pair[1]['observed_Data_layout']))
@@ -77,21 +84,23 @@ def main(a):
                 f'profile{i}_57_budget':c['candidate_physics_ticks']==57*c['physics_steps'],
                 f'profile{i}_no_aid_no_reset':c['initial_reset_count']==1 and c['resets_after_start']==0 and c['summary']['gates']['no_applied_force']})
             reviewed=next(e for e in review['cases'] if (e['mode'],e['dt'])==key)
-            outcomes.append(dict(profile=['BASELINE','TIGHT'][i],duration_s=c['summary']['metrics']['actual_duration_s'],metrics=c['summary']['metrics'],task_qualified=c['summary']['qualified'],
+            if axis=='ORIENTATION':local[f'profile{i}_objective_metadata']=c['orientation_objective']==labels[i] and all(d['orientation_objective']==labels[i] for d in c['planning'])
+            outcomes.append(dict(profile=labels[i],duration_s=c['summary']['metrics']['actual_duration_s'],metrics=c['summary']['metrics'],task_qualified=c['summary']['qualified'],
                 prediction_passed=sum(d['fidelity_passed'] for d in reviewed['decisions']),prediction_total=len(reviewed['decisions']),
                 failed_predictions=[d for d in reviewed['decisions'] if not d['fidelity_passed']],candidate_ticks=c['candidate_physics_ticks'],actual_ticks=c['physics_steps'],wall_s=c['wall_s'],
                 candidate_cuda_ms=sum(d['candidate_cuda_ms'] for d in c['planning'])))
         cells.append(dict(mode=key[0],dt=key[1],checks=local,outcomes=outcomes))
     passed=sum(checks.values())+sum(sum(c['checks'].values()) for c in cells);total=len(checks)+sum(len(c['checks']) for c in cells)
-    a.output.mkdir();result=dict(schema='fresh_native_CCD_matrix_audit:1',source=file_pin(__file__),baseline=file_pin(a.baseline),tight=file_pin(a.tight),
+    a.output.mkdir();result=dict(schema='fresh_native_'+axis+'_matrix_audit:2',axis=axis,source=file_pin(__file__),baseline=file_pin(a.baseline),tight=file_pin(a.tight),
         baseline_review=file_pin(a.baseline_review),tight_review=file_pin(a.tight_review),checks=checks,cells=cells,passed=passed,total=total,
         actual_integrations=sum(c['physics_steps'] for r in runs for c in r['cases']),candidate_integrations=sum(c['candidate_physics_ticks'] for r in runs for c in r['cases']),
-        new_integrations=0,neural_updates=0,scope='Exact paired physics except declared CCD tolerance; fresh actual task metrics and source provenance. One episode/cell, unequal survival compute, no statistical policy-benefit/expert/ego/acceleration qualification; failed force predictions preserved.')
+        new_integrations=0,neural_updates=0,scope='Declared axis only: CCD permits tolerance difference, ORIENTATION requires exact same model bytes and only SHAFT/FULL_SO3 scoring difference. Fresh actual task metrics and provenance. One episode/cell, unequal survival cost; failed force/task gates retained. No expert/ego/gradient/acceleration qualification.')
     write(a.output/'report.json',result);print(json.dumps(dict(report=file_pin(a.output/'report.json'),contracts=[passed,total],actual=result['actual_integrations'],candidate=result['candidate_integrations'])))
     if passed!=total:raise ValueError('Matrix contract failed; retain report')
 
 
 if __name__=='__main__':
     p=argparse.ArgumentParser()
+    p.add_argument('--axis',choices=['CCD','ORIENTATION'],default='CCD')
     for name in ['baseline','tight','baseline-review','tight-review','output']:p.add_argument('--'+name,type=Path,required=True)
     main(p.parse_args())
