@@ -9,10 +9,14 @@ from .pen_native_response import vector_comparison
 def pooled_error(rows):
     if not rows:return dict(pairs=0)
     denominator=sum(row['target_L2']**2 for row in rows)
-    return dict(pairs=len(rows),pooled_relative_L2_error=float(np.sqrt(
-        sum((row['relative_L2_error']*row['target_L2'])**2 for row in rows)/max(denominator,1e-24))),
+    # Legacy vector summaries used max(target_L2,1e-12) as their divisor.
+    # Preserve absolute errors for zero/tiny targets rather than multiplying
+    # their relative errors by zero and falsely reporting perfect agreement.
+    numerator=sum(row.get('absolute_L2_error', row['relative_L2_error']*max(row['target_L2'],1e-12))**2 for row in rows)
+    return dict(pairs=len(rows),pooled_relative_L2_error=float(np.sqrt(numerator/denominator)) if denominator>0 else None,
+        pooled_absolute_L2_error=float(np.sqrt(numerator)),target_energy=denominator,
         median_pair_relative_error=float(np.median([row['relative_L2_error'] for row in rows])),
-        max_pair_relative_error=max(row['relative_L2_error'] for row in rows),zero_response_comparator=1.)
+        max_pair_relative_error=max(row['relative_L2_error'] for row in rows),zero_response_comparator=1. if denominator>0 else None)
 
 
 def response_diagnostics(model,data,pairs,directions,scale,device):

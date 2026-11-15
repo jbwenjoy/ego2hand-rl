@@ -6,6 +6,7 @@ def vector_comparison(prediction, target):
     prediction, target = np.asarray(prediction,float), np.asarray(target,float)
     pn, tn = np.linalg.norm(prediction), np.linalg.norm(target)
     return dict(prediction_L2=float(pn), target_L2=float(tn),
+        absolute_L2_error=float(np.linalg.norm(prediction-target)),
         relative_L2_error=float(np.linalg.norm(prediction-target)/max(tn,1e-12)),
         cosine=float(prediction@target/(pn*tn)) if pn*tn > 1e-24 else None)
 
