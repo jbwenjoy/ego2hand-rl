@@ -1,0 +1,450 @@
+{
+  "schema": "pen_native_policy_evidence_summary:1",
+  "roots": {
+    "failed": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_full_pose_native_v1\\report.json",
+      "bytes": 62143,
+      "sha256": "c1f23a4c74ef852b821a1f7884c240974a201f6941d4ced1ace18cd6a05e3095"
+    },
+    "fixed": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_full_pose_native_v2\\report.json",
+      "bytes": 62648,
+      "sha256": "651595b5697e7fd335196a8c02eb4131befd5c71d68d067f1db501dc8aa7e322"
+    },
+    "final": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_full_pose_native_v3\\report.json",
+      "bytes": 62645,
+      "sha256": "ce794fa182b30e4bd73a171a6e53d827ba757c5b212e40c1a22f8457ca1c722d"
+    },
+    "review_fixed": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_full_pose_native_review_v1\\report.json",
+      "bytes": 32982,
+      "sha256": "85141cc8897ef4496e3a072af2f16dd9b5df3faba8695e0c48dde6ac9e903bb1"
+    },
+    "review_final": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_full_pose_native_review_v2\\report.json",
+      "bytes": 32963,
+      "sha256": "939536ea3db61217d8f46517b708d1b769b1035ba9ecff6600c61c35fa1e2031"
+    }
+  },
+  "native_checks": {
+    "failed": [
+      662,
+      670
+    ],
+    "fixed": [
+      674,
+      674
+    ],
+    "final": [
+      674,
+      674
+    ],
+    "review_fixed": [
+      256,
+      256
+    ],
+    "review_final": [
+      256,
+      256
+    ]
+  },
+  "retained_first_failure": [
+    "row16_postphysics_reward_used_reference",
+    "row17_postphysics_reward_used_reference",
+    "row18_postphysics_reward_used_reference",
+    "row24_postphysics_reward_used_reference",
+    "row26_postphysics_reward_used_reference",
+    "row30_postphysics_reward_used_reference",
+    "row31_postphysics_reward_used_reference",
+    "worlds32_reset_ctrl_other_worlds_unchanged"
+  ],
+  "transitions_per_version": 528,
+  "integrations_per_version": 4224,
+  "total_native_integrations": 12672,
+  "CPU_kinematics_queries": 1056,
+  "actual_task_optimizer_updates": 0,
+  "final_unit_tests": 266,
+  "latest_max_policy_error": 2.7783161271610624e-07,
+  "latest_max_critic_error": 1.83109001881121e-05,
+  "latest_max_reward_error": 3.983990537470561e-07,
+  "native_cases": {
+    "failed": [
+      {
+        "worlds": 1,
+        "transitions": 16,
+        "integrations": 128,
+        "observed_setup_integrations": 0,
+        "graph_capture_invocations": 2,
+        "terminal_reset_worlds": 0,
+        "explicit_reset_worlds": 2,
+        "model_unchanged": true,
+        "metadata": {
+          "observation_schema": "pen_fixed_wrist_full_pose161_H20:1",
+          "policy_input_dim": 161,
+          "critic_schema": "pen_full_pose188_privileged_ema20_wrist_velocity6_phase1:1",
+          "critic_input_dim": 188,
+          "action_dim": 20,
+          "action_contract": "RAW_CLAMP_MINUS1_PLUS1_SCALE0P5_EMA0P5_PD_BOUNDS",
+          "transition_schema": "pen_native_postphysics_used_reference_phase:1",
+          "scope": "Fresh controlled native full-pose interface; no WM, trained policy, ego camera or portable-physics-resume qualification."
+        },
+        "numerical": {
+          "host": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 1e-12,
+            "ls_tolerance": 1e-08
+          },
+          "GPU": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 9.999999960041972e-13,
+            "ls_tolerance": 9.99999993922529e-09
+          }
+        }
+      },
+      {
+        "worlds": 32,
+        "transitions": 512,
+        "integrations": 4096,
+        "observed_setup_integrations": 0,
+        "graph_capture_invocations": 2,
+        "terminal_reset_worlds": 41,
+        "explicit_reset_worlds": 89,
+        "model_unchanged": true,
+        "metadata": {
+          "observation_schema": "pen_fixed_wrist_full_pose161_H20:1",
+          "policy_input_dim": 161,
+          "critic_schema": "pen_full_pose188_privileged_ema20_wrist_velocity6_phase1:1",
+          "critic_input_dim": 188,
+          "action_dim": 20,
+          "action_contract": "RAW_CLAMP_MINUS1_PLUS1_SCALE0P5_EMA0P5_PD_BOUNDS",
+          "transition_schema": "pen_native_postphysics_used_reference_phase:1",
+          "scope": "Fresh controlled native full-pose interface; no WM, trained policy, ego camera or portable-physics-resume qualification."
+        },
+        "numerical": {
+          "host": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 1e-12,
+            "ls_tolerance": 1e-08
+          },
+          "GPU": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 9.999999960041972e-13,
+            "ls_tolerance": 9.99999993922529e-09
+          }
+        }
+      }
+    ],
+    "fixed": [
+      {
+        "worlds": 1,
+        "transitions": 16,
+        "integrations": 128,
+        "observed_setup_integrations": 0,
+        "graph_capture_invocations": 2,
+        "terminal_reset_worlds": 0,
+        "explicit_reset_worlds": 2,
+        "model_unchanged": true,
+        "metadata": {
+          "observation_schema": "pen_fixed_wrist_full_pose161_H20:1",
+          "policy_input_dim": 161,
+          "critic_schema": "pen_full_pose188_privileged_ema20_wrist_velocity6_phase1:1",
+          "critic_input_dim": 188,
+          "action_dim": 20,
+          "action_contract": "RAW_CLAMP_MINUS1_PLUS1_SCALE0P5_EMA0P5_PD_BOUNDS",
+          "transition_schema": "pen_native_postphysics_used_reference_phase:1",
+          "scope": "Fresh controlled native full-pose interface; no WM, trained policy, ego camera or portable-physics-resume qualification."
+        },
+        "numerical": {
+          "host": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 1e-12,
+            "ls_tolerance": 1e-08
+          },
+          "GPU": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 9.999999960041972e-13,
+            "ls_tolerance": 9.99999993922529e-09
+          }
+        }
+      },
+      {
+        "worlds": 32,
+        "transitions": 512,
+        "integrations": 4096,
+        "observed_setup_integrations": 0,
+        "graph_capture_invocations": 2,
+        "terminal_reset_worlds": 41,
+        "explicit_reset_worlds": 89,
+        "model_unchanged": true,
+        "metadata": {
+          "observation_schema": "pen_fixed_wrist_full_pose161_H20:1",
+          "policy_input_dim": 161,
+          "critic_schema": "pen_full_pose188_privileged_ema20_wrist_velocity6_phase1:1",
+          "critic_input_dim": 188,
+          "action_dim": 20,
+          "action_contract": "RAW_CLAMP_MINUS1_PLUS1_SCALE0P5_EMA0P5_PD_BOUNDS",
+          "transition_schema": "pen_native_postphysics_used_reference_phase:1",
+          "scope": "Fresh controlled native full-pose interface; no WM, trained policy, ego camera or portable-physics-resume qualification."
+        },
+        "numerical": {
+          "host": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 1e-12,
+            "ls_tolerance": 1e-08
+          },
+          "GPU": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 9.999999960041972e-13,
+            "ls_tolerance": 9.99999993922529e-09
+          }
+        }
+      }
+    ],
+    "final": [
+      {
+        "worlds": 1,
+        "transitions": 16,
+        "integrations": 128,
+        "observed_setup_integrations": 0,
+        "graph_capture_invocations": 2,
+        "terminal_reset_worlds": 0,
+        "explicit_reset_worlds": 2,
+        "model_unchanged": true,
+        "metadata": {
+          "observation_schema": "pen_fixed_wrist_full_pose161_H20:1",
+          "policy_input_dim": 161,
+          "critic_schema": "pen_full_pose188_privileged_ema20_wrist_velocity6_phase1:1",
+          "critic_input_dim": 188,
+          "action_dim": 20,
+          "action_contract": "RAW_CLAMP_MINUS1_PLUS1_SCALE0P5_EMA0P5_PD_BOUNDS",
+          "transition_schema": "pen_native_postphysics_used_reference_phase:1",
+          "scope": "Fresh controlled native full-pose interface; no WM, trained policy, ego camera or portable-physics-resume qualification."
+        },
+        "numerical": {
+          "host": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 1e-12,
+            "ls_tolerance": 1e-08
+          },
+          "GPU": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 9.999999960041972e-13,
+            "ls_tolerance": 9.99999993922529e-09
+          }
+        }
+      },
+      {
+        "worlds": 32,
+        "transitions": 512,
+        "integrations": 4096,
+        "observed_setup_integrations": 0,
+        "graph_capture_invocations": 2,
+        "terminal_reset_worlds": 42,
+        "explicit_reset_worlds": 90,
+        "model_unchanged": true,
+        "metadata": {
+          "observation_schema": "pen_fixed_wrist_full_pose161_H20:1",
+          "policy_input_dim": 161,
+          "critic_schema": "pen_full_pose188_privileged_ema20_wrist_velocity6_phase1:1",
+          "critic_input_dim": 188,
+          "action_dim": 20,
+          "action_contract": "RAW_CLAMP_MINUS1_PLUS1_SCALE0P5_EMA0P5_PD_BOUNDS",
+          "transition_schema": "pen_native_postphysics_used_reference_phase:1",
+          "scope": "Fresh controlled native full-pose interface; no WM, trained policy, ego camera or portable-physics-resume qualification."
+        },
+        "numerical": {
+          "host": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 1e-12,
+            "ls_tolerance": 1e-08
+          },
+          "GPU": {
+            "iterations": 50,
+            "ls_iterations": 50,
+            "tolerance": 9.999999960041972e-13,
+            "ls_tolerance": 9.99999993922529e-09
+          }
+        }
+      }
+    ]
+  },
+  "physical_comparisons": [
+    {
+      "worlds": 1,
+      "field": "body_mass",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "body_inertia",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "body_ipos",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "body_iquat",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "geom_size",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "geom_friction",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "geom_solref",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "geom_solimp",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "actuator_gainprm",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "actuator_biasprm",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "actuator_forcerange",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "actuator_ctrlrange",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "jnt_range",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "dof_damping",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 1,
+      "field": "dof_armature",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "body_mass",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "body_inertia",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "body_ipos",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "body_iquat",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "geom_size",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "geom_friction",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "geom_solref",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "geom_solimp",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "actuator_gainprm",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "actuator_biasprm",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "actuator_forcerange",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "actuator_ctrlrange",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "jnt_range",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "dof_damping",
+      "exact_all_worlds": true
+    },
+    {
+      "worlds": 32,
+      "field": "dof_armature",
+      "exact_all_worlds": true
+    }
+  ],
+  "initialization_configuration": {
+    "proposal": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_support_search_v1\\report.json",
+      "bytes": 14559,
+      "sha256": "0c8c06a98fd31c4140709a33a8d36f3ef4cf84b6e33d49afa3302c04d5f896e9"
+    },
+    "selected": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_gpu_support_search_v1\\selected.npz",
+      "bytes": 7868,
+      "sha256": "59a56b4e8fd014eefdc6478ad7977fc7df28becc4ff497228ddc5259c63bd2ce"
+    },
+    "scope": "Pre-start physical initialization only; historical diagnostic decision/response labels never fitted or promoted."
+  },
+  "retained_nonrepeat": "v2/v3 terminal reset worlds41/42; no physical repeat/portable resume qualification or speedup inferred.",
+  "scope": "Native161/188 frame/control/postphysics reward/partial-reset progress. All full-task/contact-wrench/gradient failures persist. No Actor training, WM fitting, full-task/portable-resume/ego/GPU-speedup claim; full Goal active."
+}
