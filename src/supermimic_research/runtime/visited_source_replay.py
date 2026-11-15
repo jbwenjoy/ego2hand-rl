@@ -11,7 +11,9 @@ from scipy.spatial.transform import Rotation
 from ..artifacts import file_pin,verify_file_pin
 from ..frozen_sources import freeze_sources,verify_source_snapshot
 from .controlled_evaluation import write
-from .gpu_model_snapshot import capture_model,restore_model_arrays,model_leaves
+from .gpu_model_snapshot import capture_model
+from .saved_native_plant import saved_native_plant
+from .collision_numerics import set_collision_numerics
 from .saved_dynamic_arrays import restore_dynamic_arrays
 from .gpu_data_fork import fork_dynamic_data
 from .gpu_data_snapshot import ResidentDataSnapshot
@@ -28,6 +30,10 @@ def main(a):
     import warp as wp
     cp=a.config.resolve();cfg=tomllib.loads(cp.read_text());rp=(cp.parent/cfg['run']).resolve();vp=(cp.parent/cfg['review']).resolve()
     r=json.loads(rp.read_text());v=json.loads(vp.read_text())
+    ccd=cfg.get('collision_numerics');profile=cfg.get('ccd_profile','ORIGINAL_RECONSTRUCTION')
+    if ('ccd_profile' in cfg)!=('collision_numerics' in cfg):raise ValueError('CCD profile and explicit options must occur together')
+    if ccd is not None and (profile not in ['BASELINE','TIGHT'] or ccd!={'ccd_iterations':50,'ccd_tolerance':1e-6 if profile=='BASELINE' else 1e-7}):
+        raise ValueError('Fixed matched CCD profiles, no additional sweep')
     expected=[dict(mode='STATE_PLUS_VELOCITY_SUPPORT',dt=.005,anchors=[0,8,9,10]),dict(mode='STATE_ONLY',dt=.0025,anchors=[0,1,2])]
     if (cfg['cohorts']!=expected or cfg['repeats']!=3 or cfg['horizon_s']!=.02 or cfg['data_role']!='DIAGNOSTIC_NEVER_FIT'
             or cfg['paths']!=['ORIGINAL_57_CANDIDATE_GRAPH','INSTRUMENTED_SINGLE_STEP_GRAPH'] or verify_file_pin(v['run'])!=rp
@@ -36,9 +42,13 @@ def main(a):
     paths=sorted((ROOT/'src/supermimic_research').rglob('*.py'))+[ROOT/'tools/replay_pen_visited_sources.py']
     receipt=freeze_sources(paths,a.output/'source_snapshot',ROOT,subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip())
     write(a.output/'source_receipt.json',receipt)
+    package=Path(mw.__file__).resolve().parent
+    installed=freeze_sources(sorted(p for p in package.rglob('*.py') if not p.name.endswith('_test.py') and not p.name.startswith('test_')),
+        a.output/'installed_source_snapshot',package,'installed-package-source-not-git')
+    write(a.output/'installed_source_receipt.json',installed)
     sources=[q['snapshot'] for q in receipt['records']]
-    intent=dict(schema='pen_visited_source_replay:1',config=file_pin(cp),original_run=file_pin(rp),original_review=file_pin(vp),
-        source_receipt=file_pin(a.output/'source_receipt.json'),sources=sources,data_role=cfg['data_role'],neural_updates=0,
+    intent=dict(schema='pen_visited_source_replay:2',config=file_pin(cp),original_run=file_pin(rp),original_review=file_pin(vp),
+        source_receipt=file_pin(a.output/'source_receipt.json'),installed_source_receipt=file_pin(a.output/'installed_source_receipt.json'),ccd_profile=profile,collision_numerics=ccd,sources=sources,data_role=cfg['data_role'],neural_updates=0,
         scope='All7 predeclared anchors,3 repeats/path. Original57-candidate path plus independent instrumented20ms held-PD path. No live actual episode or training. Old missing Data scalars are explicitly reconstructed; lost original task-import list stays unavailable.')
     write(a.output/'intent.json',intent);anchors=[];candidate_replays=[];cases=[];keepers=[]
     base=tomllib.loads(verify_file_pin(r['base_config']).read_text());scorecfg=tomllib.loads(verify_file_pin(r['config']).read_text())
@@ -46,24 +56,21 @@ def main(a):
     for cohort in cfg['cohorts']:
         c=next(c for c in r['cases'] if c['name']==cohort['mode'] and c['dt']==cohort['dt']);dt=c['dt'];n=round(.02/dt)
         folder=a.output/f"{c['name']}_{dt}";folder.mkdir()
-        m=mujoco.MjModel.from_binary_path(str(verify_file_pin(c['host_topology'])))
-        physical=dict(np.load(verify_file_pin(c['GPU_physical_context'])))
-        for key,value in physical.items():getattr(m,key)[:]=value[0]
-        values=dict(np.load(verify_file_pin(c['fixed_model_arrays'])));scalars=json.loads(verify_file_pin(c['fixed_model_scalars']).read_text())
-        dm=mw.put_model(m);restore_model_arrays(dm,values,scalars);current,current_scalars,hashes=capture_model(dm)
-        exact_model=current_scalars==scalars and all(current[k].tobytes()==values[k].tobytes() for k in values)
-        if not exact_model:raise ValueError('Exact404 model arrays/195 scalars reconstruction failed')
         source0=dict(np.load(verify_file_pin(c['planning'][0]['source'])))
-        builder=dict(nworld=source0['qpos'].shape[0],naconmax=source0['contact.geom'].shape[0],njmax=source0['efc.force'].shape[1])
-        data=mw.make_data(m,**builder);restored=restore_dynamic_arrays(data,source0)
-        # Other static capacities come from current compatible constructor defaults,
-        # NOT an observation or identification of the old unsaved scalar leaves.
-        reconstruction=dict(model_arrays=len(values),model_scalars=len(scalars),model_exact=exact_model,
-            original_model_arrays=c['fixed_model_arrays'],original_model_scalars=c['fixed_model_scalars'],
-            Data_builder=builder,Data_static_scalars=restored['fresh_static_scalars'],
-            Data_static_role='RECONSTRUCTED_COMPATIBLE_NOT_ORIGINAL_OBSERVATION',
-            Data_static_limit='naccdmax/default-derived capacities not independently identified by old array packets. All169 array keys/shapes/dtypes/bytes must match.',
-            installed_io_source=file_pin(Path(mw.make_data.__code__.co_filename)))
+        m,dm,data,reconstruction=saved_native_plant(c,source0)
+        original_values,original_scalars,original_hashes=capture_model(dm)
+        policy=set_collision_numerics(m,dm,ccd) if ccd is not None else None
+        values,scalars,hashes=capture_model(dm)
+        changed_arrays=sorted(k for k in hashes if hashes[k]!=original_hashes[k])
+        changed_scalars=sorted(k for k in scalars if scalars[k]!=original_scalars[k])
+        if set(changed_arrays)-{'opt.ccd_tolerance'} or changed_scalars:raise ValueError('Only declared CCD tolerance may differ')
+        np.savez_compressed(folder/'profile_model_arrays.npz',**values);write(folder/'profile_model_scalars.json',scalars)
+        reconstruction.update(original_model_exact_before_override=True,original_model_arrays=c['fixed_model_arrays'],original_model_scalars=c['fixed_model_scalars'],
+            profile_model_arrays=file_pin(folder/'profile_model_arrays.npz'),profile_model_scalars=file_pin(folder/'profile_model_scalars.json'),
+            changed_arrays=changed_arrays,changed_scalars=changed_scalars,collision_numerics=policy,
+            model_exact_to_original=not changed_arrays and not changed_scalars,
+            model_exact_scope='DECLARED_PROFILE_AFTER_EXPLICIT_CCD_OVERRIDE',
+            Data_static_limit='Fresh compatible constructor capacities are not original observations. Exact169 array layout/bytes required.')
         write(folder/'reconstruction.json',reconstruction)
         jids=np.array([m.joint(f'robot/right_finger{i}_joint{j}').id for i in range(1,6) for j in range(1,5)])
         qids=m.jnt_qposadr[jids];aids=np.array([np.flatnonzero(m.actuator_trnid[:,0]==j)[0] for j in jids])
@@ -107,6 +114,7 @@ def main(a):
                 cases.append(dict(task='hand2-pen-spin',controller='INSTRUMENTED_SINGLE_STEP_GRAPH',name=name,mode=c['name'],dt=dt,k=k,repeat=repeat,
                     role=cfg['data_role'],contact_label_schema='GPU_constraint_indexed_no_adhesion:1',trace=file_pin(path),
                     host_topology=c['host_topology'],GPU_physical_context=c['GPU_physical_context'],model_layout=c['model_layout'],
+                    host_model_scope='Original topology/physical tables for EFC decoding; declared current numerical model saved in anchor reconstruction.',
                     original_prediction=d['prediction'],original_selected=d['selected'],original_source=d['source'],
                     restored_source_exact=before.audit(data)['all_array_bytes_equal'],native_physics_ticks=n))
             _,after_scalars,after_hashes=capture_model(dm)
@@ -120,7 +128,7 @@ def main(a):
             write(a.output/'progress.json',dict(anchors=anchors,candidate_replays=candidate_replays,cases=cases))
             print(json.dumps(dict(mode=c['name'],dt=dt,k=k,checks=checks)),flush=True)
             if not all(checks.values()):raise ValueError('Saved-source reconstruction/isolation failed')
-    verify_source_snapshot(receipt,live=True)
+    verify_source_snapshot(receipt,live=True);verify_source_snapshot(installed,live=True)
     result=dict(**intent,anchors=anchors,candidate_replays=candidate_replays,cases=cases,
         candidate_physics_ticks=sum(e['native_physics_ticks'] for e in candidate_replays),instrumented_physics_ticks=sum(e['native_physics_ticks'] for e in cases),
         passed=sum(sum(e['checks'].values()) for e in anchors),total=sum(len(e['checks']) for e in anchors))

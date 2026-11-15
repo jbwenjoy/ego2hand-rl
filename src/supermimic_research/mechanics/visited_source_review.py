@@ -43,6 +43,10 @@ def main(a):
     if a.output.exists():raise ValueError('Fresh independent visited-source review')
     verify_source_snapshot(json.loads(verify_file_pin(r['source_receipt']).read_text()))
     for pin in r['sources']:verify_file_pin(pin)
+    if 'installed_source_receipt' in r:verify_source_snapshot(json.loads(verify_file_pin(r['installed_source_receipt']).read_text()))
+    profile=r.get('ccd_profile','ORIGINAL_RECONSTRUCTION')
+    profile_options=r.get('collision_numerics')
+    old_reference_differs=profile=='TIGHT'
     a.output.mkdir();receipt=freeze_sources(sorted((ROOT/'src/supermimic_research').rglob('*.py'))+[ROOT/'tools/review_pen_visited_sources.py'],
         a.output/'source_snapshot',ROOT,subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip())
     write(a.output/'source_receipt.json',receipt)
@@ -68,11 +72,26 @@ def main(a):
         cand_packets={c['repeat']:dict(np.load(verify_file_pin(c['trace']))) for c in candidates}
         inst_packets={c['repeat']:dict(np.load(verify_file_pin(c['trace']))) for c in instrumented}
         inst_w={c['repeat']:np.load(verify_file_pin(next(e for e in efc['cases'] if e['name']==c['name'] and e['dt']==dt)['wrenches']))['world_COM_wrench'] for c in instrumented}
-        base_checks=dict(source_keys_exact=set(source)==set(saved),all_source_bytes_exact=all(source[key].tobytes()==saved[key].tobytes() for key in source),
+        reconstruction=json.loads(verify_file_pin(anchor['reconstruction']).read_text())
+        model_checks={}
+        if 'profile_model_arrays' in reconstruction:
+            profile_model=dict(np.load(verify_file_pin(reconstruction['profile_model_arrays'])))
+            old_model=dict(np.load(verify_file_pin(reconstruction['original_model_arrays'])))
+            profile_scalars=json.loads(verify_file_pin(reconstruction['profile_model_scalars']).read_text())
+            old_scalars=json.loads(verify_file_pin(reconstruction['original_model_scalars']).read_text())
+            changed_arrays=sorted(key for key in old_model if profile_model[key].tobytes()!=old_model[key].tobytes())
+            target_tolerance=profile_options['ccd_tolerance'] if profile_options else float(old_model['opt.ccd_tolerance'][0])
+            model_checks=dict(model_keys_exact=set(profile_model)==set(old_model),only_CCD_tolerance_changed=set(changed_arrays)<=set(['opt.ccd_tolerance']),
+                all_model_scalars_exact=profile_scalars==old_scalars,declared_CCD_tolerance=np.array_equal(profile_model['opt.ccd_tolerance'],np.full_like(old_model['opt.ccd_tolerance'],target_tolerance)),
+                declared_field_diff=changed_arrays==reconstruction['changed_arrays'] and not reconstruction['changed_scalars'])
+        base_checks=dict(**model_checks,source_keys_exact=set(source)==set(saved),all_source_bytes_exact=all(source[key].tobytes()==saved[key].tobytes() for key in source),
             static_role_explicit=anchor['Data_scalar_role']=='RECONSTRUCTED_NOT_ORIGINAL',both_paths_three_repeats=len(candidates)==3 and len(instrumented)==3)
         def comparison(label,p,pw,q,qw,repeat,candidate=None):
             metrics,checks=compare_response(p,q,pw,qw,qids,dofs,qa,da,gates)
-            entry=dict(mode=mode,dt=dt,k=k,repeat=repeat,label=label,metrics=metrics,checks=checks,passed=all(checks.values()))
+            within=label in ['CANDIDATE_VS_INSTRUMENTED','CANDIDATE_VS_REPEAT0','INSTRUMENTED_VS_REPEAT0','ALL57_VS_REPEAT0']
+            role='WITHIN_PROFILE_FIDELITY' if within else ('OLD_NUMERICAL_MODEL_RESPONSE_DIFFERENCE' if old_reference_differs else 'HISTORICAL_SAME_NUMERICS_DIAGNOSTIC')
+            entry=dict(mode=mode,dt=dt,k=k,repeat=repeat,label=label,role=role,used_for_profile_qualification=within or profile=='ORIGINAL_RECONSTRUCTION',
+                metrics=metrics,checks=checks,passed=all(checks.values()))
             if candidate is not None:entry['candidate']=candidate
             return entry
         for repeat in range(3):
@@ -104,11 +123,15 @@ def main(a):
             results={label:[sum(q['passed'] for q in selected_rows if q['label']==label),sum(q['label']==label for q in selected_rows)] for label in sorted({q['label'] for q in selected_rows})}))
     counts={label:[sum(q['passed'] for q in comparisons if q['label']==label),sum(q['label']==label for q in comparisons)] for label in sorted({q['label'] for q in comparisons})}
     verify_source_snapshot(receipt,live=True)
-    result=dict(schema='pen_visited_source_saved_review:1',run=file_pin(a.report),source_receipt=file_pin(a.output/'source_receipt.json'),
+    eligible=[e for e in comparisons if e['used_for_profile_qualification']]+all_spreads
+    contracts_ok=all(all(e['checks'].values()) for e in contracts)
+    profile_qualified=contracts_ok and efc['passed']==efc['total'] and all(e['passed'] for e in eligible)
+    result=dict(schema='pen_visited_source_saved_review:2',run=file_pin(a.report),source_receipt=file_pin(a.output/'source_receipt.json'),
+        ccd_profile=profile,collision_numerics=profile_options,old_reference_model_differs=old_reference_differs,within_profile_qualified=profile_qualified,
         EFC=file_pin(a.output/'EFC/report.json'),EFC_counts=[efc['passed'],efc['total']],anchors=anchors,comparisons=comparisons,
         contract_passed=sum(sum(e['checks'].values()) for e in contracts),contract_total=sum(len(e['checks']) for e in contracts),contracts=contracts,
         comparison_counts=counts,all57_repeat_passed=sum(e['passed'] for e in all_spreads),all57_repeat_total=len(all_spreads),all57_repeats=all_spreads,
         contact_patterns=contact_patterns,original_Data_scalar_observations_available=False,neural_updates=0,native_integrations=0,
-        scope='Every original selected candidate through two paths/three repeats, all57 repeat spread, independent EFC, active pair/edge patterns and solver counters. Static Data metadata remains reconstructed, original lost import list remains unavailable. No confidence intervals, contact-cause proof, expert promotion, policy/ego success or global fidelity qualification.')
+        scope='Within-profile qualification excludes old numerical-model response differences. Every original selected candidate through two paths/three repeats, all57 repeat spread, independent EFC, active pair/edge patterns and solver counters. Static Data metadata remains reconstructed, original lost import list remains unavailable. No confidence intervals, contact-cause proof, expert promotion, policy/ego success or global fidelity qualification.')
     write(a.output/'report.json',result);print(json.dumps(dict(report=file_pin(a.output/'report.json'),EFC=result['EFC_counts'],contracts=[result['contract_passed'],result['contract_total']],comparisons=counts,all57=[result['all57_repeat_passed'],len(all_spreads)],anchors=anchors)))
-    if result['contract_passed']!=result['contract_total'] or efc['passed']!=efc['total'] or any(not e['passed'] for e in comparisons+all_spreads):raise ValueError('Preserve failed visited-source replay gates')
+    if not profile_qualified:raise ValueError('Preserve failed within-profile visited-source replay gates')

@@ -1,0 +1,20 @@
+schema = 1
+ccd_profile = "TIGHT"
+run = "../runs/pen_native_velocity_recovery_v1/report.json"
+review = "../runs/pen_native_velocity_review_v1/report.json"
+gates = "pen_gpu_step_audit_v1.toml"
+repeats = 3
+horizon_s = 0.02
+data_role = "DIAGNOSTIC_NEVER_FIT"
+paths = ["ORIGINAL_57_CANDIDATE_GRAPH", "INSTRUMENTED_SINGLE_STEP_GRAPH"]
+[collision_numerics]
+ccd_iterations = 50
+ccd_tolerance = 1e-07
+[[cohorts]]
+mode = "STATE_PLUS_VELOCITY_SUPPORT"
+dt = 0.005
+anchors = [0, 8, 9, 10]
+[[cohorts]]
+mode = "STATE_ONLY"
+dt = 0.0025
+anchors = [0, 1, 2]
