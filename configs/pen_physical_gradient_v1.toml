@@ -1,0 +1,14 @@
+schema = 1
+base_config = "controlled_evaluation_v4.toml"
+proposal = "../runs/pen_gpu_support_search_v1/report.json"
+checkpoint_health = "../runs/pen_wm_continuation_v1/health_2000.json"
+dt = [0.005, 0.0025]
+direction_count = 2
+PD_target_eps_rad = [0.002, 0.005]
+execution_repeats = 3
+numerical_device_override = true
+[numerical_options]
+iterations = 50
+ls_iterations = 50
+tolerance = 0.000000000001
+ls_tolerance = 0.00000001
