@@ -1,4 +1,4 @@
-"""Four-arm point/finite-response ablation; preserved frozen V2 baseline."""
+"""One four-arm trainer for explicit historical or fresh common-data studies."""
 import json
 import random
 import time
@@ -9,11 +9,13 @@ import numpy as np
 import torch
 
 from ..artifacts import file_pin,verify_file_pin
+from ..frozen_sources import freeze_sources,verify_source_snapshot
 from .checkpoint import _adam_valid,_finite_tree
 from .gpu_monitor import GPUMonitor
 from .pen_branch_fit import arm_payload,validate_fit_contract
 from .pen_contrast_update import update_contrast,restore_contrast_arm
 from .pen_response import PenResponseWM
+from .pen_response_dataset import common_response_data
 from .pen_stage import metrics,write
 from .world_model import atomic_checkpoint,capture_rng,raw_tree_equal
 
@@ -46,7 +48,7 @@ def checkpoint_health(path,arms,cache,cfg,device,initial_buffers,initial_net,bas
             model=raw_tree_equal(a['model'].state_dict(),b['model'].state_dict()),Adam=raw_tree_equal(a['optimizer'].state_dict(),b['optimizer'].state_dict()),
             point_sampler=raw_tree_equal(a['sampler'].get_state(),b['sampler'].get_state()),pair_sampler=raw_tree_equal(a['pair_sampler'].get_state(),b['pair_sampler'].get_state()))
         checks.update({name+'_clone_next_'+k:bool(v) for k,v in parity.items()})
-        if name.startswith('POINT_'):
+        if baseline is not None and name.startswith('POINT_'):
             original=baseline['arms'][arm['mode']]
             reference=dict(model=raw_tree_equal(saved['model'],original['model']),Adam=raw_tree_equal(saved['optimizer'],original['optimizer']),
                 sampler=raw_tree_equal(saved['sampler'],original['sampler']),gradient=raw_tree_equal(saved['gradient_snapshot'],original['gradient_snapshot']),
@@ -60,28 +62,71 @@ def checkpoint_health(path,arms,cache,cfg,device,initial_buffers,initial_net,bas
     return checks
 
 
-def run_fit(root,config_path,out,*,run=False):
+def common_model_config(spec):
+    """Study/data schema2 explicitly creates fresh model-family schema1 arms.
+
+    Model schema2 means DIRECT_VS_DIRECT_CV elsewhere and is never reinterpreted.
+    This adapter imports no historical network or optimizer.
+    """
+    if (spec.get('schema')!=2 or spec.get('models')!=['POINT_DIRECT','POINT_IMPULSE','RESPONSE_DIRECT','RESPONSE_IMPULSE']
+            or spec.get('CHECK_role')!='DEVELOPMENT_NEVER_FIT_NOT_FINAL_TEST'
+            or spec.get('first_checkpoint_update')!=100 or spec.get('planned_updates')!=2000
+            or not spec.get('continue_after_first_healthy_checkpoint') or 'model_comparison' in spec
+            or spec.get('contrast_weight')!=.1 or spec.get('pair_batch_size')!=32 or spec.get('pair_sampler_seed')!=7751):
+        raise ValueError('Explicit fresh four-arm common-data study;no CV/schema reinterpretation')
+    return {**spec,'schema':1,'study_schema':2,'dataset_schema':'contact_pen_common_response_data:2'}
+
+
+def run_fit(root,config_path,out,*,run=False,common_data=None):
+    entry_started=time.perf_counter()
     root,cp,out=[Path(p).resolve() for p in [root,config_path,out]];spec=tomllib.loads(cp.read_text())
-    paths={k:(cp.parent/spec[k]).resolve() for k in ['base_fit','contrasts','contrast_readback']}
-    base,contrast,readback=[json.loads(p.read_text()) for p in paths.values()]
-    if (base['schema']!='pen_branch_paired_fit_result:1' or base['update']!=2000 or base['training_running']
+    fresh=spec.get('schema',1)==2;receipt=None
+    if fresh:
+        cfg=common_model_config(spec)
+        if common_data is None:raise ValueError('Explicit frozen common-data report required')
+        pp=Path(common_data).resolve();prep=json.loads(pp.read_text());base=None
+        if (prep['schema']!='contact_pen_common_response_data:2' or prep['config']!=file_pin(cp)
+                or prep['TRAIN_preparation']!=file_pin((cp.parent/spec['train_preparation']).resolve())
+                or prep['CHECK_review']!=file_pin((cp.parent/spec['check_review']).resolve())
+                or prep['passed']!=prep['total'] or not all(prep['checks'].values()) or prep['TRAIN_valid']!=808
+                or prep['CHECK_valid']!=324 or prep['TRAIN_pairs']!=188 or prep['scale_input_role']!='VALID_TRAIN_ONLY'
+                or prep['CHECK_role']!=spec['CHECK_role']):raise ValueError('Exact role-checked registered808/324/188 common data')
+        verify_source_snapshot(json.loads(verify_file_pin(prep['source_receipt']).read_text()))
+        data={r:dict(np.load(verify_file_pin(p))) for r,p in prep['outputs'].items()};pairs=dict(np.load(verify_file_pin(prep['pairs'])))
+        tr=json.loads(verify_file_pin(prep['TRAIN_preparation']).read_text());cr=json.loads(verify_file_pin(prep['CHECK_review']).read_text());directions=np.load(verify_file_pin(prep['directions']))['directions']
+        rebuilt=common_response_data(tr,data['TRAIN'],cr,data['CHECK'],directions)
+        for key in ['scales','head_scales','pairs']:
+            saved=dict(np.load(verify_file_pin(prep[key])))
+            if set(saved)!=set(rebuilt[key]) or any(not np.array_equal(v,saved[k]) for k,v in rebuilt[key].items()):raise ValueError('Frozen common data/scales differ from TRAIN-only reconstruction')
+        source_paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (root/'src'/pkg).rglob('*.py')})+[root/'tools/train_pen_contrasts.py',cp,verify_file_pin(prep['protocol'])]
+        sources=[file_pin(p) for p in source_paths]
+        lineage=dict(config=file_pin(cp),prepared=file_pin(pp),TRAIN_preparation=prep['TRAIN_preparation'],CHECK_review=prep['CHECK_review'],dataset_pins=prep['outputs'],pairs=prep['pairs'],scales=prep['scales'],head_scales=prep['head_scales'],sources=sources)
+        expected_pairs=188
+    else:
+        if spec.get('schema',1)!=1 or common_data is not None:raise ValueError('Historical study cannot silently accept common data')
+        paths={k:(cp.parent/spec[k]).resolve() for k in ['base_fit','contrasts','contrast_readback']}
+        base,contrast,readback=[json.loads(p.read_text()) for p in paths.values()]
+        if (base['schema']!='pen_branch_paired_fit_result:1' or base['update']!=2000 or base['training_running']
             or contrast['schema']!='pen_TRAIN_finite_action_contrasts:1' or contrast['input_role']!='NEW_TRAIN_ONLY'
             or not all(contrast['checks'].values()) or not all(readback['checks'].values())
             or verify_file_pin(readback['preparation'])!=paths['contrasts']
             or spec['contrast_weight']!=.1 or spec['pair_batch_size']!=32 or spec['pair_sampler_seed']!=7751):
-        raise ValueError('Fixed predeclared response ablation and reviewed TRAIN-only contrasts')
-    cfg={**tomllib.loads(verify_file_pin(base['config']).read_text()),**{k:spec[k] for k in ['contrast_weight','pair_batch_size','pair_sampler_seed']}}
-    pp=verify_file_pin(base['prepared']);prep=json.loads(pp.read_text());review=json.loads(verify_file_pin(base['review']).read_text())
-    validate_fit_contract(cfg,prep,review)
-    if verify_file_pin(contrast['prepared'])!=pp or verify_file_pin(contrast['original_scales'])!=verify_file_pin(prep['scales']):raise ValueError('Same augmented rows/scales')
-    for pin in base['sources']+prep['sources']+[review['source']]+contrast['sources']:verify_file_pin(pin)
-    data={r:dict(np.load(verify_file_pin(p))) for r,p in prep['outputs'].items()};pairs=dict(np.load(verify_file_pin(contrast['output'])))
-    if len(pairs['epsilon'])!=26:raise ValueError('Predeclared26 finite-contrast pairs')
-    if not run:return dict(training_started=False,TRAIN_rows=len(data['TRAIN']['x']),TRAIN_pairs=26,models=4,planned_updates_per_model=2000,Actor_updates=0)
+            raise ValueError('Fixed predeclared response ablation and reviewed TRAIN-only contrasts')
+        cfg={**tomllib.loads(verify_file_pin(base['config']).read_text()),**{k:spec[k] for k in ['contrast_weight','pair_batch_size','pair_sampler_seed']}}
+        pp=verify_file_pin(base['prepared']);prep=json.loads(pp.read_text());review=json.loads(verify_file_pin(base['review']).read_text())
+        validate_fit_contract(cfg,prep,review)
+        if verify_file_pin(contrast['prepared'])!=pp or verify_file_pin(contrast['original_scales'])!=verify_file_pin(prep['scales']):raise ValueError('Same augmented rows/scales')
+        for pin in base['sources']+prep['sources']+[review['source']]+contrast['sources']:verify_file_pin(pin)
+        data={r:dict(np.load(verify_file_pin(p))) for r,p in prep['outputs'].items()};pairs=dict(np.load(verify_file_pin(contrast['output'])))
+        sources=[file_pin(root/p) for p in ['tools/train_pen_contrasts.py','src/supermimic_research/learning/pen_contrast_fit.py','src/supermimic_research/learning/pen_contrast_update.py']]+base['sources']
+        lineage=dict(config=file_pin(cp),base_fit=file_pin(paths['base_fit']),contrasts=file_pin(paths['contrasts']),contrast_readback=file_pin(paths['contrast_readback']),prepared=base['prepared'],review=base['review'],dataset_pins=base['dataset_pins'],sources=sources)
+        expected_pairs=26
+    if len(pairs['epsilon'])!=expected_pairs:raise ValueError('Registered finite-contrast pair count differs')
+    if not run:return dict(training_started=False,TRAIN_rows=len(data['TRAIN']['x']),TRAIN_valid=int(data['TRAIN']['valid'].sum()),TRAIN_pairs=expected_pairs,models=4,planned_updates_per_model=2000,Actor_updates=0)
     if out.exists() or not out.is_relative_to(root/'runs') or not torch.cuda.is_available():raise ValueError('Fresh unified CUDA output')
     device=torch.device(cfg['device']);torch.set_num_threads(4);torch.use_deterministic_algorithms(True);torch.set_float32_matmul_precision('highest')
     torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
-    random.seed(cfg['sampler_seed']);np.random.seed(cfg['sampler_seed']);torch.manual_seed(cfg['sampler_seed'])
+    init_seed=cfg.get('init_seed',cfg['sampler_seed']);random.seed(init_seed);np.random.seed(init_seed);torch.manual_seed(init_seed)
     scales=dict(np.load(verify_file_pin(prep['scales'])));head_scales=dict(np.load(verify_file_pin(prep['head_scales'])))
     heads=dict(DIRECT=dict(head_mean=scales['y_mean'],head_scale=scales['y_scale']),IMPULSE=head_scales)
     arms={};initial=None;buffers={}
@@ -102,13 +147,15 @@ def run_fit(root,config_path,out,*,run=False):
         finite_contrast=tensor(pairs['finite_contrast'],torch.float64),epsilon=tensor(pairs['epsilon'],torch.float64))
     evaluation={r:(tensor(d['x'][d['valid']],torch.float32),tensor(d['y'][d['valid']],torch.float64)) for r,d in data.items()}
     cache['probe']=evaluation['CHECK'][0]
-    sources=[file_pin(root/p) for p in ['tools/train_pen_contrasts.py','src/supermimic_research/learning/pen_contrast_fit.py',
-        'src/supermimic_research/learning/pen_contrast_update.py']]+base['sources']
-    lineage=dict(config=file_pin(cp),base_fit=file_pin(paths['base_fit']),contrasts=file_pin(paths['contrasts']),contrast_readback=file_pin(paths['contrast_readback']),
-        prepared=base['prepared'],review=base['review'],dataset_pins=base['dataset_pins'],sources=sources)
-    out.mkdir();write(out/'intent.json',dict(schema='pen_response_loss_ablation:1',**lineage,planned_updates_per_model=2000,models=list(arms),
+    out.mkdir()
+    if fresh:
+        import subprocess
+        receipt=freeze_sources(source_paths,out/'source_snapshot',root,subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip());write(out/'source_receipt.json',receipt);lineage['source_receipt']=file_pin(out/'source_receipt.json')
+        atomic_checkpoint(out/'initial_NN.pt',initial);lineage['initial_NN']=file_pin(out/'initial_NN.pt')
+    study_version=2 if fresh else 1
+    write(out/'intent.json',dict(schema=f'pen_response_loss_ablation:{study_version}',**lineage,planned_updates_per_model=2000,models=list(arms),
         matched_initial_NN=True,point_batch=256,response_pair_batch=32,response_weight=.1,pair_seed=7751,
-        response_loss='mean object12 + mean source-BODY wrench6 squared finite-action contrast error, divided by unchanged frozen V2 output scales',
+        response_loss='mean object12 + mean source-BODY wrench6 squared finite-action contrast error;frozen valid-TRAIN-only scales' if fresh else 'mean object12 + mean source-BODY wrench6 squared finite-action contrast error, divided by unchanged frozen V2 output scales',
         scope='Same point streams and optimizer counts, additional64 pair endpoints/response-arm update; not equal FLOPs. No CHECK fitting/selection or Actor training.'))
     logs={n:[] for n in arms};gradients={};curve={};healths={};timers=[];monitor=GPUMonitor();monitor.start();start=time.perf_counter()
     try:
@@ -121,25 +168,29 @@ def run_fit(root,config_path,out,*,run=False):
             if update in [100,500,1000,2000]:curve[str(update)]={n:{r:metrics(a['model'],x,y)[0] for r,(x,y) in evaluation.items()} for n,a in arms.items()}
             if update in [100,2000]:
                 path=out/f'pen_response_loss_checkpoint_{update:04d}.pt'
-                atomic_checkpoint(path,dict(schema='pen_response_loss_ablation_checkpoint:1',**lineage,update=update,planned_updates=2000,
+                atomic_checkpoint(path,dict(schema=f'pen_response_loss_ablation_checkpoint:{study_version}',**lineage,update=update,planned_updates=2000,
                     arms={n:payload(a,cfg,scales,heads[a['mode']],prep['physics'],update,device,gradients[n]) for n,a in arms.items()},
                     logs={n:torch.stack(v).cpu().tolist() for n,v in logs.items()}))
-                bh=json.loads(verify_file_pin(base['checkpoint_health'][str(update)]).read_text())
-                baseline=torch.load(verify_file_pin(bh['checkpoint']),map_location='cpu',weights_only=False)
+                baseline=None
+                if not fresh:
+                    bh=json.loads(verify_file_pin(base['checkpoint_health'][str(update)]).read_text());baseline=torch.load(verify_file_pin(bh['checkpoint']),map_location='cpu',weights_only=False)
                 checks=checkpoint_health(path,arms,cache,cfg,device,buffers,initial,baseline,update)
                 health=dict(schema='pen_response_loss_checkpoint_health:1',checkpoint=file_pin(path),checks=checks,passed=sum(checks.values()),total=len(checks),
                     update=update,live_cursor_per_model=update,clone_only_optimizer_steps_at_boundary=8,Actor_updates=0,
                     remaining_all_four_compute_estimate_s=(2000-update)*float(np.median([a.elapsed_time(b) for a,b in timers[-50:]]))/1000)
                 hp=out/f'health_{update:04d}.json';write(hp,health);healths[str(update)]=file_pin(hp)
+                print(json.dumps(dict(update=update,health=[health['passed'],health['total']],checkpoint=file_pin(path),remaining_compute_s=health['remaining_all_four_compute_estimate_s'])),flush=True)
                 if not all(checks.values()):raise ValueError('Preserve failed restore/baseline check; no more updates')
         torch.cuda.synchronize(device);wall=time.perf_counter()-start
     finally:monitor.stop()
     for pin in sources:verify_file_pin(pin)
-    result=dict(schema='pen_response_loss_ablation_result:1',**lineage,checkpoint=file_pin(path),checkpoint_health=healths,curve=curve,update=2000,
+    if receipt is not None:verify_source_snapshot(receipt,live=True)
+    result=dict(schema=f'pen_response_loss_ablation_result:{study_version}',**lineage,checkpoint=file_pin(path),checkpoint_health=healths,curve=curve,update=2000,
         live_models=4,live_updates_per_model=2000,clone_only_optimizer_steps=16,Actor_updates=0,training_running=False,
         point_rows_drawn_per_model=2000*256,response_pairs_drawn_per_response_model=2000*32,
         extra_pair_endpoint_forwards_per_response_model=2000*64,fit_and_QA_wall_s=wall,
         CUDA_ms_per_four_model_update=[a.elapsed_time(b) for a,b in timers],GPU_telemetry=dict(samples=monitor.samples,errors=monitor.errors),
         hardware=dict(GPU_name=torch.cuda.get_device_name(device),Torch_version=torch.__version__),
         scope='Fixed predeclared four-arm finite-response loss ablation only. All CHECK curves development evaluation, no model/weight selection. No physical derivative/task/Actor/ego qualification by checkpoint health.')
+    if fresh:result.update(total_runner_wall_s=time.perf_counter()-entry_started,loader_normalizer_recomputations=1,actual_native_integrations=0,optimizer_steps=8016)
     write(out/'report.json',result);return dict(report=file_pin(out/'report.json'),checkpoint=file_pin(path),health=healths,fit_and_QA_wall_s=wall)
