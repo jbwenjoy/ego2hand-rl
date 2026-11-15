@@ -41,7 +41,7 @@ def main(a):
                     object12=repeated_contrast_spread(Y[:,plus,:12],Y[:,minus,:12],scales[:12]),
                     mean_world_wrench6=repeated_contrast_spread(Y[:,plus,12:],Y[:,minus,12:],scales[12:]),
                     combined18=repeated_contrast_spread(Y[:,plus],Y[:,minus],scales)))
-    passed=sum(sum(c.values()) for c in checks);total=sum(len(c) for c in checks)
+    passed=int(sum(sum(c.values()) for c in checks));total=sum(len(c) for c in checks)
     a.output.mkdir();result=dict(schema='pen_matched_finite_contrasts:1',run=file_pin(a.report),source=file_pin(__file__),
         helper=file_pin(ROOT/'src/supermimic_research/learning/pen_native_response.py'),gates=file_pin(cp.parent/cfg['gates']),fixed_scales=scales.tolist(),
         input_role=r['data_role'],pairs=rows,passed=passed,total=total,native_integrations=0,neural_updates=0,
