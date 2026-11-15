@@ -12,7 +12,7 @@ from .gpu_model_snapshot import model_leaves
 from supermimic_research.artifacts import file_pin,verify_file_pin
 from supermimic_research.frozen_sources import verify_source_snapshot
 
-SCHEMA='controlled_pen_native_portable_state:2'
+SCHEMA='controlled_pen_native_portable_state:3'
 EXCLUDED=((('attr','env'),('attr','extras')),(('attr','env'),('attr','obs_buf')),
     (('attr','env'),('attr','observation_manager'),('attr','_obs_buffer')))
 STATIC_OPAQUE={'functools.partial','warp._src.context.Device','warp._src.context.Graph',
@@ -23,6 +23,12 @@ STATIC_OPAQUE={'functools.partial','warp._src.context.Device','warp._src.context
 
 def inventory(adapter):
     sim=adapter.env.sim
+    group=adapter.env.cfg.observations['policy']
+    if group.enable_corruption or group.history_length not in [None,0] or set(group.terms)!= {'full_pose'}:
+        raise ValueError('Portable output-cache exclusion requires perfect historyless full-pose group')
+    term=group.terms['full_pose']
+    if any(getattr(term,key)!=0 for key in ['history_length','delay_min_lag','delay_max_lag','delay_hold_prob','delay_update_period']):
+        raise ValueError('No observation history/delay state may be excluded')
     # ManagerBasedRlEnv creates these four boundary fields on its FIRST step.
     # Materialize their declared storage/aliases without executing physics.
     # No other missing runtime field is repaired or silently skipped.
@@ -45,6 +51,20 @@ def host_model_digest(model):
 
 
 def tensor_bytes(value):return value.detach().cpu().contiguous().reshape(-1).view(torch.uint8).numpy().tobytes()
+
+
+def reference_signature(adapter):
+    digest=hashlib.sha256()
+    for key,value in sorted(adapter.motion._frames.items()):
+        digest.update(key.encode());digest.update(str((tuple(value.shape),value.dtype)).encode());digest.update(tensor_bytes(value))
+    return digest.hexdigest()
+
+
+def scalar_equal(actual,expected):
+    if type(actual)!=type(expected):return False
+    if isinstance(actual,(float,np.floating)) and np.isnan(actual) and np.isnan(expected):
+        return np.asarray(actual).tobytes()==np.asarray(expected).tobytes()
+    return bool(actual==expected)
 
 
 def rng_state():
@@ -92,7 +112,7 @@ def capture(adapter,source_receipt):
         arrays,scalars=model_leaves(root)
         native[key]=dict(arrays={k:v.numpy().copy() for k,v in arrays.items()},scalars=scalars)
     return dict(schema=SCHEMA,metadata=adapter.metadata(),config=file_pin(adapter.config_path),worlds=adapter.num_envs,
-        host_model_digest=host_model_digest(adapter.env.sim.mj_model),python=py,native=native,
+        host_model_digest=host_model_digest(adapter.env.sim.mj_model),reference_signature=reference_signature(adapter),python=py,native=native,
         rng=rng_state(),sources=source_receipt,engine_sources=engine_sources(),
         exclusions=dict(bridge='WarpBridge caches are native-array views/stream resources; model/Data copied separately.',
             paths=EXCLUDED,reason='Controlled historyless perfect observation is regenerated; extras/obs caches are overwritten, not future-physics state.',
@@ -107,6 +127,7 @@ def restore(adapter,state):
         raise ValueError('Portable pen schema/161/188/world contract mismatch')
     if file_pin(adapter.config_path)!=state['config'] or host_model_digest(adapter.env.sim.mj_model)!=state['host_model_digest']:
         raise ValueError('Portable config/host topology mismatch')
+    if reference_signature(adapter)!=state['reference_signature']:raise ValueError('Portable reference content mismatch')
     verify_source_snapshot(state['sources'],live=True)
     for pin in state['engine_sources']:verify_file_pin(pin)
     torch.cuda.synchronize();wp.synchronize()
@@ -151,5 +172,7 @@ def restore(adapter,state):
     for path,target in current['tensors'].items():
         count+=1
         if tensor_bytes(target)!=tensor_bytes(state['python']['tensors'][path]):differences.append(repr(path))
+    scalar_differences=[repr(path) for path,value in state['python']['scalars'].items() if not scalar_equal(path_value(adapter,path),value)]
     return dict(array_fields=count,all_array_bytes_equal=not differences,differing_fields=differences,
+        all_scalar_values_equal=not scalar_differences,differing_scalar_fields=scalar_differences,
         scalar_fields=len(current['scalars']),scope='Immediate array/closure restore only, no physical replay qualification.')

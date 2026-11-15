@@ -1,0 +1,28 @@
+schema = 1
+adapter_config = "pen_full_pose_native_v1.toml"
+role = "FRESH_TRAIN_CONTROLLED_NATIVE_PPO_DIAGNOSTIC"
+num_envs = 32
+normalization_calibration_controls = 8
+qualification_controls = 8
+iterations = 32
+first_checkpoint_iteration = 2
+normalization = "BLOCK_FROZEN_PREVIOUS_ROLLOUT:1"
+scope = "Actual native model-free baseline under known W32 numerical replay limits. No CHORD/WM-gradient/ego/task-success qualification."
+
+[ppo]
+seed = 7411
+ppo_rollout_steps = 64
+ppo_epochs = 4
+ppo_minibatches = 8
+ppo_clip = 0.2
+ppo_entropy = 0.001
+ppo_value_coef = 0.5
+ppo_max_grad_norm = 1.0
+ppo_normalize_advantage = true
+ppo_lr = 0.0001
+weight_decay = 0.0
+ppo_init_std = 0.5
+ppo_std_min = 0.2
+ppo_std_max = 50.0
+ppo_gamma = 0.996
+lam = 0.95

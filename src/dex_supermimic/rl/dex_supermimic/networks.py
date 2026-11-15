@@ -128,9 +128,9 @@ class GaussianPPOActor(nn.Module):
             final.weight[self.action_dim :].zero_()
             final.bias[self.action_dim :] = self.init_std
 
-    def distribution(self, obs):
+    def distribution(self, obs, *, validate_args=None):
         mean, std = self.net(self.norm(obs)).unflatten(-1, (2, self.action_dim)).unbind(-2)
-        return Normal(mean, std.clamp(*self.std_range))
+        return Normal(mean, std.clamp(*self.std_range), validate_args=validate_args)
 
     def forward(self, obs):
         return self.distribution(obs).sample()
