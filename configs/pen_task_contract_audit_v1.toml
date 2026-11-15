@@ -1,0 +1,11 @@
+schema = 1
+baseline = "../runs/pen_native_horizon_H1_v1/report.json"
+horizon = "../runs/pen_native_horizon_H5_v1/report.json"
+baseline_review = "../runs/pen_native_horizon_H1_review_v1/report.json"
+horizon_review = "../runs/pen_native_horizon_H5_review_v1/report.json"
+matrix = "../runs/pen_horizon_matrix_review_v1/report.json"
+clip = "01_single_axis/clip_001.npz"
+frame_position_tolerance_m = 0.000001
+frame_rotation_tolerance_rad = 0.00001
+axis_roll_angles_deg = [0, 10, 90, 180]
+scope = "All actual H1/H5 traces/common prefixes and recorded candidate tables. Pose/contact failures retained; fixed wrist reconstruction and instantaneous axis-feature alias witness only. No dynamics integration, new task, training, expert or ego claim."
