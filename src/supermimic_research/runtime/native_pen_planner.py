@@ -81,7 +81,7 @@ class NativePenPlanner:
         self.body=model.body('object/cube').id;joint=model.body_jntadr[self.body]
         self.qa=int(model.jnt_qposadr[joint]);self.da=int(model.jnt_dofadr[joint])
         if np.any(device_model.body_ipos.numpy()[0,self.body]):raise ValueError('COM at free-body origin')
-        self.stream=wp.stream_from_torch(torch.cuda.current_stream());self.torch_stream=torch.cuda.current_stream()
+        self.torch_stream=torch.cuda.Stream();self.stream=wp.stream_from_torch(self.torch_stream)
         live_arrays,self.live_scalars=model_leaves(live)
         self.live_layout={k:(a.ptr,a.shape,a.dtype,a.strides) for k,a in live_arrays.items()}
         with wp.ScopedStream(self.stream):
@@ -117,8 +117,10 @@ class NativePenPlanner:
         self.views={k:wp.to_torch(getattr(self,k)) for k in ['slot','target_ctrl','Q','V','U','W','T','pen','other','bad']}
         self.qid_tensor=torch.as_tensor(qids.astype(np.int64),device='cuda');self.ctrl_tensor=wp.to_torch(live.ctrl)
         self.aid_tensor=torch.as_tensor(np.asarray(aids,dtype=np.int64),device='cuda')
+        wp.synchronize_stream(self.stream)
 
     def load_source(self):
+        self.torch_stream.wait_stream(torch.cuda.current_stream())
         arrays,scalars=model_leaves(self.live)
         if scalars!=self.live_scalars or set(arrays)!=set(self.live_layout):raise ValueError('Live Data layout drift')
         for key,a in arrays.items():
@@ -128,15 +130,18 @@ class NativePenPlanner:
                 if a.size:wp.copy(self.source.arrays[key],a)
 
     def search(self,targets,ema,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg):
-        self.views['target_ctrl'].copy_(self.ctrl_tensor.expand(57,-1))
-        self.views['target_ctrl'][:,self.aid_tensor]=targets
-        begin,end=torch.cuda.Event(enable_timing=True),torch.cuda.Event(enable_timing=True);begin.record()
-        with wp.ScopedStream(self.stream):
+        caller=torch.cuda.current_stream();self.torch_stream.wait_stream(caller)
+        begin,end=torch.cuda.Event(enable_timing=True),torch.cuda.Event(enable_timing=True)
+        with torch.cuda.stream(self.torch_stream),wp.ScopedStream(self.stream):
+            self.views['target_ctrl'].copy_(self.ctrl_tensor.expand(57,-1))
+            self.views['target_ctrl'][:,self.aid_tensor]=targets
+            begin.record()
             for i in range(57):
                 self.views['slot'].fill_(i);wp.capture_launch(self.graph,stream=self.stream)
-        result=score_candidates(self.views['Q'],self.views['V'],self.views['U'],self.views['W'],self.views['pen'],self.views['other'],self.views['bad'],ema,
-            self.qid_tensor,self.qa,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg)
-        end.record();end.synchronize()
+            result=score_candidates(self.views['Q'],self.views['V'],self.views['U'],self.views['W'],self.views['pen'],self.views['other'],self.views['bad'],ema,
+                self.qid_tensor,self.qa,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg)
+            end.record()
+        end.synchronize();caller.wait_stream(self.torch_stream)
         index=int(result['index']);arrays={k:v.detach().cpu().numpy().copy() for k,v in self.views.items() if k not in ['slot','target_ctrl']}
         scores={k:v.detach().cpu().numpy().copy() for k,v in result.items()}
         return index,arrays,scores,float(begin.elapsed_time(end))
