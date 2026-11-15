@@ -1,0 +1,176 @@
+{
+  "schema": "matched_source_CCD_figure:1",
+  "comparison": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_visited_ccd_comparison_v1\\report.json",
+    "bytes": 28854,
+    "sha256": "1bc79d1450dac239a696b42ac9198ce48830f5fb082087c8e651f4761464f686"
+  },
+  "gates": {
+    "path": "D:\\workspace\\supermimic-research\\configs\\pen_gpu_step_audit_v1.toml",
+    "bytes": 416,
+    "sha256": "c31b252e6cfe90e6c89531efb8cac31daf72f813f4e4d7886adda70a9fd1e436"
+  },
+  "source": {
+    "path": "D:\\workspace\\supermimic-research\\tools\\plot_pen_source_ccd.py",
+    "bytes": 4205,
+    "sha256": "38ab8b24721e0430a99356420afbcbe2a4abd527fc06c97a9f2ac20bc7a62444"
+  },
+  "figure": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_visited_ccd_figure_v1\\summary.png",
+    "bytes": 106349,
+    "sha256": "96d1291fbd2c4832f59718c05be0ef2cf0283470bec1fe8cc761356ea1afdda0"
+  },
+  "summaries": [
+    {
+      "profile": "BASELINE",
+      "required_comparisons": 847,
+      "state_failed": 6,
+      "maximum_metrics": {
+        "hand_position_rad": 0.0003118664026260376,
+        "object_position_m": 0.0003873565653633559,
+        "object_rotation_rad": 0.03970024239467152,
+        "hand_velocity_rad_s": 0.062372103333473206,
+        "object_velocity_m_s": 0.07746899322921387,
+        "object_omega_rad_s": 7.940121470566023,
+        "control_rad": 0.0,
+        "EFC_force_N": 0.46481399293890047,
+        "EFC_torque_Nm": 0.014872970445096837
+      },
+      "anchors": [
+        {
+          "mode": "STATE_PLUS_VELOCITY_SUPPORT",
+          "dt": 0.005,
+          "k": 0,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 1956.2615571654387,
+          "maximum_state_gate_ratio": 14.74660982534065
+        },
+        {
+          "mode": "STATE_PLUS_VELOCITY_SUPPORT",
+          "dt": 0.005,
+          "k": 8,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 0.0008560483486633984,
+          "maximum_state_gate_ratio": 2.388837865452883e-06
+        },
+        {
+          "mode": "STATE_PLUS_VELOCITY_SUPPORT",
+          "dt": 0.005,
+          "k": 9,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 4648.1399293890045,
+          "maximum_state_gate_ratio": 39.70060735283011
+        },
+        {
+          "mode": "STATE_PLUS_VELOCITY_SUPPORT",
+          "dt": 0.005,
+          "k": 10,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 7.580821088047859,
+          "maximum_state_gate_ratio": 0.020745265025309302
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 0,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 2.3195019328359106,
+          "maximum_state_gate_ratio": 0.0253962057820463
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 1,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 0.0026540341196460335,
+          "maximum_state_gate_ratio": 4.783208298049891e-06
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 2,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 0.0008289591054946431,
+          "maximum_state_gate_ratio": 5.215406418545041e-07
+        }
+      ]
+    },
+    {
+      "profile": "TIGHT",
+      "required_comparisons": 847,
+      "state_failed": 0,
+      "maximum_metrics": {
+        "hand_position_rad": 3.409385681152344e-05,
+        "object_position_m": 4.728466599682645e-06,
+        "object_rotation_rad": 0.0003259392435580115,
+        "hand_velocity_rad_s": 0.013571500778198242,
+        "object_velocity_m_s": 0.0018926952585295448,
+        "object_omega_rad_s": 0.10503337228079371,
+        "control_rad": 0.0,
+        "EFC_force_N": 0.0227887073136,
+        "EFC_torque_Nm": 0.00037167433485471563
+      },
+      "anchors": [
+        {
+          "mode": "STATE_PLUS_VELOCITY_SUPPORT",
+          "dt": 0.005,
+          "k": 0,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 16.987046222181874,
+          "maximum_state_gate_ratio": 0.2349511317856271
+        },
+        {
+          "mode": "STATE_PLUS_VELOCITY_SUPPORT",
+          "dt": 0.005,
+          "k": 8,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 0.0006558472972838348,
+          "maximum_state_gate_ratio": 5.960464478059933e-06
+        },
+        {
+          "mode": "STATE_PLUS_VELOCITY_SUPPORT",
+          "dt": 0.005,
+          "k": 9,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 10.0529144987316,
+          "maximum_state_gate_ratio": 0.04888772532721268
+        },
+        {
+          "mode": "STATE_PLUS_VELOCITY_SUPPORT",
+          "dt": 0.005,
+          "k": 10,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 1.7278927374505064,
+          "maximum_state_gate_ratio": 0.01055095002687096
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 0,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 1.2831099412207665,
+          "maximum_state_gate_ratio": 0.007298700544728176
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 1,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 227.88707313599997,
+          "maximum_state_gate_ratio": 0.5251668614039685
+        },
+        {
+          "mode": "STATE_ONLY",
+          "dt": 0.0025,
+          "k": 2,
+          "comparisons": 121,
+          "maximum_force_gate_ratio": 11.063908710550198,
+          "maximum_state_gate_ratio": 0.07991790656581199
+        }
+      ]
+    }
+  ],
+  "native_integrations": 0,
+  "neural_updates": 0,
+  "scope": "Per-anchor maxima over SAME within-profile cohort. State ratio is max over six original state gates, not a pooled accuracy score. Force failures retained; no profile fully qualified."
+}
