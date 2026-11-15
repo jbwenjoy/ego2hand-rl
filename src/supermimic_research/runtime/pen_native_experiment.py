@@ -127,5 +127,3 @@ def main(a):
             task_sources.append(file_pin(path))
     result=dict(**intent,cases=cases,task_sources=task_sources)
     write(a.output/'report.json',result);print(json.dumps(dict(report=file_pin(a.output/'report.json'),cases=[dict(mode=c['name'],dt=c['dt'],duration=c['summary']['metrics']['actual_duration_s'],qualified=c['summary']['qualified'],candidates=c['candidates_evaluated']) for c in cases])))
-
-

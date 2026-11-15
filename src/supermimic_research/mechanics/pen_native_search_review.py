@@ -120,5 +120,3 @@ def main(a):
     print(json.dumps(dict(report=file_pin(a.output/'report.json'),contracts=[contract_passed,contract_total],EFC=result['EFC_counts'],fidelity=[result['selected_fidelity_passed'],len(all_decisions)],
         cases=[dict(mode=c['mode'],dt=c['dt'],duration=c['actual_duration_s'],fallbacks=c['fallbacks'],terminations=c['terminations'],qualified=c['qualified']) for c in results])))
     if contract_passed!=contract_total or efc['passed']!=efc['total'] or result['selected_fidelity_passed']!=len(all_decisions):raise ValueError('Retain failing audit; no global contract/replay qualification')
-
-
