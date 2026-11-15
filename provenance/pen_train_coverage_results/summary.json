@@ -1,0 +1,112 @@
+{
+  "schema": "pen_TRAIN_response_coverage_summary:1",
+  "roots": {
+    "collection": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_train_coverage_v1\\report.json",
+      "bytes": 4737223,
+      "sha256": "c7c4989f698b94ba7cecb75270572e0d773293545c1ce293a96840402220c620"
+    },
+    "preparation": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_train_preparation_v1\\report.json",
+      "bytes": 1778228,
+      "sha256": "dc232e2ac4b5d353743d5b644311f796d3d2fe1980e1b6299e31f8fc55aa4a2e"
+    },
+    "diagnosis_initial": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_train_momentum_diagnosis_v1\\report.json",
+      "bytes": 81647,
+      "sha256": "559ec5a1e5045ff3197b2f1eb165f1b446d60f1812707a9771541bfa7b646540"
+    },
+    "diagnosis": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_train_momentum_diagnosis_v2\\report.json",
+      "bytes": 81904,
+      "sha256": "a475d8ad1a706714d74dec9ee4b28188d6cb487e9a8068848c0b364ea7cb18fb"
+    }
+  },
+  "checks": {
+    "collection": [
+      5,
+      5
+    ],
+    "preparation": [
+      81,
+      81
+    ],
+    "diagnosis_initial": [
+      9,
+      825
+    ],
+    "diagnosis": [
+      825,
+      825
+    ]
+  },
+  "source_states": 24,
+  "episodes": 4,
+  "branches": 816,
+  "qualified_sources": 24,
+  "qualified_rows": 808,
+  "rejected_rows": [
+    72,
+    88,
+    137,
+    155,
+    273,
+    291,
+    790,
+    806
+  ],
+  "physical_qualification": "REJECTED_ROWS_RETAINED_AND_MASKED",
+  "row_gates": [
+    16312,
+    16320
+  ],
+  "qualified_response_groups": 188,
+  "actual_native_integrations": 8800,
+  "optimizer_steps": 0,
+  "CHECK_response_rows_used": 0,
+  "restore_mode": "STRICT",
+  "unit_tests": 352,
+  "prior_epoch_physical_qualification": "INCOMPLETE_ORIGINAL_IMPULSE_FAILURE_RETAINED",
+  "strict_impulse_failure_rows": [
+    72,
+    88,
+    137,
+    155,
+    273,
+    291,
+    790,
+    806
+  ],
+  "recorded_repeat_conditions": [
+    {
+      "names": [
+        "RESIDUAL_N8801_P036_D1_E0.005_S-1_R0",
+        "RESIDUAL_N8801_P036_D1_E0.005_S-1_R1"
+      ],
+      "identical_recorded_residuals": true
+    },
+    {
+      "names": [
+        "RESIDUAL_N8801_P064_D1_E0.002_S1_R0",
+        "RESIDUAL_N8801_P064_D1_E0.002_S1_R1"
+      ],
+      "identical_recorded_residuals": true
+    },
+    {
+      "names": [
+        "RESIDUAL_N8802_P036_D1_E0.002_S1_R0",
+        "RESIDUAL_N8802_P036_D1_E0.002_S1_R1"
+      ],
+      "identical_recorded_residuals": true
+    },
+    {
+      "names": [
+        "SUPPORT_N8802_P072_D2_E0.005_S-1_R0",
+        "SUPPORT_N8802_P072_D2_E0.005_S-1_R1"
+      ],
+      "identical_recorded_residuals": true
+    }
+  ],
+  "max_velocity_update_residual_m_s": 3.879492347902313e-09,
+  "scope": "Independent-noise-history TRAIN physical response coverage within one original reference. Existing developmental CHECK NEVER_FIT. No new WM fit,Actor update,task/video improvement,unseen-reference/ego or PPO-speed claim;prior epoch impulse anomaly unresolved."
+}

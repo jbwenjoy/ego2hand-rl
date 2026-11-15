@@ -7,7 +7,8 @@ import torch
 from dex_supermimic.rl.dex_supermimic.networks import GaussianPPOActor
 from supermimic_research.artifacts import file_pin,verify_file_pin
 from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot
-from supermimic_research.learning.pen_interventions import intervention_profiles
+from supermimic_research.learning.pen_interventions import intervention_profiles,seeded_training_profiles,prefix_noise_schedule
+from supermimic_research.learning.frozen_pen_actor import frozen_actor_for_current_W1
 from supermimic_research.learning.pen_support_ppo import static_contract,CENTERED_SCHEMA
 from supermimic_research.runtime.pen_support_runtime import SupportPenRuntime
 from supermimic_research.runtime import owned_pen_state as native
@@ -19,12 +20,22 @@ def write(p,v):p.write_text(json.dumps(v,indent=2,allow_nan=False)+'\n',encoding
 
 def main(a):
     cp=a.config.resolve();cfg=tomllib.loads(cp.read_text());tp=(cp.parent/cfg['training_report']).resolve();training=json.loads(tp.read_text());op=(cp.parent/cfg['objective_config']).resolve();out=a.output.resolve()
-    if out.exists() or not out.is_relative_to(ROOT/'runs') or cfg['source_phases']!=[10,20,30,40,60,75] or cfg['actors']!=['RESIDUAL','SUPPORT'] or cfg['PD_eps_rad']!=[.002,.005] or cfg['repeats']!=3:raise ValueError('Fresh registered324-branch study')
+    train=cfg['schema']==2
+    if out.exists() or not out.is_relative_to(ROOT/'runs') or cfg['schema'] not in (1,2) or cfg['actors']!=['RESIDUAL','SUPPORT'] or cfg['PD_eps_rad']!=[.002,.005]:raise ValueError('Fresh explicitly registered response study')
+    if train:
+        if cfg['source_phases']!=[12,24,36,48,64,72] or cfg['noise_seeds']!=[8801,8802] or cfg['prefix_raw_sigma']!=.01 or cfg['directions']!=4 or cfg['direction_seed']!=9301 or cfg['repeats']!=2 or cfg['role']!='TRAIN_CONTROLLED_PHYSICAL_RESPONSE' or cfg['restore_mode']!='STRICT':raise ValueError('Registered TRAIN coverage contract differs')
+        context_path=(cp.parent/cfg['frozen_W1_context_report']).resolve();contexts=json.loads(context_path.read_text())
+        if contexts['role']!='CHECK_TRAINED_ACTOR_PHYSICAL_RESPONSE_NEVER_FIT' or contexts['passed']!=contexts['total']:raise ValueError('Frozen context only;CHECK responses never enter TRAIN')
+    elif cfg['source_phases']!=[10,20,30,40,60,75] or cfg['repeats']!=3 or cfg['role']!='CHECK_TRAINED_ACTOR_PHYSICAL_RESPONSE_NEVER_FIT':raise ValueError('Original324-branch CHECK contract differs')
     if training['config']!=file_pin(op) or training['passed']!=training['total']:raise ValueError('Completed registered training required')
-    verify_source_snapshot(json.loads(verify_file_pin(training['source_receipt']).read_text()),live=True)
+    verify_source_snapshot(json.loads(verify_file_pin(training['source_receipt']).read_text()),live=not train)
     out.mkdir();protocol=(cp.parent/cfg['protocol']).resolve();paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/pkg).rglob('*.py')})+[Path(__file__).resolve(),cp,protocol]
     receipt=freeze_sources(paths,out/'source_snapshot',ROOT,subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip());write(out/'source_receipt.json',receipt)
-    directions,profiles=intervention_profiles();np.savez_compressed(out/'directions.npz',directions=directions)
+    directions,profiles=seeded_training_profiles(cfg['direction_seed'],cfg['directions'],cfg['repeats']) if train else intervention_profiles();np.savez_compressed(out/'directions.npz',directions=directions)
+    seeds=cfg['noise_seeds'] if train else [None]
+    schedules={seed:prefix_noise_schedule(seed,max(cfg['source_phases'])-1,cfg['prefix_raw_sigma']) for seed in seeds} if train else {}
+    if train:np.savez_compressed(out/'prefix_noise.npz',**{f'seed{seed}':value for seed,value in schedules.items()})
+    jobs=[(arm,seed) for arm in training['arms'] for seed in seeds]
     from mjlab.sim.sim import Simulation
     original=Simulation.step;observed=0;recorder=None;runtime=None;sources=[];cases=[];phase='construction'
     def step(sim):
@@ -36,11 +47,16 @@ def main(a):
     try:
         with torch.no_grad(),torch.jit.optimized_execution(False):
             # Finish the entire two-actor bank BEFORE restoring any source.
-            for arm in training['arms']:
-                label=arm['arm'];folder=out/label;folder.mkdir();phase=label+'_producer';saved=torch.load(verify_file_pin(arm['checkpoint']),map_location='cpu',weights_only=False)
+            for arm,seed in jobs:
+                label=arm['arm'];episode=label+(f'_N{seed}' if train else '');folder=out/episode;folder.mkdir();phase=episode+'_producer';saved=torch.load(verify_file_pin(arm['checkpoint']),map_location='cpu',weights_only=False)
                 if saved['schema']!=CENTERED_SCHEMA:raise ValueError('Registered training4 actor required')
-                runtime=SupportPenRuntime(op,1);runtime.support_weight=float(saved['metadata']['support_weight']);settings=saved['config']
-                actor=GaussianPPOActor(161,20,init_std=settings['ppo_init_std'],std_range=(settings['ppo_std_min'],settings['ppo_std_max'])).to(runtime.device);actor.load_state_dict(saved['modules']['actor']);actor.eval()
+                runtime=SupportPenRuntime(op,1);runtime.support_weight=float(saved['metadata']['support_weight']);settings=saved['config'];actor_audit=None
+                if train:
+                    context=next(s['source'] for s in contexts['sources'] if s['actor']==label and s['phase']==10)
+                    actor,actor_audit=frozen_actor_for_current_W1(runtime,arm['checkpoint'],context)
+                else:
+                    actor=GaussianPPOActor(161,20,init_std=settings['ppo_init_std'],std_range=(settings['ppo_std_min'],settings['ppo_std_max'])).to(runtime.device);actor.load_state_dict(saved['modules']['actor']);actor.eval()
+                prefix_actions=[]
                 physics=save_physics(runtime,folder);recorder=OwnedProbeRecorder(runtime);terminated=False;before=observed
                 current_arrays=runtime.env.sim.wp_model
                 for key in ['body_mass','body_inertia','body_ipos','body_iquat','geom_size','geom_pos','geom_quat','geom_friction','geom_solref','geom_solimp','actuator_gainprm','actuator_biasprm','actuator_forcerange','actuator_ctrlrange','jnt_range','dof_damping','dof_armature']:
@@ -49,10 +65,13 @@ def main(a):
                 for k in cfg['source_phases']:
                     while int(runtime.motion.time_steps[0])<k and not terminated:
                         raw=actor.distribution(runtime.observation()['policy'],validate_args=False).mean
+                        if train:
+                            control=int(runtime.motion.time_steps[0])-1;mean=raw[0].cpu().numpy().copy();raw=raw+torch.tensor(schedules[seed][control],device=runtime.device)[None]
+                            prefix_actions.append(dict(control_index=control,phase=int(runtime.motion.time_steps[0]),mean_raw=mean.tolist(),submitted_raw=raw[0].cpu().numpy().tolist(),clamped_components=int((raw.abs()>1).sum())))
                         _,_,term,trunc,_=runtime.step(raw);terminated=bool(term[0] or trunc[0])
-                    source_folder=folder/f'PHASE{k:03d}';source_folder.mkdir();name=f'{label}_P{k:03d}'
+                    source_folder=folder/f'PHASE{k:03d}';source_folder.mkdir();name=f'{episode}_P{k:03d}'
                     if terminated:
-                        sources.append(dict(name=name,actor=label,phase=k,available=False,qualified=False,reason='Producer terminated before source; no replacement'))
+                        sources.append(dict(name=name,actor=label,episode=episode,noise_seed=seed,phase=k,available=False,qualified=False,reason='Producer terminated before source; no replacement'))
                         continue
                     d=runtime.env.sim.wp_data;f=runtime.features;c={key:v.cpu().numpy().copy() for key,v in runtime.contact_views.items()}
                     raw=actor.distribution(runtime.observation()['policy'],validate_args=False).mean[0].cpu().numpy().copy()
@@ -65,13 +84,13 @@ def main(a):
                         no_aid=not np.any(d.qfrc_applied.numpy()) and not np.any(d.xfrc_applied.numpy()),unclipped_base_raw=bool(np.max(abs(raw))<=1))
                     state=dict(schema='owned_trained_actor_probe_source:1',native=native.capture(runtime,receipt),task_static=static_contract(runtime,native.inventory(runtime)),
                         observation={key:value.cpu().clone() for key,value in runtime.observation().items()},base_raw=raw,phase=k,actor=label,actor_checkpoint=arm['checkpoint'],
-                        source_qpos_R=gap['qpos_R'],source_qpos_COM=gap['qpos_COM'],source_cached_R=d.xmat.numpy()[0,f.body].copy(),source_cached_COM=d.xipos.numpy()[0,f.body].copy())
+                        source_qpos_R=gap['qpos_R'],source_qpos_COM=gap['qpos_COM'],source_cached_R=d.xmat.numpy()[0,f.body].copy(),source_cached_COM=d.xipos.numpy()[0,f.body].copy(),episode=episode,noise_seed=seed)
                     torch.save(state,source_folder/'source.pt')
-                    entry=dict(name=name,actor=label,phase=k,source_time_s=(k-1)*.02,available=True,qualified=all(quality.values()),quality=quality,
+                    entry=dict(name=name,actor=label,episode=episode,noise_seed=seed,phase=k,source_time_s=(k-1)*.02,available=True,qualified=all(quality.values()),quality=quality,
                         previous_geometry=geometry.tolist(),previous_mean_hand_normal_N=normal,cached_rotation_gap_rad=gap['cached_rotation_gap_rad'],cached_COM_gap_m=gap['cached_COM_gap_m'],
                         source=file_pin(source_folder/'source.pt'),model=file_pin(folder/'model.mjb'),physical_context=file_pin(folder/'physical_context.npz'),physics=physics,actor_checkpoint=arm['checkpoint'])
                     sources.append(entry);write(source_folder/'source.json',entry)
-                prefix=observed-before;write(folder/'producer.json',dict(native_integrations=prefix,no_post_start_resets=True,final_phase=int(runtime.motion.time_steps[0]),terminated=terminated))
+                prefix=observed-before;write(folder/'producer.json',dict(native_integrations=prefix,no_post_start_resets=True,final_phase=int(runtime.motion.time_steps[0]),terminated=terminated,actor_audit=actor_audit,episode=episode,noise_seed=seed,prefix_actions=prefix_actions))
                 runtime.close();runtime=None;recorder=None
             producer_integrations=observed;write(out/'source_bank.json',dict(sources=sources,actual_native_integrations=producer_integrations,role=cfg['role']))
             for label in cfg['actors']:
@@ -80,7 +99,7 @@ def main(a):
                     baseline_PD=None;source=torch.load(verify_file_pin(entry['source']),map_location='cpu',weights_only=False) if entry['available'] else None
                     f=runtime.features;m=runtime.env.sim.mj_model;b=f.body;qa=f.qa;da=int(m.jnt_dofadr[m.body_jntadr[b]]);aids=runtime.action._position_ctrl_ids.cpu().numpy()
                     for profile in profiles:
-                        name=entry['name']+'_'+profile['name'];case=dict(name=name,source_name=entry['name'],actor=label,phase=entry['phase'],profile=profile,role=cfg['role'])
+                        name=entry['name']+'_'+profile['name'];case=dict(name=name,source_name=entry['name'],actor=label,episode=entry['episode'],noise_seed=entry['noise_seed'],phase=entry['phase'],profile=profile,role=cfg['role'])
                         if not entry['qualified']:
                             case.update(available=False,qualified=False,reason='Source quality exclusion; no replacement',native_integrations=0);cases.append(case);continue
                         direction=np.zeros(20) if profile['direction']<0 else directions[profile['direction']]
@@ -89,7 +108,7 @@ def main(a):
                             case.update(available=False,qualified=False,reason=str(error),native_integrations=0);cases.append(case);continue
                         audit=restore_source(runtime,source)
                         if not audit['all_array_bytes_equal'] or not audit['all_scalar_values_equal'] or any(not torch.equal(v.cpu(),source['observation'][key]) for key,v in runtime.observation().items()):raise ValueError('Source/observation restoration differs')
-                        folder=out/label/f'PHASE{entry["phase"]:03d}'/profile['name'];folder.mkdir();recorder.begin(raw);start=observed
+                        folder=Path(entry['source']['path']).parent/profile['name'];folder.mkdir();recorder.begin(raw);start=observed
                         _,_,term,trunc,info=runtime.step(torch.tensor(raw,device=runtime.device)[None]);packet=recorder.finish();window={k:v.cpu().numpy().copy()[0] for k,v in runtime.contact_views.items()}
                         actual=packet['post_ctrl'][0,aids]
                         if baseline_PD is None:baseline_PD=actual.copy()
@@ -109,14 +128,16 @@ def main(a):
                     write(out/'progress.json',dict(sources=sources,cases=cases,actual_native_integrations=observed))
                     print(json.dumps(dict(source=entry['name'],source_qualified=entry['qualified'],branches=sum(c['source_name']==entry['name'] and c['available'] for c in cases),observed_native=observed)),flush=True)
                 runtime.close();runtime=None;recorder=None
-            checks=dict(declared_sources=len(sources)==12,declared_cases=len(cases)==324,all_actual_steps_accounted=observed==producer_integrations+sum(c['native_integrations'] for c in cases),
+            expected_sources=len(jobs)*len(cfg['source_phases'])
+            checks=dict(declared_sources=len(sources)==expected_sources,declared_cases=len(cases)==expected_sources*len(profiles),all_actual_steps_accounted=observed==producer_integrations+sum(c['native_integrations'] for c in cases),
                 all_available_restore_exact=all(c['restore_audit']['all_array_bytes_equal'] and c['restore_audit']['all_scalar_values_equal'] for c in cases if c['available']),
                 all_available_native_count=all(c['native_integrations']==8 for c in cases if c['available']))
             verify_source_snapshot(receipt,live=True)
-            result=dict(schema='trained_pen_same_source_response_probe:1',config=file_pin(cp),training=file_pin(tp),source_receipt=file_pin(out/'source_receipt.json'),protocol=file_pin(protocol),directions=file_pin(out/'directions.npz'),
+            result=dict(schema='trained_pen_same_source_response_probe:2' if train else 'trained_pen_same_source_response_probe:1',config=file_pin(cp),training=file_pin(tp),source_receipt=file_pin(out/'source_receipt.json'),protocol=file_pin(protocol),directions=file_pin(out/'directions.npz'),
                 source_bank=file_pin(out/'source_bank.json'),sources=sources,cases=cases,checks=checks,passed=sum(checks.values()),total=len(checks),qualified_sources=sum(s['qualified'] for s in sources),
                 available_cases=sum(c['available'] for c in cases),online_geometry_qualified_cases=sum(c['qualified'] for c in cases),producer_native_integrations=producer_integrations,
                 actual_native_integrations=observed,optimizer_steps=0,role=cfg['role'],scope=cfg['scope'])
+            if train:result.update(frozen_W1_context_report=file_pin(context_path),prefix_noise=file_pin(out/'prefix_noise.npz'),producers=[file_pin(out/(arm['arm']+f'_N{seed}')/'producer.json') for arm,seed in jobs],restore_mode='STRICT',CHECK_response_rows_used=0)
             write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),checks=[result['passed'],result['total']],native_integrations=observed,qualified_sources=result['qualified_sources'],available_cases=result['available_cases'],geometry_qualified=result['online_geometry_qualified_cases'])),flush=True)
             if not all(checks.values()):raise ValueError('Retain probe contract discrepancy')
     except Exception as error:
