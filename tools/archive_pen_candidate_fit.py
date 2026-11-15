@@ -1,5 +1,6 @@
 """Compact tracked candidate-fit evidence; exact large artifacts stay local."""
 import json
+import argparse
 import shutil
 import subprocess
 import sys
@@ -11,9 +12,11 @@ from supermimic_research.artifacts import file_pin
 from supermimic_research.frozen_sources import freeze_sources, verify_source_snapshot, verify_source_pin
 
 
-def main():
+def main(experiment='candidate'):
     out = ROOT / 'provenance/pen_candidate_fit_results'
     analysis = ROOT / 'runs/pen_candidate_fit_analysis_v1'
+    cv=experiment=='cv_prior'
+    if cv:out,analysis=ROOT/'provenance/pen_cv_prior_results',ROOT/'runs/pen_cv_prior_analysis_v1'
     if out.exists() or analysis.exists():
         raise ValueError('Fresh immutable evidence directory required')
     reports = dict(
@@ -25,13 +28,23 @@ def main():
     receipt_paths = [ROOT / ('runs/' + folder + '/source_receipt.json') for folder in [
         'pen_candidate_fit_first100_sources_v1', 'pen_candidate_fit_continuation_sources_v1',
         'pen_candidate_fit_evaluation_sources_v1', 'pen_candidate_fit_rollout_sources_v1']]
+    if cv:
+        reports=dict(first100=ROOT/'runs/pen_cv_prior_first100_v1/health_0100.json',
+            final=ROOT/'runs/pen_cv_prior_continuation_v1/health_2000.json',physical=ROOT/'runs/pen_cv_prior_evaluation_v1/report.json',
+            recursive=ROOT/'runs/pen_cv_prior_rollout_v1/report.json',figure=ROOT/'runs/pen_cv_prior_figure_v1/report.json',
+            independent=ROOT/'runs/pen_cv_prior_review_v1/report.json')
+        receipt_paths=[ROOT/'runs'/folder/'source_receipt.json' for folder in ['pen_cv_prior_legacy_sources_v1',
+            'pen_cv_prior_sources_v1','pen_cv_prior_archive_legacy_v1','pen_cv_prior_review_v1']]
+        verify_source_snapshot(json.loads(receipt_paths[1].read_text()),live=True)
     analysis.mkdir()
     revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    manifest = freeze_sources([Path(__file__), ROOT / 'tools/archive_pen_source_ccd_evidence.py',
-                              ROOT / 'tools/plot_pen_candidate_fit.py'], analysis / 'snapshot', ROOT, revision)
+    files=[Path(__file__), ROOT / 'tools/archive_pen_source_ccd_evidence.py',ROOT / 'tools/plot_pen_candidate_fit.py']
+    if cv:files+=[ROOT/'tools/review_pen_cv_prior.py',ROOT/'tests/test_pen_cv_prior.py',ROOT/'archive/pen_pre_cv_prior_v1/impulse_response.py']
+    manifest = freeze_sources(files, analysis / 'snapshot', ROOT, revision)
     write(analysis / 'source_receipt.json', manifest)
     receipt_paths.append(analysis / 'source_receipt.json')
     prior = ROOT / 'provenance/pen_candidate_response_results/source_resolutions.json'
+    if cv:prior=ROOT/'provenance/pen_horizon_results/source_resolutions.json'
     aliases = {json.dumps(e['original'], sort_keys=True): e for e in json.loads(prior.read_text())['records']}
     for path in receipt_paths:
         receipt = json.loads(path.read_text())
@@ -45,7 +58,16 @@ def main():
     docs = [ROOT / ('docs/' + name) for name in ['research-plan-v0.87.md', 'research-plan-v0.88.md',
         'research-plan-v0.89.md', 'research-plan-v0.90.md', 'pen-candidate-fit-results-2026-11-15.md']]
     test = ROOT / 'runs/pen_candidate_fit_final_tests229.log'
+    if cv:
+        docs=[ROOT/'docs'/name for name in ['research-plan-v0.93.md','research-plan-v0.94.md','pen-cv-prior-results-2026-11-15.md']]
+        test=ROOT/'runs/pen_cv_prior_tests244.log'
     todo = [file_pin(p) for p in list(reports.values()) + receipt_paths + docs + [test]]
+    if cv:
+        independent=json.loads(reports['independent'].read_text())
+        if independent['passed']!=independent['total']:raise ValueError('Independent CV/data/budget review failed')
+        for key in ['baseline_health','baseline_evaluation','baseline_rollout']:
+            baseline=json.loads(verify_source_pin(independent['inputs'][key],resolutions).read_text())
+            todo+=list(pins(baseline))
     allowed = {p.parent for p in reports.values()} | {p.parent for p in receipt_paths}
     verified = {}
     while todo:
@@ -58,7 +80,7 @@ def main():
         if resolved.suffix == '.json' and any(resolved.is_relative_to(folder) for folder in allowed):
             todo += list(pins(json.loads(resolved.read_text())))
     h, f, e, r = [json.loads(reports[k].read_text()) for k in ['first100', 'final', 'physical', 'recursive']]
-    for health, expected in [(h, 43), (f, 44)]:
+    for health, expected in [(h, 45 if cv else 43), (f, 44)]:
         if health['passed'] != expected or health['total'] != expected or not all(health['checks'].values()) or health['training_running']:
             raise ValueError('Terminal healthy checkpoints required')
     summary = dict(schema='candidate_fit_evidence_summary:1', roots={k: file_pin(p) for k, p in reports.items()},
@@ -75,12 +97,15 @@ def main():
         Actor_optimizer_updates=0, additional_native_integrations=0,
         prior_data_evidence=file_pin(ROOT / 'provenance/pen_candidate_response_results/ledger.json'),
         scope='Fixed-budget WM components remain unready for Actor gradients/control. Correlated same-clip development data, failed source tasks, uncertain excluded labels; no ego/task/acceleration claim. Full Goal incomplete and active.')
+    if cv:summary.update(schema='cv_prior_evidence_summary:1',independent_review=independent,
+        per_CHECK_parent={mode:m['per_CHECK_parent'] for mode,m in e['models'].items()},
+        prior_model_evidence=file_pin(ROOT/'provenance/pen_candidate_fit_results/ledger.json'))
     out.mkdir()
     write(out / 'summary.json', summary)
     write(out / 'source_resolutions.json', resolutions)
     shutil.copyfile(test, out / test.name)
     write(analysis / 'verified_pins.json', dict(records=list(verified.values())))
-    write(out / 'ledger.json', dict(schema='candidate_fit_evidence_ledger:1', analysis_revision=revision,
+    write(out / 'ledger.json', dict(schema='cv_prior_evidence_ledger:1' if cv else 'candidate_fit_evidence_ledger:1', analysis_revision=revision,
         roots={k: file_pin(p) for k, p in reports.items()}, summary=file_pin(out / 'summary.json'),
         source_resolutions=file_pin(out / 'source_resolutions.json'), previous_resolutions=file_pin(prior),
         source_receipts=[file_pin(p) for p in receipt_paths], verified_pins=len(verified), exact_source_aliases=len(aliases),
@@ -92,4 +117,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    p=argparse.ArgumentParser();p.add_argument('--experiment',choices=['candidate','cv_prior'],default='candidate')
+    main(p.parse_args().experiment)
