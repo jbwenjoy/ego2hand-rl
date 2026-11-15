@@ -3,6 +3,7 @@ import gc
 import json
 import subprocess
 import tomllib
+import time
 from pathlib import Path
 
 import numpy as np
@@ -24,6 +25,7 @@ ROOT=Path(__file__).resolve().parents[3]
 
 
 def main(a):
+    main_started=time.perf_counter()
     import mujoco
     import mujoco_warp as mw
     import torch
@@ -50,13 +52,14 @@ def main(a):
     intent=dict(schema='pen_visited_source_replay:2',config=file_pin(cp),original_run=file_pin(rp),original_review=file_pin(vp),
         source_receipt=file_pin(a.output/'source_receipt.json'),installed_source_receipt=file_pin(a.output/'installed_source_receipt.json'),ccd_profile=profile,collision_numerics=ccd,sources=sources,data_role=cfg['data_role'],neural_updates=0,
         scope='All7 predeclared anchors,3 repeats/path. Original57-candidate path plus independent instrumented20ms held-PD path. No live actual episode or training. Old missing Data scalars are explicitly reconstructed; lost original task-import list stays unavailable.')
-    write(a.output/'intent.json',intent);anchors=[];candidate_replays=[];cases=[];keepers=[]
+    write(a.output/'intent.json',intent);anchors=[];candidate_replays=[];cases=[];keepers=[];setup_timings=[]
     base=tomllib.loads(verify_file_pin(r['base_config']).read_text());scorecfg=tomllib.loads(verify_file_pin(r['config']).read_text())
     scorecfg.update({k:base[k] for k in ['max_penetration_m','max_self_penetration_m','max_joint_limit_excursion_rad','max_object_nonhand_normal_force_N']})
     for cohort in cfg['cohorts']:
         c=next(c for c in r['cases'] if c['name']==cohort['mode'] and c['dt']==cohort['dt']);dt=c['dt'];n=round(.02/dt)
         folder=a.output/f"{c['name']}_{dt}";folder.mkdir()
         source0=dict(np.load(verify_file_pin(c['planning'][0]['source'])))
+        model_setup_started=time.perf_counter()
         m,dm,data,reconstruction=saved_native_plant(c,source0)
         original_values,original_scalars,original_hashes=capture_model(dm)
         policy=set_collision_numerics(m,dm,ccd) if ccd is not None else None
@@ -74,6 +77,7 @@ def main(a):
         write(folder/'reconstruction.json',reconstruction)
         jids=np.array([m.joint(f'robot/right_finger{i}_joint{j}').id for i in range(1,6) for j in range(1,5)])
         qids=m.jnt_qposadr[jids];aids=np.array([np.flatnonzero(m.actuator_trnid[:,0]==j)[0] for j in jids])
+        planner_setup_started=time.perf_counter()
         planner=NativePenPlanner(m,dm,data,qids,aids,n)
         with wp.ScopedStream(planner.stream):
             diagnostic,diagnostic_layout=fork_dynamic_data(data)
@@ -83,6 +87,8 @@ def main(a):
             finally:
                 if was_gc:gc.enable()
         graph=capture.graph;keepers.append((m,dm,data,planner,diagnostic,graph))
+        wp.synchronize();setup_timings.append(dict(mode=c['name'],dt=dt,model_restore_and_snapshot_wall_s=planner_setup_started-model_setup_started,
+            planner_graph_setup_including_compile_wall_s=time.perf_counter()-planner_setup_started))
         reference=np.load(verify_file_pin(c['initialization']['nominal_mean_wrench']))
         for k in cohort['anchors']:
             d=c['planning'][k];old=np.load(verify_file_pin(d['prediction']));source=dict(np.load(verify_file_pin(d['source'])))
@@ -103,12 +109,14 @@ def main(a):
                 after=source_snapshot.audit(data)
                 entry=dict(mode=c['name'],dt=dt,k=k,repeat=repeat,original_selected=d['selected'],recomputed_selected=index,
                     original_prediction=d['prediction'],source=d['source'],trace=file_pin(path),candidate_cuda_ms=cuda_ms,
-                    candidates=57,native_physics_ticks=57*n,source_untouched=after['all_array_bytes_equal'] and after['scalar_equal'])
+                    candidates=57,native_physics_ticks=57*n,search_timing=dict(planner.last_search_timing),source_untouched=after['all_array_bytes_equal'] and after['scalar_equal'])
                 candidate_replays.append(entry);records.append(entry['source_untouched'])
             for repeat in range(cfg['repeats']):
                 with wp.ScopedStream(planner.stream):
                     restore_dynamic_arrays(diagnostic,source);before=ResidentDataSnapshot(diagnostic);wp.synchronize()
+                    response_started=time.perf_counter()
                     packet=record_response(m,dm,diagnostic,graph,aids,old['PD_targets'][d['selected']],n,instrument=True)
+                    response_wall_s=time.perf_counter()-response_started
                 path=anchor_folder/f'instrumented_R{repeat}.npz';np.savez_compressed(path,**packet)
                 name=f"{c['name']}_A{k}_R{repeat}"
                 cases.append(dict(task='hand2-pen-spin',controller='INSTRUMENTED_SINGLE_STEP_GRAPH',name=name,mode=c['name'],dt=dt,k=k,repeat=repeat,
@@ -116,7 +124,8 @@ def main(a):
                     host_topology=c['host_topology'],GPU_physical_context=c['GPU_physical_context'],model_layout=c['model_layout'],
                     host_model_scope='Original topology/physical tables for EFC decoding; declared current numerical model saved in anchor reconstruction.',
                     original_prediction=d['prediction'],original_selected=d['selected'],original_source=d['source'],
-                    restored_source_exact=before.audit(data)['all_array_bytes_equal'],native_physics_ticks=n))
+                    restored_source_exact=before.audit(data)['all_array_bytes_equal'],native_physics_ticks=n,
+                    instrumented_response_including_readback_wall_s=response_wall_s))
             _,after_scalars,after_hashes=capture_model(dm)
             checks=dict(model_exact_and_unchanged=after_scalars==scalars and after_hashes==hashes,
                 all_candidate_sources_read_only=all(records),source_still_exact=source_snapshot.audit(data)['all_array_bytes_equal'],
@@ -130,6 +139,8 @@ def main(a):
             if not all(checks.values()):raise ValueError('Saved-source reconstruction/isolation failed')
     verify_source_snapshot(receipt,live=True);verify_source_snapshot(installed,live=True)
     result=dict(**intent,anchors=anchors,candidate_replays=candidate_replays,cases=cases,
+        setup_timings=setup_timings,collector_main_wall_s=time.perf_counter()-main_started,
+        timing_scope='Model restore/snapshots, graph setup(including compile), candidate CUDA, submit/wait and readback separated. Instrumented response includes per-step host reads. Final report write/process startup not included; not a training acceleration benchmark.',
         candidate_physics_ticks=sum(e['native_physics_ticks'] for e in candidate_replays),instrumented_physics_ticks=sum(e['native_physics_ticks'] for e in cases),
         passed=sum(sum(e['checks'].values()) for e in anchors),total=sum(len(e['checks']) for e in anchors))
     write(a.output/'report.json',result);print(json.dumps(dict(report=file_pin(a.output/'report.json'),contracts=[result['passed'],result['total']],

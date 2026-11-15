@@ -1,5 +1,6 @@
 """One-world resident finite-action native oracle; live Data stays read-only."""
 import gc
+import time
 
 import numpy as np
 import torch
@@ -131,6 +132,7 @@ class NativePenPlanner:
 
     def search(self,targets,ema,reference_COM,reference_shaft,reference_hand,target_wrench,wrench_valid,support_weight,cfg,
                *,reference_velocity=None,velocity_valid=False,velocity_weight=0.):
+        wall_started=time.perf_counter()
         caller=torch.cuda.current_stream();self.torch_stream.wait_stream(caller)
         begin,end=torch.cuda.Event(enable_timing=True),torch.cuda.Event(enable_timing=True)
         with torch.cuda.stream(self.torch_stream),wp.ScopedStream(self.stream):
@@ -144,6 +146,11 @@ class NativePenPlanner:
                 object_da=self.da,reference_velocity=reference_velocity,velocity_valid=velocity_valid,velocity_weight=velocity_weight)
             end.record()
         end.synchronize();caller.wait_stream(self.torch_stream)
+        readback_started=time.perf_counter()
         index=int(result['index']);arrays={k:v.detach().cpu().numpy().copy() for k,v in self.views.items() if k not in ['slot','target_ctrl']}
         scores={k:v.detach().cpu().numpy().copy() for k,v in result.items()}
-        return index,arrays,scores,float(begin.elapsed_time(end))
+        cuda_ms=float(begin.elapsed_time(end));ended=time.perf_counter()
+        self.last_search_timing=dict(candidate_cuda_ms=cuda_ms,submit_and_wait_wall_s=readback_started-wall_started,
+            readback_and_host_copy_wall_s=ended-readback_started,total_search_wall_s=ended-wall_started,
+            scope='Boundary timing only; no new synchronization or per-candidate host checks. Setup/compile and artifact I/O are outside search.')
+        return index,arrays,scores,cuda_ms
