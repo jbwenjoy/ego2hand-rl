@@ -976,80 +976,10 @@ class DexSuperMimicRunner:
         return self.env.observation_manager.compute(update_history=False)["critic"]
 
     def ppo_update(self):
-        c = self.cfg
-        memory = self.ppo_memory
-        batch, num_envs = memory["reward"].shape
-        flat_actor_obs = memory["obs"].reshape(-1, memory["obs"].shape[-1])
-        flat_obs = memory["critic_obs"].reshape(-1, memory["critic_obs"].shape[-1])
-        flat_actions = memory["actions"].reshape(-1, memory["actions"].shape[-1])
-        flat_old_log_prob = memory["log_prob"].reshape(-1)
-        flat_values = memory["value"].reshape(-1)
-
-        # rsl-rl GAE with timeout reward bootstrapping already applied above.
-        rewards = memory["reward"]
-        dones = (memory["terminated"].bool() | memory["truncated"].bool()).float()
-        critic = self._ensure_ppo_critic(memory["critic_obs"])
-        final_value = critic(self._critic_observation()).flatten()
-        advantages = torch.zeros_like(rewards)
-        gae = torch.zeros(num_envs, device=self.device)
-        for t in reversed(range(batch)):
-            next_non_terminal = 1.0 - dones[t]
-            next_value = final_value if t == batch - 1 else memory["value"][t + 1]
-            delta = rewards[t] + c.ppo_gamma * next_non_terminal * next_value - memory["value"][t]
-            gae = delta + c.ppo_gamma * c.lam * next_non_terminal * gae
-            advantages[t] = gae
-        flat_advantages = advantages.reshape(-1)
-        returns = flat_advantages + flat_values
-        if c.ppo_normalize_advantage:
-            flat_advantages = (flat_advantages - flat_advantages.mean()) / flat_advantages.std().clamp_min(1e-8)
-
-        count = batch * num_envs
-        usable_count = (count // c.ppo_minibatches) * c.ppo_minibatches
-        minibatch_size = max(1, count // c.ppo_minibatches)
-        actor_losses, critic_losses, entropies, clip_fractions, kls = [], [], [], [], []
-        for _ in range(c.ppo_epochs):
-            permutation = torch.randperm(usable_count, device=self.device)
-            for start in range(0, usable_count, minibatch_size):
-                ids = permutation[start : start + minibatch_size]
-                distribution = self.actor.distribution(flat_actor_obs[ids])
-                log_prob = distribution.log_prob(flat_actions[ids]).sum(-1)
-                with torch.no_grad():
-                    old_distribution = self.actor.distribution(flat_actor_obs[ids])
-                ratio = (log_prob - flat_old_log_prob[ids]).exp()
-                policy_loss = -torch.min(
-                    ratio * flat_advantages[ids],
-                    ratio.clamp(1.0 - c.ppo_clip, 1.0 + c.ppo_clip) * flat_advantages[ids],
-                ).mean()
-                entropy = distribution.entropy().sum(-1).mean()
-                values = critic(flat_obs[ids])
-                value_loss = (values - returns[ids]).square().mean()
-                loss = policy_loss + c.ppo_value_coef * value_loss - c.ppo_entropy * entropy
-                self.optimizers["ppo"].zero_grad(set_to_none=True)
-                loss.backward()
-                nn.utils.clip_grad_norm_(
-                    tuple(self.actor.parameters()) + tuple(critic.parameters()), c.ppo_max_grad_norm
-                )
-                self.optimizers["ppo"].step()
-                with torch.no_grad():
-                    clip_fractions.append(((ratio - 1.0).abs() > c.ppo_clip).float().mean())
-                    kls.append(
-                        torch.distributions.kl_divergence(old_distribution, distribution).sum(-1).mean()
-                    )
-                actor_losses.append(policy_loss.detach())
-                critic_losses.append(value_loss.detach())
-                entropies.append(entropy.detach())
-
-        target_variance = returns.var()
-        explained = 1.0 - (returns - critic(flat_obs)).square().mean() / target_variance.clamp_min(1e-8)
-        return dict(
-            actor_loss=torch.stack(actor_losses).mean(),
-            critic_loss=torch.stack(critic_losses).mean(),
-            entropy=torch.stack(entropies).mean(),
-            clip_fraction=torch.stack(clip_fractions).mean(),
-            kl=torch.stack(kls).mean(),
-            explained_variance=explained.detach(),
-            horizon=batch,
-        )
+        from .ppo import ppo_update
+        critic = self._ensure_ppo_critic(self.ppo_memory["critic_obs"])
+        return ppo_update(self.actor, critic, self.optimizers["ppo"], self.ppo_memory,
+                          self._critic_observation(), self.cfg)
 
     def learn_ppo(self):
         start = self.started_at
