@@ -1,0 +1,334 @@
+{
+  "schema": "owned_PPO_evidence_summary:1",
+  "roots": {
+    "initial": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\owned_ppo_qualification_v1\\report.json",
+      "bytes": 14095,
+      "sha256": "ad0a98eb29ec5ce0839a0348b4a8c4c31daba333547310238e638322d8e138c7"
+    },
+    "qualification": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\owned_ppo_qualification_v2\\report.json",
+      "bytes": 14095,
+      "sha256": "f0845ef85f35b83ea33d83d58a7f3b7842a515cee9951d904bb6150950e839c4"
+    },
+    "initial_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\owned_ppo_review_v1\\report.json",
+      "bytes": 3849,
+      "sha256": "a29ea311a6c2f4bee5ff52aebd831d37eb9c03388a458cf65076c278e3eca7fd"
+    },
+    "review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\owned_ppo_review_v2\\report.json",
+      "bytes": 7516,
+      "sha256": "c6e2f93f0c1b82b338025459c15fc8feee1be8a500c97fdfd0d9b6c4411b642b"
+    },
+    "probe": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\owned_pen_ema_probe_v1\\report.json",
+      "bytes": 17358,
+      "sha256": "7472dcdc69cd57c28df0fc2dd0f6a9c8e77a915628ad2f71deb52a1e1d657b5b"
+    }
+  },
+  "checks": {
+    "initial": [
+      83,
+      83
+    ],
+    "qualification": [
+      83,
+      83
+    ],
+    "initial_review": [
+      51,
+      51
+    ],
+    "review": [
+      84,
+      84
+    ],
+    "probe": [
+      8,
+      8
+    ]
+  },
+  "initial_check_limit": "v1 file immutability check compared the same read to itself; retained as reported, not independent integrity evidence. v2 records pre-test pin and redoes all work.",
+  "state_audits": [
+    {
+      "name": "qualification",
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\owned_ppo_qualification_v2\\checkpoint.pt",
+        "bytes": 46173431,
+        "sha256": "9bedbd15f341a7bac859c93ebb3aeba11e4719772f086814dfa3245e1ff7ac0a"
+      },
+      "schema": "pen_owned_contact_PPO_training:2",
+      "native_schema": "controlled_pen_owned_state:4",
+      "iteration": 1,
+      "optimizer_steps": 32,
+      "training_transitions": 128,
+      "calibration_transitions": 256,
+      "normalizer_count": 288,
+      "role": "COLLECTOR_STATE_DIAGNOSTIC_NO_POLICY_PROMOTION",
+      "memory_iteration": 0
+    },
+    {
+      "name": "fresh",
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\owned_ppo_review_v2\\fresh_combined_state.pt",
+        "bytes": 46175791,
+        "sha256": "a1711f5234bf09301ba29c812cbdc513487f772c8148f88d8bf446e7414cafcc"
+      },
+      "schema": "pen_owned_contact_PPO_training:2",
+      "native_schema": "controlled_pen_owned_state:4",
+      "iteration": 1,
+      "optimizer_steps": 32,
+      "training_transitions": 128,
+      "calibration_transitions": 256,
+      "normalizer_count": 288,
+      "role": "COLLECTOR_STATE_DIAGNOSTIC_NO_POLICY_PROMOTION",
+      "memory_iteration": 0
+    },
+    {
+      "name": "continued",
+      "state": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\owned_ppo_review_v2\\continuation_state.pt",
+        "bytes": 46179799,
+        "sha256": "10badccb005a78b45ac029a156dc350dd7186177e6fb40ea505fff8403b1ca19"
+      },
+      "schema": "pen_owned_contact_PPO_training:2",
+      "native_schema": "controlled_pen_owned_state:4",
+      "iteration": 2,
+      "optimizer_steps": 64,
+      "training_transitions": 256,
+      "calibration_transitions": 256,
+      "normalizer_count": 416,
+      "role": "COLLECTOR_STATE_DIAGNOSTIC_NO_POLICY_PROMOTION",
+      "memory_iteration": 1
+    }
+  ],
+  "primary_geometry_screen": {
+    "object_penetration_m": {
+      "limit": 0.002,
+      "maximum": 0.011900590732693672,
+      "violating_rows": 55,
+      "total_rows": 128,
+      "violating_worlds": 26
+    },
+    "self_penetration_m": {
+      "limit": 0.0002,
+      "maximum": 0.005712531041353941,
+      "violating_rows": 28,
+      "total_rows": 128,
+      "violating_worlds": 13
+    },
+    "joint_excursion_rad": {
+      "limit": 0.001,
+      "maximum": 0.0,
+      "violating_rows": 0,
+      "total_rows": 128,
+      "violating_worlds": 0
+    },
+    "nonhand_N": {
+      "limit": 0.1,
+      "maximum": 0.0,
+      "violating_rows": 0,
+      "total_rows": 128
+    }
+  },
+  "probe_control_end_tracking": [
+    {
+      "name": "ZERO_RAW",
+      "noise_seed": 7411,
+      "controls": 4,
+      "COM_control_end_max_m": 0.018227992579340935,
+      "full_angle_control_end_max_rad": 0.822929322719574,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_INITIAL_RAW",
+      "noise_seed": 7411,
+      "controls": 4,
+      "COM_control_end_max_m": 0.004256305750459433,
+      "full_angle_control_end_max_rad": 0.21047835052013397,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.05",
+      "noise_seed": 7411,
+      "controls": 4,
+      "COM_control_end_max_m": 0.021636616438627243,
+      "full_angle_control_end_max_rad": 1.2732462882995605,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.1",
+      "noise_seed": 7411,
+      "controls": 4,
+      "COM_control_end_max_m": 0.022542310878634453,
+      "full_angle_control_end_max_rad": 1.281944990158081,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.2",
+      "noise_seed": 7411,
+      "controls": 4,
+      "COM_control_end_max_m": 0.022355834022164345,
+      "full_angle_control_end_max_rad": 1.323175072669983,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.5",
+      "noise_seed": 7411,
+      "controls": 4,
+      "COM_control_end_max_m": 0.0141045693308115,
+      "full_angle_control_end_max_rad": 0.5976859331130981,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": false,
+      "full_task_qualified": false
+    },
+    {
+      "name": "ZERO_RAW",
+      "noise_seed": 7412,
+      "controls": 4,
+      "COM_control_end_max_m": 0.018227992579340935,
+      "full_angle_control_end_max_rad": 0.822929322719574,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_INITIAL_RAW",
+      "noise_seed": 7412,
+      "controls": 4,
+      "COM_control_end_max_m": 0.0035734022967517376,
+      "full_angle_control_end_max_rad": 0.149553582072258,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.05",
+      "noise_seed": 7412,
+      "controls": 4,
+      "COM_control_end_max_m": 0.006770864594727755,
+      "full_angle_control_end_max_rad": 0.43650585412979126,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.1",
+      "noise_seed": 7412,
+      "controls": 4,
+      "COM_control_end_max_m": 0.011655482463538647,
+      "full_angle_control_end_max_rad": 0.5288411378860474,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.2",
+      "noise_seed": 7412,
+      "controls": 4,
+      "COM_control_end_max_m": 0.010015375912189484,
+      "full_angle_control_end_max_rad": 0.0784870982170105,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.5",
+      "noise_seed": 7412,
+      "controls": 4,
+      "COM_control_end_max_m": 0.017827779054641724,
+      "full_angle_control_end_max_rad": 1.2040860652923584,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": false,
+      "full_task_qualified": false
+    },
+    {
+      "name": "ZERO_RAW",
+      "noise_seed": 7413,
+      "controls": 4,
+      "COM_control_end_max_m": 0.018227992579340935,
+      "full_angle_control_end_max_rad": 0.822929322719574,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_INITIAL_RAW",
+      "noise_seed": 7413,
+      "controls": 4,
+      "COM_control_end_max_m": 0.004256305750459433,
+      "full_angle_control_end_max_rad": 0.21047836542129517,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.05",
+      "noise_seed": 7413,
+      "controls": 4,
+      "COM_control_end_max_m": 0.0017651155358180404,
+      "full_angle_control_end_max_rad": 0.05196978524327278,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.1",
+      "noise_seed": 7413,
+      "controls": 4,
+      "COM_control_end_max_m": 0.0028119967319071293,
+      "full_angle_control_end_max_rad": 0.05605560168623924,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.2",
+      "noise_seed": 7413,
+      "controls": 4,
+      "COM_control_end_max_m": 0.006693512201309204,
+      "full_angle_control_end_max_rad": 0.06686213612556458,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": true,
+      "full_task_qualified": false
+    },
+    {
+      "name": "HOLD_PLUS_NOISE_0.5",
+      "noise_seed": 7413,
+      "controls": 4,
+      "COM_control_end_max_m": 0.016794418916106224,
+      "full_angle_control_end_max_rad": 0.45698073506355286,
+      "EMA_recurrence_max_error": 0.0,
+      "geometry_prefix_qualified": false,
+      "full_task_qualified": false
+    }
+  ],
+  "raw_window_max_errors": {
+    "geometry_max": 0.0,
+    "Fn6_sum": 0.0,
+    "nonhand_max_sum": 0.0,
+    "wrench_sum": 8.881784197001252e-16,
+    "counts": 0.0,
+    "errors": 0.0,
+    "global_error": 0.0,
+    "source_R": 0.0,
+    "source_C": 0.0,
+    "clock": 0.0
+  },
+  "actual_native_integrations": 7760,
+  "diagnostic_optimizer_steps": 224,
+  "retained_candidate_optimizer_steps": 0,
+  "unit_tests": 322,
+  "scope": "Training2/native4 collector/source/optimizer continuation qualified; old tracking-only diagnostic weights, early geometry failures and short never-fit EMA probe are not trained-policy/task/support/WM-gradient/ego or speedup evidence."
+}

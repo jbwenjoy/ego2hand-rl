@@ -1,0 +1,8 @@
+schema = 1
+training_config = "pen_native_ppo_v1.toml"
+prior_ledger = "../provenance/owned_pen_state_results/ledger.json"
+calibration_controls = 8
+qualification_controls = 4
+optimizer_updates = 32
+timeout_controls = 1
+scope = "Collector/training2 state integration diagnostic only: old tracking reward, one discarded/noncandidate32-step update to make Adam state nonempty, no epoch sweep or learned-policy promotion."
