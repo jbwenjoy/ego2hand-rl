@@ -1,0 +1,16 @@
+schema = 1
+base_config = "controlled_evaluation_v4.toml"
+proposal = "../runs/pen_gpu_support_search_v1/report.json"
+anchors = [0, 2, 4, 6]
+dt = [0.005, 0.0025]
+train_direction_seed = 7501
+check_direction_seed = 7511
+train_direction_count = 12
+check_direction_count = 4
+PD_target_eps_rad = [0.005, 0.02]
+numerical_device_override = true
+[numerical_options]
+iterations = 50
+ls_iterations = 50
+tolerance = 0.000000000001
+ls_tolerance = 0.00000001
