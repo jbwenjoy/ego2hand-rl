@@ -11,6 +11,7 @@ from supermimic_research.runtime.portable_inventory import path_value
 from supermimic_research.runtime.pen_reference_cache import tensor_digest
 
 SCHEMA='pen_geometry_support_PPO_training:3'
+CENTERED_SCHEMA='pen_geometry_support_PPO_training:4'
 
 
 def pilot_settings(path):
@@ -20,7 +21,7 @@ def pilot_settings(path):
 
 
 def fork_initial_state(common,expected_metadata):
-    if common['schema']!=SCHEMA or any(common[k]!=0 for k in ['iteration','optimizer_steps','training_transitions']) or common['memory'] is not None:raise ValueError('Fork only a calibrated untrained common source')
+    if common['schema'] not in [SCHEMA,CENTERED_SCHEMA] or common['schema']!=expected_metadata['checkpoint_schema'] or any(common[k]!=0 for k in ['iteration','optimizer_steps','training_transitions']) or common['memory'] is not None:raise ValueError('Fork only a calibrated untrained common source of the same explicit schema')
     metadata=copy.deepcopy(common['metadata']);changes=[]
     for key in ['arm','support_weight']:
         if metadata[key]!=expected_metadata[key]:changes.append(dict(path='metadata.'+key,before=metadata[key],after=expected_metadata[key]))
@@ -45,7 +46,7 @@ def static_contract(runtime,inv):
 class SupportPenPPO(OwnedPenPPO):
     def __init__(self,adapter,config,arm):
         if not isinstance(adapter,SupportPenRuntime) or arm not in adapter.objective_cfg['support_weights']:raise ValueError('Preregistered objective runtime/arm required')
-        self.arm=arm;adapter.support_weight=float(adapter.objective_cfg['support_weights'][arm]);super().__init__(adapter,config)
+        self.arm=arm;self.checkpoint_schema=adapter.objective_cfg.get('checkpoint_schema',SCHEMA);adapter.support_weight=float(adapter.objective_cfg['support_weights'][arm]);super().__init__(adapter,config)
         with torch.no_grad():
             self.actor.net[-1].weight[:20].zero_();self.actor.net[-1].bias[:20].copy_(adapter.initial_raw)
 
@@ -58,17 +59,19 @@ class SupportPenPPO(OwnedPenPPO):
         finally:del self.adapter.step
 
     def metadata(self):
-        result=super().metadata();result.update(checkpoint_schema=SCHEMA,task_reward_contract='geometry_hard_nominal_support_mean:1',role='CONTROLLED_SINGLE_SEED_FEASIBILITY_PILOT',
+        contract='geometry_hard_nominal_support_mean:1' if self.checkpoint_schema==SCHEMA else 'geometry_hard_zero_wrench_centered_support_mean:2'
+        result=super().metadata();result.update(checkpoint_schema=self.checkpoint_schema,task_reward_contract=contract,role='CONTROLLED_SINGLE_SEED_FEASIBILITY_PILOT',
             arm=self.arm,support_weight=float(self.adapter.support_weight),actor_initialization='Mean head weights0/bias initialized raw; same total-raw action/logprob contract.')
         return result
 
     def checkpoint(self,sources):
-        result=super().checkpoint(sources);result['schema']=SCHEMA;result['task_static']=static_contract(self.adapter,native.inventory(self.adapter))
+        result=super().checkpoint(sources);result['schema']=self.checkpoint_schema;result['task_static']=static_contract(self.adapter,native.inventory(self.adapter))
         result['scope']='Geometry/support pilot complete state. Original strict full task, repeated-seed benefit, physical WM gradients and ego generalization unproven.'
         return result
 
     def preflight(self,state):
-        if state.get('schema')!=SCHEMA:raise ValueError('Explicit training3 objective checkpoint required')
+        expected_schema=getattr(self,'checkpoint_schema',SCHEMA)
+        if state.get('schema')!=expected_schema:raise ValueError('Explicit training3/training4 objective checkpoint required, without cross-loading')
         expected=float(self.adapter.objective_cfg['support_weights'][self.arm]);path=(('attr','support_weight'),)
         if self.adapter.support_weight!=expected or state['native']['python']['scalars'][path]!=expected:raise ValueError('Objective arm/weight state mismatch')
         inv=native.inventory(self.adapter);contract=static_contract(self.adapter,inv)

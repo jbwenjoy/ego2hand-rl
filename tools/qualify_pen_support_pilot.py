@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 import numpy as np
 import torch
-from supermimic_research.artifacts import file_pin
+from supermimic_research.artifacts import file_pin,verify_file_pin
 from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot
 from supermimic_research.runtime.pen_support_runtime import SupportPenRuntime
 from supermimic_research.learning.pen_support_ppo import SupportPenPPO,pilot_settings,fork_initial_state
@@ -21,7 +21,12 @@ def write(p,v):p.write_text(json.dumps(v,indent=2,allow_nan=False)+'\n',encoding
 def main(a):
     cp=a.config.resolve();cfg,ppo=pilot_settings(cp);out=a.output.resolve()
     if out.exists() or not out.is_relative_to(ROOT/'runs'):raise ValueError('Fresh preregistered pilot qualification')
-    out.mkdir();paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/pkg).rglob('*.py')})+[Path(__file__).resolve(),cp,ROOT/'docs/geometry-support-pilot-protocol-v1.md']
+    protocol=(cp.parent/cfg.get('protocol','../docs/geometry-support-pilot-protocol-v1.md')).resolve();selection=None
+    if cfg.get('support_score','ABSOLUTE')=='CENTERED':
+        sp=(cp.parent/cfg['score_study']).resolve();selection=json.loads(sp.read_text())
+        if selection['selected_variant']!=['CENTERED'] or selection['passed']!=selection['total'] or selection['optimizer_steps'] or selection['actual_native_integrations']:raise ValueError('Passing preregistered offline score selection required')
+        verify_source_snapshot(json.loads(verify_file_pin(selection['source_receipt']).read_text()),live=True)
+    out.mkdir();paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/pkg).rglob('*.py')})+[Path(__file__).resolve(),cp,protocol]
     receipt=freeze_sources(paths,out/'source_snapshot',ROOT,subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip());write(out/'source_receipt.json',receipt)
     from mjlab.sim.sim import Simulation
     original=Simulation.step;observed=0;runtime=None;checks={};cases=[];phase='construction'
@@ -47,6 +52,9 @@ def main(a):
                     actual=m['contact_objective_target_source'][row].numpy();errors['target']=max(errors.get('target',0.),float(abs(target-actual).max()))
                     measured=m['contact_wrench_sum'][row,:,5].numpy()/m['contact_counts'][row,:,0,None].numpy();errors['measured']=max(errors.get('measured',0.),float(abs(measured-m['contact_objective_measured_source'][row].numpy()).max()))
                     loss=((measured[:,:3]-target[:,:3])/cfg['force_scale_N'])**2;torque=((measured[:,3:]-target[:,3:])/cfg['torque_scale_Nm'])**2;score=np.exp(-.5*(loss.mean(-1)+torque.mean(-1)))
+                    if cfg.get('support_score','ABSOLUTE')=='CENTERED':
+                        baseline=np.exp(-.5*(((target[:,:3]/cfg['force_scale_N'])**2).mean(-1)+((target[:,3:]/cfg['torque_scale_Nm'])**2).mean(-1)))
+                        score=score-baseline
                     eligible=m['contact_objective_support_eligible'][row].numpy();score=np.where(eligible,score,0).astype(np.float32)
                     errors['bonus']=max(errors.get('bonus',0.),float(abs(score-m['contact_objective_support_bonus'][row].numpy()).max()))
                     g=m['contact_geometry_max'][row].numpy();non=m['contact_nonhand_max_sum'][row,:,0].numpy();limits=np.array([.002,.0002,.001])
@@ -60,9 +68,11 @@ def main(a):
                 runtime.close();runtime=None
             checks['common_file_unchanged']=file_pin(out/'common_initial_state.pt')==common_pin;checks['no_optimizer']=all(checks[arm+'_no_optimizer'] for arm in ['RESIDUAL','SUPPORT'])
             checks['actual_native_budget']=observed==4096;verify_source_snapshot(receipt,live=True)
-            result=dict(schema='geometry_support_pilot_qualification:1',config=file_pin(cp),protocol=file_pin(ROOT/'docs/geometry-support-pilot-protocol-v1.md'),source_receipt=file_pin(out/'source_receipt.json'),common_initial=common_pin,
+            if selection is not None:checks['registered_score_selection']=selection['selected_variant']==['CENTERED']
+            result=dict(schema='geometry_support_pilot_qualification:1',config=file_pin(cp),protocol=file_pin(protocol),source_receipt=file_pin(out/'source_receipt.json'),common_initial=common_pin,
                 support_reference=file_pin(out/'support_reference.npz'),cases=cases,checks=checks,passed=sum(checks.values()),total=len(checks),actual_native_integrations=observed,optimizer_steps=0,
                 scope='Preregistered reward/target/frame/fork/state qualification before pilot optimization. Nominal support is a reward only; no task/benefit/ego/physical WM-gradient claim.')
+            if selection is not None:result['score_study']=file_pin(sp)
             write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),checks=[result['passed'],result['total']],native_integrations=observed)),flush=True)
             if not all(checks.values()):raise ValueError('Preserve pre-pilot qualification discrepancy')
     except Exception as error:

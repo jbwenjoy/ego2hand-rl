@@ -18,7 +18,7 @@ from PIL import Image
 from dex_supermimic.rl.dex_supermimic.networks import GaussianPPOActor
 from supermimic_research.artifacts import file_pin, verify_file_pin
 from supermimic_research.frozen_sources import freeze_sources, verify_source_snapshot
-from supermimic_research.learning.pen_support_ppo import SCHEMA
+from supermimic_research.learning.pen_support_ppo import SCHEMA, CENTERED_SCHEMA
 from supermimic_research.mechanics.compound_holding import object_state
 from supermimic_research.mechanics.warp_contact_labels import read_warp_contact_labels
 from supermimic_research.runtime.controlled_evaluation import summarize_trace
@@ -37,8 +37,8 @@ def execute(pin, config, gates, folder):
     """Transfer only actor/norm weights; never transfer W32 native state to W1."""
     folder.mkdir()
     state = torch.load(verify_file_pin(pin), map_location='cpu', weights_only=False)
-    if state['schema'] != SCHEMA or state['metadata']['objective_config'] != file_pin(config):
-        raise ValueError('Registered training3/config required')
+    if state['schema'] not in [SCHEMA,CENTERED_SCHEMA] or state['schema'] != state['metadata']['checkpoint_schema'] or state['metadata']['objective_config'] != file_pin(config):
+        raise ValueError('Explicit registered training3/training4/config required')
     require_full_pose_contract(state['metadata'])
     verify_source_snapshot(state['native']['sources'], live=True)
     runtime = SupportPenRuntime(config, 1)
@@ -151,7 +151,7 @@ def execute(pin, config, gates, folder):
         raw_arrays = {k: np.array(v).reshape((-1,) + {'geom': (2,), 'pos': (3,), 'frame': (3, 3), 'friction': (5,), 'efc_address': (6,), 'local_force6': (6,)}.get(k, ())) for k, v in raw.items()}
         np.savez_compressed(folder / 'raw_contacts.npz', **raw_arrays, efc_force=np.array(efc), efc_offsets=np.array(offsets))
         np.savez_compressed(folder / 'control_windows.npz', **{k: np.stack([w[k] for w in windows]) for k in windows[0]})
-        result = dict(checkpoint=pin, iteration=state['iteration'], arm=state['metadata']['arm'], summary=summary, controls=len(actions),
+        result = dict(checkpoint=pin, iteration=state['iteration'], trained_optimizer_steps=state['optimizer_steps'], checkpoint_schema=state['schema'], arm=state['metadata']['arm'], summary=summary, controls=len(actions),
                       native_integrations=len(trace['post_qpos']), optimizer_steps=0, terminated=bool(term[0]), truncated=bool(trunc[0]),
                       termination_reasons=reasons, fixed_mount=bool(fixed_mount), post_start_resets=0, physical_matches=physical_checks,
                       model=file_pin(folder / 'model.mjb'), trace=file_pin(folder / 'trace.npz'),
@@ -170,7 +170,7 @@ def render(cases, out):
     z = [dict(np.load(verify_file_pin(c['trace']))) for c in cases]
     durations = [c['summary']['metrics']['actual_duration_s'] for c in cases]
     scenes = []
-    labels = ['共同初始化', '几何约束：2轮训练', '几何＋支持目标：2轮训练']
+    labels = ['共同初始化', f'几何约束：{cases[1]["iteration"]}轮训练', f'几何＋支持目标：{cases[2]["iteration"]}轮训练']
     for c, v in zip(cases, z):
         m = mujoco.MjModel.from_binary_path(str(verify_file_pin(c['model'])))
         m.vis.global_.offwidth = 768
@@ -198,7 +198,7 @@ def render(cases, out):
                 frame = canvas(1536, '最新几何／支持目标先导训练：真实仿真执行',
                     '20倍慢放；均值动作；保存的2.5ms姿态，无插值；受控参考、完美位姿，非ego数据', panels, names,
                     '各列物理时间：' + ' / '.join(f'{min(t, duration):.3f}' for duration in durations) + ' 秒',
-                    ['完整任务7.36秒；两训练组各64次优化更新。终止后保持末帧，没有继续仿真。',
+                    [f'完整任务7.36秒；两训练组各{cases[1]["trained_optimizer_steps"]}次优化更新。终止后保持末帧，没有继续仿真。',
                      '无物体外力辅助；单参考、单种子的小规模试验，尚未通过完整任务。'])
                 if i == 0:
                     Image.fromarray(frame).save(out / 'start.png')

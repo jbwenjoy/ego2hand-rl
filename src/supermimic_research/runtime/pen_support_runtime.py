@@ -49,6 +49,8 @@ class ReferenceMeanSupport:
 class SupportPenRuntime(OwnedPenRuntime):
     def __init__(self,objective_config,num_envs):
         self.objective_config_path=Path(objective_config).resolve();self.objective_cfg=tomllib.loads(self.objective_config_path.read_text());self.support_weight=0.
+        variant=self.objective_cfg.get('support_score','ABSOLUTE');schema=self.objective_cfg.get('checkpoint_schema','pen_geometry_support_PPO_training:3')
+        if (variant,schema) not in [('ABSOLUTE','pen_geometry_support_PPO_training:3'),('CENTERED','pen_geometry_support_PPO_training:4')]:raise ValueError('Explicit score/training-schema pairing required')
         super().__init__((self.objective_config_path.parent/self.objective_cfg['adapter_config']).resolve(),num_envs)
         self.support_table=ReferenceMeanSupport(self)
         self.objective_constants={'geometry_limits':torch.tensor([self.objective_cfg[k] for k in ['object_penetration_m','self_penetration_m','joint_excursion_rad']],device=self.device,dtype=torch.float64)}
@@ -90,7 +92,8 @@ class SupportPenRuntime(OwnedPenRuntime):
         return ob,terms['reward'],term,trunc,info
 
     def metadata(self):
-        result=super().metadata();result.update(objective_contract=CONTRACT,objective_config=file_pin(self.objective_config_path),support_table_spec=copy.deepcopy(self.support_table.spec),
+        contract=CONTRACT if self.objective_cfg.get('support_score','ABSOLUTE')=='ABSOLUTE' else 'pen_geometry_and_zero_wrench_centered_source_BODY_support:2'
+        result=super().metadata();result.update(objective_contract=contract,objective_config=file_pin(self.objective_config_path),support_table_spec=copy.deepcopy(self.support_table.spec),
             support_weight_state_path=(('attr','support_weight'),),
             contact_output='Borrowed native window plus objective fields; geometry/native termination at20ms control boundary; support reward only, no applied force.')
         return result

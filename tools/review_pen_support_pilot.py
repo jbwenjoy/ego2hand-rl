@@ -45,6 +45,8 @@ def main(a):
                 torch.save(current,folder/'fresh_state.pt')
                 invalid=[]
                 bad=copy.deepcopy(state);bad['schema']='pen_owned_contact_PPO_training:2';invalid.append(('old_schema',bad))
+                if state['schema']=='pen_geometry_support_PPO_training:4':
+                    bad=copy.deepcopy(state);bad['schema']='pen_geometry_support_PPO_training:3';invalid.append(('absolute_schema',bad))
                 bad=copy.deepcopy(state);bad['metadata']['arm']='SUPPORT' if name=='RESIDUAL' else 'RESIDUAL';invalid.append(('cross_arm',bad))
                 bad=copy.deepcopy(state)
                 path=next(p for p in state['task_static']['tensors'] if state['native']['python']['tensors'][p].dtype==torch.float64)
@@ -65,8 +67,9 @@ def main(a):
                 local.update({'continued_load_'+k:v for k,v in again.items() if isinstance(v,bool)})
                 local['continued_native_bytes']=again['native']['all_array_bytes_equal'] and again['native']['all_scalar_values_equal']
                 local['continued_budget']=observed-before_native==1024 and stats['optimizer_steps']==32
-                local['continued_counters']=learner.iteration==3 and learner.optimizer_steps==96 and learner.training_transitions==4224
-                local['continued_norm_count']=int(learner.actor.norm.count)==int(learner.critic.norm.count)==4384
+                local['continued_counters']=learner.iteration==state['iteration']+1 and learner.optimizer_steps==state['optimizer_steps']+32 and learner.training_transitions==state['training_transitions']+128
+                expected_norm=32+state['calibration_transitions']+state['training_transitions']
+                local['continued_norm_count']=int(learner.actor.norm.count)==int(learner.critic.norm.count)==expected_norm
                 cases.append(dict(arm=name,checkpoint=arm['checkpoint'],fresh_state=file_pin(folder/'fresh_state.pt'),load_audit=audit,
                     diagnostic_continuation=file_pin(folder/'diagnostic_continuation.pt'),continuation_health=health,checks=local))
                 checks.update({name+'_'+k:v for k,v in local.items()});verify_file_pin(arm['checkpoint']);runtime.close();runtime=None

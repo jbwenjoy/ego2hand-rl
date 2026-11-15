@@ -1,5 +1,6 @@
 """Pure GPU reward/termination math for the preregistered pen pilot."""
 import torch
+from .support_score import support_score
 
 
 def select_interval(targets,valid,phase,world=None):
@@ -18,7 +19,10 @@ def objective_terms(tracking,native_term,geometry,nonhand,errors,global_error,wr
     force=((measured[:,:3]-target[:,:3])/cfg['force_scale_N']).square().mean(-1)
     torque=((measured[:,3:]-target[:,3:])/cfg['torque_scale_Nm']).square().mean(-1)
     support_loss=force+torque;eligible=target_valid&phase_valid&~failed&~native_term
-    bonus=torch.where(eligible,torch.exp(-.5*support_loss).float(),torch.zeros_like(tracking))
+    variant=cfg.get('support_score','ABSOLUTE')
+    if variant=='ABSOLUTE':bonus=torch.where(eligible,torch.exp(-.5*support_loss).float(),torch.zeros_like(tracking))
+    elif variant=='CENTERED':bonus=support_score(measured,target,eligible,cfg['force_scale_N'],cfg['torque_scale_Nm'],variant,loss=support_loss)['score'].float()
+    else:raise ValueError('Production score must be explicitly ABSOLUTE or CENTERED')
     reward=tracking-cfg['geometry_soft_weight']*geometry_loss-cfg['geometry_failure_penalty']*failed.float()+weight*bonus
     return dict(reward=reward,geometry_failure=failed,geometry_loss=geometry_loss,target_source=target,measured_source=measured,
         support_loss=support_loss,support_bonus=bonus,support_eligible=eligible)

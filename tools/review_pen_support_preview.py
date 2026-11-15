@@ -22,6 +22,14 @@ def main(a):
         z=dict(np.load(verify_file_pin(c['trace'])));raw=dict(np.load(verify_file_pin(c['raw_contacts'])));windows=dict(np.load(verify_file_pin(c['control_windows'])))
         m=mujoco.MjModel.from_binary_path(str(verify_file_pin(c['model'])))
         result=diagnose(m,z,raw,windows,gates);local=result['checks']
+        target=windows['objective_target_source'];measured=windows['objective_measured_source']
+        loss=(((measured[:,:3]-target[:,:3])/.3)**2).mean(-1)+(((measured[:,3:]-target[:,3:])/.003)**2).mean(-1)
+        score=np.exp(-.5*loss)
+        if c.get('checkpoint_schema')=='pen_geometry_support_PPO_training:4':
+            baseline=np.exp(-.5*(((target[:,:3]/.3)**2).mean(-1)+((target[:,3:]/.003)**2).mean(-1)))
+            score-=baseline
+        expected=np.where(windows['objective_support_eligible'],score,0)
+        local['declared_support_score']=bool(np.allclose(expected,windows['objective_support_bonus'],atol=1e-6,rtol=1e-6))
         local.update({key+'_metric':bool(np.isclose(value,c['summary']['metrics'][key],atol=1e-12,rtol=1e-12)) for key,value in result['metrics'].items()})
         for key in ['COM_RMS_m','COM_max_m','angle_RMS_rad','angle_max_rad','max_penetration_m','max_self_penetration_m','max_joint_limit_excursion_rad','max_object_nonhand_normal_force_N']:
             local[key+'_gate']=(result['metrics'][key]<=gates[key])==c['summary']['gates'][key]

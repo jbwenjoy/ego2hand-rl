@@ -1,0 +1,31 @@
+schema = 1
+adapter_config = "pen_full_pose_native_v1.toml"
+ppo_config = "pen_native_ppo_v1.toml"
+prior_ledger = "../provenance/pen_support_pilot_results_v2/ledger.json"
+protocol = "../docs/pen-centered-support-training-protocol-v1.md"
+score_study = "../runs/pen_support_score_study_v1/report.json"
+checkpoint_schema = "pen_geometry_support_PPO_training:4"
+support_score = "CENTERED"
+seed = 7411
+num_envs = 32
+calibration_controls = 8
+rollout_controls = 64
+pilot_iterations = 64
+checkpoint_interval = 8
+initial_mean = "INITIAL_RAW_WITH_ZERO_MEAN_HEAD_WEIGHTS"
+initial_std = 0.05
+std_min = 0.02
+std_max = 0.2
+geometry_soft_weight = 0.25
+geometry_failure_penalty = 2.0
+force_scale_N = 0.3
+torque_scale_Nm = 0.003
+object_penetration_m = 0.002
+self_penetration_m = 0.0002
+joint_excursion_rad = 0.001
+nonhand_normal_N = 0.1
+scope = "Registered shared-fresh-initialization centered-score single-seed single-clip trial. Per arm64 iterations/131072 transitions/1048576 native integrations/2048 Adam steps. Not a multiseed benefit or A1/A2 result."
+
+[support_weights]
+RESIDUAL = 0.0
+SUPPORT = 0.2

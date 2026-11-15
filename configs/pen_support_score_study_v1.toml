@@ -1,0 +1,11 @@
+schema = 1
+training_report = "../runs/pen_support_pilot_v1/report.json"
+preview_report = "../runs/pen_support_pilot_preview_v2/report.json"
+prior_ledger = "../provenance/pen_support_pilot_results_v2/ledger.json"
+variants = ["ABSOLUTE", "CONTACT_ABSOLUTE", "CENTERED", "CONTACT_CENTERED"]
+contact_threshold_N = 0.1
+force_scale_N = 0.3
+torque_scale_Nm = 0.003
+alpha_grid = [-1.0, 0.0, 0.5, 1.0, 1.5, 2.0]
+selection_rule = "Require zero score for zero net wrench at both weak and strong contact, no artificial jump at contact threshold, exact target strictly best on nonzero analytic force/torque cases, negative opposite-target score. Select CENTERED only if all hold; otherwise do not train."
+scope = "Preregistered offline score invariants and saved-row diagnostics. No policy benefit, feasibility, gradient-of-physics or ego claim. Keep v1 pilot rewards/checkpoints unchanged."

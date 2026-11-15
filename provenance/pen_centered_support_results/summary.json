@@ -1,0 +1,334 @@
+{
+  "schema": "centered_support_trial_evidence_summary:1",
+  "roots": {
+    "score_study": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_support_score_study_v1\\report.json",
+      "bytes": 34747,
+      "sha256": "ac1785ce6a594d4de1499fe40dd9de444e3956288360338eddab643b883470a9"
+    },
+    "qualification": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_qualification_v1\\report.json",
+      "bytes": 10921,
+      "sha256": "d848868b6558845ad146bef11b022e3272199788c0ba454f2be2fdd6fbdefaf6"
+    },
+    "training": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_training_v1\\report.json",
+      "bytes": 378072,
+      "sha256": "b8371cf15da59c776747d82974b0a7f9033c24be8332b0efc95d7df893d8cd7f"
+    },
+    "state_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_state_review_v1\\report.json",
+      "bytes": 26249,
+      "sha256": "2a28ec3b9cf3f549d73d92f5c8777773c6cb38a79667d97b712a936fb5642292"
+    },
+    "registration": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_evaluation_registration_v1\\registration.json",
+      "bytes": 1017,
+      "sha256": "2ac7e9f90c30a80254bc7fa5d73f5e8abc5a6d0337b96f8ca9ed8b82e16ab3ef"
+    },
+    "evaluation": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_evaluation_v1\\report.json",
+      "bytes": 114153,
+      "sha256": "4bdd5829693ea366a63025b8c4ba83369b4d9425fa83ae44e66fa3955778cdcd"
+    },
+    "evaluation_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_evaluation_review_v1\\report.json",
+      "bytes": 634786,
+      "sha256": "a9266e6418de9593ed8c37f65be34d901adad6ce6a3f475b8ea29fe5ca65cea1"
+    },
+    "common_windows": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_common_windows_v1\\report.json",
+      "bytes": 14332,
+      "sha256": "68994f8b77cf60b1870a5f155197a77761606dcb1d443fd4df870148071400d8"
+    }
+  },
+  "checks": {
+    "score_study": [
+      14,
+      14
+    ],
+    "qualification": [
+      75,
+      75
+    ],
+    "training": [
+      5,
+      5
+    ],
+    "state_review": [
+      216,
+      216
+    ],
+    "evaluation_review": [
+      351,
+      351
+    ],
+    "common_windows": [
+      15,
+      15
+    ]
+  },
+  "selected_score": [
+    "CENTERED"
+  ],
+  "state_audits": [
+    {
+      "arm": "RESIDUAL",
+      "checkpoint": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_training_v1\\RESIDUAL\\checkpoint_0064.pt",
+        "bytes": 57460469,
+        "sha256": "fa054d99b280e4c0f736812663378e273e4728b2489a5df1c620d96596057f71"
+      },
+      "schema": "pen_geometry_support_PPO_training:4",
+      "native_schema": "controlled_pen_owned_state:4",
+      "iteration": 64,
+      "optimizer_steps": 2048,
+      "training_transitions": 131072,
+      "normalizer_count": 129312,
+      "role": "CONTROLLED_SINGLE_SEED_FEASIBILITY_PILOT"
+    },
+    {
+      "arm": "SUPPORT",
+      "checkpoint": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_training_v1\\SUPPORT\\checkpoint_0064.pt",
+        "bytes": 57462197,
+        "sha256": "c9f39696b794a311725bd54cd427b522a3ad9e2a3d334da8e39f90aab6948f60"
+      },
+      "schema": "pen_geometry_support_PPO_training:4",
+      "native_schema": "controlled_pen_owned_state:4",
+      "iteration": 64,
+      "optimizer_steps": 2048,
+      "training_transitions": 131072,
+      "normalizer_count": 129312,
+      "role": "CONTROLLED_SINGLE_SEED_FEASIBILITY_PILOT"
+    }
+  ],
+  "execution_aggregate": {
+    "INITIAL": {
+      "duration_s": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "min_s": 0.2,
+      "median_s": 0.2,
+      "max_s": 0.2,
+      "qualified_count": 0
+    },
+    "RESIDUAL": {
+      "duration_s": [
+        1.86,
+        2.08,
+        1.86
+      ],
+      "min_s": 1.86,
+      "median_s": 1.86,
+      "max_s": 2.08,
+      "qualified_count": 0
+    },
+    "SUPPORT": {
+      "duration_s": [
+        2.14,
+        2.14,
+        2.14
+      ],
+      "min_s": 2.14,
+      "median_s": 2.14,
+      "max_s": 2.14,
+      "qualified_count": 0
+    }
+  },
+  "common_horizon_descriptive": [
+    {
+      "group": "ALL_COMMON",
+      "policy": "INITIAL",
+      "horizon_s": 0.2,
+      "metrics": {
+        "COM_RMS_m": {
+          "min": 0.022954363399268582,
+          "median": 0.02295589176470123,
+          "max": 0.02487778372703037
+        },
+        "COM_max_m": {
+          "min": 0.05365604584452778,
+          "median": 0.0536604038159383,
+          "max": 0.05695234977618986
+        },
+        "angle_RMS_rad": {
+          "min": 1.2938357285208255,
+          "median": 1.2938517709749178,
+          "max": 1.3273387985261322
+        },
+        "angle_max_rad": {
+          "min": 3.064342304166559,
+          "median": 3.065077413174223,
+          "max": 3.1374316152710207
+        },
+        "max_penetration_m": {
+          "min": 0.0019766760524362326,
+          "median": 0.0019766760524362326,
+          "max": 0.0019766760524362326
+        },
+        "max_self_penetration_m": {
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.0
+        }
+      }
+    },
+    {
+      "group": "ALL_COMMON",
+      "policy": "RESIDUAL",
+      "horizon_s": 0.2,
+      "metrics": {
+        "COM_RMS_m": {
+          "min": 0.0010089149707268557,
+          "median": 0.0010100606340039643,
+          "max": 0.00101145367380698
+        },
+        "COM_max_m": {
+          "min": 0.0019239380216370743,
+          "median": 0.0019267581693422128,
+          "max": 0.0019295780042691045
+        },
+        "angle_RMS_rad": {
+          "min": 0.06112058346708345,
+          "median": 0.06116273940654933,
+          "max": 0.06122157722063992
+        },
+        "angle_max_rad": {
+          "min": 0.10834195065580113,
+          "median": 0.10841140264825617,
+          "max": 0.10864363299892947
+        },
+        "max_penetration_m": {
+          "min": 0.0019786066841334105,
+          "median": 0.0019786066841334105,
+          "max": 0.0019786066841334105
+        },
+        "max_self_penetration_m": {
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.0
+        }
+      }
+    },
+    {
+      "group": "ALL_COMMON",
+      "policy": "SUPPORT",
+      "horizon_s": 0.2,
+      "metrics": {
+        "COM_RMS_m": {
+          "min": 0.0009429612818474958,
+          "median": 0.0009431364994975052,
+          "max": 0.0009481454831923416
+        },
+        "COM_max_m": {
+          "min": 0.001609106771112819,
+          "median": 0.0016094934171203303,
+          "max": 0.0016209195373673528
+        },
+        "angle_RMS_rad": {
+          "min": 0.046415780528885286,
+          "median": 0.04655053440991327,
+          "max": 0.046571114212123316
+        },
+        "angle_max_rad": {
+          "min": 0.06799237492235745,
+          "median": 0.0682016225995397,
+          "max": 0.06828646601437277
+        },
+        "max_penetration_m": {
+          "min": 0.001978836953639984,
+          "median": 0.001978836953639984,
+          "max": 0.001978836953639984
+        },
+        "max_self_penetration_m": {
+          "min": 0.0,
+          "median": 0.0,
+          "max": 0.0
+        }
+      }
+    },
+    {
+      "group": "FINAL_COMMON",
+      "policy": "RESIDUAL",
+      "horizon_s": 1.86,
+      "metrics": {
+        "COM_RMS_m": {
+          "min": 0.009704873712396795,
+          "median": 0.009900282464929638,
+          "max": 0.010113504905334823
+        },
+        "COM_max_m": {
+          "min": 0.038676861184651086,
+          "median": 0.0409335706267726,
+          "max": 0.04098658066073079
+        },
+        "angle_RMS_rad": {
+          "min": 0.34784474159558637,
+          "median": 0.35623749476414013,
+          "max": 0.3624913035713424
+        },
+        "angle_max_rad": {
+          "min": 1.3606942214542033,
+          "median": 1.419939197176648,
+          "max": 1.4468102614816065
+        },
+        "max_penetration_m": {
+          "min": 0.0019786066841334105,
+          "median": 0.002139622811228037,
+          "max": 0.0028792577795684338
+        },
+        "max_self_penetration_m": {
+          "min": 6.257239874685183e-05,
+          "median": 6.834883970441297e-05,
+          "max": 8.83841494214721e-05
+        }
+      }
+    },
+    {
+      "group": "FINAL_COMMON",
+      "policy": "SUPPORT",
+      "horizon_s": 1.86,
+      "metrics": {
+        "COM_RMS_m": {
+          "min": 0.007924533847488716,
+          "median": 0.007951647028442761,
+          "max": 0.008655529642276035
+        },
+        "COM_max_m": {
+          "min": 0.020116641306323835,
+          "median": 0.02135923367567392,
+          "max": 0.0259356158974401
+        },
+        "angle_RMS_rad": {
+          "min": 0.38503312604153367,
+          "median": 0.3894413921592129,
+          "max": 0.4064376637116266
+        },
+        "angle_max_rad": {
+          "min": 0.9629722223300249,
+          "median": 0.9758006775920509,
+          "max": 1.145896572134447
+        },
+        "max_penetration_m": {
+          "min": 0.001978836953639984,
+          "median": 0.001978836953639984,
+          "max": 0.001978836953639984
+        },
+        "max_self_penetration_m": {
+          "min": 4.286180774215609e-05,
+          "median": 6.319953536149114e-05,
+          "max": 7.23152479622513e-05
+        }
+      }
+    }
+  ],
+  "actual_native_integrations": 2108424,
+  "retained_trial_optimizer_steps": 4096,
+  "diagnostic_optimizer_steps": 64,
+  "total_actual_optimizer_steps": 4160,
+  "unit_tests": 334,
+  "scope": "Registered equal-budget64-iteration centered-score single-seed/clip trial,9 fresh numerical executions,216-state and351-raw readbacks. All original full tasks fail; mixed COM/orientation evidence, not statistical support benefit,ego/physical-WM-gradient/speedup qualification."
+}
