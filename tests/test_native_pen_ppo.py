@@ -1,4 +1,6 @@
 import copy
+from pathlib import Path
+import sys
 from types import SimpleNamespace
 import unittest
 import torch
@@ -6,6 +8,9 @@ from torch import nn
 from torch.distributions import Normal
 from dex_supermimic.rl.dex_supermimic.ppo import gae_targets
 from supermimic_research.learning.native_pen_ppo import NativePenPPO,timeout_reward,model_pair,validate_modules
+from supermimic_research.learning.native_pen_ppo import cpu_tree,tensor_tree_equal
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
+from review_native_pen_ppo import clone_training_modules
 
 
 class CountNorm:
@@ -96,6 +101,17 @@ class NativePPOTests(unittest.TestCase):
     def test_legacy_cube_checkpoint_is_rejected_at_schema_boundary(self):
         r=NativePenPPO.__new__(NativePenPPO)
         with self.assertRaisesRegex(ValueError,'checkpoint/config'):r.load({'schema':'legacy_cube_format4'})
+
+    def test_optimizer_clones_do_not_share_CPU_step_with_source_or_other_clone(self):
+        c=dict(ppo_init_std=.5,ppo_std_min=.2,ppo_std_max=50.,ppo_lr=1e-4,weight_decay=0.)
+        actor,critic,opt=model_pair('cpu',SimpleNamespace(**c))
+        loss=actor.net[0].weight.square().mean()+critic.net[0].weight.square().mean();loss.backward();opt.step()
+        state=dict(config=c,modules=dict(actor=cpu_tree(actor.state_dict()),critic=cpu_tree(critic.state_dict())),optimizer=cpu_tree(opt.state_dict()))
+        source=copy.deepcopy(state['optimizer']);a,ac,ao=clone_training_modules(state,'cpu');b,bc,bo=clone_training_modules(state,'cpu')
+        (a.net[0].weight.square().mean()+ac.net[0].weight.square().mean()).backward();ao.step()
+        self.assertTrue(tensor_tree_equal(source,state['optimizer']))
+        self.assertTrue(tensor_tree_equal(source,cpu_tree(bo.state_dict())))
+        self.assertFalse(tensor_tree_equal(source,cpu_tree(ao.state_dict())))
 
 
 if __name__=='__main__':unittest.main()
