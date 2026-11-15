@@ -22,7 +22,10 @@ def orientation_errors(q,reference_q):
     """Full SO(3) and directed shaft angles. Invalid quaternions stay invalid."""
     q=q/torch.linalg.vector_norm(q,dim=-1,keepdim=True)
     r=reference_q/torch.linalg.vector_norm(reference_q,dim=-1,keepdim=True)
-    full=2*torch.acos((q*r).sum(-1).abs().clamp(0,1))
+    # atan2 retains small rotation information lost by float32 acos(dot).
+    w=(q*r).sum(-1)
+    v=r[:,:1]*q[:,1:]-q[:,:1]*r[:,1:]-torch.linalg.cross(r[:,1:],q[:,1:])
+    full=2*torch.atan2(torch.linalg.vector_norm(v,dim=-1),w.abs())
     a=quat_to_mat(q)[..., :,0];b=quat_to_mat(r)[..., :,0]
     shaft=torch.atan2(torch.linalg.vector_norm(torch.linalg.cross(a,b),dim=-1),(a*b).sum(-1))
     return full,shaft
@@ -168,6 +171,9 @@ class NativePenPolicyAdapter:
         a._processed_actions[ids]=self.initial_ema;a._raw_actions[ids]=self.initial_raw
         a._targets[ids]=a.limit_target(self.motion._frames['joint_pos'][0][None]+self.initial_ema)[0]
         a._targets_valid[ids]=True
+        # Keep the entity-owned control source consistent with the explicit
+        # simulator ctrl. A later partial env.reset writes targets for ALL worlds.
+        self.features.robot.set_joint_position_target(a._targets[ids],joint_ids=a._target_ids,env_ids=ids)
         self.env.sim.data.ctrl[ids[:,None],a._position_ctrl_ids[None,:]]=a._targets[ids]
         self.env.sim.forward();self.env.sim.sense()
         self.pending[ids]=False;self.explicit_reset_worlds+=len(ids)

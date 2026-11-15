@@ -24,6 +24,11 @@ class NativePenPolicyTests(unittest.TestCase):
         a,_=orientation_errors(torch.zeros_like(q),r)
         self.assertFalse(bool(torch.isfinite(a).all()))
 
+    def test_small_float32_rotation_survives_reward_boundary(self):
+        q=torch.tensor([[1.,5e-6,0,0]],dtype=torch.float32)
+        a,_=orientation_errors(q,torch.tensor([[1.,0,0,0]]))
+        self.assertAlmostEqual(float(a[0]),1e-5,places=10)
+
     def test_action_cost_uses_applied_action_and_reward_is_unscaled(self):
         cfg=dict(COM_scale_m=.005,angle_scale_rad=np.pi/36,hand_scale_rad=.02,
             COM_weight=1.,angle_weight=1.,hand_weight=.1,action_weight=.001)

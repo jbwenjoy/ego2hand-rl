@@ -25,6 +25,7 @@ def state(adapter):
     d=adapter.env.sim.data;a=adapter.action
     return {**{k:cpu(getattr(d,k)) for k in ['qpos','qvel','ctrl','qacc_warmstart','time','mocap_pos','mocap_quat']},
         'EMA':cpu(a._processed_actions),'raw':cpu(a._raw_actions),'target':cpu(a._targets),
+        'entity_position_targets':cpu(adapter.features.robot.data.joint_pos_target),
         'phase':cpu(adapter.motion.time_steps),'pending':cpu(adapter.pending)}
 
 
@@ -89,6 +90,8 @@ def main(a):
                             ob=adapter.reset(ids);after=state(adapter);untouched=np.setdiff1d(np.arange(worlds),cpu(ids))
                             flags={key+'_other_worlds_unchanged':np.array_equal(before[key][untouched],after[key][untouched]) for key in before}
                             flags.update({key+'_reset_source':np.array_equal(after[key][cpu(ids)],initial[key][cpu(ids)]) for key in initial})
+                            np.savez_compressed(folder/'partial_reset.npz',**{'before__'+key:value for key,value in before.items()},
+                                **{'after__'+key:value for key,value in after.items()},reset_ids=cpu(ids))
                             resets.append(dict(k=k,ids=cpu(ids).tolist(),checks={key:bool(v) for key,v in flags.items()}))
                         previous=state(adapter)
                         w=torch.arange(worlds,device=adapter.device)[:,None];j=torch.arange(20,device=adapter.device)[None,:]
