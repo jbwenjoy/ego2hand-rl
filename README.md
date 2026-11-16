@@ -584,3 +584,6 @@ Latest: [termination comparison results](docs/pen-termination-comparator-results
 
 Current: [line-search epoch audit](docs/pen-linesearch-epoch-audit-results-2026-11-17.md), [paired ray protocol](docs/pen-paired-ray-trace-protocol-v1.md), [plan v1.53](docs/research-plan-v1.53.md). All960 saved ticks are audited; factory/reference CPU components pass610 tests. Coupled phase capture and native trace remain pending; no new native integration or training occurred.
 
+
+Latest evidence: [paired GPU ray/friction results](docs/pen-paired-ray-friction-results-2026-11-17.md), [plan v1.54](docs/research-plan-v1.54.md). All240 native queries and independent phase/decision reviews are complete. A separate fixed-input CUDA probe supports stable friction-cost differences;no live numerical-cost backend or new policy benefit is admitted yet.
+
