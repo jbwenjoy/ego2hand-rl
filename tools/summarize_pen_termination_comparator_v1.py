@@ -120,7 +120,9 @@ def main(a):
         observed_iterations={k:distribution(v) for k,v in ticks.items()},observed_cap_ticks={k:sum(x==50 for x in v) for k,v in ticks.items()},
         failed_observed_peaks={algorithm:[r for r in rows if r['algorithm']==algorithm and r['scope']=='PACKET_PLUS_SOLVE_EXIT' and not r['impulse_valid']] for algorithm in [original,candidate]},
         all_matched_task_flags_equal=sum(p['task_flags_equal'] for p in matched),max_matched_qpos_abs=max(p['post_qpos_max_abs'] for p in matched),max_matched_qvel_abs=max(p['post_qvel_max_abs'] for p in matched),
-        wall_s=dict(native_processes=sum(read(roots[r]['producer'])['wall_s'] for r in roots),independent_readers=sum(read(roots[r]['review'])['wall_s'] for r in roots)),
+        wall_s=dict(native_processes=sum(read(roots[r]['producer'])['wall_s'] for r in roots),independent_readers=sum(read(roots[r]['review'])['wall_s'] for r in roots),
+            retained_failed_v1_reader=read(file_pin(ROOT/'runs/pen_termination_comparator_review_v1/A/report.json'))['wall_s']),
+        timing_scope='Recorded native-process and reader walls include setup/audit/storage;failed V1 review retained. Registration,CPU tests and summary wall are not included;not complete adaptation cost or isolated solver speed.',
         csv=file_pin(out/'all240_queries.csv'),matched_csv=file_pin(out/'all120_algorithm_pairs.csv'),figure=file_pin(out/'all_conditions_and_caps.png'),
         native_integrations_in_producers=1920,actual_native_integrations=0,optimizer_steps=0,normalizer_fits=0,
         scope='All predeclared targeted conditions and matched transitions. No relaxed gate, convergence from cap, full task/Actor/ego benefit or isolated speed claim. New solver remains physically unqualified outside this comparator.')
