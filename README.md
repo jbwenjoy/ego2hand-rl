@@ -575,3 +575,6 @@ V1观测器的26维分配假设不符真实工厂，尚未用于任何原生重�
 
 Current evidence/plan: [full54 and actual solve-exit results](docs/pen-full54-and-solve-exit-results-2026-11-17.md), [research plan v1.50](docs/research-plan-v1.50.md). Full54 is closed with 0/54 complete-task successes; actual A/B diagnostics and all saved-pair checks are complete. The next separately identified termination-rule comparator remains pending.
 
+
+Next comparator: [protocol v1](docs/pen-termination-rule-comparator-protocol-v1.md), [plan v1.51](docs/research-plan-v1.51.md). The single-expression candidate and CPU qualification are implemented (597 tests); explicit source transfer, native worker/reader and actual comparison remain pending.
+
