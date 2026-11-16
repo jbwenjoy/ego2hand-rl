@@ -1,0 +1,16 @@
+schema = 1
+training_mode = "MATCHED_RESUME_200"
+training_report = "../runs/pen_matched_recovery_training_v2/report.json"
+objective_config = "pen_long_control_training_v1.toml"
+gates = "controlled_evaluation_v4.toml"
+protocol = "../docs/pen-matched-recovery-evaluation-protocol-v2.md"
+registration = "../runs/pen_matched_recovery_evaluation_registration_v2/registration.json"
+recovery_registration = "../runs/pen_matched_recovery_registration_v2/registration.json"
+startup_ledger = "../provenance/pen_long_control_registration_v1/ledger.json"
+plant_context_report = "../runs/pen_trained_response_probe_v1/report.json"
+repetitions = 3
+case_order = ["INITIAL", "RESIDUAL", "SUPPORT"]
+video_repetition = 0
+required_training_iterations = 2000
+evaluation_features = "LIVE"
+scope = "Final cumulative2000 policies from matched parent200 recovery,three fresh W1 numerical repeats each,first repeat video. New recovery schema/parents/added and causal/unique-work budgets required. Same single seed/controlled perfect-pose reference,not ego,independent training seeds or successful original failed trial."

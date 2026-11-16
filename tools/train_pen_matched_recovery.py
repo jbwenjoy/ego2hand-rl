@@ -25,6 +25,9 @@ def settings(cp):
     cfg = tomllib.loads(cp.read_text())
     work = budget(cfg)
     paths = {k: (cp.parent / cfg[k]).resolve() for k in ['objective_config', 'qualification', 'original_run', 'prior_ledger', 'protocol', 'registration']}
+    for key in ['load_qualification', 'startup_failure']:
+        if key in cfg:
+            paths[key] = (cp.parent / cfg[key]).resolve()
     parents = {arm: dict(cfg['parents'][arm], path=str((cp.parent / cfg['parents'][arm]['path']).resolve())) for arm in ARMS}
     return cfg, paths, parents, work
 
@@ -37,7 +40,7 @@ def freeze(cp, paths, out):
     return receipt
 
 
-def validate_inputs(paths, parents):
+def validate_inputs(paths, parents, *, require_load_qualification=True):
     failure = json.loads((paths['original_run'] / 'failure.json').read_text())
     if (failure['phase'], failure['actual_native_integrations'], failure['optimizer_steps']) != ('SUPPORT_206', 36143104, 70560):
         raise ValueError('Original stopped-cohort accounting differs')
@@ -53,6 +56,16 @@ def validate_inputs(paths, parents):
             raise ValueError('Parent modules are nonfinite')
     initial = [torch.load(paths['original_run'] / arm / 'initial_state.pt', map_location='cpu', weights_only=False) for arm in ARMS]
     validate_initial_pair(*initial)
+    if 'startup_failure' in paths:
+        stopped = json.loads(paths['startup_failure'].read_text())
+        if stopped['actual_native_integrations'] or stopped['optimizer_steps'] or stopped['phase'] != 'RESIDUAL_parent200_load':
+            raise ValueError('Preserve zero-step startup failure separately')
+    if require_load_qualification and 'load_qualification' in paths:
+        qa = json.loads(paths['load_qualification'].read_text())
+        if (qa['schema'] != 'pen_matched_recovery_parent_load_qualification:1' or qa['parents'] != parents
+                or qa['passed'] != 21 or qa['total'] != 21 or qa['actual_native_integrations'] or qa['optimizer_steps']):
+            raise ValueError('Both ordinary parent load qualifications required')
+        verify_source_snapshot(json.loads(verify_file_pin(qa['source_receipt']).read_text()), live=True)
     return qualification
 
 
@@ -67,11 +80,15 @@ def save(learner, receipt, path):
 
 
 def main(a):
+    runner_started = time.perf_counter()
     cp = a.config.resolve()
     cfg, paths, parents, work = settings(cp)
     qualification = validate_inputs(paths, parents)
     inputs = {k: file_pin(paths[k]) for k in ['objective_config', 'qualification', 'prior_ledger', 'protocol']}
     inputs['original_failure'] = file_pin(paths['original_run'] / 'failure.json')
+    for key in ['load_qualification', 'startup_failure']:
+        if key in paths:
+            inputs[key] = file_pin(paths[key])
     if a.register:
         out = paths['registration'].parent
         if out.exists() or not out.is_relative_to(ROOT / 'runs'):
@@ -83,6 +100,7 @@ def main(a):
             original_initial={arm: file_pin(paths['original_run'] / arm / 'initial_state.pt') for arm in ARMS},
             accounting=dict(original_failed_native=36143104, original_failed_optimizer=70560,
                 bounded_replay_native=98304, bounded_replay_optimizer=192, preparation_native=4928,
+                prior_zero_step_startup_native=0, prior_zero_step_startup_optimizer=0, prior_zero_step_startup_wall_s=None,
                 reused_prefix_already_in_original_native=6553600, reused_prefix_already_in_original_optimizer=12800),
             scope=cfg['scope']))
         print(json.dumps(dict(registration=file_pin(paths['registration']), budgets=work)), flush=True)
@@ -100,7 +118,11 @@ def main(a):
     from mjlab.sim.sim import Simulation
     original = Simulation.step
     counter = WorkCounter()
-    Simulation.step = lambda sim: counter.native_call(original, sim)
+    # The ordinary native closure contract records this bound callback's
+    # qualified name. Preserve the declared main.<locals>.step interface.
+    def step(sim):
+        return counter.native_call(original, sim)
+    Simulation.step = step
     runtime = learner = None
     phase = 'construction'
     folder = out
@@ -112,6 +134,7 @@ def main(a):
                 folder = out / arm
                 folder.mkdir()
                 phase = arm + '_parent200_load'
+                arm_started = time.perf_counter()
                 native_start, update_start = counter.native, counter.optimizer
                 state = torch.load(verify_file_pin(parents[arm]), map_location='cpu', weights_only=False)
                 runtime = SupportPenRuntime(paths['objective_config'], 32)
@@ -173,6 +196,7 @@ def main(a):
                     actual_native_integrations=counter.native - native_start, added_optimizer_steps=counter.optimizer - update_start,
                     optimizer_steps=learner.optimizer_steps, training_transitions=learner.training_transitions,
                     final_health=file_pin(folder / 'health_2000.json'), parent_reload=file_pin(folder / 'parent_reload.json')))
+                completed_arms[-1]['arm_wall_s_excluding_close'] = time.perf_counter() - arm_started
                 runtime.close()
                 runtime = learner = None
             verify_source_snapshot(receipt, live=True)
@@ -187,18 +211,23 @@ def main(a):
                 source_receipt=file_pin(out / 'source_receipt.json'), arms=completed_arms, checks=checks,
                 passed=sum(checks.values()), total=len(checks), **counter.metadata(), causal_policy_budget=work,
                 unique_named_lineage_total=dict(native_integrations=36143104 + 98304 + 4928 + counter.native,
-                                               optimizer_steps=70560 + 192 + counter.optimizer), scope=cfg['scope'])
+                                               optimizer_steps=70560 + 192 + counter.optimizer),
+                total_runner_wall_s=time.perf_counter() - runner_started,
+                wall_scope='Main entry through source/budget checks;includes parent loads/checkpoint QA,excludes Python imports. Earlier lineage wall total remains incomplete.',
+                lineage_wall_total_complete=False, scope=cfg['scope'])
             write(out / 'report.json', result)
             print(json.dumps(dict(report=file_pin(out / 'report.json'), checks=[result['passed'], result['total']], **counter.metadata())), flush=True)
     except Exception as error:
         base = dict(type=type(error).__name__, message=str(error), phase=phase, completed_arms=completed_arms,
-                    **counter.metadata(), registration=file_pin(paths['registration']), source_receipt=file_pin(out / 'source_receipt.json'))
+                    **counter.metadata(), total_runner_wall_s=time.perf_counter() - runner_started,
+                    registration=file_pin(paths['registration']), source_receipt=file_pin(out / 'source_receipt.json'))
         write(out / 'failure_exception.json', base)
         try:
             evidence = persist_failed_learner(learner, folder, receipt)
         except Exception as capture_error:
             evidence = dict(failure_evidence_capture_error=dict(type=type(capture_error).__name__, message=str(capture_error)))
-        write(out / 'failure.json', dict(base, evidence=evidence, immediate_exception=file_pin(out / 'failure_exception.json')))
+        write(out / 'failure.json', dict(base, evidence=evidence, total_runner_wall_s=time.perf_counter() - runner_started,
+                                       immediate_exception=file_pin(out / 'failure_exception.json')))
         raise
     finally:
         if runtime is not None:
