@@ -581,3 +581,6 @@ Next comparator: [protocol v1](docs/pen-termination-rule-comparator-protocol-v1.
 
 Latest: [termination comparison results](docs/pen-termination-comparator-results-2026-11-17.md), [plan v1.52](docs/research-plan-v1.52.md). All240 queries/1920 integrations and both independent reviews are complete. The candidate reduces some local impulse failures but increases cap50 frequency and remains unqualified; no new Actor/task/ego benefit is claimed.
 
+
+Current: [line-search epoch audit](docs/pen-linesearch-epoch-audit-results-2026-11-17.md), [paired ray protocol](docs/pen-paired-ray-trace-protocol-v1.md), [plan v1.53](docs/research-plan-v1.53.md). All960 saved ticks are audited; factory/reference CPU components pass610 tests. Coupled phase capture and native trace remain pending; no new native integration or training occurred.
+
