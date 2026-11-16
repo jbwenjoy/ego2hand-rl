@@ -69,6 +69,10 @@ class RayFactoryTests(unittest.TestCase):
                         self.assertEqual(integers[1:,:,INT_FIELDS.index('valid')].sum(),0)
                         if not already_done:
                             self.assertEqual(ray[0,0,RAY_FIELDS.index('p0_grad0')],-2.-smooth0)
+                            self.assertEqual(ray[0,0,RAY_FIELDS.index('p0_hessian0')],2.)
+                            np.testing.assert_array_equal(diagnostics[2].numpy()[0,0,0],[-1.,1.,1.,0.])
+                            np.testing.assert_array_equal(diagnostics[1].numpy()[0,0,0],[1.,1.,-1.,smooth0,-1.,-2.-smooth0])
+                            np.testing.assert_array_equal(diagnostics[1].numpy()[0,0,1:],np.zeros((25,len(VECTOR_FIELDS))))
                             self.assertEqual(ray[0,0,RAY_FIELDS.index('accepted_alpha')],results[-1][6][0])
                             self.assertEqual(integers[0,0,INT_FIELDS.index('initial_converged')],int(smooth0==0.))
                             if smooth0==3.: self.assertGreater(integers[0,0,INT_FIELDS.index('ls_used')],0)

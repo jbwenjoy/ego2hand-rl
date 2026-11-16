@@ -103,7 +103,7 @@ if not trace_active and tid == 0:
     values=['ctx_search_in[worldid, dofid]','ctx_mv_in[worldid, dofid]','efc_Ma_out[worldid, dofid]',
             'qfrc_smooth_in[worldid, dofid]','qacc_out[worldid, dofid]','trace_grad_in[worldid, dofid]']
     gaussloops[0].body += statements('if trace_active:\n'+'\n'.join(f'  trace_vectors_out[trace_i, worldid, dofid, {i}] = {v}' for i,v in enumerate(values)))
-    after(kernel.body,'p0_delta',writes('trace_ray_out',RAY_FIELDS,RAY_PRE,'trace_i, worldid'))
+    after(kernel.body,'lo_alpha_in',writes('trace_ray_out',RAY_FIELDS,RAY_PRE,'trace_i, worldid'))
     after(kernel.body,'initial_converged',writes('trace_ray_out',RAY_FIELDS,RAY_INITIAL,'trace_i, worldid')+
           writes('trace_int_out',INT_FIELDS,dict(initial_converged='int(initial_converged)'),'trace_i, worldid'))
     branch=[n for n in kernel.body if isinstance(n,ast.If) and ast.unparse(n.test)=='not initial_converged']
