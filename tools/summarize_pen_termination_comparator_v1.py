@@ -60,6 +60,8 @@ def main(a):
                     row['peak_'+field]=bool(o['context.'+field][peak,0])
                 for field in ['state_changed_count','quad_changed_count']:
                     row['peak_'+field]=int(o['context.'+field][peak,0])
+                gradient=o['context.grad'][peak,0,:26].astype(np.float64)*float(o['context.grad_scale'][peak,0])
+                row['peak_scaled_gradient_dot_stored_search']=float(gradient@o['context.search'][peak,0].astype(np.float64))
                 ticks.setdefault(d['algorithm'],[]).extend(niter.tolist())
                 for k,vv in e['terminal_predicates'].items(): row[k+'_ticks']=sum(vv)
             rows.append(row)
