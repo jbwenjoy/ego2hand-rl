@@ -1,0 +1,13 @@
+schema = 1
+mode = "READ_ONLY_SOLVE_EXIT_SAVED_REVIEW"
+implementation = "PADDED_SOLVER_CONTEXT_V2"
+context_layout_preflight = "../runs/pen_context_layout_v2_preflight/report.json"
+layout_tests = "../runs/pen_context_layout_v2_tests591_v1.log"
+worker_config = "pen_solve_exit_replay_v2.toml"
+worker_registration = "../runs/pen_solve_exit_replay_registration_v2/registration.json"
+registration = "../runs/pen_solve_exit_saved_review_registration_v2/registration.json"
+output = "../runs/pen_solve_exit_saved_review_v2"
+protocol = "../docs/pen-solve-exit-context-layout-v2.md"
+replicas = ["A", "B"]
+queries_per_replica = 60
+native_steps_per_replica = 480
