@@ -1,0 +1,10 @@
+schema = 1
+mode = "READ_ONLY_SOLVE_EXIT_SAVED_REVIEW"
+worker_config = "pen_solve_exit_replay_v1.toml"
+worker_registration = "../runs/pen_solve_exit_replay_registration_v1/registration.json"
+registration = "../runs/pen_solve_exit_saved_review_registration_v1/registration.json"
+output = "../runs/pen_solve_exit_saved_review_v1"
+protocol = "../docs/pen-solve-exit-saved-review-protocol-v1.md"
+replicas = ["A", "B"]
+queries_per_replica = 60
+native_steps_per_replica = 480
