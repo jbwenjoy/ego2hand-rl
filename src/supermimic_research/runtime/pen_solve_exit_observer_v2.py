@@ -3,9 +3,9 @@ from .pen_solve_exit_observer import SolveExitGraphObserver as OriginalObserver
 
 
 def expected_layout(nv,nv_pad,solver,worlds):
-    if (nv,nv_pad,int(solver),worlds)!=(26,32,2,1):
-        raise ValueError('Pinned Hand2 W1 Newton layout26/32 required')
-    return {'grad':(1,32),'Mgrad':(1,0),'search':(1,26)}
+    if (nv,nv_pad,int(solver),worlds)!=(26,28,2,1):
+        raise ValueError('Saved Hand2 W1 Newton layout26/28 required')
+    return {'grad':(1,28),'Mgrad':(1,0),'search':(1,26)}
 
 
 class SolveExitGraphObserverV2(OriginalObserver):

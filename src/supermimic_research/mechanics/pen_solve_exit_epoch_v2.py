@@ -7,9 +7,9 @@ def physical_view(observations,nv):
     raw=np.asarray(observations['context.grad'])
     if nv==26:
         mg=np.asarray(observations['context.Mgrad'])
-        if (raw.ndim!=3 or raw.shape[1:]!=(1,32) or mg.shape!=(raw.shape[0],1,0)
+        if (raw.ndim!=3 or raw.shape[1:]!=(1,28) or mg.shape!=(raw.shape[0],1,0)
                 or not np.isfinite(raw).all() or not np.all(raw[...,26:]==0)):
-            raise ValueError('Full finite32-gradient/zero padding/empty Newton Mgrad required')
+            raise ValueError('Full finite28-gradient/zero padding/empty Newton Mgrad required')
     elif raw.shape[-1]!=nv:
         raise ValueError('Unpadded analytic layout required outside the fixed Hand2 case')
     result=dict(observations);result['context.grad']=raw[...,:nv]
@@ -21,5 +21,5 @@ def review(packet,observations,model_arrays,case,decoded,decoder_gravity,iterati
     if nv!=26:raise ValueError('Fixed Hand2 physical26-DOF epoch required')
     physical=physical_view(observations,nv)
     result,arrays=original_review(packet,physical,model_arrays,case,decoded,decoder_gravity,iteration_cap)
-    result['context_layout']=dict(version=2,physical_nv=26,padded_gradient_width=32,Mgrad_shape=list(observations['context.Mgrad'].shape),padding_all_zero=True,raw_copies_preserved=True)
+    result['context_layout']=dict(version=2,physical_nv=26,padded_gradient_width=28,Mgrad_shape=list(observations['context.Mgrad'].shape),padding_all_zero=True,raw_copies_preserved=True)
     return result,arrays
