@@ -1,0 +1,60 @@
+{
+  "roots": {
+    "gravity": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\mug_gravity_transport_audit_v1\\report.json",
+      "bytes": 5900,
+      "sha256": "494d271f1e2856840bbff7f774362162069e0c2fa0badfea805c79fa94639d3e"
+    },
+    "transition": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_long_control_second_arm_milestone_v2\\report.json",
+      "bytes": 3156,
+      "sha256": "4e022e6fd7114b36d826057d78abb1f12aa2ec3f10efa47b65224bad3ffa8ec6"
+    },
+    "transition_inline": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_long_control_second_arm_milestone_v1\\report.json",
+      "bytes": 2847,
+      "sha256": "620a84d486c19443299b98d2f9a966418293ac52b2b880712c565fa780b2bdaf"
+    }
+  },
+  "gravity_metrics": {
+    "minimum_RMS_unit_gravity_change_from_initial": 0.029384366551811585,
+    "independent_SVD_minimum": 0.029384366551811585,
+    "minimizing_direction_RMS_change": 0.029384366551811578,
+    "conditional_RMS_gravity_change_m_s2": 0.31966160827932033,
+    "conditional_angle_to_robot_range_deg": [
+      111.90813957740355,
+      117.76775997301597
+    ],
+    "conditional_angle_to_initial_max_deg": 4.336633569914618
+  },
+  "physical_status": {
+    "mass_inertia_friction_measured": false,
+    "nominal_mass_kg": 0.25,
+    "nominal_only": true,
+    "can_use_explicit_nominal_robot_simulation": true,
+    "can_claim_source_load_or_force_ground_truth": false,
+    "source_gravity_registered": false,
+    "independent_RGB_reconstruction": false
+  },
+  "transition_checks": {
+    "R_final_counters": true,
+    "S_first_counters": true,
+    "initial_modules_exact": true,
+    "initial_empty_Adam_exact": true,
+    "initial_PPO_config_exact": true,
+    "initial_normalizer_ready": true,
+    "initial_metadata_only_arm_weight_change": true,
+    "R_final_modules_finite": true,
+    "S_first_modules_finite": true,
+    "R_all_Adam_steps64000": true,
+    "S_all_Adam_steps32": true,
+    "S_ordinary_reload_boolean_checks": true,
+    "S_native_immediate_arrays": true,
+    "S_native_immediate_scalars": true
+  },
+  "actual_native_integrations": 0,
+  "optimizer_steps": 0,
+  "long_training_final_actual_work": null,
+  "embedded_milestone_work_is_nonadditive": true,
+  "scope": "Conditional gravity/kinematic frame audit and CPU saved-checkpoint milestone only. No source gravity calibration,force ground truth,task/ego success or new training work."
+}
