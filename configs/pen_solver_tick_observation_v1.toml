@@ -1,0 +1,41 @@
+schema = 1
+mode = "PREPARE_SAME_SOLVE_EXIT_DIAGNOSTIC"
+partition_report = "../runs/pen_impulse_balance_v2/report.json"
+study_config = "pen_backend_long_control_v1.toml"
+protocol = "../docs/pen-solver-tick-observation-protocol-v1.md"
+output = "../runs/pen_solver_tick_preparation_v1"
+required_closed_producer = "../runs/pen_native_screened_rollout_v1/report.json"
+required_closed_review = "../runs/pen_native_screened_review_v3/report.json"
+replicas = ["A", "B"]
+repeats = 3
+scopes = ["PACKET_BASELINE", "PACKET_PLUS_SOLVE_EXIT"]
+controls_per_condition = 1
+native_ticks_per_control = 8
+future_native_cap = 960
+optimizer_budget = 0
+normalizer_fit_budget = 0
+
+[[pairs]]
+failure = "SUPPORT_P058"
+control = "SUPPORT_P057"
+control_role = "PREVIOUS_CONTROL_DIFFERENT_SOURCE"
+
+[[pairs]]
+failure = "R0_RESIDUAL_UNMODIFIED_ACTOR_P027_BASE"
+control = "R0_RESIDUAL_UNMODIFIED_ACTOR_P026_BASE"
+control_role = "PREVIOUS_CONTROL_DIFFERENT_SOURCE"
+
+[[pairs]]
+failure = "R0_RESIDUAL_NATIVE_SHAM_P064_ALT"
+control = "R0_RESIDUAL_NATIVE_SHAM_P064_BASE"
+control_role = "SAME_SOURCE_DUPLICATE_ACTION"
+
+[[pairs]]
+failure = "R0_RESIDUAL_NATIVE_SHAM_P110_BASE"
+control = "R0_RESIDUAL_NATIVE_SHAM_P109_BASE"
+control_role = "PREVIOUS_CONTROL_DIFFERENT_SOURCE"
+
+[[pairs]]
+failure = "R0_RESIDUAL_NATIVE_RANDOM_P067_BASE"
+control = "R0_RESIDUAL_NATIVE_RANDOM_P066_BASE"
+control_role = "PREVIOUS_CONTROL_DIFFERENT_SOURCE"
