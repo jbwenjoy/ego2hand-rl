@@ -1,0 +1,132 @@
+{
+  "roots": {
+    "integration": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_integration_v1\\report.json",
+      "bytes": 6501,
+      "sha256": "ad0e8b066f93d6d6f97b2cea17ee8a496278349c2f636aa9077bc6a26b43287f"
+    },
+    "registration": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_integration_registration_v1\\registration.json",
+      "bytes": 1349,
+      "sha256": "e0183a3d56bf09e37e7372a560ad58fc40326b756228933e16148111157eed9f"
+    }
+  },
+  "checks": {
+    "root_all6": true,
+    "native_budget": true,
+    "optimizer_budget": true,
+    "case_order": true,
+    "W1_RESIDUAL_all_checks": true,
+    "W1_RESIDUAL_actual_budget": true,
+    "W1_RESIDUAL_ordinary_load": true,
+    "W1_RESIDUAL_trained_state": true,
+    "W1_RESIDUAL_raw_coverage": true,
+    "W1_SUPPORT_all_checks": true,
+    "W1_SUPPORT_actual_budget": true,
+    "W1_SUPPORT_ordinary_load": true,
+    "W1_SUPPORT_trained_state": true,
+    "W1_SUPPORT_raw_coverage": true,
+    "W32_RESIDUAL_all_checks": true,
+    "W32_RESIDUAL_actual_budget": true,
+    "W32_RESIDUAL_ordinary_load": true,
+    "W32_RESIDUAL_trained_state": true,
+    "W32_RESIDUAL_raw_coverage": true,
+    "W32_SUPPORT_all_checks": true,
+    "W32_SUPPORT_actual_budget": true,
+    "W32_SUPPORT_ordinary_load": true,
+    "W32_SUPPORT_trained_state": true,
+    "W32_SUPPORT_raw_coverage": true,
+    "four_rejections": true,
+    "actual_graph_source_observed": true,
+    "tests461": true
+  },
+  "passed": 27,
+  "total": 27,
+  "cases": [
+    {
+      "label": "W1_RESIDUAL",
+      "maximum": {
+        "constraint_force": 4.61860293593519e-07,
+        "constraint_torque": 5.600222415143297e-09,
+        "raw_geometry_max": 0.0,
+        "raw_Fn6_sum": 0.0,
+        "raw_nonhand_max_sum": 0.0,
+        "raw_wrench_sum": 3.469446951953614e-18,
+        "raw_counts": 0.0,
+        "raw_errors": 0.0,
+        "raw_global_error": 0.0,
+        "raw_source_R": 0.0,
+        "raw_source_C": 0.0,
+        "raw_clock": 0.0
+      },
+      "native_array_fields": 854,
+      "native_scalar_fields": 890
+    },
+    {
+      "label": "W1_SUPPORT",
+      "maximum": {
+        "constraint_force": 4.61860293593519e-07,
+        "constraint_torque": 4.604315454294697e-09,
+        "raw_geometry_max": 0.0,
+        "raw_Fn6_sum": 0.0,
+        "raw_nonhand_max_sum": 0.0,
+        "raw_wrench_sum": 1.734723475976807e-18,
+        "raw_counts": 0.0,
+        "raw_errors": 0.0,
+        "raw_global_error": 0.0,
+        "raw_source_R": 0.0,
+        "raw_source_C": 0.0,
+        "raw_clock": 0.0
+      },
+      "native_array_fields": 854,
+      "native_scalar_fields": 890
+    },
+    {
+      "label": "W32_RESIDUAL",
+      "maximum": {
+        "constraint_force": 3.4311799618214067e-07,
+        "constraint_torque": 5.828121311078627e-09,
+        "raw_geometry_max": 0.0,
+        "raw_Fn6_sum": 0.0,
+        "raw_nonhand_max_sum": 0.0,
+        "raw_wrench_sum": 4.440892098500626e-16,
+        "raw_counts": 0.0,
+        "raw_errors": 0.0,
+        "raw_global_error": 0.0,
+        "raw_source_R": 0.0,
+        "raw_source_C": 0.0,
+        "raw_clock": 0.0
+      },
+      "native_array_fields": 854,
+      "native_scalar_fields": 890
+    },
+    {
+      "label": "W32_SUPPORT",
+      "maximum": {
+        "constraint_force": 5.706204856958941e-07,
+        "constraint_torque": 6.293782598386366e-09,
+        "raw_geometry_max": 0.0,
+        "raw_Fn6_sum": 0.0,
+        "raw_nonhand_max_sum": 0.0,
+        "raw_wrench_sum": 4.440892098500626e-16,
+        "raw_counts": 0.0,
+        "raw_errors": 0.0,
+        "raw_global_error": 0.0,
+        "raw_source_R": 0.0,
+        "raw_source_C": 0.0,
+        "raw_clock": 0.0
+      },
+      "native_array_fields": 854,
+      "native_scalar_fields": 890
+    }
+  ],
+  "added_actual_work": {
+    "native_integrations": 42240,
+    "optimizer_steps": 128
+  },
+  "old_native_migrated": false,
+  "admitted_scope": "Fresh controlled research runtime/state integration only;not final task,WM gradient,ego,hardware or performance admission.",
+  "successful_run": true,
+  "current_live_training": false,
+  "failure_handler_scope": "Successful CLI path verified;long runner must capture failure and close runtime inside active backend scope."
+}

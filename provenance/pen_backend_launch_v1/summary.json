@@ -1,0 +1,659 @@
+{
+  "schema": "bounded_backend_launch_observation:1",
+  "observed_at_UTC": "2026-11-16T09:00:09.448167+00:00",
+  "checks": {
+    "integration_independent": true,
+    "prior_pins": true,
+    "registration_backend": true,
+    "preparation_backend": true,
+    "initial_W1_backend": true,
+    "first_W1_backend": true,
+    "preparation_checks": true,
+    "preparation_registration": true,
+    "initial_W1_checks": true,
+    "initial_W1_registration": true,
+    "first_W1_checks": true,
+    "first_W1_registration": true,
+    "preparation_budget": true,
+    "initial_W1_unstepped": true,
+    "initial_W1_model_and_actor": true,
+    "first_W1_unstepped": true,
+    "first_W1_model_and_actor": true,
+    "first_checkpoint_same": true,
+    "first_readback": true,
+    "fresh_initial_load": true,
+    "contiguous_prefix": true,
+    "exact_completed_counts": true,
+    "all_completed_health": true,
+    "tests464": true,
+    "live_process_observed": true
+  },
+  "passed": 25,
+  "total": 25,
+  "process": {
+    "ProcessId": 36272,
+    "CreationDate": "/Date(1794819394671)/",
+    "CommandLine": "\"D:\\workspace\\dex-supermimic-research\\.uv-python\\cpython-3.12-windows-x86_64-none\\python.exe\" -X utf8 tools/run_pen_backend_control_study.py --config configs/pen_backend_long_control_v1.toml --mode train --output runs/pen_backend_long_training_v1"
+  },
+  "last_completed_iteration": 114,
+  "completed_training_native": 1867776,
+  "completed_training_Adam": 3648,
+  "preparation_native": 2048,
+  "additional_W1_admission_native": 0,
+  "additional_W1_admission_Adam": 0,
+  "median_last_up_to50_loop_s": 1.7075642999843694,
+  "estimated_remaining_loop_s": 6635.59486973926,
+  "estimated_loop_end_UTC": "2026-11-16T10:50:45.043037+00:00",
+  "ETA_scope": "Bounded completed R prefix projected to remaining R/S loops;excludes next-arm construction/final evaluation/render;future contacts may change cost. W1 admission overlapped briefly;not a throughput comparison.",
+  "GPU_devicewide_instantaneous_csv": "66, 2240, 32607",
+  "completed_health": [
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0001.json",
+      "bytes": 1082,
+      "sha256": "ba70b695e4a4a46e3ade27681b562e1f021471d12e5112a4bd822428e38c2fe1"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0002.json",
+      "bytes": 806,
+      "sha256": "5457d70be52c0a55c11b3a732090437ffbf6dfc47e33c185ac0f99f6aab7f87d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0003.json",
+      "bytes": 808,
+      "sha256": "fa89628b3bc59d16c61f65e982e1929ec0283e64ed198cbab72939633e80e677"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0004.json",
+      "bytes": 810,
+      "sha256": "ccc5f5b82f2df94abfdf9577df90ce2c49a5f6f9759438a67daf7177bfda1ff1"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0005.json",
+      "bytes": 811,
+      "sha256": "bdf4b74e0b24335aedf1ff928760607f434a2e966fa3ffc6f095feed12d5d78c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0006.json",
+      "bytes": 811,
+      "sha256": "dbf9a47a16b1eaf13663e79e131270ac0ae96087d918e84a7566d4e6adfd85a4"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0007.json",
+      "bytes": 810,
+      "sha256": "c4f5077f7f4d48d7ac8f92b9c0892bd925c7a89ece459d3e545ae1a684a86696"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0008.json",
+      "bytes": 812,
+      "sha256": "7e2e52a47077439384430414eaa0c03657d70c0e4f92a7521df6523fad891c79"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0009.json",
+      "bytes": 801,
+      "sha256": "3de3e3ed7f91659e3c15b27a87d94cd31fbab8fa798c98f9df26486240d1ba37"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0010.json",
+      "bytes": 803,
+      "sha256": "00dcdda2d21e4b596a0ed7f8ce37a22e58bbbc2094399324d9c7d22d0594f03b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0011.json",
+      "bytes": 802,
+      "sha256": "11dbf0c232d54f0109b4814e02e841d80035f240f83049473f8990639a1a3e9b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0012.json",
+      "bytes": 801,
+      "sha256": "0d2d9b3518caa60a0f393913810b969b3f9640190e202119508e3c6c1a8bad95"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0013.json",
+      "bytes": 802,
+      "sha256": "842dfd7f790f35bb5b49c8b2149974628f514a747a8301710993642afacf512e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0014.json",
+      "bytes": 811,
+      "sha256": "4c100f752baa2351de480e06bddb259d838280d2ee264be407319a4b9d84d938"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0015.json",
+      "bytes": 811,
+      "sha256": "6378423716b50db55bcd58e3d3d0b30889b34fa486b76ffed2c6228b8f51e49b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0016.json",
+      "bytes": 812,
+      "sha256": "853280b77948bcf550eafa9b5e7f15742a7822f3f342114e0bfc572f117706e4"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0017.json",
+      "bytes": 811,
+      "sha256": "33b138e58a24587c60e7b3fe9982ae71a8a4746f46c6920283bafa235cf9d149"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0018.json",
+      "bytes": 812,
+      "sha256": "ac5b09a7d113fed9f5d93331c62441b57a660afbdec92bbfdafa9ecf2423afe9"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0019.json",
+      "bytes": 809,
+      "sha256": "39185fc22958b82ea9911c8d558b5b7bae74890af1156bd34830b737ecbc0849"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0020.json",
+      "bytes": 811,
+      "sha256": "13a5305bbd7e95dcfee92dd5bca12a9e020cb1176b54c595d1bf080f3b74ab1c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0021.json",
+      "bytes": 809,
+      "sha256": "3321b972a16dd7dddaf20ad1895a59c7ca1b2b01acc477f329dae0cb73155b8f"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0022.json",
+      "bytes": 808,
+      "sha256": "95296ec4a8c9bbf2a521ea857068db2842b9d01681e45e07ae74bbabeb31aa08"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0023.json",
+      "bytes": 812,
+      "sha256": "05620909d3b6d4cf74fd68ec2b93e7146b2eedf96d47987ecc1de05879e72284"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0024.json",
+      "bytes": 808,
+      "sha256": "03bec613479a2744d1723cb58fcf0035a87ac83f2b682e9f8fb7a092d8b311f6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0025.json",
+      "bytes": 811,
+      "sha256": "32bb8d72a2164d65ae4b18894e3af23097aeccab33d11be89022fe7a73257659"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0026.json",
+      "bytes": 812,
+      "sha256": "fa78a7afa891df0361f80842c9d527d20fc27313e818810054a065996d3303d2"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0027.json",
+      "bytes": 810,
+      "sha256": "4baade3346a9f183b0f7dd4120cf6d5b7b11a445b52578eb6dd3088b162a29da"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0028.json",
+      "bytes": 811,
+      "sha256": "91f22e9cc2776e01db3ac61aff6ba077e7f2b7fcec8cf454e495f5819591fcc5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0029.json",
+      "bytes": 812,
+      "sha256": "e2c1ace4ca185a8c0e14f3f154ff96a3e9498a0dce000ae75d23b7be487fd758"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0030.json",
+      "bytes": 811,
+      "sha256": "5c282524b344aa7833d436a49ab4fcfcc18933fa17d497a7006b53800506ad30"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0031.json",
+      "bytes": 810,
+      "sha256": "39d12e266c65532666ddfdf1d3fc5d2204223e20bbdf890394ccb61206a0e3a8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0032.json",
+      "bytes": 812,
+      "sha256": "a8492f99bdd449584731e2ab708f4823c2939718473c562bdd1346ea2d4a0dc2"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0033.json",
+      "bytes": 809,
+      "sha256": "b760833aa3f5b30302ea413ecc1fcbf44f33f911184e357b5111ee940fd9ea4e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0034.json",
+      "bytes": 813,
+      "sha256": "8468009a89aeaa0076bfb209203c09a1ef6bb18c6e49e476d659e66ca7a341ce"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0035.json",
+      "bytes": 813,
+      "sha256": "9a4b98947d4ab405a5e21197c65258e876c470704bde2300c91718e0773f9ca7"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0036.json",
+      "bytes": 814,
+      "sha256": "2690b87a7be900467c1cf9b82bd586d8ae9a3ca510769c7b69178b8194a64773"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0037.json",
+      "bytes": 811,
+      "sha256": "8814748a43692ad60ee4e744351dad8b1ce10bdb85651f04d88fe8a7045b1140"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0038.json",
+      "bytes": 813,
+      "sha256": "09d9d0fe906856a5feb684737b835d943c71826ac09f3b02b93cf1628733630d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0039.json",
+      "bytes": 812,
+      "sha256": "15cf0b2802540bcc1708656d7c15b4c190be9ac0e498a4abc10021cd2208de1b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0040.json",
+      "bytes": 813,
+      "sha256": "3e6b10f5f266392cc7ead17bb080a6c26bce4c7c50f75cfc7513ad80d6156a94"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0041.json",
+      "bytes": 813,
+      "sha256": "6b6bf86ca31748336fb02299630b66a8df7d009c411e64993b2b5a0e0e822ffc"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0042.json",
+      "bytes": 810,
+      "sha256": "992eeb8d4ac25ba4e629cf7045e38eb49183e309a485c6e082ae67e0b50e30fb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0043.json",
+      "bytes": 813,
+      "sha256": "d84f244c909de9fbe3a1af853d209f63ad5d3b9a3c553e88398be02409623531"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0044.json",
+      "bytes": 809,
+      "sha256": "4aa0e8483cbf085a0c4dc8b9a573622535823eec2160767641e1b72c91138e67"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0045.json",
+      "bytes": 812,
+      "sha256": "82d6599ddc59bd7e3a924ea0b1d46bb036688d3e48bd5703fd49d5c9b67ead72"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0046.json",
+      "bytes": 812,
+      "sha256": "bf37c42d3c5871916051c0bfbfb35c1976b4fcb503c8f550243cd5ab86ca8ade"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0047.json",
+      "bytes": 812,
+      "sha256": "bb27d6861208256b09cf2458d0863880a7df141df531bebc9cceb563773d401d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0048.json",
+      "bytes": 812,
+      "sha256": "3892df2d1899f90b0209478837b0bdd749529046578e241a6ed1de1485b56a6b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0049.json",
+      "bytes": 814,
+      "sha256": "583e37a3a5a68a6e76c68bc68478615c315c5287bf4543e1be26de32a433da10"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0050.json",
+      "bytes": 813,
+      "sha256": "a90419482b27e950f8864db7b429551ade492adf7bad4b14bf04c5854e40dea7"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0051.json",
+      "bytes": 811,
+      "sha256": "e2cd8e2e573ef7f4f0e083b9fe88766bf46f9340dd7f082b7469d18803c4e488"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0052.json",
+      "bytes": 814,
+      "sha256": "42cbcd9dab844c2dbe7598a3805f215efb37a2f401a7d6072702c301de4eaacb"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0053.json",
+      "bytes": 811,
+      "sha256": "e65240ec84dc5cf89512e7bf8e80b568e020c9d020be082b1540b229a07f4925"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0054.json",
+      "bytes": 813,
+      "sha256": "c465c6641a14bb483fb4bd1b44d114f2cdf7b1ff6896074f63ddede92132b6ec"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0055.json",
+      "bytes": 810,
+      "sha256": "181e66c28dfa401c46e76bbd46b280dfd0f24b1f6a227a0218c60168798b513c"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0056.json",
+      "bytes": 813,
+      "sha256": "99a47d7b4d0470fd9e9f8fd1d138a7f5ac5e83c75b268f46e082df3cb00a19c0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0057.json",
+      "bytes": 812,
+      "sha256": "bda98f5ba94cf99e01f4f93d96a0328d6c7a7aa41b9c07acf806f6d133318bf2"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0058.json",
+      "bytes": 814,
+      "sha256": "aa59ce6764feb436793a53b2cd88367c9d639a85fb3a707753954b07375b9a3a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0059.json",
+      "bytes": 814,
+      "sha256": "86d6b6b3dbfe9042a8c9f386c44cd94e3ac06ce493b0b3689d78e51f69e42c19"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0060.json",
+      "bytes": 814,
+      "sha256": "fa0aceeb5510a5eee41fd697858bb8e5d6e88fb5e3102eb8ae725e618d36fad5"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0061.json",
+      "bytes": 813,
+      "sha256": "999b35d85c07db7bf656572de695743942d34dba34c3591a7e8e919fd711379f"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0062.json",
+      "bytes": 814,
+      "sha256": "ed5d0ce977622f08516ecc306fbba4b78c0b24a3749ddd04bcb0cfdaa536112e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0063.json",
+      "bytes": 813,
+      "sha256": "e800bfb1273cc309c6b38bf0b962937c8bc5c33bebd19bbe778a1c540c403c10"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0064.json",
+      "bytes": 814,
+      "sha256": "6923b1776e3bcd815e3bfe20c9b162d3440252f1ebf1fc7b65025ea296d22b74"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0065.json",
+      "bytes": 813,
+      "sha256": "57eec68e9e343e31df7bd961101d03fd93a6d86d167fc4f9b174863083f250de"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0066.json",
+      "bytes": 814,
+      "sha256": "483d605a3b2c42525942e2a9da123810e8c965a07b987723765f590033ebb8f2"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0067.json",
+      "bytes": 814,
+      "sha256": "58d243438ff51c9ed1711aa9b8ee81a8ac995334ad7f15772fc9c6fe54ba4d8f"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0068.json",
+      "bytes": 813,
+      "sha256": "e21ff1482bd849923d92f9eed03291883fd8d256d21e4e54c9e850485cfbf9aa"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0069.json",
+      "bytes": 814,
+      "sha256": "41fa7ee458cb40e94b2edfab9ed8989d36f6a37e3af6e32ca12c308e078539f4"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0070.json",
+      "bytes": 814,
+      "sha256": "bcb98377b4343286bdef78604cd13991833cbea80a30e1d464f9b961a3516ddf"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0071.json",
+      "bytes": 814,
+      "sha256": "9f5fd19177350736e36b27130df6a3066c53fd2f6ec0bbf469a68c871934f184"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0072.json",
+      "bytes": 814,
+      "sha256": "36948148632ce85f7eccc5e3d2b6fda04496e3a13296b4ba105e5b3dbd82b988"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0073.json",
+      "bytes": 812,
+      "sha256": "9398b5deb81d1de2f730b56e2eaa0b3ac7298587ca91b90d3ca99e2b812f9383"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0074.json",
+      "bytes": 815,
+      "sha256": "bdc42ee2d5fc6dca833a0910fc8fff0f22ff5ee7ac544d9a1037c430e2bff5fa"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0075.json",
+      "bytes": 814,
+      "sha256": "5105bf668a63022f51324cfc34dd994b172a6e1ab1d26a11d9a79a5f4a87d3a6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0076.json",
+      "bytes": 814,
+      "sha256": "0565caf087e2fd5ffdb88925762beebcf9d04646af1643444eadc4a40fa75f25"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0077.json",
+      "bytes": 814,
+      "sha256": "773b88952f75a6063d7f12c707aa84fd88d9055295f6ac69810c4bb9ad9f5ec8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0078.json",
+      "bytes": 810,
+      "sha256": "a347936161931c069f3c05fd1e3b5de50f7d3533bc7f8d61ca3444186a4a3f02"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0079.json",
+      "bytes": 815,
+      "sha256": "c01c026e0894fca6ea8874370b97e5e694db8a131edfdb6727973869287e84a0"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0080.json",
+      "bytes": 816,
+      "sha256": "33d934c05a9da78184c4745f73396cf434f0e57e66c2d9169761fa1edacced58"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0081.json",
+      "bytes": 811,
+      "sha256": "aa2869227b6a10cf6bac28ecec91fb4600986ca96dc038f5982d9b4c0adaac26"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0082.json",
+      "bytes": 814,
+      "sha256": "b253b06188c918dffa34f19a292636a58185be76d0370c30a6622eac0bd6db63"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0083.json",
+      "bytes": 815,
+      "sha256": "d138ad6b4a9b63770572927c15ac2291bda7d214b40f496f4b611119c122471d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0084.json",
+      "bytes": 815,
+      "sha256": "0c905add45a5a7c27e6cff6bd520d38578dca9e596d660d513857f7cc0c07c2a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0085.json",
+      "bytes": 814,
+      "sha256": "393024a7642da42a352ea4c87418d4b196b954147f3ab7db5b6bd42f7257eb0f"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0086.json",
+      "bytes": 815,
+      "sha256": "da9fd29b42e05f2919c60085ea6f33bf78928e8277796e2533dddf2c9b32197f"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0087.json",
+      "bytes": 814,
+      "sha256": "4349ba3a91f2052b0eae75c565eab9fe39e34b36def5a3841aaa4f1a3854193a"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0088.json",
+      "bytes": 814,
+      "sha256": "cd5b86321d1566a6a13c3e224df86c8d6cea35b9425bf6054b049bca811dce8d"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0089.json",
+      "bytes": 809,
+      "sha256": "f7325670c2a957db004b78ce662384b8a1ee198ef4e7db3fb4633f6d68347ce3"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0090.json",
+      "bytes": 815,
+      "sha256": "a2d178f380af845b6de18a500002fa6163dc348533b3bd55b98012906eb9fd1e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0091.json",
+      "bytes": 815,
+      "sha256": "18aeef67590d25810e7f30218bb26d6b2d7ff3f0e8662bbc197bfc8935a31fac"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0092.json",
+      "bytes": 815,
+      "sha256": "f0d95b87ef51461e3634795d4c2e3cbb4c0bda0ec4c546a7adca47e52bad4086"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0093.json",
+      "bytes": 815,
+      "sha256": "551eafd25a809700e63dfa61da4a4e9f7487f17c5e4972f1a7d9e4e8eb2058ac"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0094.json",
+      "bytes": 813,
+      "sha256": "3ce970da86f67c40e35acdf1f7b12778420fb359dd39de9701dfb1ffbcef5155"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0095.json",
+      "bytes": 814,
+      "sha256": "2b102749420d271c2a197fe5000d4e289fc9392fba2a87efd6772c340a42b8f6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0096.json",
+      "bytes": 814,
+      "sha256": "3bd677251c426df9bf4cfec1a460dcc59296720f534b21cc93c0722d8974f12e"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0097.json",
+      "bytes": 815,
+      "sha256": "62545a0a18ce623fc2a535be209c972ba191562753285398c487b675aa0c5ea2"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0098.json",
+      "bytes": 815,
+      "sha256": "2c5d42a9489abbdd0ac018f67a2e4e5909c4c9750032921f2930cbd4120a7aca"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0099.json",
+      "bytes": 814,
+      "sha256": "52074b48359cbcd4505fc729f70ff26b47605c913f6ab8873bf349200e43ec23"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0100.json",
+      "bytes": 1040,
+      "sha256": "6c89c9470629aa8502fabd4268290630a530bb535000d13743f2df7fe5c3e055"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0101.json",
+      "bytes": 816,
+      "sha256": "8b6236126425087a1945ce5827d508f123b0ab3e2e5c02dc91f1f6c771257afe"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0102.json",
+      "bytes": 814,
+      "sha256": "9eb0e480482c58b0884eef6cdc2a5729c9ee9850d132d2cd4a8e42755702cfbc"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0103.json",
+      "bytes": 816,
+      "sha256": "9c7ab6cc890a31d56a95bf9818c2a87edcba107cda64a60ba6c332d02eb5b848"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0104.json",
+      "bytes": 813,
+      "sha256": "f546cfc2c36c9bf1ad7fe46fa53a8bd19058865ce7c947fab74de7551860e138"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0105.json",
+      "bytes": 816,
+      "sha256": "431c6affe952148f9b7ca8211be25d9e6c670fff22d729f1b7fa650a271ab317"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0106.json",
+      "bytes": 815,
+      "sha256": "1a6d2873d6a28aa4117d08004633a628649ba576dc59b75a1159bc5769dc16ff"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0107.json",
+      "bytes": 815,
+      "sha256": "641f380000473889c7fef2f8992f526ec55ddfb94699b09d454a938c76646db6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0108.json",
+      "bytes": 816,
+      "sha256": "a9d61372166004951964224548e5b4664fbb039402b4de54e193c4f1a2511887"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0109.json",
+      "bytes": 816,
+      "sha256": "3ae1b66fdbe21d5728d2f87ed342ad450671d38e897d1841b2013042e4d3c875"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0110.json",
+      "bytes": 813,
+      "sha256": "425856fcfa17e843045a1bc9c388baf52f9848e7bbc6f6ea83404d01b1d29e8b"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0111.json",
+      "bytes": 815,
+      "sha256": "839626bafb2c92b6b426202e09ef3d3b7461583bd444f04df5b3e5a83b3996a4"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0112.json",
+      "bytes": 816,
+      "sha256": "c000f184e70ca82a672634262b5fdcdba770475bb6c4635840b567aa7b51cfc6"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0113.json",
+      "bytes": 816,
+      "sha256": "66d2cdb3999cc8c5dd779eae80dd7b382c51ab3a513a0c5d47c4130062c275f8"
+    },
+    {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0114.json",
+      "bytes": 814,
+      "sha256": "d81e50b611b0279ba8e16636a031a74332a1bd6dd1b5f9a0e5a687cb3bc581a6"
+    }
+  ],
+  "roots": {
+    "registration": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_registration_v1\\registration.json",
+      "bytes": 3852,
+      "sha256": "2669db952f4032d1e7a40807c86dd26251c552684dd053b32703b30a640c0bbe"
+    },
+    "preparation": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_preparation_v1\\report.json",
+      "bytes": 1634,
+      "sha256": "f8c27be5180573cfe0772599aa97a7bc27f067d7d08fc480c0a8e2298f2f5147"
+    },
+    "initial_W1": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_W1_initial_admission_v1\\report.json",
+      "bytes": 2975,
+      "sha256": "438bc37a5b552e802df85247b7991ac0ef2e4cb113e40f838e1068cc633ed12e"
+    },
+    "first_W1": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_W1_first_admission_v1\\report.json",
+      "bytes": 2981,
+      "sha256": "4fe1d49f5e8775d1c0ae5bf87a695d90e52f250d2ef0c7304d0d205960e1778f"
+    },
+    "first_health": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\health_0001.json",
+      "bytes": 1082,
+      "sha256": "ba70b695e4a4a46e3ade27681b562e1f021471d12e5112a4bd822428e38c2fe1"
+    },
+    "initialization": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_long_training_v1\\RESIDUAL\\initialization.json",
+      "bytes": 1082,
+      "sha256": "84e836d4690cde867bc9a6246357d6b7483192a0c924fe8a69cbb03363c01e4e"
+    }
+  },
+  "test_log": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_backend_study_tests464_v1.log",
+    "bytes": 77508,
+    "sha256": "87103956204f700b9cc3be1106210429ca00334f537d85ffef63b66df4e2b8b5"
+  },
+  "admitted_scope": "Launch/readback/unstepped W1 contracts only. SUPPORT not started,complete trial and strict physical policy performance unproven. Process is a timestamped observation,not a future liveness guarantee."
+}
