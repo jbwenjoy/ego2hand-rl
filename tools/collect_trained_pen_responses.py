@@ -7,7 +7,7 @@ import torch
 from dex_supermimic.rl.dex_supermimic.networks import GaussianPPOActor
 from supermimic_research.artifacts import file_pin,verify_file_pin
 from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot
-from supermimic_research.learning.pen_interventions import intervention_profiles,seeded_training_profiles,prefix_noise_schedule
+from supermimic_research.learning.pen_interventions import intervention_profiles,seeded_training_profiles,prefix_noise_schedule,validate_full_rank_cohort
 from supermimic_research.learning.frozen_pen_actor import frozen_actor_for_current_W1
 from supermimic_research.learning.pen_support_ppo import static_contract,CENTERED_SCHEMA
 from supermimic_research.runtime.pen_support_runtime import SupportPenRuntime
@@ -20,10 +20,11 @@ def write(p,v):p.write_text(json.dumps(v,indent=2,allow_nan=False)+'\n',encoding
 
 def main(a):
     cp=a.config.resolve();cfg=tomllib.loads(cp.read_text());tp=(cp.parent/cfg['training_report']).resolve();training=json.loads(tp.read_text());op=(cp.parent/cfg['objective_config']).resolve();out=a.output.resolve()
-    train=cfg['schema']==2
-    if out.exists() or not out.is_relative_to(ROOT/'runs') or cfg['schema'] not in (1,2) or cfg['actors']!=['RESIDUAL','SUPPORT'] or cfg['PD_eps_rad']!=[.002,.005]:raise ValueError('Fresh explicitly registered response study')
+    full=cfg['schema']==3;train=cfg['schema'] in (2,3)
+    if out.exists() or not out.is_relative_to(ROOT/'runs') or cfg['schema'] not in (1,2,3) or cfg['actors']!=['RESIDUAL','SUPPORT'] or cfg['PD_eps_rad']!=[.002,.005]:raise ValueError('Fresh explicitly registered response study')
+    if full:full_directions,full_profiles=validate_full_rank_cohort(cfg)
     if train:
-        if cfg['source_phases']!=[12,24,36,48,64,72] or cfg['noise_seeds']!=[8801,8802] or cfg['prefix_raw_sigma']!=.01 or cfg['directions']!=4 or cfg['direction_seed']!=9301 or cfg['repeats']!=2 or cfg['role']!='TRAIN_CONTROLLED_PHYSICAL_RESPONSE' or cfg['restore_mode']!='STRICT':raise ValueError('Registered TRAIN coverage contract differs')
+        if not full and (cfg['source_phases']!=[12,24,36,48,64,72] or cfg['noise_seeds']!=[8801,8802] or cfg['prefix_raw_sigma']!=.01 or cfg['directions']!=4 or cfg['direction_seed']!=9301 or cfg['repeats']!=2 or cfg['role']!='TRAIN_CONTROLLED_PHYSICAL_RESPONSE' or cfg['restore_mode']!='STRICT'):raise ValueError('Registered TRAIN coverage contract differs')
         context_path=(cp.parent/cfg['frozen_W1_context_report']).resolve();contexts=json.loads(context_path.read_text())
         if contexts['role']!='CHECK_TRAINED_ACTOR_PHYSICAL_RESPONSE_NEVER_FIT' or contexts['passed']!=contexts['total']:raise ValueError('Frozen context only;CHECK responses never enter TRAIN')
     elif cfg['source_phases']!=[10,20,30,40,60,75] or cfg['repeats']!=3 or cfg['role']!='CHECK_TRAINED_ACTOR_PHYSICAL_RESPONSE_NEVER_FIT':raise ValueError('Original324-branch CHECK contract differs')
@@ -31,7 +32,7 @@ def main(a):
     verify_source_snapshot(json.loads(verify_file_pin(training['source_receipt']).read_text()),live=not train)
     out.mkdir();protocol=(cp.parent/cfg['protocol']).resolve();paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/pkg).rglob('*.py')})+[Path(__file__).resolve(),cp,protocol]
     receipt=freeze_sources(paths,out/'source_snapshot',ROOT,subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip());write(out/'source_receipt.json',receipt)
-    directions,profiles=seeded_training_profiles(cfg['direction_seed'],cfg['directions'],cfg['repeats']) if train else intervention_profiles();np.savez_compressed(out/'directions.npz',directions=directions)
+    directions,profiles=(full_directions,full_profiles) if full else seeded_training_profiles(cfg['direction_seed'],cfg['directions'],cfg['repeats']) if train else intervention_profiles();np.savez_compressed(out/'directions.npz',directions=directions)
     seeds=cfg['noise_seeds'] if train else [None]
     schedules={seed:prefix_noise_schedule(seed,max(cfg['source_phases'])-1,cfg['prefix_raw_sigma']) for seed in seeds} if train else {}
     if train:np.savez_compressed(out/'prefix_noise.npz',**{f'seed{seed}':value for seed,value in schedules.items()})
@@ -51,6 +52,7 @@ def main(a):
                 label=arm['arm'];episode=label+(f'_N{seed}' if train else '');folder=out/episode;folder.mkdir();phase=episode+'_producer';saved=torch.load(verify_file_pin(arm['checkpoint']),map_location='cpu',weights_only=False)
                 if saved['schema']!=CENTERED_SCHEMA:raise ValueError('Registered training4 actor required')
                 runtime=SupportPenRuntime(op,1);runtime.support_weight=float(saved['metadata']['support_weight']);settings=saved['config'];actor_audit=None
+                if full and runtime.metadata()['fixed_frame_features']!='LIVE':raise ValueError('Registered full-rank W1 cohort requires LIVE features')
                 if train:
                     context=next(s['source'] for s in contexts['sources'] if s['actor']==label and s['phase']==10)
                     actor,actor_audit=frozen_actor_for_current_W1(runtime,arm['checkpoint'],context)
@@ -133,11 +135,12 @@ def main(a):
                 all_available_restore_exact=all(c['restore_audit']['all_array_bytes_equal'] and c['restore_audit']['all_scalar_values_equal'] for c in cases if c['available']),
                 all_available_native_count=all(c['native_integrations']==8 for c in cases if c['available']))
             verify_source_snapshot(receipt,live=True)
-            result=dict(schema='trained_pen_same_source_response_probe:2' if train else 'trained_pen_same_source_response_probe:1',config=file_pin(cp),training=file_pin(tp),source_receipt=file_pin(out/'source_receipt.json'),protocol=file_pin(protocol),directions=file_pin(out/'directions.npz'),
+            result=dict(schema='trained_pen_same_source_response_probe:3' if full else 'trained_pen_same_source_response_probe:2' if train else 'trained_pen_same_source_response_probe:1',config=file_pin(cp),training=file_pin(tp),source_receipt=file_pin(out/'source_receipt.json'),protocol=file_pin(protocol),directions=file_pin(out/'directions.npz'),
                 source_bank=file_pin(out/'source_bank.json'),sources=sources,cases=cases,checks=checks,passed=sum(checks.values()),total=len(checks),qualified_sources=sum(s['qualified'] for s in sources),
                 available_cases=sum(c['available'] for c in cases),online_geometry_qualified_cases=sum(c['qualified'] for c in cases),producer_native_integrations=producer_integrations,
                 actual_native_integrations=observed,optimizer_steps=0,role=cfg['role'],scope=cfg['scope'])
             if train:result.update(frozen_W1_context_report=file_pin(context_path),prefix_noise=file_pin(out/'prefix_noise.npz'),producers=[file_pin(out/(arm['arm']+f'_N{seed}')/'producer.json') for arm,seed in jobs],restore_mode='STRICT',CHECK_response_rows_used=0)
+            if full:result.update(direction_basis=cfg['direction_basis'],direction_rank=int(np.linalg.matrix_rank(directions)),direction_condition=float(np.linalg.cond(directions)),validation_rows_used_for_TRAIN=0,fixed_frame_features='LIVE')
             write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),checks=[result['passed'],result['total']],native_integrations=observed,qualified_sources=result['qualified_sources'],available_cases=result['available_cases'],geometry_qualified=result['online_geometry_qualified_cases'])),flush=True)
             if not all(checks.values()):raise ValueError('Retain probe contract discrepancy')
     except Exception as error:

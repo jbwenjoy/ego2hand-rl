@@ -31,3 +31,9 @@ class PreparationRoles(unittest.TestCase):
 
     def test_experimental_epoch_cannot_impersonate_strict_cohort(self):
         self.rejects(restore_mode='READ_LOCKED_EPOCH')
+
+    def test_reserved_fullrank_validation_cannot_be_prepared_as_TRAIN(self):
+        self.rejects(schema='trained_pen_same_source_response_probe:3',config=file_pin(ROOT/'configs/pen_response_fullrank_validation_v1.toml'))
+
+    def test_fullrank_TRAIN_cannot_be_mislabelled_as_reserved_validation(self):
+        self.rejects(schema='trained_pen_same_source_response_probe:3',config=file_pin(ROOT/'configs/pen_response_fullrank_train_v1.toml'),role='VALIDATE_CONTROLLED_PHYSICAL_RESPONSE_NEVER_FIT')

@@ -25,7 +25,7 @@ def first_raw_action(delta20, direction20, epsilon, sign):
     return raw
 
 
-def seeded_training_profiles(seed, count=4, repeats=2):
+def seeded_training_profiles(seed, count=4, repeats=2,*,basis='GAUSSIAN'):
     """Independent fixed directions; role/split belongs to the source cohort.
 
     These finite perturbations are not asserted to be smooth derivatives.
@@ -34,7 +34,10 @@ def seeded_training_profiles(seed, count=4, repeats=2):
     if type(seed) is not int or type(count) is not int or type(repeats) is not int or not 1<=count<=20 or repeats<2:
         raise ValueError('Integer seed,1..20 directions,and at least two repeats')
     directions=np.random.Generator(np.random.PCG64(seed)).standard_normal((count,20))
-    directions/=np.linalg.norm(directions,axis=1,keepdims=True)
+    if basis=='GAUSSIAN':directions/=np.linalg.norm(directions,axis=1,keepdims=True)
+    elif basis=='ORTHONORMAL_QR':
+        Q,R=np.linalg.qr(directions.T,mode='reduced');directions=(Q*np.sign(np.diag(R))[None]).T
+    else:raise ValueError('Explicit GAUSSIAN/ORTHONORMAL_QR direction basis')
     rows=[]
     for repeat in range(repeats):
         rows.append(dict(name=f'BASE_R{repeat}',repeat=repeat,direction=-1,epsilon=0.,sign=0))
@@ -43,6 +46,21 @@ def seeded_training_profiles(seed, count=4, repeats=2):
                 for sign in ((1,-1) if repeat%2==0 else (-1,1)):
                     rows.append(dict(name=f'D{direction+1}_E{epsilon}_S{sign}_R{repeat}',repeat=repeat,direction=direction,epsilon=epsilon,sign=sign))
     return directions,rows
+
+
+def validate_full_rank_cohort(cfg):
+    """Registered disjoint TRAIN/validation identities,before any simulation."""
+    expected={
+        'TRAIN_CONTROLLED_PHYSICAL_RESPONSE':([8841,8842],[12,24,36,48,64,72],9401,24,3888),
+        'VALIDATE_CONTROLLED_PHYSICAL_RESPONSE_NEVER_FIT':([8861,8862],[18,42,66],9402,12,1944),
+    }
+    if cfg.get('role') not in expected:raise ValueError('Full-rank TRAIN/NEVER_FIT validation role required')
+    seeds,phases,direction,sources,cases=expected[cfg['role']]
+    if cfg.get('schema')!=3 or cfg.get('noise_seeds')!=seeds or cfg.get('source_phases')!=phases or cfg.get('direction_seed')!=direction or cfg.get('directions')!=20 or cfg.get('direction_basis')!='ORTHONORMAL_QR' or cfg.get('repeats')!=2 or cfg.get('prefix_raw_sigma')!=.01 or cfg.get('restore_mode')!='STRICT' or cfg.get('expected_sources')!=sources or cfg.get('expected_cases')!=cases:
+        raise ValueError('Registered full-rank source/split/direction/budget contract differs')
+    directions,profiles=seeded_training_profiles(direction,20,2,basis='ORTHONORMAL_QR')
+    if np.linalg.matrix_rank(directions)!=20 or not np.allclose(directions@directions.T,np.eye(20),atol=2e-15,rtol=0) or len(profiles)!=162:raise ValueError('Full-rank well-conditioned actual PD basis required')
+    return directions,profiles
 
 
 def prefix_noise_schedule(seed,controls,sigma):
