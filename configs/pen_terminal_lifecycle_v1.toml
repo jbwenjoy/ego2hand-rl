@@ -1,0 +1,12 @@
+schema = 1
+mode = "FRESH_NATIVE4_CLIPPED_AND_TERMINAL_LIFECYCLE_ONLY"
+study_config = "pen_backend_long_control_v1.toml"
+node_review = "../runs/pen_live_node_review_v1/report.json"
+protocol = "../docs/pen-terminal-lifecycle-protocol-v1.md"
+registration = "../runs/pen_terminal_lifecycle_registration_v1/registration.json"
+output = "../runs/pen_terminal_lifecycle_v1"
+arms = ["RESIDUAL", "SUPPORT"]
+reference_controls_max = 368
+native_budget_max = 5920
+clipped_RAW_joint0 = 1.4
+verifier = "SINGLE_RESOLVE_FULL_REHASH"

@@ -1,0 +1,15 @@
+schema = 1
+mode = "FRESH_W1_OWNED_BRANCH_ROLLBACK_QUALIFICATION"
+study_config = "pen_backend_long_control_v1.toml"
+transport_report = "../runs/pen_snapshot_transport_v1/report.json"
+shared_transport_report = "../runs/pen_shared_snapshot_transport_v1/report.json"
+prior_ledger = "../provenance/pen_path_decomposition_results_v1/ledger.json"
+protocol = "../docs/pen-live-node-qualification-protocol-v1.md"
+registration = "../runs/pen_live_node_registration_v1/registration.json"
+output = "../runs/pen_live_node_qualification_v1"
+arms = ["RESIDUAL", "SUPPORT"]
+transports = ["GZIP_FULL", "GZIP_SHARED_IMMUTABLE"]
+branches = ["BASE", "ALT", "CONT_A", "CONT_B"]
+native_budget = 128
+alternative_RAW_joint0_delta = 0.008
+verifier = "SINGLE_RESOLVE_FULL_REHASH"
