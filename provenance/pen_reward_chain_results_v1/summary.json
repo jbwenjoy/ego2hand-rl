@@ -1,0 +1,131 @@
+{
+  "checks": [
+    18,
+    18
+  ],
+  "reviewed_rows": 4860,
+  "row_checks": [
+    68040,
+    68040
+  ],
+  "real_row_formula_reconstructions_including_failed_attempt_and_preflight": 9721,
+  "source_contexts": 36,
+  "omission": {
+    "TRAIN": {
+      "residual_objective": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 779,
+          "omission_relative_L2": 0.025572011487373567,
+          "opposite_sign_pairs": 19,
+          "zero_observable_pairs": 0,
+          "zero_full_pairs": 0
+        },
+        "FROZEN_SCALAR_SCREEN": {
+          "pairs": 508,
+          "omission_relative_L2": 0.02490411520569102,
+          "opposite_sign_pairs": 2,
+          "zero_observable_pairs": 0,
+          "zero_full_pairs": 0
+        }
+      },
+      "support_objective": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 779,
+          "omission_relative_L2": 0.020428930617742293,
+          "opposite_sign_pairs": 8,
+          "zero_observable_pairs": 0,
+          "zero_full_pairs": 0
+        },
+        "FROZEN_SCALAR_SCREEN": {
+          "pairs": 508,
+          "omission_relative_L2": 0.02084967363078531,
+          "opposite_sign_pairs": 0,
+          "zero_observable_pairs": 0,
+          "zero_full_pairs": 0
+        }
+      }
+    },
+    "VALIDATE": {
+      "residual_objective": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 386,
+          "omission_relative_L2": 0.45682876699295255,
+          "opposite_sign_pairs": 5,
+          "zero_observable_pairs": 0,
+          "zero_full_pairs": 0
+        },
+        "FROZEN_SCALAR_SCREEN": {
+          "pairs": 280,
+          "omission_relative_L2": 0.01426157538614697,
+          "opposite_sign_pairs": 0,
+          "zero_observable_pairs": 0,
+          "zero_full_pairs": 0
+        }
+      },
+      "support_objective": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 386,
+          "omission_relative_L2": 0.4564534517903003,
+          "opposite_sign_pairs": 6,
+          "zero_observable_pairs": 0,
+          "zero_full_pairs": 0
+        },
+        "FROZEN_SCALAR_SCREEN": {
+          "pairs": 292,
+          "omission_relative_L2": 0.014431374421787931,
+          "opposite_sign_pairs": 0,
+          "zero_observable_pairs": 0,
+          "zero_full_pairs": 0
+        }
+      }
+    }
+  },
+  "geometry_share": {
+    "TRAIN": {
+      "pairs": 779,
+      "median": 0.00908863527143656,
+      "p95": 0.07889968878885648,
+      "max": 0.569584829824162,
+      "share_above_10_percent": 26
+    },
+    "VALIDATE": {
+      "pairs": 386,
+      "median": 0.005827905970263556,
+      "p95": 0.4542500234326104,
+      "max": 0.8989460473327772,
+      "share_above_10_percent": 73
+    }
+  },
+  "stable_reward_direction_counts": {
+    "TRAIN": {
+      "COM": 297,
+      "SO3": 260,
+      "hand": 332,
+      "action_penalty": 380,
+      "tracking": 254,
+      "geometry_penalty": 182,
+      "support_bonus": 246,
+      "residual_objective": 254,
+      "support_objective": 254,
+      "source_objective": 260
+    },
+    "VALIDATE": {
+      "COM": 166,
+      "SO3": 140,
+      "hand": 168,
+      "action_penalty": 187,
+      "tracking": 140,
+      "geometry_penalty": 80,
+      "support_bonus": 159,
+      "residual_objective": 140,
+      "support_objective": 146,
+      "source_objective": 144
+    }
+  },
+  "actual_native_integrations": 0,
+  "optimizer_steps": 0,
+  "normalizer_fits": 0,
+  "WM_or_Actor_updates": 0,
+  "physical_status": "NATIVE_COMPONENTS_RECONSTRUCTED_FULL_WM_REWARD_NOT_ADMITTED",
+  "scope": "Actual RAW quarter-gain and native components checked;path-dependent geometry missing from current WM90. Oracle partial-objective omission can be large on all valid validation pairs but small on stable-screen subset;neither subset qualifies full reward/Actor/ego/task gradients."
+}
