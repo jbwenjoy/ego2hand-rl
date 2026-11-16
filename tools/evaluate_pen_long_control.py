@@ -18,6 +18,7 @@ from supermimic_research.learning.pen_w1_evaluation import actor_for_fresh_live_
 from supermimic_research.runtime.controlled_evaluation import summarize_trace
 from supermimic_research.runtime.pen_support_runtime import SupportPenRuntime
 from supermimic_research.runtime.pen_executed_control_audit import audit_executed_control
+from supermimic_research.learning.pen_matched_recovery import validate_recovery_result
 from preview_pen_support_pilot import execute, render, write
 
 
@@ -28,9 +29,15 @@ def settings(path):
             or cfg['video_repetition'] != 0 or cfg['required_training_iterations'] != 2000
             or cfg['evaluation_features'] != 'LIVE'):
         raise ValueError('Registered final2000/LIVE/nine-case matrix required')
-    return cfg, {k: (path.parent / cfg[k]).resolve() for k in [
+    paths = {k: (path.parent / cfg[k]).resolve() for k in [
         'training_report', 'objective_config', 'gates', 'protocol', 'registration',
         'startup_ledger', 'plant_context_report']}
+    mode = cfg.get('training_mode', 'FRESH_LONG')
+    if mode not in ['FRESH_LONG', 'MATCHED_RESUME_200']:
+        raise ValueError('Explicit fresh-long or matched parent200 evaluation role required')
+    if mode == 'MATCHED_RESUME_200':
+        paths['recovery_registration'] = (path.parent / cfg['recovery_registration']).resolve()
+    return cfg, paths
 
 
 def context_pins(report):
@@ -41,7 +48,10 @@ def context_pins(report):
             for label in ['RESIDUAL', 'SUPPORT']}
 
 
-def validate_final_training(report, objective_pin):
+def validate_final_training(report, objective_pin, *, recovery_registration=None):
+    if recovery_registration is not None:
+        validate_recovery_result(report, objective_pin, recovery_registration)
+        return
     if (report['schema'] != 'pen_geometry_support_long_control_training:2'
             or report['config'] != objective_pin or report['passed'] != 5 or report['total'] != 5
             or not all(report['checks'].values()) or report['actual_native_integrations'] != 65536000
@@ -66,6 +76,8 @@ def main(a):
     cp = a.config.resolve()
     cfg, paths = settings(cp)
     inputs = {k: file_pin(paths[k]) for k in ['objective_config', 'gates', 'protocol', 'startup_ledger', 'plant_context_report']}
+    if 'recovery_registration' in paths:
+        inputs['recovery_registration'] = file_pin(paths['recovery_registration'])
     contexts = context_pins(json.loads(paths['plant_context_report'].read_text()))
     if a.register:
         folder = paths['registration'].parent
@@ -100,7 +112,7 @@ def main(a):
         labels = ['RESIDUAL']
     else:
         training = json.loads(paths['training_report'].read_text())
-        validate_final_training(training, inputs['objective_config'])
+        validate_final_training(training, inputs['objective_config'], recovery_registration=inputs.get('recovery_registration'))
         verify_source_snapshot(json.loads(verify_file_pin(training['source_receipt']).read_text()), live=True)
         checkpoints = [training['arms'][0]['initial']] + [arm['checkpoint'] for arm in training['arms']]
         labels = cfg['case_order']
@@ -182,8 +194,9 @@ def main(a):
                         reference = {k: z[k] for k in ['time_s', 'COM_world_m', 'quaternion_wxyz']}
                         prefixes[case['name']] = summarize_trace(trace, reference, .0025, False, gates)['metrics']
                 phase = 'saved_pose_rendering'
-                video = render(cases[:3], out, title='2000轮长训练：真实仿真执行')
-                result = dict(schema='pen_long_control_fresh_W1_evaluation:1',
+                matched = 'recovery_registration' in inputs
+                video = render(cases[:3], out, title='匹配恢复至2000轮：真实仿真执行' if matched else '2000轮长训练：真实仿真执行')
+                result = dict(schema='pen_matched_recovery_fresh_W1_evaluation:1' if matched else 'pen_long_control_fresh_W1_evaluation:1',
                     training=file_pin(paths['training_report']), cases=cases, aggregate=aggregate,
                     trained_common_horizon_s=common_s, common_horizon_metrics=prefixes,
                     rendering=video, execution_record_wall_s=execution_s,

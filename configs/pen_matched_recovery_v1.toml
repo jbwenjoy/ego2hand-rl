@@ -1,0 +1,25 @@
+schema = 1
+study = "MATCHED_RESUME_200"
+objective_config = "pen_long_control_training_v1.toml"
+qualification = "../runs/pen_long_control_qualification_v1/report.json"
+original_run = "../runs/pen_long_control_training_v1"
+prior_ledger = "../provenance/pen_long_support206_failure/ledger.json"
+protocol = "../docs/pen-matched-recovery-protocol-v1.md"
+registration = "../runs/pen_matched_recovery_registration_v1/registration.json"
+start_iteration = 200
+final_iteration = 2000
+num_envs = 32
+rollout_controls = 64
+checkpoint_interval = 100
+arm_order = ["RESIDUAL", "SUPPORT"]
+scope = "New matched200->2000 recovery cohort with ordinary parent200 restores for BOTH arms;same source/physics/objective,gates and common original initialization. Reused prefix budgets and all discarded/failed/diagnostic/preparation work charged separately. No original-trial completion,WM Actor,task or ego claim."
+
+[parents.RESIDUAL]
+path = "../runs/pen_long_control_training_v1/RESIDUAL/checkpoint_0200.pt"
+bytes = 57480705
+sha256 = "2bfc941712046ebb9da30573751e1b23325d5d2e68b52b94f1fd9d27f7e122a9"
+
+[parents.SUPPORT]
+path = "../runs/pen_long_control_training_v1/SUPPORT/checkpoint_0200.pt"
+bytes = 57473921
+sha256 = "4ecf6f7d5cc7535cc1fcf6324b45dbb68a68d7bd3c1589fe481da4400947ba85"
