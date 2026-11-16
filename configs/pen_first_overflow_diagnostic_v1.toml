@@ -1,0 +1,15 @@
+schema = 1
+study = "FIRST_NATIVE_OVERFLOW_DIAGNOSTIC"
+objective_config = "pen_long_control_training_v1.toml"
+parent = "../runs/pen_matched_recovery_training_v2/RESIDUAL/checkpoint_0201.pt"
+parent_bytes = 57484161
+parent_sha256 = "cf7ec89f30ffed3262ceb7640ac233b43bd0bdea2647201e91d0c4f91f916b01"
+first_iteration = 202
+max_collections = 99
+rollout_controls = 64
+num_envs = 32
+arm = "RESIDUAL"
+protocol = "../docs/pen-first-overflow-diagnostic-protocol-v1.md"
+prior_ledger = "../provenance/pen_matched_recovery_failure_v2/ledger.json"
+registration = "../runs/pen_first_overflow_registration_v1/registration.json"
+qualification = "../runs/pen_first_overflow_observer_qualification_v1/report.json"
