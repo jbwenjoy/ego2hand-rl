@@ -1,0 +1,11 @@
+schema = 1
+probe = "../runs/pen_backend_response_train_v1/report.json"
+objective_config = "pen_long_control_training_v1.toml"
+backend_manifest = "collision_backend_face_normal_v1.json"
+protocol = "../docs/native-full-rehash-integration-protocol-v1.md"
+registration = "../runs/native_full_rehash_integration_registration_v1/registration.json"
+output = "../runs/native_full_rehash_integration_v1"
+sources = ["RESIDUAL_N8841_P024", "SUPPORT_N8841_P024"]
+rounds = 3
+modes = ["ORIGINAL_A", "SINGLE_RESOLVE", "ORIGINAL_B"]
+native_budget = 1440
