@@ -26,6 +26,8 @@ def main(a):
         sp=(cp.parent/cfg['score_study']).resolve();selection=json.loads(sp.read_text())
         if selection['selected_variant']!=['CENTERED'] or selection['passed']!=selection['total'] or selection['optimizer_steps'] or selection['actual_native_integrations']:raise ValueError('Passing preregistered offline score selection required')
         verify_source_snapshot(json.loads(verify_file_pin(selection['source_receipt']).read_text()),live=True)
+        for pin in selection['inputs']:verify_file_pin(pin)
+        for key in ['config','training','preview','prior_ledger']:verify_file_pin(selection[key])
     out.mkdir();paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/pkg).rglob('*.py')})+[Path(__file__).resolve(),cp,protocol]
     receipt=freeze_sources(paths,out/'source_snapshot',ROOT,subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip());write(out/'source_receipt.json',receipt)
     from mjlab.sim.sim import Simulation

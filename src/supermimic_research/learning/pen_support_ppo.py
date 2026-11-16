@@ -12,6 +12,7 @@ from supermimic_research.runtime.pen_reference_cache import tensor_digest
 
 SCHEMA='pen_geometry_support_PPO_training:3'
 CENTERED_SCHEMA='pen_geometry_support_PPO_training:4'
+FROZEN_WEIGHTS_SCHEMA='pen_geometry_support_PPO_frozen_weights_training:5'
 
 
 def pilot_settings(path):
@@ -42,7 +43,7 @@ def fork_fixed_frame_mode(state,expected_metadata,expected_native_metadata):
     Both paths must already agree at the saved observation source.
     """
     field='fixed_frame_features';before=state['metadata'].get(field);after=expected_metadata.get(field)
-    if state['schema'] not in [SCHEMA,CENTERED_SCHEMA] or state['schema']!=expected_metadata['checkpoint_schema'] or state['native']['schema']!=native.SCHEMA or before not in ['LIVE','CACHED'] or after not in ['LIVE','CACHED']:raise ValueError('Explicit current owned feature-mode source required')
+    if state['schema'] not in [SCHEMA,CENTERED_SCHEMA,FROZEN_WEIGHTS_SCHEMA] or state['schema']!=expected_metadata['checkpoint_schema'] or state['native']['schema']!=native.SCHEMA or before not in ['LIVE','CACHED'] or after not in ['LIVE','CACHED']:raise ValueError('Explicit current owned feature-mode source required')
     metadata=copy.deepcopy(state['metadata']);metadata[field]=after
     native_metadata=copy.deepcopy(state['native']['metadata']);native_metadata[field]=after
     if metadata!=expected_metadata or native_metadata!=expected_native_metadata:raise ValueError('Feature-mode fork changes more than its declared mode')
@@ -81,7 +82,16 @@ class SupportPenPPO(OwnedPenPPO):
         contract='geometry_hard_nominal_support_mean:1' if self.checkpoint_schema==SCHEMA else 'geometry_hard_zero_wrench_centered_support_mean:2'
         result=super().metadata();result.update(checkpoint_schema=self.checkpoint_schema,task_reward_contract=contract,role='CONTROLLED_SINGLE_SEED_FEASIBILITY_PILOT',
             arm=self.arm,support_weight=float(self.adapter.support_weight),actor_initialization='Mean head weights0/bias initialized raw; same total-raw action/logprob contract.')
+        if self.checkpoint_schema==FROZEN_WEIGHTS_SCHEMA:
+            result.update(normalizer_seed=copy.deepcopy(self.normalizer_seed),role='FROZEN_WEIGHTS_FRESH_NATIVE_DIAGNOSTIC',actor_initialization='Pinned trained64 actor/critic/embedded norms;fresh native/Adam/RNG/counters.')
         return result
+
+    def normalization_seed_offset(self,state):
+        if self.checkpoint_schema!=FROZEN_WEIGHTS_SCHEMA:return 0
+        seed=self.normalizer_seed
+        if state['metadata'].get('normalizer_seed')!=seed or seed['actor_count']!=seed['critic_count'] or type(seed['actor_count']) is not int or seed['actor_count']<self.adapter.num_envs:
+            raise ValueError('Pinned normalizer seed history differs')
+        return seed['actor_count']-self.adapter.num_envs
 
     def checkpoint(self,sources):
         result=super().checkpoint(sources);result['schema']=self.checkpoint_schema;result['task_static']=static_contract(self.adapter,native.inventory(self.adapter))

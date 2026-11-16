@@ -31,6 +31,9 @@ def validate_recorded_rollout(m,gamma):
 
 
 class OwnedPenPPO(NativePenPPO):
+    def normalization_seed_offset(self,state):
+        return 0
+
     def __init__(self,adapter,config):
         if not isinstance(adapter,OwnedPenRuntime):raise ValueError('Owned native4 runtime required')
         super().__init__(adapter,config)
@@ -159,7 +162,7 @@ class OwnedPenPPO(NativePenPPO):
             step=values['step']
             if step.ndim or step.dtype!=torch.float32 or float(step)<0 or float(step)!=int(step):raise ValueError('Invalid AdamW step counter')
         if not tensor_tree_equal(cpu_tree(opt.state_dict()),state['optimizer']):raise ValueError('Staged optimizer readback mismatch')
-        expected_norm=0 if not state['normalizers_ready'] else N+state['calibration_transitions']+state['training_transitions']-n*N
+        expected_norm=0 if not state['normalizers_ready'] else N+self.normalization_seed_offset(state)+state['calibration_transitions']+state['training_transitions']-n*N
         if int(actor.norm.count)!=expected_norm or int(critic.norm.count)!=expected_norm:raise ValueError('Frozen normalizer data count mismatch')
         return dict(actor=actor,critic=critic,optimizer=opt,memory=staged_memory,normalization_batch=staged_batch,
             observations={k:v.to(self.device).clone() for k,v in state['observations'].items()},

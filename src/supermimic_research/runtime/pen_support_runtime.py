@@ -49,6 +49,8 @@ class ReferenceMeanSupport:
 class SupportPenRuntime(OwnedPenRuntime):
     def __init__(self,objective_config,num_envs):
         self.objective_config_path=Path(objective_config).resolve();self.objective_cfg=tomllib.loads(self.objective_config_path.read_text());self.support_weight=0.
+        mode=self.objective_cfg.get('fixed_frame_features','LIVE')
+        if mode not in ['LIVE','CACHED']:raise ValueError('Explicit LIVE/CACHED fixed-frame configuration required')
         variant=self.objective_cfg.get('support_score','ABSOLUTE');schema=self.objective_cfg.get('checkpoint_schema','pen_geometry_support_PPO_training:3')
         if (variant,schema) not in [('ABSOLUTE','pen_geometry_support_PPO_training:3'),('CENTERED','pen_geometry_support_PPO_training:4')]:raise ValueError('Explicit score/training-schema pairing required')
         super().__init__((self.objective_config_path.parent/self.objective_cfg['adapter_config']).resolve(),num_envs)
@@ -58,6 +60,7 @@ class SupportPenRuntime(OwnedPenRuntime):
         doubles={'target_world','target_source','measured_source','support_loss'};booleans={'support_eligible','geometry_failure','phase_valid','target_valid','native_terminated'}
         self.objective_views={k:torch.zeros((num_envs,)+shape,device=self.device,dtype=torch.float64 if k in doubles else torch.bool if k in booleans else torch.float32) for k,shape in shapes.items()}
         self.contact_views.update({'objective_'+k:v for k,v in self.objective_views.items()});self._binding_resources=self._pointers()
+        if mode=='CACHED':self.set_fixed_frame_features(True)
 
     def _pointers(self):
         result=super()._pointers()

@@ -1,0 +1,167 @@
+{
+  "schema": "pen_cached_adoption_summary:1",
+  "roots": {
+    "features": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fixed_frame_qualification_v4\\report.json",
+      "bytes": 219902,
+      "sha256": "ab0c18e065084e1f86931e17c31dd3b601d282a746b073af7affbcbfe5952ef3"
+    },
+    "qualification": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_cached_support_qualification_v1\\report.json",
+      "bytes": 10893,
+      "sha256": "a7d20305b7d03462cca4fe1d9b496c1affd10730bb2c94e0c404419c74c8fab3"
+    },
+    "training": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_cached_support_training_v1\\report.json",
+      "bytes": 17741,
+      "sha256": "5f213f41d7c850b9124b49ee9aa3b27df3d61357cbef9d60d75009b29ba3a489"
+    },
+    "checkpoint_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_cached_support_checkpoint_review_v1\\report.json",
+      "bytes": 6765,
+      "sha256": "3506ddea32a2ad106812aa30e3d96fc7b5be9ba5f12fe79914b194112bdcf063"
+    },
+    "comparison": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_trained64_frame_comparison_v1\\report.json",
+      "bytes": 38562,
+      "sha256": "54dd38d5c773cf6392f5d69760bd487a83b53bd12b49b45255ef1c665c94cec6"
+    },
+    "gradients": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fixed_frame_gradients_v3\\report.json",
+      "bytes": 2479,
+      "sha256": "b10180c5db3a092878bb1d959d971650da67523b140778323c67c77f9c95e843"
+    },
+    "review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_trained64_frame_review_v1\\report.json",
+      "bytes": 9104,
+      "sha256": "9022c5e56feec18e1b9164d721bc61dfb0836ffe346ca98555d83774facdbfd1"
+    }
+  },
+  "checks": {
+    "features": [
+      388,
+      388
+    ],
+    "qualification": [
+      75,
+      75
+    ],
+    "training": [
+      5,
+      5
+    ],
+    "checkpoint_review": [
+      18,
+      18
+    ],
+    "comparison": [
+      4,
+      4
+    ],
+    "gradients": [
+      9,
+      9
+    ],
+    "review": [
+      41,
+      41
+    ]
+  },
+  "initialization": {
+    "mode": "FROZEN_W32_ACTOR_CRITIC_AND_NORMALIZERS_ONLY",
+    "checkpoint": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_training_v1\\SUPPORT\\checkpoint_0064.pt",
+      "bytes": 57462197,
+      "sha256": "c9f39696b794a311725bd54cd427b522a3ad9e2a3d334da8e39f90aab6948f60"
+    },
+    "full_model_arrays": 404,
+    "full_model_scalars": 195,
+    "full_model_bytes_equal": true,
+    "historical_snapshots_verified": true,
+    "modules_exact": true,
+    "normalizers_ready": true,
+    "new_checkpoint_schema": "pen_geometry_support_PPO_frozen_weights_training:5",
+    "normalizer_seed": {
+      "source": {
+        "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_training_v1\\SUPPORT\\checkpoint_0064.pt",
+        "bytes": 57462197,
+        "sha256": "c9f39696b794a311725bd54cd427b522a3ad9e2a3d334da8e39f90aab6948f60"
+      },
+      "actor_count": 129312,
+      "critic_count": 129312
+    },
+    "old_native_optimizer_RNG_counters_loaded": false,
+    "scope": "Fresh current-code W32 physics/observations/empty Adam/counters/RNG;only trained64 actor,critic and embedded normalizer state initialized. Not native resume or policy promotion.",
+    "training_report": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_centered_support_training_v1\\report.json",
+      "bytes": 378072,
+      "sha256": "b8371cf15da59c776747d82974b0a7f9033c24be8332b0efc95d7df893d8cd7f"
+    },
+    "full_native_and_RNG_unchanged": true,
+    "fresh_observations_unchanged": true,
+    "empty_Adam": true
+  },
+  "timing": {
+    "LIVE": {
+      "cases": [
+        "LIVE_A",
+        "LIVE_B",
+        "LIVE_C"
+      ],
+      "collect_s": [
+        1.1841869999771006,
+        1.1867455000174232,
+        1.1970689000445418
+      ],
+      "collect_median_s": 1.1867455000174232,
+      "whole_phase_s": [
+        1.338649199984502,
+        1.3425946999923326,
+        1.3504222000483423
+      ],
+      "whole_phase_median_s": 1.3425946999923326,
+      "reset_worlds": [
+        2,
+        3,
+        4
+      ]
+    },
+    "CACHED": {
+      "cases": [
+        "CACHED_A",
+        "CACHED_B",
+        "CACHED_C"
+      ],
+      "collect_s": [
+        1.087764399999287,
+        1.0948257999843918,
+        1.0889491999987513
+      ],
+      "collect_median_s": 1.0889491999987513,
+      "whole_phase_s": [
+        1.24394429998938,
+        1.2487576000276022,
+        1.2427574000321329
+      ],
+      "whole_phase_median_s": 1.24394429998938,
+      "reset_worlds": [
+        3,
+        2,
+        2
+      ]
+    }
+  },
+  "collect_throughput_ratio": 1.0898079543276986,
+  "collect_wall_reduction_fraction": 0.08240713785494536,
+  "whole_phase_throughput_ratio": 1.0793045154865817,
+  "performance_status": "OBSERVED_COMPONENT_TIMING_GAIN",
+  "mechanism_status": "EXACT_TESTED_FEATURES_GRADIENTS_AND_DECLARED_SOURCE_FORKS",
+  "default_mode": "LIVE",
+  "new_training_config_mode": "CACHED",
+  "main_policy_promoted": false,
+  "earlier_cohorts_pooled": false,
+  "unit_tests": 379,
+  "actual_native_integrations": 233472,
+  "optimizer_steps": 448,
+  "scope": "Qualified optional cached32 training/checkpoint integration and trained64 NN/norm-only W32 timing. New normalizer seed history is explicit;no old native/Adam/RNG/work counters imported. Not universal/full-training speed,long-trajectory equivalence,physical WM gradients,main-policy/task/ego success."
+}

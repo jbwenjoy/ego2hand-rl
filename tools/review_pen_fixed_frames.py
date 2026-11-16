@@ -1,5 +1,5 @@
 """Independent source-fork,feature proof and clean timing/operator review."""
-import argparse,json,subprocess,sys
+import argparse,json,subprocess,sys,tomllib
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 import numpy as np
@@ -45,13 +45,18 @@ def main(a):
     for mode in ['LIVE','CACHED']:
         cases=[c for c in run['cases'] if c['name'].startswith(mode+'_')];values=np.array([c['wall_s']['collect64'] for c in cases]);total=np.array([sum(c['wall_s'].values()) for c in cases]);timing[mode]=dict(cases=[c['name'] for c in cases],collect_s=values.tolist(),collect_median_s=float(np.median(values)),whole_phase_s=total.tolist(),whole_phase_median_s=float(np.median(total)),reset_worlds=[c['reset_worlds'] for c in cases])
     ratio=timing['LIVE']['collect_median_s']/timing['CACHED']['collect_median_s'];reduction=1-1/ratio
-    checks.update(all369_actual_phases=len([r for r in qualification['rows'] if r['name'].startswith('PHASE')])==369,all_actual_feature_rows_exact=qualification['all_feature_rows_exact'],all_feature_JVP_rows_exact=all(r['forward_exact'] and r['JVP_exact'] for r in gradient['rows']),work_native=run['actual_native_integrations']==165888,work_updates=run['optimizer_steps']==320)
+    cfg=tomllib.loads(verify_file_pin(run['config']).read_text());frozen=cfg.get('initialization')=='FROZEN_W32_TRAINED64_WEIGHTS'
+    expected_native=cfg['calibration_controls']*256+(cfg['warmup_iterations']+len(cfg['cases']))*16384
+    checks.update(all369_actual_phases=len([r for r in qualification['rows'] if r['name'].startswith('PHASE')])==369,all_actual_feature_rows_exact=qualification['all_feature_rows_exact'],all_feature_JVP_rows_exact=all(r['forward_exact'] and r['JVP_exact'] for r in gradient['rows']),work_native=run['actual_native_integrations']==expected_native,work_updates=run['optimizer_steps']==(cfg['warmup_iterations']+len(cfg['cases']))*32)
+    if frozen:
+        init=json.loads(verify_file_pin(run['initialization']).read_text());initial=torch.load(verify_file_pin(run['frozen_initial']),map_location='cpu',weights_only=False)
+        checks.update(full_trained_context=init['full_model_arrays']==404 and init['full_model_scalars']==195 and init['full_model_bytes_equal'],native_RNG_not_imported=init['full_native_and_RNG_unchanged'] and not init['old_native_optimizer_RNG_counters_loaded'],warmup_discarded=not differences(initial,source),fresh_counters=source['iteration']==source['optimizer_steps']==source['training_transitions']==source['calibration_transitions']==0 and not source['optimizer']['state'])
     verify_source_snapshot(receipt,live=True);verify_source_snapshot(json.loads(verify_file_pin(run['source_receipt']).read_text()),live=True)
     result=dict(schema='fixed_frame_cache_saved_review:1',comparison=file_pin(a.comparison),qualification=run['qualification'],gradients=file_pin(a.gradients),source_receipt=file_pin(out/'source_receipt.json'),fork_audits=fork_audits,timing=timing,operators=operators,
         collect_throughput_ratio=ratio,collect_wall_reduction_fraction=reduction,whole_phase_throughput_ratio=timing['LIVE']['whole_phase_median_s']/timing['CACHED']['whole_phase_median_s'],
         performance_status='OBSERVED_COMPONENT_TIMING_GAIN' if ratio>1 else 'NO_OBSERVED_GAIN',mechanism_status='EXACT_TESTED_FEATURES_GRADIENTS_AND_DECLARED_SOURCE_FORKS' if all(checks.values()) else 'INCOMPLETE',
         checks=checks,passed=sum(checks.values()),total=len(checks),actual_native_integrations=0,optimizer_steps=0,
-        scope='Current-source fixed-input mechanism/source proofs and three clean timings per mode in a fresh early-training32-world fixture. Not universal speed,identical chaotic trajectories,final64-policy benefit,physical WM gradients or full task/ego qualification. Default LIVE until a declared caller chooses CACHED.')
+        scope='Current-source fixed-input mechanism/source proofs and three clean timings per mode. Fixture='+('TRAINED64_WEIGHTS_WITH_FRESH_W32_PHYSICS' if frozen else 'EARLY_TRAINING32')+'. Not universal speed,identical chaotic trajectories,policy improvement,physical WM gradients or full task/ego qualification. Default LIVE until a declared caller chooses CACHED.')
     write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),checks=[result['passed'],result['total']],ratio=ratio,reduction=reduction,timing=timing)),flush=True)
     if not all(checks.values()):raise ValueError('Retain fixed-frame source/timing review discrepancy')
 
