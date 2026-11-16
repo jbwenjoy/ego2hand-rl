@@ -1,0 +1,147 @@
+{
+  "schema": "pen_fullrank_data_summary:1",
+  "roots": {
+    "train": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_fullrank_train_v1\\report.json",
+      "bytes": 22362297,
+      "sha256": "c86abf2b0bb52d3747952712292b1f37642fdc12ffea73f7473b91fd55f04221"
+    },
+    "validation": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_fullrank_validation_v1\\report.json",
+      "bytes": 11256876,
+      "sha256": "be95d95fac051b4a4ec96d7843b9b2958ef011453a601e119abca932f4616fc1"
+    },
+    "train_preparation": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_fullrank_train_preparation_v1\\report.json",
+      "bytes": 8488992,
+      "sha256": "f6c34904394fe132ed2cb5f00230280c9e820f7edff48afca4abf3ba9a2da0e9"
+    },
+    "validation_preparation": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_fullrank_validation_preparation_v1\\report.json",
+      "bytes": 4250838,
+      "sha256": "aa8ee529993ef2ce2700c8238ae654baecc518e43c1125b8bf7504d165fc83f3"
+    },
+    "review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fullrank_data_review_v1\\report.json",
+      "bytes": 2529366,
+      "sha256": "80ba13cecb0dfc1da193a120d6abefb4f6ee3aa9fb3987bfdd7efdea747fa020"
+    },
+    "common": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fullrank_common_data_v1\\report.json",
+      "bytes": 187220,
+      "sha256": "27c0d6268f9fa1ae3dcff93ef9d0876150c0763d9a24e60fd968b0e3eeb02946"
+    }
+  },
+  "checks": {
+    "train": [
+      5,
+      5
+    ],
+    "validation": [
+      5,
+      5
+    ],
+    "train_preparation": [
+      81,
+      81
+    ],
+    "validation_preparation": [
+      51,
+      51
+    ],
+    "review": [
+      7312,
+      7312
+    ],
+    "common": [
+      9,
+      9
+    ]
+  },
+  "coverage": {
+    "TRAIN": {
+      "rows": 3888,
+      "qualified_rows": 3866,
+      "groups": 960,
+      "qualified_groups": 949,
+      "failed_gate_counts": {
+        "EFC_linear_impulse": 22,
+        "packet_quality": 22
+      },
+      "physical_screen_direction_counts": {
+        "object12": 277,
+        "wrench6": 338,
+        "Fn6": 382
+      },
+      "both_amplitude_ranks": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        19,
+        17,
+        20,
+        19,
+        19,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        17,
+        20,
+        20,
+        18
+      ]
+    },
+    "VALIDATE": {
+      "rows": 1944,
+      "qualified_rows": 1935,
+      "groups": 480,
+      "qualified_groups": 475,
+      "failed_gate_counts": {
+        "EFC_linear_impulse": 9,
+        "packet_quality": 9
+      },
+      "physical_screen_direction_counts": {
+        "object12": 124,
+        "wrench6": 133,
+        "Fn6": 142
+      },
+      "both_amplitude_ranks": [
+        20,
+        20,
+        20,
+        20,
+        19,
+        17,
+        20,
+        20,
+        19,
+        20,
+        20,
+        20
+      ]
+    }
+  },
+  "pair_counts": {
+    "rank4": 189,
+    "rank20": 949
+  },
+  "actual_native_integrations": 51008,
+  "producer_overlap_with_prior_registration": 4352,
+  "incremental_native_integrations_since_registration": 46656,
+  "optimizer_steps": 0,
+  "normalizer_fits": 2,
+  "unit_tests": 390,
+  "validation_rows_used_for_TRAIN": 0,
+  "main_policy_promoted": false,
+  "training_fit_started": false,
+  "scope": "Completed full20 controlled physical-response cohort;31 failed impulse rows retained/masked,physical-mask ranks17–20,matched rank4/rank20 pair subsets share one point bank. Same original reference/fixed actors;not model-gradient/task/ego/final-test or speed qualification. Cohort total includes4352 producers already registered."
+}
