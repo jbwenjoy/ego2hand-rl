@@ -1,0 +1,14 @@
+schema = 1
+mode = "FIXED_TEN_CONDITION_SOLVE_EXIT_REPLAY"
+observation_config = "pen_solver_tick_observation_v1.toml"
+preparation = "../runs/pen_solver_tick_preparation_v1/report.json"
+prior_evidence = "../provenance/pen_solve_exit_observer_v1/ledger.json"
+protocol = "../docs/pen-solve-exit-replay-protocol-v1.md"
+registration = "../runs/pen_solve_exit_replay_registration_v1/registration.json"
+output = "../runs/pen_solve_exit_replay_v1"
+verifier = "SINGLE_RESOLVE_FULL_REHASH"
+replicas = ["A", "B"]
+queries_per_replica = 60
+native_cap_per_replica = 480
+optimizer_budget = 0
+normalizer_fit_budget = 0
