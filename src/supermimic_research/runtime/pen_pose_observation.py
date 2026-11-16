@@ -6,15 +6,20 @@ OBSERVATION_SCHEMA='pen_fixed_wrist_full_pose161_H20:1'
 ACTION_CONTRACT='RAW_CLAMP_MINUS1_PLUS1_SCALE0P5_EMA0P5_PD_BOUNDS'
 
 
-def pose9_world_in_wrist(pose,mount,*,position_bound=.15):
+def pose9_world_in_wrist(pose,mount,*,position_bound=.15,wrist_rotation_transpose=None):
     """WXYZ world poses; COM at object free-body origin, matrix columns in wrist."""
     if pose.shape[-1]!=7 or mount.shape[-1]!=7 or position_bound<=0:
         raise ValueError('Declared WXYZ poses and positive wrist-local bound required')
     # No epsilon/identity fallback: invalid zero poses propagate NaN for the
     # collector's explicit finite-observation rejection at its boundary.
     q=pose[...,3:]/torch.linalg.vector_norm(pose[...,3:],dim=-1,keepdim=True)
-    w=mount[...,3:]/torch.linalg.vector_norm(mount[...,3:],dim=-1,keepdim=True)
-    R=quat_to_mat(q);W=quat_to_mat(w);WT=W.transpose(-1,-2)
+    if wrist_rotation_transpose is None:w=mount[...,3:]/torch.linalg.vector_norm(mount[...,3:],dim=-1,keepdim=True)
+    R=quat_to_mat(q)
+    if wrist_rotation_transpose is None:
+        WT=quat_to_mat(w).transpose(-1,-2)
+    else:
+        WT=wrist_rotation_transpose
+        if WT.shape[-2:]!=(3,3) or WT.device!=pose.device or WT.dtype!=pose.dtype:raise ValueError('Matching fixed wrist WORLD-to-wrist matrix required')
     local=(WT@(pose[...,:3]-mount[...,:3]).unsqueeze(-1)).squeeze(-1)
     relative=WT@R
     return torch.cat([position_bound*torch.tanh(local/position_bound),relative[..., :,0],relative[..., :,1]],dim=-1)

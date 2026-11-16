@@ -80,11 +80,12 @@ class NativePenFeatures:
             pose9_world_in_wrist(self.reference_pose_world(),mount),self.motion.link_pos.flatten(1),
             q,qd,pose9_world_in_wrist(self.pose(),mount),self.action._raw_actions)
 
-    def critic(self,policy):
+    def critic(self,policy,*,wrist_rotation_transpose=None):
         # Free-joint translation velocity is WORLD; angular velocity is BODY.
         d=self.env.sim.data;da=int(self.env.sim.mj_model.jnt_dofadr[
             self.env.sim.mj_model.body_jntadr[self.body]])
-        WT=quat_to_mat(self.mount()[:,3:]).transpose(-1,-2)
+        WT=quat_to_mat(self.mount()[:,3:]).transpose(-1,-2) if wrist_rotation_transpose is None else wrist_rotation_transpose
+        if WT.shape!=(len(policy),3,3):raise ValueError('World-owned fixed critic wrist matrix required')
         R=quat_to_mat(self.pose()[:,3:])
         v=(WT@d.qvel[:,da:da+3,None]).squeeze(-1)
         w=(WT@R@d.qvel[:,da+3:da+6,None]).squeeze(-1)

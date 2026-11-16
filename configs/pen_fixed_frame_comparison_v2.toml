@@ -1,0 +1,13 @@
+schema = 1
+study = "FIXED_FRAME_COMPARISON"
+qualification = "../runs/pen_fixed_frame_qualification_v3/report.json"
+objective_config = "pen_centered_support_training_v1.toml"
+protocol = "../docs/pen-fixed-frame-cache-protocol-v1.md"
+arm = "SUPPORT"
+num_envs = 32
+calibration_controls = 8
+warmup_iterations = 2
+rollout_controls = 64
+telemetry_enabled = false
+cases = ["LIVE_A", "CACHED_A", "CACHED_B", "LIVE_B", "LIVE_C", "CACHED_C", "TORCH_LIVE", "TORCH_CACHED"]
+role = "ORDINARY_32_WORLD_PPO_FIXED_FRAME_CACHE_COMPARISON"

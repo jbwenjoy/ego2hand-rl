@@ -40,7 +40,7 @@ def inventory(runtime):
 
 def immutable_paths(runtime,inv):
     cache=runtime.reference_cache
-    wanted=[getattr(cache,k) for k in ['prefix','world_pose','mount','origins','world_ids']]+list(runtime.motion._frames.values())+[runtime.env.scene.env_origins]
+    wanted=[getattr(cache,k) for k in ['prefix','world_pose','mount','origins','world_ids','policy_WT','critic_WT']]+list(runtime.motion._frames.values())+[runtime.env.scene.env_origins]
     result={}
     for value in wanted:
         paths=[p for p,v in inv['tensors'].items() if v is value]
@@ -92,8 +92,17 @@ def capture(runtime,sources):
         scope='Owned cache/metric/native state. No trained module payload or future physical-repeat qualification.')
 
 
+def validate_saved_feature_mode(state):
+    # Compatibility for test/minimal closures;real owned metadata always has
+    # this field and the ordinary metadata equality guard rejects older states.
+    if 'fixed_frame_features' not in state['metadata']:return
+    mode=state['metadata']['fixed_frame_features'];paths=[p for p in state['python']['scalars'] if p and p[-1]==('attr','fixed_frame_cache')]
+    if mode not in ['LIVE','CACHED'] or len(paths)!=1 or type(state['python']['scalars'][paths[0]]) is not bool or state['python']['scalars'][paths[0]]!=(mode=='CACHED'):raise ValueError('Saved fixed-frame mode disagrees with metadata')
+
+
 def preflight(runtime,state,*,source_epoch=None):
     if state.get('schema')!=SCHEMA or state['metadata']!=runtime.metadata() or state['worlds']!=runtime.num_envs:raise ValueError('Owned native4 runtime/schema contract mismatch')
+    validate_saved_feature_mode(state)
     if state['config']!=file_pin(runtime.config_path) or state['host_model_digest']!=base.host_model_digest(runtime.env.sim.mj_model):raise ValueError('Owned config/host model mismatch')
     if state['reference_signature']!=base.reference_signature(runtime) or state['cache_metadata']!=runtime.reference_cache.metadata() or state['metric_metadata']!=runtime.contact_metrics.metadata():raise ValueError('Owned immutable reference/metric contract mismatch')
     validate_state_sources(state['sources'],state['engine_sources'],source_epoch)

@@ -1,0 +1,224 @@
+{
+  "schema": "pen_fixed_frame_cache_summary:1",
+  "roots": {
+    "failed": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fixed_frame_qualification_v1\\failure.json",
+      "bytes": 355,
+      "sha256": "83867706fad842c7a810dcf58448c0d47430681397418e0344b636031ed8f91f"
+    },
+    "initial_qualification": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fixed_frame_qualification_v2\\report.json",
+      "bytes": 219540,
+      "sha256": "2054fe735847fee9cc9b8132ab9bbf6b55c620b9fb495d8398528914003b8495"
+    },
+    "final_qualification": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fixed_frame_qualification_v3\\report.json",
+      "bytes": 219902,
+      "sha256": "b96797f803f109077acc6ab4a1965d888f5f32299f5d82c7387e7227c1dc6ff1"
+    },
+    "initial_comparison": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fixed_frame_comparison_v1\\report.json",
+      "bytes": 37840,
+      "sha256": "f52728b65ae55a0772b99e247b8a73e315261a56f5c6edc9b33be0cc82cae1a3"
+    },
+    "final_comparison": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fixed_frame_comparison_v2\\report.json",
+      "bytes": 37843,
+      "sha256": "8689a908dba8f9ab85a2132f2dbb019aefbb497c026297e7c645a52c1584f219"
+    },
+    "initial_gradients": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fixed_frame_gradients_v1\\report.json",
+      "bytes": 2479,
+      "sha256": "d6b47d1db3fb038bd289e70ab3c43e602fdd47b62d7ca82cc355aab09d0635e1"
+    },
+    "final_gradients": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fixed_frame_gradients_v2\\report.json",
+      "bytes": 2479,
+      "sha256": "2ad2610edcca842b129f84e842a8752dfd443ec86bf301f75548080d61d26d60"
+    },
+    "review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_fixed_frame_review_v1\\report.json",
+      "bytes": 8985,
+      "sha256": "0f2f6335b50433eaddf9b5193e256b2dae7af0abc4485e36455d6552da8db296"
+    }
+  },
+  "checks": {
+    "initial_qualification": [
+      386,
+      386
+    ],
+    "final_qualification": [
+      388,
+      388
+    ],
+    "initial_comparison": [
+      4,
+      4
+    ],
+    "final_comparison": [
+      4,
+      4
+    ],
+    "initial_gradients": [
+      9,
+      9
+    ],
+    "final_gradients": [
+      9,
+      9
+    ],
+    "review": [
+      37,
+      37
+    ]
+  },
+  "failed_attempt": {
+    "type": "AttributeError",
+    "message": "Cannot set qvel on read-only WarpBridge;dynamic feature probe used augmented attribute assignment.",
+    "actual_native_integrations": 0,
+    "optimizer_steps": 0,
+    "partial_rows_saved": false,
+    "scope": "Failed probe writer;no successful GPU qualification is inferred from reaching the dynamic probe."
+  },
+  "timing": {
+    "LIVE": {
+      "cases": [
+        "LIVE_A",
+        "LIVE_B",
+        "LIVE_C"
+      ],
+      "collect_s": [
+        1.797997200046666,
+        1.797986800025683,
+        1.7978789000189863
+      ],
+      "collect_median_s": 1.797986800025683,
+      "whole_phase_s": [
+        1.9507313000503927,
+        1.950030800071545,
+        1.9509814999764785
+      ],
+      "whole_phase_median_s": 1.9507313000503927,
+      "reset_worlds": [
+        198,
+        199,
+        198
+      ]
+    },
+    "CACHED": {
+      "cases": [
+        "CACHED_A",
+        "CACHED_B",
+        "CACHED_C"
+      ],
+      "collect_s": [
+        1.6394221999798901,
+        1.645895300025586,
+        1.6175264000194147
+      ],
+      "collect_median_s": 1.6394221999798901,
+      "whole_phase_s": [
+        1.7938040000153705,
+        1.7991823000484146,
+        1.7740355000132695
+      ],
+      "whole_phase_median_s": 1.7938040000153705,
+      "reset_worlds": [
+        191,
+        199,
+        199
+      ]
+    }
+  },
+  "collect_throughput_ratio": 1.0967198077760187,
+  "collect_wall_reduction_fraction": 0.0881900801738521,
+  "whole_phase_throughput_ratio": 1.087482969172595,
+  "performance_status": "OBSERVED_COMPONENT_TIMING_GAIN",
+  "mechanism_status": "EXACT_TESTED_FEATURES_GRADIENTS_AND_DECLARED_SOURCE_FORKS",
+  "operators": {
+    "TORCH_LIVE": {
+      "aten::nonzero": {
+        "key": "aten::nonzero",
+        "count": 317,
+        "self_cpu_us": 536529.9819999983,
+        "total_cpu_us": 538104.0170000005
+      },
+      "aten::mul": {
+        "key": "aten::mul",
+        "count": 25770,
+        "self_cpu_us": 198898.14799998744,
+        "total_cpu_us": 198898.14799998744
+      },
+      "aten::stack": {
+        "key": "aten::stack",
+        "count": 1017,
+        "self_cpu_us": 6010.835000007626,
+        "total_cpu_us": 23725.875000001368
+      },
+      "aten::_local_scalar_dense": {
+        "key": "aten::_local_scalar_dense",
+        "count": 2148,
+        "self_cpu_us": 22667.235000001416,
+        "total_cpu_us": 22667.235000001416
+      },
+      "aten::linalg_vector_norm": {
+        "key": "aten::linalg_vector_norm",
+        "count": 1608,
+        "self_cpu_us": 15740.45200000636,
+        "total_cpu_us": 15818.650000006612
+      },
+      "aten::bmm": {
+        "key": "aten::bmm",
+        "count": 882,
+        "self_cpu_us": 14075.601000000577,
+        "total_cpu_us": 14075.601000000577
+      }
+    },
+    "TORCH_CACHED": {
+      "aten::nonzero": {
+        "key": "aten::nonzero",
+        "count": 313,
+        "self_cpu_us": 521780.72699999996,
+        "total_cpu_us": 523570.25599999964
+      },
+      "aten::mul": {
+        "key": "aten::mul",
+        "count": 16360,
+        "self_cpu_us": 133155.29800000752,
+        "total_cpu_us": 133155.29800000752
+      },
+      "aten::_local_scalar_dense": {
+        "key": "aten::_local_scalar_dense",
+        "count": 2136,
+        "self_cpu_us": 23170.206999998176,
+        "total_cpu_us": 23170.206999998176
+      },
+      "aten::stack": {
+        "key": "aten::stack",
+        "count": 629,
+        "self_cpu_us": 4134.3069999902145,
+        "total_cpu_us": 15932.201999998346
+      },
+      "aten::bmm": {
+        "key": "aten::bmm",
+        "count": 868,
+        "self_cpu_us": 14856.857000000287,
+        "total_cpu_us": 14856.857000000287
+      },
+      "aten::linalg_vector_norm": {
+        "key": "aten::linalg_vector_norm",
+        "count": 1092,
+        "self_cpu_us": 12048.377000000939,
+        "total_cpu_us": 12133.072000000266
+      }
+    }
+  },
+  "cohorts_pooled": false,
+  "default_mode": "LIVE",
+  "explicit_cold_cached_mode_available": true,
+  "main_policy_promoted": false,
+  "unit_tests": 374,
+  "actual_native_integrations": 331776,
+  "optimizer_steps": 640,
+  "scope": "Separate source-version cohorts;final early-training32-world collector timing improved with exact tested features/JVP and declared three-field source forks. Not universal/full-training speed,identical long trajectories,physical WM gradients,main-policy/task/ego success."
+}

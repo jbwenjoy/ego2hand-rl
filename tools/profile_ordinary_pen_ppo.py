@@ -7,7 +7,7 @@ import torch
 from supermimic_research.artifacts import file_pin,verify_file_pin
 from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot
 from supermimic_research.runtime.pen_support_runtime import SupportPenRuntime
-from supermimic_research.learning.pen_support_ppo import SupportPenPPO,pilot_settings
+from supermimic_research.learning.pen_support_ppo import SupportPenPPO,pilot_settings,fork_fixed_frame_mode
 from supermimic_research.learning.native_pen_ppo import cpu_tree
 from supermimic_research.learning.gpu_monitor import GPUMonitor
 
@@ -22,9 +22,13 @@ def write(p,v):p.write_text(json.dumps(v,indent=2,allow_nan=False,default=json_v
 
 def main(a):
     cp=a.config.resolve();cfg=tomllib.loads(cp.read_text());op=(cp.parent/cfg['objective_config']).resolve();objective,ppo=pilot_settings(op);out=a.output.resolve()
-    comparison=cfg.get('study')=='EMPTY_SIGNAL_DRIVER_COMPARISON'
-    declared=['BASE_A','FAST_A','FAST_B','BASE_B','BASE_C','FAST_C','TORCH_BASE','TORCH_FAST'] if comparison else ['CLEAN_A','CLEAN_B','CPROFILE','TORCH_CPU_PROFILE','CLEAN_C']
+    frame_comparison=cfg.get('study')=='FIXED_FRAME_COMPARISON';comparison=frame_comparison or cfg.get('study')=='EMPTY_SIGNAL_DRIVER_COMPARISON'
+    declared=(['LIVE_A','CACHED_A','CACHED_B','LIVE_B','LIVE_C','CACHED_C','TORCH_LIVE','TORCH_CACHED'] if frame_comparison else ['BASE_A','FAST_A','FAST_B','BASE_B','BASE_C','FAST_C','TORCH_BASE','TORCH_FAST']) if comparison else ['CLEAN_A','CLEAN_B','CPROFILE','TORCH_CPU_PROFILE','CLEAN_C']
     if out.exists() or not out.is_relative_to(ROOT/'runs') or cfg['cases']!=declared or cfg['num_envs']!=32 or cfg['warmup_iterations']!=2:raise ValueError('Fresh registered32-world ordinary profile')
+    qualification=None
+    if frame_comparison:
+        qp=(cp.parent/cfg['qualification']).resolve();qualification=json.loads(qp.read_text())
+        if qualification['passed']!=qualification['total'] or not all(r[k]['exact'] for r in qualification['rows'] for k in ['policy','critic']):raise ValueError('Healthy GPU qualification and exact observations required for source fork')
     out.mkdir();protocol=(cp.parent/cfg['protocol']).resolve();paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/pkg).rglob('*.py')})+[Path(__file__).resolve(),cp,op,protocol]
     receipt=freeze_sources(paths,out/'source_snapshot',ROOT,subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip());write(out/'source_receipt.json',receipt)
     from mjlab.sim.sim import Simulation
@@ -44,7 +48,10 @@ def main(a):
             write(out/'warmup.json',dict(warmup=warm,actual_native_integrations=warm_native,optimizer_steps=executed_updates,fixture=fixture_pin))
             for name in cfg['cases']:
                 driver='EMPTY_SIGNALS' if comparison and 'FAST' in name else 'UPSTREAM'
-                folder=out/name;folder.mkdir();t=time.perf_counter();audit=learner.load(torch.load(verify_file_pin(fixture_pin),map_location='cpu',weights_only=False));restore_wall=time.perf_counter()-t
+                folder=out/name;folder.mkdir();t=time.perf_counter();state=torch.load(verify_file_pin(fixture_pin),map_location='cpu',weights_only=False);fork_info=None
+                if frame_comparison:
+                    runtime.set_fixed_frame_features('CACHED' in name);state,patches=fork_fixed_frame_mode(state,learner.metadata(),runtime.metadata());torch.save(state,folder/'source_fork.pt');write(folder/'fork_changes.json',patches);fork_info=dict(source=file_pin(folder/'source_fork.pt'),changes=file_pin(folder/'fork_changes.json'),feature_mode=runtime.metadata()['fixed_frame_features'])
+                audit=learner.load(state);restore_wall=time.perf_counter()-t
                 if not audit['native']['all_array_bytes_equal'] or not audit['native']['all_scalar_values_equal']:raise ValueError('Fixture readback differs')
                 before=observed;resets=runtime.explicit_reset_worlds;cursor=learner.optimizer_steps;timer={};events={};pyprof=cProfile.Profile() if name=='CPROFILE' else None;torchprof=None;monitor=GPUMonitor() if cfg.get('telemetry_enabled',True) else None
                 if monitor:monitor.start()
@@ -73,11 +80,13 @@ def main(a):
                 row=dict(name=name,control_driver=driver,wall_s=timer,CUDA_ms=events,restore_wall_s=restore_wall,actual_native_integrations=observed-before,optimizer_steps=learner.optimizer_steps-cursor,reset_worlds=runtime.explicit_reset_worlds-resets,
                     terminated_worlds=int(m['terminated'].sum()),truncated_worlds=int(m['truncated'].sum()),collector=health,checks=checks,rollout=file_pin(folder/'rollout.pt'),modules=file_pin(folder/'modules.pt'),
                     artifacts=artifacts,GPU_telemetry=dict(samples=monitor.samples,errors=monitor.errors) if monitor else dict(disabled=True,reason='Isolate ordinary work from background nvidia-smi threads/processes.'),restore_audit=audit)
+                if fork_info is not None:row['feature_fork']=fork_info
                 cases.append(row);write(folder/'report.json',row);print(json.dumps(dict(name=name,wall_s=timer,checks=checks,reset_worlds=row['reset_worlds'])),flush=True)
                 if not all(checks.values()):raise ValueError('Retain ordinary profile discrepancy')
             verify_source_snapshot(receipt,live=True);checks=dict(declared_cases=len(cases)==len(declared),native_total=observed==(165888 if comparison else 116736),optimizer_total=executed_updates==(320 if comparison else 224),all_case_checks=all(all(c['checks'].values()) for c in cases))
-            result=dict(schema='ordinary_pen_PPO_driver_comparison:1' if comparison else 'ordinary_pen_PPO_profile:1',config=file_pin(cp),protocol=file_pin(protocol),source_receipt=file_pin(out/'source_receipt.json'),fixture=fixture_pin,warmup=file_pin(out/'warmup.json'),cases=cases,checks=checks,passed=sum(checks.values()),total=len(checks),actual_native_integrations=observed,optimizer_steps=executed_updates,
+            result=dict(schema='ordinary_pen_PPO_fixed_frame_comparison:1' if frame_comparison else 'ordinary_pen_PPO_driver_comparison:1' if comparison else 'ordinary_pen_PPO_profile:1',config=file_pin(cp),protocol=file_pin(protocol),source_receipt=file_pin(out/'source_receipt.json'),fixture=fixture_pin,warmup=file_pin(out/'warmup.json'),cases=cases,checks=checks,passed=sum(checks.values()),total=len(checks),actual_native_integrations=observed,optimizer_steps=executed_updates,
                 role=cfg['role'],scope='Fresh early-training32-world actual collector/consistency/update profile. CPU profiler overhead excluded from clean repeats;CUDA event boundaries measured,not GPU-kernel occupancy. No legacy native resume,policy promotion,task/ego or optimization speedup claim.')
+            if frame_comparison:result['qualification']=file_pin(qp)
             write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),checks=[result['passed'],result['total']],native=observed,updates=executed_updates)),flush=True)
     except Exception as error:
         write(out/'failure.json',dict(type=type(error).__name__,message=str(error),actual_native_integrations=observed,optimizer_steps=executed_updates));raise

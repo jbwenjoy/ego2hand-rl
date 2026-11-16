@@ -34,6 +34,25 @@ def fork_initial_state(common,expected_metadata):
     return result,changes
 
 
+def fork_fixed_frame_mode(state,expected_metadata,expected_native_metadata):
+    """Current-source performance fork:only feature mode may change.
+
+    The ordinary loader still validates sources/layout/full state. No historical
+    source receipt,config,physics,NN/Adam/RNG or observation is rebound/repaired.
+    Both paths must already agree at the saved observation source.
+    """
+    field='fixed_frame_features';before=state['metadata'].get(field);after=expected_metadata.get(field)
+    if state['schema'] not in [SCHEMA,CENTERED_SCHEMA] or state['schema']!=expected_metadata['checkpoint_schema'] or state['native']['schema']!=native.SCHEMA or before not in ['LIVE','CACHED'] or after not in ['LIVE','CACHED']:raise ValueError('Explicit current owned feature-mode source required')
+    metadata=copy.deepcopy(state['metadata']);metadata[field]=after
+    native_metadata=copy.deepcopy(state['native']['metadata']);native_metadata[field]=after
+    if metadata!=expected_metadata or native_metadata!=expected_native_metadata:raise ValueError('Feature-mode fork changes more than its declared mode')
+    paths=[p for p,v in state['native']['python']['scalars'].items() if p and p[-1]==('attr','fixed_frame_cache')]
+    if len(paths)!=1 or type(state['native']['python']['scalars'][paths[0]]) is not bool or state['native']['python']['scalars'][paths[0]]!=(before=='CACHED') or paths[0] in state['native']['immutable_scalars']:raise ValueError('One mutable feature-mode owner with matching metadata required')
+    result=copy.deepcopy(state);result['metadata']=metadata;result['native']['metadata']=native_metadata;result['native']['python']['scalars'][paths[0]]=after=='CACHED'
+    changes=[] if before==after else [dict(path='metadata.'+field,before=before,after=after),dict(path='native.metadata.'+field,before=before,after=after),dict(path=repr(paths[0]),before=before=='CACHED',after=after=='CACHED')]
+    return result,changes
+
+
 def static_contract(runtime,inv):
     roots=[p for p in inv['objects'] if path_value(runtime,p) is runtime.support_table]
     cfg_path=(('attr','objective_cfg'),);path_path=(('attr','objective_config_path'),);constants=(('attr','objective_constants'),)
