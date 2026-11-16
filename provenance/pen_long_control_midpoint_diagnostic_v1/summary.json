@@ -1,0 +1,67 @@
+{
+  "registration": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_long_control_midpoint_diagnostic_v1\\registration.json",
+    "bytes": 1892,
+    "sha256": "6d29cbcce07025bc943c0277bd452c16f7dc16069398a3e7f414f21b64e1ee49"
+  },
+  "report": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_long_control_midpoint_diagnostic_v1\\report.json",
+    "bytes": 20534,
+    "sha256": "a087e29374d945317765a14a82fa845103095c7ddc155c3cdb675f3952c91fcd"
+  },
+  "checkpoint": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_long_control_training_v1\\RESIDUAL\\checkpoint_1000.pt",
+    "bytes": 57488257,
+    "sha256": "f1828a7396d676004e2f1f7a3cb92a00ea4f2648171a34c9800e428d656ce423"
+  },
+  "summary": {
+    "metrics": {
+      "actual_duration_s": 1.86,
+      "COM_RMS_m": 0.008183363166975875,
+      "COM_max_m": 0.050710004809623815,
+      "angle_RMS_rad": 0.13948934995994608,
+      "angle_max_rad": 0.9722135814729513,
+      "max_penetration_m": 0.0019842914771288633,
+      "max_self_penetration_m": 0.0,
+      "max_joint_limit_excursion_rad": 0.0,
+      "max_object_nonhand_normal_force_N": 0.0,
+      "hand_contact_coverage_over_0_1N": 0.9650537634408602,
+      "object_speed_RMS_m_s": 0.11049634218215942,
+      "object_omega_RMS_rad_s": 4.155877113342285
+    },
+    "gates": {
+      "COM_RMS_m": false,
+      "COM_max_m": false,
+      "angle_RMS_rad": false,
+      "angle_max_rad": false,
+      "max_penetration_m": true,
+      "max_self_penetration_m": true,
+      "max_joint_limit_excursion_rad": true,
+      "max_object_nonhand_normal_force_N": true,
+      "duration_complete": false,
+      "no_applied_force": true,
+      "finite_dynamics": true,
+      "no_contact_constraint_overflow": true
+    },
+    "qualified": false,
+    "warning_count": null,
+    "warning_scope": "Warp has no equivalent copied native warning counter; finite/capacity checks are explicit, not native warning=0."
+  },
+  "termination_reasons": {
+    "position": true,
+    "shaft": false,
+    "nonfinite": false,
+    "reference_end": false,
+    "geometry": false
+  },
+  "video": {
+    "path": "D:\\workspace\\supermimic-research\\runs\\pen_long_control_midpoint_diagnostic_v1\\residual_1000_diagnostic.mp4",
+    "bytes": 9258764,
+    "sha256": "2dcc3d98792d2e906500c6e7de0847ebbe7758db2f4010614a8baea66a4ccd75"
+  },
+  "actual_native_integrations": 744,
+  "optimizer_steps": 0,
+  "main_policy_promoted": false,
+  "final_training_actual_work": null,
+  "scope": "One preregistered RESIDUAL1000 fresh LIVE W1 diagnostic execution;two camera views of one trajectory. No checkpoint selection,no equal-budget SUPPORT comparison,no early stop or budget change;final2000 nine-case evaluation remains required."
+}
