@@ -52,6 +52,12 @@ def main(a):
                 peak=e['peak_tick']; row.update(peak_iterations=int(niter[peak]),max_iterations=int(niter.max()),mean_iterations=float(niter.mean()),
                     cap_ticks=int((niter==50).sum()),peak_improvement=float(o['context.improvement'][peak,0]),
                     peak_scaled_gradient_projection=e['peak_signed_projections']['actual_scaled_gradient'])
+                for field in ['grad_dot','grad_scale','newton_decrement','alpha']:
+                    row['peak_'+field]=float(o['context.'+field][peak,0])
+                for field in ['ls_exhausted','search_unchanged']:
+                    row['peak_'+field]=bool(o['context.'+field][peak,0])
+                for field in ['state_changed_count','quad_changed_count']:
+                    row['peak_'+field]=int(o['context.'+field][peak,0])
                 ticks.setdefault(d['algorithm'],[]).extend(niter.tolist())
                 for k,vv in e['terminal_predicates'].items(): row[k+'_ticks']=sum(vv)
             rows.append(row)
@@ -109,6 +115,7 @@ def main(a):
     result=dict(schema='pen_termination_comparator_all240_summary:1',roots=roots,inputs=inputs,source_receipt=file_pin(out/'source_receipt.json'),checks=checks,passed=sum(checks.values()),total=len(checks),
         groups=groups,original_candidate_mask_transitions={str(k):v for k,v in transition.items()},scope_pairs=scopes,
         observed_iterations={k:distribution(v) for k,v in ticks.items()},observed_cap_ticks={k:sum(x==50 for x in v) for k,v in ticks.items()},
+        failed_observed_peaks={algorithm:[r for r in rows if r['algorithm']==algorithm and r['scope']=='PACKET_PLUS_SOLVE_EXIT' and not r['impulse_valid']] for algorithm in [original,candidate]},
         all_matched_task_flags_equal=sum(p['task_flags_equal'] for p in matched),max_matched_qpos_abs=max(p['post_qpos_max_abs'] for p in matched),max_matched_qvel_abs=max(p['post_qvel_max_abs'] for p in matched),
         wall_s=dict(native_processes=sum(read(roots[r]['producer'])['wall_s'] for r in roots),independent_readers=sum(read(roots[r]['review'])['wall_s'] for r in roots)),
         csv=file_pin(out/'all240_queries.csv'),matched_csv=file_pin(out/'all120_algorithm_pairs.csv'),figure=file_pin(out/'all_conditions_and_caps.png'),
