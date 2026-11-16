@@ -1,0 +1,13 @@
+schema = 1
+mode = "READ_ONLY_RECURSIVE_SELECTED_NATIVE_CONTROLS"
+review_index = "../runs/pen_native_screened_review_v3/indices/completed_18.json"
+model_fit = "../runs/pen_path_fit_v1/report.json"
+protocol = "../docs/pen-selected-rollout-diagnostic-protocol-v1.md"
+registration = "../runs/pen_selected_rollout_diagnostic_registration_v1/registration.json"
+preparation = "../runs/pen_selected_rollout_diagnostic_data_v1/report.json"
+output = "../runs/pen_selected_rollout_diagnostic_v1"
+models = ["RESPONSE_ONLY", "PATH_POINT", "PATH_POINT_RESPONSE"]
+horizons = [1, 2, 4, 8, 16]
+cases = 18
+reference_controls = 368
+device = "cpu"
