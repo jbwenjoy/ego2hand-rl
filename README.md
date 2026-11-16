@@ -578,3 +578,6 @@ Current evidence/plan: [full54 and actual solve-exit results](docs/pen-full54-an
 
 Next comparator: [protocol v1](docs/pen-termination-rule-comparator-protocol-v1.md), [plan v1.51](docs/research-plan-v1.51.md). The single-expression candidate and CPU qualification are implemented (597 tests); explicit source transfer, native worker/reader and actual comparison remain pending.
 
+
+Latest: [termination comparison results](docs/pen-termination-comparator-results-2026-11-17.md), [plan v1.52](docs/research-plan-v1.52.md). All240 queries/1920 integrations and both independent reviews are complete. The candidate reduces some local impulse failures but increases cap50 frequency and remains unqualified; no new Actor/task/ego benefit is claimed.
+
