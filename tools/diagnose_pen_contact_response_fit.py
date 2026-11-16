@@ -13,8 +13,8 @@ def write(p,v):p.write_text(json.dumps(v,indent=2,allow_nan=False)+'\n',encoding
 
 
 def main(a):
-    fit=json.loads(a.fit.read_text());prep=json.loads(verify_file_pin(fit['prepared']).read_text());tr=json.loads(verify_file_pin(prep['TRAIN_preparation']).read_text());cr=json.loads(verify_file_pin(prep['CHECK_review']).read_text());probe=json.loads(verify_file_pin(cr['probe']).read_text());out=a.output.resolve()
-    if out.exists() or not out.is_relative_to(ROOT/'runs') or fit['update']!=2000 or fit['schema']!='pen_response_loss_ablation_result:2':raise ValueError('Fresh fixed-final post-hoc diagnosis')
+    fit=json.loads(a.fit.read_text());full=fit['schema']=='pen_response_loss_ablation_result:3';prep=json.loads(verify_file_pin(fit['prepared']).read_text());tr=json.loads(verify_file_pin(prep['TRAIN_preparation']).read_text());cr=json.loads(verify_file_pin(prep['VALIDATE_preparation' if full else 'CHECK_review']).read_text());probe=json.loads(verify_file_pin(cr['probe']).read_text());out=a.output.resolve()
+    if out.exists() or not out.is_relative_to(ROOT/'runs') or fit['update']!=2000 or fit['schema'] not in ['pen_response_loss_ablation_result:2','pen_response_loss_ablation_result:3']:raise ValueError('Fresh fixed-final post-hoc diagnosis')
     out.mkdir();paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/pkg).rglob('*.py')})+[Path(__file__).resolve()]
     receipt=freeze_sources(paths,out/'source_snapshot',ROOT,subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip());write(out/'source_receipt.json',receipt)
     checkpoint=torch.load(verify_file_pin(fit['checkpoint']),map_location='cpu',weights_only=False);pairs=dict(np.load(verify_file_pin(prep['pairs'])));data=dict(np.load(verify_file_pin(prep['outputs']['TRAIN'])));directions=np.load(verify_file_pin(prep['directions']))['directions'];check_directions=np.load(verify_file_pin(probe['directions']))['directions']
@@ -23,6 +23,9 @@ def main(a):
     deltas=np.array([data['x'][r['row_index'],81:101]-data['x'][base[r['source_name']],81:101] for r in metadata if r['valid']]);off=deltas-(deltas@basis)@basis.T
     rank=dict(declared_directions=int(len(directions)),physical_PD_dimension=20,declared_rank=int(np.linalg.matrix_rank(directions)),singular_values=np.linalg.svd(directions,compute_uv=False).tolist(),CHECK_direction_projection_fraction=fractions.tolist(),max_observed_PD_delta_off_span_L2_rad=float(np.linalg.norm(off,axis=1).max()),
         caveat='Local intervention design,not the global action matrix rank or proof of one failure cause. Cross-state action variation may add constraints under structural assumptions. Tiny float32 deviations are not deliberate independent excitation.')
+    if full:
+        rank['VALIDATE_direction_projection_fraction']=rank.pop('CHECK_direction_projection_fraction')
+        rank['VALIDATE_direction_rank4_projection_fraction']=np.sum((check_directions@directions[:4].T)**2,axis=1).tolist()
     torch.set_num_threads(4);torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False;device='cuda:0';arrays={};aggregate={};losses={};checks={};blocks=dict(object12=slice(40,52),wrench6=slice(78,84),Fn6=slice(84,90))
     for name,saved in checkpoint['arms'].items():
         model=model_from_arm(saved,device);model.eval();scale=np.asarray(saved['scales']['y_scale']);ad={}
@@ -40,11 +43,12 @@ def main(a):
         checks[name+'_loss_accounting']=bool(np.allclose(log[:,0],log[:,1]+saved['config']['auxiliary_weight']*log[:,2]+weight*log[:,3],atol=1e-10,rtol=1e-10))
         losses[name]=dict(first=log[0].tolist(),last100_mean=mean.tolist(),weighted_response_fraction=float(weighted/max(mean[0],1e-24)),point_with_auxiliary=float(point),weighted_response=float(weighted))
     np.savez_compressed(out/'TRAIN_response_predictions.npz',**arrays)
-    checks.update(declared_pairs=len(groups)==188,masked_rows_unchanged=int(data['valid'].sum())==808,finite_arrays=all(np.isfinite(v).all() for v in arrays.values()))
+    checks.update(declared_pairs=len(groups)==(949 if full else 188),masked_rows_unchanged=int(data['valid'].sum())==(3866 if full else 808),finite_arrays=all(np.isfinite(v).all() for v in arrays.values()))
     verify_source_snapshot(receipt,live=True);verify_source_snapshot(json.loads(verify_file_pin(fit['source_receipt']).read_text()),live=True)
-    result=dict(schema='contact_pen_fit_posthoc_diagnosis:1',fit=file_pin(a.fit),common_data=fit['prepared'],source_receipt=file_pin(out/'source_receipt.json'),arrays=file_pin(out/'TRAIN_response_predictions.npz'),pair_order=groups,
+    result=dict(schema='contact_pen_fullrank_fit_posthoc_diagnosis:2' if full else 'contact_pen_fit_posthoc_diagnosis:1',fit=file_pin(a.fit),common_data=fit['prepared'],source_receipt=file_pin(out/'source_receipt.json'),arrays=file_pin(out/'TRAIN_response_predictions.npz'),pair_order=groups,
         TRAIN_response=aggregate,local_excitation=rank,loss_diagnostics=losses,checks=checks,passed=sum(checks.values()),total=len(checks),actual_native_integrations=0,optimizer_steps=0,
         scope='Post-hoc descriptive TRAIN fit/excitation/objective-scale diagnostics;no weight/checkpoint selection,new optimizer steps or causal proof. Reusing inspected CHECK directions for span reporting does not make them a final test. Original physical gates remain unchanged.')
+    if full:result['scope']='Post-hoc TRAIN response-fit/rank/loss-value diagnostics after fixed-final six-arm evaluation. Loss fractions are not gradient fractions. Reserved validation is now inspected developmental NEVER_FIT;not final-test or Actor qualification. No NN/native steps or weight selection.'
     write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),checks=[result['passed'],result['total']],TRAIN_response=aggregate,rank=rank,weighted_response_fraction={k:v['weighted_response_fraction'] for k,v in losses.items()})),flush=True)
     if not all(checks.values()):raise ValueError('Retain diagnosis accounting discrepancy')
 

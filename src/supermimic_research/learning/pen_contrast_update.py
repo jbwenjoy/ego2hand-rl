@@ -1,4 +1,5 @@
 """Finite-amplitude response supervision with separate point/pair RNG streams."""
+import copy
 import torch
 
 from .impulse_stage import update_impulse
@@ -12,6 +13,7 @@ def finite_contrast_loss(plus,minus,target,epsilon,scale):
 
 
 def update_contrast(arm,cache,cfg,*,capture_gradient=False):
+    if 'pair_contract' in arm and arm['pair_contract']!=cache.get('pair_contract'):raise ValueError('Response pair/cache identity mismatch before sampling')
     if arm['contrast_weight']==0:
         values,point_ids,gradient=update_impulse(arm,cache,cfg,capture_gradient=capture_gradient)
         return torch.cat([values,values.new_zeros(1)]),point_ids,None,gradient
@@ -31,7 +33,12 @@ def update_contrast(arm,cache,cfg,*,capture_gradient=False):
 
 
 def restore_contrast_arm(saved,device):
+    contract=saved.get('pair_contract')
+    if saved['config'].get('study_schema')==3:
+        if not isinstance(contract,dict) or set(contract)!={'rank','rows','index_sha256','point_bank','pair_bank','subset_bank'} or contract['rank'] not in [0,4,20] or type(contract['rows']) is not int or contract['rows']<0 or (contract['rank']==0)!=(contract['rows']==0):raise ValueError('Explicit serialized study3 pair-subset identity required')
+    elif contract is not None:raise ValueError('Historical arm cannot silently acquire study3 pair identity')
     arm=restore_arm(saved,device)
     arm['pair_sampler']=torch.Generator(device=device);arm['pair_sampler'].set_state(saved['pair_sampler'])
     arm['contrast_weight']=saved['contrast_weight']
+    if contract is not None:arm['pair_contract']=copy.deepcopy(contract)
     return arm
