@@ -80,8 +80,8 @@ class SupportPenRuntime(OwnedPenRuntime):
             for value in self.objective_views.values():value[ids]=0
         return ob
 
-    def _step_impl(self,sampled_raw):
-        ob,tracking,native_term,trunc,info=super()._step_impl(sampled_raw);c=self.contact_views;phase=info['reference_phase']
+    def _step_impl(self,sampled_raw,*,control_driver='UPSTREAM'):
+        ob,tracking,native_term,trunc,info=super()._step_impl(sampled_raw) if control_driver=='UPSTREAM' else super()._step_impl(sampled_raw,control_driver=control_driver);c=self.contact_views;phase=info['reference_phase']
         target_world,target_valid,phase_valid=select_interval(self.support_table.targets,self.support_table.valid,phase,self.reference_cache.world_ids)
         terms=objective_terms(tracking,native_term,c['geometry_max'],c['nonhand_max_sum'],c['errors'],c['global_error'],c['wrench_sum'],c['counts'],c['source_R'],target_world,target_valid,phase_valid,self.objective_cfg,self.support_weight,self.objective_constants['geometry_limits'])
         values=dict(target_world=target_world,target_valid=target_valid,phase_valid=phase_valid,tracking_reward=tracking,native_terminated=native_term,

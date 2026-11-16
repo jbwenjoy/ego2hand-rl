@@ -91,14 +91,14 @@ class OwnedPenRuntime(NativePenPolicyAdapter):
         self.contact_metrics.reset_window(ids)
         return observation
 
-    def step(self,sampled_raw):
-        return self._on_owned_stream(lambda:self._step_impl(sampled_raw))
+    def step(self,sampled_raw,*,control_driver='UPSTREAM'):
+        return self._on_owned_stream(lambda:self._step_impl(sampled_raw) if control_driver=='UPSTREAM' else self._step_impl(sampled_raw,control_driver=control_driver))
 
-    def _step_impl(self,sampled_raw):
+    def _step_impl(self,sampled_raw,*,control_driver='UPSTREAM'):
         # Reset at the first REAL native step, after the original pending/shape
         # guards. A rejected action must not erase an existing metric window.
         self._window_pending=True
-        try:ob,reward,term,trunc,info=super().step(sampled_raw)
+        try:ob,reward,term,trunc,info=super().step(sampled_raw) if control_driver=='UPSTREAM' else super().step(sampled_raw,control_driver=control_driver)
         finally:self._window_pending=False
         info['contact_window']=self.contact_views
         info['contact_schema']=self.contact_metrics.metadata()['schema']

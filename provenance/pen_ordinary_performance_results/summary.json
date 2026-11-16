@@ -1,0 +1,347 @@
+{
+  "schema": "ordinary_pen_performance_summary:1",
+  "roots": {
+    "failed": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_ordinary_ppo_profile_v1\\failure.json",
+      "bytes": 159,
+      "sha256": "21dc64c13a4c5f9a704ba77ab6910509992566aabbe31bd40c516f3be77ae7c4"
+    },
+    "monitored": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_ordinary_ppo_profile_v2\\report.json",
+      "bytes": 30774,
+      "sha256": "44f63925842472b8c63e5027473d02f307400faa9ab52e1850ddd0f2f1d23979"
+    },
+    "isolated": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_ordinary_ppo_profile_v3\\report.json",
+      "bytes": 21324,
+      "sha256": "0eb16fa6ff26e8b3435d2049ee9efdb3debe5ec4ffe771b40866a08824b83d26"
+    },
+    "comparison": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_empty_signal_comparison_v1\\report.json",
+      "bytes": 32750,
+      "sha256": "f343e8501497f631e250ca64194aff53aedc829c87ddd303b8c209ab8a5c2b8b"
+    },
+    "review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_ordinary_performance_review_v1\\report.json",
+      "bytes": 11624,
+      "sha256": "6ec0ab4840b56bbe34ae3ecc7b60ba03238b6bace6ec798525183b207a9edaed"
+    },
+    "gpu": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_ordinary_gpu_timeline_v1\\report.json",
+      "bytes": 61359,
+      "sha256": "61f862a96e6014b839b141700132074439f07db4abaf778ea484a465b76aa2ca"
+    },
+    "gpu_review_initial": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_ordinary_gpu_timeline_review_v1\\report.json",
+      "bytes": 3083,
+      "sha256": "4dfd5b4824545239a743bd471bc670c31681967fb0e5067320bf188cc42593bf"
+    },
+    "gpu_review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_ordinary_gpu_timeline_review_v2\\report.json",
+      "bytes": 3084,
+      "sha256": "d9c52f6f72b45b88d3cb7678ecb1789e7bcb027d8f3c5346a846d0176e9a3f67"
+    }
+  },
+  "checks": {
+    "monitored": [
+      4,
+      4
+    ],
+    "isolated": [
+      4,
+      4
+    ],
+    "comparison": [
+      4,
+      4
+    ],
+    "review": [
+      37,
+      37
+    ],
+    "gpu": [
+      7,
+      7
+    ],
+    "gpu_review_initial": [
+      18,
+      19
+    ],
+    "gpu_review": [
+      19,
+      19
+    ]
+  },
+  "failed_attempt": {
+    "type": "TypeError",
+    "message": "Object of type Tensor is not JSON serializable",
+    "actual_native_integrations": 34816,
+    "optimizer_steps": 64
+  },
+  "timing": {
+    "UPSTREAM": {
+      "cases": [
+        "BASE_A",
+        "BASE_B",
+        "BASE_C"
+      ],
+      "wall_s": {
+        "collect64": [
+          1.7709047999815084,
+          1.7768440000363626,
+          1.78758140001446
+        ],
+        "consistency": [
+          0.03992169996490702,
+          0.0393484000233002,
+          0.03896600002190098
+        ],
+        "update32": [
+          0.11622070003068075,
+          0.1141226000036113,
+          0.11235000001033768
+        ]
+      },
+      "reset_worlds": [
+        200,
+        196,
+        200
+      ],
+      "median_collect_s": 1.7768440000363626,
+      "median_total_s": 1.930315000063274
+    },
+    "EMPTY_SIGNALS": {
+      "cases": [
+        "FAST_A",
+        "FAST_B",
+        "FAST_C"
+      ],
+      "wall_s": {
+        "collect64": [
+          1.789452099998016,
+          1.7834075999562629,
+          1.822603699984029
+        ],
+        "consistency": [
+          0.03951719996985048,
+          0.039422000001650304,
+          0.0401177000021562
+        ],
+        "update32": [
+          0.11687130003701895,
+          0.11569659999804571,
+          0.11559650005074218
+        ]
+      },
+      "reset_worlds": [
+        198,
+        197,
+        193
+      ],
+      "median_collect_s": 1.789452099998016,
+      "median_total_s": 1.9458406000048853
+    }
+  },
+  "BASE_over_FAST_median_collect_ratio": 0.9929542120956089,
+  "performance_status": "NO_CLEAN_SPEEDUP_OBSERVED",
+  "equivalence_status": "NOT_ESTABLISHED_OUTSIDE_OBSERVED_BASE_ENVELOPES",
+  "adoption": "UPSTREAM_DEFAULT_RETAINED",
+  "operators": {
+    "TORCH_BASE": {
+      "aten::nonzero": {
+        "key": "aten::nonzero",
+        "count": 315,
+        "self_cpu_us": 524788.5189999992,
+        "total_cpu_us": 526606.7619999988
+      },
+      "aten::copy_": {
+        "key": "aten::copy_",
+        "count": 12261,
+        "self_cpu_us": 157672.3130000082,
+        "total_cpu_us": 157672.3130000082
+      },
+      "aten::_to_copy": {
+        "key": "aten::_to_copy",
+        "count": 5579,
+        "self_cpu_us": 8324.772999998064,
+        "total_cpu_us": 124326.0670000042
+      },
+      "aten::item": {
+        "key": "aten::item",
+        "count": 2142,
+        "self_cpu_us": 1598.761000001572,
+        "total_cpu_us": 24255.764999997522
+      },
+      "aten::_local_scalar_dense": {
+        "key": "aten::_local_scalar_dense",
+        "count": 2142,
+        "self_cpu_us": 22657.003999995948,
+        "total_cpu_us": 22657.003999995948
+      }
+    },
+    "TORCH_FAST": {
+      "aten::nonzero": {
+        "key": "aten::nonzero",
+        "count": 251,
+        "self_cpu_us": 534975.3190000014,
+        "total_cpu_us": 536276.784
+      },
+      "aten::copy_": {
+        "key": "aten::copy_",
+        "count": 12269,
+        "self_cpu_us": 158679.93200001423,
+        "total_cpu_us": 158679.93200001423
+      },
+      "aten::_to_copy": {
+        "key": "aten::_to_copy",
+        "count": 5579,
+        "self_cpu_us": 8535.785999993612,
+        "total_cpu_us": 125505.63399999877
+      },
+      "aten::item": {
+        "key": "aten::item",
+        "count": 2142,
+        "self_cpu_us": 1224.6689999960224,
+        "total_cpu_us": 23520.472999995094
+      },
+      "aten::_local_scalar_dense": {
+        "key": "aten::_local_scalar_dense",
+        "count": 2142,
+        "self_cpu_us": 22295.803999999072,
+        "total_cpu_us": 22295.803999999072
+      }
+    }
+  },
+  "isolated_python_calls": [
+    {
+      "file": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\owned_pen_runtime.py",
+      "line": 85,
+      "function": "reset",
+      "primitive_calls": 62,
+      "total_calls": 62,
+      "self_s": 7.26e-05,
+      "cumulative_s": 0.7113983
+    },
+    {
+      "file": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_native_policy.py",
+      "line": 162,
+      "function": "reset",
+      "primitive_calls": 62,
+      "total_calls": 62,
+      "self_s": 0.07173560000000001,
+      "cumulative_s": 0.6711907
+    },
+    {
+      "file": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\owned_pen_runtime.py",
+      "line": 15,
+      "function": "policy",
+      "primitive_calls": 188,
+      "total_calls": 188,
+      "self_s": 0.0004372,
+      "cumulative_s": 0.23101570000000002
+    },
+    {
+      "file": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_reference_cache.py",
+      "line": 54,
+      "function": "policy",
+      "primitive_calls": 188,
+      "total_calls": 188,
+      "self_s": 0.017279700000000002,
+      "cumulative_s": 0.23057850000000002
+    },
+    {
+      "file": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_native_policy.py",
+      "line": 83,
+      "function": "critic",
+      "primitive_calls": 126,
+      "total_calls": 126,
+      "self_s": 0.012064100000000001,
+      "cumulative_s": 0.1325271
+    },
+    {
+      "file": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_native_policy.py",
+      "line": 61,
+      "function": "reference_pose_world",
+      "primitive_calls": 64,
+      "total_calls": 64,
+      "self_s": 0.0275916,
+      "cumulative_s": 0.041904000000000004
+    },
+    {
+      "file": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\resident_contact_metrics.py",
+      "line": 265,
+      "function": "sample",
+      "primitive_calls": 512,
+      "total_calls": 512,
+      "self_s": 0.0005740000000000001,
+      "cumulative_s": 0.0126342
+    },
+    {
+      "file": "D:\\workspace\\supermimic-research\\src\\supermimic_research\\runtime\\pen_reference_cache.py",
+      "line": 42,
+      "function": "validate",
+      "primitive_calls": 2,
+      "total_calls": 2,
+      "self_s": 4.83e-05,
+      "cumulative_s": 0.0082374
+    }
+  ],
+  "GPU_phases": {
+    "collect64": {
+      "kernel_count": 196447,
+      "sum_kernel_ms": 738.642891,
+      "label_wall_ms": 5966.960273
+    },
+    "consistency": {
+      "kernel_count": 4161,
+      "sum_kernel_ms": 7.3130370000000005,
+      "label_wall_ms": 56.889180999999994
+    },
+    "update32": {
+      "kernel_count": 7804,
+      "sum_kernel_ms": 16.192954,
+      "label_wall_ms": 379.82855800000004
+    }
+  },
+  "GPU_forward_frequency": {
+    "native_steps": 512,
+    "post_control_forward": 64,
+    "upstream_reset_forward": 61,
+    "adapter_reset_forward": 61,
+    "total": 698
+  },
+  "CCD_groups": [
+    {
+      "name": "ccd_kernel_builder__locals__ccd_kernel_ca87333d_cuda_kernel_forward",
+      "count": 698,
+      "sum_us": 324866.6920000002
+    },
+    {
+      "name": "ccd_kernel_builder__locals__ccd_kernel_71292190_cuda_kernel_forward",
+      "count": 698,
+      "sum_us": 19816.11600000001
+    },
+    {
+      "name": "ccd_kernel_builder__locals__ccd_kernel_fc0934bc_cuda_kernel_forward",
+      "count": 698,
+      "sum_us": 13420.552
+    },
+    {
+      "name": "ccd_kernel_builder__locals__ccd_kernel_5bdf3e6f_cuda_kernel_forward",
+      "count": 698,
+      "sum_us": 1034.2459999999985
+    },
+    {
+      "name": "ccd_kernel_builder__locals__ccd_kernel_25151c06_cuda_kernel_forward",
+      "count": 698,
+      "sum_us": 998.1870000000031
+    }
+  ],
+  "CCD_sum_ms": 360.13579300000026,
+  "CCD_fraction_of_collect_kernel_sum": 0.4875641495884921,
+  "actual_native_integrations": 450560,
+  "optimizer_steps": 864,
+  "main_policy_promoted": false,
+  "unit_tests": 366,
+  "scope": "Actual ordinary32-world profiling and an opt-in negative optimization trial. Query removal is not faster,repeat equivalence incomplete;CPU/GPU trace identifies next fixed-frame/reference/reset targets. Diagnostic PPO updates are not main-policy/ego/task or speedup results."
+}

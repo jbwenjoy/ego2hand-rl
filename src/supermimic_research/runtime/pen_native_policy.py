@@ -185,13 +185,17 @@ class NativePenPolicyAdapter:
         return dict(policy=p,critic=self.features.critic(p))
 
     @torch.no_grad()
-    def step(self,sampled_raw):
+    def step(self,sampled_raw,*,control_driver='UPSTREAM'):
+        if control_driver not in ['UPSTREAM','EMPTY_SIGNALS']:raise ValueError('Explicit supported control driver')
         if sampled_raw.shape!=(self.num_envs,20):raise ValueError('World-by20 sample')
         if bool(self.pending.any()):raise ValueError('Explicitly reset terminal worlds before next step')
         applied=sampled_raw.clamp(-1,1)
         phase=self.motion.time_steps.clone();refpose=self.features.reference_pose_world().clone();refq=self.motion.joint_pos.clone()
         # Post-step obs points to the NEXT reference. Reward uses the saved one.
-        native_observation=self.env.step(applied)[0]
+        if control_driver=='UPSTREAM':native_observation=self.env.step(applied)[0]
+        else:
+            from .empty_signal_control import empty_signal_control_step
+            native_observation=empty_signal_control_step(self.env,applied)[0]
         pose=self.features.pose();q=self.env.sim.data.qpos[:,self.features.qids]
         reward,parts=tracking_reward(pose[:,:3],pose[:,3:],q,refpose,refq,applied,self.cfg['reward'])
         finite=torch.isfinite(pose).all(-1)&torch.isfinite(self.env.sim.data.qvel).all(-1)&torch.isfinite(reward)

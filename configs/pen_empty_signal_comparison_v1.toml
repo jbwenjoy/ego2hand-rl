@@ -1,0 +1,12 @@
+schema = 1
+study = "EMPTY_SIGNAL_DRIVER_COMPARISON"
+objective_config = "pen_centered_support_training_v1.toml"
+protocol = "../docs/pen-empty-signal-comparison-protocol-v1.md"
+arm = "SUPPORT"
+num_envs = 32
+calibration_controls = 8
+warmup_iterations = 2
+rollout_controls = 64
+telemetry_enabled = false
+cases = ["BASE_A", "FAST_A", "FAST_B", "BASE_B", "BASE_C", "FAST_C", "TORCH_BASE", "TORCH_FAST"]
+role = "ORDINARY_32_WORLD_PPO_OPT_IN_DRIVER_COMPARISON"

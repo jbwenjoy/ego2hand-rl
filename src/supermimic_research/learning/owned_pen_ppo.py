@@ -53,12 +53,13 @@ class OwnedPenPPO(NativePenPPO):
         return memory
 
     @torch.no_grad()
-    def collect(self,steps,*,forced_actions=None):
+    def collect(self,steps,*,forced_actions=None,control_driver='UPSTREAM'):
+        if control_driver not in ['UPSTREAM','EMPTY_SIGNALS']:raise ValueError('Explicit supported control driver')
         if self._collecting or 'step' in self.adapter.__dict__ or steps<1:raise ValueError('Exclusive complete rollout required')
         self._collecting=True;self._rollout_complete=False;self._captured_rows=0
         original=self.adapter.step
-        def capture_step(sample):
-            result=original(sample);info=result[4];row=self._captured_rows
+        def capture_step(sample,**kwargs):
+            result=original(sample,**kwargs);info=result[4];row=self._captured_rows
             if row>=steps:raise ValueError('Unexpected extra control transition')
             for key,view in info['contact_window'].items():self.memory['contact_'+key][row].copy_(view)
             self.memory['contact_used_phase'][row].copy_(info['reference_phase'])
@@ -67,7 +68,7 @@ class OwnedPenPPO(NativePenPPO):
         try:
             with self._block():
                 self.adapter.step=capture_step
-                try:result=super().collect(steps,forced_actions=forced_actions)
+                try:result=super().collect(steps,forced_actions=forced_actions) if control_driver=='UPSTREAM' else super().collect(steps,forced_actions=forced_actions,control_driver=control_driver)
                 finally:del self.adapter.step
             if self._captured_rows!=steps:raise ValueError('Incomplete contact rollout')
             self._rollout_complete=True;self.memory_iteration=self.iteration

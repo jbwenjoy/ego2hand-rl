@@ -106,7 +106,8 @@ class NativePenPPO:
         return result
 
     @torch.no_grad()
-    def collect(self,steps,*,forced_actions=None):
+    def collect(self,steps,*,forced_actions=None,control_driver='UPSTREAM'):
+        if control_driver not in ['UPSTREAM','EMPTY_SIGNALS']:raise ValueError('Explicit supported control driver')
         if self.normalization_batch is not None:
             self.actor.norm.update(self.normalization_batch['policy']);self.critic.norm.update(self.normalization_batch['critic'])
         elif not self.normalizers_ready:
@@ -124,7 +125,7 @@ class NativePenPPO:
             m['value'][t].copy_(self.critic(obs['critic']))
             m['phase_source'][t].copy_(self.adapter.motion.time_steps)
             m['EMA_before'][t].copy_(self.adapter.action._processed_actions)
-            nextobs,reward,term,trunc,info=self.adapter.step(sampled)
+            nextobs,reward,term,trunc,info=self.adapter.step(sampled) if control_driver=='UPSTREAM' else self.adapter.step(sampled,control_driver=control_driver)
             nextvalue=self.critic(nextobs['critic'])
             m['raw_reward'][t].copy_(reward);m['reward'][t].copy_(timeout_reward(reward,nextvalue,term,trunc,self.cfg.ppo_gamma))
             m['terminal_next_value'][t].copy_(nextvalue);m['terminated'][t].copy_(term);m['truncated'][t].copy_(trunc)

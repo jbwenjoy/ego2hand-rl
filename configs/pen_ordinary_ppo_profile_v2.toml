@@ -1,0 +1,11 @@
+schema = 1
+objective_config = "pen_centered_support_training_v1.toml"
+protocol = "../docs/pen-ordinary-ppo-profile-protocol-v2.md"
+arm = "SUPPORT"
+num_envs = 32
+calibration_controls = 8
+warmup_iterations = 2
+rollout_controls = 64
+telemetry_enabled = false
+cases = ["CLEAN_A", "CLEAN_B", "CPROFILE", "TORCH_CPU_PROFILE", "CLEAN_C"]
+role = "ORDINARY_32_WORLD_PPO_PERFORMANCE_DIAGNOSTIC"
