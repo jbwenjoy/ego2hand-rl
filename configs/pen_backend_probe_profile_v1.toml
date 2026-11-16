@@ -1,0 +1,12 @@
+schema = 1
+mode = "STRICT_BACKEND_PIPELINE_PROFILE"
+TRAIN = "../runs/pen_backend_response_train_v1/report.json"
+VALIDATE = "../runs/pen_backend_response_validation_v1/report.json"
+objective_config = "pen_long_control_training_v1.toml"
+backend_manifest = "collision_backend_face_normal_v1.json"
+protocol = "../docs/pen-backend-probe-profile-protocol-v1.md"
+registration = "../runs/pen_backend_probe_profile_registration_v1/registration.json"
+output = "../runs/pen_backend_probe_profile_v1"
+source_count = 36
+restore_repeats = 3
+branch_native_budget = 320
