@@ -1,0 +1,3020 @@
+{
+  "checks": [
+    906,
+    906
+  ],
+  "independent_gain_arithmetic_checks": 12708,
+  "declared_controls": 1800,
+  "executed_controls": 1500,
+  "physical_valid_rows": 1477,
+  "physical_total_rows": 1500,
+  "physics_flags": [
+    29977,
+    30000
+  ],
+  "reward_flags": [
+    21000,
+    21000
+  ],
+  "native_integrations": 12000,
+  "attempted_native_integrations": 12000,
+  "prior_reconstructed_native_integrations": 8,
+  "total_cohort_native_integrations": 12008,
+  "prior_counter_reconstruction_scope": "Exactly one complete8-tick packet;frozen first-source warmup+branch restore;traceback at first case write before next control. Original live counters/failure JSON were not persisted;counts reconstructed from complete packet and frozen control flow,not a resumed run.",
+  "native_restores": 1530,
+  "prior_reconstructed_restores": 2,
+  "total_cohort_restores": 1532,
+  "optimizer_steps": 0,
+  "normalizer_fits": 0,
+  "added_review_native_integrations": 0,
+  "bank_wall_s": 13.499769499991089,
+  "native_wall_s": 799.6055308999494,
+  "physical_review_wall_s": 63.25396709999768,
+  "groups": 432,
+  "complete_groups": 360,
+  "original_invalid_center_groups": 12,
+  "outcomes": [
+    {
+      "role": "TRAIN",
+      "model": "RESPONSE_ONLY",
+      "goal": "RESIDUAL",
+      "epsilon": 0.002,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 19,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 17,
+      "negative_gain_above_repeat_envelope": 2,
+      "ascent_beats_reverse_above_repeat_envelope": 19,
+      "positive_gain_count": 17,
+      "mean_positive_gain": 0.004452040320948551,
+      "median_positive_gain": 0.0034395456314086914,
+      "min_positive_gain": -0.0005158185958862305,
+      "max_positive_gain": 0.014865696430206299,
+      "AD_relative_L2": 0.6069417206163811,
+      "two_amplitude_screen_groups": 15,
+      "mean_positive_component_gains": {
+        "COM": 9.09394339511269e-05,
+        "SO3": 0.004417926073074341,
+        "hand": 1.2926871739700358e-09,
+        "action_penalty": 4.806248685590138e-09,
+        "tracking": 0.004508852958679199,
+        "geometry_penalty": -5.68072458631114e-05,
+        "support_bonus": -0.0006300354449960746,
+        "residual_objective": 0.004452040320948551,
+        "support_objective": 0.004326042376066509,
+        "source_objective": 0.004219409666563335
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "RESPONSE_ONLY",
+      "goal": "RESIDUAL",
+      "epsilon": 0.005,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 19,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 16,
+      "negative_gain_above_repeat_envelope": 3,
+      "ascent_beats_reverse_above_repeat_envelope": 19,
+      "positive_gain_count": 16,
+      "mean_positive_gain": 0.010508518469961066,
+      "median_positive_gain": 0.006862521171569824,
+      "min_positive_gain": -0.0034714937210083008,
+      "max_positive_gain": 0.03787541389465332,
+      "AD_relative_L2": 0.5983875322841402,
+      "two_amplitude_screen_groups": 15,
+      "mean_positive_component_gains": {
+        "COM": 5.837961247092799e-05,
+        "SO3": 0.010609741273679231,
+        "hand": 2.7516053200825824e-09,
+        "action_penalty": -4.410905699172106e-09,
+        "tracking": 0.010668102063630757,
+        "geometry_penalty": -0.00015958163299058614,
+        "support_bonus": -0.0048521565224387145,
+        "residual_objective": 0.010508518469961066,
+        "support_objective": 0.009538095248372932,
+        "source_objective": 0.009505541701065866
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "RESPONSE_ONLY",
+      "goal": "SUPPORT",
+      "epsilon": 0.002,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 20,
+      "new_all_physics_invalid": 0,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 17,
+      "negative_gain_above_repeat_envelope": 3,
+      "ascent_beats_reverse_above_repeat_envelope": 19,
+      "positive_gain_count": 17,
+      "mean_positive_gain": 0.005347138643264771,
+      "median_positive_gain": 0.004792004823684692,
+      "min_positive_gain": -0.01244211196899414,
+      "max_positive_gain": 0.015449166297912598,
+      "AD_relative_L2": 0.5692277656464714,
+      "two_amplitude_screen_groups": 15,
+      "mean_positive_component_gains": {
+        "COM": -3.142356872558594e-05,
+        "SO3": 0.0034239843487739565,
+        "hand": 1.0617730747969632e-07,
+        "action_penalty": 2.75585989584215e-08,
+        "tracking": 0.003392687439918518,
+        "geometry_penalty": -4.1960924863815305e-05,
+        "support_bonus": 0.009981939243152738,
+        "residual_objective": 0.0033507317304611204,
+        "support_objective": 0.005347138643264771,
+        "source_objective": 0.004282355308532715
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "RESPONSE_ONLY",
+      "goal": "SUPPORT",
+      "epsilon": 0.005,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 20,
+      "new_all_physics_invalid": 0,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 17,
+      "negative_gain_above_repeat_envelope": 3,
+      "ascent_beats_reverse_above_repeat_envelope": 19,
+      "positive_gain_count": 17,
+      "mean_positive_gain": 0.012170973420143127,
+      "median_positive_gain": 0.010612070560455322,
+      "min_positive_gain": -0.021685659885406494,
+      "max_positive_gain": 0.03787541389465332,
+      "AD_relative_L2": 0.5715604614298105,
+      "two_amplitude_screen_groups": 15,
+      "mean_positive_component_gains": {
+        "COM": -3.0860304832458496e-05,
+        "SO3": 0.008689561486244201,
+        "hand": 2.65305823517933e-07,
+        "action_penalty": 5.689503268513363e-08,
+        "tracking": 0.00865902304649353,
+        "geometry_penalty": -0.0001255873590707779,
+        "support_bonus": 0.018187716044485568,
+        "residual_objective": 0.008533433079719543,
+        "support_objective": 0.012170973420143127,
+        "source_objective": 0.009643957018852234
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "PATH_POINT",
+      "goal": "RESIDUAL",
+      "epsilon": 0.002,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 20,
+      "new_all_physics_invalid": 0,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 19,
+      "negative_gain_above_repeat_envelope": 1,
+      "ascent_beats_reverse_above_repeat_envelope": 20,
+      "positive_gain_count": 19,
+      "mean_positive_gain": 0.00424613356590271,
+      "median_positive_gain": 0.0036165714263916016,
+      "min_positive_gain": -0.003264188766479492,
+      "max_positive_gain": 0.014456510543823242,
+      "AD_relative_L2": 0.25462466370217485,
+      "two_amplitude_screen_groups": 17,
+      "mean_positive_component_gains": {
+        "COM": -8.997321128845214e-06,
+        "SO3": 0.004301218688488007,
+        "hand": 1.6478969418071426e-08,
+        "action_penalty": 1.2339614841039292e-08,
+        "tracking": 0.004292190074920654,
+        "geometry_penalty": -4.605641588568687e-05,
+        "support_bonus": -0.000639242713805288,
+        "residual_objective": 0.00424613356590271,
+        "support_objective": 0.004118284583091736,
+        "source_objective": 0.00404384434223175
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "PATH_POINT",
+      "goal": "RESIDUAL",
+      "epsilon": 0.005,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 20,
+      "new_all_physics_invalid": 0,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 18,
+      "negative_gain_above_repeat_envelope": 2,
+      "ascent_beats_reverse_above_repeat_envelope": 20,
+      "positive_gain_count": 18,
+      "mean_positive_gain": 0.011070093512535096,
+      "median_positive_gain": 0.007713913917541504,
+      "min_positive_gain": -0.0005005598068237305,
+      "max_positive_gain": 0.03857386112213135,
+      "AD_relative_L2": 0.20891701874694413,
+      "two_amplitude_screen_groups": 17,
+      "mean_positive_component_gains": {
+        "COM": 0.00020597577095031737,
+        "SO3": 0.01101178228855133,
+        "hand": 4.075928498705592e-08,
+        "action_penalty": 1.8853643268812447e-08,
+        "tracking": 0.011217811703681945,
+        "geometry_penalty": -0.00014771814458072185,
+        "support_bonus": -0.007081230322364717,
+        "residual_objective": 0.011070093512535096,
+        "support_objective": 0.009653851389884949,
+        "source_objective": 0.009664389491081237
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "PATH_POINT",
+      "goal": "SUPPORT",
+      "epsilon": 0.002,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 20,
+      "new_all_physics_invalid": 0,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 19,
+      "negative_gain_above_repeat_envelope": 1,
+      "ascent_beats_reverse_above_repeat_envelope": 19,
+      "positive_gain_count": 19,
+      "mean_positive_gain": 0.00513668954372406,
+      "median_positive_gain": 0.004157364368438721,
+      "min_positive_gain": -0.010368704795837402,
+      "max_positive_gain": 0.014457106590270996,
+      "AD_relative_L2": 0.44667330271039546,
+      "two_amplitude_screen_groups": 17,
+      "mean_positive_component_gains": {
+        "COM": -0.00019640922546386718,
+        "SO3": 0.0037382006645202636,
+        "hand": 1.091259154505012e-07,
+        "action_penalty": -4.4665102905128154e-08,
+        "tracking": 0.0035418689250946043,
+        "geometry_penalty": -3.731055185198784e-05,
+        "support_bonus": 0.008160634618252515,
+        "residual_objective": 0.00350455641746521,
+        "support_objective": 0.00513668954372406,
+        "source_objective": 0.003988227248191834
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "PATH_POINT",
+      "goal": "SUPPORT",
+      "epsilon": 0.005,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 20,
+      "new_all_physics_invalid": 0,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 19,
+      "negative_gain_above_repeat_envelope": 1,
+      "ascent_beats_reverse_above_repeat_envelope": 20,
+      "positive_gain_count": 19,
+      "mean_positive_gain": 0.014091742038726807,
+      "median_positive_gain": 0.009864270687103271,
+      "min_positive_gain": -0.0005005598068237305,
+      "max_positive_gain": 0.03857386112213135,
+      "AD_relative_L2": 0.15702515355708233,
+      "two_amplitude_screen_groups": 17,
+      "mean_positive_component_gains": {
+        "COM": -0.00040522366762161253,
+        "SO3": 0.00931052267551422,
+        "hand": 2.725265615075892e-07,
+        "action_penalty": -1.2366485862003175e-07,
+        "tracking": 0.008905437588691712,
+        "geometry_penalty": -0.00011609168723225594,
+        "support_bonus": 0.02651196614606306,
+        "residual_objective": 0.008789345622062683,
+        "support_objective": 0.014091742038726807,
+        "source_objective": 0.011538982391357422
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "PATH_POINT_RESPONSE",
+      "goal": "RESIDUAL",
+      "epsilon": 0.002,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 20,
+      "new_all_physics_invalid": 0,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 19,
+      "negative_gain_above_repeat_envelope": 1,
+      "ascent_beats_reverse_above_repeat_envelope": 20,
+      "positive_gain_count": 19,
+      "mean_positive_gain": 0.0044580578804016115,
+      "median_positive_gain": 0.00356137752532959,
+      "min_positive_gain": -0.003925204277038574,
+      "max_positive_gain": 0.015222728252410889,
+      "AD_relative_L2": 0.1205389053702034,
+      "two_amplitude_screen_groups": 19,
+      "mean_positive_component_gains": {
+        "COM": 2.3126602172851562e-05,
+        "SO3": 0.004490554332733154,
+        "hand": -3.0325837711547963e-08,
+        "action_penalty": -4.0981967686093414e-08,
+        "tracking": 0.004513579607009888,
+        "geometry_penalty": -5.5527640506625174e-05,
+        "support_bonus": -0.000920055469032377,
+        "residual_objective": 0.0044580578804016115,
+        "support_objective": 0.004274055361747742,
+        "source_objective": 0.004179158806800842
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "PATH_POINT_RESPONSE",
+      "goal": "RESIDUAL",
+      "epsilon": 0.005,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 20,
+      "new_all_physics_invalid": 0,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 20,
+      "negative_gain_above_repeat_envelope": 0,
+      "ascent_beats_reverse_above_repeat_envelope": 20,
+      "positive_gain_count": 20,
+      "mean_positive_gain": 0.011115854978561402,
+      "median_positive_gain": 0.007607638835906982,
+      "min_positive_gain": 0.00048351287841796875,
+      "max_positive_gain": 0.0389631986618042,
+      "AD_relative_L2": 0.1259685622904174,
+      "two_amplitude_screen_groups": 19,
+      "mean_positive_component_gains": {
+        "COM": 0.00022821128368377686,
+        "SO3": 0.011051550507545471,
+        "hand": -7.669747702344657e-08,
+        "action_penalty": -1.1445608834037558e-07,
+        "tracking": 0.011279541254043578,
+        "geometry_penalty": -0.00016368543729186058,
+        "support_bonus": -0.008149790088646114,
+        "residual_objective": 0.011115854978561402,
+        "support_objective": 0.00948590338230133,
+        "source_objective": 0.009625968337059022
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "PATH_POINT_RESPONSE",
+      "goal": "SUPPORT",
+      "epsilon": 0.002,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 19,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 18,
+      "negative_gain_above_repeat_envelope": 1,
+      "ascent_beats_reverse_above_repeat_envelope": 19,
+      "positive_gain_count": 18,
+      "mean_positive_gain": 0.006005836160559403,
+      "median_positive_gain": 0.004458069801330566,
+      "min_positive_gain": -0.005344390869140625,
+      "max_positive_gain": 0.015516042709350586,
+      "AD_relative_L2": 0.21186908487663048,
+      "two_amplitude_screen_groups": 16,
+      "mean_positive_component_gains": {
+        "COM": -0.0002071951564989592,
+        "SO3": 0.003372440212651303,
+        "hand": 1.0279153530753494e-07,
+        "action_penalty": -6.495611160062253e-08,
+        "tracking": 0.003165276427018015,
+        "geometry_penalty": -4.081928024166509e-05,
+        "support_bonus": 0.01440681681331051,
+        "residual_objective": 0.0031244629307797082,
+        "support_objective": 0.006005836160559403,
+        "source_objective": 0.0048299870992961685
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "TRAIN",
+      "model": "PATH_POINT_RESPONSE",
+      "goal": "SUPPORT",
+      "epsilon": 0.005,
+      "declared": 24,
+      "complete": 20,
+      "missing": 4,
+      "eligible": 20,
+      "new_all_physics_invalid": 0,
+      "original_center_invalid": 0,
+      "positive_gain_above_repeat_envelope": 20,
+      "negative_gain_above_repeat_envelope": 0,
+      "ascent_beats_reverse_above_repeat_envelope": 20,
+      "positive_gain_count": 20,
+      "mean_positive_gain": 0.014755037426948548,
+      "median_positive_gain": 0.011423587799072266,
+      "min_positive_gain": 0.003567337989807129,
+      "max_positive_gain": 0.0389631986618042,
+      "AD_relative_L2": 0.08952036806094164,
+      "two_amplitude_screen_groups": 16,
+      "mean_positive_component_gains": {
+        "COM": -0.0004553675651550293,
+        "SO3": 0.008975529670715332,
+        "hand": 2.4353746185941204e-07,
+        "action_penalty": -1.542547579447273e-07,
+        "tracking": 0.008520221710205078,
+        "geometry_penalty": -0.00011401427909731864,
+        "support_bonus": 0.03174423433374614,
+        "residual_objective": 0.008406203985214234,
+        "support_objective": 0.014755037426948548,
+        "source_objective": 0.012091395258903504
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "RESPONSE_ONLY",
+      "goal": "RESIDUAL",
+      "epsilon": 0.002,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 9,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 8,
+      "negative_gain_above_repeat_envelope": 1,
+      "ascent_beats_reverse_above_repeat_envelope": 9,
+      "positive_gain_count": 8,
+      "mean_positive_gain": 0.005423598819308811,
+      "median_positive_gain": 0.002751946449279785,
+      "min_positive_gain": -0.00032830238342285156,
+      "max_positive_gain": 0.016514062881469727,
+      "AD_relative_L2": 0.6086127270311014,
+      "two_amplitude_screen_groups": 8,
+      "mean_positive_component_gains": {
+        "COM": -0.00015009111828274198,
+        "SO3": 0.005580080880059136,
+        "hand": -2.095566818605738e-08,
+        "action_penalty": -3.613553821600767e-08,
+        "tracking": 0.005429930157131619,
+        "geometry_penalty": -6.348515550295512e-06,
+        "support_bonus": -0.0005193848323485289,
+        "residual_objective": 0.005423598819308811,
+        "support_objective": 0.005319741037156846,
+        "source_objective": 0.005730390548706055
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "RESPONSE_ONLY",
+      "goal": "RESIDUAL",
+      "epsilon": 0.005,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 9,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 8,
+      "negative_gain_above_repeat_envelope": 1,
+      "ascent_beats_reverse_above_repeat_envelope": 9,
+      "positive_gain_count": 8,
+      "mean_positive_gain": 0.012451383802625868,
+      "median_positive_gain": 0.005770325660705566,
+      "min_positive_gain": -0.003433823585510254,
+      "max_positive_gain": 0.03874802589416504,
+      "AD_relative_L2": 0.6130635471439275,
+      "two_amplitude_screen_groups": 8,
+      "mean_positive_component_gains": {
+        "COM": -0.00042187505298190645,
+        "SO3": 0.012887510988447402,
+        "hand": -5.380504283857772e-08,
+        "action_penalty": -1.023335143044177e-07,
+        "tracking": 0.012465437253316244,
+        "geometry_penalty": -1.4054692453808255e-05,
+        "support_bonus": -0.0012680513687675827,
+        "residual_objective": 0.012451383802625868,
+        "support_objective": 0.012197785907321505,
+        "source_objective": 0.013181567192077637
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "RESPONSE_ONLY",
+      "goal": "SUPPORT",
+      "epsilon": 0.002,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 9,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 9,
+      "negative_gain_above_repeat_envelope": 0,
+      "ascent_beats_reverse_above_repeat_envelope": 9,
+      "positive_gain_count": 9,
+      "mean_positive_gain": 0.005693316459655762,
+      "median_positive_gain": 0.0039054155349731445,
+      "min_positive_gain": 0.00021958351135253906,
+      "max_positive_gain": 0.01590752601623535,
+      "AD_relative_L2": 0.5736774168362722,
+      "two_amplitude_screen_groups": 8,
+      "mean_positive_component_gains": {
+        "COM": -6.291601392957899e-07,
+        "SO3": 0.005302435821957058,
+        "hand": -2.0957327114453268e-08,
+        "action_penalty": -6.833963400115155e-08,
+        "tracking": 0.005301713943481445,
+        "geometry_penalty": -6.348515550295512e-06,
+        "support_bonus": 0.001989630488917377,
+        "residual_objective": 0.005295382605658637,
+        "support_objective": 0.005693316459655762,
+        "source_objective": 0.005831493271721734
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "RESPONSE_ONLY",
+      "goal": "SUPPORT",
+      "epsilon": 0.005,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 9,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 7,
+      "negative_gain_above_repeat_envelope": 2,
+      "ascent_beats_reverse_above_repeat_envelope": 8,
+      "positive_gain_count": 7,
+      "mean_positive_gain": 0.0031281179851955837,
+      "median_positive_gain": 0.004522085189819336,
+      "min_positive_gain": -0.05486142635345459,
+      "max_positive_gain": 0.03575420379638672,
+      "AD_relative_L2": 1.4581214071891189,
+      "two_amplitude_screen_groups": 8,
+      "mean_positive_component_gains": {
+        "COM": -0.0006989108191596137,
+        "SO3": 0.008173631297217475,
+        "hand": -5.382228827282503e-08,
+        "action_penalty": -1.8284441062456204e-07,
+        "tracking": 0.0074744489457872175,
+        "geometry_penalty": -0.005383574300342136,
+        "support_bonus": 0.0051860759027886096,
+        "residual_objective": 0.002090877956814236,
+        "support_objective": 0.0031281179851955837,
+        "source_objective": 0.00351311100853814
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "PATH_POINT",
+      "goal": "RESIDUAL",
+      "epsilon": 0.002,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 9,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 8,
+      "negative_gain_above_repeat_envelope": 1,
+      "ascent_beats_reverse_above_repeat_envelope": 9,
+      "positive_gain_count": 8,
+      "mean_positive_gain": 0.0050779713524712455,
+      "median_positive_gain": 0.0018763542175292969,
+      "min_positive_gain": -0.0001995563507080078,
+      "max_positive_gain": 0.017191171646118164,
+      "AD_relative_L2": 0.29061491728762295,
+      "two_amplitude_screen_groups": 7,
+      "mean_positive_component_gains": {
+        "COM": 0.00010310278998480903,
+        "SO3": 0.004984670215182834,
+        "hand": -1.1537390600761347e-08,
+        "action_penalty": -4.462152800341654e-08,
+        "tracking": 0.005087680286831326,
+        "geometry_penalty": -9.70355338520474e-06,
+        "support_bonus": 0.0013250746094157896,
+        "residual_objective": 0.0050779713524712455,
+        "support_objective": 0.005343013339572483,
+        "source_objective": 0.005720774332682292
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "PATH_POINT",
+      "goal": "RESIDUAL",
+      "epsilon": 0.005,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 9,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 7,
+      "negative_gain_above_repeat_envelope": 2,
+      "ascent_beats_reverse_above_repeat_envelope": 9,
+      "positive_gain_count": 7,
+      "mean_positive_gain": 0.011649542384677462,
+      "median_positive_gain": 0.004354715347290039,
+      "min_positive_gain": -0.003401041030883789,
+      "max_positive_gain": 0.03945028781890869,
+      "AD_relative_L2": 0.2983131944772068,
+      "two_amplitude_screen_groups": 7,
+      "mean_positive_component_gains": {
+        "COM": 0.0002138747109307183,
+        "SO3": 0.01146237055460612,
+        "hand": -2.9589152505486254e-08,
+        "action_penalty": -1.2354788244313872e-07,
+        "tracking": 0.01167611281077067,
+        "geometry_penalty": -2.659050126870473e-05,
+        "support_bonus": 0.0038334877586473606,
+        "residual_objective": 0.011649542384677462,
+        "support_objective": 0.012416243553161621,
+        "source_objective": 0.013333386845058866
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "PATH_POINT",
+      "goal": "SUPPORT",
+      "epsilon": 0.002,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 9,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 9,
+      "negative_gain_above_repeat_envelope": 0,
+      "ascent_beats_reverse_above_repeat_envelope": 9,
+      "positive_gain_count": 9,
+      "mean_positive_gain": 0.005631248156229655,
+      "median_positive_gain": 0.003121018409729004,
+      "min_positive_gain": 0.0008995532989501953,
+      "max_positive_gain": 0.0160597562789917,
+      "AD_relative_L2": 0.2383602720202632,
+      "two_amplitude_screen_groups": 9,
+      "mean_positive_component_gains": {
+        "COM": 7.738669713338216e-05,
+        "SO3": 0.00490537616941664,
+        "hand": -1.153867453745288e-08,
+        "action_penalty": -8.075999681346326e-08,
+        "tracking": 0.004982656902737088,
+        "geometry_penalty": -9.70355338520474e-06,
+        "support_bonus": 0.003291484951812751,
+        "residual_objective": 0.004972947968377007,
+        "support_objective": 0.005631248156229655,
+        "source_objective": 0.005689885881212022
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "PATH_POINT",
+      "goal": "SUPPORT",
+      "epsilon": 0.005,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 9,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 9,
+      "negative_gain_above_repeat_envelope": 0,
+      "ascent_beats_reverse_above_repeat_envelope": 9,
+      "positive_gain_count": 9,
+      "mean_positive_gain": 0.013326923052469889,
+      "median_positive_gain": 0.009495019912719727,
+      "min_positive_gain": 0.0009363889694213867,
+      "max_positive_gain": 0.03670358657836914,
+      "AD_relative_L2": 0.24745914003877317,
+      "two_amplitude_screen_groups": 9,
+      "mean_positive_component_gains": {
+        "COM": 0.00016538964377509223,
+        "SO3": 0.011433621247609457,
+        "hand": -2.9592395315056507e-08,
+        "action_penalty": -2.1389385235832177e-07,
+        "tracking": 0.011598798963758681,
+        "geometry_penalty": -2.659050126870473e-05,
+        "support_bonus": 0.008773359450074205,
+        "residual_objective": 0.011572228537665473,
+        "support_objective": 0.013326923052469889,
+        "source_objective": 0.013474133279588487
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "PATH_POINT_RESPONSE",
+      "goal": "RESIDUAL",
+      "epsilon": 0.002,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 9,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 6,
+      "negative_gain_above_repeat_envelope": 3,
+      "ascent_beats_reverse_above_repeat_envelope": 7,
+      "positive_gain_count": 6,
+      "mean_positive_gain": 0.004597822825113933,
+      "median_positive_gain": 0.0018936395645141602,
+      "min_positive_gain": -0.002518177032470703,
+      "max_positive_gain": 0.017061829566955566,
+      "AD_relative_L2": 0.5248180706903954,
+      "two_amplitude_screen_groups": 8,
+      "mean_positive_component_gains": {
+        "COM": 0.00018064843283759223,
+        "SO3": 0.00443251265419854,
+        "hand": -1.836619009731249e-08,
+        "action_penalty": -4.030516720376909e-08,
+        "tracking": 0.004613108105129666,
+        "geometry_penalty": -1.5288384424315558e-05,
+        "support_bonus": 0.0007848453854251271,
+        "residual_objective": 0.004597822825113933,
+        "support_objective": 0.0047548214594523115,
+        "source_objective": 0.005111641354031033
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "PATH_POINT_RESPONSE",
+      "goal": "RESIDUAL",
+      "epsilon": 0.005,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 8,
+      "new_all_physics_invalid": 2,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 6,
+      "negative_gain_above_repeat_envelope": 2,
+      "ascent_beats_reverse_above_repeat_envelope": 7,
+      "positive_gain_count": 6,
+      "mean_positive_gain": 0.011861160397529602,
+      "median_positive_gain": 0.006888628005981445,
+      "min_positive_gain": -0.00865936279296875,
+      "max_positive_gain": 0.0389711856842041,
+      "AD_relative_L2": 0.48436947055958895,
+      "two_amplitude_screen_groups": 8,
+      "mean_positive_component_gains": {
+        "COM": 0.00019006431102752686,
+        "SO3": 0.011721789836883545,
+        "hand": -5.264447549505752e-08,
+        "action_penalty": -9.98313680611318e-08,
+        "tracking": 0.011911764740943909,
+        "geometry_penalty": -5.05899079144001e-05,
+        "support_bonus": 0.002790494420489134,
+        "residual_objective": 0.011861160397529602,
+        "support_objective": 0.012419283390045166,
+        "source_objective": 0.013395830988883972
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "PATH_POINT_RESPONSE",
+      "goal": "SUPPORT",
+      "epsilon": 0.002,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 9,
+      "new_all_physics_invalid": 1,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 8,
+      "negative_gain_above_repeat_envelope": 1,
+      "ascent_beats_reverse_above_repeat_envelope": 8,
+      "positive_gain_count": 8,
+      "mean_positive_gain": 0.00514833132425944,
+      "median_positive_gain": 0.0022715330123901367,
+      "min_positive_gain": -0.0012761354446411133,
+      "max_positive_gain": 0.01596367359161377,
+      "AD_relative_L2": 0.45177538810108697,
+      "two_amplitude_screen_groups": 8,
+      "mean_positive_component_gains": {
+        "COM": 0.00024237235387166342,
+        "SO3": 0.004290733072492812,
+        "hand": -1.8367837807058912e-08,
+        "action_penalty": -7.33873295959913e-08,
+        "tracking": 0.004533012708028157,
+        "geometry_penalty": -1.5288384424315558e-05,
+        "support_bonus": 0.003152916631282242,
+        "residual_objective": 0.004517727428012424,
+        "support_objective": 0.00514833132425944,
+        "source_objective": 0.005162424511379666
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    },
+    {
+      "role": "VALIDATE",
+      "model": "PATH_POINT_RESPONSE",
+      "goal": "SUPPORT",
+      "epsilon": 0.005,
+      "declared": 12,
+      "complete": 10,
+      "missing": 2,
+      "eligible": 8,
+      "new_all_physics_invalid": 2,
+      "original_center_invalid": 1,
+      "positive_gain_above_repeat_envelope": 8,
+      "negative_gain_above_repeat_envelope": 0,
+      "ascent_beats_reverse_above_repeat_envelope": 8,
+      "positive_gain_count": 8,
+      "mean_positive_gain": 0.01353791356086731,
+      "median_positive_gain": 0.006888628005981445,
+      "min_positive_gain": 0.002349853515625,
+      "max_positive_gain": 0.03640186786651611,
+      "AD_relative_L2": 0.42370473957492255,
+      "two_amplitude_screen_groups": 8,
+      "mean_positive_component_gains": {
+        "COM": 0.00039852410554885864,
+        "SO3": 0.011331260204315186,
+        "hand": -5.264893581432423e-08,
+        "action_penalty": -1.9287540453660768e-07,
+        "tracking": 0.011729627847671509,
+        "geometry_penalty": -5.05899079144001e-05,
+        "support_bonus": 0.009294347137776507,
+        "residual_objective": 0.011679023504257202,
+        "support_objective": 0.01353791356086731,
+        "source_objective": 0.013593748211860657
+      },
+      "scope": "Source counts/repeat envelopes,not IID trials,confidence bounds,best-sign selection or multi-step policy success."
+    }
+  ],
+  "common_source_comparisons": [
+    {
+      "role": "TRAIN",
+      "goal": "RESIDUAL",
+      "epsilon": 0.002,
+      "common_source_names": [
+        "RESIDUAL_N8841_P012",
+        "RESIDUAL_N8841_P024",
+        "RESIDUAL_N8841_P036",
+        "RESIDUAL_N8841_P048",
+        "RESIDUAL_N8842_P012",
+        "RESIDUAL_N8842_P024",
+        "RESIDUAL_N8842_P036",
+        "RESIDUAL_N8842_P048",
+        "SUPPORT_N8841_P012",
+        "SUPPORT_N8841_P024",
+        "SUPPORT_N8841_P036",
+        "SUPPORT_N8841_P048",
+        "SUPPORT_N8841_P064",
+        "SUPPORT_N8842_P012",
+        "SUPPORT_N8842_P024",
+        "SUPPORT_N8842_P036",
+        "SUPPORT_N8842_P048",
+        "SUPPORT_N8842_P064",
+        "SUPPORT_N8842_P072"
+      ],
+      "models": {
+        "RESPONSE_ONLY": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 19,
+          "verified_improving_sources": 17,
+          "verified_improving_fraction_of_declared": 0.7083333333333334,
+          "common_eligible_sources": 19,
+          "common_mean_gain": 0.004452040320948551,
+          "common_verified_improving_sources": 17
+        },
+        "PATH_POINT": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 20,
+          "verified_improving_sources": 19,
+          "verified_improving_fraction_of_declared": 0.7916666666666666,
+          "common_eligible_sources": 19,
+          "common_mean_gain": 0.004641413688659668,
+          "common_verified_improving_sources": 19
+        },
+        "PATH_POINT_RESPONSE": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 20,
+          "verified_improving_sources": 19,
+          "verified_improving_fraction_of_declared": 0.7916666666666666,
+          "common_eligible_sources": 19,
+          "common_mean_gain": 0.00489928220447741,
+          "common_verified_improving_sources": 19
+        }
+      },
+      "paired_against_RESPONSE_ONLY": {
+        "PATH_POINT": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8841_P012",
+              "gain_difference": -1.895427703857422e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P024",
+              "gain_difference": 0.0001475811004638672,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P036",
+              "gain_difference": -0.00024080276489257812,
+              "positive_repeat_difference_envelope": 8.344650268554688e-07,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P048",
+              "gain_difference": 0.00036334991455078125,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P012",
+              "gain_difference": -2.6345252990722656e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P024",
+              "gain_difference": 0.0006983280181884766,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P036",
+              "gain_difference": -0.00040918588638305664,
+              "positive_repeat_difference_envelope": 6.556510925292969e-07,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P048",
+              "gain_difference": 0.0005636811256408691,
+              "positive_repeat_difference_envelope": 1.6033649444580078e-05,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P012",
+              "gain_difference": -2.1696090698242188e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8841_P024",
+              "gain_difference": 6.246566772460938e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P036",
+              "gain_difference": 0.0007071495056152344,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P048",
+              "gain_difference": 3.647804260253906e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P064",
+              "gain_difference": -0.0006996393203735352,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P012",
+              "gain_difference": -8.177757263183594e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P024",
+              "gain_difference": 4.1365623474121094e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P036",
+              "gain_difference": 0.0019502639770507812,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P048",
+              "gain_difference": 0.0006256103515625,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P064",
+              "gain_difference": 1.8835067749023438e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P072",
+              "gain_difference": -0.00011861324310302734,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            }
+          ],
+          "sources": 19,
+          "mean_gain_difference": 0.0001893733677111174,
+          "median_gain_difference": 3.647804260253906e-05,
+          "better_sources": 11,
+          "worse_sources": 8
+        },
+        "PATH_POINT_RESPONSE": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8841_P012",
+              "gain_difference": 8.07046890258789e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P024",
+              "gain_difference": 0.000493168830871582,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P036",
+              "gain_difference": -7.265806198120117e-05,
+              "positive_repeat_difference_envelope": 1.7285346984863281e-06,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P048",
+              "gain_difference": 0.00026488304138183594,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P012",
+              "gain_difference": 3.0159950256347656e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P024",
+              "gain_difference": 0.0002492666244506836,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P036",
+              "gain_difference": 0.00035703182220458984,
+              "positive_repeat_difference_envelope": 1.0728836059570312e-06,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P048",
+              "gain_difference": 0.00043827295303344727,
+              "positive_repeat_difference_envelope": 1.6033649444580078e-05,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P012",
+              "gain_difference": 0.00031554698944091797,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P024",
+              "gain_difference": 5.638599395751953e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P036",
+              "gain_difference": 0.0021524429321289062,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P048",
+              "gain_difference": 0.00016057491302490234,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P064",
+              "gain_difference": 0.0016869306564331055,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P012",
+              "gain_difference": 3.600120544433594e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P024",
+              "gain_difference": -0.00011360645294189453,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P036",
+              "gain_difference": 0.0020952224731445312,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P048",
+              "gain_difference": 0.0005341768264770508,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P064",
+              "gain_difference": -0.00012934207916259766,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P072",
+              "gain_difference": -0.00013756752014160156,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            }
+          ],
+          "sources": 19,
+          "mean_gain_difference": 0.00044724188352886,
+          "median_gain_difference": 0.0002492666244506836,
+          "better_sources": 15,
+          "worse_sources": 4
+        }
+      }
+    },
+    {
+      "role": "TRAIN",
+      "goal": "RESIDUAL",
+      "epsilon": 0.005,
+      "common_source_names": [
+        "RESIDUAL_N8841_P012",
+        "RESIDUAL_N8841_P024",
+        "RESIDUAL_N8841_P036",
+        "RESIDUAL_N8841_P048",
+        "RESIDUAL_N8842_P012",
+        "RESIDUAL_N8842_P024",
+        "RESIDUAL_N8842_P036",
+        "RESIDUAL_N8842_P048",
+        "SUPPORT_N8841_P012",
+        "SUPPORT_N8841_P024",
+        "SUPPORT_N8841_P036",
+        "SUPPORT_N8841_P048",
+        "SUPPORT_N8841_P064",
+        "SUPPORT_N8841_P072",
+        "SUPPORT_N8842_P012",
+        "SUPPORT_N8842_P024",
+        "SUPPORT_N8842_P036",
+        "SUPPORT_N8842_P048",
+        "SUPPORT_N8842_P064"
+      ],
+      "models": {
+        "RESPONSE_ONLY": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 19,
+          "verified_improving_sources": 16,
+          "verified_improving_fraction_of_declared": 0.6666666666666666,
+          "common_eligible_sources": 19,
+          "common_mean_gain": 0.010508518469961066,
+          "common_verified_improving_sources": 16
+        },
+        "PATH_POINT": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 20,
+          "verified_improving_sources": 18,
+          "verified_improving_fraction_of_declared": 0.75,
+          "common_eligible_sources": 19,
+          "common_mean_gain": 0.011281521696793405,
+          "common_verified_improving_sources": 17
+        },
+        "PATH_POINT_RESPONSE": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 20,
+          "verified_improving_sources": 20,
+          "verified_improving_fraction_of_declared": 0.8333333333333334,
+          "common_eligible_sources": 19,
+          "common_mean_gain": 0.01141566979257684,
+          "common_verified_improving_sources": 19
+        }
+      },
+      "paired_against_RESPONSE_ONLY": {
+        "PATH_POINT": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8841_P012",
+              "gain_difference": -0.00026798248291015625,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P024",
+              "gain_difference": 0.00013303756713867188,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P036",
+              "gain_difference": 0.00029087066650390625,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P048",
+              "gain_difference": 0.001674652099609375,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P012",
+              "gain_difference": -0.000225067138671875,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P024",
+              "gain_difference": 0.0006982088088989258,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P036",
+              "gain_difference": 0.0006984472274780273,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P048",
+              "gain_difference": 0.002390265464782715,
+              "positive_repeat_difference_envelope": 7.152557373046875e-07,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P012",
+              "gain_difference": 1.800060272216797e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P024",
+              "gain_difference": 0.00012755393981933594,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P036",
+              "gain_difference": 0.0028258562088012695,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P048",
+              "gain_difference": 8.654594421386719e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P064",
+              "gain_difference": -0.0008809566497802734,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8841_P072",
+              "gain_difference": 0.0014193058013916016,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P012",
+              "gain_difference": -0.0001939535140991211,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P024",
+              "gain_difference": 4.935264587402344e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P036",
+              "gain_difference": 0.005319833755493164,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P048",
+              "gain_difference": 0.0005551576614379883,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P064",
+              "gain_difference": -3.2067298889160156e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            }
+          ],
+          "sources": 19,
+          "mean_gain_difference": 0.0007730032268323397,
+          "median_gain_difference": 0.00013303756713867188,
+          "better_sources": 14,
+          "worse_sources": 5
+        },
+        "PATH_POINT_RESPONSE": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8841_P012",
+              "gain_difference": 0.0001615285873413086,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P024",
+              "gain_difference": -0.0005456209182739258,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P036",
+              "gain_difference": 0.00015234947204589844,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P048",
+              "gain_difference": 0.0009721517562866211,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P012",
+              "gain_difference": -8.26120376586914e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P024",
+              "gain_difference": -0.00011098384857177734,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P036",
+              "gain_difference": 0.001087784767150879,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P048",
+              "gain_difference": 0.0019240379333496094,
+              "positive_repeat_difference_envelope": 7.152557373046875e-07,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P012",
+              "gain_difference": 0.0007265806198120117,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P024",
+              "gain_difference": 0.00014781951904296875,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P036",
+              "gain_difference": 0.007159233093261719,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P048",
+              "gain_difference": 0.00021564960479736328,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P064",
+              "gain_difference": -0.0007725954055786133,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8841_P072",
+              "gain_difference": -0.0013060569763183594,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P012",
+              "gain_difference": -4.8279762268066406e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P024",
+              "gain_difference": 1.728534698486328e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P036",
+              "gain_difference": 0.00703883171081543,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P048",
+              "gain_difference": 0.0006164312362670898,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P064",
+              "gain_difference": -0.0001176595687866211,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            }
+          ],
+          "sources": 19,
+          "mean_gain_difference": 0.0009071513226157741,
+          "median_gain_difference": 0.00015234947204589844,
+          "better_sources": 12,
+          "worse_sources": 7
+        }
+      }
+    },
+    {
+      "role": "TRAIN",
+      "goal": "SUPPORT",
+      "epsilon": 0.002,
+      "common_source_names": [
+        "RESIDUAL_N8841_P012",
+        "RESIDUAL_N8841_P024",
+        "RESIDUAL_N8841_P036",
+        "RESIDUAL_N8841_P048",
+        "RESIDUAL_N8842_P012",
+        "RESIDUAL_N8842_P024",
+        "RESIDUAL_N8842_P036",
+        "RESIDUAL_N8842_P048",
+        "SUPPORT_N8841_P012",
+        "SUPPORT_N8841_P024",
+        "SUPPORT_N8841_P036",
+        "SUPPORT_N8841_P048",
+        "SUPPORT_N8841_P072",
+        "SUPPORT_N8842_P012",
+        "SUPPORT_N8842_P024",
+        "SUPPORT_N8842_P036",
+        "SUPPORT_N8842_P048",
+        "SUPPORT_N8842_P064",
+        "SUPPORT_N8842_P072"
+      ],
+      "models": {
+        "RESPONSE_ONLY": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 20,
+          "verified_improving_sources": 17,
+          "verified_improving_fraction_of_declared": 0.7083333333333334,
+          "common_eligible_sources": 19,
+          "common_mean_gain": 0.005293952791314376,
+          "common_verified_improving_sources": 16
+        },
+        "PATH_POINT": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 20,
+          "verified_improving_sources": 19,
+          "verified_improving_fraction_of_declared": 0.7916666666666666,
+          "common_eligible_sources": 19,
+          "common_mean_gain": 0.005041062831878662,
+          "common_verified_improving_sources": 18
+        },
+        "PATH_POINT_RESPONSE": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 19,
+          "verified_improving_sources": 18,
+          "verified_improving_fraction_of_declared": 0.75,
+          "common_eligible_sources": 19,
+          "common_mean_gain": 0.006005836160559403,
+          "common_verified_improving_sources": 18
+        }
+      },
+      "paired_against_RESPONSE_ONLY": {
+        "PATH_POINT": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8841_P012",
+              "gain_difference": 9.119510650634766e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P024",
+              "gain_difference": 0.001967191696166992,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P036",
+              "gain_difference": -0.00024080276489257812,
+              "positive_repeat_difference_envelope": 8.344650268554688e-07,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P048",
+              "gain_difference": 4.756450653076172e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P012",
+              "gain_difference": 9.5367431640625e-07,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P024",
+              "gain_difference": 1.9073486328125e-06,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P036",
+              "gain_difference": -0.00040858983993530273,
+              "positive_repeat_difference_envelope": 5.960464477539063e-08,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P048",
+              "gain_difference": -0.0003019571304321289,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8841_P012",
+              "gain_difference": -5.0067901611328125e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8841_P024",
+              "gain_difference": -0.00888979434967041,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8841_P036",
+              "gain_difference": 0.0007071495056152344,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P048",
+              "gain_difference": 0.00025975704193115234,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P072",
+              "gain_difference": 0.0020734071731567383,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P012",
+              "gain_difference": 2.5987625122070312e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P024",
+              "gain_difference": -0.0002071857452392578,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P036",
+              "gain_difference": 0.0019502639770507812,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P048",
+              "gain_difference": -1.6689300537109375e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P064",
+              "gain_difference": -0.00023448467254638672,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P072",
+              "gain_difference": -0.0015807151794433594,
+              "positive_repeat_difference_envelope": 0.00032579898834228516,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            }
+          ],
+          "sources": 19,
+          "mean_gain_difference": -0.00025288995943571394,
+          "median_gain_difference": 9.5367431640625e-07,
+          "better_sources": 10,
+          "worse_sources": 9
+        },
+        "PATH_POINT_RESPONSE": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8841_P012",
+              "gain_difference": 0.00033342838287353516,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P024",
+              "gain_difference": 0.0006098747253417969,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P036",
+              "gain_difference": -7.265806198120117e-05,
+              "positive_repeat_difference_envelope": 1.7285346984863281e-06,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P048",
+              "gain_difference": 0.00012314319610595703,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P012",
+              "gain_difference": -4.6253204345703125e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P024",
+              "gain_difference": 2.944469451904297e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P036",
+              "gain_difference": 0.00035691261291503906,
+              "positive_repeat_difference_envelope": 1.1920928955078125e-06,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P048",
+              "gain_difference": 0.00013744831085205078,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P012",
+              "gain_difference": 0.00013625621795654297,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P024",
+              "gain_difference": 6.687641143798828e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P036",
+              "gain_difference": 0.0021524429321289062,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P048",
+              "gain_difference": 0.00012350082397460938,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P072",
+              "gain_difference": 0.007097721099853516,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P012",
+              "gain_difference": 0.00012922286987304688,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P024",
+              "gain_difference": 1.1920928955078125e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P036",
+              "gain_difference": 0.0020952224731445312,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P048",
+              "gain_difference": 0.0003343820571899414,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P064",
+              "gain_difference": -0.0003298521041870117,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P072",
+              "gain_difference": 0.00023674964904785156,
+              "positive_repeat_difference_envelope": 0.00032579898834228516,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": false
+            }
+          ],
+          "sources": 19,
+          "mean_gain_difference": 0.0007118833692450272,
+          "median_gain_difference": 0.00013625621795654297,
+          "better_sources": 15,
+          "worse_sources": 3
+        }
+      }
+    },
+    {
+      "role": "TRAIN",
+      "goal": "SUPPORT",
+      "epsilon": 0.005,
+      "common_source_names": [
+        "RESIDUAL_N8841_P012",
+        "RESIDUAL_N8841_P024",
+        "RESIDUAL_N8841_P036",
+        "RESIDUAL_N8841_P048",
+        "RESIDUAL_N8842_P012",
+        "RESIDUAL_N8842_P024",
+        "RESIDUAL_N8842_P036",
+        "RESIDUAL_N8842_P048",
+        "SUPPORT_N8841_P012",
+        "SUPPORT_N8841_P024",
+        "SUPPORT_N8841_P036",
+        "SUPPORT_N8841_P048",
+        "SUPPORT_N8841_P064",
+        "SUPPORT_N8841_P072",
+        "SUPPORT_N8842_P012",
+        "SUPPORT_N8842_P024",
+        "SUPPORT_N8842_P036",
+        "SUPPORT_N8842_P048",
+        "SUPPORT_N8842_P064",
+        "SUPPORT_N8842_P072"
+      ],
+      "models": {
+        "RESPONSE_ONLY": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 20,
+          "verified_improving_sources": 17,
+          "verified_improving_fraction_of_declared": 0.7083333333333334,
+          "common_eligible_sources": 20,
+          "common_mean_gain": 0.012170973420143127,
+          "common_verified_improving_sources": 17
+        },
+        "PATH_POINT": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 20,
+          "verified_improving_sources": 19,
+          "verified_improving_fraction_of_declared": 0.7916666666666666,
+          "common_eligible_sources": 20,
+          "common_mean_gain": 0.014091742038726807,
+          "common_verified_improving_sources": 19
+        },
+        "PATH_POINT_RESPONSE": {
+          "declared_sources": 24,
+          "executed_sources": 20,
+          "eligible_sources": 20,
+          "verified_improving_sources": 20,
+          "verified_improving_fraction_of_declared": 0.8333333333333334,
+          "common_eligible_sources": 20,
+          "common_mean_gain": 0.014755037426948548,
+          "common_verified_improving_sources": 20
+        }
+      },
+      "paired_against_RESPONSE_ONLY": {
+        "PATH_POINT": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8841_P012",
+              "gain_difference": 0.0003311634063720703,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P024",
+              "gain_difference": -6.663799285888672e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P036",
+              "gain_difference": 0.00029098987579345703,
+              "positive_repeat_difference_envelope": 1.1920928955078125e-07,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P048",
+              "gain_difference": 0.000649571418762207,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P012",
+              "gain_difference": -0.00021576881408691406,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P024",
+              "gain_difference": 0.0003274679183959961,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P036",
+              "gain_difference": 0.0006984472274780273,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P048",
+              "gain_difference": 0.0004665255546569824,
+              "positive_repeat_difference_envelope": 2.7835369110107422e-05,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P012",
+              "gain_difference": -0.00020575523376464844,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8841_P024",
+              "gain_difference": 0.0,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P036",
+              "gain_difference": 0.0028258562088012695,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P048",
+              "gain_difference": 0.0005739927291870117,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P064",
+              "gain_difference": -0.0005486011505126953,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8841_P072",
+              "gain_difference": 0.029672563076019287,
+              "positive_repeat_difference_envelope": 5.6684017181396484e-05,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P012",
+              "gain_difference": -7.271766662597656e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P024",
+              "gain_difference": -0.0003783702850341797,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P036",
+              "gain_difference": 0.005319833755493164,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P048",
+              "gain_difference": 0.0006556510925292969,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P064",
+              "gain_difference": 5.328655242919922e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P072",
+              "gain_difference": -0.001962125301361084,
+              "positive_repeat_difference_envelope": 0.00025707483291625977,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            }
+          ],
+          "sources": 20,
+          "mean_gain_difference": 0.0019207686185836793,
+          "median_gain_difference": 0.00030922889709472656,
+          "better_sources": 12,
+          "worse_sources": 7
+        },
+        "PATH_POINT_RESPONSE": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8841_P012",
+              "gain_difference": 0.0005435943603515625,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P024",
+              "gain_difference": -6.23464584350586e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P036",
+              "gain_difference": 0.00015246868133544922,
+              "positive_repeat_difference_envelope": 1.1920928955078125e-07,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8841_P048",
+              "gain_difference": 0.0005441904067993164,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P012",
+              "gain_difference": -0.00015282630920410156,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P024",
+              "gain_difference": 0.0002728700637817383,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P036",
+              "gain_difference": 0.001087784767150879,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8842_P048",
+              "gain_difference": 0.00043964385986328125,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P012",
+              "gain_difference": 0.00010943412780761719,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P024",
+              "gain_difference": 0.0002537965774536133,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P036",
+              "gain_difference": 0.007159233093261719,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P048",
+              "gain_difference": 0.0008916854858398438,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8841_P064",
+              "gain_difference": -0.0012427568435668945,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8841_P072",
+              "gain_difference": 0.03254204988479614,
+              "positive_repeat_difference_envelope": 5.6684017181396484e-05,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P012",
+              "gain_difference": 0.00010514259338378906,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P024",
+              "gain_difference": -7.390975952148438e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P036",
+              "gain_difference": 0.00703883171081543,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P048",
+              "gain_difference": 0.0016546249389648438,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8842_P064",
+              "gain_difference": -3.039836883544922e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8842_P072",
+              "gain_difference": 0.0004481673240661621,
+              "positive_repeat_difference_envelope": 0.00025707483291625977,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            }
+          ],
+          "sources": 20,
+          "mean_gain_difference": 0.00258406400680542,
+          "median_gain_difference": 0.00035625696182250977,
+          "better_sources": 15,
+          "worse_sources": 5
+        }
+      }
+    },
+    {
+      "role": "VALIDATE",
+      "goal": "RESIDUAL",
+      "epsilon": 0.002,
+      "common_source_names": [
+        "RESIDUAL_N8861_P018",
+        "RESIDUAL_N8861_P042",
+        "RESIDUAL_N8862_P018",
+        "RESIDUAL_N8862_P042",
+        "SUPPORT_N8861_P018",
+        "SUPPORT_N8861_P042",
+        "SUPPORT_N8862_P018",
+        "SUPPORT_N8862_P042",
+        "SUPPORT_N8862_P066"
+      ],
+      "models": {
+        "RESPONSE_ONLY": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 9,
+          "verified_improving_sources": 8,
+          "verified_improving_fraction_of_declared": 0.6666666666666666,
+          "common_eligible_sources": 9,
+          "common_mean_gain": 0.005423598819308811,
+          "common_verified_improving_sources": 8
+        },
+        "PATH_POINT": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 9,
+          "verified_improving_sources": 8,
+          "verified_improving_fraction_of_declared": 0.6666666666666666,
+          "common_eligible_sources": 9,
+          "common_mean_gain": 0.0050779713524712455,
+          "common_verified_improving_sources": 8
+        },
+        "PATH_POINT_RESPONSE": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 9,
+          "verified_improving_sources": 6,
+          "verified_improving_fraction_of_declared": 0.5,
+          "common_eligible_sources": 9,
+          "common_mean_gain": 0.004597822825113933,
+          "common_verified_improving_sources": 6
+        }
+      },
+      "paired_against_RESPONSE_ONLY": {
+        "PATH_POINT": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8861_P018",
+              "gain_difference": 7.224082946777344e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8861_P042",
+              "gain_difference": 0.0006771087646484375,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P018",
+              "gain_difference": -0.0007843971252441406,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P042",
+              "gain_difference": 0.00021839141845703125,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8861_P018",
+              "gain_difference": -9.560585021972656e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8861_P042",
+              "gain_difference": -0.0027223825454711914,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P018",
+              "gain_difference": -0.00014472007751464844,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P042",
+              "gain_difference": 0.00012874603271484375,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8862_P066",
+              "gain_difference": -0.00046002864837646484,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            }
+          ],
+          "sources": 9,
+          "mean_gain_difference": -0.0003456274668375651,
+          "median_gain_difference": -9.560585021972656e-05,
+          "better_sources": 4,
+          "worse_sources": 5
+        },
+        "PATH_POINT_RESPONSE": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8861_P018",
+              "gain_difference": -2.0265579223632812e-06,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8861_P042",
+              "gain_difference": 0.0005477666854858398,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P018",
+              "gain_difference": -9.393692016601562e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P042",
+              "gain_difference": -7.867813110351562e-06,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8861_P018",
+              "gain_difference": -7.832050323486328e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8861_P042",
+              "gain_difference": -0.005270123481750488,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P018",
+              "gain_difference": -0.00016820430755615234,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P042",
+              "gain_difference": 0.0002785921096801758,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8862_P066",
+              "gain_difference": -0.0026378631591796875,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            }
+          ],
+          "sources": 9,
+          "mean_gain_difference": -0.0008257759941948785,
+          "median_gain_difference": -7.832050323486328e-05,
+          "better_sources": 2,
+          "worse_sources": 7
+        }
+      }
+    },
+    {
+      "role": "VALIDATE",
+      "goal": "RESIDUAL",
+      "epsilon": 0.005,
+      "common_source_names": [
+        "RESIDUAL_N8861_P018",
+        "RESIDUAL_N8861_P042",
+        "RESIDUAL_N8862_P018",
+        "RESIDUAL_N8862_P042",
+        "SUPPORT_N8861_P018",
+        "SUPPORT_N8861_P042",
+        "SUPPORT_N8862_P018",
+        "SUPPORT_N8862_P042"
+      ],
+      "models": {
+        "RESPONSE_ONLY": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 9,
+          "verified_improving_sources": 8,
+          "verified_improving_fraction_of_declared": 0.6666666666666666,
+          "common_eligible_sources": 8,
+          "common_mean_gain": 0.013594448566436768,
+          "common_verified_improving_sources": 7
+        },
+        "PATH_POINT": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 9,
+          "verified_improving_sources": 7,
+          "verified_improving_fraction_of_declared": 0.5833333333333334,
+          "common_eligible_sources": 8,
+          "common_mean_gain": 0.012838229537010193,
+          "common_verified_improving_sources": 6
+        },
+        "PATH_POINT_RESPONSE": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 8,
+          "verified_improving_sources": 6,
+          "verified_improving_fraction_of_declared": 0.5,
+          "common_eligible_sources": 8,
+          "common_mean_gain": 0.011861160397529602,
+          "common_verified_improving_sources": 6
+        }
+      },
+      "paired_against_RESPONSE_ONLY": {
+        "PATH_POINT": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8861_P018",
+              "gain_difference": 8.356571197509766e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8861_P042",
+              "gain_difference": 0.0007022619247436523,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P018",
+              "gain_difference": 9.059906005859375e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P042",
+              "gain_difference": 0.00030732154846191406,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8861_P018",
+              "gain_difference": -0.00016736984252929688,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8861_P042",
+              "gain_difference": -0.0069931745529174805,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P018",
+              "gain_difference": -0.00010573863983154297,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P042",
+              "gain_difference": 3.2782554626464844e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            }
+          ],
+          "sources": 8,
+          "mean_gain_difference": -0.0007562190294265747,
+          "median_gain_difference": 5.817413330078125e-05,
+          "better_sources": 5,
+          "worse_sources": 3
+        },
+        "PATH_POINT_RESPONSE": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8861_P018",
+              "gain_difference": -0.0002014636993408203,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8861_P042",
+              "gain_difference": 0.0002231597900390625,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P018",
+              "gain_difference": -6.818771362304688e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P042",
+              "gain_difference": 0.00021374225616455078,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8861_P018",
+              "gain_difference": -8.106231689453125e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8861_P042",
+              "gain_difference": -0.014429688453674316,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P018",
+              "gain_difference": -0.0002875328063964844,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P042",
+              "gain_difference": 0.0007647275924682617,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            }
+          ],
+          "sources": 8,
+          "mean_gain_difference": -0.0017332881689071655,
+          "median_gain_difference": -7.462501525878906e-05,
+          "better_sources": 3,
+          "worse_sources": 5
+        }
+      }
+    },
+    {
+      "role": "VALIDATE",
+      "goal": "SUPPORT",
+      "epsilon": 0.002,
+      "common_source_names": [
+        "RESIDUAL_N8861_P018",
+        "RESIDUAL_N8861_P042",
+        "RESIDUAL_N8862_P018",
+        "RESIDUAL_N8862_P042",
+        "SUPPORT_N8861_P018",
+        "SUPPORT_N8861_P042",
+        "SUPPORT_N8862_P018",
+        "SUPPORT_N8862_P042",
+        "SUPPORT_N8862_P066"
+      ],
+      "models": {
+        "RESPONSE_ONLY": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 9,
+          "verified_improving_sources": 9,
+          "verified_improving_fraction_of_declared": 0.75,
+          "common_eligible_sources": 9,
+          "common_mean_gain": 0.005693316459655762,
+          "common_verified_improving_sources": 9
+        },
+        "PATH_POINT": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 9,
+          "verified_improving_sources": 9,
+          "verified_improving_fraction_of_declared": 0.75,
+          "common_eligible_sources": 9,
+          "common_mean_gain": 0.005631248156229655,
+          "common_verified_improving_sources": 9
+        },
+        "PATH_POINT_RESPONSE": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 9,
+          "verified_improving_sources": 8,
+          "verified_improving_fraction_of_declared": 0.6666666666666666,
+          "common_eligible_sources": 9,
+          "common_mean_gain": 0.00514833132425944,
+          "common_verified_improving_sources": 8
+        }
+      },
+      "paired_against_RESPONSE_ONLY": {
+        "PATH_POINT": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8861_P018",
+              "gain_difference": 7.224082946777344e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8861_P042",
+              "gain_difference": 0.00015223026275634766,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P018",
+              "gain_difference": -0.0007843971252441406,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P042",
+              "gain_difference": 6.139278411865234e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8861_P018",
+              "gain_difference": -9.560585021972656e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8861_P042",
+              "gain_difference": -0.0006234645843505859,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P018",
+              "gain_difference": -0.00014472007751464844,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P042",
+              "gain_difference": 0.0012633800506591797,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8862_P066",
+              "gain_difference": -0.0004596710205078125,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            }
+          ],
+          "sources": 9,
+          "mean_gain_difference": -6.206830342610677e-05,
+          "median_gain_difference": -9.560585021972656e-05,
+          "better_sources": 4,
+          "worse_sources": 5
+        },
+        "PATH_POINT_RESPONSE": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8861_P018",
+              "gain_difference": -2.0265579223632812e-06,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8861_P042",
+              "gain_difference": 5.614757537841797e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P018",
+              "gain_difference": -9.393692016601562e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P042",
+              "gain_difference": 5.6862831115722656e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8861_P018",
+              "gain_difference": -7.832050323486328e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8861_P042",
+              "gain_difference": -0.0038461685180664062,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P018",
+              "gain_difference": -0.00016820430755615234,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P042",
+              "gain_difference": 0.0018061399459838867,
+              "positive_repeat_difference_envelope": 4.76837158203125e-07,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8862_P066",
+              "gain_difference": -0.002635359764099121,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            }
+          ],
+          "sources": 9,
+          "mean_gain_difference": -0.0005449851353963217,
+          "median_gain_difference": -7.832050323486328e-05,
+          "better_sources": 3,
+          "worse_sources": 6
+        }
+      }
+    },
+    {
+      "role": "VALIDATE",
+      "goal": "SUPPORT",
+      "epsilon": 0.005,
+      "common_source_names": [
+        "RESIDUAL_N8861_P018",
+        "RESIDUAL_N8861_P042",
+        "RESIDUAL_N8862_P018",
+        "RESIDUAL_N8862_P042",
+        "SUPPORT_N8861_P018",
+        "SUPPORT_N8861_P042",
+        "SUPPORT_N8862_P018",
+        "SUPPORT_N8862_P042"
+      ],
+      "models": {
+        "RESPONSE_ONLY": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 9,
+          "verified_improving_sources": 7,
+          "verified_improving_fraction_of_declared": 0.5833333333333334,
+          "common_eligible_sources": 8,
+          "common_mean_gain": 0.0031059235334396362,
+          "common_verified_improving_sources": 6
+        },
+        "PATH_POINT": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 9,
+          "verified_improving_sources": 9,
+          "verified_improving_fraction_of_declared": 0.75,
+          "common_eligible_sources": 8,
+          "common_mean_gain": 0.014725342392921448,
+          "common_verified_improving_sources": 8
+        },
+        "PATH_POINT_RESPONSE": {
+          "declared_sources": 12,
+          "executed_sources": 10,
+          "eligible_sources": 8,
+          "verified_improving_sources": 8,
+          "verified_improving_fraction_of_declared": 0.6666666666666666,
+          "common_eligible_sources": 8,
+          "common_mean_gain": 0.01353791356086731,
+          "common_verified_improving_sources": 8
+        }
+      },
+      "paired_against_RESPONSE_ONLY": {
+        "PATH_POINT": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8861_P018",
+              "gain_difference": 8.356571197509766e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8861_P042",
+              "gain_difference": 0.09156501293182373,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P018",
+              "gain_difference": 9.059906005859375e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P042",
+              "gain_difference": 0.00014460086822509766,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8861_P018",
+              "gain_difference": -0.00016736984252929688,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8861_P042",
+              "gain_difference": -0.0014274120330810547,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P018",
+              "gain_difference": -0.00010573863983154297,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P042",
+              "gain_difference": 0.002772092819213867,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            }
+          ],
+          "sources": 8,
+          "mean_gain_difference": 0.011619418859481812,
+          "median_gain_difference": 8.70823860168457e-05,
+          "better_sources": 5,
+          "worse_sources": 3
+        },
+        "PATH_POINT_RESPONSE": {
+          "records": [
+            {
+              "source_name": "RESIDUAL_N8861_P018",
+              "gain_difference": -0.0002014636993408203,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8861_P042",
+              "gain_difference": 0.0912632942199707,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P018",
+              "gain_difference": -6.818771362304688e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "RESIDUAL_N8862_P042",
+              "gain_difference": 0.0003510713577270508,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            },
+            {
+              "source_name": "SUPPORT_N8861_P018",
+              "gain_difference": -8.106231689453125e-05,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8861_P042",
+              "gain_difference": -0.011705756187438965,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P018",
+              "gain_difference": -0.0002875328063964844,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": false,
+              "worse_than_baseline_above_envelope": true
+            },
+            {
+              "source_name": "SUPPORT_N8862_P042",
+              "gain_difference": 0.0041855573654174805,
+              "positive_repeat_difference_envelope": 0.0,
+              "better_than_baseline_above_envelope": true,
+              "worse_than_baseline_above_envelope": false
+            }
+          ],
+          "sources": 8,
+          "mean_gain_difference": 0.010431990027427673,
+          "median_gain_difference": -7.462501525878906e-05,
+          "better_sources": 3,
+          "worse_sources": 5
+        }
+      }
+    }
+  ],
+  "default_changed": false,
+  "source_epoch_used": false,
+  "scope": "All fixed native one-step suggestions/reverse/base controls,original gates and missing/invalid centers retained. V1 failed serialization preserved with explicitly reconstructed8 prior ticks;no Actor/multistep/ego/task/overall acceleration claim."
+}
