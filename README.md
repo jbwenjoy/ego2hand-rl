@@ -572,3 +572,6 @@ CUDA图捕获／重放尚未验证，仍未采集失败子步的内部梯度，�
 2026-11-17 观测布局修正：[存档模型28维梯度与V2登记](docs/pen-context-layout-correction-results-2026-11-17.md)。
 V1观测器的26维分配假设不符真实工厂，尚未用于任何原生重放；首次32维草稿也已由逐源CPU预检拒绝并保留。10个存档源确认实际grad28／物理26／Mgrad空，52／52工厂预检与修正后591项测试通过。
 后续只使用已登记的V2工作器和V2保存数据复核；完整原始梯度保留，力计算显式取物理26维，实际默认入口5／5确认当前仍拒绝执行。尚无GPU资格或求解器根因结论，完整目标与命令见[研究计划](docs/research-plan-v1.49.md)。
+
+Current evidence/plan: [full54 and actual solve-exit results](docs/pen-full54-and-solve-exit-results-2026-11-17.md), [research plan v1.50](docs/research-plan-v1.50.md). Full54 is closed with 0/54 complete-task successes; actual A/B diagnostics and all saved-pair checks are complete. The next separately identified termination-rule comparator remains pending.
+
