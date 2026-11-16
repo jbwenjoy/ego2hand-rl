@@ -61,7 +61,9 @@ def main():
             if set(bz) != set(oz):
                 raise ValueError('Trace field inventory changed')
             diffs = {k: difference(oz[k], bz[k]) for k in bz}
-            if diffs != o['differences_between_scopes']:
+            saved_differences = [q['differences_between_scopes'] for q in [b, o]
+                                 if 'differences_between_scopes' in q]
+            if len(saved_differences) != 1 or diffs != saved_differences[0]:
                 raise ValueError('Stored field differences disagree with arrays')
             row = dict(replica=replica, repeat=repeat, row_index=ri,
                        name=o['declaration']['original_name'],
