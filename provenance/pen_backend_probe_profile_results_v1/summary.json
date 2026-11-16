@@ -1,0 +1,78 @@
+{
+  "checks": [
+    20,
+    20
+  ],
+  "stages": {
+    "UNINSTRUMENTED": {
+      "branches": 20,
+      "whole_branch_s": 11.525164099934045,
+      "stages_s": {
+        "strict_restore_and_observation_s": 9.20890259987209,
+        "recorder_begin_s": 0.1039753999793902,
+        "step_with8_recorded_ticks_s": 1.9477268001646735,
+        "finish_and_window_copy_s": 0.013591200055088848,
+        "compressed_trace_IO_s": 0.08354550023796037,
+        "final_synchronize_s": 0.000644099956844002
+      },
+      "restore_fraction": 0.7990257249287053,
+      "recorded8_tick_step_fraction": 0.16899774990412672,
+      "other_unattributed_s": 0.1667784996679984
+    },
+    "CPROFILE": {
+      "branches": 20,
+      "whole_branch_s": 12.988063800090458,
+      "stages_s": {
+        "strict_restore_and_observation_s": 10.849847599980421,
+        "recorder_begin_s": 0.14900490001309663,
+        "step_with8_recorded_ticks_s": 1.708090900152456,
+        "finish_and_window_copy_s": 0.013748000026680529,
+        "compressed_trace_IO_s": 0.11673980002524331,
+        "final_synchronize_s": 0.000965499843005091
+      },
+      "restore_fraction": 0.8353706731795432,
+      "recorded8_tick_step_fraction": 0.1315123583039806,
+      "other_unattributed_s": 0.1496671000495553
+    }
+  },
+  "restore_timing": {
+    "calls": 108,
+    "median_s": 0.5400130999914836,
+    "sum_s": 58.62323709978955
+  },
+  "profile_wall_s": 114.56596929999068,
+  "restore_calls": 186,
+  "profile_native_integrations": 320,
+  "independent_review_native_integrations": 0,
+  "optimizer_steps": 0,
+  "physical_rows": [
+    40,
+    40
+  ],
+  "row_flags": [
+    800,
+    800
+  ],
+  "verifier_microbenchmark": {
+    "RESIDUAL_N8841_P024": {
+      "median_wall_s": {
+        "ORIGINAL": 0.3162231000023894,
+        "SINGLE_RESOLVE": 0.2724222000106238
+      },
+      "original_over_candidate_ratio": 1.1607831519973684,
+      "time_reduction_fraction": 0.13851265132570856
+    },
+    "RESIDUAL_N8861_P018": {
+      "median_wall_s": {
+        "ORIGINAL": 0.3164474999648519,
+        "SINGLE_RESOLVE": 0.2725594000075944
+      },
+      "original_over_candidate_ratio": 1.1610221476714238,
+      "time_reduction_fraction": 0.13868998795102572
+    }
+  },
+  "verifier_complete_hash_calls": 22848,
+  "default_verifier_changed": false,
+  "native_candidate_integration_qualified": false,
+  "scope": "New-backend strict restore/recording attribution and full-rehash standalone candidate only. No source epoch,speedup of native collection/training,Actor/task/ego claim. Old source-epoch anomaly stays unresolved."
+}
