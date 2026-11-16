@@ -29,13 +29,15 @@ def distribution(values):
 
 def main(a):
     cp=a.config.resolve(); cfg=tomllib.loads(cp.read_text()); paths={k:(cp.parent/cfg[k]).resolve() for k in ['registration','output','reader_output']}
+    # Explicit corrected reader version; immutable worker config retains V1 paths.
+    paths['reader_output']=ROOT/'runs/pen_termination_comparator_review_v2'
     out=ROOT/'runs/pen_termination_comparator_summary_v1'
     if out.exists(): raise ValueError('Fresh complete summary required')
     regpin=file_pin(paths['registration']); reg=read(regpin); inputs=[regpin]; rows=[]; packets={}; ticks={}; roots={}
     for replica in ['A','B']:
         pp=file_pin(paths['output']/replica/'report.json'); rp=file_pin(paths['reader_output']/replica/'report.json')
         p,v=read(pp),read(rp); roots[replica]=dict(producer=pp,review=rp); inputs += [pp,rp]
-        if p['passed']!=p['total'] or v['passed']!=v['total'] or not all(p['checks'].values()) or not all(v['checks'].values()) or v['producer']!=pp or p['actual_native_integrations']!=960:
+        if p['passed']!=p['total'] or v['passed']!=v['total'] or not all(p['checks'].values()) or not all(v['checks'].values()) or v['producer']!=pp or p['actual_native_integrations']!=960 or v.get('reader_version')!=2:
             raise ValueError('Both complete independently reviewed replicas required')
         for slot in p['rows']:
             q=read(slot['report']); c=read(q['case']); d=q['declaration']; inputs += [slot['report'],q['case'],c['trace']]
@@ -113,6 +115,7 @@ def main(a):
     fig.text(.5,.015,'Both fresh processes, numerical repeats and observation scopes retained. Local solver comparison, not task/Actor/ego benefit or isolated speed benchmark.',ha='center',fontsize=8)
     fig.tight_layout(rect=(0,.04,1,.96)); fig.savefig(out/'all_conditions_and_caps.png',dpi=160); plt.close(fig)
     result=dict(schema='pen_termination_comparator_all240_summary:1',roots=roots,inputs=inputs,source_receipt=file_pin(out/'source_receipt.json'),checks=checks,passed=sum(checks.values()),total=len(checks),
+        reader_version=2, retained_reader_v1_failure=file_pin(ROOT/'runs/pen_termination_comparator_review_v1/A/report.json'),
         groups=groups,original_candidate_mask_transitions={str(k):v for k,v in transition.items()},scope_pairs=scopes,
         observed_iterations={k:distribution(v) for k,v in ticks.items()},observed_cap_ticks={k:sum(x==50 for x in v) for k,v in ticks.items()},
         failed_observed_peaks={algorithm:[r for r in rows if r['algorithm']==algorithm and r['scope']=='PACKET_PLUS_SOLVE_EXIT' and not r['impulse_valid']] for algorithm in [original,candidate]},
