@@ -1,0 +1,13 @@
+schema = 1
+mode = "FULL54_NATIVE_SCREENED_OFFLINE_EVALUATION"
+design = "pen_native_screened_rollout_design_v1.toml"
+study_config = "pen_backend_long_control_v1.toml"
+model_fit = "../runs/pen_path_fit_v1/report.json"
+model_ledger = "../provenance/pen_path_study_results_v1/ledger.json"
+lifecycle_review = "../runs/pen_terminal_lifecycle_review_v1/report.json"
+qualification_ledger = "../provenance/pen_live_lifecycle_results_v1/ledger.json"
+protocol = "../docs/pen-native-screened-rollout-protocol-v1.md"
+registration = "../runs/pen_native_screened_rollout_registration_v1/registration.json"
+output = "../runs/pen_native_screened_rollout_v1"
+reserve_GiB = 32
+verifier = "SINGLE_RESOLVE_FULL_REHASH"
