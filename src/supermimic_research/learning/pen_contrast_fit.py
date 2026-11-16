@@ -17,6 +17,7 @@ from .pen_contrast_update import update_contrast,restore_contrast_arm
 from .pen_response import PenResponseWM
 from .pen_response_dataset import common_response_data
 from .pen_fullrank_study import model_config as fullrank_model_config,load_common as load_fullrank_common,pair_contract,evaluation_roles
+from .pen_response_units import model_config as unit_model_config,derivative_scale,response_contract
 from .pen_stage import metrics,write
 from .world_model import atomic_checkpoint,capture_rng,raw_tree_equal
 
@@ -25,6 +26,7 @@ def payload(arm,cfg,scales,heads,physics,update,device,gradient):
     result=dict(**arm_payload(arm,cfg,scales,heads,physics,update,device,gradient),
         pair_sampler=arm['pair_sampler'].get_state(),contrast_weight=arm['contrast_weight'])
     if 'pair_contract' in arm:result['pair_contract']=arm['pair_contract'].copy()
+    if 'response_contract' in arm:result['response_contract']=arm['response_contract'].copy()
     return result
 
 
@@ -46,6 +48,7 @@ def checkpoint_health(path,arms,cache,cfg,device,initial_buffers,initial_net,bas
             parameters_changed=not raw_tree_equal(initial_net,arm['model'].net.state_dict()))
         checks.update({name+'_'+k:bool(v) for k,v in local.items()})
         if 'pair_contract' in arm:checks[name+'_pair_contract_exact']=arm['pair_contract']==saved['pair_contract']==clone['pair_contract']
+        if 'response_contract' in arm:checks[name+'_response_contract_exact']=arm['response_contract']==saved['response_contract']==clone['response_contract']
         a,b=restore_contrast_arm(saved,device),restore_contrast_arm(saved,device)
         selected=cache if arm_caches is None else arm_caches[name]
         la,ia,pa,ga=update_contrast(a,selected,cfg,capture_gradient=True);lb,ib,pb,gb=update_contrast(b,selected,cfg,capture_gradient=True)
@@ -86,15 +89,22 @@ def common_model_config(spec):
 def run_fit(root,config_path,out,*,run=False,common_data=None):
     entry_started=time.perf_counter()
     root,cp,out=[Path(p).resolve() for p in [root,config_path,out]];spec=tomllib.loads(cp.read_text())
-    rank_study=spec.get('schema')==3;fresh=spec.get('schema',1) in [2,3];receipt=None;subsets=None
+    unit_study=spec.get('schema')==4;rank_study=spec.get('schema') in [3,4];fresh=spec.get('schema',1) in [2,3,4];receipt=None;subsets=None;unit_values=None;unit_pin=None
     if rank_study:
-        cfg=fullrank_model_config(spec)
+        cfg=unit_model_config(spec) if unit_study else fullrank_model_config(spec)
         if common_data is None:raise ValueError('Explicit full20 common-data report required')
         pp,prep,data,pairs,subsets=load_fullrank_common(cp,common_data);base=None
         source_paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (root/'src'/pkg).rglob('*.py')})+[root/'tools/train_pen_contrasts.py',cp,verify_file_pin(prep['protocol']),(cp.parent/spec['protocol']).resolve()]
         sources=[file_pin(p) for p in source_paths]
         lineage=dict(config=file_pin(cp),prepared=file_pin(pp),TRAIN_preparation=prep['TRAIN_preparation'],VALIDATE_preparation=prep['VALIDATE_preparation'],dataset_pins=prep['outputs'],pairs=prep['pairs'],pair_subsets=prep['pair_subsets'],scales=prep['scales'],head_scales=prep['head_scales'],sources=sources)
         expected_pairs=949
+        if unit_study:
+            up=(cp.parent/spec['response_scale_preparation']).resolve();units=json.loads(up.read_text());unit_pin=file_pin(up)
+            if units['config']!=file_pin(cp) or units['pairs']!=prep['pairs'] or units['point_scales']!=prep['scales'] or units['passed']!=units['total'] or units['input_role']!='VALID_TRAIN_PAIR_TARGETS_ONLY' or units['validation_rows_used_for_TRAIN']:raise ValueError('Passing exact TRAIN-only response units required')
+            verify_source_snapshot(json.loads(verify_file_pin(units['source_receipt']).read_text()))
+            stored=dict(np.load(verify_file_pin(units['arrays'])));point=np.load(verify_file_pin(prep['scales']))['y_scale'];computed=derivative_scale(pairs['finite_contrast'],point,role='TRAIN_CONTROLLED_PHYSICAL_RESPONSE')
+            if stored.keys()!=computed.keys() or any(not np.array_equal(v,stored[k]) for k,v in computed.items()):raise ValueError('Response units differ from eligible TRAIN reconstruction')
+            unit_values=stored['response_scale'];lineage['response_scale_preparation']=unit_pin
     elif fresh:
         cfg=common_model_config(spec)
         if common_data is None:raise ValueError('Explicit frozen common-data report required')
@@ -136,7 +146,7 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
         lineage=dict(config=file_pin(cp),base_fit=file_pin(paths['base_fit']),contrasts=file_pin(paths['contrasts']),contrast_readback=file_pin(paths['contrast_readback']),prepared=base['prepared'],review=base['review'],dataset_pins=base['dataset_pins'],sources=sources)
         expected_pairs=26
     if len(pairs['epsilon'])!=expected_pairs:raise ValueError('Registered finite-contrast pair count differs')
-    if not run:return dict(training_started=False,TRAIN_rows=len(data['TRAIN']['x']),TRAIN_valid=int(data['TRAIN']['valid'].sum()),TRAIN_pairs=expected_pairs,models=6 if rank_study else 4,planned_updates_per_model=2000,Actor_updates=0)
+    if not run:return dict(training_started=False,TRAIN_rows=len(data['TRAIN']['x']),TRAIN_valid=int(data['TRAIN']['valid'].sum()),TRAIN_pairs=expected_pairs,models=8 if unit_study else 6 if rank_study else 4,planned_updates_per_model=2000,Actor_updates=0)
     if out.exists() or not out.is_relative_to(root/'runs') or not torch.cuda.is_available():raise ValueError('Fresh unified CUDA output')
     device=torch.device(cfg['device']);torch.set_num_threads(4);torch.use_deterministic_algorithms(True);torch.set_float32_matmul_precision('highest')
     torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
@@ -144,7 +154,7 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
     scales=dict(np.load(verify_file_pin(prep['scales'])));head_scales=dict(np.load(verify_file_pin(prep['head_scales'])))
     heads=dict(DIRECT=dict(head_mean=scales['y_mean'],head_scale=scales['y_scale']),IMPULSE=head_scales)
     arms={};initial=None;buffers={}
-    for package in (['POINT','RANK4','RANK20'] if rank_study else ['POINT','RESPONSE']):
+    for package in (['POINT','RAW','RMS01','RMS1'] if unit_study else ['POINT','RANK4','RANK20'] if rank_study else ['POINT','RESPONSE']):
         for mode in ['DIRECT','IMPULSE']:
             name=package+'_'+mode;model=PenResponseWM(scales,heads[mode],prep['physics'],width=cfg['width'],coupled=mode=='IMPULSE').to(device)
             if initial is None:initial={k:v.detach().cpu().clone() for k,v in model.net.state_dict().items()}
@@ -152,7 +162,7 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
             buffers[name]={k:v.detach().cpu().clone() for k,v in model.named_buffers()}
             arms[name]=dict(model=model,optimizer=torch.optim.AdamW(model.parameters(),lr=cfg['learning_rate'],weight_decay=cfg['weight_decay'],fused=True),
                 sampler=torch.Generator(device=device).manual_seed(cfg['sampler_seed']),pair_sampler=torch.Generator(device=device).manual_seed(cfg['pair_sampler_seed']),
-                mode=mode,contrast_weight=spec['contrast_weight'] if package!='POINT' else 0.)
+                mode=mode,contrast_weight=1. if unit_study and package=='RMS1' else spec['contrast_weight'] if package!='POINT' else 0.)
     if not all(raw_tree_equal(initial,arm['model'].net.state_dict()) for arm in arms.values()):raise ValueError('Identical four-arm NN initialization')
     tensor=lambda a,dtype:torch.as_tensor(a,dtype=dtype,device=device)
     d=data['TRAIN'];valid=d['valid'];cache=dict(x=tensor(d['x'][valid],torch.float32),y=tensor(d['y'][valid],torch.float64),
@@ -170,17 +180,23 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
                 ids=tensor(indices,torch.long)
                 for key in ['x_plus','x_minus','finite_contrast','epsilon']:selected[key]=cache[key].index_select(0,ids)
             contract=pair_contract(prep,rank,indices);arm['pair_contract']=contract;selected['pair_contract']=contract.copy();arm_caches[name]=selected
+        if unit_study:
+            rms_tensor=tensor(unit_values,torch.float64)
+            for name,arm in arms.items():
+                rms=name.startswith('RMS');value=unit_values if rms else scales['y_scale'];contract=response_contract(value,'TRAIN_DERIVATIVE_RMS' if rms else 'POINT_Y_SCALE',arm['contrast_weight'],unit_pin)
+                arm['response_contract']=contract;arm_caches[name]['response_contract']=contract.copy();arm_caches[name]['response_scale']=rms_tensor if rms else arm['model'].y_scale
     out.mkdir()
     if fresh:
         import subprocess
         receipt=freeze_sources(source_paths,out/'source_snapshot',root,subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip());write(out/'source_receipt.json',receipt);lineage['source_receipt']=file_pin(out/'source_receipt.json')
         atomic_checkpoint(out/'initial_NN.pt',initial);lineage['initial_NN']=file_pin(out/'initial_NN.pt')
-    study_version=3 if rank_study else 2 if fresh else 1
+    study_version=4 if unit_study else 3 if rank_study else 2 if fresh else 1
     intent=dict(schema=f'pen_response_loss_ablation:{study_version}',**lineage,planned_updates_per_model=2000,models=list(arms),
         matched_initial_NN=True,point_batch=256,response_pair_batch=32,response_weight=.1,pair_seed=7751,
         response_loss='mean object12 + mean source-BODY wrench6 squared finite-action contrast error;frozen valid-TRAIN-only scales' if fresh else 'mean object12 + mean source-BODY wrench6 squared finite-action contrast error, divided by unchanged frozen V2 output scales',
         scope='Same point streams and optimizer counts, additional64 pair endpoints/response-arm update; not equal FLOPs. No CHECK fitting/selection or Actor training.')
     if rank_study:intent.update(health_probe_role='TRAIN',health_probe_rows=128,validation_evaluation_updates=[2000],pair_contracts={n:a['pair_contract'] for n,a in arms.items()})
+    if unit_study:intent['response_contracts']={n:a['response_contract'] for n,a in arms.items()}
     write(out/'intent.json',intent)
     logs={n:[] for n in arms};gradients={};curve={};healths={};timers=[];monitor=GPUMonitor();monitor.start();start=time.perf_counter()
     try:
@@ -203,9 +219,9 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
                 health=dict(schema='pen_response_loss_checkpoint_health:1',checkpoint=file_pin(path),checks=checks,passed=sum(checks.values()),total=len(checks),
                     update=update,live_cursor_per_model=update,clone_only_optimizer_steps_at_boundary=2*len(arms),Actor_updates=0,
                     remaining_all_four_compute_estimate_s=(2000-update)*float(np.median([a.elapsed_time(b) for a,b in timers[-50:]]))/1000)
-                if rank_study:health['remaining_all_six_compute_estimate_s']=health.pop('remaining_all_four_compute_estimate_s')
+                if rank_study:health['remaining_all_eight_compute_estimate_s' if unit_study else 'remaining_all_six_compute_estimate_s']=health.pop('remaining_all_four_compute_estimate_s')
                 hp=out/f'health_{update:04d}.json';write(hp,health);healths[str(update)]=file_pin(hp)
-                print(json.dumps(dict(update=update,health=[health['passed'],health['total']],checkpoint=file_pin(path),remaining_compute_s=health.get('remaining_all_six_compute_estimate_s',health.get('remaining_all_four_compute_estimate_s')))),flush=True)
+                print(json.dumps(dict(update=update,health=[health['passed'],health['total']],checkpoint=file_pin(path),remaining_compute_s=health.get('remaining_all_eight_compute_estimate_s',health.get('remaining_all_six_compute_estimate_s',health.get('remaining_all_four_compute_estimate_s'))))),flush=True)
                 if not all(checks.values()):raise ValueError('Preserve failed restore/baseline check; no more updates')
         torch.cuda.synchronize(device);wall=time.perf_counter()-start
     finally:monitor.stop()
@@ -220,6 +236,7 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
         scope='Fixed predeclared four-arm finite-response loss ablation only. All CHECK curves development evaluation, no model/weight selection. No physical derivative/task/Actor/ego qualification by checkpoint health.')
     if fresh:result.update(total_runner_wall_s=time.perf_counter()-entry_started,loader_normalizer_recomputations=1,actual_native_integrations=0,optimizer_steps=2004*len(arms))
     if rank_study:
-        result['CUDA_ms_per_six_model_update']=result.pop('CUDA_ms_per_four_model_update')
+        result['CUDA_ms_per_eight_model_update' if unit_study else 'CUDA_ms_per_six_model_update']=result.pop('CUDA_ms_per_four_model_update')
         result.update(validation_evaluation_updates=[2000],health_probe_role='TRAIN',health_probe_rows=128,pair_contracts={n:a['pair_contract'] for n,a in arms.items()},scope='Registered six-arm rank4/rank20 response supervision with one full20 TRAIN point bank. Validation only at final2000,no fit/scales/selection/early stopping;old CHECK unused. Same original reference/fixed actor seed,not final-test/ego/Actor/physical-gradient qualification.')
+    if unit_study:result.update(response_contracts={n:a['response_contract'] for n,a in arms.items()},loader_response_unit_recomputations=1,scope='Registered eight-arm derivative-unit/weight isolation,unchanged full20 TRAIN point/pair banks and forward anchor. Inspected NEVER_FIT validation only at final2000,no fit/scales/selection;not final-test/ego/Actor or physical-gradient qualification.')
     write(out/'report.json',result);return dict(report=file_pin(out/'report.json'),checkpoint=file_pin(path),health=healths,fit_and_QA_wall_s=wall)

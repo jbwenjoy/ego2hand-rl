@@ -9,6 +9,7 @@ from supermimic_research.frozen_sources import freeze_sources,verify_source_snap
 from supermimic_research.learning.pen_response import model_from_arm
 from supermimic_research.learning.pen_native_response import compare_native_response,vector_comparison
 from supermimic_research.learning.pen_fullrank_study import MODELS as FULL_MODELS
+from supermimic_research.learning.pen_response_units import MODELS as UNIT_MODELS
 
 BLOCKS=dict(object12=slice(40,52),wrench6=slice(78,84),Fn6=slice(84,90))
 MODELS=['POINT_DIRECT','POINT_IMPULSE','RESPONSE_DIRECT','RESPONSE_IMPULSE']
@@ -19,8 +20,8 @@ def write(p,v):p.write_text(json.dumps(v,indent=2,allow_nan=False)+'\n',encoding
 
 def main(a):
     cp=a.config.resolve();cfg=tomllib.loads(cp.read_text());fp=(cp.parent/cfg['fit_report']).resolve();fit=json.loads(fp.read_text());out=a.output.resolve()
-    full=cfg.get('schema',1)==2;names=FULL_MODELS if full else MODELS;role='VALIDATE' if full else 'CHECK'
-    if out.exists() or not out.is_relative_to(ROOT/'runs') or fit['schema']!=('pen_response_loss_ablation_result:3' if full else 'pen_response_loss_ablation_result:2') or fit['update']!=2000 or fit['training_running'] or fit['optimizer_steps']!=(12024 if full else 8016) or cfg['physical_screen']!=('REGISTERED_RESERVED_VALIDATION_PHYSICAL_SCREEN' if full else 'FROZEN_PREVIOUS_CHECK_PHYSICAL_SCREEN'):raise ValueError('Fresh fixed-final registered study review')
+    unit=cfg.get('schema',1)==3;full=cfg.get('schema',1) in [2,3];names=UNIT_MODELS if unit else FULL_MODELS if full else MODELS;role='VALIDATE' if full else 'CHECK'
+    if out.exists() or not out.is_relative_to(ROOT/'runs') or fit['schema']!=('pen_response_loss_ablation_result:4' if unit else 'pen_response_loss_ablation_result:3' if full else 'pen_response_loss_ablation_result:2') or fit['update']!=2000 or fit['training_running'] or fit['optimizer_steps']!=(16032 if unit else 12024 if full else 8016) or cfg['physical_screen']!=('REGISTERED_RESERVED_VALIDATION_PHYSICAL_SCREEN' if full else 'FROZEN_PREVIOUS_CHECK_PHYSICAL_SCREEN'):raise ValueError('Fresh fixed-final registered study review')
     prep=json.loads(verify_file_pin(fit['prepared']).read_text());cr=json.loads(verify_file_pin(prep['VALIDATE_preparation' if full else 'CHECK_review']).read_text());probe=json.loads(verify_file_pin(cr['probe']).read_text())
     data={r:dict(np.load(verify_file_pin(p))) for r,p in prep['outputs'].items()};directions=np.load(verify_file_pin(probe['directions']))['directions'];checkpoint=torch.load(verify_file_pin(fit['checkpoint']),map_location='cpu',weights_only=False);initial=torch.load(verify_file_pin(fit['initial_NN']),map_location='cpu',weights_only=False)
     if full:
@@ -82,12 +83,13 @@ def main(a):
     checks.update(all_pairs_retained=len(pairs)==(480 if full else 48),all_model_outputs_finite=all(np.isfinite(v).all() for v in predictions.values()),all_JVP_finite=all(np.isfinite(v).all() for v in derivatives.values()),physical_mask_unchanged=(sum(r['qualified'] for r in pairs)==475 and int(data[role]['valid'].sum())==1935) if full else all(r['qualified'] for r in pairs))
     if not full:checks={dict(all_pairs_retained='all48_retained',physical_mask_unchanged='all_physical_valid').get(k,k):v for k,v in checks.items()}
     verify_source_snapshot(receipt,live=True);verify_source_snapshot(json.loads(verify_file_pin(fit['source_receipt']).read_text()),live=True)
-    result=dict(schema='contact_pen_six_arm_physical_response_evaluation:2' if full else 'contact_pen_four_arm_physical_response_evaluation:1',config=file_pin(cp),protocol=file_pin(protocol),fit=file_pin(fp),checkpoint=fit['checkpoint'],common_data=fit['prepared'],
+    result=dict(schema='contact_pen_response_units_evaluation:3' if unit else 'contact_pen_six_arm_physical_response_evaluation:2' if full else 'contact_pen_four_arm_physical_response_evaluation:1',config=file_pin(cp),protocol=file_pin(protocol),fit=file_pin(fp),checkpoint=fit['checkpoint'],common_data=fit['prepared'],
         source_receipt=file_pin(out/'source_receipt.json'),predictions=file_pin(out/(role+'_predictions.npz')),JVP=file_pin(out/(role+'_JVP.npz')),JVP_source_order=[dict(source_name=s,direction=d) for s,d in jvp_keys],
         forward_normalized_MSE=forward,response_pairs=pairs,aggregate=aggregate,checks=checks,passed=sum(checks.values()),total=len(checks),actual_native_integrations=0,optimizer_steps=0,Actor_updates=0,
         scope='Fixed final2000,one seed/reference,inspected developmental CHECK NEVER_FIT. Frozen original physical screens are independent of new model scores;new common scales come only from TRAIN. Neither passing arithmetic nor some candidate local directions qualify a full20D Jacobian,task,Actor,ego or amortized speedup.')
     result['VALIDATE_preparation' if full else 'CHECK_review']=prep['VALIDATE_preparation' if full else 'CHECK_review']
     if full:result.update(data_review=prep['data_review'],validation_role=cr['role'],scope='Fixed final2000 six-arm evaluation on reserved development validation after fitting. All480 groups retained,475 physical-valid;frozen independent amplitude/repeat masks unchanged. Same reference/frozen actor seed,not final-test/ego/Actor/full-Jacobian qualification.')
+    if unit:result.update(response_scale_preparation=fit['response_scale_preparation'],scope='Fixed final2000 eight-arm response-unit/weight comparison on already-inspected NEVER_FIT development validation. Evaluation uses unchanged POINT y_scale,not derivative training units. All masks retained;not final-test/ego/Actor or full contact-Jacobian qualification.')
     write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),checks=[result['passed'],result['total']],forward={n:v[role] for n,v in forward.items()},AD_on_frozen_screen={n:{b:z['FROZEN_PHYSICAL_SCREEN'] for b,z in v.items()} for n,v in aggregate.items()})),flush=True)
     if not all(checks.values()):raise ValueError('Retain final evaluation contract discrepancy')
 

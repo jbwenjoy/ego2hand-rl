@@ -1,0 +1,903 @@
+{
+  "schema": "pen_response_unit_summary:1",
+  "roots": {
+    "units": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_unit_scales_v1\\report.json",
+      "bytes": 2255,
+      "sha256": "2dd3124d35b7b1ea0f2a44dd3edfebb02f8dc99a6c7c56566c3c21e8fa612c19"
+    },
+    "fit": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_unit_fit_v1\\report.json",
+      "bytes": 199583,
+      "sha256": "05cbb193494d0a4332ac0014758e5ec44c55d9cb5daf5d09a1733ace8329d535"
+    },
+    "evaluation": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_unit_evaluation_v1\\report.json",
+      "bytes": 16566924,
+      "sha256": "6918e7e7984498f687bc363f613d50bc91ff5747bc63d4ba881fe5937122ab66"
+    },
+    "diagnosis": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_unit_diagnosis_v1\\report.json",
+      "bytes": 303380,
+      "sha256": "6fec9421d57aa2e826a42fa793ed664ad3ad680e5256dcfda8724a0ce7215d31"
+    },
+    "review": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_response_unit_review_v1\\report.json",
+      "bytes": 57452,
+      "sha256": "2ff965a90b61a2b4d9a03fdc13d1fc42fa8ac3d6ab38bb3ed20f1267f3a38d9d"
+    }
+  },
+  "checks": {
+    "units": [
+      4,
+      4
+    ],
+    "evaluation": [
+      980,
+      980
+    ],
+    "diagnosis": [
+      11,
+      11
+    ],
+    "review": [
+      1186,
+      1186
+    ]
+  },
+  "checkpoint_health": [
+    {
+      "update": 100,
+      "passed": 187,
+      "total": 187
+    },
+    {
+      "update": 2000,
+      "passed": 187,
+      "total": 187
+    }
+  ],
+  "forward": {
+    "POINT_DIRECT": {
+      "TRAIN": {
+        "hand40": 0.011249605478653951,
+        "warm26": 0.03641402693036607,
+        "object12": 0.0029825721282895133,
+        "wrench6": 0.0005631494862414132,
+        "Fn6": 0.001163549222828397
+      },
+      "VALIDATE": {
+        "hand40": 1.0990384258101449,
+        "warm26": 1.2767496525331306,
+        "object12": 0.9576186468302389,
+        "wrench6": 0.17402074294413095,
+        "Fn6": 0.35788800780402363
+      },
+      "INITIAL_VALIDATE": {
+        "object12": 0.7839113447271561,
+        "wrench6": 0.30831165944764133,
+        "Fn6": 3.090622325558479
+      }
+    },
+    "POINT_IMPULSE": {
+      "TRAIN": {
+        "hand40": 0.012029860618426825,
+        "warm26": 0.03646174042933849,
+        "object12": 0.008253874272450898,
+        "wrench6": 0.0006723598793690616,
+        "Fn6": 0.0018562647680002518
+      },
+      "VALIDATE": {
+        "hand40": 1.0455416719693271,
+        "warm26": 1.020080112445926,
+        "object12": 4.637426376181856,
+        "wrench6": 0.11657833844420669,
+        "Fn6": 0.29343151729039624
+      },
+      "INITIAL_VALIDATE": {
+        "object12": 2.4376612705373453,
+        "wrench6": 0.30831165944764133,
+        "Fn6": 3.090622325558479
+      }
+    },
+    "RAW_DIRECT": {
+      "TRAIN": {
+        "hand40": 0.02593820512460405,
+        "warm26": 0.07927751843698655,
+        "object12": 0.07028548438612144,
+        "wrench6": 0.01628673759278307,
+        "Fn6": 0.01383158817465582
+      },
+      "VALIDATE": {
+        "hand40": 1.202654697411208,
+        "warm26": 1.4909534928590964,
+        "object12": 13.722401132875005,
+        "wrench6": 3.0654547346504843,
+        "Fn6": 0.22654412761188342
+      },
+      "INITIAL_VALIDATE": {
+        "object12": 0.7839113447271561,
+        "wrench6": 0.30831165944764133,
+        "Fn6": 3.090622325558479
+      }
+    },
+    "RAW_IMPULSE": {
+      "TRAIN": {
+        "hand40": 0.04398797625053499,
+        "warm26": 0.1035794885637306,
+        "object12": 0.47743555810715166,
+        "wrench6": 0.10640242541431,
+        "Fn6": 0.045786740157735824
+      },
+      "VALIDATE": {
+        "hand40": 1.113898676743098,
+        "warm26": 1.0718643097009561,
+        "object12": 8.694216933913273,
+        "wrench6": 2.048600276355246,
+        "Fn6": 0.5711341132689957
+      },
+      "INITIAL_VALIDATE": {
+        "object12": 2.4376612705373453,
+        "wrench6": 0.30831165944764133,
+        "Fn6": 3.090622325558479
+      }
+    },
+    "RMS01_DIRECT": {
+      "TRAIN": {
+        "hand40": 0.011378416329806235,
+        "warm26": 0.03600107842429966,
+        "object12": 0.010654746756037633,
+        "wrench6": 0.0014823708899940726,
+        "Fn6": 0.0011214856188877349
+      },
+      "VALIDATE": {
+        "hand40": 1.105295707849955,
+        "warm26": 1.5873467332581903,
+        "object12": 2.459366216049181,
+        "wrench6": 1.491812518511789,
+        "Fn6": 0.24737672944809408
+      },
+      "INITIAL_VALIDATE": {
+        "object12": 0.7839113447271561,
+        "wrench6": 0.30831165944764133,
+        "Fn6": 3.090622325558479
+      }
+    },
+    "RMS01_IMPULSE": {
+      "TRAIN": {
+        "hand40": 0.014200108006341115,
+        "warm26": 0.03796799183903659,
+        "object12": 0.031245638558324733,
+        "wrench6": 0.0011093101819960422,
+        "Fn6": 0.0025838523641243736
+      },
+      "VALIDATE": {
+        "hand40": 1.0845619008248393,
+        "warm26": 1.04767295645299,
+        "object12": 6.4099756690008745,
+        "wrench6": 0.14808393572472445,
+        "Fn6": 0.1984722092938108
+      },
+      "INITIAL_VALIDATE": {
+        "object12": 2.4376612705373453,
+        "wrench6": 0.30831165944764133,
+        "Fn6": 3.090622325558479
+      }
+    },
+    "RMS1_DIRECT": {
+      "TRAIN": {
+        "hand40": 0.01962557070511403,
+        "warm26": 0.05025820170386468,
+        "object12": 0.008341084755209987,
+        "wrench6": 0.005732126013023105,
+        "Fn6": 0.005694201625805843
+      },
+      "VALIDATE": {
+        "hand40": 1.059605581483163,
+        "warm26": 1.478091122844704,
+        "object12": 4.117585299685434,
+        "wrench6": 1.7555248534433758,
+        "Fn6": 0.22562773598875627
+      },
+      "INITIAL_VALIDATE": {
+        "object12": 0.7839113447271561,
+        "wrench6": 0.30831165944764133,
+        "Fn6": 3.090622325558479
+      }
+    },
+    "RMS1_IMPULSE": {
+      "TRAIN": {
+        "hand40": 0.02393648021764245,
+        "warm26": 0.05201114664796315,
+        "object12": 0.11456156284536886,
+        "wrench6": 0.010947587420861554,
+        "Fn6": 0.008604177512918792
+      },
+      "VALIDATE": {
+        "hand40": 1.1073853846757047,
+        "warm26": 1.0361895876752265,
+        "object12": 14.027065964166084,
+        "wrench6": 0.9952672489500758,
+        "Fn6": 0.23959765290010313
+      },
+      "INITIAL_VALIDATE": {
+        "object12": 2.4376612705373453,
+        "wrench6": 0.30831165944764133,
+        "Fn6": 3.090622325558479
+      }
+    }
+  },
+  "physical_response": {
+    "POINT_DIRECT": {
+      "object12": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 0.9998840652832273,
+          "model_finite_response_relative_L2_error": 0.9998839712853286,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 6
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 248,
+          "AD_relative_L2_error": 0.998471208201639,
+          "model_finite_response_relative_L2_error": 0.9984710687331363,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 6
+        }
+      },
+      "wrench6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0001456012434466,
+          "model_finite_response_relative_L2_error": 1.0001454627692867,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 14
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 266,
+          "AD_relative_L2_error": 1.0001643586910698,
+          "model_finite_response_relative_L2_error": 1.0001641218592752,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 14
+        }
+      },
+      "Fn6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0012138658326428,
+          "model_finite_response_relative_L2_error": 1.0012137158775605,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 49
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 284,
+          "AD_relative_L2_error": 0.9988852095847799,
+          "model_finite_response_relative_L2_error": 0.998883815143045,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 49
+        }
+      }
+    },
+    "POINT_IMPULSE": {
+      "object12": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0003577418363427,
+          "model_finite_response_relative_L2_error": 1.0003586192919187,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 2
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 248,
+          "AD_relative_L2_error": 0.9998868819229111,
+          "model_finite_response_relative_L2_error": 0.999889054623585,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 2
+        }
+      },
+      "wrench6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0002445859876588,
+          "model_finite_response_relative_L2_error": 1.0002447043008236,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 4
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 266,
+          "AD_relative_L2_error": 1.00271554072309,
+          "model_finite_response_relative_L2_error": 1.0027157825601085,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 4
+        }
+      },
+      "Fn6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0031988746755867,
+          "model_finite_response_relative_L2_error": 1.0031985228612308,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 43
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 284,
+          "AD_relative_L2_error": 1.0051483853812133,
+          "model_finite_response_relative_L2_error": 1.0051468706724926,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 43
+        }
+      }
+    },
+    "RAW_DIRECT": {
+      "object12": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 0.9728139917447055,
+          "model_finite_response_relative_L2_error": 0.9728140357645599,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 167
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 248,
+          "AD_relative_L2_error": 0.608678716878364,
+          "model_finite_response_relative_L2_error": 0.608677649196154,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 167
+        }
+      },
+      "wrench6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0240406784602691,
+          "model_finite_response_relative_L2_error": 1.0240421423027086,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 161
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 266,
+          "AD_relative_L2_error": 0.7443167508414738,
+          "model_finite_response_relative_L2_error": 0.7443162788275971,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 161
+        }
+      },
+      "Fn6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.012260000626274,
+          "model_finite_response_relative_L2_error": 1.0122609291284972,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 17
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 284,
+          "AD_relative_L2_error": 1.0420028330710427,
+          "model_finite_response_relative_L2_error": 1.0420034397954296,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 17
+        }
+      }
+    },
+    "RAW_IMPULSE": {
+      "object12": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.014490060369333,
+          "model_finite_response_relative_L2_error": 1.0144895663126072,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 159
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 248,
+          "AD_relative_L2_error": 0.8355926233341937,
+          "model_finite_response_relative_L2_error": 0.835591056319266,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 159
+        }
+      },
+      "wrench6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.135125944369898,
+          "model_finite_response_relative_L2_error": 1.1351227551808982,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 171
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 266,
+          "AD_relative_L2_error": 1.0614109219435766,
+          "model_finite_response_relative_L2_error": 1.0614083202819538,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 171
+        }
+      },
+      "Fn6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0259274263328912,
+          "model_finite_response_relative_L2_error": 1.025926421149137,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 39
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 284,
+          "AD_relative_L2_error": 1.0486870058285098,
+          "model_finite_response_relative_L2_error": 1.0486840866493365,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 39
+        }
+      }
+    },
+    "RMS01_DIRECT": {
+      "object12": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 0.9598080624960256,
+          "model_finite_response_relative_L2_error": 0.9598084591118493,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 171
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 248,
+          "AD_relative_L2_error": 0.5676029189037032,
+          "model_finite_response_relative_L2_error": 0.5676094667185867,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 171
+        }
+      },
+      "wrench6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0075752090654557,
+          "model_finite_response_relative_L2_error": 1.0075769258357332,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 160
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 266,
+          "AD_relative_L2_error": 0.7145435340278958,
+          "model_finite_response_relative_L2_error": 0.7145466312568015,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 160
+        }
+      },
+      "Fn6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.008915394176698,
+          "model_finite_response_relative_L2_error": 1.0089148001439652,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 27
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 284,
+          "AD_relative_L2_error": 1.0297882162480656,
+          "model_finite_response_relative_L2_error": 1.0297885073688657,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 27
+        }
+      }
+    },
+    "RMS01_IMPULSE": {
+      "object12": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 0.977589481771513,
+          "model_finite_response_relative_L2_error": 0.977591321247358,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 111
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 248,
+          "AD_relative_L2_error": 0.7073167852289198,
+          "model_finite_response_relative_L2_error": 0.7073027120587355,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 111
+        }
+      },
+      "wrench6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 0.9859542011762524,
+          "model_finite_response_relative_L2_error": 0.9859539866942862,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 65
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 266,
+          "AD_relative_L2_error": 0.8625169605950737,
+          "model_finite_response_relative_L2_error": 0.8625165272426082,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 65
+        }
+      },
+      "Fn6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.022745431441478,
+          "model_finite_response_relative_L2_error": 1.022744532310937,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 39
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 284,
+          "AD_relative_L2_error": 1.041143473902106,
+          "model_finite_response_relative_L2_error": 1.0411424220734942,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 39
+        }
+      }
+    },
+    "RMS1_DIRECT": {
+      "object12": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 0.9592947850936456,
+          "model_finite_response_relative_L2_error": 0.9592949796147721,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 177
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 248,
+          "AD_relative_L2_error": 0.4950867805648951,
+          "model_finite_response_relative_L2_error": 0.49509111111133774,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 177
+        }
+      },
+      "wrench6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0225832851615426,
+          "model_finite_response_relative_L2_error": 1.0225830480705222,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 170
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 266,
+          "AD_relative_L2_error": 0.711928598413399,
+          "model_finite_response_relative_L2_error": 0.71193301776484,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 170
+        }
+      },
+      "Fn6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0030759539447665,
+          "model_finite_response_relative_L2_error": 1.0030759388990693,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 45
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 284,
+          "AD_relative_L2_error": 1.00234697912734,
+          "model_finite_response_relative_L2_error": 1.0023456163396256,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 45
+        }
+      }
+    },
+    "RMS1_IMPULSE": {
+      "object12": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0324007358124478,
+          "model_finite_response_relative_L2_error": 1.0324018992945947,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 147
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 248,
+          "AD_relative_L2_error": 0.8332946600640131,
+          "model_finite_response_relative_L2_error": 0.833281339900762,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 147
+        }
+      },
+      "wrench6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0129379789365114,
+          "model_finite_response_relative_L2_error": 1.0129357440750912,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 168
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 266,
+          "AD_relative_L2_error": 0.7657881526258111,
+          "model_finite_response_relative_L2_error": 0.7657686747491289,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 168
+        }
+      },
+      "Fn6": {
+        "ALL_PHYSICAL_VALID": {
+          "pairs": 475,
+          "AD_relative_L2_error": 1.0022695473276857,
+          "model_finite_response_relative_L2_error": 1.0022692980724222,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 40
+        },
+        "FROZEN_PHYSICAL_SCREEN": {
+          "pairs": 284,
+          "AD_relative_L2_error": 1.0033814175101359,
+          "model_finite_response_relative_L2_error": 1.0033830240052066,
+          "zero_response_relative_L2_error": 1.0,
+          "candidate_AD_pairs": 40
+        }
+      }
+    }
+  },
+  "TRAIN_response": {
+    "POINT_DIRECT": {
+      "object12": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.9985244523914835,
+        "finite_response_relative_L2_error": 0.9985245511445079,
+        "zero_response_relative_error": 1.0
+      },
+      "wrench6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.9986414815679785,
+        "finite_response_relative_L2_error": 0.9986413977448406,
+        "zero_response_relative_error": 1.0
+      },
+      "Fn6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.9972866744534209,
+        "finite_response_relative_L2_error": 0.9972871442508807,
+        "zero_response_relative_error": 1.0
+      }
+    },
+    "POINT_IMPULSE": {
+      "object12": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.9982737750766778,
+        "finite_response_relative_L2_error": 0.9982734043949225,
+        "zero_response_relative_error": 1.0
+      },
+      "wrench6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.9995244594822605,
+        "finite_response_relative_L2_error": 0.9995244538754395,
+        "zero_response_relative_error": 1.0
+      },
+      "Fn6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 1.0079504872219343,
+        "finite_response_relative_L2_error": 1.0079501777769175,
+        "zero_response_relative_error": 1.0
+      }
+    },
+    "RAW_DIRECT": {
+      "object12": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.36858575547157285,
+        "finite_response_relative_L2_error": 0.36858121651376324,
+        "zero_response_relative_error": 1.0
+      },
+      "wrench6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.4099174738269539,
+        "finite_response_relative_L2_error": 0.409908290454007,
+        "zero_response_relative_error": 1.0
+      },
+      "Fn6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 1.0257030464141033,
+        "finite_response_relative_L2_error": 1.02570254549972,
+        "zero_response_relative_error": 1.0
+      }
+    },
+    "RAW_IMPULSE": {
+      "object12": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.44855636359756257,
+        "finite_response_relative_L2_error": 0.44855382707761654,
+        "zero_response_relative_error": 1.0
+      },
+      "wrench6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.46794339416753794,
+        "finite_response_relative_L2_error": 0.4679322559698058,
+        "zero_response_relative_error": 1.0
+      },
+      "Fn6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 1.047004341518469,
+        "finite_response_relative_L2_error": 1.0470040510238838,
+        "zero_response_relative_error": 1.0
+      }
+    },
+    "RMS01_DIRECT": {
+      "object12": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.5455226646666146,
+        "finite_response_relative_L2_error": 0.5455266662291499,
+        "zero_response_relative_error": 1.0
+      },
+      "wrench6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.48366233441501,
+        "finite_response_relative_L2_error": 0.48365837406330014,
+        "zero_response_relative_error": 1.0
+      },
+      "Fn6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 1.0193179089677062,
+        "finite_response_relative_L2_error": 1.0193168686495835,
+        "zero_response_relative_error": 1.0
+      }
+    },
+    "RMS01_IMPULSE": {
+      "object12": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.6766306613999906,
+        "finite_response_relative_L2_error": 0.676631530256466,
+        "zero_response_relative_error": 1.0
+      },
+      "wrench6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.869985267389388,
+        "finite_response_relative_L2_error": 0.8699871715035554,
+        "zero_response_relative_error": 1.0
+      },
+      "Fn6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 1.0534654133261672,
+        "finite_response_relative_L2_error": 1.0534604526970759,
+        "zero_response_relative_error": 1.0
+      }
+    },
+    "RMS1_DIRECT": {
+      "object12": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.4533042719900857,
+        "finite_response_relative_L2_error": 0.4533056066142754,
+        "zero_response_relative_error": 1.0
+      },
+      "wrench6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.4457166612987012,
+        "finite_response_relative_L2_error": 0.4457074519358553,
+        "zero_response_relative_error": 1.0
+      },
+      "Fn6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.9965741894605076,
+        "finite_response_relative_L2_error": 0.9965734427262486,
+        "zero_response_relative_error": 1.0
+      }
+    },
+    "RMS1_IMPULSE": {
+      "object12": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.4593023768478661,
+        "finite_response_relative_L2_error": 0.45930912317684885,
+        "zero_response_relative_error": 1.0
+      },
+      "wrench6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 0.5338560280668158,
+        "finite_response_relative_L2_error": 0.5338579699205658,
+        "zero_response_relative_error": 1.0
+      },
+      "Fn6": {
+        "pairs": 949,
+        "AD_relative_L2_error": 1.0314375268798794,
+        "finite_response_relative_L2_error": 1.03143203032235,
+        "zero_response_relative_error": 1.0
+      }
+    }
+  },
+  "weighted_response_loss_fractions": {
+    "POINT_DIRECT": 0.0,
+    "POINT_IMPULSE": 0.0,
+    "RAW_DIRECT": 0.9717471940713256,
+    "RAW_IMPULSE": 0.9318353415770766,
+    "RMS01_DIRECT": 0.6846416776172091,
+    "RMS01_IMPULSE": 0.7560472653520088,
+    "RMS1_DIRECT": 0.8854848662699905,
+    "RMS1_IMPULSE": 0.8458476422791524
+  },
+  "control_replay_all_exact": true,
+  "control_replay": {
+    "100": {
+      "POINT_DIRECT": {
+        "model": true,
+        "optimizer": true,
+        "sampler": true,
+        "pair_sampler": true,
+        "gradient_snapshot": true,
+        "logs": true
+      },
+      "POINT_IMPULSE": {
+        "model": true,
+        "optimizer": true,
+        "sampler": true,
+        "pair_sampler": true,
+        "gradient_snapshot": true,
+        "logs": true
+      },
+      "RAW_DIRECT": {
+        "model": true,
+        "optimizer": true,
+        "sampler": true,
+        "pair_sampler": true,
+        "gradient_snapshot": true,
+        "logs": true
+      },
+      "RAW_IMPULSE": {
+        "model": true,
+        "optimizer": true,
+        "sampler": true,
+        "pair_sampler": true,
+        "gradient_snapshot": true,
+        "logs": true
+      }
+    },
+    "2000": {
+      "POINT_DIRECT": {
+        "model": true,
+        "optimizer": true,
+        "sampler": true,
+        "pair_sampler": true,
+        "gradient_snapshot": true,
+        "logs": true
+      },
+      "POINT_IMPULSE": {
+        "model": true,
+        "optimizer": true,
+        "sampler": true,
+        "pair_sampler": true,
+        "gradient_snapshot": true,
+        "logs": true
+      },
+      "RAW_DIRECT": {
+        "model": true,
+        "optimizer": true,
+        "sampler": true,
+        "pair_sampler": true,
+        "gradient_snapshot": true,
+        "logs": true
+      },
+      "RAW_IMPULSE": {
+        "model": true,
+        "optimizer": true,
+        "sampler": true,
+        "pair_sampler": true,
+        "gradient_snapshot": true,
+        "logs": true
+      }
+    }
+  },
+  "physical_status": "NO_MODEL_QUALIFIED_FOR_ACTOR_OPTIMIZATION",
+  "actor_gradient_qualified": {
+    "POINT_DIRECT": false,
+    "POINT_IMPULSE": false,
+    "RAW_DIRECT": false,
+    "RAW_IMPULSE": false,
+    "RMS01_DIRECT": false,
+    "RMS01_IMPULSE": false,
+    "RMS1_DIRECT": false,
+    "RMS1_IMPULSE": false
+  },
+  "validation_status": "INSPECTED_DEVELOPMENT_NEVER_FIT_NOT_FINAL_TEST",
+  "fit_and_QA_wall_s": 87.20823160000145,
+  "total_runner_wall_s": 90.12689240003238,
+  "live_optimizer_steps": 16000,
+  "clone_only_optimizer_steps": 32,
+  "optimizer_steps": 16032,
+  "actual_native_integrations": 0,
+  "Actor_updates": 0,
+  "main_policy_promoted": false,
+  "unit_tests": 401,
+  "scale_preparation_normalizer_fits": 2,
+  "scale_preparation_response_unit_computations": 2,
+  "dry_loader_normalizer_recomputations": 1,
+  "dry_loader_response_unit_recomputations": 1,
+  "fit_loader_normalizer_recomputations": 1,
+  "fit_loader_response_unit_recomputations": 1,
+  "scope": "Same-bank response-unit/weight isolation. RMS improves some forward/object/wrench tradeoffs,Fn6 gradients remain unreliable;no Actor/task/ego/final-test or general speed admission. All eight outputs and exact fresh controls retained."
+}

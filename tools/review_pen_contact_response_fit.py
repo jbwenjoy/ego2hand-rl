@@ -4,15 +4,17 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 import numpy as np
 import torch
+import tomllib
 from supermimic_research.artifacts import file_pin,verify_file_pin
 from supermimic_research.frozen_sources import freeze_sources,verify_source_snapshot
+from supermimic_research.learning.world_model import raw_tree_equal
 
 
 def write(p,v):p.write_text(json.dumps(v,indent=2,allow_nan=False)+'\n',encoding='utf-8')
 
 
 def main(a):
-    ev=json.loads(a.evaluation.read_text());full=ev['schema']=='contact_pen_six_arm_physical_response_evaluation:2';diag=json.loads(a.diagnosis.read_text());fit=json.loads(verify_file_pin(ev['fit']).read_text());prep=json.loads(verify_file_pin(fit['prepared']).read_text());cr=json.loads(verify_file_pin(prep['VALIDATE_preparation' if full else 'CHECK_review']).read_text());out=a.output.resolve();role='VALIDATE' if full else 'CHECK'
+    ev=json.loads(a.evaluation.read_text());unit=ev['schema']=='contact_pen_response_units_evaluation:3';full=ev['schema'] in ['contact_pen_six_arm_physical_response_evaluation:2','contact_pen_response_units_evaluation:3'];diag=json.loads(a.diagnosis.read_text());fit=json.loads(verify_file_pin(ev['fit']).read_text());prep=json.loads(verify_file_pin(fit['prepared']).read_text());cr=json.loads(verify_file_pin(prep['VALIDATE_preparation' if full else 'CHECK_review']).read_text());out=a.output.resolve();role='VALIDATE' if full else 'CHECK'
     if out.exists() or not out.is_relative_to(ROOT/'runs') or diag['fit']!=ev['fit'] or ev['passed']!=ev['total'] or diag['passed']!=diag['total']:raise ValueError('Fresh complete matching evaluation/diagnosis review')
     out.mkdir();paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/pkg).rglob('*.py')})+[Path(__file__).resolve()]
     receipt=freeze_sources(paths,out/'source_snapshot',ROOT,subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip());write(out/'source_receipt.json',receipt)
@@ -40,7 +42,7 @@ def main(a):
             for mode,field in [('JVP','AD_relative_L2_error'),('finite','finite_response_relative_L2_error')]:
                 value=float(np.sqrt(np.sum(((train_pred[name+'_'+mode][:,sl]-train_pairs['finite_contrast'][:,sl])/scale[sl])**2)/den_train));checks[name+'_'+key+'_TRAIN_'+mode]=bool(np.isclose(value,diag['TRAIN_response'][name][key][field],atol=1e-10,rtol=1e-10))
             s=ev['aggregate'][name][key]['FROZEN_PHYSICAL_SCREEN'];outcomes[name][key]=dict(screen_pairs=s['pairs'],candidate_AD_pairs=s['candidate_AD_pairs'],all_local_screens_pass=s['candidate_AD_pairs']==s['pairs'])
-    checks.update(declared_live_updates=fit['live_models']*fit['live_updates_per_model']==(12000 if full else 8000),declared_clone_updates=fit['clone_only_optimizer_steps']==(24 if full else 16),total_optimizer_steps=fit['optimizer_steps']==(12024 if full else 8016),zero_task_native=fit['actual_native_integrations']==0)
+    checks.update(declared_live_updates=fit['live_models']*fit['live_updates_per_model']==(16000 if unit else 12000 if full else 8000),declared_clone_updates=fit['clone_only_optimizer_steps']==(32 if unit else 24 if full else 16),total_optimizer_steps=fit['optimizer_steps']==(16032 if unit else 12024 if full else 8016),zero_task_native=fit['actual_native_integrations']==0)
     if full:
         for update,curve in fit['curve'].items():
             checks['curve_'+update+'_only_declared_roles']=all(set(rows)==({'TRAIN','VALIDATE'} if update=='2000' else {'TRAIN'}) for rows in curve.values())
@@ -50,11 +52,27 @@ def main(a):
         for name,saved in checkpoint['arms'].items():
             rank=0 if name.startswith('POINT_') else 4 if name.startswith('RANK4_') else 20;ids=np.empty(0,dtype=np.int64) if rank==0 else subsets[f'rank{rank}'];contract=saved['pair_contract']
             checks[name+'_exact_pair_bank_identity']=contract==dict(rank=rank,rows=len(ids),index_sha256=hashlib.sha256(ids.tobytes()).hexdigest(),point_bank=prep['outputs']['TRAIN'],pair_bank=prep['pairs'],subset_bank=prep['pair_subsets'])
+    replay={};prior_pin=None
+    if unit:
+        cfg_path=verify_file_pin(fit['config']);cfg=tomllib.loads(cfg_path.read_text());prior_path=(cfg_path.parent/cfg['prior_fit']).resolve();prior=json.loads(prior_path.read_text());prior_pin=file_pin(prior_path)
+        verify_source_snapshot(json.loads(verify_file_pin(prior['source_receipt']).read_text()))
+        units=json.loads(verify_file_pin(fit['response_scale_preparation']).read_text());rms=np.load(verify_file_pin(units['arrays']))['response_scale']
+        for name,saved in checkpoint['arms'].items():
+            normalized=name.startswith('RMS');weight=0. if name.startswith('POINT_') else 1. if name.startswith('RMS1_') else .1;values=rms if normalized else np.asarray(saved['scales']['y_scale'])
+            expected=dict(schema='physical_response_units:1',mode='TRAIN_DERIVATIVE_RMS' if normalized else 'POINT_Y_SCALE',weight=weight,scale_sha256=hashlib.sha256(np.asarray(values,np.float64).tobytes()).hexdigest(),scale_report=fit['response_scale_preparation'])
+            checks[name+'_exact_response_units']=saved['response_contract']==expected and fit['response_contracts'][name]==expected and saved['contrast_weight']==weight
+        checks['same_initial_NN_as_rank_study']=raw_tree_equal(torch.load(verify_file_pin(fit['initial_NN']),weights_only=False,map_location='cpu'),torch.load(verify_file_pin(prior['initial_NN']),weights_only=False,map_location='cpu'))
+        mapping={'POINT_DIRECT':'POINT_DIRECT','POINT_IMPULSE':'POINT_IMPULSE','RAW_DIRECT':'RANK20_DIRECT','RAW_IMPULSE':'RANK20_IMPULSE'}
+        for cursor in ['100','2000']:
+            nh=json.loads(verify_file_pin(fit['checkpoint_health'][cursor]).read_text());oh=json.loads(verify_file_pin(prior['checkpoint_health'][cursor]).read_text());ns=torch.load(verify_file_pin(nh['checkpoint']),weights_only=False,map_location='cpu');os=torch.load(verify_file_pin(oh['checkpoint']),weights_only=False,map_location='cpu')
+            replay[cursor]={name:{k:raw_tree_equal(ns['arms'][name][k],os['arms'][old][k]) for k in ['model','optimizer','sampler','pair_sampler','gradient_snapshot']} for name,old in mapping.items()}
+            for name,old in mapping.items():replay[cursor][name]['logs']=raw_tree_equal(ns['logs'][name],os['logs'][old])
     verify_source_snapshot(receipt,live=True)
-    result=dict(schema='contact_pen_fullrank_fit_saved_review:2' if full else 'contact_pen_fit_saved_arithmetic_review:1',evaluation=file_pin(a.evaluation),diagnosis=file_pin(a.diagnosis),fit=ev['fit'],source_receipt=file_pin(out/'source_receipt.json'),
+    result=dict(schema='contact_pen_response_units_saved_review:3' if unit else 'contact_pen_fullrank_fit_saved_review:2' if full else 'contact_pen_fit_saved_arithmetic_review:1',evaluation=file_pin(a.evaluation),diagnosis=file_pin(a.diagnosis),fit=ev['fit'],source_receipt=file_pin(out/'source_receipt.json'),
         local_screen_outcomes=outcomes,actor_gradient_qualified={name:False for name in outcomes},physical_status='NO_MODEL_QUALIFIED_FOR_ACTOR_OPTIMIZATION',checks=checks,passed=sum(checks.values()),total=len(checks),actual_native_integrations=0,optimizer_steps=0,
         scope='Saved-array arithmetic and optimizer cursors only,not new neural/physics execution. No model passes all original local contact/response screens;none establishes a full20D Jacobian or permits model-based Actor promotion. Original failed data and all four fixed-final outputs retained.')
     if full:result['scope']='Independent saved-array arithmetic,cursors,pair identities,final-only validation and unchanged physical-mask review. Six fixed-final outputs retained;partial object/wrench improvement does not establish full20D contact/Fn6/forward/Actor reliability.'
+    if unit:result.update(control_replay_prior_fit=prior_pin,control_replay=replay,control_replay_all_exact=all(v for c in replay.values() for arm in c.values() for v in arm.values()),scope='Independent eight-arm saved-array/cursor/pair/unit identity,final-only inspected-development evaluation,masks and fresh-control replay audit. Replay mismatches retained if any,not repaired. No model admitted for Actor/full contact-Jacobian/task/ego use.')
     write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),checks=[result['passed'],result['total']],physical_status=result['physical_status'])),flush=True)
     if not all(checks.values()):raise ValueError('Retain saved-arithmetic discrepancy')
 
