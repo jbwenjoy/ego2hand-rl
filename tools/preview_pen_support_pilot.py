@@ -33,7 +33,7 @@ def write(path, value):
 
 
 @torch.no_grad()
-def execute(pin, config, gates, folder):
+def execute(pin, config, gates, folder, *, actor_initializer=None):
     """Transfer only actor/norm weights; never transfer W32 native state to W1."""
     folder.mkdir()
     state = torch.load(verify_file_pin(pin), map_location='cpu', weights_only=False)
@@ -51,9 +51,17 @@ def execute(pin, config, gates, folder):
     if list(runtime.motion.joint_names) != state['metadata']['joint_order']:
         raise ValueError('Joint order differs')
     cfg = state['config']
-    actor = GaussianPPOActor(161, 20, init_std=cfg['ppo_init_std'], std_range=(cfg['ppo_std_min'], cfg['ppo_std_max'])).to(runtime.device)
-    actor.load_state_dict(state['modules']['actor'], strict=True)
-    actor.eval()
+    initialization_audit = None
+    if actor_initializer is None:
+        actor = GaussianPPOActor(161, 20, init_std=cfg['ppo_init_std'], std_range=(cfg['ppo_std_min'], cfg['ppo_std_max'])).to(runtime.device)
+        actor.load_state_dict(state['modules']['actor'], strict=True)
+        actor.eval()
+    else:
+        try:
+            actor, initialization_audit = actor_initializer(runtime, state, pin)
+        except Exception:
+            runtime.close()
+            raise
     render_model = copy.copy(model)
     physical_checks = {}
     for key in ['body_mass', 'body_inertia', 'body_ipos', 'body_iquat', 'geom_size', 'geom_pos', 'geom_quat', 'geom_friction', 'geom_solref', 'geom_solimp',
@@ -157,6 +165,8 @@ def execute(pin, config, gates, folder):
                       model=file_pin(folder / 'model.mjb'), trace=file_pin(folder / 'trace.npz'),
                       raw_contacts=file_pin(folder / 'raw_contacts.npz'), control_windows=file_pin(folder / 'control_windows.npz'),
                       dt=.0025, cone=int(sim.wp_model.opt.cone))
+        if initialization_audit is not None:
+            result['actor_initialization'] = initialization_audit
         if result['native_integrations'] != 8 * len(actions) or not fixed_mount:
             raise ValueError('Native clock/mount mismatch')
         write(folder / 'report.json', result)
@@ -166,7 +176,7 @@ def execute(pin, config, gates, folder):
         runtime.close()
 
 
-def render(cases, out):
+def render(cases, out, *, title='最新几何／支持目标先导训练：真实仿真执行'):
     z = [dict(np.load(verify_file_pin(c['trace']))) for c in cases]
     durations = [c['summary']['metrics']['actual_duration_s'] for c in cases]
     scenes = []
@@ -195,11 +205,11 @@ def render(cases, out):
                     indices.append(j)
                     names.append(label + ('：终止静帧' if t >= duration else '：实测'))
                 selected.append(indices)
-                frame = canvas(1536, '最新几何／支持目标先导训练：真实仿真执行',
+                frame = canvas(1536, title,
                     '20倍慢放；均值动作；保存的2.5ms姿态，无插值；受控参考、完美位姿，非ego数据', panels, names,
                     '各列物理时间：' + ' / '.join(f'{min(t, duration):.3f}' for duration in durations) + ' 秒',
                     [f'完整任务7.36秒；两训练组各{cases[1]["trained_optimizer_steps"]}次优化更新。终止后保持末帧，没有继续仿真。',
-                     '无物体外力辅助；单参考、单种子的小规模试验，尚未通过完整任务。'])
+                     '无物体外力辅助；受控单参考、单种子；完整任务验收结果见评测报告。'])
                 if i == 0:
                     Image.fromarray(frame).save(out / 'start.png')
                     for _ in range(18):

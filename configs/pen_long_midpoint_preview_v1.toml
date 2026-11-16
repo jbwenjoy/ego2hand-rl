@@ -1,0 +1,10 @@
+schema = 1
+arm = "RESIDUAL"
+iteration = 1000
+checkpoint = "../runs/pen_long_control_training_v1/RESIDUAL/checkpoint_1000.pt"
+health = "../runs/pen_long_control_training_v1/RESIDUAL/health_1000.json"
+objective_config = "pen_long_control_training_v1.toml"
+gates = "controlled_evaluation_v4.toml"
+plant_context_report = "../runs/pen_trained_response_probe_v1/report.json"
+protocol = "../docs/pen-long-midpoint-preview-protocol-v1.md"
+scope = "One preregistered RESIDUAL1000 fresh LIVE W1 diagnostic execution;two camera views of one trajectory. No checkpoint selection,no equal-budget SUPPORT comparison,no early stop or budget change;final2000 nine-case evaluation remains required."

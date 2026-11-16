@@ -1,0 +1,68 @@
+{
+  "schema": "pen_long_control_startup_registration:1",
+  "status": "RUNNING_AT_REGISTRATION_NOT_FINAL",
+  "roots": {
+    "qualification": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_long_control_qualification_v1\\report.json",
+      "bytes": 10875,
+      "sha256": "962f4c0417ce8af17526ae5dfdf867d306a6c8cbf2476e0c85f65c9abee01134"
+    },
+    "first_health": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_long_control_training_v1\\RESIDUAL\\health_0001.json",
+      "bytes": 3618,
+      "sha256": "d8b907e95dd039f9ebc4e825c578a40c250ec2b13ff613008b1fa1656a033241"
+    },
+    "initialization": {
+      "path": "D:\\workspace\\supermimic-research\\runs\\pen_long_control_training_v1\\RESIDUAL\\initialization.json",
+      "bytes": 572,
+      "sha256": "b6106ec5a8fd70875b792efd389e015f76204b28a2561b1a0f7271efad60efc7"
+    }
+  },
+  "registered_per_arm": {
+    "iterations": 2000,
+    "native_integrations": 32768000,
+    "optimizer_steps": 64000,
+    "transitions": 4096000
+  },
+  "registered_total": {
+    "native_integrations": 65536000,
+    "optimizer_steps": 128000
+  },
+  "separate_qualification": {
+    "actual_native_integrations": 4096,
+    "optimizer_steps": 0
+  },
+  "first_checkpoint": {
+    "optimizer_steps": 32,
+    "training_transitions": 2048,
+    "derived_native_budget": 16384,
+    "normalizer_count": 288,
+    "reload": {
+      "native": {
+        "schema": "controlled_pen_owned_state:4",
+        "array_fields": 854,
+        "scalar_fields": 857,
+        "all_array_bytes_equal": true,
+        "differing_fields": [],
+        "all_scalar_values_equal": true,
+        "differing_scalar_fields": [],
+        "pointers_preserved": true,
+        "scope": "Immediate complete owned/native byte restoration only; physics future repeatability separate."
+      },
+      "modules_equal": true,
+      "optimizer_equal": true,
+      "memory_equal": true,
+      "observation_equal": true,
+      "stored_observation_equal": true,
+      "normalization_equal": true,
+      "CPU_observation_max_error": {
+        "policy": 2.384185791015625e-07,
+        "critic": 2.86102294921875e-06
+      }
+    },
+    "reload_wall_s": 1.0384860999765806
+  },
+  "later_training_actual_work": null,
+  "final_actual_work": null,
+  "scope": "Immutable qualification and first optimized reload evidence only. Running session was separately polled by the parent agent. This record is not current process liveness or final work accounting. No active console/progress log is pinned. Immediate reload byte equality does not establish future trajectory determinism. No WM Actor updates; model-free training metrics are not strict task success or ego results."
+}

@@ -14,7 +14,7 @@ def write(p,v):p.write_text(json.dumps(v,indent=2,allow_nan=False)+'\n',encoding
 
 
 def main(a):
-    ev=json.loads(a.evaluation.read_text());unit=ev['schema']=='contact_pen_response_units_evaluation:3';full=ev['schema'] in ['contact_pen_six_arm_physical_response_evaluation:2','contact_pen_response_units_evaluation:3'];diag=json.loads(a.diagnosis.read_text());fit=json.loads(verify_file_pin(ev['fit']).read_text());prep=json.loads(verify_file_pin(fit['prepared']).read_text());cr=json.loads(verify_file_pin(prep['VALIDATE_preparation' if full else 'CHECK_review']).read_text());out=a.output.resolve();role='VALIDATE' if full else 'CHECK'
+    ev=json.loads(a.evaluation.read_text());contact=ev['schema']=='contact_pen_Fn_response_evaluation:4';unit=ev['schema'] in ['contact_pen_response_units_evaluation:3','contact_pen_Fn_response_evaluation:4'];full=ev['schema'] in ['contact_pen_six_arm_physical_response_evaluation:2','contact_pen_response_units_evaluation:3','contact_pen_Fn_response_evaluation:4'];diag=json.loads(a.diagnosis.read_text());fit=json.loads(verify_file_pin(ev['fit']).read_text());prep=json.loads(verify_file_pin(fit['prepared']).read_text());cr=json.loads(verify_file_pin(prep['VALIDATE_preparation' if full else 'CHECK_review']).read_text());out=a.output.resolve();role='VALIDATE' if full else 'CHECK'
     if out.exists() or not out.is_relative_to(ROOT/'runs') or diag['fit']!=ev['fit'] or ev['passed']!=ev['total'] or diag['passed']!=diag['total']:raise ValueError('Fresh complete matching evaluation/diagnosis review')
     out.mkdir();paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (ROOT/'src'/pkg).rglob('*.py')})+[Path(__file__).resolve()]
     receipt=freeze_sources(paths,out/'source_snapshot',ROOT,subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip());write(out/'source_receipt.json',receipt)
@@ -58,21 +58,34 @@ def main(a):
         verify_source_snapshot(json.loads(verify_file_pin(prior['source_receipt']).read_text()))
         units=json.loads(verify_file_pin(fit['response_scale_preparation']).read_text());rms=np.load(verify_file_pin(units['arrays']))['response_scale']
         for name,saved in checkpoint['arms'].items():
-            normalized=name.startswith('RMS');weight=0. if name.startswith('POINT_') else 1. if name.startswith('RMS1_') else .1;values=rms if normalized else np.asarray(saved['scales']['y_scale'])
+            normalized=contact or name.startswith('RMS');weight=0. if name.startswith('POINT_') else 1. if name.startswith(('RMS1_','FN1_')) else .1;values=rms if normalized else np.asarray(saved['scales']['y_scale'])
             expected=dict(schema='physical_response_units:1',mode='TRAIN_DERIVATIVE_RMS' if normalized else 'POINT_Y_SCALE',weight=weight,scale_sha256=hashlib.sha256(np.asarray(values,np.float64).tobytes()).hexdigest(),scale_report=fit['response_scale_preparation'])
+            if contact:expected.update(schema='physical_response_units:2',blocks=['object12','wrench6']+(['Fn6'] if name.startswith('FN') else []))
             checks[name+'_exact_response_units']=saved['response_contract']==expected and fit['response_contracts'][name]==expected and saved['contrast_weight']==weight
         checks['same_initial_NN_as_rank_study']=raw_tree_equal(torch.load(verify_file_pin(fit['initial_NN']),weights_only=False,map_location='cpu'),torch.load(verify_file_pin(prior['initial_NN']),weights_only=False,map_location='cpu'))
-        mapping={'POINT_DIRECT':'POINT_DIRECT','POINT_IMPULSE':'POINT_IMPULSE','RAW_DIRECT':'RANK20_DIRECT','RAW_IMPULSE':'RANK20_IMPULSE'}
+        mapping={n:n for n in ['RMS01_DIRECT','RMS01_IMPULSE','RMS1_DIRECT','RMS1_IMPULSE']} if contact else {'POINT_DIRECT':'POINT_DIRECT','POINT_IMPULSE':'POINT_IMPULSE','RAW_DIRECT':'RANK20_DIRECT','RAW_IMPULSE':'RANK20_IMPULSE'}
         for cursor in ['100','2000']:
             nh=json.loads(verify_file_pin(fit['checkpoint_health'][cursor]).read_text());oh=json.loads(verify_file_pin(prior['checkpoint_health'][cursor]).read_text());ns=torch.load(verify_file_pin(nh['checkpoint']),weights_only=False,map_location='cpu');os=torch.load(verify_file_pin(oh['checkpoint']),weights_only=False,map_location='cpu')
             replay[cursor]={name:{k:raw_tree_equal(ns['arms'][name][k],os['arms'][old][k]) for k in ['model','optimizer','sampler','pair_sampler','gradient_snapshot']} for name,old in mapping.items()}
             for name,old in mapping.items():replay[cursor][name]['logs']=raw_tree_equal(ns['logs'][name],os['logs'][old])
+        if contact:
+            checks['component_probe_TRAIN_only']=fit['response_component_probe_role']=='TRAIN'
+            for cursor,table in fit['response_components_curve'].items():
+                for name,values in table.items():
+                    used=values['object12']+values['wrench6']+(values['Fn6'] if name.startswith('FN') else 0.)
+                    weight=checkpoint['arms'][name]['contrast_weight']
+                    checks[name+'_components_'+cursor]=bool(np.isclose(used,values['total_used'],atol=1e-10,rtol=1e-10) and np.isclose(weight*used,values['weighted_total_used'],atol=1e-10,rtol=1e-10))
+            for name in checkpoint['arms']:
+                errors=((train_pred[name+'_finite']-train_pairs['finite_contrast'])/rms)**2
+                for block,sl in blocks.items():
+                    value=float(errors[:,sl].mean());checks[name+'_final_component_'+block]=bool(np.isclose(value,fit['response_components_curve']['2000'][name][block],atol=1e-10,rtol=1e-10))
     verify_source_snapshot(receipt,live=True)
-    result=dict(schema='contact_pen_response_units_saved_review:3' if unit else 'contact_pen_fullrank_fit_saved_review:2' if full else 'contact_pen_fit_saved_arithmetic_review:1',evaluation=file_pin(a.evaluation),diagnosis=file_pin(a.diagnosis),fit=ev['fit'],source_receipt=file_pin(out/'source_receipt.json'),
+    result=dict(schema='contact_pen_Fn_response_saved_review:4' if contact else 'contact_pen_response_units_saved_review:3' if unit else 'contact_pen_fullrank_fit_saved_review:2' if full else 'contact_pen_fit_saved_arithmetic_review:1',evaluation=file_pin(a.evaluation),diagnosis=file_pin(a.diagnosis),fit=ev['fit'],source_receipt=file_pin(out/'source_receipt.json'),
         local_screen_outcomes=outcomes,actor_gradient_qualified={name:False for name in outcomes},physical_status='NO_MODEL_QUALIFIED_FOR_ACTOR_OPTIMIZATION',checks=checks,passed=sum(checks.values()),total=len(checks),actual_native_integrations=0,optimizer_steps=0,
         scope='Saved-array arithmetic and optimizer cursors only,not new neural/physics execution. No model passes all original local contact/response screens;none establishes a full20D Jacobian or permits model-based Actor promotion. Original failed data and all four fixed-final outputs retained.')
     if full:result['scope']='Independent saved-array arithmetic,cursors,pair identities,final-only validation and unchanged physical-mask review. Six fixed-final outputs retained;partial object/wrench improvement does not establish full20D contact/Fn6/forward/Actor reliability.'
     if unit:result.update(control_replay_prior_fit=prior_pin,control_replay=replay,control_replay_all_exact=all(v for c in replay.values() for arm in c.values() for v in arm.values()),scope='Independent eight-arm saved-array/cursor/pair/unit identity,final-only inspected-development evaluation,masks and fresh-control replay audit. Replay mismatches retained if any,not repaired. No model admitted for Actor/full contact-Jacobian/task/ego use.')
+    if contact:result['scope']='Independent explicit Fn6-addition component/gradient/cursor/pair/block identity,physical-mask and fresh-control replay audit. All eight outcomes retained;no Actor/full contact-Jacobian/task/ego admission.'
     write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),checks=[result['passed'],result['total']],physical_status=result['physical_status'])),flush=True)
     if not all(checks.values()):raise ValueError('Retain saved-arithmetic discrepancy')
 

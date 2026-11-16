@@ -13,11 +13,12 @@ from ..frozen_sources import freeze_sources,verify_source_snapshot
 from .checkpoint import _adam_valid,_finite_tree
 from .gpu_monitor import GPUMonitor
 from .pen_branch_fit import arm_payload,validate_fit_contract
-from .pen_contrast_update import update_contrast,restore_contrast_arm
+from .pen_contrast_update import update_contrast,restore_contrast_arm,response_components
 from .pen_response import PenResponseWM
 from .pen_response_dataset import common_response_data
 from .pen_fullrank_study import model_config as fullrank_model_config,load_common as load_fullrank_common,pair_contract,evaluation_roles
 from .pen_response_units import model_config as unit_model_config,derivative_scale,response_contract
+from .pen_contact_supervision import model_config as contact_model_config
 from .pen_stage import metrics,write
 from .world_model import atomic_checkpoint,capture_rng,raw_tree_equal
 
@@ -89,9 +90,9 @@ def common_model_config(spec):
 def run_fit(root,config_path,out,*,run=False,common_data=None):
     entry_started=time.perf_counter()
     root,cp,out=[Path(p).resolve() for p in [root,config_path,out]];spec=tomllib.loads(cp.read_text())
-    unit_study=spec.get('schema')==4;rank_study=spec.get('schema') in [3,4];fresh=spec.get('schema',1) in [2,3,4];receipt=None;subsets=None;unit_values=None;unit_pin=None
+    contact_study=spec.get('schema')==5;unit_study=spec.get('schema') in [4,5];rank_study=spec.get('schema') in [3,4,5];fresh=spec.get('schema',1) in [2,3,4,5];receipt=None;subsets=None;unit_values=None;unit_pin=None
     if rank_study:
-        cfg=unit_model_config(spec) if unit_study else fullrank_model_config(spec)
+        cfg=contact_model_config(spec) if contact_study else unit_model_config(spec) if unit_study else fullrank_model_config(spec)
         if common_data is None:raise ValueError('Explicit full20 common-data report required')
         pp,prep,data,pairs,subsets=load_fullrank_common(cp,common_data);base=None
         source_paths=sorted({p for pkg in ['supermimic_research','dex_supermimic','chord_study'] for p in (root/'src'/pkg).rglob('*.py')})+[root/'tools/train_pen_contrasts.py',cp,verify_file_pin(prep['protocol']),(cp.parent/spec['protocol']).resolve()]
@@ -100,7 +101,8 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
         expected_pairs=949
         if unit_study:
             up=(cp.parent/spec['response_scale_preparation']).resolve();units=json.loads(up.read_text());unit_pin=file_pin(up)
-            if units['config']!=file_pin(cp) or units['pairs']!=prep['pairs'] or units['point_scales']!=prep['scales'] or units['passed']!=units['total'] or units['input_role']!='VALID_TRAIN_PAIR_TARGETS_ONLY' or units['validation_rows_used_for_TRAIN']:raise ValueError('Passing exact TRAIN-only response units required')
+            expected_unit_config=(cp.parent/spec['scale_preparation_config']).resolve() if contact_study else cp
+            if units['config']!=file_pin(expected_unit_config) or units['pairs']!=prep['pairs'] or units['point_scales']!=prep['scales'] or units['passed']!=units['total'] or units['input_role']!='VALID_TRAIN_PAIR_TARGETS_ONLY' or units['validation_rows_used_for_TRAIN']:raise ValueError('Passing exact TRAIN-only response units required')
             verify_source_snapshot(json.loads(verify_file_pin(units['source_receipt']).read_text()))
             stored=dict(np.load(verify_file_pin(units['arrays'])));point=np.load(verify_file_pin(prep['scales']))['y_scale'];computed=derivative_scale(pairs['finite_contrast'],point,role='TRAIN_CONTROLLED_PHYSICAL_RESPONSE')
             if stored.keys()!=computed.keys() or any(not np.array_equal(v,stored[k]) for k,v in computed.items()):raise ValueError('Response units differ from eligible TRAIN reconstruction')
@@ -154,7 +156,7 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
     scales=dict(np.load(verify_file_pin(prep['scales'])));head_scales=dict(np.load(verify_file_pin(prep['head_scales'])))
     heads=dict(DIRECT=dict(head_mean=scales['y_mean'],head_scale=scales['y_scale']),IMPULSE=head_scales)
     arms={};initial=None;buffers={}
-    for package in (['POINT','RAW','RMS01','RMS1'] if unit_study else ['POINT','RANK4','RANK20'] if rank_study else ['POINT','RESPONSE']):
+    for package in (['RMS01','FN01','RMS1','FN1'] if contact_study else ['POINT','RAW','RMS01','RMS1'] if unit_study else ['POINT','RANK4','RANK20'] if rank_study else ['POINT','RESPONSE']):
         for mode in ['DIRECT','IMPULSE']:
             name=package+'_'+mode;model=PenResponseWM(scales,heads[mode],prep['physics'],width=cfg['width'],coupled=mode=='IMPULSE').to(device)
             if initial is None:initial={k:v.detach().cpu().clone() for k,v in model.net.state_dict().items()}
@@ -162,7 +164,7 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
             buffers[name]={k:v.detach().cpu().clone() for k,v in model.named_buffers()}
             arms[name]=dict(model=model,optimizer=torch.optim.AdamW(model.parameters(),lr=cfg['learning_rate'],weight_decay=cfg['weight_decay'],fused=True),
                 sampler=torch.Generator(device=device).manual_seed(cfg['sampler_seed']),pair_sampler=torch.Generator(device=device).manual_seed(cfg['pair_sampler_seed']),
-                mode=mode,contrast_weight=1. if unit_study and package=='RMS1' else spec['contrast_weight'] if package!='POINT' else 0.)
+                mode=mode,contrast_weight=1. if unit_study and package in ['RMS1','FN1'] else spec['contrast_weight'] if package!='POINT' else 0.)
     if not all(raw_tree_equal(initial,arm['model'].net.state_dict()) for arm in arms.values()):raise ValueError('Identical four-arm NN initialization')
     tensor=lambda a,dtype:torch.as_tensor(a,dtype=dtype,device=device)
     d=data['TRAIN'];valid=d['valid'];cache=dict(x=tensor(d['x'][valid],torch.float32),y=tensor(d['y'][valid],torch.float64),
@@ -183,14 +185,14 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
         if unit_study:
             rms_tensor=tensor(unit_values,torch.float64)
             for name,arm in arms.items():
-                rms=name.startswith('RMS');value=unit_values if rms else scales['y_scale'];contract=response_contract(value,'TRAIN_DERIVATIVE_RMS' if rms else 'POINT_Y_SCALE',arm['contrast_weight'],unit_pin)
+                rms=contact_study or name.startswith('RMS');value=unit_values if rms else scales['y_scale'];blocks=['object12','wrench6']+(['Fn6'] if name.startswith('FN') else []) if contact_study else None;contract=response_contract(value,'TRAIN_DERIVATIVE_RMS' if rms else 'POINT_Y_SCALE',arm['contrast_weight'],unit_pin,blocks=blocks)
                 arm['response_contract']=contract;arm_caches[name]['response_contract']=contract.copy();arm_caches[name]['response_scale']=rms_tensor if rms else arm['model'].y_scale
     out.mkdir()
     if fresh:
         import subprocess
         receipt=freeze_sources(source_paths,out/'source_snapshot',root,subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip());write(out/'source_receipt.json',receipt);lineage['source_receipt']=file_pin(out/'source_receipt.json')
         atomic_checkpoint(out/'initial_NN.pt',initial);lineage['initial_NN']=file_pin(out/'initial_NN.pt')
-    study_version=4 if unit_study else 3 if rank_study else 2 if fresh else 1
+    study_version=5 if contact_study else 4 if unit_study else 3 if rank_study else 2 if fresh else 1
     intent=dict(schema=f'pen_response_loss_ablation:{study_version}',**lineage,planned_updates_per_model=2000,models=list(arms),
         matched_initial_NN=True,point_batch=256,response_pair_batch=32,response_weight=.1,pair_seed=7751,
         response_loss='mean object12 + mean source-BODY wrench6 squared finite-action contrast error;frozen valid-TRAIN-only scales' if fresh else 'mean object12 + mean source-BODY wrench6 squared finite-action contrast error, divided by unchanged frozen V2 output scales',
@@ -198,7 +200,7 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
     if rank_study:intent.update(health_probe_role='TRAIN',health_probe_rows=128,validation_evaluation_updates=[2000],pair_contracts={n:a['pair_contract'] for n,a in arms.items()})
     if unit_study:intent['response_contracts']={n:a['response_contract'] for n,a in arms.items()}
     write(out/'intent.json',intent)
-    logs={n:[] for n in arms};gradients={};curve={};healths={};timers=[];monitor=GPUMonitor();monitor.start();start=time.perf_counter()
+    logs={n:[] for n in arms};gradients={};curve={};component_curve={};healths={};timers=[];monitor=GPUMonitor();monitor.start();start=time.perf_counter()
     try:
         for update in range(1,2001):
             begin,end=torch.cuda.Event(enable_timing=True),torch.cuda.Event(enable_timing=True);begin.record()
@@ -207,6 +209,7 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
                 if gradient is not None:gradients[name]=gradient
             end.record();timers.append((begin,end))
             if update in [100,500,1000,2000]:curve[str(update)]={n:{r:metrics(a['model'],x,y)[0] for r,(x,y) in evaluation.items() if not rank_study or r in evaluation_roles(update)} for n,a in arms.items()}
+            if contact_study and update in [100,500,1000,2000]:component_curve[str(update)]={n:response_components(a,arm_caches[n]) for n,a in arms.items()}
             if update in [100,2000]:
                 path=out/f'pen_response_loss_checkpoint_{update:04d}.pt'
                 atomic_checkpoint(path,dict(schema=f'pen_response_loss_ablation_checkpoint:{study_version}',**lineage,update=update,planned_updates=2000,
@@ -239,4 +242,5 @@ def run_fit(root,config_path,out,*,run=False,common_data=None):
         result['CUDA_ms_per_eight_model_update' if unit_study else 'CUDA_ms_per_six_model_update']=result.pop('CUDA_ms_per_four_model_update')
         result.update(validation_evaluation_updates=[2000],health_probe_role='TRAIN',health_probe_rows=128,pair_contracts={n:a['pair_contract'] for n,a in arms.items()},scope='Registered six-arm rank4/rank20 response supervision with one full20 TRAIN point bank. Validation only at final2000,no fit/scales/selection/early stopping;old CHECK unused. Same original reference/fixed actor seed,not final-test/ego/Actor/physical-gradient qualification.')
     if unit_study:result.update(response_contracts={n:a['response_contract'] for n,a in arms.items()},loader_response_unit_recomputations=1,scope='Registered eight-arm derivative-unit/weight isolation,unchanged full20 TRAIN point/pair banks and forward anchor. Inspected NEVER_FIT validation only at final2000,no fit/scales/selection;not final-test/ego/Actor or physical-gradient qualification.')
+    if contact_study:result.update(response_component_probe_role='TRAIN',response_components_curve=component_curve,scope='Registered Fn6-response addition against unchanged object/wrench controls at two fixed weights. Same units/data/NN/forward anchor;inspected NEVER_FIT development validation only at final budget. Not Actor/task/ego/full contact-Jacobian qualification.')
     write(out/'report.json',result);return dict(report=file_pin(out/'report.json'),checkpoint=file_pin(path),health=healths,fit_and_QA_wall_s=wall)

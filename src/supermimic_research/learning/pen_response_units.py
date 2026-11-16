@@ -25,7 +25,11 @@ def derivative_scale(targets,point_scale,*,role,floor_relative=.001):
     return dict(raw_RMS=rms,floor=floor,response_scale=np.maximum(rms,floor))
 
 
-def response_contract(scale,mode,weight,scale_report):
+def response_contract(scale,mode,weight,scale_report,*,blocks=None):
     a=np.asarray(scale,dtype=np.float64)
     if a.shape!=(90,) or not np.isfinite(a).all() or np.any(a<=0) or mode not in ['POINT_Y_SCALE','TRAIN_DERIVATIVE_RMS'] or weight not in [0.,.1,1.]:raise ValueError('Explicit finite response-scale/cache contract required')
-    return dict(schema='physical_response_units:1',mode=mode,weight=float(weight),scale_sha256=hashlib.sha256(a.tobytes()).hexdigest(),scale_report=scale_report)
+    result=dict(schema='physical_response_units:1',mode=mode,weight=float(weight),scale_sha256=hashlib.sha256(a.tobytes()).hexdigest(),scale_report=scale_report)
+    if blocks is not None:
+        if blocks not in [['object12','wrench6'],['object12','wrench6','Fn6']]:raise ValueError('Explicit existing blocks with optional Fn6 addition required')
+        result.update(schema='physical_response_units:2',blocks=list(blocks))
+    return result

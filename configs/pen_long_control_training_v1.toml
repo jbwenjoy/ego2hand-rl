@@ -1,0 +1,34 @@
+schema = 1
+study = "LONG_CONTROL_BASELINE"
+adapter_config = "pen_full_pose_native_v1.toml"
+ppo_config = "pen_native_ppo_v1.toml"
+prior_ledger = "../provenance/pen_response_unit_results/ledger.json"
+protocol = "../docs/pen-long-control-protocol-v1.md"
+score_study = "../runs/pen_support_score_study_v1/report.json"
+checkpoint_schema = "pen_geometry_support_PPO_training:4"
+support_score = "CENTERED"
+fixed_frame_features = "CACHED"
+first_checkpoint_reload = true
+seed = 7411
+num_envs = 32
+calibration_controls = 8
+rollout_controls = 64
+pilot_iterations = 2000
+checkpoint_interval = 100
+initial_mean = "INITIAL_RAW_WITH_ZERO_MEAN_HEAD_WEIGHTS"
+initial_std = 0.05
+std_min = 0.02
+std_max = 0.2
+geometry_soft_weight = 0.25
+geometry_failure_penalty = 2.0
+force_scale_N = 0.3
+torque_scale_Nm = 0.003
+object_penetration_m = 0.002
+self_penetration_m = 0.0002
+joint_excursion_rad = 0.001
+nonhand_normal_N = 0.1
+scope = "Registered fresh shared initialization2000-round model-free geometry/support control baseline. Per arm4096000 transitions/32768000 native integrations/64000 Adam steps. No WM Actor,ego,independent-seed or A1/A2 claim;real no-aid task evaluation remains required."
+
+[support_weights]
+RESIDUAL = 0.0
+SUPPORT = 0.2

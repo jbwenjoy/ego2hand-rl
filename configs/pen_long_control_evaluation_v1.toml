@@ -1,0 +1,14 @@
+schema = 1
+training_report = "../runs/pen_long_control_training_v1/report.json"
+objective_config = "pen_long_control_training_v1.toml"
+gates = "controlled_evaluation_v4.toml"
+protocol = "../docs/pen-long-control-evaluation-protocol-v1.md"
+registration = "../runs/pen_long_control_evaluation_registration_v1/registration.json"
+startup_ledger = "../provenance/pen_long_control_registration_v1/ledger.json"
+plant_context_report = "../runs/pen_trained_response_probe_v1/report.json"
+repetitions = 3
+case_order = ["INITIAL", "RESIDUAL", "SUPPORT"]
+video_repetition = 0
+required_training_iterations = 2000
+evaluation_features = "LIVE"
+scope = "Fixed final2000 mean policies,three fresh W1 numerical repeats each;first repeat video. Full7.36s/full pose/no-aid/strict geometry gates. Single training seed and controlled perfect-pose reference,not ego or independent-seed generalization."

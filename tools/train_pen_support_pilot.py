@@ -23,10 +23,21 @@ def save(learner,receipt,path):
     temporary=path.with_suffix('.tmp');torch.save(learner.checkpoint(receipt),temporary);temporary.replace(path);return file_pin(path)
 
 
+def registered_budget(cfg):
+    long=cfg.get('study')=='LONG_CONTROL_BASELINE'
+    n=cfg['pilot_iterations'];interval=cfg.get('checkpoint_interval',1)
+    if long:
+        if n!=2000 or interval!=100 or cfg.get('fixed_frame_features')!='CACHED' or cfg.get('first_checkpoint_reload') is not True:raise ValueError('Registered2000-round cached control baseline and first reload required')
+    elif n not in [2,64]:raise ValueError('Historical pilot cannot silently expand its budget')
+    if interval<1 or cfg['num_envs']!=32 or cfg['rollout_controls']!=64:raise ValueError('Registered32-world64-control budget required')
+    return long
+
+
 def main(a):
     cp=a.config.resolve();cfg,ppo=pilot_settings(cp);qp=a.qualification.resolve();qualification=json.loads(qp.read_text());out=a.output.resolve()
     iterations=cfg['pilot_iterations'];interval=cfg.get('checkpoint_interval',1)
-    if out.exists() or not out.is_relative_to(ROOT/'runs') or iterations not in [2,64] or interval<1 or cfg['num_envs']!=32 or cfg['rollout_controls']!=64:raise ValueError('Fresh explicitly registered two-arm trial')
+    long=registered_budget(cfg)
+    if out.exists() or not out.is_relative_to(ROOT/'runs'):raise ValueError('Fresh explicitly registered two-arm trial')
     if qualification['config']!=file_pin(cp) or qualification['passed']!=qualification['total'] or qualification['optimizer_steps']!=0:raise ValueError('Current completed zero-update qualification required')
     verify_source_snapshot(json.loads(verify_file_pin(qualification['source_receipt']).read_text()),live=True)
     common=torch.load(verify_file_pin(qualification['common_initial']),map_location='cpu',weights_only=False)
@@ -42,6 +53,7 @@ def main(a):
     Simulation.step=step
     try:
         with torch.jit.optimized_execution(False):
+            if long:torch.set_num_threads(4)
             for arm_index,arm in enumerate(['RESIDUAL','SUPPORT']):
                 phase=arm+'_initialization';folder=out/arm;folder.mkdir();start_integrations=observed
                 runtime=SupportPenRuntime(cp,32);learner=SupportPenPPO(runtime,ppo,arm);fork,changes=fork_initial_state(common,learner.metadata());audit=learner.load(fork)
@@ -63,10 +75,20 @@ def main(a):
                     t=time.perf_counter();stats=learner.update();update_s=time.perf_counter()-t;updates+=stats['optimizer_steps']
                     if not finite_training_state(learner):raise ValueError('Nonfinite trained modules/optimizer')
                     checkpoint=save(learner,receipt,folder/f'checkpoint_{iteration:04d}.pt') if checkpoint_due else None;loop_s=time.perf_counter()-iteration_start
+                    reload_audit=None;reload_s=0.
+                    if long and iteration==1:
+                        reload_started=time.perf_counter()
+                        saved=torch.load(verify_file_pin(checkpoint),map_location='cpu',weights_only=False);reload_audit=learner.load(saved)
+                        if not all(v for v in reload_audit.values() if type(v) is bool) or not reload_audit['native']['all_array_bytes_equal'] or not reload_audit['native']['all_scalar_values_equal']:raise ValueError('First optimized checkpoint reload differs')
+                        reload_s=time.perf_counter()-reload_started
                     log=dict(iteration=iteration,arm=arm,parent=parent,checkpoint=checkpoint,memory=memory_pin,collector=health,
                         summary=summary,collection_wall_s=collection_s,update_wall_s=update_s,iteration_wall_s=loop_s,remaining_this_arm_loop_s=(iterations-iteration)*loop_s,
                         estimated_total_remaining_loop_s=((iterations-iteration)+(1-arm_index)*iterations)*loop_s,
                         optimizer_steps=learner.optimizer_steps,training_transitions=learner.training_transitions,normalizer_count=int(learner.actor.norm.count))
+                    if reload_audit is not None:log.update(first_checkpoint_reload=reload_audit,first_checkpoint_reload_wall_s=reload_s)
+                    if long:
+                        recent=[row['iteration_wall_s'] for row in logs[-49:]]+[loop_s];typical=sorted(recent)[len(recent)//2]
+                        log.update(remaining_this_arm_loop_s=(iterations-iteration)*typical,estimated_total_remaining_loop_s=((iterations-iteration)+(1-arm_index)*iterations)*typical,ETA_scope='Median of at most50 recent loop times;startup/reload/next-arm setup/final evaluation excluded.')
                     write(folder/f'health_{iteration:04d}.json',log);logs.append(log)
                     if checkpoint is not None:parent=checkpoint
                     print(json.dumps(dict(arm=arm,iteration=iteration,checks=[health['passed'],health['total']],checkpoint=checkpoint,summary=summary,remaining_this_arm_loop_s=log['remaining_this_arm_loop_s'],estimated_total_remaining_loop_s=log['estimated_total_remaining_loop_s'])),flush=True)
@@ -78,7 +100,7 @@ def main(a):
             verify_file_pin(qualification['common_initial']);verify_source_snapshot(receipt,live=True)
             checks=dict(equal_native_budget=all(c['actual_native_integrations']==iterations*16384 for c in arms),equal_optimizer_budget=all(c['optimizer_steps']==iterations*32 for c in arms),
                 equal_transition_budget=all(c['training_transitions']==iterations*2048 for c in arms),actual_native_total=observed==iterations*32768,actual_optimizer_total=updates==iterations*64)
-            result=dict(schema='pen_geometry_support_training_pilot:1',config=file_pin(cp),qualification=file_pin(qp),source_receipt=file_pin(out/'source_receipt.json'),arms=arms,
+            result=dict(schema='pen_geometry_support_long_control_training:2' if long else 'pen_geometry_support_training_pilot:1',config=file_pin(cp),qualification=file_pin(qp),source_receipt=file_pin(out/'source_receipt.json'),arms=arms,
                 checks=checks,passed=sum(checks.values()),total=len(checks),actual_native_integrations=observed,optimizer_steps=updates,
                 scope=cfg['scope']+' Actual new geometry-aware pilot parameters, original timing/physics/no aids; training metrics alone do not establish strict task success or support benefit. Shared calibration charged in qualification.')
             write(out/'report.json',result);print(json.dumps(dict(report=file_pin(out/'report.json'),checks=[result['passed'],result['total']],native_integrations=observed,optimizer_steps=updates)))
