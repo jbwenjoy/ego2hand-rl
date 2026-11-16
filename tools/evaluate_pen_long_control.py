@@ -17,6 +17,7 @@ from supermimic_research.frozen_sources import freeze_sources, verify_source_sna
 from supermimic_research.learning.pen_w1_evaluation import actor_for_fresh_live_W1
 from supermimic_research.runtime.controlled_evaluation import summarize_trace
 from supermimic_research.runtime.pen_support_runtime import SupportPenRuntime
+from supermimic_research.runtime.pen_executed_control_audit import audit_executed_control
 from preview_pen_support_pilot import execute, render, write
 
 
@@ -92,7 +93,7 @@ def main(a):
     out = a.output.resolve()
     if out.exists() or not out.is_relative_to(ROOT / 'runs'):
         raise ValueError('Fresh output directory required')
-    if a.qualify_only:
+    if a.qualify_only or a.qualify_recording:
         startup = json.loads(paths['startup_ledger'].read_text())
         first = json.loads(verify_file_pin(startup['roots']['first_health']).read_text())
         checkpoints = [first['checkpoint']]
@@ -132,6 +133,17 @@ def main(a):
                 result = dict(schema='pen_long_control_W1_admission:1', audit=audit,
                               actual_native_integrations=observed, optimizer_steps=0,
                               policy_performance_evaluated=False)
+            elif a.qualify_recording:
+                gates = tomllib.loads(paths['gates'].read_text())
+                initializer = partial(actor_for_fresh_live_W1, plant_context_pin=contexts['RESIDUAL'])
+                case = execute(checkpoints[0], paths['objective_config'], gates, out / 'FIRST_CHECKPOINT', actor_initializer=initializer)
+                with np.load(verify_file_pin(case['trace'])) as z:
+                    control_audit = audit_executed_control(dict(z), case)
+                if control_audit['passed'] != control_audit['total'] or observed != case['native_integrations']:
+                    raise ValueError('Actual recording QA failed')
+                result = dict(schema='pen_long_control_recording_qualification:1', case=case,
+                              executed_control_audit=control_audit, actual_native_integrations=observed,
+                              optimizer_steps=0, performance_role='FIRST_CHECKPOINT_INSTRUMENTATION_QA_NOT_FINAL_POLICY')
             else:
                 gates = tomllib.loads(paths['gates'].read_text())
                 cases = []
@@ -145,6 +157,10 @@ def main(a):
                         case = execute(pin, paths['objective_config'], gates, folder / label,
                                        actor_initializer=initializer)
                         case.update(name=phase, policy=label, repetition=repetition)
+                        with np.load(verify_file_pin(case['trace'])) as z:
+                            case['executed_control_audit'] = audit_executed_control(dict(z), case)
+                        if case['executed_control_audit']['passed'] != case['executed_control_audit']['total']:
+                            raise ValueError('Recorded transmitted control audit failed')
                         cases.append(case)
                         print(json.dumps(dict(name=phase, summary=case['summary'])), flush=True)
                 if observed != sum(c['native_integrations'] for c in cases):
@@ -197,6 +213,7 @@ if __name__ == '__main__':
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument('--register', action='store_true')
     mode.add_argument('--qualify-only', action='store_true')
+    mode.add_argument('--qualify-recording', action='store_true')
     args = parser.parse_args()
     if not args.register and args.output is None:
         parser.error('--output is required for execution')

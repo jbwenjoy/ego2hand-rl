@@ -86,8 +86,14 @@ def execute(pin, config, gates, folder, *, actor_initializer=None):
     initial_qpos = d.qpos.numpy()[0].copy()
     initial_mocap_pos = d.mocap_pos.numpy().copy()
     initial_mocap_quat = d.mocap_quat.numpy().copy()
+    position_ctrl_ids = runtime.action._position_ctrl_ids.cpu().numpy().copy()
+    initial_ema = runtime.initial_ema.cpu().numpy().copy()
+    encoder_bias = runtime.features.robot.data.encoder_bias[0, runtime.features.local_joints].cpu().numpy().copy()
+    target_lower, target_upper = [v[0].cpu().numpy().copy() for v in runtime.action.target_position_limits]
+    reference_joints = runtime.motion._frames['joint_pos'].cpu().numpy().copy()
     reference = dict(time_s=np.arange(369) * .02, COM_world_m=runtime.support_table.pose[:, :3], quaternion_wxyz=runtime.support_table.pose[:, 3:])
-    trace = {k: [] for k in ['post_qpos', 'post_qvel', 'post_COM', 'post_quaternion_wxyz', 'post_COM_velocity', 'post_omega_world',
+    trace = {k: [] for k in ['pre_qpos', 'pre_qvel', 'post_qpos', 'post_qvel', 'post_ctrl', 'post_actuator_force', 'post_qfrc_actuator',
+                              'post_COM', 'post_quaternion_wxyz', 'post_COM_velocity', 'post_omega_world',
                               'pre_penetration_m', 'pre_self_penetration_m', 'post_joint_limit_excursion_rad', 'pre_hand_normal_N',
                               'pre_object_nonhand_normal_N', 'post_qfrc_applied', 'post_xfrc_applied', 'overflow']}
     # Instrument the native resource below the owned hook; keep its stream and
@@ -98,6 +104,7 @@ def execute(pin, config, gates, folder, *, actor_initializer=None):
 
     def record_step(s):
         nonlocal fixed_mount
+        pre_qpos, pre_qvel = d.qpos.numpy()[0].copy(), d.qvel.numpy()[0].copy()
         original(s)
         if s is not sim:
             raise ValueError('Unexpected simulation')
@@ -126,7 +133,10 @@ def execute(pin, config, gates, folder, *, actor_initializer=None):
             elif gn.startswith('robot/') and hn.startswith('robot/'):
                 selfpen = max(selfpen, max(0., -float(labels['dist'][i])))
         excursion = float(np.maximum(np.maximum(ranges[:, 0] - q[qids], q[qids] - ranges[:, 1]), 0).max())
-        row = dict(post_qpos=q, post_qvel=v, post_COM=center, post_quaternion_wxyz=quat, post_COM_velocity=velocity, post_omega_world=omega,
+        row = dict(pre_qpos=pre_qpos, pre_qvel=pre_qvel, post_qpos=q, post_qvel=v,
+                   post_ctrl=d.ctrl.numpy()[0].copy(), post_actuator_force=d.actuator_force.numpy()[0].copy(),
+                   post_qfrc_actuator=d.qfrc_actuator.numpy()[0].copy(), post_COM=center, post_quaternion_wxyz=quat,
+                   post_COM_velocity=velocity, post_omega_world=omega,
                    pre_penetration_m=pen, pre_self_penetration_m=selfpen, post_joint_limit_excursion_rad=excursion, pre_hand_normal_N=hand,
                    pre_object_nonhand_normal_N=nonhand, post_qfrc_applied=d.qfrc_applied.numpy()[0].copy(), post_xfrc_applied=d.xfrc_applied.numpy()[0].copy(),
                    overflow=int(d.overflow.numpy()[0]) or int(labels['overflow']))
@@ -155,7 +165,9 @@ def execute(pin, config, gates, folder, *, actor_initializer=None):
         arrays = {k: np.array(v) for k, v in trace.items()}
         summary = summarize_trace(arrays, reference, .0025, len(actions) == 368 and not bool(term[0]), gates)
         np.savez_compressed(folder / 'trace.npz', **arrays, **reference, initial_qpos=initial_qpos, initial_mocap_pos=initial_mocap_pos,
-                            initial_mocap_quat=initial_mocap_quat, sampled_mean_raw=np.array(actions), pre_action_phase=np.array(phases))
+                            initial_mocap_quat=initial_mocap_quat, sampled_mean_raw=np.array(actions), pre_action_phase=np.array(phases),
+                            initial_ema=initial_ema, encoder_bias=encoder_bias, target_position_lower=target_lower,
+                            target_position_upper=target_upper, reference_joint_pos=reference_joints)
         raw_arrays = {k: np.array(v).reshape((-1,) + {'geom': (2,), 'pos': (3,), 'frame': (3, 3), 'friction': (5,), 'efc_address': (6,), 'local_force6': (6,)}.get(k, ())) for k, v in raw.items()}
         np.savez_compressed(folder / 'raw_contacts.npz', **raw_arrays, efc_force=np.array(efc), efc_offsets=np.array(offsets))
         np.savez_compressed(folder / 'control_windows.npz', **{k: np.stack([w[k] for w in windows]) for k in windows[0]})
@@ -165,6 +177,8 @@ def execute(pin, config, gates, folder, *, actor_initializer=None):
                       model=file_pin(folder / 'model.mjb'), trace=file_pin(folder / 'trace.npz'),
                       raw_contacts=file_pin(folder / 'raw_contacts.npz'), control_windows=file_pin(folder / 'control_windows.npz'),
                       dt=.0025, cone=int(sim.wp_model.opt.cone))
+        result.update(joint_order=list(runtime.motion.joint_names), position_ctrl_ids=position_ctrl_ids.tolist(),
+                      action_contract=state['metadata']['action_contract'], recorded_executed_control_schema='pen_PD_and_native_drives:1')
         if initialization_audit is not None:
             result['actor_initialization'] = initialization_audit
         if result['native_integrations'] != 8 * len(actions) or not fixed_mount:
