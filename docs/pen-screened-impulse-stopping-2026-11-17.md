@@ -11,13 +11,13 @@ complete case/query coverage. Every query remains in `all_queries.csv`.
 These checks regroup the already independently raw-decoded V3 results and
 re-evaluate the original scalar threshold; they are not another raw decoder.
 
--6069 queries are physically qualified;41 are invalid:19 BASE and22 ALT.
--All41 fail only EFC_linear_impulse. No other geometry, actuator, label, online
+- 6069 queries are physically qualified;41 are invalid:19 BASE and22 ALT.
+- All41 fail only EFC_linear_impulse. No other geometry, actuator, label, online
   or physical-audit condition fails in this checkpoint's queried packets.
--All41 invalid queries have terminated=false and truncated=false. All19
+- All41 invalid queries have terminated=false and truncated=false. All19
   physical case stops occur on their final BASE query, before a task termination
   flag. The original native-screening protocol therefore censors their future.
--Invalid maximum linear impulse residuals have min5.853724569e-7,
+- Invalid maximum linear impulse residuals have min5.853724569e-7,
   median1.055800612e-6,p95 2.487888014e-6,max2.866139584e-6Ns.
   The unchanged original threshold is5e-7Ns. Their magnitude alone neither
   establishes a solver root cause nor authorizes a different tolerance.
