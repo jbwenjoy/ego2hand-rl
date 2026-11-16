@@ -1,0 +1,11 @@
+schema = 1
+mode = "READ_ONLY_ONE_STEP_RAW_REWARD"
+models = ["POINT_DIRECT", "POINT_IMPULSE", "RESPONSE_DIRECT", "RESPONSE_IMPULSE", "CONTACT_DIRECT", "CONTACT_IMPULSE"]
+common_data = "../runs/pen_backend_common_data_v1/report.json"
+fit = "../runs/pen_backend_response_fit_v1/report.json"
+native_reward_audit = "../runs/pen_backend_reward_chain_v2/report.json"
+objective_config = "pen_long_control_training_v1.toml"
+adapter_config = "pen_full_pose_native_v1.toml"
+protocol = "../docs/pen-backend-RAW-reward-gradient-protocol-v2.md"
+registration = "../runs/pen_backend_RAW_reward_gradient_registration_v2/registration.json"
+output = "../runs/pen_backend_RAW_reward_gradient_v2"
