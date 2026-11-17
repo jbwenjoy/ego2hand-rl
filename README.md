@@ -587,3 +587,5 @@ Current: [line-search epoch audit](docs/pen-linesearch-epoch-audit-results-2026-
 
 Latest evidence: [paired GPU ray/friction results](docs/pen-paired-ray-friction-results-2026-11-17.md), [plan v1.54](docs/research-plan-v1.54.md). All240 native queries and independent phase/decision reviews are complete. A separate fixed-input CUDA probe supports stable friction-cost differences;no live numerical-cost backend or new policy benefit is admitted yet.
 
+Current: [stable-cost implementation and failed GPU qualification](docs/pen-stable-friction-qualification-results-2026-11-17.md), [plan v1.55](docs/research-plan-v1.55.md). Full629 CPU tests pass, but all three CUDA cost-backend versions remain unqualified; fallback cost bytes differ despite unchanged FP64-version gradients/Hessians. The24/24 saved review validates retained negative evidence,not a repaired backend. No new native dynamics or Actor training occurred.
+
