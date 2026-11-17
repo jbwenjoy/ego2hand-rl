@@ -589,3 +589,5 @@ Latest evidence: [paired GPU ray/friction results](docs/pen-paired-ray-friction-
 
 Current: [stable-cost implementation and failed GPU qualification](docs/pen-stable-friction-qualification-results-2026-11-17.md), [plan v1.55](docs/research-plan-v1.55.md). Full629 CPU tests pass, but all three CUDA cost-backend versions remain unqualified; fallback cost bytes differ despite unchanged FP64-version gradients/Hessians. The24/24 saved review validates retained negative evidence,not a repaired backend. No new native dynamics or Actor training occurred.
 
+Latest: [guarded cost native results](docs/pen-guarded-friction-native-results-2026-11-17.md), [plan v1.56](docs/research-plan-v1.56.md). Guarded V4 passes22/22 arithmetic qualification and the full240-query/1920-integration comparison;both independent readers pass3493/3493. Original37/120 impulse-invalid queries become0/120 under the unchanged gate;cap50 ticks13/480 become0/480. This is local inspected-source W1 evidence,not full-task/Actor/ego/W32/speed admission. Next is a separately identified frozen-Actor long evaluation,then intended W32/data/model/training/performance qualification.
+
