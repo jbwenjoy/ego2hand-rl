@@ -591,3 +591,5 @@ Current: [stable-cost implementation and failed GPU qualification](docs/pen-stab
 
 Latest: [guarded cost native results](docs/pen-guarded-friction-native-results-2026-11-17.md), [plan v1.56](docs/research-plan-v1.56.md). Guarded V4 passes22/22 arithmetic qualification and the full240-query/1920-integration comparison;both independent readers pass3493/3493. Original37/120 impulse-invalid queries become0/120 under the unchanged gate;cap50 ticks13/480 become0/480. This is local inspected-source W1 evidence,not full-task/Actor/ego/W32/speed admission. Next is a separately identified frozen-Actor long evaluation,then intended W32/data/model/training/performance qualification.
 
+2026-11-20：[冻结策略长程评测](docs/pen-frozen-cost-long-results-2026-11-20.md)及[研究计划 v1.57](docs/research-plan-v1.57.md)。修复后残差策略三次均通过冲量审计，随后因笔轴误差终止。18 例完整任务成功为 0，下一阶段验证 32 并行环境的原始接触、重置与完整状态恢复。
+
