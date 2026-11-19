@@ -1,0 +1,12 @@
+objective = "pen_long_control_training_v1.toml"
+collision = "collision_backend_face_normal_v1.json"
+arithmetic = "../runs/pen_stable_friction_backend_qualification_v4/report.json"
+w1_evidence = "../provenance/pen_frozen_cost_long_v1/ledger.json"
+protocol = "../docs/pen-guarded-w32-protocol-v1.md"
+output = "../runs/pen_guarded_w32_v1"
+worlds = 32
+controls_before_restore = 4
+controls_after_restore = 2
+ticks_per_control = 8
+native_budget = 1536
+reset_ids = [0, 7, 31]
