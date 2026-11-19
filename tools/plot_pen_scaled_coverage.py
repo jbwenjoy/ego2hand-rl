@@ -41,7 +41,8 @@ def render(run, target):
     ax.set_facecolor("#eeeeee")
     ax.axhline(3.68, linestyle="--", color="#be5014", linewidth=1.3, label="Second half begins")
     ax.axhline(5.52, linestyle=":", color="#ac291c", linewidth=1.3, label="Last quarter begins")
-    ax.set(ylabel="Reference time (s)", ylim=(0,7.36), title="Wuji Hand 2 pen spin | 256-world residual PPO")
+    fig.suptitle("Wuji Hand 2 pen spin | 256-world residual PPO")
+    ax.set(ylabel="Reference time (s)", ylim=(0,7.36))
     ax.legend(loc="upper right", fontsize=8)
     fig.colorbar(mesh,ax=ax,label="Valid transitions in phase bin / all transitions")
     seen = 0
@@ -71,3 +72,4 @@ if __name__=="__main__":
     parser.add_argument("target",type=Path)
     args=parser.parse_args()
     print(json.dumps(render(args.run,args.target)))
+
