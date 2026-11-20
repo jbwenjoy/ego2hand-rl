@@ -17,11 +17,21 @@ from supermimic_research.strict_json import write_json
 def read(pin):return json.loads(verify_file_pin(pin).read_bytes())
 
 
-def config(out,name,preload=None):
+def config(out,name,preload=None,*,initial_hand_q=None):
     root=b.ROOT;pre=json.loads((preload or root/'runs/pen_dev_static_preload_v1/report.json').read_bytes())
     proj=read(read(pre['intent'])['source']);screen=read(read(proj['intent'])['screen']);item=screen['results'][name]
     pose=next(r for r in proj['rows'] if r['clip']==name)['variants']['projection']['trace']
     ctrl=next(r for r in pre['rows'] if r['clip']==name)['holds']['preloaded']['trace']
+    if initial_hand_q is not None:
+        with np.load(verify_file_pin(pose), allow_pickle=False) as archive:
+            projected = dict(archive)
+        q = np.asarray(initial_hand_q, dtype=projected['initial_hand_q'].dtype)
+        if q.shape != (20,) or not np.isfinite(q).all():
+            raise ValueError('Expected a finite 20-joint start')
+        projected['initial_hand_q'] = q
+        path = out / 'projected_start.npz'
+        np.savez_compressed(path, **projected)
+        pose = file_pin(path)
     def absolute_cfg(path,changes):
         text=path.read_text()
         for k,v in changes.items():
@@ -49,12 +59,27 @@ def main(out):
     return evaluate_cases(out,obj,item,actors,{'residual':0.,'support':.2},3)
 
 
-def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_labels=None,initial_histories=None,*,custom_start=True,refit_export=False):
+def raw_prefix_array(values):
+    raw = np.asarray(values, dtype=float)
+    if raw.shape == (0,):
+        raw = raw.reshape(0, 20)
+    if raw.ndim != 2 or raw.shape[1] != 20 or not np.isfinite(raw).all() or np.any(abs(raw) > 1):
+        raise ValueError('Expected a finite H by 20 admissible raw prefix')
+    return raw.astype(np.float32)
+
+
+def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_labels=None,initial_histories=None,*,custom_start=True,refit_export=False,raw_prefixes=None):
     """Shared clip-bound native loop. Actor names preserve the registered run order."""
     if repetitions < 1 or set(actors) != set(environment_weights):
         raise ValueError('Specify the native support weight for each Actor')
     if training_labels is not None and set(actors) != set(training_labels):
         raise ValueError('Missing imagined training arm metadata')
+    if raw_prefixes is not None:
+        if set(raw_prefixes) != set(actors) or initial_histories is not None:
+            raise ValueError('Prefix evaluation requires a prefix per actor and native histories')
+        raw_prefixes = {name: raw_prefix_array(values) for name, values in raw_prefixes.items()}
+        if any(len(v) >= item['frames'] - 1 for v in raw_prefixes.values()):
+            raise ValueError('Leave a reference frame for the frozen-policy handoff')
     rec=None;ticks=0;original=b.Simulation.step
     def step(sim):
         nonlocal ticks
@@ -92,6 +117,10 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
                             body=rt.features.body;layout=dict(object_body=body,object_qposadr=rt.features.qa,object_dofadr=int(m.jnt_dofadr[m.body_jntadr[body]]),COM_BODY=m.body_ipos[body].tolist())
                             case=dict(dt=.0025,model_layout=layout,aids=rt.action._position_ctrl_ids.cpu().tolist(),qids=rt.features.qids.cpu().tolist(),dofs=rt.features.dofs.cpu().tolist())
                             rec=b.OwnedProbeRecorder(rt);parts=[];stop=None;checks=[]
+                            if raw_prefixes is not None:
+                                prefix = torch.as_tensor(raw_prefixes[arm], device=rt.device)
+                                executed_pd = []
+                                handoff = {}
                             for phase in range(1,item['frames']):
                                 assert int(rt.motion.time_steps[0])==phase
                                 obs=rt.observation()['policy']
@@ -101,9 +130,26 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
                                         obs=obs.clone()
                                         obs[0,-20:]=torch.as_tensor(initial_histories[arm],device=obs.device,dtype=obs.dtype)
                                     first_obs=obs[0].detach().cpu().numpy().copy()
-                                raw=actor.distribution(obs).mean;rec.begin(raw[0].cpu().numpy())
+                                if raw_prefixes is not None and phase <= len(prefix):
+                                    raw = prefix[phase-1:phase]
+                                else:
+                                    raw = actor.distribution(obs).mean
+                                    if raw_prefixes is not None and phase == len(prefix) + 1:
+                                        handoff = dict(handoff_obs=obs[0].cpu().numpy().copy(),
+                                            handoff_actor_raw=raw[0].cpu().numpy().copy(),
+                                            handoff_previous_raw=rt.action._raw_actions[0].cpu().numpy().copy(),
+                                            handoff_previous_ema=rt.action._processed_actions[0].cpu().numpy().copy())
+                                rec.begin(raw[0].cpu().numpy())
+                                if raw_prefixes is not None and phase == 1:
+                                    entry = dict(entry_hand_q=rec.host.qpos[case['qids']].copy(),
+                                        entry_object_qpos=rec.host.qpos[rt.features.qa:rt.features.qa+7].copy(),
+                                        entry_ctrl=rec.host.ctrl[case['aids']].copy(),
+                                        entry_raw=rt.action._raw_actions[0].cpu().numpy().copy(),
+                                        entry_ema=rt.action._processed_actions[0].cpu().numpy().copy())
                                 if phase==1:first_raw=raw[0].detach().cpu().numpy().copy()
                                 _,_,term,trunc,info=rt.step(raw);z=rec.finish()
+                                if raw_prefixes is not None and phase <= len(prefix):
+                                    executed_pd.append(z['post_ctrl'][:,case['aids']].copy())
                                 if phase==1:first_pd=z['post_ctrl'][0,case['aids']].copy()
                                 metrics,decoded=b.decode_saved_case(case,z,m,phys);pkt=b.pack_case(m,case,z,decoded,case['qids'],case['dofs'],case['aids'],z['initial_warmstart'],ph)
                                 ok=bool(all(metrics['checks'].values()) and pkt['valid'][0] and np.all(pkt['geometry_flags'][0]<=[.002,.0002,.001]))
@@ -125,6 +171,12 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
                                 initial_file=folder/'first_action.npz'
                                 np.savez_compressed(initial_file,native_obs=initial_obs,actor_obs=first_obs,raw=first_raw,transmitted_pd=first_pd)
                                 row.update(first_action=file_pin(initial_file))
+                            if raw_prefixes is not None:
+                                execution = folder/'prefix_execution.npz'
+                                np.savez_compressed(execution, **entry, **handoff,
+                                    post_ctrl=np.asarray(executed_pd).reshape(-1,8,20))
+                                row.update(prefix_execution=file_pin(execution),prefix_controls=len(executed_pd),
+                                           handoff_phase=len(prefix)+1 if handoff else None)
                             write_json(folder/'report.json',dict(**row,checks=checks,trace=file_pin(folder/'trace.npz')))
                             rows.append(dict(**row,case=file_pin(folder/'report.json')))
                         finally:rec=None;rt.close()
