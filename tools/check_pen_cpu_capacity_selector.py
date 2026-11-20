@@ -10,16 +10,19 @@ from supermimic_research.strict_json import write_json
 read=lambda pin:json.loads(verify_file_pin(pin).read_bytes())
 
 
-def main(root,out):
+def main(root,out,refit=False):
     out.mkdir(exist_ok=False);report=read(file_pin(root/'report.json'));intent=read(report['intent'])
     dirs=balanced_directions()
     with np.load(verify_file_pin(intent['targets'])) as f:targets=f['capacity']
-    write_json(out/'intent.json',dict(source=file_pin(root/'report.json'),design='Offline exploratory CPU exact-dynamics reference, native chooser restricted to BASE or either signed suggestion from both models. Only slot-zero pre-state and all registered candidate PD vectors supplied before selecting the minimum CPU-predicted capacity mismatch. No future native branch data used by selector. Strict success requires both selected repeats better than both BASE repeats by more than BASE spread.'))
+    write_json(out/'intent.json',dict(refit_pen_inertial_bvh=refit,source=file_pin(root/'report.json'),design='Offline exploratory CPU exact-dynamics reference, native chooser restricted to BASE or either signed suggestion from both models. Only slot-zero pre-state and all registered candidate PD vectors supplied before selecting the minimum CPU-predicted capacity mismatch. No future native branch data used by selector. Strict success requires both selected repeats better than both BASE repeats by more than BASE spread.'))
     result={}
     for arm,entry in report['results'].items():
         ar=read(entry['report']);proposals=read(ar['proposals'])
         from_file=Path(entry['report']['path']).parent
         model=mujoco.MjModel.from_binary_path(str(from_file/'model.mjb'));body=model.body('object/cube').id
+        if refit:
+            from supermimic_research.mechanics.pen_body_bvh import copy_refit_pen_bvh
+            model,proof=copy_refit_pen_bvh(model,body);write_json(out/(arm+'_refit.json'),proof)
         rows=[]
         for src in proposals['entries']:
             p=src['phase'];replays=[r for r in ar['observations'] if r['phase']==p]
@@ -46,5 +49,5 @@ def main(root,out):
         result[arm]=dict(rows=rows,complete=len(clean),strict_wins=sum(s['strict_win'] for s in clean),improves=sum(s['improves'] for s in clean),worsens=sum(s['worsens'] for s in clean),base_choices=sum(s['chosen']=='BASE' for s in clean),median_gain=float(np.median([s['native_gain'] for s in clean])))
     write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),result=result))
     print({a:{k:v for k,v in r.items() if k!='rows'} for a,r in result.items()})
-if __name__=='__main__':main(*map(Path,sys.argv[1:]))
+if __name__=='__main__':main(*map(Path,sys.argv[1:3]),refit='--refit' in sys.argv[3:])
 

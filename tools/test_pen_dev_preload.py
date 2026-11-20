@@ -14,7 +14,7 @@ def main(proj,out):
     out.mkdir(exist_ok=False)
     source=json.loads((proj/'report.json').read_bytes());intent=json.loads(verify_file_pin(source['intent']).read_bytes())
     sr=json.loads(verify_file_pin(intent['screen']).read_bytes());sp=json.loads(verify_file_pin(sr['intent']).read_bytes())
-    c=json.loads(verify_file_pin(sp['case']).read_bytes());m=mujoco.MjModel.from_binary_path(str(verify_file_pin(c['model'])))
+    c=json.loads(verify_file_pin(sp['case']).read_bytes());m=mujoco.MjModel.from_binary_path(str(verify_file_pin(sp.get('cpu_model',c['model']))))
     with np.load(verify_file_pin(c['trace'])) as f:mount=(f['initial_mocap_pos'][0],f['initial_mocap_quat'][0])
     qids=np.array(c['qids']);dofs=np.array(c['dofs']);aids=np.array(c['aids']);body=c['model_layout']['object_body'];qa=c['model_layout']['object_qposadr']
     np.testing.assert_allclose(m.actuator_gear[aids,0],1.)

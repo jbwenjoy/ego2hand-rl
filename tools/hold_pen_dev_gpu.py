@@ -49,17 +49,17 @@ def trial(rt,folder,target,start,case,physical,model,qids,aids,body,qa,mount):
     write_json(folder/'report.json',result);return result
 
 
-def main(out):
+def main(out,preload_path=None,names=('clip_003','clip_004')):
     out.mkdir(exist_ok=False);run=b.ROOT/'runs'
-    preload=file_pin(run/'pen_dev_static_preload_v1/report.json');pr=read(preload)
+    preload=file_pin(preload_path or run/'pen_dev_static_preload_v1/report.json');pr=read(preload)
     proj=read(read(pr['intent'])['source']);screen=read(read(proj['intent'])['screen'])
-    case=read(read(screen['intent'])['case']); model=mujoco.MjModel.from_binary_path(str(verify_file_pin(case['model'])))
+    screen_intent=read(screen['intent']);case=read(screen_intent['case']); model=mujoco.MjModel.from_binary_path(str(verify_file_pin(screen_intent.get('cpu_model',case['model']))))
     with np.load(verify_file_pin(case['trace'])) as f:
         qbase=f['initial_qpos'];mount=(f['initial_mocap_pos'][0],f['initial_mocap_quat'][0])
     with np.load(verify_file_pin(case['physical_context'])) as f:physical=dict(f)
     qids=np.array(case['qids']);aids=np.array(case['aids']);layout=case['model_layout'];body=layout['object_body'];qa=layout['object_qposadr']
     inputs={};expected={}
-    for n in ('clip_003','clip_004'):
+    for n in names:
         source=next(r for r in proj['rows'] if r['clip']==n)
         with np.load(verify_file_pin(source['variants']['projection']['trace'])) as f:
             q=qbase.copy();q[qids]=f['initial_hand_q'];q[qa:qa+7]=np.r_[f['object_pos'],f['object_quat']]
@@ -85,4 +85,7 @@ def main(out):
             finally:rt.close()
     write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),native_ticks=len(rows)*80,rows=rows))
     for r in rows:print(r['clip'],r['arm'],r['rep'],round(r['max_mm'],2),round(r['max_deg'],2),r['valid_windows'],r['contact_ticks'])
-if __name__=='__main__':main(Path(sys.argv[1]).resolve())
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('out',type=Path);parser.add_argument('--preload',type=Path);parser.add_argument('--clips',nargs='+',default=['clip_003','clip_004'])
+    a=parser.parse_args();main(a.out.resolve(),a.preload,a.clips)

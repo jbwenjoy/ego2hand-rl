@@ -24,8 +24,8 @@ def compute(con,sign,com,R,dirs):
 
 def targets(root,out,dirs):
     report=json.loads((root/'report.json').read_bytes())
-    c=read(read(report['intent'])['case'])
-    model=mujoco.MjModel.from_binary_path(str(verify_file_pin(c['model'])))
+    screen_intent=read(report['intent']);c=read(screen_intent['case'])
+    model=mujoco.MjModel.from_binary_path(str(verify_file_pin(screen_intent.get('cpu_model',c['model']))))
     d=mujoco.MjData(model);body=c['model_layout']['object_body'];qa=c['model_layout']['object_qposadr']
     with np.load(verify_file_pin(c['trace'])) as z:
         d.mocap_pos[:]=z['initial_mocap_pos'][0];d.mocap_quat[:]=z['initial_mocap_quat'][0]

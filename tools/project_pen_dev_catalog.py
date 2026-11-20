@@ -15,7 +15,7 @@ def main(screen,out):
     report=json.loads((screen/'report.json').read_bytes());intent=json.loads(verify_file_pin(report['intent']).read_bytes())
     case=json.loads(verify_file_pin(intent['case']).read_bytes())
     cp=ROOT/'configs/controlled_pen_projection_v1.toml';cfg=tomllib.loads(cp.read_text())
-    m=mujoco.MjModel.from_binary_path(str(verify_file_pin(case['model'])))
+    m=mujoco.MjModel.from_binary_path(str(verify_file_pin(intent.get('cpu_model',case['model']))))
     with np.load(verify_file_pin(case['trace'])) as z:mount=(z['initial_mocap_pos'][0],z['initial_mocap_quat'][0])
     body=case['model_layout']['object_body'];qa=case['model_layout']['object_qposadr'];qids=np.array(case['qids']);aids=np.array(case['aids']);j=m.actuator_trnid[aids,0]
     np.testing.assert_array_equal(m.jnt_qposadr[j],qids)

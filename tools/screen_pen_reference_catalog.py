@@ -12,7 +12,7 @@ from supermimic_research.artifacts import file_pin,verify_file_pin
 from supermimic_research.strict_json import write_json
 
 
-def main(out):
+def main(out,explicit_model=None):
     out.mkdir(exist_ok=False)
     config=ROOT/'configs/controlled_evaluation_v4.toml'
     cfg=tomllib.loads(config.read_text())
@@ -21,10 +21,11 @@ def main(out):
     assert dt==.02 and len(index['clips'])==10
     casepath=ROOT/'runs/pen_scaled_train_v1/eval_02781/repeat_0/report.json'
     case=json.loads(casepath.read_bytes())
-    write_json(out/'intent.json',dict(index=file_pin(group/'index.json'),case=file_pin(casepath),config=file_pin(config),
+    model_pin=case['model'] if explicit_model is None else file_pin(explicit_model)
+    write_json(out/'intent.json',dict(cpu_model=model_pin,index=file_pin(group/'index.json'),case=file_pin(casepath),config=file_pin(config),
         split='001 existing controlled training clip. For new development 002-006; validation 007-008; reserve 009-010 for subsequent policy evaluation. Geometry screened on all, no policy score used for assignment.',
         screen='At reference frame i use hand-only nonpositive-gap contact cones to support the nominal interval i wrench about moving COM. No actuator load cap. Geometry and instantaneous cone feasibility only.'))
-    model=mujoco.MjModel.from_binary_path(str(verify_file_pin(case['model'])))
+    model=mujoco.MjModel.from_binary_path(str(verify_file_pin(model_pin)))
     assert int(model.opt.cone)==int(mujoco.mjtCone.mjCONE_PYRAMIDAL)
     d=mujoco.MjData(model);body=case['model_layout']['object_body'];qa=case['model_layout']['object_qposadr']
     qids=np.array(case['qids']);joints=np.array([model.joint('robot/'+n).id for n in RIGHT_FINGER_JOINT_NAMES]);np.testing.assert_array_equal(model.jnt_qposadr[joints],qids)
@@ -83,5 +84,5 @@ def main(out):
     write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),columns=['object_pen_m','self_pen_m','joint_excursion_rad','object_hand_contacts','max_link_FK_error_m','geometry_pass','nominal_valid','wrench_feasible'],results=result))
     for k,v in result.items():print(k,v['frames'],round(v['first_penetration_mm'],3),v['initial_geometry_pass'],v['geometry_and_cone'],v['nominal_intervals'],round(v['max_FK_disagreement_m']*1000,3))
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('out',type=Path);main(parser.parse_args().out)
+    parser=argparse.ArgumentParser();parser.add_argument('out',type=Path);parser.add_argument('--cpu-model',type=Path);args=parser.parse_args();main(args.out,args.cpu_model)
 
