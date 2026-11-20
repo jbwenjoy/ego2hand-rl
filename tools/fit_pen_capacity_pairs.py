@@ -199,11 +199,15 @@ def main(bank,out):
     if set(roles)!=set((*TRAIN_ROLES,'TEST')) or any(roles[k]['selected']!=roles['TEST']['selected'] for k in TRAIN_ROLES):
         raise ValueError('Missing or mismatched roles')
     actor_pins=read(read(seq['collection'])['intent'])['actors']
-    probe_pins=read(read(report['native_report'])['intent'])['actors']
+    native_report=read(report['native_report'])
+    if native_report['native']!=report['native_ticks'] or set(native_report['arms'])!=set(roles):
+        raise ValueError('Unmatched native accounting or roles')
+    native_intent=file_pin(Path(report['native_report']['path']).with_name('intent.json'))
+    probe_pins=read(native_intent)['actors']
     if {k:v['sha256'] for k,v in probe_pins.items()}!={k:actor_pins[a]['sha256'] for k,a in [('TRAIN_A','A'),('TRAIN_B','B'),('TEST','TEST2')]}:
         raise ValueError('Pair-source actors do not match registered policy split')
     out.mkdir(exist_ok=False,parents=True)
-    write_json(out/'intent.json',dict(source=file_pin(Path(__file__)),data=sequences,pairs=pair_pin,reference=ref_pin,
+    write_json(out/'intent.json',dict(source=file_pin(Path(__file__)),data=sequences,pairs=pair_pin,native_intent=native_intent,reference=ref_pin,
                roles='TRAIN_A/B basis-only contrasts and valid basis/sham endpoints; no mixed endpoints used in fitting. Absolute sequence TRAIN uses only A/B/C/D; previously inspected VAL and TEST policies.',
                schedule=dict(seed=SEED,epochs=EPOCHS,lr=.001,sequence_batch=128,pair_batch=PAIR_BATCH,endpoint_batch=2*PAIR_BATCH),
                fit='Fresh shared initialization. Fixed final epoch; VAL absolute MAE recorded for both. Both arms fit identical sequence/endpoint labels. Paired loss predicts centered capacity change per radian of actual transmitted PD. Residual scaled by pooled TRAIN-only derivative RMS. Unit coefficient versus zero. JVP assessed at actual endpoint midpoint.',
@@ -232,4 +236,5 @@ def main(bank,out):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('bank',type=Path);parser.add_argument('out',type=Path)
     args=parser.parse_args();main(args.bank.resolve(),args.out.resolve())
+
 
