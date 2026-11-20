@@ -4,40 +4,10 @@ import sys
 import json
 import mujoco
 import numpy as np
-from scipy.spatial.transform import Rotation
 from audit_pen_geom_membership_gaps import active, members, file_pin, verify_file_pin, write_json
 
 
-def rotation(quat):
-    return Rotation.from_quat(quat[[1,2,3,0]]).as_matrix()
-
-
-def refit_body_boxes(model,body):
-    # mj_collideTree compares rigid-body nodes in the current body inertial
-    # frame. Leaf prim centers/extents below enclose the compiled geom AABB
-    # transformed into that frame. Internal bounds enclose their children.
-    adr=int(model.body_bvhadr[body]);count=int(model.body_bvhnum[body])
-    if adr<0 or count!=5:raise ValueError('Declared three-geom pen tree required')
-    old=model.bvh_aabb[adr:adr+count].copy();ib=rotation(model.body_iquat[body]).T
-    new=np.zeros_like(old);ids=model.bvh_nodeid[adr:adr+count]
-    for local in np.argsort(-model.bvh_depth[adr:adr+count]):
-        gid=ids[local];children=model.bvh_child[adr+local]
-        if gid>=0:
-            if np.any(children>=0) or model.geom_bodyid[gid]!=body:raise ValueError('Unexpected leaf topology')
-            R=rotation(model.geom_quat[gid]);bounds=model.geom_aabb[gid]
-            center=ib@(model.geom_pos[gid]+R@bounds[:3]-model.body_ipos[body])
-            half=np.abs(ib@R)@bounds[3:]
-        else:
-            if np.any(children<0) or np.any(children>=count):raise ValueError('Invalid children')
-            lo=np.min(new[children,:3]-new[children,3:],axis=0)
-            hi=np.max(new[children,:3]+new[children,3:],axis=0)
-            center=(hi+lo)/2;half=(hi-lo)/2
-        new[local]=np.r_[center,half]
-    model.bvh_aabb[adr:adr+count]=new
-    return dict(address=adr,rows=count,node_geoms=ids.tolist(),old=old.tolist(),refit=new.tolist(),
-                inertial_quaternion_wxyz=model.body_iquat[body].tolist(),geoms=[
-            dict(id=int(g),name=model.geom(g).name,body_position=model.geom_pos[g].tolist(),
-                 body_quat=model.geom_quat[g].tolist(),geom_aabb=model.geom_aabb[g].tolist()) for g in ids if g>=0])
+from supermimic_research.mechanics.pen_body_bvh import copy_refit_pen_bvh
 
 
 def main(root,out):
@@ -49,7 +19,7 @@ def main(root,out):
         body=meta['layout']['object_body'];adr=ms[0].body_bvhadr[body];count=ms[0].body_bvhnum[body]
         mujoco.mj_setConst(ms[1],mujoco.MjData(ms[1]))
         np.testing.assert_array_equal(ms[1].bvh_aabb,ms[0].bvh_aabb)
-        proof=refit_body_boxes(ms[2],body)
+        ms[2],proof=copy_refit_pen_bvh(ms[0],body)
         np.testing.assert_array_equal(ms[2].bvh_aabb[:adr],ms[0].bvh_aabb[:adr])
         np.testing.assert_array_equal(ms[2].bvh_aabb[adr+count:],ms[0].bvh_aabb[adr+count:])
         ms[3].opt.disableflags |= int(mujoco.mjtDisableBit.mjDSBL_MIDPHASE)
