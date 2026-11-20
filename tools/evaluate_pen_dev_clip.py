@@ -45,6 +45,15 @@ def main(out):
     roots=b.ROOT/'runs'
     actors={k:file_pin(roots/folder/'actor_02781.pt') for k,folder in [('residual','pen_scaled_train_v1'),('support','pen_scaled_support_matched_v1')]}
     write_json(out/'intent.json',dict(reference=item['source'],actors=actors,repetitions=3,scope='Fixed-preload dev clip 003. Each fresh policy starts at phase 1; truncate on native termination or original strict physical audit failure.'))
+    return evaluate_cases(out,obj,item,actors,{'residual':0.,'support':.2},3)
+
+
+def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_labels=None):
+    """Shared clip-bound native loop. Actor names preserve the registered run order."""
+    if repetitions < 1 or set(actors) != set(environment_weights):
+        raise ValueError('Specify the native support weight for each Actor')
+    if training_labels is not None and set(actors) != set(training_labels):
+        raise ValueError('Missing imagined training arm metadata')
     rec=None;ticks=0;original=b.Simulation.step
     def step(sim):
         nonlocal ticks
@@ -56,13 +65,13 @@ def main(out):
     try:
         with torch.no_grad(),torch.jit.optimized_execution(False),b.backend_scope(b.COLLISION) as col:
             manifest=b.factory();ident=b.execution_identity('STABLE_SAME_REGIME_FRICTION_OR',col.contract['backend_id'],manifest)
-            for rep in range(3):
-                for arm in ('residual','support'):
+            for rep in range(repetitions):
+                for arm in actors:
                     folder=out/f'{arm}_{rep}';folder.mkdir()
                     with b.CostProfile(ident,manifest) as profile:
                         with clip_start_constructor():rt=profile.create_runtime(obj,1)
                         try:
-                            rt.set_fixed_frame_features(False);rt.support_weight=.2 if arm=='support' else 0.
+                            rt.set_fixed_frame_features(False);rt.support_weight=environment_weights[arm]
                             ref=reference(rt)
                             # Older reference helper hardcodes the original clip clock; use actual catalog frame times.
                             ref['time_s']=np.arange(item['frames'])*.02
@@ -93,11 +102,15 @@ def main(out):
                             summary=summarize_trace(trace,ref,.0025,stop=='REFERENCE_COMPLETION' and phase==item['frames']-1,tomllib.loads((out/'controlled_evaluation_v4.toml').read_text()))
                             np.savez_compressed(folder/'trace.npz',**trace,**ref)
                             row=dict(arm=arm,rep=rep,controls=phase,stop=stop,reasons={k:bool(v[0]) for k,v in info['termination_reasons'].items()},valid_s=.02*(phase-int(not ok)),summary=summary)
+                            if training_labels is not None:
+                                row.update(training=training_labels[arm],environment_support_weight=rt.support_weight,
+                                           actor=actors[arm],strict_success=bool(summary['qualified']))
                             write_json(folder/'report.json',dict(**row,checks=checks,trace=file_pin(folder/'trace.npz')))
                             rows.append(dict(**row,case=file_pin(folder/'report.json')))
                         finally:rec=None;rt.close()
         assert ticks==8*sum(r['controls'] for r in rows)
         write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),rows=rows,native=ticks))
         print([(r['arm'],r['valid_s'],r['stop'],r['reasons']) for r in rows])
+        return rows
     finally:b.Simulation.step=original
 if __name__=='__main__':main(Path(sys.argv[1]).resolve())
