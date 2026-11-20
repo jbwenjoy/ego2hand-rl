@@ -68,7 +68,7 @@ def raw_prefix_array(values):
     return raw.astype(np.float32)
 
 
-def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_labels=None,initial_histories=None,*,custom_start=True,refit_export=False,raw_prefixes=None):
+def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_labels=None,initial_histories=None,*,custom_start=True,refit_export=False,raw_prefixes=None,handoff_weights=None):
     """Shared clip-bound native loop. Actor names preserve the registered run order."""
     if repetitions < 1 or set(actors) != set(environment_weights):
         raise ValueError('Specify the native support weight for each Actor')
@@ -80,6 +80,12 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
         raw_prefixes = {name: raw_prefix_array(values) for name, values in raw_prefixes.items()}
         if any(len(v) >= item['frames'] - 1 for v in raw_prefixes.values()):
             raise ValueError('Leave a reference frame for the frozen-policy handoff')
+    if handoff_weights is not None:
+        if raw_prefixes is None or set(handoff_weights) != set(actors) or any(len(v) == 0 for v in raw_prefixes.values()):
+            raise ValueError('Blended evaluation requires a nonempty prefix and weights per Actor')
+        for w in handoff_weights.values():
+            if np.ndim(w) != 1 or not np.isfinite(w).all() or np.any((np.asarray(w)<0)|(np.asarray(w)>1)):
+                raise ValueError('Expected a vector of convex Actor weights')
     rec=None;ticks=0;original=b.Simulation.step
     def step(sim):
         nonlocal ticks
@@ -121,6 +127,9 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
                                 prefix = torch.as_tensor(raw_prefixes[arm], device=rt.device)
                                 executed_pd = []
                                 handoff = {}
+                            if handoff_weights is not None:
+                                weights = handoff_weights[arm]
+                                commands = {k:[] for k in ('actor_mean','sent_raw','applied_raw','previous_raw','post_ctrl','actor_weight')}
                             for phase in range(1,item['frames']):
                                 assert int(rt.motion.time_steps[0])==phase
                                 obs=rt.observation()['policy']
@@ -130,15 +139,27 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
                                         obs=obs.clone()
                                         obs[0,-20:]=torch.as_tensor(initial_histories[arm],device=obs.device,dtype=obs.dtype)
                                     first_obs=obs[0].detach().cpu().numpy().copy()
+                                if handoff_weights is not None or raw_prefixes is None or phase > len(prefix):
+                                    actor_raw = actor.distribution(obs).mean
                                 if raw_prefixes is not None and phase <= len(prefix):
                                     raw = prefix[phase-1:phase]
                                 else:
-                                    raw = actor.distribution(obs).mean
+                                    raw = actor_raw
                                     if raw_prefixes is not None and phase == len(prefix) + 1:
                                         handoff = dict(handoff_obs=obs[0].cpu().numpy().copy(),
                                             handoff_actor_raw=raw[0].cpu().numpy().copy(),
                                             handoff_previous_raw=rt.action._raw_actions[0].cpu().numpy().copy(),
                                             handoff_previous_ema=rt.action._processed_actions[0].cpu().numpy().copy())
+                                if handoff_weights is not None:
+                                    offset = phase - len(prefix) - 1
+                                    weight = 0. if offset < 0 else 1.
+                                    if 0 <= offset < len(weights):
+                                        weight = float(weights[offset])
+                                        raw = (1-weight)*prefix[-1:] + weight*actor_raw.clamp(-1,1)
+                                    commands['actor_weight'].append(weight)
+                                    commands['actor_mean'].append(actor_raw[0].cpu().numpy().copy())
+                                    commands['sent_raw'].append(raw[0].cpu().numpy().copy())
+                                    commands['previous_raw'].append(obs[0,-20:].cpu().numpy().copy())
                                 rec.begin(raw[0].cpu().numpy())
                                 if raw_prefixes is not None and phase == 1:
                                     entry = dict(entry_hand_q=rec.host.qpos[case['qids']].copy(),
@@ -148,6 +169,9 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
                                         entry_ema=rt.action._processed_actions[0].cpu().numpy().copy())
                                 if phase==1:first_raw=raw[0].detach().cpu().numpy().copy()
                                 _,_,term,trunc,info=rt.step(raw);z=rec.finish()
+                                if handoff_weights is not None:
+                                    commands['applied_raw'].append(rt.action._raw_actions[0].cpu().numpy().copy())
+                                    commands['post_ctrl'].append(z['post_ctrl'][:,case['aids']].copy())
                                 if raw_prefixes is not None and phase <= len(prefix):
                                     executed_pd.append(z['post_ctrl'][:,case['aids']].copy())
                                 if phase==1:first_pd=z['post_ctrl'][0,case['aids']].copy()
@@ -177,6 +201,10 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
                                     post_ctrl=np.asarray(executed_pd).reshape(-1,8,20))
                                 row.update(prefix_execution=file_pin(execution),prefix_controls=len(executed_pd),
                                            handoff_phase=len(prefix)+1 if handoff else None)
+                            if handoff_weights is not None:
+                                controls_file = folder/'handoff_controls.npz'
+                                np.savez_compressed(controls_file, **commands)
+                                row.update(handoff_controls=file_pin(controls_file))
                             write_json(folder/'report.json',dict(**row,checks=checks,trace=file_pin(folder/'trace.npz')))
                             rows.append(dict(**row,case=file_pin(folder/'report.json')))
                         finally:rec=None;rt.close()
