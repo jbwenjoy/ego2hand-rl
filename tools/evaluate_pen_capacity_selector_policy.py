@@ -28,7 +28,7 @@ def cpu_scores(m,state,actions,body,dirs,target):
     return scores
 
 
-def main(out):
+def main(out,pose_fit=None):
     root=b.ROOT/'runs';out.mkdir(exist_ok=False)
     read=lambda p:json.loads(verify_file_pin(p).read_bytes())
     fit=file_pin(root/'pen_capacity_pair_fit_v1/report.json')
@@ -37,7 +37,15 @@ def main(out):
     target=read(file_pin(root/'pen_capacity_targets_v1/report.json'))['refs']['clip_001']['series']
     with np.load(verify_file_pin(target)) as z:targets=z['capacity'];eligible=z['eligible']
     dirs=balanced_directions();order=['BASE','LEARNED','CPU','CPU','BASE','LEARNED','LEARNED','CPU','BASE']
-    write_json(out/'intent.json',dict(actor=source,fit=fit,target=target,schedule=order,phase_range=[206,222],
+    pose_nets={};pose_pins={}
+    if pose_fit is not None:
+        from supermimic_research.mechanics.pen_substep_pose import load_substep_pose
+        pose_report=read(file_pin(pose_fit/'report.json'))
+        for key in ('absolute','paired'):
+            pose_pin=pose_report['models'][key]['checkpoint'];pose_pins[key]=pose_pin
+            pose_nets[key.upper()]=load_substep_pose(torch.load(verify_file_pin(pose_pin),map_location='cpu',weights_only=False),dtype=torch.float64).eval()
+        order=['BASE','ABSOLUTE','PAIRED','PAIRED','BASE','ABSOLUTE','ABSOLUTE','PAIRED','BASE']
+    write_json(out/'intent.json',dict(pose_models=pose_pins,pose_modes='ABSOLUTE/PAIRED score the same five candidates using predicted substep poses plus CPU collision geometry. Separate exploratory native trial on a previously inspected behavior.',actor=source,fit=fit,target=target,schedule=order,phase_range=[206,222],
         arms='BASE original, LEARNED lowest response-head cost across all 5 candidates, CPU lowest predicted cost across same 5 candidates using CPU dynamics from observed initial state. All choices before physical execution. No learned parameters updated. Inside qualified geometry windows only.',endpoints='Mean actual 8-tick capacity L1 in intervention region, strict full duration and orientation, score only matched qualified intervals across arms.'))
     st=torch.load(verify_file_pin(source),map_location='cpu',weights_only=False);manifest=b.factory()
     original=b.Simulation.step;rec=None;ticks=0;rows=[]
@@ -61,7 +69,7 @@ def main(out):
                         actor,_,_=b.model_pair(rt.device,SimpleNamespace(**st['config']));actor.load_state_dict(st['actor']);actor.eval()
                         ph=b.save_physics(rt,folder);m=mujoco.MjModel.from_binary_path(str(folder/'model.mjb'));b.require_structure(m)
                         with np.load(folder/'physical_context.npz') as f:phys=dict(f)
-                        c=setup(rt);rec=b.OwnedProbeRecorder(rt);records=[];traces=[];stop=None;query_ticks=0
+                        c=setup(rt);rec=b.OwnedProbeRecorder(rt);records=[];traces=[];stop=None;query_ticks=0;query_geometry=0
                         for p in range(1,369):
                             assert int(rt.motion.time_steps[0])==p
                             raw=actor.distribution(rt.observation()['policy']).mean;key='BASE';scores={};options={}
@@ -73,6 +81,17 @@ def main(out):
                                     sig=mujoco.mjtState.mjSTATE_INTEGRATION;state=np.empty(mujoco.mj_stateSize(m,sig))
                                     mw.get_data_into(rec.host,rec.model,rt.env.sim.wp_data);mujoco.mj_getState(rec.model,rec.host,state,sig)
                                     scores=cpu_scores(m,state,options,c['model_layout']['object_body'],dirs,targets[p-1]);query_ticks+=8*len(scores)
+                                elif mode in pose_nets:
+                                    data=rt.env.sim.wp_data;layout=c['model_layout']
+                                    state=old.native_state55(data.qpos.numpy()[0],data.qvel.numpy()[0],c['qids'],c['dofs'],layout['object_qposadr'],layout['object_dofadr'])
+                                    pd=torch.as_tensor(np.array([a['pd'] for a in options.values()]),dtype=torch.float64)
+                                    poses=pose_nets[mode].predict_qpos(old.tensor(state).expand(len(pd),-1),old.tensor(data.qacc_warmstart.numpy()[0]).expand(len(pd),-1),pd).numpy()
+                                    assert poses.shape==(len(pd),8,27) and np.isfinite(poses).all()
+                                    geo=mujoco.MjData(m);geo.mocap_pos[:]=data.mocap_pos.numpy()[0];geo.mocap_quat[:]=data.mocap_quat.numpy()[0]
+                                    for label,trajectory in zip(options,poses):
+                                        capacities=[geometry(m,geo,q,layout['object_body'],dirs) for q in trajectory]
+                                        scores[label]=float(np.mean(np.abs(np.mean(capacities,0)-targets[p-1])))
+                                    query_geometry+=poses.shape[0]*8
                                 if scores:key=min(scores,key=scores.get)
                                 raw=torch.tensor(options[key]['raw'],device=rt.device,dtype=raw.dtype)[None]
                             rec.begin(raw[0].cpu().numpy());_,_,term,trunc,info=rt.step(raw);z=rec.finish()
@@ -97,10 +116,10 @@ def main(out):
                         write_json(folder/'report.json',dict(records=records,stop=stop,summary=summary,trace=file_pin(folder/'trace.npz')))
                         valid_s=.02*(p-int(not valid));scored=[a['mismatch'] for a in records if a['valid'] and a['mismatch'] is not None]
                         rows.append(dict(mode=mode,case=file_pin(folder/'report.json'),valid_s=valid_s,stop=stop,success=bool(summary['qualified']),phase_count=len(scored),
-                            local_capacity_error=float(np.mean(scored)) if scored else None,rollout_ticks=8*p,planning_ticks=query_ticks,changed=sum(a['selected']!='BASE' for a in records)))
+                            local_capacity_error=float(np.mean(scored)) if scored else None,rollout_ticks=8*p,planning_ticks=query_ticks,predicted_pose_geometry_queries=query_geometry,changed=sum(a['selected']!='BASE' for a in records)))
                         print(mode,valid_s,rows[-1]['local_capacity_error'],flush=True);write_json(out/'progress.json',dict(rows=rows))
                     finally:rec=None;rt.close()
         assert ticks==sum(r['rollout_ticks'] for r in rows)
         write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),native=ticks,rows=rows))
     finally:b.Simulation.step=original
-if __name__=='__main__':main(Path(sys.argv[1]).resolve())
+if __name__=='__main__':main(*map(lambda s:Path(s).resolve(),sys.argv[1:]))

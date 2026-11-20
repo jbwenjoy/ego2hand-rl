@@ -50,10 +50,11 @@ def main(run,out):
                          errors=measured,full_angle_deg=float(np.rad2deg(case['summary']['metrics']['angle_RMS_rad'])) if item['stop']=='REFERENCE_COMPLETION' else None,
                          shaft_at_4p44=shaft,cpu_replayed_score_max_abs=max(abs(v) for v in cpu) if cpu else None))
     common=sorted(set.intersection(*(set(r['errors']) for r in rows)));summary={}
-    for mode in ('BASE','LEARNED','CPU'):
+    for mode in dict.fromkeys(intent['schedule']):
         rs=[r for r in rows if r['mode']==mode]
         summary[mode]=dict(strict=sum(r['strict_success'] for r in rs),valid_s=[r['valid_s'] for r in rs],full_deg=[r['full_angle_deg'] for r in rs],
             shaft_deg=[r['shaft_at_4p44'] for r in rs],common_MAE=[np.mean([r['errors'][p] for p in common]) if common else None for r in rs])
     write_json(out/'report.json',dict(source=source,intervention_phases=phases,common=common,summary=summary,rows=rows))
     print(summary)
 if __name__=='__main__':main(*map(Path,sys.argv[1:]))
+
