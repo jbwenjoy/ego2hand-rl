@@ -11,12 +11,13 @@ from supermimic_research.artifacts import verify_file_pin,file_pin
 from supermimic_research.strict_json import write_json
 
 
-def main(root,out):
+def main(root,out,disable_midphase=False):
     out.mkdir(exist_ok=False);data=json.loads((root/'report.json').read_bytes());dirs=balanced_directions()
-    write_json(out/'intent.json',dict(parent=file_pin(root/'report.json'),plan='At true source pose each substep, replace CPU rays with native rays for absent/extra hand-object geom groups, then for different row multiplicities. Use maximum over groups with one shared unit normal budget. Privileged data diagnose model errors, no action selection or simulation.'))
+    write_json(out/'intent.json',dict(parent=file_pin(root/'report.json'),disable_cpu_midphase=disable_midphase,plan='At true source pose each substep, replace CPU rays with native rays for absent/extra hand-object geom groups, then for different row multiplicities. Use maximum over groups with one shared unit normal budget. Privileged data diagnose model errors, no action selection or simulation.'))
     rows=[]
     for role,meta in data['actors'].items():
         m=mujoco.MjModel.from_binary_path(str(verify_file_pin(meta['model'])));d=mujoco.MjData(m)
+        if disable_midphase:m.opt.disableflags |= int(mujoco.mjtDisableBit.mjDSBL_MIDPHASE)
         qa=meta['layout']['object_qposadr'];body=meta['layout']['object_body']
         with np.load(verify_file_pin(meta['physical_context'])) as f:fr=f['geom_friction'][0]
         for r in [z for z in data['rows'] if z['actor']==role]:
@@ -57,4 +58,4 @@ def main(root,out):
         rs=[r for r in rows if r['role']==role];signal=sum(r['magnitude']**2 for r in rs)
         summary[role]=np.sqrt(np.square([r['errors'] for r in rs]).sum(0)/signal).tolist()
     write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),columns=['original_CPU','match_group_existence','match_group_multiplicity'],summary=summary,rows=rows));print(summary)
-if __name__=='__main__':main(*map(Path,sys.argv[1:]))
+if __name__=='__main__':main(*map(Path,sys.argv[1:3]),disable_midphase='--disable-midphase' in sys.argv[3:])
