@@ -7,7 +7,7 @@ from scipy.spatial.transform import Rotation
 from evaluate_mug_sequence_feedforward import ROOT,wrench_target,mean_reference_wrench,file_pin,verify_file_pin,write_json
 
 
-def run(out):
+def run(out,approximate=False):
     out.mkdir(exist_ok=False);root=ROOT/'runs'
     parent=root/'mug_temporal_feedforward_v1/report.json'
     read=lambda p:json.loads(verify_file_pin(p).read_bytes())
@@ -22,13 +22,13 @@ def run(out):
     inertia=fixedI@np.diag(m.body_inertia[body])@fixedI.T
     mass=m.body_mass[body];prior=mean_reference_wrench(z['COM_world_m'],z['quaternion_wxyz'],mass,inertia,m.opt.gravity)
     refs=Rotation.from_quat(z['quaternion_wxyz'][:,[1,2,3,0]])
-    write_json(out/'intent.json',dict(parent=file_pin(parent),arms=['replay','live_contacts','live_pose_PD'],gains='linear/rotational acceleration P=100 s^-2 and D=20 s^-1; prior uses same reference average wrench; final three intervals and infeasible LPs fall back to archived feedforward. Perfect-state diagnostic, no object assist.'))
+    write_json(out/'intent.json',dict(parent=file_pin(parent),approximate=approximate,allocation='closest torque-limited L1 wrench, 5cm torque scaling' if approximate else 'exact',arms=['replay','live_contacts','live_pose_PD'],gains='linear/rotational acceleration P=100 s^-2 and D=20 s^-1; prior uses same reference average wrench; final three intervals and infeasible LPs fall back to archived feedforward. Perfect-state diagnostic, no object assist.'))
     arms={}
     for mode in ('replay','live_contacts','live_pose_PD'):
         d=mujoco.MjData(m);sensor=mujoco.MjData(m);d.qpos[:]=z['initial_qpos27'];d.qvel[:]=z['initial_qvel26'];d.ctrl[:]=base[0];mujoco.mj_forward(m,d)
         q=[];rows=[];commands=[];substeps=round(.02/m.opt.timestep)
         for i in range(100):
-            cmd=base[i+1].copy();status='archived';cup_table=0;cup_hand=0
+            cmd=base[i+1].copy();status='archived';detail=None;cup_table=0;cup_hand=0
             if mode!='replay' and prior['valid_interval'][i]:
                 sensor.qpos[:]=d.qpos;sensor.qvel[:]=d.qvel;sensor.ctrl[:]=d.ctrl;mujoco.mj_forward(m,sensor)
                 R=Rotation.from_quat(d.qpos[qa+np.array([4,5,6,3])])
@@ -38,7 +38,10 @@ def run(out):
                     w[:3]+=mass*(100*(z['COM_world_m'][i]-sensor.xipos[body])+20*(z['COM_velocity_world_m_s'][i]-vel))
                     w[3:]+=R.as_matrix()@inertia@R.as_matrix().T@(100*(refs[i]*R.inv()).as_rotvec()+20*(z['angular_velocity_world_rad_s'][i]-omega))
                 neutral=d.qpos[:20]-m.actuator_biasprm[:,2]*d.qvel[:20]/m.actuator_gainprm[:,0]
-                candidate,status=wrench_target(m,sensor,body,hand,w,neutral,cmd-neutral)
+                if approximate:
+                    from supermimic_research.mechanics.mug_closest_wrench import closest_servo
+                    candidate,status,detail=closest_servo(m,sensor,body,hand,w,neutral,cmd-neutral)
+                else:candidate,status=wrench_target(m,sensor,body,hand,w,neutral,cmd-neutral)
                 if candidate is not None:cmd=candidate
             d.ctrl[:]=cmd;commands.append(cmd)
             for _ in range(substeps):
@@ -52,7 +55,7 @@ def run(out):
                         hand_now|=other in hand;table_now|=other==m.geom('mug_task_table').id
                 cup_hand+=hand_now;cup_table+=table_now
             mujoco.mj_kinematics(m,d);q.append(d.qpos.copy())
-            rows.append(dict(interval=i,status=status,hand_ticks=cup_hand,table_ticks=cup_table))
+            rows.append(dict(interval=i,status=status,allocation=detail,hand_ticks=cup_hand,table_ticks=cup_table))
         q=np.array(q);assert np.isfinite(q).all() and abs(d.time-2)<1e-8
         if mode=='replay':np.testing.assert_array_equal(q,gold)
         R=Rotation.from_quat(q[:,qa+np.array([4,5,6,3])]);pos=q[:,qa:qa+3]+R.apply(z['COM_BODY_m'])
@@ -63,4 +66,4 @@ def run(out):
             rms_mm=float(1000*np.sqrt(np.mean(dist**2))),rms_deg=float(np.sqrt(np.mean(ang**2))),rows=rows,trace=file_pin(p))
     write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),arms=arms,steps=3*100*substeps))
     print({k:[v[x] for x in ('solved','first_cm','first_10deg','rms_mm','rms_deg')] for k,v in arms.items()})
-if __name__=='__main__':run(Path(sys.argv[1]).resolve())
+if __name__=='__main__':run(Path(sys.argv[1]).resolve(),approximate='--approximate' in sys.argv[2:])
