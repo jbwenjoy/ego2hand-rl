@@ -1,5 +1,7 @@
 # SuperMimic + CHORD 统一研究仓库
 
+当前研究从 HO-Cap 裸手纸盒拿放开始，以自由物体的原速全程重放、同卡训练耗时和留出成功率验收。[当前目标与验收条件](docs/current-research-goal.md)
+
 这里是 Wuji Hand2 研究的后续开发入口。共享实现只维护 `src` 中的一份，
 实验差异通过配置表达。GPU 性能优化从这里继续，不逐份修改历史 study 副本。
 
