@@ -64,7 +64,10 @@ def rms_summary(pairs):
                 positive_dot=int((dots>0).sum()))
 
 
-def main(native_run,pose_run,old_run,topology_run,out):
+def main(native_run,pose_run,old_run,topology_run,out,methods=METHODS,hybrid="paired",previous=None):
+    methods=tuple(methods)
+    if not methods or len(methods)!=len(set(methods)) or hybrid not in methods:
+        raise ValueError("Unique forecast method keys, including the hybrid ablation source, required")
     root_report = file_pin(native_run/'report.json')
     source = json.loads(verify_file_pin(root_report).read_bytes())
     old = json.loads((old_run/'report.json').read_bytes())
@@ -77,13 +80,13 @@ def main(native_run,pose_run,old_run,topology_run,out):
     with np.load(verify_file_pin(fit['predictions']),allow_pickle=False) as f:
         ids = list(zip(map(int,f['phase']),map(str,f['name'])))
         valid = f['valid'].copy()
-        preds = {m:f[m].astype(float) for m in METHODS}
+        preds = {m:f[m].astype(float) for m in methods}
     declared = source['roles']['TEST']['rows']
     if len(set(ids))!=len(ids) or ids!=[(r['phase'],r['name']) for r in declared]:
         raise ValueError('TEST source order/coverage mismatch')
     out.mkdir(exist_ok=False,parents=True)
     write_json(out/'intent.json',dict(native=root_report,model=file_pin(pose_run/'report.json'),
-        historic=file_pin(old_run/'report.json'),topology=file_pin(topology_run/'report.json'),
+        methods=methods,hybrid=hybrid,previous=file_pin(previous/'report.json') if previous is not None else None,historic=file_pin(old_run/'report.json'),topology=file_pin(topology_run/'report.json'),
         scope='All TEST rows for prediction; valid, nonterminal, nonzero effective PD pairs for contrasts. Native sorted geom-pair multisets at all eight ticks define the topology strata. Oracle-only ablations replace one body with measured substep poses.'))
     folder=native_run/'native/TEST'
     model=mujoco.MjModel.from_binary_path(str(folder/'model.mjb'))
@@ -93,7 +96,8 @@ def main(native_run,pose_run,old_run,topology_run,out):
     qs=model.jnt_qposadr[model.actuator_trnid[:,0]]
     assert len(qs)==20 and not set(qs).intersection(range(qa,qa+7))
     directions=balanced_directions()
-    modes=METHODS+('true_substeps','paired_hand_true_object','true_hand_paired_object')
+    hand_name=hybrid+'_hand_true_object';object_name='true_hand_'+hybrid+'_object'
+    modes=methods+('true_substeps',hand_name,object_name)
     caps={m:[] for m in modes}; signatures={m:[] for m in modes}
     native=[];native_sets=[];pd=[];native_ok=[]
     for i,r in enumerate(declared):
@@ -103,10 +107,10 @@ def main(native_run,pose_run,old_run,topology_run,out):
         with np.load(verify_file_pin(r['packet'])) as f:
             native.append(f['capacity'].copy());pd.append(f['pd'].copy())
         native_sets.append(top);native_ok.append(bool(r['valid'] and not r['terminal']))
-        hand=truth.copy();hand[:,qs]=preds['paired'][i][:,qs]
-        obj=truth.copy();obj[:,qa:qa+7]=preds['paired'][i][:,qa:qa+7]
-        poses=dict(true_substeps=truth,paired_hand_true_object=hand,true_hand_paired_object=obj)
-        poses.update({m:preds[m][i] for m in METHODS})
+        hand=truth.copy();hand[:,qs]=preds[hybrid][i][:,qs]
+        obj=truth.copy();obj[:,qa:qa+7]=preds[hybrid][i][:,qa:qa+7]
+        poses={'true_substeps':truth,hand_name:hand,object_name:obj}
+        poses.update({m:preds[m][i] for m in methods})
         for name,q in poses.items():
             # Quaternion sign has no effect on the pose or collision geometry.
             np.testing.assert_allclose(q[0,qs],truth[0,qs],rtol=0,atol=1e-6)
@@ -146,9 +150,17 @@ def main(native_run,pose_run,old_run,topology_run,out):
     caps_path=out/'capacities.npz'
     np.savez_compressed(caps_path,phase=np.array([p for p,_ in ids]),name=np.array([n for _,n in ids]),native=native,valid=native_ok,**{k:np.stack(v) for k,v in caps.items()})
     old_interp=np.stack([old_rows[key]['learned_endpoint'] for key in ids])
-    historic_gap=np.abs(caps['load_interpolation']-old_interp)
+    historic_gap=np.abs(caps['load_interpolation']-old_interp) if 'load_interpolation' in caps else None
+    prior=None
+    if previous is not None:
+        earlier=json.loads((previous/'report.json').read_bytes())
+        if json.loads(verify_file_pin(earlier['intent']).read_bytes())['native']!=root_report or earlier['used_rows']!=sum(native_ok) or earlier['excluded_pairs']!=omissions:
+            raise ValueError('Changed denominator in previous comparison')
+        prior=earlier['summary']
+        for kind in ('basis','mixed'):
+            np.testing.assert_allclose(summaries['true_substeps'][kind]['all']['relative_error'],prior['true_substeps'][kind]['all']['relative_error'],atol=1e-12)
     write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),predictions=fit['predictions'],model=file_pin(folder/'model.mjb'),
-        historic_load_interpolation=dict(max_abs=float(historic_gap.max()),mean_abs=float(historic_gap.mean()),mixed=old['summary']['learned_endpoint']['mixed']),
+        historic_load_interpolation=dict(max_abs=float(historic_gap.max()),mean_abs=float(historic_gap.mean()),mixed=old['summary']['learned_endpoint']['mixed']) if historic_gap is not None else None, previous_summary=prior,
         estimates=file_pin(caps_path),available_rows=len(ids),used_rows=int(native_ok.sum()),excluded_pairs=omissions,summary=summaries,pairs=rows,
         historic_cpu_mixed=old['summary']['cpu_openloop_substeps']['mixed'],historic_cpu_basis=old['summary']['cpu_openloop_substeps']['basis']))
     for key,s in summaries.items():
@@ -158,4 +170,7 @@ def main(native_run,pose_run,old_run,topology_run,out):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     for name in ['native_run','pose_run','old_run','topology_run','out']:parser.add_argument(name,type=Path)
-    args=parser.parse_args();main(args.native_run,args.pose_run,args.old_run,args.topology_run,args.out)
+    parser.add_argument('--methods',nargs='+',default=METHODS)
+    parser.add_argument('--hybrid',default='paired')
+    parser.add_argument('--previous',type=Path)
+    args=parser.parse_args();main(**vars(args))
