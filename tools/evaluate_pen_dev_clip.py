@@ -1,6 +1,7 @@
 """Run frozen policies on the first dynamically screened development start."""
 from pathlib import Path
 import json,re,sys,tomllib
+from contextlib import nullcontext
 from types import SimpleNamespace
 import numpy as np
 import mujoco
@@ -16,8 +17,8 @@ from supermimic_research.strict_json import write_json
 def read(pin):return json.loads(verify_file_pin(pin).read_bytes())
 
 
-def config(out,name):
-    root=b.ROOT;pre=json.loads((root/'runs/pen_dev_static_preload_v1/report.json').read_bytes())
+def config(out,name,preload=None):
+    root=b.ROOT;pre=json.loads((preload or root/'runs/pen_dev_static_preload_v1/report.json').read_bytes())
     proj=read(read(pre['intent'])['source']);screen=read(read(proj['intent'])['screen']);item=screen['results'][name]
     pose=next(r for r in proj['rows'] if r['clip']==name)['variants']['projection']['trace']
     ctrl=next(r for r in pre['rows'] if r['clip']==name)['holds']['preloaded']['trace']
@@ -48,7 +49,7 @@ def main(out):
     return evaluate_cases(out,obj,item,actors,{'residual':0.,'support':.2},3)
 
 
-def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_labels=None):
+def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_labels=None,initial_histories=None,*,custom_start=True,refit_export=False):
     """Shared clip-bound native loop. Actor names preserve the registered run order."""
     if repetitions < 1 or set(actors) != set(environment_weights):
         raise ValueError('Specify the native support weight for each Actor')
@@ -69,7 +70,7 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
                 for arm in actors:
                     folder=out/f'{arm}_{rep}';folder.mkdir()
                     with b.CostProfile(ident,manifest) as profile:
-                        with clip_start_constructor():rt=profile.create_runtime(obj,1)
+                        with (clip_start_constructor() if custom_start else nullcontext()):rt=profile.create_runtime(obj,1)
                         try:
                             rt.set_fixed_frame_features(False);rt.support_weight=environment_weights[arm]
                             ref=reference(rt)
@@ -80,15 +81,30 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
                                 assert np.min(abs((ref['quaternion_wxyz']*fixed['quat_wxyz']).sum(1)))>1-1e-6
                             st=torch.load(verify_file_pin(actors[arm]),map_location='cpu',weights_only=False)
                             actor,_,_=b.model_pair(rt.device,SimpleNamespace(**st['config']));actor.load_state_dict(st['actor']);actor.eval()
-                            ph=b.save_physics(rt,folder);m=mujoco.MjModel.from_binary_path(str(folder/'model.mjb'));b.require_structure(m)
-                            with np.load(folder/'physical_context.npz') as f:phys=dict(f)
+                            if refit_export:
+                                from supermimic_research.runtime.pen_cpu_model_export import export_pen_cpu_model
+                                bundle=export_pen_cpu_model(rt,folder/'cpu_export')
+                                ph=bundle['physics'];model_file=verify_file_pin(bundle['model']);physical_file=verify_file_pin(bundle['physical_context'])
+                            else:
+                                ph=b.save_physics(rt,folder);model_file=folder/'model.mjb';physical_file=folder/'physical_context.npz'
+                            m=mujoco.MjModel.from_binary_path(str(model_file));b.require_structure(m)
+                            with np.load(physical_file) as f:phys=dict(f)
                             body=rt.features.body;layout=dict(object_body=body,object_qposadr=rt.features.qa,object_dofadr=int(m.jnt_dofadr[m.body_jntadr[body]]),COM_BODY=m.body_ipos[body].tolist())
                             case=dict(dt=.0025,model_layout=layout,aids=rt.action._position_ctrl_ids.cpu().tolist(),qids=rt.features.qids.cpu().tolist(),dofs=rt.features.dofs.cpu().tolist())
                             rec=b.OwnedProbeRecorder(rt);parts=[];stop=None;checks=[]
                             for phase in range(1,item['frames']):
                                 assert int(rt.motion.time_steps[0])==phase
-                                raw=actor.distribution(rt.observation()['policy']).mean;rec.begin(raw[0].cpu().numpy())
+                                obs=rt.observation()['policy']
+                                if phase==1:
+                                    initial_obs=obs[0].detach().cpu().numpy().copy()
+                                    if initial_histories is not None:
+                                        obs=obs.clone()
+                                        obs[0,-20:]=torch.as_tensor(initial_histories[arm],device=obs.device,dtype=obs.dtype)
+                                    first_obs=obs[0].detach().cpu().numpy().copy()
+                                raw=actor.distribution(obs).mean;rec.begin(raw[0].cpu().numpy())
+                                if phase==1:first_raw=raw[0].detach().cpu().numpy().copy()
                                 _,_,term,trunc,info=rt.step(raw);z=rec.finish()
+                                if phase==1:first_pd=z['post_ctrl'][0,case['aids']].copy()
                                 metrics,decoded=b.decode_saved_case(case,z,m,phys);pkt=b.pack_case(m,case,z,decoded,case['qids'],case['dofs'],case['aids'],z['initial_warmstart'],ph)
                                 ok=bool(all(metrics['checks'].values()) and pkt['valid'][0] and np.all(pkt['geometry_flags'][0]<=[.002,.0002,.001]))
                                 checks.append(dict(ok=ok,geometry=pkt['geometry_flags'][0].tolist(),metrics=metrics))
@@ -105,6 +121,10 @@ def evaluate_cases(out,obj,item,actors,environment_weights,repetitions,training_
                             if training_labels is not None:
                                 row.update(training=training_labels[arm],environment_support_weight=rt.support_weight,
                                            actor=actors[arm],strict_success=bool(summary['qualified']))
+                            if initial_histories is not None:
+                                initial_file=folder/'first_action.npz'
+                                np.savez_compressed(initial_file,native_obs=initial_obs,actor_obs=first_obs,raw=first_raw,transmitted_pd=first_pd)
+                                row.update(first_action=file_pin(initial_file))
                             write_json(folder/'report.json',dict(**row,checks=checks,trace=file_pin(folder/'trace.npz')))
                             rows.append(dict(**row,case=file_pin(folder/'report.json')))
                         finally:rec=None;rt.close()
