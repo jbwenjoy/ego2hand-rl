@@ -5,7 +5,7 @@ from scipy.optimize import least_squares
 from .retargeting import HandTipIK
 
 
-def solve_contact_sequence(model,qinit,targets,poses,mug,hand_ids):
+def solve_contact_sequence(model,qinit,targets,poses,mug,hand_ids,*,gap_penalty=None,max_speed=None):
     base=HandTipIK(model,qinit,targets[0],regularization=0.)
     d=base.data;q0=qinit[:20].copy()
     d.qpos[:]=qinit;mujoco.mj_forward(model,d)
@@ -27,13 +27,18 @@ def solve_contact_sequence(model,qinit,targets,poses,mug,hand_ids):
         previous=seq[-1];pose=poses[i];goal=mug_points@pose[:3,:3].T+pose[:3,3]
         base.targets=targets[i]
         def residual(q):
-            return np.r_[base.residual(q)[:15],((points()-goal)*weights[:,None]/.0003).flatten(),.05*(q-q0),.1*(q-previous)]
+            extra=gap_penalty.update(q,pose)[0] if gap_penalty is not None else np.empty(0)
+            return np.r_[extra,base.residual(q)[:15],((points()-goal)*weights[:,None]/.0003).flatten(),.05*(q-q0),.1*(q-previous)]
         def jac(q):
             J=base.jacobian(q)[:15];blocks=[]
             for point,(body,_,_,_),w in zip(points(),binds,weights):
                 jp=np.zeros((3,model.nv));mujoco.mj_jac(model,d,jp,None,point,body)
                 blocks.append(jp[:,:20]*w/.0003)
-            return np.vstack([J,*blocks,.05*np.eye(20),.1*np.eye(20)])
-        result=least_squares(residual,previous,jac=jac,bounds=(base.lo,base.hi),max_nfev=100)
+            extra=gap_penalty.update(q,pose)[1] if gap_penalty is not None else np.empty((0,20))
+            return np.vstack([extra,J,*blocks,.05*np.eye(20),.1*np.eye(20)])
+        lo,hi=base.lo,base.hi
+        if max_speed is not None:
+            lo=np.maximum(lo,previous-.02*max_speed);hi=np.minimum(hi,previous+.02*max_speed)
+        result=least_squares(residual,previous,jac=jac,bounds=(lo,hi),max_nfev=100)
         q=result.x.copy();seq.append(q);tip.append(base.state(q));errors.append(np.linalg.norm(points()-goal,axis=1));ok.append(bool(result.success))
     return np.array(seq),np.array(tip),ok,np.array(errors),[r[3] for r in binds]

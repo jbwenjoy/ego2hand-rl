@@ -9,15 +9,17 @@ from supermimic_research.mechanics.mug_contact_sequence import solve_contact_seq
 from supermimic_research.artifacts import file_pin,verify_file_pin
 from supermimic_research.strict_json import write_json
 
-def main(out):
+def main(out,bounded=False):
     out.mkdir(exist_ok=False);root=baseline.ROOT/'runs';parent=root/'mug_tip_sequence_v1/report.json'
     prev=json.loads(parent.read_bytes());intent=json.loads(verify_file_pin(prev['intent']).read_bytes())
     binding=json.loads(verify_file_pin(intent['binding']).read_bytes());source=json.loads(verify_file_pin(intent['reference']).read_bytes())
     with np.load(verify_file_pin(source['output'])) as f:poses=f['T_world_from_BODY']
-    write_json(out/'intent.json',dict(parent=file_pin(parent),rules='All active nonpositive-gap hand/mug material points in initial mechanical grasp. 0.3 mm position scale per hand body, 10 mm human tip scale; same joint regularization, time, preload and no-aid native test.'))
+    write_json(out/'intent.json',dict(parent=file_pin(parent),bounded=bounded,speed_cap_rad_s=5.0 if bounded else None,active_gap_penalty=bounded,rules='All active nonpositive-gap hand/mug material points in initial mechanical grasp. 0.3 mm position scale per hand body, 10 mm human tip scale; same joint regularization, time, preload and no-aid native test.'))
     def solve(model,q,targets):
         ids={model.geom(n).id for n in binding['hand_collision_names']}
-        seq,tips,ok,err,names=solve_contact_sequence(model,q,targets,poses,binding['mug_body_id'],ids)
+        from supermimic_research.mechanics.mug_active_gaps import ContactGapPenalty
+        penalty=ContactGapPenalty(model,q,binding['mug_body_id'],ids) if bounded else None
+        seq,tips,ok,err,names=solve_contact_sequence(model,q,targets,poses,binding['mug_body_id'],ids,gap_penalty=penalty,max_speed=5. if bounded else None)
         np.savez_compressed(out/'contact_errors.npz',error_m=err,names=names)
         return seq,tips,ok
     with patch.object(baseline,'solve_trajectory',solve):
@@ -34,4 +36,4 @@ def main(out):
     with np.load(out/'contact_errors.npz') as f: summary=dict(points=len(f['names']),rms_mm=1000*np.sqrt(np.mean(f['error_m']**2)),max_mm=1000*f['error_m'].max())
     write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),dynamic=file_pin(out/'contact_ik/report.json'),screen=file_pin(out/'wrench/report.json'),material_points=summary,thresholds=rows,constant_native_replay_exact=True))
     print(summary,rows)
-if __name__=='__main__':main(Path(sys.argv[1]).resolve())
+if __name__=='__main__':main(Path(sys.argv[1]).resolve(),bounded='--bounded' in sys.argv[2:])
