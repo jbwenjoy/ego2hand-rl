@@ -40,7 +40,7 @@ def main(root,out):
     for row in master['roles'][role]['rows']:
         with np.load(verify_file_pin(row['packet'])) as f:x=f['x'];pd=f['pd'];target=f['capacity']
         with np.load(verify_file_pin(row['trace'])) as f:
-            pre=f['pre_qpos'];end=f['post_qpos'][-1];d.mocap_pos[:]=f['post_mocap_pos'][0];d.mocap_quat[:]=f['post_mocap_quat'][0]
+            initial=f['initial_native_state'];warm=f['initial_warmstart'];velocity=f['pre_qvel'][0];pre=f['pre_qpos'];end=f['post_qpos'][-1];d.mocap_pos[:]=f['post_mocap_pos'][0];d.mocap_quat[:]=f['post_mocap_quat'][0]
         x0=torch.from_numpy(x[:55]).double();nxt=pen_load_step(x0,torch.from_numpy(pd).double(),None,net,mass,I,g)[0].detach().numpy()
         hat=end.copy();hat[qs]=nxt[:20];hat[qa:qa+3]=nxt[40:43];hat[qa+3:qa+7]=Rotation.from_matrix(state_rotation(nxt)).as_quat()[[3,0,1,2]]
         def interpolate(b):
@@ -50,8 +50,14 @@ def main(root,out):
             return q
         hand_only=end.copy();hand_only[qs]=hat[qs]
         object_only=end.copy();object_only[qa:qa+7]=hat[qa:qa+7]
+        # CPU native prediction sees only the stored initial state and commanded PD.
+        replay=mujoco.MjData(m);mujoco.mj_setState(m,replay,initial,mujoco.mjtState.mjSTATE_INTEGRATION)
+        np.testing.assert_allclose(replay.qpos,pre[0],rtol=0,atol=1e-7);np.testing.assert_allclose(replay.qvel,velocity,rtol=0,atol=1e-7)
+        np.testing.assert_allclose(replay.qacc_warmstart,warm,rtol=0,atol=1e-7);assert not replay.qfrc_applied.any() and not replay.xfrc_applied.any()
+        replay.ctrl[:]=pd;cpu=[]
+        for _ in range(8):cpu.append(replay.qpos.copy());mujoco.mj_step(m,replay)
         pred={}
-        for k,poses in [('measured_substeps',pre),('measured_endpoint',interpolate(end)),('learned_hand_true_object',interpolate(hand_only)),('true_hand_learned_object',interpolate(object_only)),('learned_endpoint',interpolate(hat))]:
+        for k,poses in [('cpu_openloop_substeps',cpu),('measured_substeps',pre),('measured_endpoint',interpolate(end)),('learned_hand_true_object',interpolate(hand_only)),('true_hand_learned_object',interpolate(object_only)),('learned_endpoint',interpolate(hat))]:
             pred[k]=np.mean([geometry(m,d,q,body,dirs) for q in poses],axis=0).tolist()
         results.append(dict(phase=row['phase'],name=row['name'],ok=row['valid'] and not row['terminal'],native=target.tolist(),**pred))
     summary={}
@@ -72,4 +78,5 @@ def main(root,out):
     write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),summary=summary,rows=results))
     print(summary)
 if __name__=='__main__':main(*map(Path,sys.argv[1:]))
+
 
