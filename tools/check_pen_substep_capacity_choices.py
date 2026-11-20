@@ -14,7 +14,7 @@ def read(pin):
     return json.loads(verify_file_pin(pin).read_bytes())
 
 
-def main(fit,source,out):
+def main(fit,source,out,secant_fit=None):
     from supermimic_research.mechanics.pen_substep_pose import load_substep_pose
     out.mkdir(exist_ok=False);torch.set_num_threads(2)
     train=read(file_pin(fit/'report.json'));bank=read(file_pin(source/'report.json'))
@@ -22,10 +22,14 @@ def main(fit,source,out):
     for k in ('absolute','paired'):
         pin=train['models'][k]['checkpoint']
         models[k]=load_substep_pose(torch.load(verify_file_pin(pin),map_location='cpu',weights_only=False)).eval()
+    if secant_fit is not None:
+        from supermimic_research.mechanics.pen_substep_secant import load_local_secant
+        p=read(file_pin(secant_fit/'report.json'))['checkpoint']
+        models['local_secant']=load_local_secant(torch.load(verify_file_pin(p),map_location='cpu',weights_only=True))
     target_pin=read(bank['intent'])['targets']
     with np.load(verify_file_pin(target_pin)) as f:target=f['capacity'];dirs=f['directions']
     np.testing.assert_array_equal(dirs,balanced_directions())
-    write_json(out/'intent.json',dict(fit=file_pin(fit/'report.json'),bank=file_pin(source/'report.json'),scope='Held-out earlier executed candidates; choose among all declared actions using only the common start and proposed joint targets. No native endpoint observations in selection. W1 CPU collision queries on predicted poses, zero native integration.'))
+    write_json(out/'intent.json',dict(fit=file_pin(fit/'report.json'),secant=file_pin(secant_fit/'report.json') if secant_fit else None,bank=file_pin(source/'report.json'),scope='Held-out earlier executed candidates; choose among all declared actions using only the common start and proposed joint targets. No native endpoint observations in selection. W1 CPU collision queries on predicted poses, zero native integration.'))
     results={}
     for arm,detail in bank['results'].items():
         source_cases=read(detail['report']);decl=read(source_cases['proposals']);folder=Path(detail['report']['path']).parent
@@ -64,3 +68,4 @@ def main(fit,source,out):
     write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),results=results))
     print({k:{j:(v['wins'],v['total'],v['median_gain']) for j,v in arm.items()} for k,arm in results.items()})
 if __name__=='__main__':main(*map(lambda s:Path(s).resolve(),sys.argv[1:]))
+

@@ -28,7 +28,7 @@ def cpu_scores(m,state,actions,body,dirs,target):
     return scores
 
 
-def main(out,pose_fit=None):
+def main(out,pose_fit=None,secant_fit=None):
     root=b.ROOT/'runs';out.mkdir(exist_ok=False)
     read=lambda p:json.loads(verify_file_pin(p).read_bytes())
     fit=file_pin(root/'pen_capacity_pair_fit_v1/report.json')
@@ -45,6 +45,12 @@ def main(out,pose_fit=None):
             pose_pin=pose_report['models'][key]['checkpoint'];pose_pins[key]=pose_pin
             pose_nets[key.upper()]=load_substep_pose(torch.load(verify_file_pin(pose_pin),map_location='cpu',weights_only=False),dtype=torch.float64).eval()
         order=['BASE','ABSOLUTE','PAIRED','PAIRED','BASE','ABSOLUTE','ABSOLUTE','PAIRED','BASE']
+    if secant_fit is not None:
+        from supermimic_research.mechanics.pen_substep_secant import load_local_secant
+        assert pose_fit is not None
+        pin=read(file_pin(secant_fit/'report.json'))['checkpoint'];pose_pins={'local_secant':pin}
+        pose_nets={'SECANT':load_local_secant(torch.load(verify_file_pin(pin),map_location='cpu',weights_only=True))}
+        order=['BASE','SECANT','SECANT','BASE','BASE','SECANT']
     write_json(out/'intent.json',dict(pose_models=pose_pins,pose_modes='ABSOLUTE/PAIRED score the same five candidates using predicted substep poses plus CPU collision geometry. Separate exploratory native trial on a previously inspected behavior.',actor=source,fit=fit,target=target,schedule=order,phase_range=[206,222],
         arms='BASE original, LEARNED lowest response-head cost across all 5 candidates, CPU lowest predicted cost across same 5 candidates using CPU dynamics from observed initial state. All choices before physical execution. No learned parameters updated. Inside qualified geometry windows only.',endpoints='Mean actual 8-tick capacity L1 in intervention region, strict full duration and orientation, score only matched qualified intervals across arms.'))
     st=torch.load(verify_file_pin(source),map_location='cpu',weights_only=False);manifest=b.factory()
@@ -123,3 +129,4 @@ def main(out,pose_fit=None):
         write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),native=ticks,rows=rows))
     finally:b.Simulation.step=original
 if __name__=='__main__':main(*map(lambda s:Path(s).resolve(),sys.argv[1:]))
+
