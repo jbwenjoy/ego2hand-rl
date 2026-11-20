@@ -108,6 +108,17 @@ def evaluate(prepared,fit,out):
     fit_pin=file_pin(fit/'report.json');fit_report=read(fit_pin)
     ckpin=file_pin(fit/'state.pt')
     if not contains_pin(fit_report,ckpin):raise ValueError('Unverified state-only checkpoint')
+    fit_intent=read(fit_report['intent'])
+    if fit_intent['reference']!=native['target_series']:
+        raise ValueError('Target capacity reference differs from the forecast training protocol')
+    collection=read(read(fit_intent['data'])['collection'])
+    behavior_pins=read(collection['intent'])['actors']
+    probe_actors=read(read(native['source'])['intent'])['actors']
+    if probe_actors!={'residual':behavior_pins['TEST2'],'support':behavior_pins['TEST3']}:
+        raise ValueError('Source actors differ from the declared holdout roles')
+    train_pins=[behavior_pins[k]['sha256'] for k in ('A','B','C','D','VAL')]
+    if any(p['sha256'] in train_pins for p in probe_actors.values()):
+        raise ValueError('Evaluation policy also owns a TRAIN or VAL trajectory')
     head=load_capacity_head(torch.load(verify_file_pin(ckpin),weights_only=True,map_location='cpu'),dtype=torch.float64,device='cpu').requires_grad_(False)
     if head.use_history:raise ValueError('State-only capacity model required')
     t=lambda v:torch.as_tensor(v,dtype=torch.float64)
@@ -154,3 +165,4 @@ if __name__=='__main__':
     args=p.parse_args()
     if args.mode=='prepare':prepare(args.producer,args.targets,args.shaft_review,args.out)
     else:evaluate(args.prepared,args.fit,args.out)
+
