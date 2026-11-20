@@ -38,11 +38,13 @@ def main(root,out):
             by_action={key:np.array([r['mismatch'] for r in replays if r['name']==key]) for key in scores}
             valid=all(r['valid'] and not r['terminal'] for r in replays) and all(v.shape==(2,) for v in by_action.values())
             baseline=by_action['BASE'];gain=float(baseline.mean()-by_action[pick].mean())
-            rows.append(dict(phase=p,chosen=pick,cpu_scores=scores,native_gain=gain,admitted=valid,
+            opposite=(pick[:-4]+'up' if pick.endswith('down') else pick[:-2]+'down') if pick!='BASE' else 'BASE'
+            rows.append(dict(phase=p,chosen=pick,strict_win=bool(valid and by_action[pick].max()+np.ptp(baseline)<min(baseline.min(),by_action[opposite].min())),cpu_scores=scores,native_gain=gain,admitted=valid,
                 improves=bool(valid and by_action[pick].max()+np.ptp(baseline)<baseline.min()),
                 worsens=bool(valid and by_action[pick].min()-np.ptp(baseline)>baseline.max())))
         clean=[s for s in rows if s['admitted']]
-        result[arm]=dict(rows=rows,complete=len(clean),improves=sum(s['improves'] for s in clean),worsens=sum(s['worsens'] for s in clean),base_choices=sum(s['chosen']=='BASE' for s in clean),median_gain=float(np.median([s['native_gain'] for s in clean])))
+        result[arm]=dict(rows=rows,complete=len(clean),strict_wins=sum(s['strict_win'] for s in clean),improves=sum(s['improves'] for s in clean),worsens=sum(s['worsens'] for s in clean),base_choices=sum(s['chosen']=='BASE' for s in clean),median_gain=float(np.median([s['native_gain'] for s in clean])))
     write_json(out/'report.json',dict(intent=file_pin(out/'intent.json'),result=result))
     print({a:{k:v for k,v in r.items() if k!='rows'} for a,r in result.items()})
 if __name__=='__main__':main(*map(Path,sys.argv[1:]))
+
