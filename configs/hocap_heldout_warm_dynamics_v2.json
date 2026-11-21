@@ -1,0 +1,12 @@
+{
+  "version": "hocap_heldout_shared_dynamics_transfer_v2",
+  "parent_comparison_sha256": "8f03dc355d4302a9c1521260d2f9290d07f7f68bc7de83e891e04e225ca623c6",
+  "arm": "shared_wm_warm_dynamics",
+  "paired_ablation": "shared_wm",
+  "source_selection": "Same final shared hybrid development checkpoint as the fixed-budget actor-only ablation. Pair the actor, native training state and auxiliary sidecar by step and checkpoint-set ID. Reject prior or best-scoring alternatives.",
+  "transfer": "Extract only shared dynamics weights plus the original input and output centers and scales. Both source normalizations remain fixed throughout target adaptation. Transfer the same actor and its batch statistics; leave native critic, replay, optimizer, target transition history and auxiliary optimizer fresh. Per-target sampling, Adam and model update counters begin at zero.",
+  "target_exposures": "Same references, source-stage masks, world count, four native step budgets, seeds, physical settings, curriculum and auxiliary update schedule as the actor-only fresh-world-model arm. Resume only each target's own correctly paired native and auxiliary state. No target state is reused across participants.",
+  "zero_shot": "Reuse the exact existing zero-shot report for the same actor, reference, source-stage hash and physical certificates. The transferred world model only participates in target training, so there is no second zero-shot experiment.",
+  "accounting": "Report time-to-verified pass and matched-step trajectories side by side. Charge shared hybrid pretraining once per stand-alone deployment in each counterfactual method's totals. Across the experiment charge prep, calibration, shared pretraining and zero-shot scoring only once, and report the extra CPU export plus actual target adaptation/scoring costs separately.",
+  "regime": "Register rule and extraction hashes against the final development selection before any held-out source is opened. Execute separately after the original comparison is complete. The signed primary and supplementary split and v1 ablation remain authoritative."
+}

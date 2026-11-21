@@ -1,0 +1,17 @@
+{
+  "version": "hocap_three_participant_heldout_v1",
+  "split_manifest_sha256": "3e0b26d4a212b975989c6b722aa2f5c4e964dbb09a33e104ae58c4ca1c45d076",
+  "split_public_key_hex": "87b8c8e24d312053f57c144a6fbb23f5c59802a565e118526ba14d36a8cf400a",
+  "stage_config_sha256": "3f3445e7bc6f38f2ad6502bd753faac2e56e22519d856b13b176b3221bdf6497",
+  "primary": "subject_2",
+  "supplementary": ["subject_5","subject_6"],
+  "checkpoint_selection": "Use each shared stream's terminal saved checkpoint in its final pre-declared development round, regardless of any development score. Require completion of the entire development ledger.",
+  "target_budget": "Use the frozen development plan's single-reference curriculum horizon as total native environment steps, at its chosen total world count. Each target and each adaptation arm gets exactly this same budget. Measure at rounded 1/4, 1/2, 3/4 and full budget. Preserve stage schedule against the full horizon on resume.",
+  "checks_in_quarters": [1,2,3,4],
+  "zero_shot": ["shared_mf","shared_wm"],
+  "adaptation": ["cold_single","shared_mf","shared_wm"],
+  "transfer_scope": "One reference per target run, canonical zero-step learner in all arms. Shared streams transfer only the matching terminal actor and batch statistics. Fresh target replay, critic, optimizer counters and auxiliary world model. No information or checkpoints flow between held-out participants.",
+  "disturbance": "Run separately at zero-shot and final budget when the nominal held-out rollout reaches the frozen source intervention and passive-force certificates validate. Classify non-applicable, unexposed and partial exposures explicitly. Disturbance never changes qualification.",
+  "availability": "All source-stage digests must be registered before any policy is scored. A source-ambiguous reference remains in the assigned denominator.",
+  "accounting": "Record per-subject costs for preparation, physics calibration, zero-shot evaluation, training/adaptation, physical evaluation, and separate disturbance. Charge failed attempts. Report target-only, end-to-end, and pretraining-inclusive curves; charge development training and its validation once per shared arm, not once per target."
+}
