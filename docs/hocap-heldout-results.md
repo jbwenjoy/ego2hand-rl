@@ -28,6 +28,8 @@
 
 在第 72 个源帧，313,920 步策略的姿态误差达到 17.59°。继续到全预算，旋转 RMS 略降，位置和指尖误差增大。终点扰动中，闭环和原控制开环各自经历正、负两个完整脉冲，各自均恢复 2/2。相同指令的开环也能恢复，本例尚不能把恢复归因于闭环反馈。[最差姿态帧](../runs/wuji_heldout_subject5_first_full_visual_v1/maximum_rotation_error.jpg) · [全预算策略视频](../runs/wuji_heldout_subject5_final_visual_v1/ego_vs_policy.mp4) · [终点扰动收据](../runs/wuji_heldout_formal_v1/jobs/subject_5_cold_single_disturb_418560/attempt_001.json)
 
+视频左侧直接读取源 HoloLens 的 132 帧 RGB。右侧把 Newton / MuJoCo-Warp 记录的手和物体状态投影到逐帧标定的同一相机。CPU 软件渲染器逐帧核对了 28 个刚体，两个视频中的最大刚体原点偏差均小于 0.00021 mm。视频制作和支撑面诊断有一部分与正式作业共用主机 CPU，两项工作均在 CPU 上完成。处理器竞争对墙钟时间的影响未单独估计。[回放工具](../tools/render_hocap_heldout_score.py) · [全预算视频核验](../runs/wuji_heldout_subject5_final_visual_v1/report.json)
+
 ## 支撑面带来的测量限制
 
 茶盒在统一的水平桌面上复位时，盒底已经穿入桌面。四个逐条检查点在首个物理子步都测得 **10.11 mm** 盒桌穿透，超过 2 mm 门限，此时没有手盒载荷。独立静态场景在发出任何动作前就复现了这个间距。两台固定相机的深度估计也无法唯一确定一张同时符合首末盒底的桌面。原协议下的完整成功率包含这一固定场景误差，应同时报告实际搬运和其余门限。[初态零积分检查与深度残差](hocap-heldout-initial-support.md)

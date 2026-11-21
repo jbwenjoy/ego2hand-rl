@@ -2,6 +2,27 @@
 
 S5 茶盒在源首帧 **已经穿入固定桌面 10.113 mm**。完整物理评测要求所有子步的盒相关穿透均不超过 2 mm。在保留该源姿态、碰撞资产、桌面和调用顺序的条件下，策略来不及改变首个碰撞距离。因而 S5 在这一门槛上的失败具有确定的场景原因。下述诊断保留原始评分，使用冻结的三条留出轨迹、原始深度和已存的冷启动回放。[诊断数据](../runs/wuji_heldout_initial_support_diagnosis_v1/audit.json) · [原始留出结果](../runs/wuji_heldout_formal_v1/cost_and_outcomes.json)
 
+## 训练前检查
+
+独立入口只需准备好的 HO-Cap Wuji 参考及其资产、解析后的 FlashCHORD 场景配置 JSON、物理配置与原有门槛。它在源首帧 reset 后运行 CPU 前向计算，输出接触对、几何编号、原生有符号距离和适用阈值。本次运行选用开发集已有的场景配置，其任务、仿真器、碰撞、手型、环境和终止配置已与正式校准使用的配置逐项核对。三条输入均未使用目标策略、目标评分、目标训练日志或控制指令。[独立入口](../tools/preflight_wuji_source_contacts.py) · [三条源参考的前置回执](../runs/wuji_source_contact_preflight_v1/report.json)
+
+| 参考 | 盒–桌穿透，限 2 mm | 手–盒穿透，限 2 mm | 手–桌穿透，无冻结门槛 | 手自碰，限 0.5 mm |
+| --- | ---: | ---: | ---: | ---: |
+| S2 | 0.477 mm | 无接触 | 无接触 | 无接触 |
+| S5 | **10.113 mm，超限** | 无接触 | 4.173 mm | 无接触 |
+| S6 | 0.038 mm | 无接触 | 6.611 mm | 无接触 |
+
+正式开发训练的 S1、S3、S4 在各自直接 IK 和水平桌面场景中，首帧均无盒–桌、手–盒或手部自碰接触，因此三条开发参考均可通过已冻结的首帧穿透门槛。三者同时存在明显的手–桌穿入，最大值依次为 **36.173、35.501、13.667 mm**，这一类别未设门槛。逐条离线修正使用另行拟合的斜桌，上述数值只适用于开发 RL 的平桌场景。[正式开发参考清单](../runs/wuji_flashsac_matched_v2/plan.json) · [开发集独立前置回执](../runs/wuji_source_contact_preflight_v1/development.json)
+
+这项检查在三条参考中只标出 S5 的盒–桌门槛超限。手–桌数据保留在回执中供诊断。其余参考仍需动态验证后续接触。FlashCHORD 环境中的调用示例如下，`--reference` 可一次接收多份 parquet。默认物理配置和门槛与本研究相同。
+
+```sh
+python tools/preflight_wuji_source_contacts.py \
+  --reference /path/to/prepared/data.parquet \
+  --scene-config /path/to/resolved/environment.json \
+  --output /path/to/initial_contacts.json
+```
+
 ## 首个物理子步
 
 有符号间距单位为 mm，负数表示重叠。CPU 列在完整原生场景中调用 MuJoCo 前向计算，控制次数与积分次数均为零。末列仅将水平桌面平移到源首帧凸包最低点，已检查所有其他刚体的世界位姿逐项完全相同。
@@ -44,3 +65,9 @@ S5 首、末各三帧的平均盒底相差 7.366 mm。盒坐标原点水平移�
 3. 在策略推理前保留一次源首帧的完整 CPU 静态接触回执，记录盒–桌、手–盒、手–桌、手部自碰，以及每一类的 margin。原始留出结果保留。新的场景假设需另外运行相同控制或策略，才能判断接触、运动质量与耗时改善。
 
 复核命令为 FlashCHORD 环境下的 `python tools/audit_wuji_heldout_initial_support.py`。脚本强制 CPU，核对输入与回放摘要，将数据写入独立诊断目录。[诊断脚本](../tools/audit_wuji_heldout_initial_support.py)
+
+## 与公开方法的关系
+
+HO-Cap 通过多视角 RGB-D 重建并优化物体和裸手姿势。论文表 3 的 3.42 mm 描述可见物体顶点相对人工三角化标点的平均三维距离。这项统计不能给出 S5 盒底的竖直误差。官方多机位变换以标记坐标建立世界系，桌面与该世界零高度之间的毫米级误差需要对当前场景实测。[HO-Cap 原论文](https://arxiv.org/html/2406.06843) · [官方坐标加载器](https://github.com/IRVLUTD/HO-Cap/blob/main/hocap_toolkit/loaders/sequence_loader.py#L110-L140)
+
+CHORD 在构建训练集时筛查手–物及手–手穿透，采用 2 cm 逐帧阈值，还通过 300 步仿真重放检查可执行性。NVIDIA v0.4.0 的可选支撑重建从物体静止时的网格最低点生成水平圆盘，其高度来自同一份物体轨迹。本次用两台深度相机的观测检验了 S5 的候选支撑面。[CHORD 附录 D](https://arxiv.org/html/2607.00033v2#A4) · [NVIDIA 支撑重建实现](https://github.com/nvidia-isaac/video_to_data/blob/v0.4.0/robotic_grounding/source/robotic_grounding/robotic_grounding/retarget/support_recon.py)
