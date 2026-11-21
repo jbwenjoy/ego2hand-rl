@@ -74,9 +74,10 @@ def fold(plan, rows, *, verify=True):
         m["sampled_steps"] += int(row["native_added_steps"])
         for check in row["checks"]:
             seq = check["sequence"]
-            if type(check["passed"]) != bool or not check["gates"] or any(type(v)!=bool for v in check["gates"].values()):
+            flags = list(check["gates"].values())
+            if type(check["passed"]) != bool or not flags or any(v is not None and type(v)!=bool for v in flags):
                 raise ValueError("Invalid evaluation flags")
-            if check["passed"] != all(check["gates"].values()):
+            if check["passed"] != all(v is True for v in flags) or (not check["passed"] and False not in flags):
                 raise ValueError(f"Overall success disagrees with gates: {key} {seq}")
             if verify:
                 raw = read(check["report"])

@@ -15,22 +15,26 @@ def compare(plan, ledger):
         stream=segment["stream"]
         out=stream_actors.setdefault(stream,[])
         segment_final=segment["measured"]["total_steps"]
-        before=segment_final-segment["native_added_steps"]
-        for path in (Path(segment["measured"]["path"])/"checkpoints").glob("policy_*.safetensors"):
-            steps=int(path.stem.removeprefix("policy_"))
-            if not before < steps <= segment_final:
-                continue
-            key=(stream,steps)
-            if key in seen:
-                raise ValueError(f"Ambiguous saved actor for {key}")
-            seen.add(key)
-            header=read_checkpoint_metadata(path)
-            if int(header["environment_steps"])!=steps:
-                raise ValueError(f"Checkpoint/header mismatch: {path}")
-            out.append(dict(round=segment["round"], steps=steps,per_ref_steps=steps/nrefs,
-                            curriculum_stage=int(header["curriculum_stage"]),target_voc=float(header["voc_scale"]),
-                            update_attempts=int(header["global_update_step"]),checkpoint=str(path),
-                            originally_scored=(steps==segment_final)))
+        before=segment_final-segment.get("native_committed_delta",segment["native_added_steps"])
+        spans=[(Path(f["attempt"]),f["retained_through_step"]) for f in segment.get("failed_train_attempts",[])
+               if f.get("retained_through_step") is not None]
+        for directory,through in [*spans,(Path(segment["measured"]["path"]),segment_final)]:
+            for path in (directory/"checkpoints").glob("policy_*.safetensors"):
+                steps=int(path.stem.removeprefix("policy_"))
+                if not before < steps <= through:
+                    continue
+                key=(stream,steps)
+                if key in seen:
+                    raise ValueError(f"Ambiguous saved actor for {key}")
+                seen.add(key)
+                header=read_checkpoint_metadata(path)
+                if int(header["environment_steps"])!=steps:
+                    raise ValueError(f"Checkpoint/header mismatch: {path}")
+                out.append(dict(round=segment["round"], steps=steps,per_ref_steps=steps/nrefs,
+                                curriculum_stage=int(header["curriculum_stage"]),target_voc=float(header["voc_scale"]),
+                                update_attempts=int(header["global_update_step"]),checkpoint=str(path),
+                                originally_scored=(steps==segment_final)))
+            before=through
     results={}
     for stream,actors in stream_actors.items():
         actors.sort(key=lambda x:x["steps"])

@@ -45,3 +45,12 @@ class LedgerTest(unittest.TestCase):
         self.assertEqual(result["matched_known_card_budget_s"],12)
         self.assertEqual(single["distinct_success_at_matched_budget_range"],[0,1])
         self.assertIsNone(single["first_qualified_card_s"])
+
+    def test_nonfinite_policy_failure_has_no_observed_physics_tail(self):
+        r=segment("single0",1,False,1,1)
+        r["checks"][0]["gates"]={"finite_actor":False,"position":None,"release":None}
+        result=fold({"references":[{"sequence":"A"}]},[r],verify=False)
+        self.assertEqual(result["methods"]["single"]["qualified_clips"],0)
+        r["checks"][0]["gates"]["finite_actor"]=None
+        with self.assertRaises(ValueError):
+            fold({"references":[{"sequence":"A"}]},[r],verify=False)
