@@ -5,7 +5,7 @@ import json
 import os
 
 
-def export(actor,output,selection=None,development_fixture=False):
+def export(actor,output,selection=None,development_fixture=False,record_numerical_unavailability=False):
     import jax
     import numpy as np
     from flax import serialization
@@ -43,18 +43,30 @@ def export(actor,output,selection=None,development_fixture=False):
     sidecar=actor.parent/pair["auxiliary_file"]
     if file_hash(sidecar)!=pair["auxiliary_sha256"]:raise ValueError("Training sidecar failed SHA-256 validation")
     raw=serialization.msgpack_restore(sidecar.read_bytes())
-    if int(raw["native_environment_steps"])!=step or int(raw["state"]["model_updates"])<1:
-        raise ValueError("Expected a trained dynamics model at the source checkpoint")
+    if int(raw["native_environment_steps"])!=step:
+        raise ValueError("Auxiliary source checkpoint step differs from native state")
     payload={k:raw["state"][k] for k in ("model_params","scale")}
     source_updates=int(raw["state"]["model_updates"]);del raw
     interface=contract(meta);scale=payload["scale"]
     state_width=interface["policy_schema"]["observation"]["dimension"]+interface["critic_schema"]["context"]["dimension"]
     term_width=len(interface["native_objective_terms"])
     for kind,width in (("state",state_width),("output",state_width+term_width)):
-        if any(np.shape(scale[kind+"_"+k])!=(width,) for k in ("center","scale")) or np.any(scale[kind+"_scale"]<=0):
-            raise ValueError("Incompatible learned model normalization")
-    if not all(np.isfinite(x).all() for x in jax.tree.leaves(payload)):
-        raise ValueError("Source model contains nonfinite parameters or normalization")
+        if any(np.shape(scale[kind+"_"+k])!=(width,) for k in ("center","scale")):
+            raise ValueError("Incompatible learned model normalization shape")
+    invalid=[dict(leaf=jax.tree_util.keystr(k),nonfinite=int((~np.isfinite(v)).sum())) for k,v
+             in jax.tree_util.tree_flatten_with_path(payload)[0] if not np.isfinite(v).all()]
+    nonpositive={k:int(np.sum(scale[k]<=0)) for k in ("state_scale","output_scale") if np.any(scale[k]<=0)}
+    if invalid or nonpositive or source_updates<1:
+        if not record_numerical_unavailability:
+            raise ValueError("Selected source dynamics is unfitted or contains invalid parameters/calibration")
+        output.mkdir(parents=True,exist_ok=False)
+        status=dict(usable=False,status="invalid_source_dynamics" if invalid or nonpositive else "source_dynamics_not_fitted",
+                    source_set_id=link,source_training_steps=step,source_model_updates=source_updates,
+                    actor_sha256=file_hash(actor),source_pair_sha256=file_hash(pair_path),
+                    source_sidecar_sha256=pair["auxiliary_sha256"],nonfinite_leaves=invalid,
+                    nonpositive_scale_values=nonpositive,exported_payload_bytes=0)
+        atomic_json(output/"unavailable.json",status)
+        return status
     output.mkdir(parents=True,exist_ok=False)
     dst=output/"dynamics.msgpack";dst.write_bytes(serialization.msgpack_serialize(payload))
     manifest=dict(format="wuji_frozen_dynamics_v1",source_set_id=link,source_training_steps=step,source_model_updates=source_updates,
@@ -76,7 +88,9 @@ if __name__=="__main__":
     p.add_argument("--output",type=Path,required=True)
     p.add_argument("--selection",type=Path)
     p.add_argument("--development-fixture",action="store_true")
+    p.add_argument("--record-numerical-unavailability",action="store_true")
     a=p.parse_args()
     os.environ["JAX_PLATFORMS"]="cpu";os.environ["CUDA_VISIBLE_DEVICES"]=""
-    m=export(a.actor.resolve(),a.output.resolve(),a.selection.resolve() if a.selection else None,a.development_fixture)
-    print(json.dumps({k:m[k] for k in ("source_set_id","source_training_steps","source_model_updates","payload_sha256")}))
+    m=export(a.actor.resolve(),a.output.resolve(),a.selection.resolve() if a.selection else None,
+             a.development_fixture,a.record_numerical_unavailability)
+    print(json.dumps({k:m[k] for k in ("source_set_id","source_training_steps","source_model_updates","payload_sha256","status") if k in m}))

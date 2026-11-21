@@ -10,6 +10,7 @@ from types import SimpleNamespace
 
 from benchmark_wuji_parallel import environment, train_command
 from heldout_wuji_cost import summarize
+from heldout_teacher_health import inspect_actor
 from run_wuji_heldout import Jobs, artifact, check, comparison_schedule, digest, now, read, store, verify_release
 from summarize_wuji_tranche import fold, unscored_processes
 
@@ -34,16 +35,29 @@ def preregister(args):
     repo=Path(base["repo"]);teacher=check(base["teachers"]["shared_wm"])
     started=time.perf_counter()
     output=args.out/"transfer"
-    cmd=[sys.executable,str(repo/"tools/export_wuji_heldout_dynamics.py"),"--actor",str(teacher),"--selection",
-         str(args.original/"final_selection.json"),"--output",str(output)]
-    env=environment(repo,Path(base["upstream"]))
-    env.update(CUDA_VISIBLE_DEVICES="",JAX_PLATFORMS="cpu")
-    with (args.out/"extraction.log").open("x") as log:
-        subprocess.run(cmd,cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)
+    actor_health=base.get("teacher_health",{}).get("shared_wm")
+    if actor_health is None:actor_health=inspect_actor(teacher)
+    availability=dict(usable=False,status=actor_health["status"],source_set_id=actor_health["checkpoint_set_id"])
+    manifest=None
+    if actor_health["usable"]:
+        cmd=[sys.executable,str(repo/"tools/export_wuji_heldout_dynamics.py"),"--actor",str(teacher),"--selection",
+             str(args.original/"final_selection.json"),"--output",str(output),"--record-numerical-unavailability"]
+        env=environment(repo,Path(base["upstream"]))
+        env.update(CUDA_VISIBLE_DEVICES="",JAX_PLATFORMS="cpu")
+        with (args.out/"extraction.log").open("x") as log:
+            subprocess.run(cmd,cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)
+        if (output/"manifest.json").is_file():
+            manifest=read(output/"manifest.json")
+            if manifest["development_fixture"] or manifest["actor_sha256"]!=base["teachers"]["shared_wm"]["sha256"]:
+                raise ValueError("Only a matched final shared development actor and model may enter the study")
+            availability=dict(usable=True,status="available",source_set_id=manifest["source_set_id"])
+        else:
+            record=read(output/"unavailable.json")
+            if record["usable"] or record["actor_sha256"]!=base["teachers"]["shared_wm"]["sha256"]:
+                raise ValueError("Invalid dynamics unavailability receipt")
+            availability=dict(usable=False,status=record["status"],source_set_id=record["source_set_id"],
+                              receipt=artifact(output/"unavailable.json"))
     export_s=time.perf_counter()-started
-    manifest=read(output/"manifest.json")
-    if manifest["development_fixture"] or manifest["actor_sha256"]!=base["teachers"]["shared_wm"]["sha256"]:
-        raise ValueError("Only a matched final shared development actor and model may enter the study")
     supplemental_sources=[repo/"tools"/name for name in ("run_wuji_heldout_dynamics_supplement.py",
                           "export_wuji_heldout_dynamics.py","train_wuji_heldout_warm_dynamics.py")]
     supplemental_sources.append(repo/"src/supermimic_research/learning/heldout_dynamics_transfer.py")
@@ -52,9 +66,10 @@ def preregister(args):
     dev_known=sum(row["exclusive_card_s_known"] for row in totals.values())+sum(
         e["seconds"] for trials in unscored.values() for e in trials)
     plan=dict(created=now(),method=ARM,protocol=artifact(cfg_path),base_selection=artifact(args.original/"final_selection.json"),
-              source_teacher=artifact(teacher),dynamics_manifest=artifact(output/"manifest.json"),
-              dynamics_payload=artifact(output/manifest["payload_file"]),export_cpu_s=export_s,
-              source_set_id=manifest["source_set_id"],code=[artifact(p) for p in supplemental_sources],
+              source_teacher=artifact(teacher),dynamics_manifest=artifact(output/"manifest.json") if manifest else None,
+              dynamics_payload=artifact(output/manifest["payload_file"]) if manifest else None,export_cpu_s=export_s,
+              availability=availability,actor_health=actor_health,source_set_id=availability["source_set_id"],
+              code=[artifact(p) for p in supplemental_sources],
               development_trial_s_known=dev_known,development_unknown_costs=any(row["unknown_costs"] for row in totals.values()) or bool(pending),
               registration_coordinator_s=time.perf_counter()-registration_start-export_s,
               original=str(args.original),root=str(args.out),bulk=str(args.bulk),
@@ -68,8 +83,10 @@ def ready(args):
     if digest(path)!=args.supplement_sha256:raise ValueError("A registered supplemental plan digest is required")
     extra=read(path)
     if extra["root"]!=str(args.out):raise ValueError("Wrong supplementary study root")
-    for pin in [extra["protocol"],extra["base_selection"],extra["source_teacher"],
-                extra["dynamics_manifest"],extra["dynamics_payload"],*extra["code"]]:check(pin)
+    for pin in [extra["protocol"],extra["base_selection"],extra["source_teacher"],*extra["code"]]:check(pin)
+    if extra.get("availability",{}).get("usable",True):
+        check(extra["dynamics_manifest"]);check(extra["dynamics_payload"])
+    elif extra["availability"].get("receipt"):check(extra["availability"]["receipt"])
     orig=Path(extra["original"])
     base,jobs=verify_release(SimpleNamespace(out=orig,released_plan_sha256=extra["base_selection"]["sha256"]))
     if not (orig/"complete.json").is_file():raise ValueError("Run only after the fixed original comparison completes")
@@ -111,8 +128,18 @@ def outcomes(extra,base,original,jobs,frozen):
     extract=[dict(subject=s["subject"],method=None,steps=None,card=False,kind="source_dynamics_export_cpu_share",
                   known_wall_s=extra["export_cpu_s"]/len(refs),unknown_cost=False,outcome=None) for s in refs]
     alternate=dict(base,protocol=dict(base["protocol"],adaptation=[ARM],zero_shot=[ARM]),
-                   upfront_exclusive_card_s={ARM:base["upfront_exclusive_card_s"]["shared_wm"]})
+                   upfront_exclusive_card_s={ARM:base["upfront_exclusive_card_s"]["shared_wm"]},
+                   upfront_exclusive_card_s_range={ARM:base.get("upfront_exclusive_card_s_range",{}).get(
+                       "shared_wm",[base["upfront_exclusive_card_s"]["shared_wm"]]*2)})
+    actor_health=extra.get("actor_health",base.get("teacher_health",{}).get("shared_wm"))
+    if actor_health:
+        alternate["teacher_health"]={ARM:actor_health}
     new=summarize(alternate,[*extract,*shared,*unique],{s:v["source_status"] for s,v in frozen.items()})["methods"][ARM]
+    availability=extra.get("availability",{"usable":True,"status":"available"})
+    if not availability["usable"]:
+        new["transfer_availability"]=availability["status"]
+        for row in new["subjects"].values():
+            row["adaptation_status"]="not_run_"+availability["status"]
     baseline_method=baseline["methods"]["shared_wm"]
     paired={}
     for row in refs:
@@ -124,7 +151,8 @@ def outcomes(extra,base,original,jobs,frozen):
             pairs.append(dict(target_steps=nowrow["steps"],actor_only=previous["status"],
                               actor_and_dynamics=nowrow["status"],same_evaluation_reused=nowrow["steps"]==0))
         paired[s]=pairs
-    original_s=sum(e["known_wall_s"] for e in baseline["entries"])
+    original_s=(sum(e["known_wall_s"] for e in baseline["entries"])+
+                sum(h.get("inspection_cpu_wall_s",0.) for h in base.get("teacher_health",{}).values()))
     incremental=extra["export_cpu_s"]+sum(e["known_wall_s"] for e in unique)
     teachers=base["upfront_exclusive_card_s"]
     pret=(teachers["shared_mf"]+teachers["shared_wm"]
@@ -153,6 +181,12 @@ def run(args):
     report_path=jobs.root/"supplement_outcomes.json"
     if args.mode=="report":
         store(report_path,outcomes(extra,base,original,jobs,frozen));return
+    if not extra.get("availability",{}).get("usable",True):
+        store(report_path,outcomes(extra,base,original,jobs,frozen))
+        store(jobs.root/"complete.json",dict(finished=now(),method_availability=extra["availability"],
+                  assigned_subjects=[s["subject"] for s in base["subjects"]],no_target_training=True,
+                  supplement_sha256=args.supplement_sha256))
+        return
     refs=[x["subject"] for x in base["subjects"]]
     teacher=check(extra["source_teacher"]); transfer=check(extra["dynamics_manifest"])
     repo=jobs.repo; upstream=Path(base["upstream"]);warp=upstream.parent/"cache/warp"
@@ -183,7 +217,7 @@ def run(args):
         elif kind=="evaluate":
             actor=native[s]/f"checkpoints/policy_{steps}.safetensors"
             certs=[check(completed_job(original,f"{s}_cert_{name}")["receipt"]) for name in ("cpu","cuda0")]
-            dest,_=jobs.one(f"{s}_{ARM}_eval_{steps}",s,"shared_wm",kind,True,lambda out:jobs.local("evaluate_wuji_heldout.py",
+            dest,_=jobs.one(f"{s}_{ARM}_eval_{steps}",s,"shared_wm",kind,True,lambda out:jobs.local("heldout_numeric_evaluation.py",
                 "evaluate","--parquet",pq,"--contract",contract,"--contract-sha256",item["contract"]["sha256"],
                 "--cpu-certificate",certs[0],"--gpu-certificate",certs[1],"--checkpoint",actor,
                 "--physics",repo/"configs/flashchord_wuji_physics_v2.json","--warp-cache",warp,

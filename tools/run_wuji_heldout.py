@@ -12,8 +12,9 @@ import time
 
 from benchmark_wuji_parallel import environment, train_command
 from heldout_wuji_cost import summarize
+from heldout_teacher_health import inspect_actor
 from run_wuji_matched_tranche import digest, local_path, read, store, verified_phase
-from summarize_wuji_tranche import fold, unscored_processes
+from summarize_wuji_tranche import apply_interruption_bounds, fold, unscored_processes
 
 
 def now():
@@ -75,20 +76,40 @@ def freeze_final(args):
                              package_sha256=r["source_bundle"]["sha256"],
                              dataset_root=str(local_path(r["pose_arrays"][0]["path"]).parents[2])))
     if [s["subject"] for s in subjects]!=[protocol["primary"],*protocol["supplementary"]]:raise ValueError("Wrong subject grouping")
-    totals=fold(dplan,ledger)["methods"];extra,pending=unscored_processes(dplan,ledger)
+    scored=fold(dplan,ledger);extra,pending=unscored_processes(dplan,ledger)
+    bound_files=sorted(args.tranche.glob("recovery*/cost_bounds.json"))
+    bounds={}
+    for path in bound_files:
+        for name,values in read(path)["attempts"].items():
+            if name in bounds and bounds[name]!=values:raise ValueError(f"Conflicting interruption records for {name}")
+            bounds[name]=values
+    apply_interruption_bounds(scored,ledger,bounds)
+    totals=scored["methods"]
     upfront={"cold_single":0.}
+    upfront_range={"cold_single":[0.,0.]}
     teachers={}
     for method in protocol["zero_shot"]:
         final=finals[method]
         teachers[method]=artifact(final["checkpoint"])
         m=totals[method]
-        upfront[method]=None if m["unknown_costs"] or pending.get(method) else (
-            m["exclusive_card_s_known"]+sum(x["seconds"] for x in extra.get(method,[])))
+        unscored=sum(x["seconds"] for x in extra.get(method,[]))
+        lower,upper=m["scored_card_s_interval"]
+        upfront_range[method]=[lower+unscored,None if upper is None or pending.get(method) else upper+unscored]
+        upfront[method]=None if m["unknown_costs"] or pending.get(method) else lower+unscored
+    health={method:inspect_actor(check(pin)) for method,pin in teachers.items()}
+    for method,pin in teachers.items():
+        if health[method]["checkpoint_sha256"]!=pin["sha256"]:raise ValueError("Terminal actor changed during CPU precheck")
+    # Passive calibration needs only the scene configuration of a checkpoint.
+    passive=next((teachers[m] for m in protocol["zero_shot"] if health[m]["usable"]),None)
+    if passive is None:
+        last=max(r["round"] for r in ledger)
+        passive=artifact(next(r["checkpoint"] for r in ledger if r["stream"]=="single0" and r["round"]==last))
     canonical=Path(dplan["canonical_initial_state"])
     init_files=[artifact(canonical/n) for n in ("initial.json","state_0.safetensors")]
     stage_cfg=repo/"configs/hocap_holdout_source_qualification_v1.json"
     if digest(stage_cfg)!=protocol["stage_config_sha256"]:raise ValueError("Prospective source-stage protocol changed")
-    scripts=["tools/"+n for n in ("run_wuji_heldout.py","heldout_wuji_cost.py","evaluate_wuji_heldout.py",
+    scripts=["tools/"+n for n in ("run_wuji_heldout.py","heldout_teacher_health.py","heldout_numeric_evaluation.py",
+                 "heldout_wuji_cost.py","summarize_wuji_tranche.py","evaluate_wuji_heldout.py",
                  "stage_frozen_hocap_evaluation.py","fetch_heldout_depth_frames.py","freeze_hocap_source_stages.py",
                  "run_wuji_multiref_flashsac.py","evaluate_flash_wuji_quality.py","benchmark_wuji_parallel.py",
                  "validate_flash_wuji_contact_force.py","evaluate_wuji_disturbance.py","materialize_hocap_flashchord.py",
@@ -101,7 +122,10 @@ def freeze_final(args):
               source_archive_urls=artifact(check(split["source_archives"])),
               dev_plan=artifact(args.tranche/"plan.json"),dev_ledger=artifact(args.tranche/"ledger.json"),
               dev_input_closure=artifact(Path(dplan["inputs"])),teachers=teachers,subjects=subjects,
-              upfront_exclusive_card_s=upfront,canonical_init=str(canonical),initial_files=init_files,
+              teacher_health=health,passive_config_checkpoint=passive,
+              upfront_exclusive_card_s=upfront,upfront_exclusive_card_s_range=upfront_range,
+              development_interruption_evidence=[artifact(p) for p in bound_files],
+              canonical_init=str(canonical),initial_files=init_files,
               frozen_code=frozen,worlds=dplan["worlds"],budget=dplan["single_clip_curriculum_horizon"],
               steps=fractions(dplan["single_clip_curriculum_horizon"],dplan["worlds"]),
               physics=dplan["physics"],common_plan_snapshot_s=dplan.get("plan_and_snapshot_wall_s"),
@@ -194,6 +218,7 @@ def verify_release(args):
     for pin in [plan["dev_plan"],plan["dev_ledger"],plan["dev_input_closure"],plan["protocol_file"],plan["split"],plan["source_archive_urls"],
                 *plan["teachers"].values(),*plan["initial_files"],*plan["frozen_code"]]:check(pin)
     verified_phase(read(check(plan["dev_plan"])))
+    if plan.get("passive_config_checkpoint"):check(plan["passive_config_checkpoint"])
     return plan,Jobs(plan)
 
 
@@ -255,14 +280,15 @@ def register_stages(args,plan,jobs):
 def comparison_schedule(plan, stages):
     """All zero-shot scores precede target adaptation. Endpoints use source transitions, not loss."""
     subjects=[r["subject"] for r in plan["subjects"] if stages[r["subject"]]["source_status"]=="scorable"]
+    def usable(method):return plan.get("teacher_health",{}).get(method,{}).get("usable",True)
     for s in subjects:
         for device in ("cpu","cuda:0"):yield ("certify",s,None,0,device)
     for i,s in enumerate(subjects):
-        methods=plan["protocol"]["zero_shot"]
+        methods=[m for m in plan["protocol"]["zero_shot"] if usable(m)]
         for m in methods[i%2:]+methods[:i%2]:yield ("evaluate",s,m,0,None)
     for j,steps in enumerate(plan["steps"]):
         for i,subject in enumerate(subjects):
-            methods=plan["protocol"]["adaptation"]
+            methods=[m for m in plan["protocol"]["adaptation"] if usable(m)]
             k=(i+j)%len(methods)
             for method in methods[k:]+methods[:k]:
                 yield ("adapt",subject,method,steps,None)
@@ -270,6 +296,7 @@ def comparison_schedule(plan, stages):
     for endpoint in (0,plan["budget"]):
         for s in subjects:
             for m in (plan["protocol"]["zero_shot"] if endpoint==0 else plan["protocol"]["adaptation"]):
+                if not usable(m):continue
                 yield ("disturbance",s,m,endpoint,None)
 
 
@@ -286,6 +313,7 @@ def execute(args,plan,jobs):
             raise ValueError("Modified source eligibility")
     certificates={};learners={};scores={}
     teachers={m:check(ref) for m,ref in plan["teachers"].items()}
+    passive=check(plan.get("passive_config_checkpoint",plan["teachers"]["shared_mf"]))
     warp_cache=Path(plan["upstream"]).parent/"cache/warp"
     physics=jobs.repo/"configs/flashchord_wuji_physics_v2.json"
     for kind,s,m,steps,device in comparison_schedule(plan,stages):
@@ -294,7 +322,7 @@ def execute(args,plan,jobs):
               "--physics",physics,"--warp-cache",warp_cache]
         if kind=="certify":
             dest,_=jobs.one(s+"_cert_"+device.replace(":",""),s,None,kind,device!="cpu",
-                     lambda out:jobs.local("evaluate_wuji_heldout.py","certify",*base,"--checkpoint",teachers["shared_mf"],
+                     lambda out:jobs.local("evaluate_wuji_heldout.py","certify",*base,"--checkpoint",passive,
                                            "--device",device,"--out",out),"certificate.json")
             certificates[s,device]=dest/"certificate.json"
         elif kind=="adapt":
@@ -318,7 +346,7 @@ def execute(args,plan,jobs):
             learners[s,m]=dest
         elif kind=="evaluate":
             ckpt=teachers[m] if steps==0 else learners[s,m]/f"checkpoints/policy_{steps}.safetensors"
-            dest,_=jobs.one(f"{s}_{m}_eval_{steps}",s,m,kind,True,lambda out:jobs.local("evaluate_wuji_heldout.py",
+            dest,_=jobs.one(f"{s}_{m}_eval_{steps}",s,m,kind,True,lambda out:jobs.local("heldout_numeric_evaluation.py",
                     "evaluate",*base,"--checkpoint",ckpt,"--cpu-certificate",certificates[s,"cpu"],
                     "--gpu-certificate",certificates[s,"cuda:0"],"--protocol",jobs.repo/"configs/hocap_carton_evaluation.json",
                     "--out",out),"report.json",steps=steps)
