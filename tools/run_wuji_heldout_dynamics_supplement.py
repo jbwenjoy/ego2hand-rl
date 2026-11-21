@@ -11,6 +11,7 @@ from types import SimpleNamespace
 from benchmark_wuji_parallel import environment, train_command
 from heldout_wuji_cost import summarize
 from heldout_teacher_health import inspect_actor
+from heldout_adaptation_health import allow_after_stop,stop_from_evaluation
 from run_wuji_heldout import Jobs, artifact, check, comparison_schedule, digest, now, read, store, verify_release
 from summarize_wuji_tranche import fold, unscored_processes
 
@@ -111,6 +112,18 @@ def completed_job(jobs,key):
     raise ValueError(f"Missing successful baseline job {key}")
 
 
+def stage_status(row,step):
+    scored=next((v for v in row["scored"] if v["steps"]==step),None)
+    if scored:return scored["status"],True
+    if row["source_status"]=="unscorable":return "unscorable_source",False
+    if row.get("scored_on_target") is False:return row["method_availability"],False
+    if row.get("adaptation_status") and step:return row["adaptation_status"],False
+    stop=row.get("adaptation_stop")
+    if stop and step>stop["step"]:return "unreachable_after_"+stop["classification"],False
+    if stop and step==stop["step"] and not stop["actor_usable"]:return "nonfinite_target_actor",False
+    return "pending",False
+
+
 def outcomes(extra,base,original,jobs,frozen):
     baseline=read(original.root/"cost_and_outcomes.json")
     shared=[]
@@ -144,12 +157,13 @@ def outcomes(extra,base,original,jobs,frozen):
     paired={}
     for row in refs:
         s=row["subject"];former=baseline_method["subjects"][s]
-        matched={r["steps"]:r for r in former["scored"]};pairs=[]
-        for nowrow in new["subjects"][s]["scored"]:
-            previous=matched.get(nowrow["steps"])
-            if previous is None:raise ValueError("Warm transfer has no identical-budget actor-only comparator")
-            pairs.append(dict(target_steps=nowrow["steps"],actor_only=previous["status"],
-                              actor_and_dynamics=nowrow["status"],same_evaluation_reused=nowrow["steps"]==0))
+        pairs=[]
+        for step in [0,*base["steps"]]:
+            prior,prior_scored=stage_status(former,step)
+            current,current_scored=stage_status(new["subjects"][s],step)
+            pairs.append(dict(target_steps=step,actor_only=prior,actor_and_dynamics=current,
+                              both_actually_scored=prior_scored and current_scored,
+                              same_evaluation_reused=step==0 and prior_scored and current_scored))
         paired[s]=pairs
     original_s=(sum(e["known_wall_s"] for e in baseline["entries"])+
                 sum(h.get("inspection_cpu_wall_s",0.) for h in base.get("teacher_health",{}).values()))
@@ -190,14 +204,17 @@ def run(args):
     refs=[x["subject"] for x in base["subjects"]]
     teacher=check(extra["source_teacher"]); transfer=check(extra["dynamics_manifest"])
     repo=jobs.repo; upstream=Path(base["upstream"]);warp=upstream.parent/"cache/warp"
-    native={};scores={}
+    native={};scores={};stopped={}
     for s in refs:
         if frozen[s]["source_status"]!="scorable":continue
         old=read(check(completed_job(original,f"{s}_shared_wm_eval_0")["receipt"]))
         if (old["checkpoint_sha256"]!=extra["source_teacher"]["sha256"] or old["contract_sha256"]!=frozen[s]["contract"]["sha256"]
                 or old["parquet_sha256"]!=frozen[s]["parquet"]["sha256"]):raise ValueError("Cannot reuse this zero-shot evaluation")
+        runtime_stop=stop_from_evaluation(old,0)
+        if runtime_stop:stopped[s]=runtime_stop
     for kind,s,m,steps,_ in comparison_schedule(base,frozen):
         if m!="shared_wm" or steps==0:continue
+        if not allow_after_stop(stopped.get(s),kind,steps):continue
         item=frozen[s]; pq=check(item["parquet"]); contract=check(item["contract"])
         if kind=="adapt":
             prior=native.get(s)
@@ -209,10 +226,13 @@ def run(args):
                 if not prior:argv.extend(["--adapt-from-actor",str(teacher),"--shared-initial-state",base["canonical_init"]])
                 for opt in base["physics"]["overrides"]:argv.extend(["--override",opt])
                 return argv
-            dest,_=jobs.one(f"{s}_{ARM}_adapt_{steps}",s,"shared_wm",kind,True,cmd,"result.json",steps=steps)
+            dest,event=jobs.one(f"{s}_{ARM}_adapt_{steps}",s,"shared_wm",kind,True,cmd,"result.json",steps=steps)
             result=read(dest/"result.json");binding=read(dest/"warm_dynamics_binding.json")
             if result["learner_steps"]!=steps or result["role"]!="per_reference_adaptation" or binding["manifest_sha256"]!=extra["dynamics_manifest"]["sha256"]:
                 raise ValueError("Unexpected target budget, role, or transferred model")
+            health=event["checkpoint_health"]
+            if health["step"]!=steps:raise ValueError("Wrong target checkpoint numerical receipt")
+            if not health["resume_usable"]:stopped[s]=health
             native[s]=dest
         elif kind=="evaluate":
             actor=native[s]/f"checkpoints/policy_{steps}.safetensors"
@@ -225,6 +245,8 @@ def run(args):
             score=read(dest/"report.json")
             if score["checkpoint_sha256"]!=digest(actor) or score["contract_sha256"]!=item["contract"]["sha256"]:
                 raise ValueError("Supplementary score is bound to another policy or source")
+            runtime_stop=stop_from_evaluation(score,steps)
+            if runtime_stop:stopped[s]=runtime_stop
             scores[s,steps]=dest,actor
             store(report_path,outcomes(extra,base,original,jobs,frozen))
         elif kind=="disturbance":

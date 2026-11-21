@@ -76,7 +76,7 @@ def points(tranche, bounds_path, limit):
     return plan, plotted, len(rows), hashlib.sha256(ledger_bytes).hexdigest()
 
 
-def draw(points, plan, count, path):
+def draw(points, plan, count, path, overlap):
     for candidate in (Path("C:/Windows/Fonts/msyh.ttc"),
                       Path("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc")):
         if candidate.is_file():
@@ -133,8 +133,11 @@ def draw(points, plan, count, path):
     fig.text(.07,.805,"每条演示实际执行的控制窗比例",fontsize=12.5,fontweight="bold",color="#182C39")
     fig.text(.07,.435,"累计通过全部严格门限的不同演示数",fontsize=12.5,fontweight="bold",color="#182C39")
     fig.text(.52,.093,"各方法累计计费的独占 GPU 时间（分钟）",ha="center",fontsize=11.5)
-    fig.text(.07,.041,"每个点是一次已评分的检查点。短横线标示时间上下界，向右箭头表示仅有下界。"
+    fig.text(.07,.047,"每个点是一次已评分的检查点。短横线标示时间上下界，向右箭头表示仅有下界。"
              "未执行的控制窗不补齐，已执行的前缀不等于通过物理验收。",fontsize=9,color="#4B606B")
+    if overlap:
+        fig.text(.07,.018,f"第三轮多参考无模型训练期间曾运行约 {overlap['external_cmd_wall_s']:.1f} 秒的 OpenGL 渲染。"
+                 "训练墙钟全额计入，显卡占用未按进程拆分。",fontsize=8.5,color="#4B606B")
     fig.savefig(path,dpi=165,facecolor="white")
     plt.close(fig)
 
@@ -149,7 +152,10 @@ if __name__=="__main__":
     if not records:raise ValueError("At least one closed score required")
     args.output.mkdir(parents=True,exist_ok=False)
     dest=args.output/"cost_and_source_qualification.png"
-    draw(records,plan,n,dest)
+    overlap_file=args.tranche/"r3_shared_mf_render_overlap.json"
+    overlap=(json.loads(overlap_file.read_bytes()) if overlap_file.is_file() and
+             any(p["method"]=="shared_mf" and p["round"]==3 for p in records) else None)
+    draw(records,plan,n,dest,overlap)
     (args.output/"plotted_points.json").write_text(json.dumps(dict(
         closed_segments=n,evaluations=len(records),ledger_sha256=ledger_sha,
         plot_sha256=hashlib.sha256(dest.read_bytes()).hexdigest(),
@@ -157,4 +163,4 @@ if __name__=="__main__":
         bounds_sha256=hashlib.sha256(args.interruption_bounds.read_bytes()).hexdigest() if args.interruption_bounds else None,
         x_axis="Per-method charged card minutes at each closed evaluation; lower endpoints plotted.",
         y_axes=["executed physical intervals / requested source intervals", "distinct original strict passes accumulated"],
-        records=records),ensure_ascii=False,allow_nan=False,indent=2),encoding="utf8")
+        concurrent_render_note=overlap,records=records),ensure_ascii=False,allow_nan=False,indent=2),encoding="utf8")

@@ -62,7 +62,8 @@ class DryJobs(Jobs):
         synthetic_s=4. if kind=="adapt" else 2.
         self.rows.append(dict(subject=subject,method=method,steps=steps,kind=kind,card=card,
                               known_wall_s=synthetic_s,unknown_cost=False,outcome=outcome))
-        return dest,x
+        return dest,dict(x,checkpoint_health=dict(step=steps,actor_usable=True,resume_usable=True,
+                       classification="healthy")) if kind=="adapt" else x
 
     def entries(self):return list(self.rows)
 
@@ -124,6 +125,33 @@ def main(args):
         assert gaps["first_verified_including_pretraining_s"] is None
         missing={s:dict(v) for s,v in refs.items()};missing["fixture_b"]["source_status"]="unscorable"
         assert all(e[1]!="fixture_b" for e in comparison_schedule(plan,missing))
+        # Exercise the actual executor branch, not just the post-hoc cost fold.
+        class PoisonedTarget(DryJobs):
+            def one(self,key,subject,method,kind,card,build,result,**kwargs):
+                dest,returned=super().one(key,subject,method,kind,card,build,result,**kwargs)
+                step=kwargs.get("steps")
+                if kind=="adapt":
+                    health=returned["checkpoint_health"]
+                    if (subject,method,step)==("fixture_a","shared_mf",self.plan["steps"][1]):
+                        health.update(actor_usable=False,resume_usable=False,classification="nonfinite_target_actor")
+                    if (subject,method,step)==("fixture_b","shared_wm",self.plan["steps"][2]):
+                        health.update(actor_usable=True,resume_usable=False,classification="nonfinite_target_resume")
+                    self.rows[-1]["checkpoint_health"]=health
+                return dest,returned
+        second=base/"stopping";second.mkdir()
+        plan2=dict(plan,root=str(second),bulk=str(second/"bulk"))
+        store(second/"final_selection.json",plan2);sha2=digest(second/"final_selection.json")
+        store(second/"registered_stages.json",dict(subjects=refs,final_selection_sha256=sha2))
+        opts2=SimpleNamespace(out=second,released_plan_sha256=sha2,registered_stages_sha256=digest(second/"registered_stages.json"))
+        stopped=PoisonedTarget(plan2,truth);execute(opts2,plan2,stopped)
+        calls={(e["subject"],e["method"],e["kind"],e["steps"]) for e in stopped.calls}
+        _,middle,later,final=plan2["steps"]
+        assert ("fixture_a","shared_mf","evaluate",middle) not in calls
+        assert ("fixture_a","shared_mf","adapt",later) not in calls
+        assert ("fixture_a","shared_mf","disturbance",0) in calls
+        assert ("fixture_b","shared_wm","evaluate",later) in calls
+        assert ("fixture_b","shared_wm","adapt",final) not in calls
+        assert ("fixture_primary","shared_wm","evaluate",final) in calls
         # Test the real Windows command routing without accessing a source archive.
         splan=dict(plan,windows_python=str(args.hand_python))
         smoke=Jobs(splan)
@@ -149,6 +177,7 @@ def main(args):
                         exact_subject_and_source_identity=True,distinct_primary_and_supplementary_counts=True,
                         complete_repeat_required=True,zero_denominator_and_unknown_cost_propagation=True,
                         source_unscorable_preserved=True,disturbance_outside_qualification=True,
+                        real_schedule_skips_only_poisoned_target_branches=True,
                         real_windows_source_cli_routing=True,exact_retry_and_reuse=True),
                     command_counts={k:sum(e["kind"]==k for e in events) for k in ("certify","evaluate","adapt","disturbance")})
     store(args.output,report)

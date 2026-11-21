@@ -1,5 +1,6 @@
 """Fold a held-out ledger without pooling subjects, auxiliary stress or unverified outcomes."""
 from collections import defaultdict
+from heldout_adaptation_health import allow_after_stop
 
 
 def summarize(plan, entries, source_status):
@@ -8,7 +9,8 @@ def summarize(plan, entries, source_status):
     common=defaultdict(lambda:{"total_s":0.,"card_s":0.,"unknown":False,"unknown_card":False,"by_kind_s":defaultdict(float)})
     per={(s,m):{"target_s":0.,"card_s":0.,"stress_s":0.,"unknown":False,"unknown_card":False,"scored":[],"disturbance":[],
                  "zero_shot_evaluation_s":0.,"target_training_s":0.,"adapted_actor_evaluation_s":0.,
-                 "first_verified_target_s":None,"qualified":False} for s in participants for m in roles}
+                 "first_verified_target_s":None,"qualified":False,"adaptation_stop":None,
+                 "maximum_observed_trained_step":0,"checkpoint_scan_cpu_s_included":0.} for s in participants for m in roles}
     for e in entries:
         subject,method=e["subject"],e.get("method")
         if subject not in participants: raise ValueError("Unknown subject in ledger")
@@ -20,6 +22,17 @@ def summarize(plan, entries, source_status):
             x["unknown_card"] |= e["card"] and e["unknown_cost"]
             continue
         x=per[subject,method]
+        if not allow_after_stop(x["adaptation_stop"],e["kind"],e["steps"]):
+            raise ValueError("A target branch ran work after a confirmed nonresumable checkpoint")
+        health=e.get("checkpoint_health")
+        if health is not None:
+            if e["kind"]!="adapt" or health["step"]!=e["steps"]:raise ValueError("Misbound adaptation health record")
+            x["checkpoint_scan_cpu_s_included"]+=health.get("inspection_cpu_wall_s",0.)
+            x["maximum_observed_trained_step"]=max(x["maximum_observed_trained_step"],e["steps"])
+            if not health["resume_usable"]:
+                if x["adaptation_stop"] is not None:raise ValueError("Duplicate terminal target checkpoint")
+                x["adaptation_stop"]=dict(health,stopped_step=e["steps"],
+                             unreached_budget_steps=[i for i in plan["steps"] if i>e["steps"]])
         if e["kind"]=="disturbance":
             x["stress_s"]+=e["known_wall_s"]
             if e.get("outcome"):x["disturbance"].append(dict(steps=e["steps"],result=e["outcome"]))
@@ -34,6 +47,13 @@ def summarize(plan, entries, source_status):
         x["unknown_card"] |= e["card"] and e["unknown_cost"]
         if e["kind"]!="evaluate" or not e.get("outcome"):continue
         outcome=e["outcome"]
+        observed=outcome.get("numerical_stop")
+        if observed:
+            if observed["step"]!=e["steps"] or observed["classification"]!="nonfinite_target_actor_output":
+                raise ValueError("Misbound target policy-output stop")
+            prior=x["adaptation_stop"]
+            x["adaptation_stop"]=dict(observed,stopped_step=e["steps"],prior_resume_state_evidence=prior,
+                                      unreached_budget_steps=[i for i in plan["steps"] if i>e["steps"]])
         if outcome["status"]=="passed":
             if outcome.get("full_repeated") is not True:raise ValueError("Unverified physical success")
             x["qualified"]=True
@@ -65,6 +85,15 @@ def summarize(plan, entries, source_status):
                 rows[s].update(method_availability=teacher["status"],scored_on_target=False,
                                zero_shot_status="not_run_invalid_frozen_teacher",
                                final_budget_status="not_run_invalid_frozen_teacher")
+            stop=x["adaptation_stop"]
+            if stop:
+                result_at_stop=next((v["status"] for v in x["scored"] if v["steps"]==stop["step"]),None)
+                status=result_at_stop or (None if stop["actor_usable"] else "not_run_invalid_target_actor")
+                rows[s]["adaptation_stop"]=dict(stop,actor_evaluation_at_stop=status)
+                if stop["step"]<plan["budget"]:
+                    rows[s]["final_budget_status"]="unreachable_after_"+stop["classification"]
+                elif not stop["actor_usable"]:
+                    rows[s]["final_budget_status"]=stop["classification"]
             first=rows[s].get("first_verified_check")
             if first:
                 rows[s]["first_verified_end_to_end_s"]=None if x["unknown"] or common[s]["unknown"] else first["end_to_end_s"]
@@ -79,7 +108,14 @@ def summarize(plan, entries, source_status):
         unknown_card=any(common[s]["unknown_card"] or rows[s]["unknown_card"] for s in participants)
         unknown=unknown_target or pre is None
         n=len(participants)
-        finished=not unavailable and all(x["final_budget_status"] is not None or x["source_status"]=="unscorable" for x in rows.values())
+        def settled(x):
+            if x["source_status"]=="unscorable" or unavailable:return True
+            stop=x["adaptation_stop"]
+            if stop:return not stop["actor_usable"] or stop["actor_evaluation_at_stop"] is not None
+            return x["final_budget_status"] is not None
+        closed=all(settled(x) for x in rows.values())
+        finished=closed and not unavailable and all(not x["adaptation_stop"] or
+                    x["adaptation_stop"]["step"]==plan["budget"] for x in rows.values())
         clock=sum(common[s]["total_s"] for s in participants)+precheck_s
         seen=set();curve=[]
         for e in entries:
@@ -91,6 +127,8 @@ def summarize(plan, entries, source_status):
                                   distinct_verified=len(seen)))
         first=next((k["end_to_end_known_s"] for k in curve if k["distinct_verified"]),None)
         output[m]=dict(subjects=rows,assigned=n,ever_verified=count,through_final_budget=finished,
+                      target_branches_accounted=closed,
+                      numerically_stopped_targets=sum(x["adaptation_stop"] is not None for x in rows.values()),
                       method_availability=teacher["status"] if teacher else "available",
                       frozen_teacher_precheck=teacher,teacher_inspection_cpu_s_once=precheck_s,
                       assigned_but_not_scored_invalid_teacher=n if unavailable else 0,
@@ -103,17 +141,17 @@ def summarize(plan, entries, source_status):
                       supplementary_ever_verified=sum(rows[s]["qualified"] for s in plan["protocol"]["supplementary"]),
                       target_end_to_end_known_s=t,target_gpu_hours_known=gpu,pretraining_exclusive_card_s=pre,
                       with_pretraining_end_to_end_known_s=None if pre is None else t+pre,
-                      amortized_end_to_end_s_per_assignment=(t+pre)/n if finished and not unknown else None,
-                      target_gpu_h_per_verified=gpu/count if count and not unknown_card and finished else None,
-                      with_pretraining_gpu_h_per_verified=(gpu+pre/3600)/count if count and pre is not None and not unknown_card and finished else None,
+                      amortized_end_to_end_s_per_assignment=(t+pre)/n if closed and not unknown else None,
+                      target_gpu_h_per_verified=gpu/count if count and not unknown_card and closed else None,
+                      with_pretraining_gpu_h_per_verified=(gpu+pre/3600)/count if count and pre is not None and not unknown_card and closed else None,
                       pretraining_exclusive_card_s_range=[pre_low,pre_high],
                       with_pretraining_gpu_h_per_verified_range=(
                           [None if pre_low is None else (gpu+pre_low/3600)/count,
                            None if pre_high is None or unknown_card else (gpu+pre_high/3600)/count]
-                          if count and finished else None),
+                          if count and closed else None),
                       with_pretraining_s_per_assignment_range=(
                           [None if pre_low is None else (t+pre_low)/n,
                            None if pre_high is None or unknown_target else (t+pre_high)/n]
-                          if finished else None),
+                          if closed else None),
                       incomplete_costs=unknown)
     return dict(methods=output,reporting="Assigned primary and supplements are retained separately. First pass is first verified at a scheduled evaluation. Common reference/force calibration once per target per counterfactual method. Stress is excluded; source RGB capture/annotation before this experiment has no measured cost.")

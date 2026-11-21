@@ -5,7 +5,7 @@ import json
 import os
 
 
-def export(actor,output,selection=None,development_fixture=False,record_numerical_unavailability=False):
+def export(actor,output,selection=None,development_fixture=False,record_numerical_unavailability=False,recovery_selection=None):
     import jax
     import numpy as np
     from flax import serialization
@@ -29,9 +29,24 @@ def export(actor,output,selection=None,development_fixture=False,record_numerica
         dev_plan=freeze["dev_plan"]
         if file_hash(Path(dev_plan["path"]))!=dev_plan["sha256"]:raise ValueError("Development plan changed")
         verified_phase(read(Path(dev_plan["path"])))
-        if file_hash(actor)!=freeze["teachers"]["shared_wm"]["sha256"] or not cfg.get("physics_identity"):
-            raise ValueError("Source actor/physics differ from the prospective final selection")
-    elif selection is not None or cfg.get("reference",{}).get("num_frames")!=141:
+        expected_actor=freeze["teachers"]["shared_wm"]["sha256"]
+        if recovery_selection is not None:
+            from heldout_recovery_selection import select_recovery
+            recovery=read(recovery_selection)
+            if (recovery.get("version")!="wuji_heldout_deployment_recovery_actor_anchors_v1" or
+                    recovery["parent_selection"]["sha256"]!=file_hash(selection)):
+                raise ValueError("Recovery alias does not bind this original final selection")
+            actual=select_recovery(Path(freeze["teachers"]["shared_wm"]["path"]),method="shared_wm",
+                                   expected_init=Path(freeze["canonical_init"]))
+            registered=recovery["decisions"]["shared_wm"]
+            if (actual["status"]!="selected_latest_finite_actor" or registered["status"]!=actual["status"]
+                    or registered["selected_sha256"]!=actual["selected_sha256"] or registered["selected_step"]!=step
+                    or registered["selected_checkpoint_set_id"]!=link or actual["selected_checkpoint_set_id"]!=link):
+                raise ValueError("No matching finite recovery actor and native set for dynamics transfer")
+            expected_actor=actual["selected_sha256"]
+        if file_hash(actor)!=expected_actor or not cfg.get("physics_identity"):
+            raise ValueError("Source actor/physics differ from prospective selection")
+    elif selection is not None or recovery_selection is not None or cfg.get("reference",{}).get("num_frames")!=141:
         raise ValueError("Use an isolated developer fixture or the real frozen selection")
     state=actor.with_name(f"state_{step}.safetensors")
     state_meta=read_checkpoint_metadata(state)
@@ -73,6 +88,7 @@ def export(actor,output,selection=None,development_fixture=False,record_numerica
         actor_sha256=file_hash(actor),native_state_sha256=file_hash(state),source_pair_sha256=file_hash(pair_path),
         source_sidecar_sha256=pair["auxiliary_sha256"],source_fingerprint=pair["source_fingerprint"],
         source_selection_sha256=file_hash(selection) if selection else None,development_fixture=development_fixture,
+        deployment_recovery_anchor_sha256=file_hash(recovery_selection) if recovery_selection else None,
         payload_file=dst.name,payload_bytes=dst.stat().st_size,payload_sha256=file_hash(dst),
         model_params_sha256=parameter_hash(payload["model_params"]),scales_sha256=parameter_hash(scale),
         reference_contract=interface,contract_sha256=contract_digest(interface),
@@ -87,10 +103,11 @@ if __name__=="__main__":
     p.add_argument("--actor",type=Path,required=True)
     p.add_argument("--output",type=Path,required=True)
     p.add_argument("--selection",type=Path)
+    p.add_argument("--recovery-selection",type=Path,help="Only the separately registered recovery actor's identical-step auxiliary is eligible.")
     p.add_argument("--development-fixture",action="store_true")
     p.add_argument("--record-numerical-unavailability",action="store_true")
     a=p.parse_args()
     os.environ["JAX_PLATFORMS"]="cpu";os.environ["CUDA_VISIBLE_DEVICES"]=""
     m=export(a.actor.resolve(),a.output.resolve(),a.selection.resolve() if a.selection else None,
-             a.development_fixture,a.record_numerical_unavailability)
+             a.development_fixture,a.record_numerical_unavailability,a.recovery_selection.resolve() if a.recovery_selection else None)
     print(json.dumps({k:m[k] for k in ("source_set_id","source_training_steps","source_model_updates","payload_sha256","status") if k in m}))

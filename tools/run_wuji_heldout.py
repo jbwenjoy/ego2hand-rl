@@ -13,6 +13,7 @@ import time
 from benchmark_wuji_parallel import environment, train_command
 from heldout_wuji_cost import summarize
 from heldout_teacher_health import inspect_actor
+from heldout_adaptation_health import allow_after_stop,stop_from_evaluation
 from run_wuji_matched_tranche import digest, local_path, read, store, verified_phase
 from summarize_wuji_tranche import apply_interruption_bounds, fold, unscored_processes
 
@@ -108,7 +109,7 @@ def freeze_final(args):
     init_files=[artifact(canonical/n) for n in ("initial.json","state_0.safetensors")]
     stage_cfg=repo/"configs/hocap_holdout_source_qualification_v1.json"
     if digest(stage_cfg)!=protocol["stage_config_sha256"]:raise ValueError("Prospective source-stage protocol changed")
-    scripts=["tools/"+n for n in ("run_wuji_heldout.py","heldout_teacher_health.py","heldout_numeric_evaluation.py",
+    scripts=["tools/"+n for n in ("run_wuji_heldout.py","heldout_teacher_health.py","heldout_adaptation_health.py","heldout_numeric_evaluation.py",
                  "heldout_wuji_cost.py","summarize_wuji_tranche.py","evaluate_wuji_heldout.py",
                  "stage_frozen_hocap_evaluation.py","fetch_heldout_depth_frames.py","freeze_hocap_source_stages.py",
                  "run_wuji_multiref_flashsac.py","evaluate_flash_wuji_quality.py","benchmark_wuji_parallel.py",
@@ -147,6 +148,17 @@ class Jobs:
         self.env=environment(self.repo,Path(plan["upstream"]))
         self.new_process_seconds=0.
 
+    def adaptation_health(self,dest,steps,hybrid):
+        health=dest/"target_checkpoint_health.json"
+        cmd=self.local("heldout_adaptation_health.py",dest,steps,health)
+        if hybrid:cmd.append("--hybrid")
+        env=dict(self.env,CUDA_VISIBLE_DEVICES="",JAX_PLATFORMS="cpu")
+        subprocess.run(cmd,cwd=self.repo,env=env,check=True)
+        detail=read(health)
+        return dict(**{k:detail[k] for k in ("step","actor_usable","resume_usable","classification",
+                                             "checkpoint_set_id","inspection_cpu_wall_s")},
+                    receipt=artifact(health))
+
     def one(self,key,subject,method,kind,card,build,result,*,steps=None,shared_disk=False):
         """Complete or reuse an immutable job. Record failed/unknown attempts in the same ledger."""
         logs=self.root/"jobs"/key;logs.mkdir(parents=True,exist_ok=True)
@@ -156,6 +168,12 @@ class Jobs:
             if j.get("success"):
                 check(j["receipt"])
                 for pin in j.get("checkpoint_set",[]):check(pin)
+                if kind=="adapt":
+                    if not j.get("checkpoint_health"):
+                        t0=time.perf_counter()
+                        j["checkpoint_health"]=self.adaptation_health(Path(j["output"]),steps,method=="shared_wm")
+                        dt=time.perf_counter()-t0;j["elapsed_s"]+=dt;self.new_process_seconds+=dt;store(f,j)
+                    else:check(j["checkpoint_health"]["receipt"])
                 return Path(j["output"]),j
         index=len(prior)+1
         dest=(self.root/"source_jobs" if shared_disk else self.bulk)/key/f"attempt_{index:03d}"
@@ -175,6 +193,7 @@ class Jobs:
                 names=[f"{x}_{n}.safetensors" for x in ("policy","state","replay")]+[f"paired_{n}.json"]
                 if method=="shared_wm":names.append(f"world_model_{n}.msgpack")
                 j["checkpoint_set"]=[artifact(ckpt/name) for name in names]
+                j["checkpoint_health"]=self.adaptation_health(dest,n,method=="shared_wm")
             j["success"]=True
         finally:
             j["elapsed_s"]=time.perf_counter()-tic;j["end"]=now();store(f,j)
@@ -191,12 +210,13 @@ class Jobs:
                     rec=dict(status=raw["status"],full_repeated=raw["status"]=="passed" and len(raw["realizations"])==3
                              and raw["force_validation"]["validated"] and all(v["numerical_pass"] for v in raw["realizations"]),
                              historical_strict=raw.get("legacy_exact_gates"),
-                             historical_repeat=raw.get("legacy_repeat_status"))
+                             historical_repeat=raw.get("legacy_repeat_status"),numerical_stop=stop_from_evaluation(raw,j["steps"]))
                 if j.get("success") and j["kind"]=="disturbance":
                     raw=read(check(j["receipt"]))
                     rec={k:raw.get(k) for k in ("onset_frame","assigned_summary","checkpoint_sha256","parquet_sha256")}
                 rows.append(dict(**{k:j[k] for k in ("key","subject","method","kind","card","steps","start")},
                                  known_wall_s=j.get("elapsed_s") or 0,unknown_cost=j.get("elapsed_s") is None,
+                                 successful_job=j.get("success",False),checkpoint_health=j.get("checkpoint_health"),
                                  receipt=j.get("receipt"),outcome=rec))
         return sorted(rows,key=lambda r:r["start"])
 
@@ -311,12 +331,13 @@ def execute(args,plan,jobs):
         for key in ("parquet","contract","source","evidence"):check(info[key])
         if ("scorable" if read(check(info["contract"]))["scorable"] else "unscorable")!=info["source_status"]:
             raise ValueError("Modified source eligibility")
-    certificates={};learners={};scores={}
+    certificates={};learners={};scores={};stopped={}
     teachers={m:check(ref) for m,ref in plan["teachers"].items()}
     passive=check(plan.get("passive_config_checkpoint",plan["teachers"]["shared_mf"]))
     warp_cache=Path(plan["upstream"]).parent/"cache/warp"
     physics=jobs.repo/"configs/flashchord_wuji_physics_v2.json"
     for kind,s,m,steps,device in comparison_schedule(plan,stages):
+        if not allow_after_stop(stopped.get((s,m)),kind,steps):continue
         info=stages[s];parquet=check(info["parquet"]);contract=check(info["contract"])
         base=["--parquet",parquet,"--contract",contract,"--contract-sha256",info["contract"]["sha256"],
               "--physics",physics,"--warp-cache",warp_cache]
@@ -340,9 +361,12 @@ def execute(args,plan,jobs):
                 if m=="shared_wm":cmd.extend(["--wm-fit-horizon","3"])
                 for override in plan["physics"]["overrides"]:cmd.extend(["--override",override])
                 return cmd
-            dest,_=jobs.one(f"{s}_{m}_adapt_{steps}",s,m,kind,True,command,"result.json",steps=steps)
+            dest,event=jobs.one(f"{s}_{m}_adapt_{steps}",s,m,kind,True,command,"result.json",steps=steps)
             actual=read(dest/"result.json")
             if actual["learner_steps"]!=steps or actual["role"]!="per_reference_adaptation":raise ValueError("Wrong target budget/role")
+            health=event["checkpoint_health"]
+            if health["step"]!=steps:raise ValueError("Wrong target checkpoint numerical receipt")
+            if not health["resume_usable"]:stopped[s,m]=health
             learners[s,m]=dest
         elif kind=="evaluate":
             ckpt=teachers[m] if steps==0 else learners[s,m]/f"checkpoints/policy_{steps}.safetensors"
@@ -353,6 +377,8 @@ def execute(args,plan,jobs):
             raw=read(dest/"report.json")
             if raw["checkpoint_sha256"]!=digest(ckpt) or raw["parquet_sha256"]!=info["parquet"]["sha256"]:
                 raise ValueError("Evaluator identity mismatch")
+            runtime_stop=stop_from_evaluation(raw,steps)
+            if runtime_stop:stopped[s,m]=runtime_stop
             scores[s,m,steps]=(dest,ckpt)
         else:
             dest,ckpt=scores[s,m,steps];rawdir=dest/"raw"
