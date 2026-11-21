@@ -45,3 +45,5 @@
 使用相同探索设计，又从校准后的原生模拟器采了 2,048 条无物体辅助转移。以 24 个环境训练、8 个环境验证，在 431 个没有跨越重置的三步窗口中，恒定观测的标准化 RMSE 为 0.892。一步拟合模型为 0.887，沿真实动作拟合三步的模型为 0.744。后者三步预测的纸盒位置 RMS 为 11.6 mm，同一批窗口冻结初始物体位置的误差为 22.0 mm。所有数据均来自开发片段，短期预测指标不能直接换算为策略训练节省的小时数。[校准后的转移](../runs/wuji_flashsac_health_v2/transitions01/report.json) · [一步拟合](../runs/wuji_flashsac_health_v2/transitions01/model_fit1_validation.json) · [三步拟合](../runs/wuji_flashsac_health_v2/transitions01/model_fit3_validation.json)
 
 正式轮转从 2026-11-21 11:48（上海时间）开始。首个单参考检查点在进程启动后 54.3 秒保存，24,768 环境步、672 次 critic 更新、336 次 actor 更新，接受数与尝试数相同。首段末端的 173,376 步策略从首帧走到 46/140 个控制区间，因物体跟踪失败终止。含训练进程、严格评测与执行开销，此时已花费 163.5 秒独占卡时间。首个中间检查点的读取验证与后续进程的真实续训分开记录。[首个检查点](../runs/wuji_flashsac_matched_v2/first_checkpoint.json) · [正式计划](../runs/wuji_flashsac_matched_v2/plan.json) · [首段成本](../runs/wuji_flashsac_matched_v2/cost_after_first_score.json)
+
+比较训练曲线时同时查看每条示范得到的样本数和训练辅助所处的阶段。首轮单参考纸盒策略在 173,376 个样本时，虚拟物体控制的目标比例为 0.025。共享无世界模型策略首轮共收集 192,000 个样本，每条示范得到 64,000 个，其目标辅助仍为 0.5。二者正式评分均关闭辅助。可在后续分析中按每条参考课程样本预算的 25%、50%、100% 以及首次目标辅助降至零，从已存权重中选取最早到达该点的检查点，报告实际样本数及超出的步数，避免把不同课程阶段的分数当成相同训练暴露量。[来自检查点元数据的阶段与样本计数](../runs/wuji_flashsac_matched_v2/early_exposure.json)
