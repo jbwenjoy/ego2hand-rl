@@ -117,7 +117,7 @@ class MultiReferenceEnv:
                               terminal_observation=self._augment(joined.terminal_observation))
 
 
-def run_shared_training(env, training, *, transition_hook=None, **runner_kwargs):
+def run_shared_training(env, training, *, transition_hook=None, initializer=None, **runner_kwargs):
     """Run the unmodified FlashSAC collector; optionally extend the post-compile transition call.
 
     The optional callable receives (native_consume, learner, transition, *runtime_args)
@@ -127,12 +127,18 @@ def run_shared_training(env, training, *, transition_hook=None, **runner_kwargs)
     A separate OS process per run isolates the temporary entry-point binding.
     """
     from dataclasses import replace
+    from contextlib import ExitStack
     from unittest.mock import patch
     from flash_chord.training.flash_sac import runner
 
-    if transition_hook is None:
+    if transition_hook is None and initializer is None:
         return runner.run_training(env, training, **runner_kwargs)
     compile_native = runner._compile_executables
+    create_native = runner.create_learner
+
+    def initialize(*args, **kwargs):
+        learner,kernels=create_native(*args,**kwargs)
+        return initializer(learner),kernels
 
     def with_hook(*args, **kwargs):
         kernels = compile_native(*args, **kwargs)
@@ -140,7 +146,11 @@ def run_shared_training(env, training, *, transition_hook=None, **runner_kwargs)
             return transition_hook(kernels.consume_transition, learner, transition, *runtime_args)
         return replace(kernels, consume_transition=consume)
 
-    with patch.object(runner, "_compile_executables", with_hook):
+    with ExitStack() as stack:
+        if transition_hook is not None:
+            stack.enter_context(patch.object(runner,"_compile_executables",with_hook))
+        if initializer is not None:
+            stack.enter_context(patch.object(runner,"create_learner",initialize))
         return runner.run_training(env, training, **runner_kwargs)
 
 

@@ -84,7 +84,7 @@ def model_update(module, optimizer, params, opt_state, scales, batch):
     return optax.apply_updates(params, updates), next_opt_state, (loss, *components)
 
 
-def sequence_model_update(module, optimizer, params, opt_state, scales, sequence):
+def sequence_model_update(module, optimizer, params, opt_state, scales, sequence, cut_after=None):
     """Fit an unroll to actual contiguous actions from each world, ending its loss at reset."""
     def loss_fn(current):
         batch0 = jax.tree.map(lambda x: x[0], sequence)
@@ -102,7 +102,11 @@ def sequence_model_update(module, optimizer, params, opt_state, scales, sequence
             end_loss = optax.sigmoid_binary_cross_entropy(stop,flags).mean(-1)
             sums += jnp.stack((feature_loss,term_loss,end_loss)) @ valid
             counts += valid.sum()
-            valid *= jnp.logical_not(jnp.logical_or(batch.terminated,batch.truncated)).astype(jnp.float32)
+            done = jnp.logical_or(batch.terminated,batch.truncated)
+            if cut_after is not None:
+                # A fresh simulator process breaks continuity but is not an observed termination.
+                done = jnp.logical_or(done,cut_after[k])
+            valid *= jnp.logical_not(done).astype(jnp.float32)
             state = nxt
         components = sums / counts
         return components.sum(), components

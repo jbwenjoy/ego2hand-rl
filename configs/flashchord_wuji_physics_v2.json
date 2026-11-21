@@ -1,0 +1,165 @@
+{
+  "scheme": "movable_dof_mean_v1",
+  "overrides": [
+    "sim._target_=supermimic_research.runtime.flash_solver.WujiSimConfig",
+    "sim.fps=30",
+    "sim.substeps=40",
+    "sim.iterations=100",
+    "sim.ls_iterations=50",
+    "sim.impratio=20.0",
+    "sim.use_mujoco_contacts=true",
+    "scene.support=true",
+    "scene.contact_friction=0.7",
+    "scene.object_scale_min=1.0",
+    "scene.object_scale_max=1.0",
+    "collision.ground=false"
+  ],
+  "scope": "Three fixed-mass Wuji single-rigid-object development shards, identical dynamics within each shard. Original finite kinematic table retained. Native 30Hz reference, 1200Hz physics, contact friction .7. Validation applies to those mesh/parameter combinations. No held-out outcome or hardware calibration.",
+  "validated": true,
+  "calibration": {
+    "flashchord_rest_drop_cpu_subject3_G10_3_v1": [
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.0,
+        "meaninertia": 0.07902379333972931,
+        "rest_weight_fraction": 1.0001475946371199,
+        "M_qacc_residual_rms_N": 0.0002132646552895925
+      },
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.05,
+        "meaninertia": 0.07902379333972931,
+        "rest_weight_fraction": 0.9977266405253693,
+        "M_qacc_residual_rms_N": 2.8402630610892105e-05
+      }
+    ],
+    "flashchord_rest_drop_cpu_subject4_G16_4_v1": [
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.0,
+        "meaninertia": 0.07901707291603088,
+        "rest_weight_fraction": 0.9988835777736493,
+        "M_qacc_residual_rms_N": 0.004098513887219644
+      },
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.05,
+        "meaninertia": 0.07901707291603088,
+        "rest_weight_fraction": 0.9953463686579961,
+        "M_qacc_residual_rms_N": 0.00031841667093957405
+      }
+    ],
+    "flashchord_rest_drop_cpu_v1": [
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.0,
+        "meaninertia": 0.07903975248336792,
+        "rest_weight_fraction": 0.9984356620841804,
+        "M_qacc_residual_rms_N": 0.00016624873224085562
+      },
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.05,
+        "meaninertia": 0.07903975248336792,
+        "rest_weight_fraction": 0.9920625195760854,
+        "M_qacc_residual_rms_N": 0.0003777951852038532
+      }
+    ],
+    "flashchord_rest_drop_cuda_subject3_G10_3_v1": [
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.0,
+        "meaninertia": 0.07902379333972931,
+        "rest_weight_fraction": 0.999723685664209,
+        "M_qacc_residual_rms_N": 9.52615319609968e-06
+      },
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.05,
+        "meaninertia": 0.07902379333972931,
+        "rest_weight_fraction": 1.0027318353595733,
+        "M_qacc_residual_rms_N": 1.1400728554292405e-05
+      }
+    ],
+    "flashchord_rest_drop_cuda_subject4_G16_4_v1": [
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.0,
+        "meaninertia": 0.07901707291603088,
+        "rest_weight_fraction": 0.9994558994032202,
+        "M_qacc_residual_rms_N": 0.0001069273681657495
+      },
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.05,
+        "meaninertia": 0.07901707291603088,
+        "rest_weight_fraction": 0.9953559563033755,
+        "M_qacc_residual_rms_N": 0.00027633568105219565
+      }
+    ],
+    "flashchord_rest_drop_cuda_v1": [
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.0,
+        "meaninertia": 0.07903975248336792,
+        "rest_weight_fraction": 0.999902173652803,
+        "M_qacc_residual_rms_N": 0.00016063555020984308
+      },
+      {
+        "kg": 0.15000000596046448,
+        "drop_m": 0.05,
+        "meaninertia": 0.07903975248336792,
+        "rest_weight_fraction": 1.0040079828378081,
+        "M_qacc_residual_rms_N": 0.0002306658615604424
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "runs/flashchord_rest_drop_cpu_subject3_G10_3_v1/report.json",
+      "sha256": "e3de8d62674fc94a96bbda185f014f45b17c396f93f5c595b0b9242f9fd0bc7e"
+    },
+    {
+      "path": "runs/flashchord_rest_drop_cpu_subject4_G16_4_v1/report.json",
+      "sha256": "d531ddaf017e3e4606d3f93c2b1223222d6e45d8dc5670fc280fca767aa3e1b7"
+    },
+    {
+      "path": "runs/flashchord_rest_drop_cpu_v1/report.json",
+      "sha256": "13aa6dfa2dcaf858baee1ebe2f9b582f76b9b6a5379a43ff6ec1021d1b563a3a"
+    },
+    {
+      "path": "runs/flashchord_rest_drop_cuda_subject3_G10_3_v1/report.json",
+      "sha256": "3b03442850e50be09f22cc09848c7eea1a780c57dbb83a7045124f5278f8e683"
+    },
+    {
+      "path": "runs/flashchord_rest_drop_cuda_subject4_G16_4_v1/report.json",
+      "sha256": "60ee47e51022dbc5b39397508b0a3441dfa4590ec9f9d225126b7d9d064ae46e"
+    },
+    {
+      "path": "runs/flashchord_rest_drop_cuda_v1/report.json",
+      "sha256": "08623f61213ac5b1c3a0fe0f236b39bfd445e9d34ff89927b1583b3bf9bc3c94"
+    },
+    {
+      "path": "runs/flashchord_conditioned_dynamic_cpu_v1/report.json",
+      "sha256": "7842d4df22224e89d88ce0cbba963eddfe4e424f7c423fab40e75f1248c818f3"
+    },
+    {
+      "path": "runs/flashchord_conditioned_dynamic_cuda46_v1/report.json",
+      "sha256": "8d7eae903406bce91ffb0162e49783b65f2818715ab9213c8262039add053b04"
+    },
+    {
+      "path": "runs/wuji_table_causal_cpu_v1/report.json",
+      "sha256": "c126620b999b4313b9ae37da70dfb97b4bbee95e6c0c6dcee3deb67cb8522733"
+    }
+  ],
+  "code": [
+    {
+      "path": "src/supermimic_research/runtime/flash_solver.py",
+      "sha256": "cb7e0594e33b950f409982c27d615583a4668be9768185dcc927171eed85f446"
+    },
+    {
+      "path": "tools/validate_flash_wuji_contact_force.py",
+      "sha256": "74bf041b6e5f965c2b12b1e6b6801cf5d17037569ad655712e4f3dd00fd466d2"
+    }
+  ]
+}

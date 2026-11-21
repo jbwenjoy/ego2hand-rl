@@ -65,6 +65,10 @@ class FlashImaginationTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 resumed.restore(path,template,state.actor.params,native_environment_steps=12)
             resumed.restore(path,template,state.actor.params,native_environment_steps=16)
+            self.assertEqual(np.flatnonzero(resumed.state.cut_after).tolist(),[1])
+            np.testing.assert_array_equal(resumed.state.history.terminated, hook.state.history.terminated)
+            resumed.restore(path,template,state.actor.params,native_environment_steps=16,continuous_solver_state=True)
+            self.assertFalse(np.any(resumed.state.cut_after))
         first,second=apply(hook,state),apply(resumed,state)
         for left,right in zip(jax.tree.leaves(first),jax.tree.leaves(second),strict=True):
             np.testing.assert_array_equal(left,right)

@@ -87,8 +87,27 @@ class SharedInitialState:
         return restored
 
 
+def transfer_actor(learner,path,schema,out):
+    """Start a timed adaptation with only the previously trained actor and batch stats."""
+    from flash_chord.training.flash_sac.checkpoint import actor_inference_state, load_actor_checkpoint
+    from flash_chord.training.checkpoint_metadata import checkpoint_policy_schema, validate_policy_schema
+    start=time.perf_counter()
+    if int(learner.environment_steps) or int(learner.replay.size):
+        raise ValueError("Actor transfer must start a fresh per-reference sampling budget")
+    template=actor_inference_state(learner)
+    actor,saved=load_actor_checkpoint(path,template)
+    validate_policy_schema(checkpoint_policy_schema(saved),schema)
+    result=learner.replace(actor=learner.actor.replace(params=actor.params,batch_stats=actor.batch_stats))
+    atomic_json(out/"adaptation_start.json",dict(source_checkpoint=str(path),source_sha256=file_hash(path),
+                source_training_steps=int(saved["environment_steps"]),target_native_steps=int(result.environment_steps),
+                target_replay_size=int(result.replay.size),transferred="actor parameters and actor batch statistics",
+                actor_sha256=parameter_hash(result.actor.params),wall_s=time.perf_counter()-start))
+    return result
+
+
 class SharedRunHook:
-    def __init__(self, aux, *, fingerprint, out, worlds, restore_state=None, restore_replay=None, max_aux_bytes=1<<29):
+    def __init__(self, aux, *, fingerprint, out, worlds, restore_state=None, restore_replay=None, max_aux_bytes=1<<29,
+                 legacy_fingerprint=None):
         self.aux=aux
         self.out=out
         self.fingerprint=fingerprint
@@ -104,7 +123,8 @@ class SharedRunHook:
             identity=state["checkpoint_set_id"]
             if (pair["checkpoint_set_id"]!=identity or replay["checkpoint_set_id"]!=identity
                     or int(replay["environment_steps"])!=steps or pair["environment_steps"]!=steps
-                    or pair["source_fingerprint"]!=fingerprint or pair["hybrid"]!=(aux is not None)):
+                    or pair["source_fingerprint"] not in (fingerprint,legacy_fingerprint)
+                    or pair["hybrid"]!=(aux is not None)):
                 raise ValueError("Checkpoint set, source bank or method mismatch")
             if aux is not None:
                 file=restore_state.parent/pair["auxiliary_file"]

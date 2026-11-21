@@ -23,9 +23,15 @@ from supermimic_research.artifacts import file_pin
 from supermimic_research.runtime.flash_multiref import EXTENT_BLOCK, scan_extents_m
 
 
-def collect(config_path, output, controls, seed):
+def collect(config_path, output, controls, seed, physics_path):
     start = time.monotonic()
     cfg = OmegaConf.load(config_path)
+    physics = json.loads(physics_path.read_bytes())
+    if physics.get("validated") is not True:
+        raise ValueError("Native world-model labels require validated solver physics")
+    cfg = OmegaConf.merge(cfg, OmegaConf.from_dotlist(physics["overrides"]))
+    # The saved config is resolved; shared interpolation links are materialized in it.
+    cfg.env.sim = OmegaConf.to_container(cfg.sim, resolve=True)
     # The standard CHORD reset applies full assistance for a settling window even
     # with a zero curriculum target. Free-object dynamics labels exclude this.
     cfg.env.reset.voc_decay_steps = 0
@@ -45,6 +51,10 @@ def collect(config_path, output, controls, seed):
             source_frame_playback=cfg.task.source_frame_playback,
             motion_start_frame=cfg.task.motion_start_frame, motion_end_frame=cfg.task.motion_end_frame)
         native = RLEnv(setup.scene, setup.reference, config=env_config)
+        receipt = native.solver.wuji_conditioning
+        if receipt["scheme"]!=physics["scheme"]:
+            raise ValueError("Active native solver calibration disagrees with the physics manifest")
+        np.testing.assert_allclose(native.solver.mjw_model.stat.meaninertia.numpy(), receipt["conditioned"], rtol=1e-6)
         native.reset()
         native.capture_step()
         env = WarpRLEnv(native, publish_diagnostics=False, publish_step_metrics=True)
@@ -93,6 +103,7 @@ def collect(config_path, output, controls, seed):
         np.savez_compressed(path, **fields)
         report = dict(
             config=file_pin(config_path), collector=file_pin(__file__), parquet=file_pin(setup.parquet_path),
+            physics=file_pin(physics_path),active_solver=receipt,
             sequence=setup.reference.metadata.sequence_id, worlds=env.world_count, controls=controls,
             samples=controls * env.world_count, seed=seed, extent_block=EXTENT_BLOCK,
             native_observation_dim=env.observation_dim, policy_schema=policy_schema(native.action, native.observation_strategy),
@@ -114,9 +125,10 @@ if __name__ == "__main__":
     p.add_argument("--controls", type=int, default=32)
     p.add_argument("--seed", type=int, default=71)
     p.add_argument("--warp-cache", type=str, required=True)
+    p.add_argument("--physics", type=Path, required=True)
     args = p.parse_args()
     if args.controls <= 0:
         p.error("--controls must be positive")
     wp.config.kernel_cache_dir = args.warp_cache
     args.output.mkdir(parents=True, exist_ok=False)
-    collect(args.config.resolve(), args.output.resolve(), args.controls, args.seed)
+    collect(args.config.resolve(), args.output.resolve(), args.controls, args.seed, args.physics.resolve())

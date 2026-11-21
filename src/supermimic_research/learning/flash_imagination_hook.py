@@ -28,6 +28,7 @@ class AuxiliaryState:
     skipped_updates: jax.Array
     last_model_loss: jax.Array
     last_actor_loss: jax.Array
+    cut_after: jax.Array
 
 
 @jax.jit
@@ -68,7 +69,7 @@ class ImaginationHook:
         self.state = AuxiliaryState(
             model_params, self._model_opt.init(model_params), self._actor_opt.init(actor_params),
             fit_scales(batch), ring, jax.random.key_data(key), jnp.int32(0), jnp.int32(0), jnp.int32(0),
-            jnp.float32(0), jnp.float32(0),
+            jnp.float32(0), jnp.float32(0), jnp.zeros(o["history"],dtype=jnp.bool_),
         )
         self._compiled = jax.jit(self._advance, static_argnames=("imagine",))
 
@@ -88,7 +89,8 @@ class ImaginationHook:
             slots = (ring_head + starts[None,:]//worlds + jnp.arange(fit_horizon)[:,None]) % history
             sequence = jax.tree.map(lambda x: x[slots,(starts%worlds)[None,:]],state.history)
             params, model_opt, (loss, *_) = sequence_model_update(self._world, self._model_opt, state.model_params,
-                                                                  state.model_optimizer, state.scale, sequence)
+                                                                  state.model_optimizer, state.scale, sequence,
+                                                                  cut_after=state.cut_after[slots])
         valid = all_finite((loss, params, model_opt))
         params, model_opt = jax.lax.cond(valid, lambda: (params, model_opt),
                                           lambda: (state.model_params, state.model_optimizer))
@@ -122,9 +124,10 @@ class ImaginationHook:
         if self.state is None:
             self.initialize(batch, learner.actor.params)
         o = self.options
-        hist = insert(self.state.history, batch, jnp.int32(self.collected % o["history"]))
+        slot = jnp.int32(self.collected % o["history"])
+        hist = insert(self.state.history, batch, slot)
         self.collected += 1
-        self.state = self.state.replace(history=hist)
+        self.state = self.state.replace(history=hist,cut_after=self.state.cut_after.at[slot].set(False))
         if self.collected == o["history"]:
             flat = jax.tree.map(lambda x: x.reshape((-1, *x.shape[2:])), hist)
             self.state = self.state.replace(scale=fit_scales(flat))
@@ -150,11 +153,17 @@ class ImaginationHook:
         temp.write_bytes(payload)
         temp.replace(path)
 
-    def restore(self, path, batch_template, actor_params, *, native_environment_steps):
+    def restore(self, path, batch_template, actor_params, *, native_environment_steps, continuous_solver_state=False):
         raw = serialization.msgpack_restore(Path(path).read_bytes())
         stored_options = {"fit_horizon": 1, **raw["options"]}
         if stored_options != self.options or raw["native_environment_steps"] != int(native_environment_steps):
             raise ValueError("Auxiliary configuration or native checkpoint step mismatch")
         self.initialize(batch_template, actor_params)
-        self.state = jax.device_put(serialization.from_state_dict(self.state, raw["state"]))
+        fields = raw["state"]
+        if "cut_after" not in fields:
+            fields = {**fields, "cut_after":jax.device_get(self.state.cut_after)}
+        self.state = jax.device_put(serialization.from_state_dict(self.state, fields))
         self.collected = raw["collected"]
+        if self.collected and not continuous_solver_state:
+            last = (self.collected-1) % self.options["history"]
+            self.state = self.state.replace(cut_after=self.state.cut_after.at[last].set(True))

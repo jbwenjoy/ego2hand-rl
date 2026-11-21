@@ -1,0 +1,13 @@
+{
+  "id": "hocap-wuji-independent-physical-repeat-v1",
+  "base_protocol": "configs/hocap_carton_evaluation.json",
+  "base_protocol_sha256": "89e35876c56b3121e243959060c9276149695a22c034f834e91c70e3329aa152",
+  "scope": "Frozen before inspecting any successful official learned-policy rollout. The seven original short health attempts remain failures.",
+  "replicates": 2,
+  "commands": "Identical source-indexed, substep-resolved joint targets, velocities and generalized efforts. No fresh policy output, object force, source modification or mid-trajectory reset.",
+  "initialization": "Build a new official Newton scene, solver and environment for each replicate. Explicit reset to source frame zero with virtual object assistance exactly zero, deterministic initialization, same model and contact material hypotheses.",
+  "pass": "The original controlled attempt and both independent repeats must complete all original source intervals and individually pass the same position, rotation, stationary-object comparison, endpoint, lift, hand support in air, release, penetration, joint, and human hand tracking gates. A failed, missing or truncated source tail cannot qualify.",
+  "exact_state_metric": "Preserve original frozen 1e-9 independent low-level replay state threshold, values and result in a separate field; continue to report original all-gates result unchanged.",
+  "solver_force_validation": "A canonical physical-reproducibility claim also requires validated solver-load semantics and momentum balance for the same physics version and material configuration. Otherwise return provisional_unknown even if all three numeric trajectories pass.",
+  "report": "All frame counts, per-replicate gate results and metrics, pairwise max and RMS object translation and angle differences, maximum generalized q and qd differences and replay-input checksums."
+}
