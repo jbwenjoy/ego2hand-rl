@@ -117,6 +117,7 @@ def fold(plan, rows, *, verify=True):
             count = sum(v["first_passing_check"] is not None for v in m["references"].values())
             repeated = sum(v["first_physical_repeat_pass"] is not None for v in m["references"].values())
             m["events"].append(dict(card_s=clock, cost_is_lower_bound=bool(m["unknown_costs"]),
+                                    unknown_intervals=list(m["unknown_costs"]),
                                     sequence=seq, qualified_distinct=count, passed=check["passed"],
                                     physical_repeat_distinct=repeated,physical_repeat_status=repeat_status))
     all_methods = {"single","shared_mf","shared_wm"} == set(methods)
@@ -169,15 +170,54 @@ def unscored_processes(plan, rows):
     return records, incomplete
 
 
+def apply_interruption_bounds(result, rows, bounds):
+    """An interrupted worker has a known last sample and a conservative termination bound."""
+    durations = {}
+    for row in rows:
+        attempts=list(row.get("failed_train_attempts",[]))
+        for c in row["checks"]:
+            attempts.extend(c.get("failed_eval_attempts",[]))
+        for a in attempts:
+            durations[a["attempt"]]=float(a.get("elapsed_s") or 0.)
+
+    def upper(lower, unknowns):
+        extra=0.
+        for name in set(unknowns):
+            if name not in bounds:return None
+            b=bounds[name]
+            if abs(durations[name]-b["lower_s"])>1e-4 or b["upper_s"]<b["lower_s"]:
+                raise ValueError(f"Interruption bounds disagree with the recorded duration: {name}")
+            extra+=b["upper_s"]-b["lower_s"]
+        return lower+extra
+
+    for m in result["methods"].values():
+        for event in m["events"]:
+            event["card_s_upper_bound"]=upper(event["card_s"],event["unknown_intervals"])
+        m["scored_card_s_interval"]=[m["exclusive_card_s_known"],upper(m["exclusive_card_s_known"],m["unknown_costs"])]
+    if set(result["methods"])!={"single","shared_mf","shared_wm"}:return
+    budget=min(m["exclusive_card_s_known"] for m in result["methods"].values())
+    result["matched_known_card_budget_s"]=budget
+    for m in result["methods"].values():
+        possible=[e for e in m["events"] if e["card_s"]<=budget]
+        confirmed=[e for e in possible if e["card_s_upper_bound"] is not None and e["card_s_upper_bound"]<=budget]
+        m["distinct_success_at_matched_budget_range"]=[
+            max((e["qualified_distinct"] for e in confirmed),default=0),
+            max((e["qualified_distinct"] for e in possible),default=0),
+        ]
+
+
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("tranche",type=Path)
     p.add_argument("output",type=Path)
+    p.add_argument("--interruption-bounds",type=Path)
     a=p.parse_args()
     path=a.tranche/"ledger.json"
     ledger=path.read_bytes() if path.exists() else b"[]"
     plan,rows=read(a.tranche/"plan.json"),json.loads(ledger)
     result=fold(plan,rows)
+    bounds=read(a.interruption_bounds)["attempts"] if a.interruption_bounds else {}
+    apply_interruption_bounds(result,rows,bounds)
     unscored, pending=unscored_processes(plan,rows)
     result["unscored_process_receipts"]=unscored
     result["unscored_attempts_without_terminal_receipts"]=pending
@@ -188,6 +228,11 @@ if __name__ == "__main__":
         n=m["qualified_clips"]
         m["gpu_h_per_qualified_clip_including_unscored"]=(total/3600/n if n and not pending.get(name)
                                                         and not m["unknown_costs"] else None)
+        scored_hi=m["scored_card_s_interval"][1]
+        total_hi=(scored_hi + sum(c["seconds"] for c in unscored.get(name,[]))
+                  if scored_hi is not None and not pending.get(name) else None)
+        m["gpu_h_per_qualified_clip_range"]=([total/3600/n,None if total_hi is None else total_hi/3600/n]
+                                            if n else None)
         repeated=m["physical_repeat_qualified_clips"]
         m["gpu_h_per_physical_repeat_clip_including_unscored"]=(total/3600/repeated if repeated
                                          and not pending.get(name) and not m["unknown_costs"] else None)

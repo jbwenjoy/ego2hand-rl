@@ -1,6 +1,6 @@
 import unittest
 
-from tools.summarize_wuji_tranche import fold
+from tools.summarize_wuji_tranche import apply_interruption_bounds, fold
 
 
 def segment(stream, round_id, passed, train, evaluation, failures=()):
@@ -33,3 +33,15 @@ class LedgerTest(unittest.TestCase):
         self.assertIsNone(summary["methods"]["single"]["gpu_h_per_qualified_clip"])
         with self.assertRaises(ValueError):
             fold({"references":[{"sequence":"A"}]},[row,row],verify=False)
+
+    def test_interruption_keeps_interval_at_common_card_budget(self):
+        interrupted=dict(attempt="a",elapsed_s=5,finished=False)
+        rows=[segment("single0",1,True,6,1,[interrupted]), segment("shared_mf",1,False,12,3),
+              segment("shared_wm",1,False,10,3)]
+        result=fold({"references":[{"sequence":"A"}]},rows,verify=False)
+        apply_interruption_bounds(result,rows,{"a":{"lower_s":5,"upper_s":9}})
+        single=result["methods"]["single"]
+        self.assertEqual(single["scored_card_s_interval"],[12,16])
+        self.assertEqual(result["matched_known_card_budget_s"],12)
+        self.assertEqual(single["distinct_success_at_matched_budget_range"],[0,1])
+        self.assertIsNone(single["first_qualified_card_s"])

@@ -25,6 +25,7 @@ def run(args):
     with np.load(verify_file_pin(parent['trace']),allow_pickle=False) as a:
         hand=a['source_right_hand21'];obj=a['world_from_carton_source']
         wrist=a['target_wrist'];finger=a['target_finger_q'];times=a['source_nominal_time_s']
+        source_indices={k:a[k] for k in ('source_frame_ids','source_sequence_nominal_time_s') if k in a}
     normal=np.asarray(args.plane_normal,float);normal/=np.linalg.norm(normal)
     normal_same=np.allclose(normal,parent['table']['unit_normal'])
     if args.anchor_plane:
@@ -51,6 +52,7 @@ def run(args):
     error=control.audit_commands(mujoco.MjModel.from_binary_path(str(mjb)),trace)
     trace.update(world_from_carton_source=obj,source_right_hand21=hand,target_wrist=wrist,target_finger_q=q,
                  source_pad_gate=gates,pad_ik_cost=cost,source_nominal_time_s=times)
+    trace.update(source_indices)
     path=folder/'trace.npz';np.savez_compressed(path,**trace)
     pred=trace['world_from_carton_sim']
     dist=1000*np.linalg.norm(pred[:,:3,3]-obj[:,:3,3],axis=1)
