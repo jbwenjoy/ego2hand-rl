@@ -17,8 +17,11 @@ def block(schema,name):
     return slice(match["start"],match["end"])
 
 
-def counts(mask,active,voc,indices):
-    return dict(entries=int(mask.sum()), distinct_start_frames=int(np.unique(indices[mask]).size),
+def counts(mask,active,voc,indices,contact_known):
+    return dict(entries=int(mask.sum()), distinct_start_frames=int(np.unique(indices[mask&(indices>=0)]).size),
+                invalid_phase_entries=int(np.count_nonzero(mask&(indices<0))),
+                invalid_contact_observations=int(np.count_nonzero(mask&~contact_known)),
+                invalid_assistance_contexts=int(np.count_nonzero(mask&~np.isfinite(voc))),
                 contact_signal_entries=int(np.count_nonzero(active & mask)),
                 zero_applied_voc_entries=int(np.count_nonzero((voc==0)&mask)),
                 contact_at_zero_applied_voc=int(np.count_nonzero(active&(voc==0)&mask)))
@@ -56,21 +59,22 @@ def inspect(file):
             if not np.all(matched.sum(1)==1):
                 raise ValueError("Replay geometry feature does not identify a unique planned shard")
             force_dir=obs[rows,contact].reshape(len(sizes),-1,3)
-            active=(np.linalg.norm(force_dir,axis=-1)>.5).any(axis=1)
-            xs.append((np.argmax(matched,axis=1),np.ravel(ctx[rows,phase]),np.ravel(ctx[rows,assist]),active))
-        ids,phases,voc,active=(np.concatenate(a) for a in zip(*xs,strict=True))
-        if np.any((phases<0)|(phases>1.00001)) or not np.isfinite(voc).all():
-            raise ValueError("Invalid reference phase or assistance context")
+            known=np.isfinite(force_dir).all(axis=(1,2))
+            active=known & (np.linalg.norm(force_dir,axis=-1)>.5).any(axis=1)
+            xs.append((np.argmax(matched,axis=1),np.ravel(ctx[rows,phase]),np.ravel(ctx[rows,assist]),active,known))
+        ids,phases,voc,active,known=(np.concatenate(a) for a in zip(*xs,strict=True))
+        phase_valid=np.isfinite(phases)&(phases>=0)&(phases<=1.00001)
         results={}
         for i,shard in enumerate(shards):
             match=ids==i
-            frames=np.rint(phases*(shard["frames"]-1)).astype(int)
-            masks=dict(all=match, first_half=match&(phases<.5),second_half=match&(phases>=.5),
-                       last_quarter=match&(phases>=.75))
+            frames=np.full(len(phases),-1,dtype=int)
+            frames[phase_valid]=np.rint(phases[phase_valid]*(shard["frames"]-1)).astype(int)
+            masks=dict(all=match, first_half=match&phase_valid&(phases<.5),second_half=match&phase_valid&(phases>=.5),
+                       last_quarter=match&phase_valid&(phases>=.75))
             if shard["sequence"]=="subject1_G04_2":
                 masks.update(acquisition_26_35=match&(frames>=26)&(frames<=35),
                              early_lift_36_46=match&(frames>=36)&(frames<=46))
-            results[shard["sequence"]]={k:counts(mask,active,voc,frames) for k,mask in masks.items()}
+            results[shard["sequence"]]={k:counts(mask,active,voc,frames,known) for k,mask in masks.items()}
         return dict(checkpoint=str(file),set_id=md["user.checkpoint_set_id"],retained_rows=n,
                     environment_steps=int(md["user.environment_steps"]),by_source=results)
 
