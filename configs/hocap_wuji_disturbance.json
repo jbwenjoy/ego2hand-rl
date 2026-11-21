@@ -1,0 +1,18 @@
+{
+  "id": "hocap-wuji-target-pulse-v1",
+  "scope": "Secondary closed-loop disturbance study; output has no effect on the frozen primary qualification, training or cost results.",
+  "selection": "Pin each checkpoint and sequence using its completed primary score before opening disturbance outcomes; record the primary report digest. Declare all selected cases even if the unperturbed policy fails before intervention.",
+  "onset": "First rising source frame reaching at least 50 percent of peak world-Z object displacement from the original initial pose. Apply during the next two reference intervals whose first frame equals that onset. If peak <20 mm or two intervals are unavailable, intervention is not applicable.",
+  "source_lift_fraction": 0.5,
+  "minimum_source_peak_lift_m": 0.020,
+  "axis_in_world": [1, 0, 0],
+  "amplitude_m": 0.004,
+  "pulse_intervals": 2,
+  "directions": [-1, 1],
+  "recovery_translation_m": 0.002,
+  "recovery_rotation_deg": 2.0,
+  "consecutive_return_frames": 3,
+  "post_pulse_observation_intervals": 30,
+  "design": "For every chosen checkpoint/sequence use two signed wrist-target pulses. Compare a fresh deterministic policy using its actual state observation at each action to open-loop playback of the unperturbed trajectory's saved per-substep finger and wrist commands. Only the wrist position target along world X is disturbed. Per-axis remaining calibrated residual target allowance clips the disturbance; all motor gains and effort limits remain active. Virtual object forces are zero. Neither source nor scene is shifted.",
+  "analysis": "Each perturbed trajectory compares actual wrist/object displacement to its own mode's unperturbed trajectory on common timestamps. Observe 30 intervals after the pulse, report source pose errors, pre-pulse divergence, applied target deltas, actual observed departures, first subsequent three-frame return within 2 mm and 2 degrees, and any subsequent departures. Unexposed, partially exposed, censored and early terminated cases remain in the assigned denominator. No physical departure is a separate result from recovering after a departure."
+}
