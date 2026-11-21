@@ -6,6 +6,8 @@
 
 在首次通过的轨迹上进一步将二十路手指目标限在 **30 rad/s**。该版本也通过全部门限，位置和完整旋转 RMS 改善至 **6.21 mm、4.27°**，最差帧为 13.70 mm 和 9.94°。抬高 241.2 mm，末帧位置误差 4.54 mm，51 个主要腾空区间均有手部支撑，末尾三个区间均离手。对八个限速档执行了相同腕部指令，4–20 rad/s 的档位出现明显偏离。30 rad/s 是目标指令限速，真机驱动器可执行的速度和力矩仍需实测。下表保留首次通过时的数值。[限速后完整验收](../runs/hocap_carton_peak_slew_v1/phase_evaluation.json) · [原片与限速后回放](../runs/hocap_carton_slew30_visual_v1/source_vs_physics.mp4) · [限速版独立重放包](../runs/hocap_carton_export_slew30_v1/Wuji-HOCap-carton-replay.zip)
 
+放回桌面后还需区分“已经松手”和“物体已经停稳”。上述 30 rad/s 版本末三个控制区间的物体位置变化为 5.80 mm，略超过后来登记的 5 mm 稳定性门限。在同一开发纸盒上固定腕部、初态、材料和第 0–105 帧全部指令，将放置阶段的手指指令平滑提前至多一个源帧（约 33 ms），仍限制为 30 rad/s。末三段的物体移动降至 **2.51 mm**，转动 **1.62°**，原开发门限和新增支撑、移动、稳定离手门限均通过。该版本全程位置 RMS 略增至 **6.70 mm**，姿态 RMS 降至 **3.87°**，最高抬升 241.2 mm。七个时序候选都计入此次约 13 秒 CPU 搜索。选中版本从导出包重新积分通过 141 帧。它和原有版本来自同一条开发示范，不能计为两条成功示范。[时序对照和逐项验收](../runs/hocap_dev_release_stability_v1/report.json) · [稳定放置视频](../runs/hocap_dev_release_stability_v1/visual/source_vs_physics.mp4) · [稳定放置重放包](../runs/hocap_dev_release_stability_v1/export/Wuji-HOCap-carton-replay.zip)
+
 | 可观察量 | 原动作或门限 | 仿真结果 |
 | --- | --- | --- |
 | 物体中心最高抬升 | 244.2 mm | 238.3 mm |
