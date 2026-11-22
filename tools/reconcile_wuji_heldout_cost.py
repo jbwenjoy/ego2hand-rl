@@ -20,7 +20,7 @@ def require(condition, message):
 
 
 def host_path(name):
-    if os.name == "nt" and name.startswith("/mnt/") and name[6:7] == "/":
+    if os.name == "nt" and name.startswith("/mnt/") and name[5:6].isalpha() and name[6:7] == "/":
         return Path(name[5] + ":/" + name[7:])
     if os.name == "nt" and name.startswith("/"):
         return Path(r"\\wsl.localhost\Ubuntu-24.04") / name[1:]

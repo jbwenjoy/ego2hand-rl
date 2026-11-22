@@ -13,8 +13,7 @@ import numpy as np
 from matplotlib import font_manager
 from matplotlib.ticker import PercentFormatter
 
-from plot_wuji_development_cost import host_path
-from reconcile_wuji_heldout_cost import S5_MAX_S
+from reconcile_wuji_heldout_cost import S5_MAX_S, host_path
 
 
 ARMS = {
@@ -168,6 +167,21 @@ def collect(runs):
     return output
 
 
+def draw_cost_panels(axes, points, time_field, xlabel, *, line_alpha, marker_area):
+    maximum = max(point[time_field][1] for rows in points.values() for point in rows)
+    for ax, (arm, rows) in zip(axes, points.items()):
+        label, color, marker = ARMS[arm]
+        lower = [point[time_field][0] for point in rows]
+        upper = [point[time_field][1] for point in rows]
+        counts = [point["distinct_verified"] for point in rows]
+        ax.step(lower, counts, where="post", lw=1, color=color, alpha=line_alpha)
+        ax.hlines(counts, lower, upper, color=color, lw=1.2)
+        ax.scatter(lower, counts, marker=marker, s=marker_area, color=color)
+        ax.plot(upper, counts, "|", color=color, ms=4)
+        ax.set(title=label, ylim=(-.2, 3.1), yticks=range(4), xlabel=xlabel, xlim=(0, maximum*1.045))
+        ax.grid(axis="y", alpha=.22)
+
+
 def draw(points, output):
     for candidate in (Path("C:/Windows/Fonts/msyh.ttc"), Path("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc")):
         if candidate.exists():
@@ -194,18 +208,7 @@ def draw(points, output):
     top.legend(*axs[0].get_legend_handles_labels(), loc="outside lower center", ncols=4, frameon=False)
     bottom.suptitle("累计通过的独立轨迹数与占卡时间", fontsize=12)
     axes = bottom.subplots(1, 4, sharex=True, sharey=True)
-    maximum = max(p["including_pretraining_gpu_h"][1] for rows in points.values() for p in rows)
-    for ax, (arm, rows) in zip(axes, points.items()):
-        label, color, marker = ARMS[arm]
-        lower = [p["including_pretraining_gpu_h"][0] for p in rows]
-        upper = [p["including_pretraining_gpu_h"][1] for p in rows]
-        counts = [p["distinct_verified"] for p in rows]
-        ax.step(lower, counts, where="post", lw=1, color=color, alpha=.6)
-        ax.hlines(counts, lower, upper, color=color, lw=1.2)
-        ax.scatter(lower, counts, marker=marker, s=15, color=color)
-        ax.plot(upper, counts, "|", color=color, ms=4)
-        ax.set(title=label, ylim=(-.2, 3.1), yticks=range(4), xlabel="占卡小时", xlim=(0, maximum*1.045))
-        ax.grid(axis="y", alpha=.22)
+    draw_cost_panels(axes, points, "including_pretraining_gpu_h", "占卡小时", line_alpha=.6, marker_area=15)
     fig.supxlabel("每条适配上限 418,560 步。冷启动糖果盒的全额策略无有效动作，末点留空。茶盒的冻结初态已超过穿透门限。\n配对动力学两组复用同一次零步评分。占卡含各自预训练、目标训练与物理评测。横向短线为中断计时范围。", fontsize=9)
     fig.savefig(output, dpi=170)
     plt.close(fig)
@@ -214,18 +217,8 @@ def draw(points, output):
 def draw_wall_times(points, output):
     fig, axes = plt.subplots(1, 4, sharey=True, sharex=True, figsize=(12.7, 3.5), layout="constrained")
     fig.suptitle("累计通过的留出轨迹数与活跃作业墙钟", fontsize=15, weight="bold")
-    maximum = max(p["including_pretraining_active_wall_h"][1] for rows in points.values() for p in rows)
-    for ax, (arm, rows) in zip(axes, points.items()):
-        label, color, marker = ARMS[arm]
-        bounds = [p["including_pretraining_active_wall_h"] for p in rows]
-        lower, upper = np.asarray(bounds).T
-        counts = [p["distinct_verified"] for p in rows]
-        ax.step(lower, counts, where="post", color=color, lw=1)
-        ax.hlines(counts, lower, upper, lw=1.2, color=color)
-        ax.scatter(lower, counts, marker=marker, s=16, color=color)
-        ax.plot(upper, counts, "|", color=color, ms=4)
-        ax.set(title=label, xlabel="累计作业小时", xlim=(0, maximum*1.045), ylim=(-.2, 3.1), yticks=range(4))
-        ax.grid(axis="y", alpha=.22)
+    draw_cost_panels(axes, points, "including_pretraining_active_wall_h", "累计作业小时",
+                     line_alpha=1., marker_area=16)
     fig.supxlabel("含该方案的共享预训练、来源准备、物理校准、适配和评分。横线给出计时区间。各独立方案均按三个目标摊销。", fontsize=9)
     fig.savefig(output, dpi=170)
     plt.close(fig)

@@ -1,4 +1,8 @@
-# One maintenance home
+# Code layout
+
+The HO-Cap work starts in [ego](../src/supermimic_research/ego). The carton controller maps the source hand to a floating Wuji wrist and 20 finger joints. The [stage evaluator](../src/supermimic_research/ego/source_stage_contract.py) compares the simulated motion and contacts with the source demonstration. The [FlashCHORD adapter](../src/supermimic_research/runtime/flash_wuji.py) and [imagination update](../src/supermimic_research/learning/flash_imagination.py) are the training-side entry points. See the [script guide](../tools/README.md) for the commands that connect them.
+
+## Shared packages and earlier experiments
 
 `src/supermimic_research/runtime` contains the current phone state, SO(3),
 momentum, structured decoder, compiled geometry, directional descriptor, task,
