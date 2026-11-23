@@ -24,4 +24,4 @@
 
 公共实现放在 `src/`，实验参数在 `configs/`，运行脚本在 `tools/`。全文报告和上图随代码提供。原始数据、视频、检查点和重放包单独保存在实验机器上，报告中的 `runs/` 链接对应这些本地产物。
 
-数据来自 Wang 等人的 [HO-Cap](https://irvlutd.github.io/HOCap/)。机器人训练使用 [NVIDIA FlashCHORD v0.4.0](https://github.com/nvidia-isaac/video_to_data/tree/v0.4.0/robotic_grounding/flash_chord)，模型想象更新参考了 [SuperMimic](https://arxiv.org/abs/2610.28480)。上游快照和随附的许可、NOTICE 保存在 [archive/studies](archive/studies)。其中两个小文本文件沿用上游的 Git LFS 存储方式，完整检出需装有 Git LFS。
+数据来自 Wang 等人的 [HO-Cap](https://irvlutd.github.io/HOCap/)。机器人训练使用 [NVIDIA FlashCHORD v0.4.0](https://github.com/nvidia-isaac/video_to_data/tree/v0.4.0/robotic_grounding/flash_chord)，模型想象更新参考了 [SuperMimic](https://arxiv.org/abs/2610.28480)。上游快照和随附的许可、NOTICE 保存在 [archive/studies](archive/studies)。
